@@ -1,0 +1,21 @@
+- name: Centro de Arquitetura do Azure
+  href: /azure/architecture
+- name: Antipadrões de desempenho
+  href: index.md
+  items:
+    - name: Banco de Dados Ocupado
+      href: busy-database/index.md
+    - name: Front-End Ocupado
+      href: busy-front-end/index.md
+    - name: E/S com ruídos
+      href: chatty-io/index.md
+    - name: Busca incorreta
+      href: extraneous-fetching/index.md
+    - name: Instanciação inadequada
+      href: improper-instantiation/index.md
+    - name: Persistência monolítica
+      href: monolithic-persistence/index.md
+    - name: Sem Cache
+      href: no-caching/index.md
+    - name: E/S Síncrona
+      href: synchronous-io/index.md
