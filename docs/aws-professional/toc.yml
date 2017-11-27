@@ -1,0 +1,8 @@
+- name: Centro de Arquitetura do Azure
+  href: /azure/architecture
+- name: Azure para Profissionais do AWS
+  items:
+    - name: Visão geral
+      href: index.md
+    - name: Comparação de serviços
+      href: services.md
