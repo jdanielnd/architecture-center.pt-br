@@ -3,11 +3,11 @@ title: "Critérios para escolher uma opção de computação do Azure"
 description: "Compare os serviços de computação do Azure entre diversos eixos."
 author: MikeWasson
 layout: LandingPage
-ms.openlocfilehash: 640793b56c1713f63456bab75ab4b9289d22a53c
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 36b57d1fb674b5a1452a0e8208de836963b2b01b
+ms.sourcegitcommit: c53adf50d3a787956fc4ebc951b163a10eeb5d20
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 11/23/2017
 ---
 # <a name="criteria-for-choosing-an-azure-compute-option"></a>Critérios para escolher uma opção de computação do Azure
 
@@ -17,12 +17,12 @@ O termo *computação* refere-se ao modelo de hospedagem para os recursos de com
 
 | Critérios | Máquinas Virtuais | Serviço de Aplicativo | Service Fabric | Funções do Azure | Serviço de Contêiner do Azure | Serviços de Nuvem | Lote do Azure |
 |----------|-----------------|-------------|----------------|-----------------|-------------------------|----------------|-------------|
-| Composição de aplicativos | Independente | Aplicativos | Serviços, executáveis convidados | Funções | Contêineres | Funções | Trabalhos agendados  |
-| Densidade | Independente | Vários aplicativos por instância via planos do aplicativo | Vários serviços por VM | Nenhuma instância dedicada <a href="#note1"><sup>1</sup></a> | Vários contêineres por VM | Uma instância de função por VM | Vários aplicativos por VM |
-| Número mínimo de nós | 1 <a href="#note2"><sup>2</sup></a>  | 1 | 5 <a href="#note3"><sup>3</sup></a> | Nenhum nó dedicado <a href="#note1"><sup>1</sup></a> | 3 | 2 | 1 <a href="#note4"><sup>4</sup></a> |
+| Composição de aplicativos | Independente | Aplicativos | Serviços, executáveis do convidado, contêineres | Funções | Contêineres | Funções | Trabalhos agendados  |
+| Densidade | Independente | Vários aplicativos por instância via planos do aplicativo | Vários serviços por VM | Sem instâncias dedicadas <a href="#note1"><sup>1</sup></a> | Vários contêineres por VM | Uma instância de função por VM | Vários aplicativos por VM |
+| Número mínimo de nós | 1 <a href="#note2"><sup>2</sup></a>  | 1 | 5 <a href="#note3"><sup>3</sup></a> | Sem nós dedicados <a href="#note1"><sup>1</sup></a> | 3 | 2 | 1 <a href="#note4"><sup>4</sup></a> |
 | Gerenciamento de estado | Com Estado ou Sem Estado | Sem estado | Com estado ou sem estado | Sem estado | Com Estado ou Sem Estado | Sem estado | Sem estado |
-| Hospedagem na Web | Independente | Interno | Auto-hospedagem, IIS em contêineres | Não aplicável | Independente | Interno (IIS) | Não |
-| SO | Windows, Linux | Windows, Linux (versão prévia)  | Windows, Linux (versão prévia) | Não aplicável | Windows, Linux | Windows | Windows, Linux |
+| Hospedagem na Web | Independente | Interno | Independente | Não aplicável | Independente | Interno (IIS) | Não |
+| SO | Windows, Linux | Windows, Linux  | Windows, Linux | Não aplicável | Windows (visualização),  Linux | Windows | Windows, Linux |
 | Pode ser implantado para VNet dedicada? | Suportado | Com suporte <a href="#note5"><sup>5</sup></a> | Suportado | Sem suporte | Suportado | Com suporte <a href="#note6"><sup>6</sup></a> | Suportado |
 | Conectividade híbrida | Suportado | Com suporte <a href="#note1"><sup>7</sup></a>  | Suportado | Sem suporte | Suportado | Com suporte <a href="#note8"><sup>8</sup></a> | Suportado |
 
