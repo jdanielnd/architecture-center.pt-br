@@ -2,15 +2,15 @@
 title: Executar VMs do Linux para um aplicativo de N camadas no Azure
 description: Como executar VMs do Linux para uma arquitetura de N camadas no Microsoft Azure.
 author: MikeWasson
-ms.date: 11/22/2016
+ms.date: 11/22/2017
 pnp.series.title: Linux VM workloads
 pnp.series.next: multi-region-application
 pnp.series.prev: multi-vm
-ms.openlocfilehash: 673e090e306ffc421603371658c8273b10b980d4
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 98814685e0f33f2a1258bf8307a86f92d8a81968
+ms.sourcegitcommit: 583e54a1047daa708a9b812caafb646af4d7607b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 11/28/2017
 ---
 # <a name="run-linux-vms-for-an-n-tier-application"></a>Executar VMs do Linux para um aplicativo de N camadas
 
@@ -24,7 +24,7 @@ Essa arquitetura de referência mostra um conjunto de práticas comprovadas para
 
 Há muitas maneiras de implementar uma arquitetura de N camadas. O diagrama mostra um aplicativo Web de três camadas típico. Essa arquitetura se baseia em [Executar VMs com balanceamento de carga para escalabilidade e disponibilidade][multi-vm]. As camadas comerciais e da Web usam VMs com balanceamento de carga.
 
-* **Conjuntos de disponibilidade.** Crie um [conjunto de disponibilidade][azure-availability-sets] para cada camada e provisione pelo menos duas VMs em cada camada.  Isso torna as VMs qualificadas para um [SLA (Contrato de Nível de Serviço)][vm-sla] mais elevado.
+* **Conjuntos de disponibilidade.** Crie um [conjunto de disponibilidade][azure-availability-sets] para cada camada e provisione pelo menos duas VMs em cada camada.  Isso torna as VMs qualificadas para um [SLA (Contrato de Nível de Serviço)][vm-sla] mais elevado. É possível implantar uma VM única em um conjunto de disponibilidade, mas a VM única não se qualificará para uma garantia de SLA, a menos que a VM única esteja utilizando o Armazenamento Premium do Azure para todos discos de dados e SO.  
 * **Sub-redes.** Sempre crie uma sub-rede separada para cada camada. Especifique o intervalo de endereços e a máscara de sub-rede usando a notação [CIDR]. 
 * **Balanceadores de carga.** Use um [Balanceador de carga para a Internet][load-balancer-external] para distribuir o tráfego de entrada da Internet para a camada da Web e um [balanceador de carga interno][load-balancer-internal] para distribuir o tráfego de rede da camada da Web para a camada comercial.
 * **Jumpbox.** Também chamada de um [host bastião]. Uma VM protegida na rede que os administradores usam para se conectar às outras VMs. O jumpbox tem um NSG que permite o tráfego remoto apenas de endereços IP públicos em uma lista segura. O NSG deve permitir o tráfego SSH (secure shell).
@@ -113,31 +113,59 @@ Simplifique o gerenciamento de todo o sistema usando ferramentas de administraç
 
 ## <a name="deploy-the-solution"></a>Implantar a solução
 
-Uma implantação para essa arquitetura está disponível no [GitHub][github-folder]. A arquitetura é implantada em três estágios. Para implantar a arquitetura, siga estas etapas: 
+Uma implantação para essa arquitetura de referência está disponível no [GitHub][github-folder]. 
 
-1. Clique no botão abaixo:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fvirtual-machines%2Fn-tier-linux%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
-2. Depois que o link for aberto no portal do Azure, insira os valores a seguir: 
-   * O nome do **Grupo de recursos** já está definido no arquivo de parâmetros, portanto, selecione **Criar novo** e digite `ra-ntier-cassandra-rg` na caixa de texto.
-   * Selecione a região na caixa suspensa **Local**.
-   * Não edite as caixas de texto **URI da raiz do modelo** ou **URI da raiz do parâmetro**.
-   * Analise os termos e condições e clique na caixa de seleção **Concordo com os termos e condições declarados acima**.
-   * Clique no botão **Comprar**.
-3. Verifique a notificação no Portal do Azure para ver uma mensagem indicando que a implantação foi concluída.
-4. Os arquivos de parâmetro incluem nomes de usuário e senha de administrador embutidos em código e é altamente recomendável que você altere imediatamente ambos em todas as VMs. Clique em cada VM no Portal do Azure e, em seguida, clique em **Redefinir senha** na folha **Suporte + solução de problemas**. Selecione **Redefinir senha** na caixa suspensa **Modo**, selecione um novo **Nome de usuário** e **Senha**. Clique no botão **Atualizar** para manter o novo nome de usuário e senha.
+### <a name="prerequisites"></a>Pré-requisitos
+
+Antes de implantar a arquitetura de referência para sua própria assinatura, você deve executar as etapas a seguir.
+
+1. Clone, crie fork ou baixe o arquivo zip para as [arquiteturas de referência AzureCAT][ref-arch-repo] no repositório GitHub.
+
+2. Verifique se a CLI do Azure 2.0 está instalada no computador. Para instalar a CLI, siga as instruções em [Instalar a CLI do Azure 2.0][azure-cli-2].
+
+3. Instale os pacote npm dos [Blocos de construção do Azure][azbb].
+
+  ```bash
+  npm install -g @mspnp/azure-building-blocks
+  ```
+
+4. Em um prompt de comando, bash prompt ou prompt do PowerShell, faça logon na sua conta do Azure usando um dos comandos abaixo e siga os prompts.
+
+  ```bash
+  az login
+  ```
+
+### <a name="deploy-the-solution-using-azbb"></a>Implantar a solução usando azbb
+
+Para implantar as VMs do Linux para uma arquitetura de referência de aplicativo de n camada, siga essas etapas:
+
+1. Navegue até a pasta `virtual-machines\n-tier-linux` para o repositório que você clonou na etapa 1 dos pré-requisitos acima.
+
+2. O arquivo de parâmetro especifica um nome de usuário e senha de administrador padrão para cada VM na implantação. Você deverá alterá-los antes de implantar a arquitetura de referência. Abra o arquivo `n-tier-linux.json` e substitua cada campo **adminUsername** e **adminPassword** com suas novas configurações.   Salve o arquivo.
+
+3. Implante a arquitetura de referência usando a ferramenta de linha de comando **azbb** conforme mostrado abaixo.
+
+  ```bash
+  azbb -s <your subscription_id> -g <your resource_group_name> -l <azure region> -p n-tier-linux.json --deploy
+  ```
+
+Para obter mais informações sobre a implantação dessa arquitetura de referência de exemplo utilizando blocos de construção Blocos de Construção do Azure, visite o repositório [GitHub][git].
 
 <!-- links -->
 [multi-dc]: multi-region-application.md
 [dmz]: ../dmz/secure-vnet-dmz.md
 [multi-vm]: ./multi-vm.md
 [naming conventions]: /azure/guidance/guidance-naming-conventions
-
+[azbb]: https://github.com/mspnp/template-building-blocks/wiki/Install-Azure-Building-Blocks
 [azure-administration]: /azure/automation/automation-intro
 [azure-availability-sets]: /azure/virtual-machines/virtual-machines-linux-manage-availability
+[azure-cli-2]: https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest
 [host bastião]: https://en.wikipedia.org/wiki/Bastion_host
 [cassandra-in-azure]: https://docs.datastax.com/en/datastax_enterprise/4.5/datastax_enterprise/install/installAzure.html
 [cidr]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
 [chef]: https://www.chef.io/solutions/azure/
 [datastax]: http://www.datastax.com/products/datastax-enterprise
+[git]: https://github.com/mspnp/template-building-blocks
 [github-folder]: https://github.com/mspnp/reference-architectures/tree/master/virtual-machines/n-tier-linux
 [lb-external-create]: /azure/load-balancer/load-balancer-get-started-internet-portal
 [lb-internal-create]: /azure/load-balancer/load-balancer-get-started-ilb-arm-portal
@@ -150,6 +178,7 @@ Uma implantação para essa arquitetura está disponível no [GitHub][github-fol
 [private-ip-space]: https://en.wikipedia.org/wiki/Private_network#Private_IPv4_address_spaces
 [endereço IP público]: /azure/virtual-network/virtual-network-ip-addresses-overview-arm
 [puppet]: https://puppetlabs.com/blog/managing-azure-virtual-machines-puppet
+[ref-arch-repo]: https://github.com/mspnp/reference-architectures
 [vm-sla]: https://azure.microsoft.com/support/legal/sla/virtual-machines
 [vnet faq]: /azure/virtual-network/virtual-networks-faq
 [visio-download]: https://archcenter.azureedge.net/cdn/vm-reference-architectures.vsdx

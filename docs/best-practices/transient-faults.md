@@ -4,11 +4,11 @@ description: "Orientações sobre repetição no tratamento de falhas transitór
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 05558abad8938788d09caa5df8b1f088ce3b5bdc
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 9562e3447b2219fe2f3df96cfca24b845efa39b0
+ms.sourcegitcommit: c53adf50d3a787956fc4ebc951b163a10eeb5d20
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 11/23/2017
 ---
 # <a name="transient-fault-handling"></a>Tratamento de falhas transitórias
 
@@ -93,7 +93,7 @@ As diretrizes a seguir ajudarão você a projetar um mecanismo adequado para tra
 * **Outras considerações**
   
   * Ao decidir sobre os valores para o número de repetições e os intervalos de repetição para uma política, considere se a operação no serviço ou recurso faz parte de uma operação de execução longa ou de várias etapas. Pode ser difícil ou dispendioso compensar todas as outras etapas operacionais que já foram bem-sucedidas quando uma falha. Nesse caso, um intervalo muito longo e um grande número de repetições podem ser aceitáveis, desde que isso não bloqueie outras operações mantendo ou prendendo recursos escassos.
-  * Considere se repetir a mesma operação pode causar inconsistências nos dados. Se algumas partes de um processo de várias etapas forem repetidas e as operações não forem idempotentes, isso poderá resultar em uma inconsistência. Por exemplo, uma operação que incrementa um valor, se repetida, produzirá um resultado inválido. Repetir uma operação que envia uma mensagem a uma fila poderá causar uma inconsistência no consumidor da mensagem se ele não puder detectar mensagens duplicadas. Para evitar isso, assegure-se de projetar cada etapa como uma operação idempotente. Para saber mais sobre idempotência, consulte [Padrões de idempotência](http://blog.jonathanoliver.com/2010/04/idempotency-patterns/).
+  * Considere se repetir a mesma operação pode causar inconsistências nos dados. Se algumas partes de um processo de várias etapas forem repetidas e as operações não forem idempotentes, isso poderá resultar em uma inconsistência. Por exemplo, uma operação que incrementa um valor, se repetida, produzirá um resultado inválido. Repetir uma operação que envia uma mensagem a uma fila poderá causar uma inconsistência no consumidor da mensagem se ele não puder detectar mensagens duplicadas. Para evitar isso, assegure-se de projetar cada etapa como uma operação idempotente. Para saber mais sobre idempotência, consulte [Padrões de idempotência][idempotency-patterns].
   * Considere o escopo das operações que serão repetidas. Por exemplo, pode ser mais fácil implementar o código de repetição em um nível que englobe várias operações e repetir todas elas se uma falhar. No entanto, fazer isso pode resultar em problemas de idempotência ou em operações de reversão desnecessárias.
   * Se você escolher um escopo de repetição que englobe várias operações, leve em conta a latência total de todos elas ao determinar os intervalos de repetição, ao monitorar o tempo gasto e antes de gerar alertas para falhas.
   * Considere como sua estratégia de repetição pode afetar vizinhos e outros locatários em um aplicativo compartilhado ou ao usar os serviços e recursos compartilhados. As políticas de repetição agressivas podem aumentar o número de falhas transitórias que ocorrem para esses outros usuários e para aplicativos que compartilham os recursos e serviços. Da mesma forma, seu aplicativo poderá ser afetado pelas políticas de repetição implementadas por outros usuários dos recursos e serviços. Para aplicativos de missão crítica, você pode decidir usar os serviços premium que não são compartilhados. Isso oferece muito mais controle sobre a carga e a limitação resultante desses recursos e serviços, o que pode ajudar a justificar o custo adicional.
@@ -103,5 +103,7 @@ As diretrizes a seguir ajudarão você a projetar um mecanismo adequado para tra
 * [Bloco de aplicativos de tratamento de falhas transitórias](http://msdn.microsoft.com/library/hh680934.aspx)
 * [Padrão de Disjuntor](http://msdn.microsoft.com/library/dn589784.aspx)
 * [Padrão de transação de compensação](http://msdn.microsoft.com/library/dn589804.aspx)
-* [Padrões de idempotência](http://blog.jonathanoliver.com/2010/04/idempotency-patterns/)
+* [Padrões de idempotência][idempotency-patterns]
+
+[idempotency-patterns]: http://blog.jonathanoliver.com/idempotency-patterns/
 

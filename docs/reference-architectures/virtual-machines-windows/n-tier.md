@@ -6,11 +6,11 @@ ms.date: 11/22/2016
 pnp.series.title: Windows VM workloads
 pnp.series.next: multi-region-application
 pnp.series.prev: multi-vm
-ms.openlocfilehash: f3c375f8fccc633d9525a8afbd11c13037265f4a
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: e25d10d661ac4759f209bd27384303dee2ee454e
+ms.sourcegitcommit: 583e54a1047daa708a9b812caafb646af4d7607b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 11/28/2017
 ---
 # <a name="run-windows-vms-for-an-n-tier-application"></a>Executar VMs do Windows para um aplicativo de N camadas
 
@@ -24,7 +24,7 @@ Essa arquitetura de referência mostra um conjunto de práticas comprovadas para
 
 Há muitas maneiras de implementar uma arquitetura de N camadas. O diagrama mostra um aplicativo Web de três camadas típico. Essa arquitetura se baseia em [Executar VMs com balanceamento de carga para escalabilidade e disponibilidade][multi-vm]. As camadas comerciais e da Web usam VMs com balanceamento de carga.
 
-* **Conjuntos de disponibilidade.** Crie um [conjunto de disponibilidade][azure-availability-sets] para cada camada e provisione pelo menos duas VMs em cada camada. Isso torna as VMs qualificadas para um [SLA (Contrato de Nível de Serviço)][vm-sla] mais elevado.
+* **Conjuntos de disponibilidade.** Crie um [conjunto de disponibilidade][azure-availability-sets] para cada camada e provisione pelo menos duas VMs em cada camada. Isso torna as VMs qualificadas para um [SLA (Contrato de Nível de Serviço)][vm-sla] mais elevado. É possível implantar uma VM única em um conjunto de disponibilidade, mas a VM única não se qualificará para uma garantia de SLA, a menos que a VM única esteja utilizando o Armazenamento Premium do Azure para todos discos de dados e SO.  
 * **Sub-redes.** Sempre crie uma sub-rede separada para cada camada. Especifique o intervalo de endereços e a máscara de sub-rede usando a notação [CIDR]. 
 * **Balanceadores de carga.** Use um [Balanceador de carga para a Internet][load-balancer-external] para distribuir o tráfego de entrada da Internet para a camada da Web e um [balanceador de carga interno][load-balancer-internal] para distribuir o tráfego de rede da camada da Web para a camada comercial.
 * **Jumpbox.** Também chamada de um [host bastião]. Uma VM protegida na rede que os administradores usam para se conectar às outras VMs. O jumpbox tem um NSG que permite o tráfego remoto apenas de endereços IP públicos em uma lista segura. O NSG deve permitir o tráfego de RDP (área de trabalho remota).
@@ -128,33 +128,50 @@ Simplifique o gerenciamento de todo o sistema usando ferramentas de administraç
 
 ## <a name="deploy-the-solution"></a>Implantar a solução
 
-Uma implantação para essa arquitetura está disponível no [GitHub][github-folder]. A arquitetura é implantada em três estágios. Para implantar a arquitetura, siga estas etapas: 
+Uma implantação para essa arquitetura de referência está disponível no [GitHub][github-folder]. 
 
-1. Clique no botão abaixo para iniciar o primeiro estágio de implantação:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fvirtual-machines%2Fn-tier-windows%2FvirtualNetwork.azuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
-2. Depois que o link for aberto no portal do Azure, insira os valores a seguir: 
-   * O nome do **Grupo de recursos** já está definido no arquivo de parâmetros, portanto, selecione **Criar novo** e digite `ra-ntier-sql-network-rg` na caixa de texto.
-   * Selecione a região na caixa suspensa **Local**.
-   * Não edite as caixas de texto **URI da raiz do modelo** ou **URI da raiz do parâmetro**.
-   * Analise os termos e condições e clique na caixa de seleção **Concordo com os termos e condições declarados acima**.
-   * Clique no botão **Comprar**.
-3. Verifique a notificação no Portal do Azure para ver uma mensagem indicando que o primeiro estágio da implantação for concluído.
-4. Clique no botão abaixo para iniciar o segundo estágio da implantação:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fvirtual-machines%2Fn-tier-windows%2Fworkload.azuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
-5. Depois que o link for aberto no portal do Azure, insira os valores a seguir: 
-   * O nome do **Grupo de recursos** já está definido no arquivo de parâmetros, portanto, selecione **Criar novo** e digite `ra-ntier-sql-workload-rg` na caixa de texto.
-   * Selecione a região na caixa suspensa **Local**.
-   * Não edite as caixas de texto **URI da raiz do modelo** ou **URI da raiz do parâmetro**.
-   * Analise os termos e condições e clique na caixa de seleção **Concordo com os termos e condições declarados acima**.
-   * Clique no botão **Comprar**.
-6. Verifique a notificação no Portal do Azure para ver uma mensagem indicando que o segundo estágio de implantação for concluído.
-7. Clique no botão abaixo para iniciar o terceiro estágio da implantação:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fvirtual-machines%2Fn-tier-windows%2Fsecurity.azuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
-8. Depois que o link for aberto no portal do Azure, insira os valores a seguir: 
-   * O nome do **Grupo de recursos** já está definido no arquivo de parâmetros, portanto, selecione **Usar Existente** e digite `ra-ntier-sql-network-rg` na caixa de texto.
-   * Selecione a região na caixa suspensa **Local**.
-   * Não edite as caixas de texto **URI da raiz do modelo** ou **URI da raiz do parâmetro**.
-   * Analise os termos e condições e clique na caixa de seleção **Concordo com os termos e condições declarados acima**.
-   * Clique no botão **Comprar**.
-9. Verifique a notificação no Portal do Azure para ver uma mensagem indicando que o terceiro estágio da implantação for concluído.
-10. Os arquivos de parâmetro incluem nomes de usuário e senha de administrador embutidos em código e é altamente recomendável que você altere imediatamente ambos em todas as VMs. Clique em cada VM no Portal do Azure e, em seguida, clique em **Redefinir senha** na folha **Suporte + solução de problemas**. Selecione **Redefinir senha** na caixa suspensa **Modo**, selecione um novo **Nome de usuário** e **Senha**. Clique no botão **Atualizar** para salvar o novo nome de usuário e senha. 
+### <a name="prerequisites"></a>Pré-requisitos
+
+Antes de implantar a arquitetura de referência para sua própria assinatura, você deve executar as etapas a seguir.
+
+1. Clone, crie fork ou baixe o arquivo zip para as [arquiteturas de referência AzureCAT][ref-arch-repo] no repositório GitHub.
+
+2. Verifique se a CLI do Azure 2.0 está instalada no computador. Para instalar a CLI, siga as instruções em [Instalar a CLI do Azure 2.0][azure-cli-2].
+
+3. Instale os pacote npm dos [Blocos de construção do Azure][azbb].
+
+  ```bash
+  npm install -g @mspnp/azure-building-blocks
+  ```
+
+4. Em um prompt de comando, bash prompt ou prompt do PowerShell, faça logon na sua conta do Azure usando um dos comandos abaixo e siga os prompts.
+
+  ```bash
+  az login
+  ```
+
+### <a name="deploy-the-solution-using-azbb"></a>Implantar a solução usando azbb
+
+Para implantar as VMs do Windows para uma arquitetura de referência de aplicativo de n camada, siga essas etapas:
+
+1. Navegue até a pasta `virtual-machines\n-tier-windows` para o repositório que você clonou na etapa 1 dos pré-requisitos acima.
+
+2. O arquivo de parâmetro especifica um nome de usuário e senha de administrador padrão para cada VM na implantação. Você deverá alterá-los antes de implantar a arquitetura de referência. Abra o arquivo `n-tier-windows.json` e substitua cada campo **adminUsername** e **adminPassword** com suas novas configurações.
+  
+  > [!NOTE]
+  > Há vários scripts que são executados durante essa implantação tanto nos objetos **VirtualMachineExtension** quanto nas configurações de **extensões** para alguns dos objetos **VirtualMachine**. Alguns desses scripts requerem o nome de usuário e a senha do administrador que você acabou de alterar. É recomendável revisar esses scripts para garantir que você especificou as credenciais corretas. A implantação poderá falhar se você não especificou as credenciais corretas.
+  > 
+  > 
+
+Salve o arquivo.
+
+3. Implante a arquitetura de referência usando a ferramenta de linha de comando **azbb** conforme mostrado abaixo.
+
+  ```bash
+  azbb -s <your subscription_id> -g <your resource_group_name> -l <azure region> -p n-tier-windows.json --deploy
+  ```
+
+Para obter mais informações sobre a implantação dessa arquitetura de referência de exemplo utilizando blocos de construção Blocos de Construção do Azure, visite o repositório [GitHub][git].
 
 
 <!-- links -->
@@ -162,14 +179,16 @@ Uma implantação para essa arquitetura está disponível no [GitHub][github-fol
 [multi-dc]: multi-region-application.md
 [multi-vm]: multi-vm.md
 [n-tier]: n-tier.md
-
+[azbb]: https://github.com/mspnp/template-building-blocks/wiki/Install-Azure-Building-Blocks
 [azure-administration]: /azure/automation/automation-intro
 [azure-availability-sets]: /azure/virtual-machines/virtual-machines-windows-manage-availability#configure-each-application-tier-into-separate-availability-sets
 [azure-cli]: /azure/virtual-machines-command-line-tools
+[azure-cli-2]: https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest
 [azure-key-vault]: https://azure.microsoft.com/services/key-vault
 [host bastião]: https://en.wikipedia.org/wiki/Bastion_host
 [cidr]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
 [chef]: https://www.chef.io/solutions/azure/
+[git]: https://github.com/mspnp/template-building-blocks
 [github-folder]: https://github.com/mspnp/reference-architectures/tree/master/virtual-machines/n-tier-windows
 [lb-external-create]: /azure/load-balancer/load-balancer-get-started-internet-portal
 [lb-internal-create]: /azure/load-balancer/load-balancer-get-started-ilb-arm-portal
@@ -181,6 +200,7 @@ Uma implantação para essa arquitetura está disponível no [GitHub][github-fol
 [private-ip-space]: https://en.wikipedia.org/wiki/Private_network#Private_IPv4_address_spaces
 [endereço IP público]: /azure/virtual-network/virtual-network-ip-addresses-overview-arm
 [puppet]: https://puppetlabs.com/blog/managing-azure-virtual-machines-puppet
+[ref-arch-repo]: https://github.com/mspnp/reference-architectures
 [sql-alwayson]: https://msdn.microsoft.com/library/hh510230.aspx
 [sql-alwayson-force-failover]: https://msdn.microsoft.com/library/ff877957.aspx
 [sql-alwayson-getting-started]: https://msdn.microsoft.com/library/gg509118.aspx
