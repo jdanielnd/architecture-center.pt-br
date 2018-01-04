@@ -6,11 +6,11 @@ author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories: resiliency
-ms.openlocfilehash: f8337717c4afd6b558f0da8e1ded3a8071340db7
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: a822de990d6ce933024207073b110e98f8da40bf
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="compensating-transaction-pattern"></a>Padrão de Transação de Compensação
 
@@ -38,7 +38,7 @@ Uma abordagem comum é usar um fluxo de trabalho para implementar uma operação
 
 > Essa abordagem é semelhante à estratégia do Sagas discutida no [blog de Clemens Vasters](http://vasters.com/clemensv/2012/09/01/Sagas.aspx).
 
-Uma transação de compensação também é uma operação eventualmente consistente e ela também poderia falhar. O sistema deve ser capaz de retomar a transação de compensação no ponto de falha e continuar. Pode ser necessário repetir uma etapa que falhou, portanto as etapas em uma transação de compensação devem ser definidas como comandos idempotentes. Para obter mais informações, consulte [Padrões de idempotência](http://blog.jonathanoliver.com/2010/04/idempotency-patterns/) no blog de Jonathan Oliver.
+Uma transação de compensação também é uma operação eventualmente consistente e ela também poderia falhar. O sistema deve ser capaz de retomar a transação de compensação no ponto de falha e continuar. Pode ser necessário repetir uma etapa que falhou, portanto as etapas em uma transação de compensação devem ser definidas como comandos idempotentes. Para obter mais informações, consulte [Padrões de idempotência](http://blog.jonathanoliver.com/idempotency-patterns/) no blog de Jonathan Oliver.
 
 Em alguns casos, pode não ser possível recuperar de uma etapa com falha, exceto por meio de intervenção manual. Nessas situações, o sistema deve acionar um alerta e fornecer o máximo possível de informações sobre o motivo da falha.
 
@@ -93,7 +93,7 @@ Em muitas soluções de negócios, a falha de uma única etapa não exige a reve
 
 Os padrões e diretrizes a seguir também podem ser relevantes ao implementar esse padrão:
 
-- [Primer de consistência de dados](https://msdn.microsoft.com/library/dn589800.aspx). O padrão de Transações de Compensação geralmente é usado para desfazer operações que implementam o modelo de consistência eventual. Esse primer fornece informações sobre as vantagens e desvantagens da consistência eventual.
+- [Primer de Consistência de Dados](https://msdn.microsoft.com/library/dn589800.aspx). O padrão de Transações de Compensação geralmente é usado para desfazer operações que implementam o modelo de consistência eventual. Esse primer fornece informações sobre as vantagens e desvantagens da consistência eventual.
 
 - [Padrão Agendador-Agente-Supervisor](scheduler-agent-supervisor.md). Descreve como implementar sistemas resilientes que executam operações de negócios que usam recursos e serviços distribuídos. Às vezes, pode ser necessário desfazer o trabalho executado por uma operação usando uma transação de compensação.
 

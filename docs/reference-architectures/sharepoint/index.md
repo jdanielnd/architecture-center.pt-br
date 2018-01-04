@@ -3,19 +3,19 @@ title: Executar um farm do SharePoint Server 2016 de alta disponibilidade no Azu
 description: "Práticas comprovadas para configurar uma farm do SharePoint Server 2016 de alta disponibilidade no Azure."
 author: njray
 ms.date: 08/01/2017
-ms.openlocfilehash: a3d47eea15f1e7e8cecf2bf1be55d8c3a9bb9bdc
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 0c0e9a7b2ae12a2d12919548f91304e6cbd2d8a6
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="run-a-high-availability-sharepoint-server-2016-farm-in-azure"></a>Executar um farm do SharePoint Server 2016 de alta disponibilidade no Azure
 
-Essa arquitetura de referência mostra um conjunto de práticas comprovadas para configurar um farm do SharePoint Server 2016 de alta disponibilidade no Azure, usando a topologia de MinRole e grupos de disponibilidade Always On do SQL Server. O farm do SharePoint é implantado em uma rede virtual protegida sem nenhuma presença ou ponto de extremidade para a Internet. [**Implantar esta solução**.](#deploy-the-solution) 
+Essa arquitetura de referência mostra um conjunto de práticas comprovadas para configurar um farm do SharePoint Server 2016 de alta disponibilidade no Azure, usando a topologia de MinRole e grupos de disponibilidade Always On do SQL Server. O farm do SharePoint é implantado em uma rede virtual protegida sem nenhuma presença ou ponto de extremidade para a Internet. [**Implante essa solução**.](#deploy-the-solution) 
 
 ![](./images/sharepoint-ha.png)
 
-*Baixar um [arquivo Visio][visio-download] dessa arquitetura.*
+*Baixe um [Arquivo Visio][visio-download] dessa arquitetura.*
 
 ## <a name="architecture"></a>Arquitetura
 
@@ -45,7 +45,7 @@ Essa arquitetura consiste nos seguintes componentes:
 
 - **Servidores do SharePoint**. Os servidores do SharePoint executam funções de front-end da Web, armazenamento em cache, aplicativo e pesquisa. 
 
-- **Jumpbox**. Também chamado de um [host bastião][bastion-host]. Esta é uma VM segura na rede que os administradores usam para se conectar às outras VMs. O jumpbox tem um NSG que permite o tráfego remoto apenas de endereços IP públicos em uma lista segura. O NSG deve permitir o tráfego de área de trabalho remota (RDP).
+- **Jumpbox**. Também chamado de um [host bastião][bastion-host]. Esta é uma VM segura na rede que os administradores usam para se conectar às outras VMs. O jumpbox tem um NSG que permite o tráfego remoto apenas de endereços IP públicos em uma lista segura. O NSG deve permitir o tráfego de RDP (área de trabalho remota).
 
 ## <a name="recommendations"></a>Recomendações
 
@@ -173,7 +173,7 @@ Os scripts de implantação para essa arquitetura de referência estão disponí
 
 Você pode implantar essa arquitetura incrementalmente ou de uma só vez. Na primeira vez, é recomendável uma implantação incremental, para que você possa ver o que faz cada implantação. Especificar o incremento usando um dos seguintes parâmetros de *modo*.
 
-| Modo           | O que faz                                                                                                            |
+| Mode           | O que faz                                                                                                            |
 |----------------|-------------------------------------------------------------------------------------------------------------------------|
 | onprem         | (Opcional) Implanta um ambiente de rede local simulado, para teste ou avaliação. Essa etapa não se conecta a uma rede local real. |
 | infrastructure | Implanta a infraestrutura de rede do SharePoint 2016 e a jumpbox do Azure.                                                |
@@ -199,7 +199,7 @@ Para implantar a arquitetura de forma incremental sem um ambiente de rede local 
 
 Para implantar tudo em uma única etapa, use `all`. Observe que todo o processo pode levar várias horas.
 
-### <a name="prerequisites"></a>Pré-requisitos
+### <a name="prerequisites"></a>pré-requisitos
 
 * Instale a versão mais recente do [Azure PowerShell][azure-ps].
 
