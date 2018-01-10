@@ -2,11 +2,11 @@
 title: Centro de Arquitetura do Azure
 description: "O Centro de Arquitetura do Azure é o centro oficial de orientação, plantas, padrões e práticas recomendados para criar soluções com o Microsoft Azure. Ele é curadoria pela equipe de padrões e práticas da Microsoft."
 layout: LandingPage
-ms.openlocfilehash: 3afe907b8ea1fe59d6c2eb9505ddb34775fdcd62
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: d48861a1001c9bef8cad152a3664077f2ad915c6
+ms.sourcegitcommit: a8453c4bc7c870fa1a12bb3c02e3b310db87530c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/29/2017
 ---
 # <a name="azure-architecture-center"></a>Centro de Arquitetura do Azure
 
@@ -84,20 +84,20 @@ ms.lasthandoff: 11/14/2017
             </div>
         </a>
     </li>
-    <!-- Performance anti-practices -->
+    <!-- Microservices -->
     <li>
-        <a href="/azure/architecture/antipatterns">
+        <a href="/azure/architecture/microservices">
             <div class="cardSize">
                 <div class="cardPadding">
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="_images/performance.svg" alt="Performance antipatterns" />
+                                <img src="_images/new-content.svg" alt="Designing, building, and operating microservices on Azure" />
                             </div>
                         </div>
                         <div class="cardText">
-                            <h3>Antipadrões de desempenho</h3>
-                            <p>Como detectar e corrigir alguns comuns causas de problemas de desempenho e escalabilidade em aplicativos de nuvem.</p>
+                            <h3>Compilar microsserviços no Azure</h3>
+                            <p>Esta série de várias partes guia você pelo processo de criação e compilação de uma arquitetura de microsserviços no Azure. Uma implementação de referência está incluída.</p>
                         </div>
                     </div>
                 </div>
@@ -124,7 +124,27 @@ ms.lasthandoff: 11/14/2017
             </div>
         </a>
     </li>
-    <!-- Azure for AWS Professionals -->
+    <!-- Azure Virtual Datacenter -->
+    <li>
+        <a href="https://aka.ms/vdc">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card">
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="_images/virtual-datacenter.svg" alt="Azure Virtual Datacenter e-book" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h3>Livro virtual: Datacenter Virtual do Azure</h3>
+                            <p>Este livro eletrônico mostra como implantar cargas de trabalho empresariais na plataforma de nuvem do Azure, respeitando simultaneamente suas políticas de segurança e de rede existentes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li>
+        <!-- Azure for AWS Professionals -->
     <li>
         <a href="/azure/architecture/aws-professional">
             <div class="cardSize">
@@ -136,7 +156,7 @@ ms.lasthandoff: 11/14/2017
                             </div>
                         </div>
                         <div class="cardText">
-                            <h3>Azure para Profissionais do AWS</h3>
+                            <h3>Azure para profissionais do AWS</h3>
                             <p>Aproveite suas experiências AWS no Microsoft Azure.</p>
                         </div>
                     </div>
@@ -178,6 +198,26 @@ ms.lasthandoff: 11/14/2017
                         <div class="cardText">
                             <h3>Blocos de Construção do Azure</h3>
                             <p>Simplificar a implantação de recursos do Azure. Com um arquivo de configurações única, implante arquiteturas complexas no Azure.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li>
+    <!-- Performance anti-practices -->
+    <li>
+        <a href="/azure/architecture/antipatterns">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card">
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="_images/performance.svg" alt="Performance antipatterns" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h3>Antipadrões de desempenho</h3>
+                            <p>Como detectar e corrigir alguns comuns causas de problemas de desempenho e escalabilidade em aplicativos de nuvem.</p>
                         </div>
                     </div>
                 </div>
@@ -238,26 +278,6 @@ ms.lasthandoff: 11/14/2017
                         <div class="cardText">
                             <h3>Gerenciamento de Identidades para Aplicativos Multilocatários</h3>
                             <p>Entenda as práticas recomendadas para multilocação, ao usar o Azure AD para gerenciamento de identidades.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </li>
-    <!-- ElasticSearch -->
-    <li>
-        <a href="/azure/architecture/elasticsearch">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                                <img src="_images/elasticsearch.svg" alt="Run Elasticsearch on Azure" />
-                            </div>
-                        </div>
-                        <div class="cardText">
-                            <h3>Executar o Elasticsearch no Azure</h3>
-                            <p>Saiba como implantar, gerenciar e ajustar a um cluster Elasticsearch no Azure.</p>
                         </div>
                     </div>
                 </div>
