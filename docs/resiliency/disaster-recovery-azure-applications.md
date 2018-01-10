@@ -3,21 +3,30 @@ title: "Recuperação de desastre para aplicativos do Azure"
 description: "Visão geral técnica e informações detalhadas sobre como projetar aplicativos para recuperação de desastre no Microsoft Azure."
 author: adamglick
 ms.date: 05/26/2017
-ms.openlocfilehash: d415b27dd7928996e2a6dc7fd8fcf6a77c835768
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 5ed6e2cec149571724f1545b40f628d6bbe1ad71
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
-[!INCLUDE [header](../_includes/header.md)]
 # <a name="disaster-recovery-for-azure-applications"></a>Recuperação de desastre para aplicativos do Azure
-Estratégias de resiliência e alta disponibilidade tem como objetivo lidar com condições de falha temporária. A recuperação de desastres (DR) tem como foco a recuperação após uma perda catastrófica de funcionalidade do aplicativo. Por exemplo, se uma região do Azure que hospeda o aplicativo ficar indisponível, você precisa de um plano para executar seu aplicativo ou acessar os dados em outra região. A execução desse plano envolve pessoas, processos e aplicativos de suporte que permitem que o sistema continue funcionando. Seu plano deve incluir ensaio de falhas e testes de recuperação de bancos de dados para garantir que o plano é sólido. Os responsáveis pelos negócios e pela tecnologia que definem o modo operacional do sistema para um desastre também determinam o nível de funcionalidade do serviço necessário durante um desastre. Esse nível de funcionalidade apresenta-se destas formas: totalmente indisponível, parcialmente disponível, por funcionalidade reduzida ou processamento com atraso, ou totalmente disponível.
+
+A recuperação de desastres (DR) tem como foco a recuperação após uma perda catastrófica de funcionalidade do aplicativo. Por exemplo, se uma região do Azure que hospeda o aplicativo ficar indisponível, você precisa de um plano para executar seu aplicativo ou acessar os dados em outra região. 
+
+Proprietários de negócios e tecnologia devem determinar quanta funcionalidade é necessária durante um desastre. Esse nível de funcionalidade apresenta-se destas formas: totalmente indisponível, parcialmente disponível, por funcionalidade reduzida ou processamento com atraso, ou totalmente disponível.
+
+Estratégias de resiliência e alta disponibilidade tem como objetivo lidar com condições de falha temporária.  A execução desse plano envolve pessoas, processos e aplicativos de suporte que permitem que o sistema continue funcionando. Seu plano deve incluir ensaio de falhas e testes de recuperação de bancos de dados para garantir que o plano é sólido. 
 
 ## <a name="azure-disaster-recovery-features"></a>Recursos de recuperação de desastre do Azure
+
 Assim como nas considerações de disponibilidade, o Azure oferece [orientações técnicas de resiliência](./index.md) desenvolvidas para lidar com a recuperação de desastre. Também há uma relação entre recursos de disponibilidade do Azure e a recuperação de desastre. Por exemplo, o gerenciamento de funções entre domínios de falha aumenta a disponibilidade de um aplicativo. Sem esse gerenciamento, uma falha de hardware sem tratamento se tornaria um cenário de "desastre". O aproveitamento desses recursos e estratégias de disponibilidade é uma parte importante da blindagem de seu aplicativo contra desastres. No entanto, este artigo vai além de problemas gerais de disponibilidade e aborda eventos de desastre mais graves (e mais raros).
 
 ## <a name="multiple-datacenter-regions"></a>Múltiplas regiões de datacenter
 O Azure mantém datacenters em muitas regiões ao redor do mundo. Essa infraestrutura é compatível com vários cenários de recuperação de desastre, como a replicação geográfica, fornecida pelo sistema, do Armazenamento do Microsoft Azure para regiões secundárias. Você também pode implantar, de forma fácil e com baixo custo, um serviço de nuvem em vários locais do mundo. Compare isso com o custo e a dificuldade de criar e manter seus próprios datacenters em várias regiões. Implantar serviços e dados em várias regiões ajuda a proteger o aplicativo contra uma grande interrupção em uma única região. Ao projetar seu plano de recuperação de desastres, é importante compreender o conceito de regiões emparelhadas. Para saber mais, consulte [Continuidade dos negócios e recuperação de desastres (BCDR): Regiões Emparelhadas do Azure](/azure/best-practices-availability-paired-regions).
+
+## <a name="azure-site-recovery"></a>Azure Site Recovery
+
+[Azure Site Recovery](/azure/site-recovery/) fornece uma maneira simples de replicar VMs do Azure entre regiões. Ele tem sobrecarga mínima de gerenciamento, pois você não precisa provisionar recursos adicionais na região secundária. Quando você habilitar a replicação, o Site Recovery criará automaticamente os recursos necessários na região de destino, com base nas configurações da VM de origem. Ele fornece replicação contínua automatizada e permite que você execute o failover de aplicativo com um único clique. Execute também exercícios de recuperação de desastres com testes de failover, sem afetar a cargas de trabalho de produção ou de replicação contínua. 
 
 ## <a name="azure-traffic-manager"></a>Gerenciador de Tráfego do Azure
 Quando ocorre uma falha específica de região, você deve redirecionar o tráfego para serviços ou implantações em outra região. É mais eficaz lidar com isso por meio de serviços como o Gerenciador de Tráfego do Microsoft Azure, que automatiza o failover de tráfego de usuários para outra região se a região principal falhar. É importante entender as noções básicas sobre o Gerenciador de Tráfego ao projetar uma estratégia de recuperação de desastres eficiente.
@@ -69,9 +78,7 @@ Com cada serviço dependente, você precisa entender as implicações de uma int
 As falhas anteriores foram, principalmente, falhas que poderiam ser gerenciadas dentro de uma mesma região do Azure. No entanto, você também deve se preparar para a possibilidade de que haja uma interrupção do serviço em toda a região. Se ocorrer uma interrupção do serviço em toda a região, as cópias dos seus dados que forem redundantes localmente não ficarão disponíveis. Se você tiver habilitado a replicação geográfica, haverá três cópias adicionais dos seus blobs e tabelas em uma região diferente. Se a Microsoft declarar a região como perdida, o Azure remapeará todas as entradas DNS para a região da replicação geográfica.
 
 > [!NOTE]
-> Lembre-se de que você não tem nenhum controle sobre esse processo e de que ele ocorrerá apenas em caso de interrupção do serviço em toda uma região. Por isso, você deve contar com outras estratégias de backup específicas ao aplicativo para chegar ao nível mais alto de disponibilidade. Para saber mais, consulte a seção sobre [estratégias de dados para recuperação de desastre](#data-strategies-for-disaster-recovery).
-> 
-> 
+> Lembre-se de que você não tem nenhum controle sobre esse processo e de que ele ocorrerá apenas em caso de interrupção do serviço em toda uma região. Considere o uso do [Azure Site Recovery](/azure/site-recovery/) para alcançar melhor RPO e RTO. O Site Recovery permite que o aplicativo decida o que é uma interrupção aceitável e quando executar failover nas VMs replicadas.
 
 ### <a name="azure-wide-service-disruption"></a>Interrupção do serviço em todo o Azure
 No planejamento para desastres, você deve levar em consideração toda a gama de possíveis desastres. Uma das interrupções de serviço mais graves envolveria todas as regiões do Azure simultaneamente. Assim como em outros tipos de interrupção de serviço, você pode optar por aceitar o risco de que haja um tempo de inatividade temporário caso a situação ocorra. Interrupções de serviço amplas que afetam várias regiões são muito mais raras do que interrupções de serviço isoladas envolvendo serviços dependentes ou regiões únicas.
@@ -177,7 +184,19 @@ Nesse cenário, o banco de dados é um único ponto de falha. Embora o Azure rep
 
 Para todos os aplicativos, exceto pelos menos críticos, você deve desenvolver um plano para implantar o aplicativo em várias regiões. Você também deve levar em consideração as restrições de custo e RTO ao avaliar qual topologia de implantação usar.
 
-Agora, vamos ver abordagens específicos para oferecer suporte ao failover em regiões diferentes. Todos estes exemplos usam duas regiões para descrever o processo.
+Vejamos agora abordagens específicas para suporte a failover em regiões diferentes. Todos estes exemplos usam duas regiões para descrever o processo.
+
+### <a name="failover-using-azure-site-recovery"></a>Failover usando o Azure Site Recovery
+
+Quando você habilita a replicação de VM do Azure usando o Azure Site Recovery, ele cria vários recursos na região secundária:
+
+- Grupo de recursos.
+- Rede virtual (VNet).
+- Conta de armazenamento. 
+- Conjuntos de disponibilidade para manter VMs após o failover.
+
+Gravações de dados em discos de VM na região primária são continuamente transferidas para a conta de armazenamento na região secundária. Os pontos de recuperação são gerados na conta de armazenamento de destino a cada poucos minutos. Quando você inicia um failover, VMs recuperadas são criadas no grupo de recursos, na VNet e no conjunto de disponibilidade de destino. Durante um failover, você pode usar qualquer ponto de recuperação disponível.
+
 
 ### <a name="redeployment-to-a-secondary-azure-region"></a>Reimplantação em uma região secundária do Azure
 Na abordagem de reimplantação em uma região secundária, somente a região primária tem aplicativos e bancos de dados em execução. A região secundária não está configurada para um failover automático. Assim, quando um desastre ocorrer, você precisará acionar todas as partes do serviço na nova região. Isso inclui carregar um serviço de nuvem no Azure, implantar o serviço de nuvem, restaurar os dados e modificar o DNS para redirecionar o tráfego.
@@ -269,16 +288,18 @@ Considere a possibilidade de criar um tipo de "meu de controle" no aplicativo pa
 
 A simulação destaca todos os problemas que foram tratados incorretamente. Os cenários simulados devem ser completamente controláveis. Isso significa que, mesmo que o plano de recuperação pareça estar falhando, você pode restaurar a situação voltar ao normal sem danos significativos. Também é importante que você informe o gerenciamento de nível superior sobre quando e como os exercícios de simulação serão executados. Esse plano deve detalhar o tempo ou os recursos afetados durante a simulação. Também defina as medidas de sucesso ao testar seu plano de recuperação de desastres.
 
+Se você estiver usando o Azure Site Recovery, poderá executar um failover de teste no Azure, validar sua estratégia de replicação ou executar exercícios de recuperação de desastres sem perda de dados ou tempo de inatividade. Um failover de teste não afeta a replicação da VM em andamento nem o ambiente de produção.
+
 Várias outras técnicas podem testar os planos de recuperação de desastres. No entanto, a maioria deles são simplesmente variações dessas técnicas básicas. O objetivo desse teste é avaliar a viabilidade do plano de recuperação. Testes de recuperação de desastre se concentram em detalhes para descobrir lacunas no plano básico de recuperação.
 
 ## <a name="service-specific-guidance"></a>Diretriz específica do serviço
 
 Os tópicos a seguir descrevem os serviços do Azure específicos de recuperação de desastres:
 
-| O Barramento de | Tópico |
+| Serviço | Tópico |
 |---------|-------|
 | Serviços de Nuvem | [O que fazer no caso de uma interrupção de serviço do Azure que afete os Serviços de Nuvem do Azure](/azure/cloud-services/cloud-services-disaster-recovery-guidance) |
-| Cofre de Chaves | [Redundância e disponibilidade de Azure Key Vault](/azure/key-vault/key-vault-disaster-recovery-guidance) |
+| Cofre da Chave | [Redundância e disponibilidade de Azure Key Vault](/azure/key-vault/key-vault-disaster-recovery-guidance) |
 |Armazenamento | [O que fazer se uma ocorrer interrupção no Armazenamento do Microsoft Azure](/azure/storage/storage-disaster-recovery-guidance) |
 | Banco de dados SQL | [Restaurar um Banco de Dados SQL ou fazer failover para um secundário](/azure/sql-database/sql-database-disaster-recovery) |
 | Máquinas virtuais | [O que fazer caso uma interrupção de serviço do Azure afete as máquinas virtuais do Azure](/azure/virtual-machines/virtual-machines-disaster-recovery-guidance) |

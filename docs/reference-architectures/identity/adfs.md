@@ -6,11 +6,11 @@ ms.date: 11/28/2016
 pnp.series.title: Identity management
 pnp.series.prev: adds-forest
 cardTitle: Extend AD FS to Azure
-ms.openlocfilehash: b24f4e72b13331437d92f20a228e3ba8121db90a
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: b8c9ae0621c087c68d449dd13e60046104c01513
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="extend-active-directory-federation-services-ad-fs-to-azure"></a>Estender o Serviços de Federação do Active Directory (AD FS) para o Azure
 
@@ -214,9 +214,9 @@ Considere usar um conjunto de soluções de virtualização de rede que registre
 
 ## <a name="deploy-the-solution"></a>Implantar a solução
 
-Há uma solução disponível no [Github][github] para implantar essa arquitetura de referência. Você precisará da versão mais recente da [CLI do Azure][azure-cli] para executar o script do Powershell que implanta a solução. Para implantar a arquitetura de referência, siga estas etapas:
+Há uma solução disponível no [GitHub][github] para implantar essa arquitetura de referência. Você precisará da versão mais recente da [CLI do Azure][azure-cli] para executar o script do Powershell que implanta a solução. Para implantar a arquitetura de referência, siga estas etapas:
 
-1. Baixe ou clone a pasta da solução do [Github][github] para seu computador local.
+1. Baixe ou clone a pasta da solução do [GitHub][github] em seu computador local.
 
 2. Abra a CLI do Azure e navegue até a pasta da solução local.
 

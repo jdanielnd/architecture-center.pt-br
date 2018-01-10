@@ -2,19 +2,19 @@
 title: Executar uma VM do Windows no Azure
 description: "Como executar uma VM do Windows no Azure, atentando-se para a escalabilidade, resiliência, capacidade de gerenciamento e segurança."
 author: telmosampaio
-ms.date: 11/16/2017
+ms.date: 12/12/2017
 pnp.series.title: Windows VM workloads
 pnp.series.next: multi-vm
 pnp.series.prev: ./index
-ms.openlocfilehash: b519cb96c124a91d95fb5965f34b86026c95805c
-ms.sourcegitcommit: 115db7ee008a0b1f2b0be50a26471050742ddb04
+ms.openlocfilehash: 71eeebae1f557ecbb6f33c4a7e37a278204f3dcd
+ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/17/2017
+ms.lasthandoff: 01/02/2018
 ---
 # <a name="run-a-windows-vm-on-azure"></a>Executar uma VM do Windows no Azure
 
-Essa arquitetura de referência mostra um conjunto de práticas comprovadas para executar uma VM (máquinas virtuais) do Windows no Azure. Ela inclui recomendações para provisionar a VM juntamente com os componentes de rede e armazenamento. Essa arquitetura pode ser usada para executar uma instância de VM única e é a base para arquiteturas mais complexas, como aplicativos de N camadas. [**Implantar essa solução.**](#deploy-the-solution)
+Essa arquitetura de referência mostra um conjunto de práticas comprovadas para executar uma VM (máquinas virtuais) do Windows no Azure. Ela inclui recomendações para provisionar a VM juntamente com os componentes de rede e armazenamento. Essa arquitetura pode ser usada para executar uma instância de VM única e é a base para arquiteturas mais complexas, como aplicativos de N camadas. [**Implante essa solução.**](#deploy-the-solution)
 
 ![[0]][0]
 
@@ -24,15 +24,16 @@ Essa arquitetura de referência mostra um conjunto de práticas comprovadas para
 
 O provisionamento de uma VM do Azure requer componentes adicionais, como recursos de armazenamento, rede e computação.
 
-* **Grupo de recursos.** Um [*grupo de recursos*][resource-manager-overview] é um contêiner que armazena os recursos relacionados. Em geral, você deve agrupar recursos em uma solução baseada no tempo de vida e quem gerenciará os recursos. Para uma carga de trabalho de VM única, você pode querer criar um grupo de recursos único para todos os recursos.
+* **Grupo de recursos.** Um [grupo de recursos][resource-manager-overview] é um contêiner que armazena os recursos relacionados. Em geral, você deve agrupar recursos em uma solução baseada no tempo de vida e quem gerenciará os recursos. Para uma carga de trabalho de VM única, você pode querer criar um grupo de recursos único para todos os recursos.
 * **VM**. Você pode provisionar uma VM a partir de uma lista de imagens publicadas, de um arquivo gerenciado personalizado ou um arquivo de VHD (disco rígido virtual) carregado no armazenamento Blobs do Azure.
 * **Disco do sistema operacional.** O disco de OS é um VHD armazenado no [Armazenamento do Microsoft Azure ][azure-storage], de modo que ele persiste mesmo quando o computador host está desligado.
-* **Disco temporário.** A VM é criada com um disco temporário (a unidade `D:` no Windows). Esse disco é armazenado em uma unidade física no computador host. Ele *não* é salvo no Armazenamento do Microsoft Azure e pode ser excluído durante a reinicialização e outros eventos de ciclo de vida da VM. Use esse disco somente para dados temporários, como arquivos de paginação ou de permuta.
+* **Disco temporário.** A VM é criada com um disco temporário (a unidade `D:` no Windows). Esse disco é armazenado em uma unidade física no computador host. Ele **não** é salvo no Armazenamento do Microsoft Azure e pode ser excluído durante a reinicialização e outros eventos de ciclo de vida da VM. Use esse disco somente para dados temporários, como arquivos de paginação ou de permuta.
 * **Discos de dados.** Um [disco de dados][data-disk] é um VHD persistente usado para dados de aplicativo. Os discos de dados são armazenados no Armazenamento do Azure, como o disco do sistema operacional.
 * **Rede Virtual e sub-rede.** Cada VM do Azure é implantada em uma VNet que pode ser segmentada em várias sub-redes.
-* **Endereço IP público.** Um endereço IP público é necessário para se comunicar com a VM &mdash; por exemplo, sobre RDP (área de trabalho remota).
-* **NIC (adaptador de rede)**. Uma NIC atribuída permite que a VM se comunique com a rede virtual.
-* **NSG (grupo de segurança de rede)**. [NSGs][nsg] são utilizados para permitir ou negar tráfego de rede a um recurso de rede. É possível associar um NSG a uma NIC individual ou a uma sub-rede. Se você associá-lo a uma sub-rede, as regras do NSG se aplicarão a todas as VMs na sub-rede.
+* **Endereço IP público.** Um endereço IP público é necessário para se comunicar com a VM &mdash; por exemplo, sobre RDP (área de trabalho remota).  
+* **DNS do Azure**. [DNS do Azure][azure-dns] é um serviço de hospedagem para domínios DNS, que fornece resolução de nomes usando a infraestrutura do Microsoft Azure. Ao hospedar seus domínios no Azure, você pode gerenciar seus registros DNS usando as mesmas credenciais, APIs, ferramentas e cobrança que seus outros serviços do Azure.  
+* **NIC (adaptador de rede)**. Uma NIC atribuída permite que a VM se comunique com a rede virtual.  
+* **NSG (grupo de segurança de rede)**. [Grupos de segurança de rede][nsg] são utilizados para permitir ou recusar tráfego de rede a um recurso de rede. É possível associar um NSG a uma NIC individual ou a uma sub-rede. Se você associá-lo a uma sub-rede, as regras do NSG se aplicarão a todas as VMs na sub-rede.
 * **Diagnósticos.** O registro de diagnóstico é crucial para o gerenciamento e solução de problemas da VM.
 
 ## <a name="recommendations"></a>Recomendações
@@ -59,7 +60,7 @@ Habilite o monitoramento e diagnóstico, incluindo métricas de integridade bás
 
 Para um melhor desempenho de E/S de disco, recomendamos o [Armazenamento Premium][premium-storage], que armazena dados em SSDs (unidades de estado sólido). O custo é baseado na capacidade do disco provisionado. O IOPS e a taxa de transferência (ou seja, a taxa de transferência de dados) também dependem do tamanho do disco. Portanto, ao provisionar um disco, considere todos os três fatores (capacidade, IOPS e taxa de transferência). 
 
-Também é recomendável usar [discos gerenciado](/azure/storage/storage-managed-disks-overview). Discos gerenciados não exigem uma conta de armazenamento. Você simplesmente especifica o tamanho e o tipo de disco e é implantado como um recurso altamente disponível.
+Também é recomendável usar [discos gerenciado](/azure/storage/storage-managed-disks-overview). Os discos gerenciados não exigem uma conta de armazenamento. Você simplesmente especifica o tamanho e o tipo de disco e é implantado como um recurso altamente disponível.
 
 Se você estiver utilizando discos não gerenciados, crie contas de armazenamento do Azure separadas para cada VM para manter VHDs (discos rígidos virtuais), para evitar atingir os [ limites de IOPS][vm-disk-limits] para contas de armazenamento.
 
@@ -86,11 +87,11 @@ Você pode escalar uma VM vertical ou horizontalmente [alterando o tamanho da VM
 
 ## <a name="availability-considerations"></a>Considerações sobre disponibilidade
 
-Para obter maior disponibilidade, implante várias VMs em um conjunto de disponibilidade. Isso também fornece um maior [contrato de nível de serviço][vm-sla] (SLA).
+Para obter maior disponibilidade, implante várias VMs em um conjunto de disponibilidade. Isso também fornece [SLA (Contrato de Nível de Serviço)][vm-sla] mais elevado.
 
 Sua VM pode ser afetada por uma [manutenção planejada][planned-maintenance] ou [manutenção não planejada][manage-vm-availability]. Você pode usar os[ logs de reinicialização da VM][reboot-logs] para determinar se uma reinicialização da VM foi causada por manutenção planejada.
 
-Os VHDs são armazenados no [	Armazenamento do Microsoft Azure][azure-storage]. Armazenamento do Microsoft Azure é replicado para durabilidade e disponibilidade.
+Os VHDs são armazenados no [	Armazenamento do Microsoft Azure][azure-storage]. O Armazenamento do Microsoft Azure é replicado para durabilidade e disponibilidade.
 
 Para se proteger contra perda acidental de dados durante operações normais (por exemplo, devido ao erro do usuário), você também deve implementar backups pontuais usando [instantâneos de blob][blob-snapshot] ou outra ferramenta.
 
@@ -100,7 +101,7 @@ Para se proteger contra perda acidental de dados durante operações normais (po
 
 **Interrompendo uma VM.** O Azure faz uma distinção entre os estados "parado" e "desalocado". Você será cobrado quando o status da VM for interrompido, mas não quando a VM for desalocada.
 
-No Portal do Azure, o botão **Parar** desaloca a VM. No entanto, se você desligar por meio do sistema operacional enquanto estiver conectado, a VM será interrompida, mas *não* desalocada e, portanto, você ainda será cobrado.
+No Portal do Azure, o botão **Parar** desaloca a VM. No entanto, se você desligar por meio do sistema operacional enquanto estiver conectado, a VM será interrompida, mas **não** desalocada e, portanto, você ainda será cobrado.
 
 **Excluindo uma VM.** Se você excluir uma VM, os VHDs não serão excluídos. Isso significa que você poderá excluir com segurança a VM sem perda de dados. No entanto, você ainda será cobrado pelo armazenamento. Para excluir o VHD, exclua o arquivo do [Armazenamento de blobs][blob-storage].
 
@@ -132,7 +133,7 @@ Uma implantação para essa arquitetura está disponível no [GitHub][github-fol
   * Uma VM que executa a versão mais recente do Windows Server 2016 Datacenter Edition.
   * Uma extensão de script personalizado de exemplo que formata os dois discos de dados e um script do PowerShell DSC que implanta IIS.
 
-### <a name="prerequisites"></a>Pré-requisitos
+### <a name="prerequisites"></a>pré-requisitos
 
 Antes de implantar a arquitetura de referência para sua própria assinatura, você deve executar as etapas a seguir.
 
@@ -180,6 +181,7 @@ Para obter mais informações sobre como implantar essa arquitetura de referênc
 [azbb]: https://github.com/mspnp/template-building-blocks/wiki/Install-Azure-Building-Blocks
 [azbbv2]: https://github.com/mspnp/template-building-blocks
 [azure-cli-2]: /cli/azure/install-azure-cli?view=azure-cli-latest
+[azure-dns]: /azure/dns/dns-overview
 [azure-storage]: /azure/storage/storage-introduction
 [blob-snapshot]: /azure/storage/storage-blob-snapshots
 [blob-storage]: /azure/storage/storage-introduction

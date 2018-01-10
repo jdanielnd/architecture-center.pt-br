@@ -4,11 +4,11 @@ description: "Diretriz específica de serviço para configurar o mecanismo de re
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 6aba60dc3a60e96e59e2034d4a1e380e0f1c996a
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 0a416bc6297c7406de92fbc695b62c39c637de8f
+ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/02/2018
 ---
 # <a name="retry-guidance-for-specific-services"></a>Repetir as diretrizes para serviços específicos
 
@@ -59,7 +59,7 @@ TableRequestOptions interactiveRequestOption = new TableRequestOptions()
   // For Read-access geo-redundant storage, use PrimaryThenSecondary.
   // Otherwise set this to PrimaryOnly.
   LocationMode = LocationMode.PrimaryThenSecondary,
-  // Maximum execution time based on the business use case. Maximum value up to 10 seconds.
+  // Maximum execution time based on the business use case. 
   MaximumExecutionTime = TimeSpan.FromSeconds(2)
 };
 ```
@@ -94,13 +94,32 @@ Você usa uma instância **OperationContext** para especificar o código a ser e
 
 Além de indicar se uma falha é adequada para repetição, as políticas estendidas de repetição retornam um objeto **RetryContext** que indica o número de repetições, os resultados da última solicitação e se a próxima repetição acontecerá no local primário ou secundário (consulte a tabela abaixo para obter detalhes). As propriedades do objeto **RetryContext** podem ser usadas para decidir se e quando tentar uma repetição. Para obter mais detalhes, consulte [Método IExtendedRetryPolicy.Evaluate](http://msdn.microsoft.com/library/microsoft.windowsazure.storage.retrypolicies.iextendedretrypolicy.evaluate.aspx).
 
-A tabela a seguir mostra as configurações padrão para as políticas de repetição internas.
+As tabelas a seguir mostram as configurações padrão para as políticas de repetição internas.
 
-| **Contexto** | **Configuração** | **Valor padrão** | **Significado** |
-| --- | --- | --- | --- |
-| QueueRequestOptions<br />QueueRequestOptions |MaximumExecutionTime<br /><br />ServerTimeout<br /><br /><br /><br /><br />LocationMode<br /><br /><br /><br /><br /><br /><br />RetryPolicy |120 segundos<br /><br />Nenhum<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />ExponentialPolicy |Tempo máximo de execução para a solicitação, incluindo todas as tentativas de repetição potenciais.<br />O intervalo do tempo limite do servidor para a solicitação (o valor é arredondado para segundos). Se não for especificado, será usado o valor padrão para todas as solicitações ao servidor. Normalmente, a melhor opção é omitir essa configuração para que o padrão de servidor seja usado.<br />Se a conta de armazenamento for criada com a opção de replicação RA-GRS (armazenamento com redundância geográfica com acesso de leitura), você poderá usar o modo de local para indicar qual local deve receber a solicitação. Por exemplo, se **PrimaryThenSecondary** for especificado, as solicitações sempre serão enviadas para o local primário primeiro. Se uma solicitação falhar, ela será enviada para o local secundário.<br />Veja abaixo os detalhes de cada opção. |
-| Política exponencial |maxAttempt<br />deltaBackoff<br /><br /><br />MinBackoff<br /><br />MaxBackoff |3<br />4 segundos<br /><br /><br />3 Segundos<br /><br />120 segundos |Número de tentativas de repetição.<br />Intervalo de retirada entre repetições. Múltiplos desse período de tempo, incluindo um elemento aleatório, serão usados para tentativas de repetição subsequentes.<br />Adicionado a todos os intervalos de repetição calculados de deltaBackoff. Esse valor não pode ser alterado.<br />MaxBackoff será usado se o intervalo de repetição calculado for maior que MaxBackoff. Esse valor não pode ser alterado. |
-| Política linear |maxAttempt<br />deltaBackoff |3<br />30 segundos |Número de tentativas de repetição.<br />Intervalo de retirada entre repetições. |
+**Opções de solicitação**
+
+| **Configuração** | **Valor padrão** | **Significado** |
+| --- | --- | --- |
+| MaximumExecutionTime | 120 segundos | Tempo máximo de execução para a solicitação, incluindo todas as tentativas de repetição potenciais. |
+| ServerTimeout | Nenhum | O intervalo do tempo limite do servidor para a solicitação (o valor é arredondado para segundos). Se não for especificado, será usado o valor padrão para todas as solicitações ao servidor. Normalmente, a melhor opção é omitir essa configuração para que o padrão de servidor seja usado. | 
+| LocationMode | Nenhum | Se a conta de armazenamento for criada com a opção de replicação RA-GRS (armazenamento com redundância geográfica com acesso de leitura), você poderá usar o modo de local para indicar qual local deve receber a solicitação. Por exemplo, se **PrimaryThenSecondary** for especificado, as solicitações sempre serão enviadas para o local primário primeiro. Se uma solicitação falhar, ela será enviada para o local secundário. |
+| RetryPolicy | ExponentialPolicy | Veja abaixo os detalhes de cada opção. |
+
+**Política exponencial** 
+
+| **Configuração** | **Valor padrão** | **Significado** |
+| --- | --- | --- |
+| maxAttempt | 3 | Número de tentativas de repetição. |
+| deltaBackoff | 4 segundos | Intervalo de retirada entre repetições. Múltiplos desse período de tempo, incluindo um elemento aleatório, serão usados para tentativas de repetição subsequentes. |
+| MinBackoff | 3 Segundos | Adicionado a todos os intervalos de repetição calculados de deltaBackoff. Esse valor não pode ser alterado.
+| MaxBackoff | 120 segundos | MaxBackoff será usado se o intervalo de repetição calculado for maior que MaxBackoff. Esse valor não pode ser alterado. |
+
+**Política linear**
+
+| **Configuração** | **Valor padrão** | **Significado** |
+| --- | --- | --- |
+| maxAttempt | 3 | Número de tentativas de repetição. |
+| deltaBackoff | 30 segundos | Intervalo de retirada entre repetições. |
 
 ### <a name="retry-usage-guidance"></a>Diretriz de uso de repetição
 Considere as seguintes diretrizes ao acessar serviços de armazenamento do Azure usando a API do cliente de armazenamento:
@@ -149,7 +168,7 @@ namespace RetryCodeSamples
                 // For Read-access geo-redundant storage, use PrimaryThenSecondary.
                 // Otherwise set this to PrimaryOnly.
                 LocationMode = LocationMode.PrimaryThenSecondary,
-                // Maximum execution time based on the business use case. Maximum value up to 10 seconds.
+                // Maximum execution time based on the business use case. 
                 MaximumExecutionTime = TimeSpan.FromSeconds(2)
             };
 
@@ -270,7 +289,14 @@ Para saber mais, consulte [Configuração baseada em código (EF6 em diante)](ht
 
 A tabela a seguir mostra as configurações padrão para a política de repetição interna ao usar o EF6.
 
-![Tente a tabela de orientação novamente](./images/retry-service-specific/RetryServiceSpecificGuidanceTable4.png)
+| Configuração | Valor padrão | Significado |
+|---------|---------------|---------|
+| Política | Exponencial | Retirada exponencial. |
+| MaxRetryCount | 5 | O número máximo de repetições. |
+| MaxDelay | 30 segundos | O atraso máximo entre as repetições. Esse valor não afeta como a série de atrasos é computada. Ele apenas define um limite superior. |
+| DefaultCoefficient | 1 segundo | O coeficiente para o cálculo de retirada exponencial. Esse valor não pode ser alterado. |
+| DefaultRandomFactor | 1,1 | O multiplicador usado para adicionar um atraso aleatório a cada entrada. Esse valor não pode ser alterado. |
+| DefaultExponentialBase | 2 | O multiplicador usado para calcular o próximo atraso. Esse valor não pode ser alterado. |
 
 ### <a name="retry-usage-guidance"></a>Diretriz de uso de repetição
 Considere as seguintes diretrizes ao acessar o Banco de Dados SQL usando o EF6:
@@ -510,7 +536,15 @@ client.RetryPolicy = new RetryExponential(minBackoff: TimeSpan.FromSeconds(0.1),
 A política de repetição não pode ser definida no nível de operação individual. Ela se aplica a todas as operações do cliente de mensagens.
 A tabela a seguir mostra as configurações padrão da política de repetição interna.
 
-![Tente a tabela de orientação novamente](./images/retry-service-specific/RetryServiceSpecificGuidanceTable7.png)
+| Configuração | Valor padrão | Significado |
+|---------|---------------|---------|
+| Política | Exponencial | Retirada exponencial. |
+| MinimalBackoff | 0 | O intervalo mínimo de retirada. Isso é adicionado ao intervalo de repetição calculados de deltaBackoff. |
+| MaximumBackoff | 30 segundos | O intervalo máximo de retirada. MaximumBackoff será usado se o intervalo de repetição calculado for maior que MaxBackoff. |
+| DeltaBackoff | 3 Segundos | Intervalo de retirada entre repetições. Múltiplos desse período de tempo serão usados para tentativas de repetição subsequentes. |
+| TimeBuffer | 5 segundos | O buffer de tempo de encerramento associado à repetição. Tentativas de repetição serão abandonadas se o tempo restante for menor do que o TimeBuffer. |
+| MaxRetryCount | 10 | O número máximo de repetições. |
+| ServerBusyBaseSleepTime | 10 segundos | Se a última exceção encontrada for **ServerBusyException**, esse valor será adicionado ao intervalo de repetição calculado. Esse valor não pode ser alterado. |
 
 ### <a name="retry-usage-guidance"></a>Diretriz de uso de repetição
 Considere as seguintes diretrizes ao usar o Barramento de Serviço:
@@ -520,7 +554,12 @@ Considere as seguintes diretrizes ao usar o Barramento de Serviço:
 
 Considere começar com as seguintes configurações para operações de repetição. Essas são configurações de finalidade geral, por isso, você deve monitorar as operações e ajustar os valores para que atendam ao seu cenário.
 
-![Tente a tabela de orientação novamente](./images/retry-service-specific/RetryServiceSpecificGuidanceTable8.png)
+| Contexto | Exemplo de latência máxima | Política de repetição | Configurações | Como ele funciona |
+|---------|---------|---------|---------|---------|
+| Interativo, interface do usuário ou primeiro plano | 2 segundos*  | Exponencial | MinimumBackoff = 0 <br/> MaximumBackoff = 30 s <br/> DeltaBackoff = 300 ms <br/> TimeBuffer = 300 ms <br/> MaxRetryCount = 2 | 1ª tentativa: atraso 0 s <br/> 2ª tentativa: atraso ~300 ms <br/> 3ª tentativa: atraso ~900 ms |
+| Segundo plano ou lote | 30 segundos | Exponencial | MinimumBackoff = 1 <br/> MaximumBackoff = 30 s <br/> DeltaBackoff = 1,75 seg. <br/> TimeBuffer = 5 seg. <br/> MaxRetryCount = 3 | 1ª tentativa: atraso de ~1 s <br/> 2ª tentativa: atraso de ~3 s <br/> 3ª tentativa: atraso ~6 ms <br/> 4ª tentativa: atraso ~13 ms |
+
+\*Não incluindo atraso que será adicionado se uma resposta Servidor Ocupado for recebida.
 
 ### <a name="telemetry"></a>Telemetria
 O Barramento de Serviço registra as repetições como eventos ETW usando um **EventSource**. Você deve anexar um **EventListener** à origem do evento para capturar os eventos e exibi-los no Visualizador de Desempenho ou gravá-los em um log de destino apropriado. Você pode usar o [Bloco de Aplicativos para Registro Semântico](http://msdn.microsoft.com/library/dn775006.aspx) para fazer isso. Os eventos de repetição são da seguinte forma:
@@ -831,7 +870,7 @@ Se o Cosmos DB limitar o cliente, ele retornará um erro HTTP 429. Confira o có
 ### <a name="policy-configuration"></a>Configuração de política
 A tabela a seguir mostra as configurações padrão para a classe `RetryOptions`.
 
-| Configuração | Valor padrão | Descrição |
+| Configuração | Valor padrão | DESCRIÇÃO |
 | --- | --- | --- |
 | MaxRetryAttemptsOnThrottledRequests |9 |O número máximo de tentativas se a solicitação falhar porque o Cosmos DB aplicou a limitação de taxa ao cliente. |
 | MaxRetryWaitTimeInSeconds |30 |O tempo máximo de repetição, em segundos. |
@@ -880,7 +919,7 @@ Rastreamento com o ETW ou por meio de registro de um provedor de rastreamento pe
 O Azure Active Directory (Azure AD) é uma solução abrangente de nuvem para gerenciamento de acesso e identidade que combina serviços principais de diretório, governança avançada de identidade, segurança e gerenciamento de acesso a aplicativos. O AD do Azure também oferece aos desenvolvedores uma plataforma de gerenciamento de identidade para fornecer controle de acesso aos respectivos aplicativos, com base nas regras e políticas centralizadas.
 
 ### <a name="retry-mechanism"></a>Mecanismo de repetição
-Na Biblioteca de autenticação do Active Directory (ADAL) há um mecanismo interno de repetição para o Azure Active Directory. Para evitar bloqueios inesperados, recomendamos que o ADAL lide com as repetições e *não* permita que as bibliotecas de terceiros ou o código do aplicativo repitam as conexões com falhas. 
+Na Biblioteca de autenticação do Active Directory (ADAL) há um mecanismo interno de repetição para o Azure Active Directory. Para evitar bloqueios inesperados, recomendamos que o ADAL lide com as repetições e **não** permita que as bibliotecas de terceiros ou o código do aplicativo repitam as conexões com falhas. 
 
 ### <a name="retry-usage-guidance"></a>Diretriz de uso de repetição
 Considere as seguintes diretrizes ao usar o Active Directory do Azure:
@@ -967,7 +1006,7 @@ Considere o seguinte ao acessar os serviços do Azure ou de terceiros:
 ### <a name="retry-strategies"></a>Estratégias de repetição
 Veja a seguir os tipos comuns de intervalo de estratégias de repetição:
 
-* **Exponencial**: uma política de repetição que executa um determinado número de repetições usando uma abordagem de retirada exponencial aleatória para determinar o intervalo entre as repetições. Por exemplo:
+* **Exponencial**: uma política de repetição que executa um determinado número de repetições usando uma abordagem de retirada exponencial aleatória para determinar o intervalo entre as repetições. Por exemplo: 
 
         var random = new Random();
 
@@ -977,11 +1016,11 @@ Veja a seguir os tipos comuns de intervalo de estratégias de repetição:
         var interval = (int)Math.Min(checked(this.minBackoff.TotalMilliseconds + delta),
                        this.maxBackoff.TotalMilliseconds);
         retryInterval = TimeSpan.FromMilliseconds(interval);
-* **Incremental**: uma estratégia de repetição com um número especificado de tentativas de repetição e um intervalo de tempo incremental entre entradas. Por exemplo:
+* **Incremental**: uma estratégia de repetição com um número especificado de tentativas de repetição e um intervalo de tempo incremental entre entradas. Por exemplo: 
 
         retryInterval = TimeSpan.FromMilliseconds(this.initialInterval.TotalMilliseconds +
                        (this.increment.TotalMilliseconds * currentRetryCount));
-* **LinearRetry**: uma política de repetição que executa um número especificado de repetições usando um intervalo de tempo fixo especificado entre as repetições. Por exemplo:
+* **LinearRetry**: uma política de repetição que executa um número especificado de repetições usando um intervalo de tempo fixo especificado entre as repetições. Por exemplo: 
 
         retryInterval = this.deltaBackoff;
 

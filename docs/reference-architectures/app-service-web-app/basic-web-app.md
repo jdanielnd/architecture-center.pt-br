@@ -2,13 +2,13 @@
 title: "Aplicativo Web básico"
 description: "Arquitetura recomendada para um aplicativo Web básico executado no Microsoft Azure."
 author: MikeWasson
-ms.date: 11/23/2016
+ms.date: 12/12/2017
 cardTitle: Basic web application
-ms.openlocfilehash: b7475c4087a184bb7608d0c45ffecee912c920d7
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 598eb547f0e96ae334af391183a792637caa8631
+ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/02/2018
 ---
 # <a name="basic-web-application"></a>Aplicativo Web básico
 [!INCLUDE [header](../../_includes/header.md)]
@@ -29,15 +29,23 @@ Essa arquitetura de referência mostra um conjunto de práticas comprovadas para
 A arquitetura tem os seguintes componentes:
 
 * **Grupo de recursos**. Um [grupo de recursos](/azure/azure-resource-manager/resource-group-overview) é um contêiner lógico para recursos do Azure.
+
 * **Aplicativo do Serviço de Aplicativo**. O [Serviço de Aplicativo do Azure][app-service] é uma plataforma totalmente gerenciada para criar e implantar aplicativos de nuvem.     
+
 * **Plano do Serviço de Aplicativo**. Um [Plano do Serviço de Aplicativo][app-service-plans] fornece as VMs (máquinas virtuais) gerenciadas que hospedam o aplicativo. Todos os aplicativos associados a um plano são executados nas mesmas instâncias de VM.
 
 * **Slots de implantação**.  Um [slot de implantação][deployment-slots] permite preparar uma implantação e, em seguida, alterná-la para a implantação de produção. Dessa forma, evita-se implantar diretamente na produção. Consulte a seção [Capacidade de gerenciamento](#manageability-considerations) para obter recomendações específicas.
 
-* **Endereço IP**. O aplicativo Serviço de Aplicativo tem um endereço IP público e um nome de domínio. O nome de domínio é um subdomínio de `azurewebsites.net`, como `contoso.azurewebsites.net`. Para usar um nome de domínio personalizado, como `contoso.com`, crie registros DNS (Serviço de Nomes de Domínio) que mapeiam o nome de domínio personalizado para o endereço IP. Para obter mais informações, consulte [Configurar um nome de domínio personalizado no Serviço de Aplicativo do Azure][custom-domain-name].
+* **Endereço IP**. O aplicativo Serviço de Aplicativo tem um endereço IP público e um nome de domínio. O nome de domínio é um subdomínio de `azurewebsites.net`, como `contoso.azurewebsites.net`.  
+
+* **DNS do Azure**. [DNS do Azure][azure-dns] é um serviço de hospedagem para domínios DNS, que fornece resolução de nomes usando a infraestrutura do Microsoft Azure. Ao hospedar seus domínios no Azure, você pode gerenciar seus registros DNS usando as mesmas credenciais, APIs, ferramentas e cobrança que seus outros serviços do Azure. Para usar um nome de domínio personalizado (como `contoso.com`), crie registros DNS que mapeiem o nome de domínio personalizado até o endereço IP. Para obter mais informações, consulte [Configurar um nome de domínio personalizado no Serviço de Aplicativo do Azure][custom-domain-name].  
+
 * **Banco de dados SQL do Azure**. O [Banco de Dados SQL][sql-db] é um banco de dados relacional como um serviço na nuvem.
+
 * **Servidor lógico**. No Banco de Dados SQL do Azure, um servidor lógico hospeda os seus bancos de dados. Você pode criar vários bancos de dados por servidor lógico.
+
 * **Armazenamento do Azure**. Crie uma conta de armazenamento do Azure com um contêiner de blob para armazenar logs de diagnóstico.
+
 * **Azure Active Directory** (Azure AD). Use o Azure AD ou outro provedor de identidade para autenticação.
 
 ## <a name="recommendations"></a>Recomendações
@@ -215,6 +223,7 @@ Para obter mais informações, consulte [Implantar recursos com modelos do Azure
 [app-service-security]: /azure/app-service-web/web-sites-security
 [app-settings]: /azure/app-service-web/web-sites-configure
 [arm-template]: /azure/azure-resource-manager/resource-group-overview#resource-groups
+[azure-dns]: /azure/dns/dns-overview
 [custom-domain-name]: /azure/app-service-web/web-sites-custom-domain-name
 [deploy]: /azure/app-service-web/web-sites-deploy
 [deploy-arm-template]: /azure/resource-group-template-deploy
@@ -223,7 +232,7 @@ Para obter mais informações, consulte [Implantar recursos com modelos do Azure
 [kudu]: https://azure.microsoft.com/blog/windows-azure-websites-online-tools-you-should-know-about/
 [monitoring-guidance]: ../../best-practices/monitoring.md
 [new-relic]: http://newrelic.com/
-[paas-basic-arm-template]: https://github.com/mspnp/reference-architectures/tree/master/app-service-web-app/basic-web-app/Paas-Basic/Templates
+[paas-basic-arm-template]: https://github.com/mspnp/reference-architectures/tree/master/managed-web-app/basic-web-app/Paas-Basic/Templates
 [perf-analysis]: https://github.com/mspnp/performance-optimization/blob/master/Performance-Analysis-Primer.md
 [rbac]: /azure/active-directory/role-based-access-control-what-is
 [resource-group]: /azure/azure-resource-manager/resource-group-overview

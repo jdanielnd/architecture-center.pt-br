@@ -6,11 +6,11 @@ ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: tailspin
 pnp.series.next: claims
-ms.openlocfilehash: 74f4e85e282799b7eee92caf2da083fb264f8733
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: e85817626675cec4d126921c19a31a0983ecd62d
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="authenticate-using-azure-ad-and-openid-connect"></a>Autentique usando o Azure AD e o OpenID Connect
 
@@ -131,7 +131,7 @@ Este é o processo de autenticação:
 Se a autenticação for bem-sucedida, o middleware OIDC criará um tíquete de autenticação contendo uma entidade de declarações que armazena as declarações do usuário. Você pode acessar o tíquete dentro do evento **AuthenticationValidated** ou **TicketReceived**.
 
 > [!NOTE]
-> Até que todo o fluxo de autenticação esteja concluído, `HttpContext.User` ainda mantém uma entidade de segurança anônima, *não* o usuário autenticado. A entidade anônima tem uma coleção de declarações vazias. Após a conclusão da autenticação e o redirecionamentos do aplicativo, o cookie de middleware desserializa o cookie de autenticação e define `HttpContext.User` como uma entidade de declarações que representa o usuário autenticado.
+> Até que todo o fluxo de autenticação esteja concluído, `HttpContext.User` ainda mantém uma entidade de segurança anônima, **não** o usuário autenticado. A entidade anônima tem uma coleção de declarações vazias. Após a conclusão da autenticação e o redirecionamentos do aplicativo, o cookie de middleware desserializa o cookie de autenticação e define `HttpContext.User` como uma entidade de declarações que representa o usuário autenticado.
 > 
 > 
 
@@ -170,7 +170,7 @@ Quando o middleware OIDC redireciona para o ponto de extremidade de autorizaçã
 * response_type  = "code id_token". Isso especifica o fluxo híbrido.
 * response_mode = "form_post". Isso especifica a resposta de postagem do formulário.
 
-Para especificar um fluxo diferente, defina a propriedade **ResponseType** nas opções. Por exemplo:
+Para especificar um fluxo diferente, defina a propriedade **ResponseType** nas opções. Por exemplo: 
 
 ```csharp
 app.UseOpenIdConnectAuthentication(options =>

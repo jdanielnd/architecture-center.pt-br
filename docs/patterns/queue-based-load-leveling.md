@@ -10,11 +10,11 @@ pnp.pattern.categories:
 - availability
 - performance-scalability
 - resiliency
-ms.openlocfilehash: d8b010648d4ec0edcfbb24f9b03243a79a34a40b
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 99b226511fe14bffdab3cdcf65d4e6cffe89bba6
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="queue-based-load-leveling-pattern"></a>Padrão de nivelamento de carga baseado em fila
 
@@ -67,7 +67,7 @@ Uma função Web do Microsoft Azure armazena dados usando um serviço de armazen
 ![Figura 2 – Um serviço que está sendo sobrecarregado com um grande número de solicitações simultâneas de instâncias de uma função web](./_images/queue-based-load-leveling-overwhelmed.png)
 
 
-Para resolver esse problema, use uma fila para nivelar a carga entre as instâncias de função web e o serviço de armazenamento. No entanto, o serviço de armazenamento é projetado para aceitar solicitações síncronas e não pode ser facilmente modificado para ler mensagens e gerenciar a taxa de transferência. Você pode introduzir uma função de trabalho para atuar como um serviço de proxy que recebe as solicitações da fila e as encaminha ao serviço de armazenamento. A lógica do aplicativo na função de trabalho pode controlar a taxa em que ele transmite solicitações ao serviço de armazenamento para impedir que o serviço de armazenamento seja sobrecarregado. Esta figura ilustra usar uma fila e uma função de trabalho para redistribuir a carga entre as instâncias da função web e o serviço.
+Para resolver esse problema, use uma fila para nivelar a carga entre as instâncias de função web e o serviço de armazenamento. No entanto, o serviço de armazenamento é projetado para aceitar solicitações síncronas e não pode ser facilmente modificado para ler mensagens e gerenciar a taxa de transferência. Você pode introduzir uma função de trabalho para atuar como um serviço de proxy que recebe as solicitações da fila e as encaminha ao serviço de armazenamento. A lógica do aplicativo na função de trabalho pode controlar a taxa em que ele transmite solicitações ao serviço de armazenamento para impedir que o serviço de armazenamento seja sobrecarregado. Esta figura ilustra o uso de uma fila e uma função de trabalho para nivelar a carga entre as instâncias de função web e o serviço.
 
 ![Figura 3 – Usar uma fila e uma função de trabalho para redistribuir a carga entre as instâncias da função web e o serviço](./_images/queue-based-load-leveling-worker-role.png)
 

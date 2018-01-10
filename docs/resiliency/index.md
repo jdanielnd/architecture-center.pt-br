@@ -5,11 +5,11 @@ author: MikeWasson
 ms.date: 05/26/2017
 ms.custom: resiliency
 pnp.series.title: Design for Resiliency
-ms.openlocfilehash: 31a685e46da02fb59d93a210e6f14da5c68331de
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 0cbcf0a8af1a8e20f2a1c024f5146a37176c5d1e
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="designing-resilient-applications-for-azure"></a>Desenvolvimento de aplicativos resilientes para o Azure
 
@@ -25,13 +25,17 @@ Este artigo fornece uma visão geral de como criar aplicativos resilientes no Mi
 Dois aspectos importantes de resiliência são alta disponibilidade e recuperação de desastres.
 
 * **HA (Alta Disponibilidade)** é a capacidade do aplicativo de continuar em execução em um estado íntegro, sem tempo de inatividade significativo. Por “estado íntegro” queremos dizer o aplicativo está respondendo e os usuários podem se conectar ao aplicativo e interagir com ele.  
-* **DR (Recuperação de Desastre)** é a capacidade de recuperação de incidentes raros, mas sérios: falhas não transitórias em larga escala, como interrupções de serviço que afetam toda a região. A recuperação de desastre inclui backup e arquivamento de dados e pode incluir a intervenção manual, como a restauração um banco de dados com base em um backup. 
+* **DR (Recuperação de Desastre)** é a capacidade de recuperação de incidentes raros, mas sérios: falhas não transitórias em larga escala, como interrupções de serviço que afetam toda a região. A recuperação de desastre inclui backup e arquivamento de dados e pode incluir a intervenção manual, como a restauração um banco de dados com base em um backup.
 
-Uma das formas de diferenciar a HA da DR é que a última é iniciada quando o impacto de uma falha excede a capacidade do design da HA para tratá-la. Por exemplo, colocar várias VMs atrás de um balanceador de carga fornecerá disponibilidade se uma delas falhar, mas não se todas falharem ao mesmo tempo. 
+Uma das formas de diferenciar a HA da DR é que a última é iniciada quando o impacto de uma falha excede a capacidade do design da HA para tratá-la.  
 
-Quando você cria um aplicativo para ser resiliente, precisa entender seus requisitos de disponibilidade. Quanto tempo de inatividade é aceitável? Trata-se parcialmente de uma questão de custo. Quanto o tempo de inatividade em potencial custará para sua empresa? Quanto você deve investir para tornar o aplicativo altamente disponível? Você também precisa definir o que significa para o aplicativo estar disponível. Por exemplo, o aplicativo está "inativo" se um cliente puder enviar uma ordem, mas o sistema não puder processá-la dentro do prazo normal? Considere também a probabilidade da ocorrência de um tipo específico de interrupção e se uma estratégia de redução é econômica.
+Quando você projeta buscando resiliência, você deve entender seus requisitos de disponibilidade. Quanto tempo de inatividade é aceitável? Trata-se parcialmente de uma questão de custo. Quanto o tempo de inatividade em potencial custará para sua empresa? Quanto você deve investir para tornar o aplicativo altamente disponível? Você também precisa definir o que significa para o aplicativo estar disponível. Por exemplo, o aplicativo está "inativo" se um cliente puder enviar uma ordem, mas o sistema não puder processá-la dentro do prazo normal? Considere também a probabilidade da ocorrência de um tipo específico de interrupção e se uma estratégia de redução é econômica.
 
-Outro termo comum é **Continuidade dos Negócios** (BC), que é a capacidade de executar funções de negócios essenciais durante e após condições adversas, como um desastre natural ou um serviço inoperante. A BC abrange toda a operação de negócios, incluindo instalações físicas, pessoas, comunicações, transporte e IT. Este artigo se concentra em aplicativos em nuvem, mas o planejamento de resiliência deve ser feito considerando-se o contexto dos requisitos gerais da BC. Para obter mais informações, consulte [Guia de Planejamento de Contingência][capacity-planning-guide] do Instituto Nacional de Ciência e Tecnologia (NIST).
+Outro termo comum é **Continuidade dos Negócios** (BC), que é a capacidade de executar funções de negócios essenciais durante e após condições adversas, como um desastre natural ou um serviço inoperante. A BC abrange toda a operação de negócios, incluindo instalações físicas, pessoas, comunicações, transporte e IT. Este artigo se concentra em aplicativos em nuvem, mas o planejamento de resiliência deve ser feito considerando-se o contexto dos requisitos gerais da BC. 
+
+O **backup de dados** é uma parte fundamental da recuperação de desastre. Se os componentes sem monitoração de estado de um aplicativo falharem, você sempre poderá reimplantá-los. Mas se os dados forem perdidos, o sistema não poderá retornar a um estado estável. O backup dos dados deve ser feito, idealmente em uma região diferente para o caso de um desastre em toda a região. 
+
+Backup é diferente de **replicação de dados**. Replicação de dados envolve a cópia de dados quase em tempo real, para que o sistema possa realizar failover rapidamente para uma réplica. Muitos sistemas de bancos de dados são compatíveis com replicação; Por exemplo, o SQL Server é compatível com Grupos de Disponibilidade Always On do SQL Server. A replicação de dados pode reduzir o tempo necessário para recuperar-se de uma interrupção, garantindo que uma réplica dos dados esteja sempre disponível. No entanto, a replicação de dados não protegerá contra erro humano. Se os dados forem corrompidos devido a erro humano, eles serão apenas copiados para as réplicas. Portanto, você ainda precisa incluir o backup de longo prazo em sua estratégia de DR. 
 
 ## <a name="process-to-achieve-resiliency"></a>Processo para obter resiliência
 Resiliência não é um complemento. Ela deve ser criada no sistema e colocada em prática operacional. Aqui está um modelo geral a seguir:
@@ -64,6 +68,7 @@ Considere também os padrões de uso. Há certos períodos críticos quando o si
 Duas métricas importantes a considerar são o Objetivo do Tempo de Recuperação e o Objetivo do Ponto de Recuperação.
 
 * **Objetivo do Tempo de Recuperação** (RTO) é o tempo máximo aceitável que um aplicativo pode ficar indisponível após um incidente. Se o RTO for de 90 minutos, você deverá ser capaz de restaurar o aplicativo para um estado de execução dentro de 90 minutos a partir do início de um desastre. Se você tiver um RTO muito baixo, poderá manter uma segunda implantação continuamente em execução no modo de espera, para proteger-se contra uma interrupção regional.
+
 * **Objetivo do Ponto de Recuperação** (RPO) é a duração máxima de perda de dados aceitável durante um desastre. Por exemplo, se você armazena dados em um único banco de dados, com nenhuma replicação para outros bancos de dados, e executar backups a cada hora, poderá perder até uma hora de dados. 
 
 RTO e RPO são os requisitos de negócios. Realizar uma avaliação de risco pode ajudá-lo a definir o RTO e o RPO do aplicativo. Outra métrica comum é **Tempo Médio para Recuperar** (MTTR), que é o tempo médio necessário para restaurar o aplicativo após uma falha. MTTR é um fato empírico sobre um sistema. Se o MTTR exceder o RTO, uma falha no sistema causará uma interrupção do negócio inaceitável, porque não é possível restaurar o sistema dentro do RTO definido. 
@@ -82,7 +87,7 @@ A tabela a seguir mostra o tempo de inatividade cumulativo em potencial para vá
 
 | Contrato de Nível de Serviço | Tempo de inatividade por semana | Tempo de inatividade por mês | Tempo de inatividade por ano |
 | --- | --- | --- | --- |
-| 99% |1,68 horas |7,2 horas |3,65 dias |
+| 99% |1,68 hora |7,2 horas |3,65 dias |
 | 99,9% |10,1 minutos |43,2 minutos |8,76 horas |
 | 99,95% |5 minutos |21,6 minutos |4,38 horas |
 | 99,99% |1,01 minutos |4,32 minutos |52,56 minutos |
@@ -134,6 +139,33 @@ Além disso, o failover não é instantâneo e pode resultar em algum tempo de i
 
 O número calculado de SLA é uma linha de base útil, mas ela não informa a história toda sobre a disponibilidade. Geralmente, um aplicativo pode degradar normalmente quando um caminho não crítico falha. Considere um aplicativo que mostra um catálogo de livros. Se o aplicativo não pode recuperar a imagem em miniatura da capa, poderá mostrar uma imagem de espaço reservado. Nesse caso, a falha ao obter a imagem não reduz o tempo de atividade do aplicativo, embora afete a experiência do usuário.  
 
+## <a name="redundancy-and-designing-for-failure"></a>Redundância e a criação pensando em falha
+
+Falhas podem variar quanto ao escopo do seu impacto. Algumas falhas de hardware, como um disco com falha, podem afetar um único computador host. Um comutador de rede com falha pode afetar um rack de servidor inteiro. Menos comuns são falhas que interrompem um data center inteiro, tais como uma perda de energia em um data center. Raramente, toda uma região pode se tornar não disponível.
+
+Uma das principais maneiras de se tornar um aplicativo resiliente é por meio de redundância. Mas você precisa planejar essa redundância ao projetar o aplicativo. Além disso, o nível de redundância necessário depende de suas necessidades de negócios &mdash; nem todo aplicativo precisa de redundância entre regiões para se proteger contra uma interrupção regional. Em geral, há um equilíbrio entre mais redundância e confiabilidade em relação a maiores custo e complexidade.  
+
+O Azure tem um número de recursos para tornar um aplicativo redundante em cada nível de falha, desde uma VM individual até uma região inteira. 
+
+![](./images/redundancy.svg)
+
+**VM individual**. O Azure fornece um SLA de tempo de atividade para VMs individuais. Embora você possa obter um SLA mais alto executando duas ou mais VMs, uma única VM pode ser suficientemente confiável para algumas cargas de trabalho. Para cargas de trabalho de produção, é recomendável usar duas ou mais máquinas virtuais para redundância. 
+
+**Conjuntos de disponibilidade**. Para se proteger contra falhas de hardware localizadas, como falha em um comutador de rede ou de disco, implante duas ou mais VMs em um conjunto de disponibilidade. Um conjunto de disponibilidade consiste em dois ou mais *domínios de falha* que compartilham um comutador de rede e uma fonte de energia comuns. Máquinas virtuais em um conjunto de disponibilidade são distribuídas entre os domínios de falha, portanto, se uma falha de hardware afeta um domínio de falha, o tráfego de rede ainda poderá ser roteado para as VMs nos outros domínios de falha. Para obter mais informações sobre conjuntos de disponibilidade, consulte [Gerenciar a disponibilidade das máquinas virtuais do Windows no Azure](/azure/virtual-machines/windows/manage-availability).
+
+**Zonas de disponibilidade (versão prévia)**.  Uma Zona de Disponibilidade é uma zona fisicamente separada em uma região do Azure. Cada zona de disponibilidade tem uma rede, resfriamento e fonte de energia distintos. A implantação de VMs em zonas de disponibilidade ajuda a proteger um aplicativo contra falhas em todo o datacenter. 
+
+**Regiões emparelhadas**. Para proteger um aplicativo contra uma interrupção regional, você pode implantar o aplicativo em várias regiões, usando o Gerenciador de Tráfego do Azure para distribuir o tráfego de Internet para as diferentes regiões. Cada região do Azure é emparelhada com outra. Juntas, elas formam um [par regional](/azure/best-practices-availability-paired-regions). Com a exceção do Sul do Brasil, pares regionais estão localizados na mesma região geográfica para atender aos requisitos de residência de dados para fins de jurisdição de imposição fiscal e legal.
+
+Quando você cria um aplicativo de várias regiões, leve em consideração que a latência de rede entre diferentes regiões é maior do que a obtida em uma região. Por exemplo, se você estiver replicando de um banco de dados para habilitar o failover, use a replicação síncrona de dados dentro de uma região, mas a replicação assíncrona de dados entre regiões.
+
+| &nbsp; | Conjunto de disponibilidade | Zona de disponibilidade | Região emparelhada |
+|--------|------------------|-------------------|---------------|
+| Escopo da falha | Rack | Datacenter | Região |
+| Roteamento de solicitação | Balanceador de carga | Load Balancer entre zonas | Gerenciador de Tráfego |
+| Latência da rede | Muito baixa | Baixo | Média a alta |
+| Rede virtual  | VNET | VNET | Emparelhamento VNET entre regiões (versão prévia) |
+
 ## <a name="designing-for-resiliency"></a>Design para resiliência
 Durante a fase de design, você deve executar uma Análise do Modo de Falha (FMA). O objetivo de uma FMA é identificar possíveis pontos de falha e definir como o aplicativo responde a essas falhas.
 
@@ -168,12 +200,11 @@ Para obter mais informações, consulte [Padrão de repetição][retry-pattern].
 ### <a name="load-balance-across-instances"></a>Balanceamento de carga entre instâncias
 Para ter escalabilidade, um aplicativo em nuvem deve ser capaz de se expandir com a adição de mais instâncias. Essa abordagem também aumenta a resiliência, porque as instâncias não íntegras podem ser removidas da rotação.  
 
-Por exemplo:
+Por exemplo: 
 
 * Coloque duas ou mais VMs por trás de um balanceador de carga. O balanceador de carga distribui o tráfego para todas as VMs. Consulte [Executar VMs com balanceamento de carga para escalabilidade e disponibilidade][ra-multi-vm].
 * Escale um aplicativo do Serviço de Aplicativo do Azure horizontalmente para várias instâncias. O Serviço de Aplicativo equilibra automaticamente a carga entre as instâncias. Consulte [Aplicativo Web básico][ra-basic-web].
 * Use o [Gerenciador de Tráfego do Azure][tm] para distribuir o tráfego em um conjunto de pontos de extremidade.
-
 
 ### <a name="replicate-data"></a>Replicar dados
 A replicação de dados é uma estratégia geral para manipular falhas não transitórias em um armazenamento de dados. Muitas tecnologias de armazenamento fornecem replicação interna, inclusive o Banco de Dados SQL do Azure, Cosmos DB e Apache Cassandra.  
@@ -183,7 +214,7 @@ A replicação de dados é uma estratégia geral para manipular falhas não tran
 Para maximizar a disponibilidade, as réplicas podem ser colocadas em várias regiões. No entanto, isso aumenta a latência na replicação de dados. Normalmente, a replicação entre regiões é feita de forma assíncrona, o que implica um modelo de consistência eventual e a possível perda de dados, se uma réplica falhar. 
 
 ### <a name="degrade-gracefully"></a>Degradar normalmente
-Se um serviço falhar e não houver caminho de failover, o aplicativo pode conseguir degradar o serviço normalmente e continuar fornecendo uma experiência de usuário aceitável. Por exemplo:
+Se um serviço falhar e não houver caminho de failover, o aplicativo pode conseguir degradar o serviço normalmente e continuar fornecendo uma experiência de usuário aceitável. Por exemplo: 
 
 * Colocar um item de trabalho em uma fila a ser tratada mais tarde. 
 * Retornar um valor estimado.
@@ -305,7 +336,7 @@ Os logs de aplicativo são uma fonte importante de dados de diagnóstico. Alguma
 * Obtenha logs de eventos nos limites dos serviços. Inclua uma ID de correlação que flua nos limites dos serviços. Se uma transação fluir em vários serviços e houver uma falha, a ID de correlação ajudará a identificar o motivo da falha da transação.
 * Use o log semântico, também conhecido como registro em log estruturado. Os logs não estruturados dificultam a automatização do consumo e da análise dos dados do log, necessários em escala de nuvem.
 * Use logs assíncronos. Caso contrário, o próprio sistema de registro em log pode provocar falha do aplicativo com solicitações de backup, pois ocorre bloqueio durante a espera para gravar um evento de log.
-* Log de aplicativo não é o mesmo que auditoria. A auditoria pode ser feita por motivos regulatórios ou de conformidade. Sendo assim, os registros de auditoria devem ser concluídos, não sendo aceitável o descarte de qualquer um deles durante o processamento de transações. Se um aplicativo exigir auditoria, ela deve ser mantida à parte do log de diagnóstico. 
+* Log de aplicativo não é o mesmo que auditoria. A auditoria pode ser feita por motivos regulatórios ou de conformidade. Sendo assim, os registros de auditoria devem ser concluídos, não sendo aceitável remover nenhum deles durante o processamento de transações. Se um aplicativo exigir auditoria, ela deve ser mantida à parte do log de diagnóstico. 
 
 Para obter mais informações sobre monitoramento e diagnóstico, consulte [Diretrizes de monitoramento e diagnóstico][monitoring-guidance].
 

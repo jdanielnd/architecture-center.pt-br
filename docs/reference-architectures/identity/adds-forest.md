@@ -7,25 +7,25 @@ pnp.series.title: Identity management
 pnp.series.prev: adds-extend-domain
 pnp.series.next: adfs
 cardTitle: Create an AD DS forest in Azure
-ms.openlocfilehash: bb7e57af2afacf1faa7679c854bf49217918eba8
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: b946afa91e8bd303c51f97e18be170c4105cc8c5
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="create-an-active-directory-domain-services-ad-ds-resource-forest-in-azure"></a>Criar uma floresta de recursos do AD DS (Active Directory Domain Services) no Azure
 
-Essa arquitetura de referência mostra como criar um domínio separado do Active Directory no Azure que é de confiança nos domínios na sua floresta local do AD. [**Implantar esta solução**.](#deploy-the-solution)
+Essa arquitetura de referência mostra como criar um domínio separado do Active Directory no Azure que é de confiança nos domínios na sua floresta local do AD. [**Implante essa solução**.](#deploy-the-solution)
 
 [![0]][0] 
 
-*Baixe um [arquivo Visio][visio-download] dessa arquitetura.*
+*Baixe um [Arquivo Visio][visio-download] dessa arquitetura.*
 
 O AD DS (Active Directory Domain Services) armazena informações de identidade em uma estrutura hierárquica. O nó superior na estrutura hierárquica é conhecido como uma floresta. Uma floresta contém domínios e domínios contêm outros tipos de objetos. Essa arquitetura de referência cria uma floresta do AD DS no Azure com uma relação de confiança de saída unidirecional com um domínio local. A floresta no Azure contém um domínio que não existe localmente. Devido à relação de confiança, os logons realizados nos domínios locais pode ser confiáveis para acessar recursos em um domínio separado do Azure. 
 
 Usos típicos para essa arquitetura incluem manter uma separação segurança para objetos e identidades mantidos na nuvem e migrar os domínios individuais do local para a nuvem. 
 
-Para ver considerações adicionais, consulte [Escolher uma solução para integrar o Active Directory local ao Azure][considerations]. 
+Para obter considerações adicionais, consulte [Escolher uma solução para a integração do Active Directory local ao Azure][considerations]. 
 
 ## <a name="architecture"></a>Arquitetura
 
@@ -87,9 +87,9 @@ Para considerações de segurança específicas do Active Directory, consulte a 
 
 ## <a name="deploy-the-solution"></a>Implantar a solução
 
-Uma solução está disponível no [GitHub][github] para implantar essa arquitetura de referência. Você precisará da versão mais recente da CLI do Azure para executar o script do Powershell que implanta a solução. Para implantar a arquitetura de referência, siga estas etapas:
+Há uma solução disponível no [GitHub][github] para implantar essa arquitetura de referência. Você precisará da versão mais recente da CLI do Azure para executar o script do Powershell que implanta a solução. Para implantar a arquitetura de referência, siga estas etapas:
 
-1. Baixe ou clone a pasta da solução do [Github] [ github] para seu computador local.
+1. Baixe ou clone a pasta da solução do [GitHub][github] em seu computador local.
 
 2. Abra a CLI do Azure e navegue até a pasta da solução local.
 
@@ -101,7 +101,7 @@ Uma solução está disponível no [GitHub][github] para implantar essa arquitet
    
     Substitua `<subscription id>` por sua ID da assinatura do Azure.
    
-    Para `<location>`, especifique uma região do Azure, tal como `eastus` ou `westus`.
+    Para `<location>`, especifique uma região do Azure, como `eastus` ou `westus`.
    
     O parâmetro `<mode>` controla a granularidade da implantação e pode ser um dos seguintes valores:
    

@@ -6,25 +6,25 @@ ms.date: 11/28/2016
 pnp.series.title: Identity management
 pnp.series.prev: azure-ad
 pnp.series.next: adds-forest
-ms.openlocfilehash: 7f771f77c7fa7f266dcce9f5b45e5be658213b8d
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 216c59a0a5912d0fe90011e49ad20eb017ada6be
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="extend-active-directory-domain-services-ad-ds-to-azure"></a>Estender o AD DS (Active Directory Domain Services) para o Azure
 
-Essa arquitetura de referência mostra como estender seu ambiente do Active Directory para o Azure para fornecer serviços de autenticação distribuídos usando o [AD DS (Active Directory Domain Services)][active-directory-domain-services].  [**Implantar esta solução**.](#deploy-the-solution)
+Essa arquitetura de referência mostra como estender seu ambiente do Active Directory para o Azure para fornecer serviços de autenticação distribuídos usando o [AD DS (Active Directory Domain Services)][active-directory-domain-services].  [**Implante essa solução**.](#deploy-the-solution)
 
 [![0]][0] 
 
-*Baixe um [arquivo Visio][visio-download] dessa arquitetura.*
+*Baixe um [Arquivo Visio][visio-download] dessa arquitetura.*
 
 O AD DS é usado para autenticar o usuário, computador, aplicativo ou outras identidades incluídas em um domínio de segurança. Ele poderá ser hospedado localmente, mas se o aplicativo estiver hospedado parcialmente localmente e parcialmente no Azure, será mais eficiente replicar essa funcionalidade no Azure. Isso pode reduzir a latência causada pelo envio de autenticação e solicitações de autorização local da nuvem de volta para o AD DS em execução local. 
 
 Essa arquitetura é geralmente usada quando a rede local e a rede virtual do Azure estão conectadas por uma conexão VPN ou de ExpressRoute. Essa arquitetura também dá suporte à replicação bidirecional, o que significa que alterações podem ser feitas localmente ou na nuvem, e ambas as fontes serão mantidas consistentes. Usos típicos dessa arquitetura incluem aplicativos híbridos em que a funcionalidade é distribuída entre o local e o Azure, e os aplicativos e serviços que realizam autenticação usando o Active Directory.
 
-Para ver considerações adicionais, consulte [Escolher uma solução para integrar o Active Directory local ao Azure][considerations]. 
+Para obter considerações adicionais, consulte [Escolher uma solução para a integração do Active Directory local ao Azure][considerations]. 
 
 ## <a name="architecture"></a>Arquitetura 
 
@@ -88,7 +88,7 @@ Implante as VMs que executam o AD DS em um [conjunto de disponibilidade][availab
 
 Execute backups regulares do AD DS. Não basta copiar os arquivos VHD de controladores de domínio em vez de executar backups regulares, pois o aquivo de banco de dados do AD DS pode não estar em um estado consistente quando for copiado, impossibilitando a reinicialização do banco de dados.
 
-Não desative uma VM do controlador de domínio usando o Portal do Azure. Em vez disso, desligue e reinicie o sistema operacional convidado. Desligar por meio do portal faz com que a VM seja desalocada, o que redefine ambos o `VM-GenerationID` e `invocationID` do repositório do Active Directory. Isso descarta o pool de RID (identificador relativo) do AD DS e marca o SYSVOL como não autoritativo e pode ser necessário reconfigurar o controlador de domínio.
+Não desative uma VM do controlador de domínio usando o Portal do Azure. Em vez disso, desligue e reinicie o sistema operacional convidado. Desligar por meio do portal faz com que a VM seja desalocada, o que redefine ambos o `VM-GenerationID` e o `invocationID` repositório do Active Directory. Isso descarta o pool de RID (identificador relativo) do AD DS e marca o SYSVOL como não autoritativo e pode ser necessário reconfigurar o controlador de domínio.
 
 ## <a name="security-considerations"></a>Considerações de segurança
 
@@ -100,9 +100,9 @@ Use a criptografia do BitLocker ou do disco do Azure para criptografar o disco q
 
 ## <a name="deploy-the-solution"></a>Implantar a solução
 
-Uma solução está disponível no [GitHub][github] para implantar essa arquitetura de referência. Você precisará da versão mais recente da [CLI do Azure][azure-powershell] para executar o script do Powershell que implanta a solução. Para implantar a arquitetura de referência, siga estas etapas:
+Há uma solução disponível no [GitHub][github] para implantar essa arquitetura de referência. Você precisará da versão mais recente da [CLI do Azure][azure-powershell] para executar o script do Powershell que implanta a solução. Para implantar a arquitetura de referência, siga estas etapas:
 
-1. Baixe ou clone a pasta da solução do [Github] [ github] para seu computador local.
+1. Baixe ou clone a pasta da solução do [GitHub][github] em seu computador local.
 
 2. Abra a CLI do Azure e navegue até a pasta da solução local.
 
@@ -111,7 +111,7 @@ Uma solução está disponível no [GitHub][github] para implantar essa arquitet
     .\Deploy-ReferenceArchitecture.ps1 <subscription id> <location> <mode>
     ```
     Substitua `<subscription id>` por sua ID da assinatura do Azure.
-    Para `<location>`, especifique uma região do Azure, tal como `eastus` ou `westus`.
+    Para `<location>`, especifique uma região do Azure, como `eastus` ou `westus`.
     O parâmetro `<mode>` controla a granularidade da implantação e pode ser um dos seguintes valores:
     * `Onpremise`: implanta o ambiente local simulado.
     * `Infrastructure`: implanta a infraestrutura e jump box da VNet no Azure.

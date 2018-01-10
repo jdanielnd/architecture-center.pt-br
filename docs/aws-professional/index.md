@@ -5,17 +5,17 @@ keywords: "Especialistas em AWS, comparação com o Azure, comparação com o AW
 author: lbrader
 ms.date: 03/24/2017
 pnp.series.title: Azure for AWS Professionals
-ms.openlocfilehash: 75fda82ee5ca7ca3665501fe428d1d01995e7422
-ms.sourcegitcommit: c53adf50d3a787956fc4ebc951b163a10eeb5d20
+ms.openlocfilehash: b576b11bc152ef721f56e79609cb7a03f2d31dd3
+ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/23/2017
+ms.lasthandoff: 01/02/2018
 ---
 # <a name="azure-for-aws-professionals"></a>Azure para profissionais do AWS
 
 Este artigo ajuda os especialistas em AWS (Amazon Web Services) a compreender os conceitos básicos de contas, plataforma e serviços do Microsoft Azure. Aborda também as principais semelhanças e diferenças entre as plataformas AWS e Azure.
 
-Você aprenderá a:
+O que você aprenderá:
 
 * Como contas e recursos são organizados no Azure.
 * Como as soluções disponíveis são estruturadas no Azure.
@@ -237,14 +237,12 @@ No Armazenamento do Azure, as [contas de armazenamento](https://azure.microsoft.
 -   [Armazenamento de filas](https://azure.microsoft.com/documentation/articles/storage-nodejs-how-to-use-queues/) - Fornece um sistema de mensagens para processamento de fluxos de trabalho e comunicação entre componentes de serviços de nuvem.
 
 -   [Armazenamento de arquivos](https://azure.microsoft.com/documentation/articles/storage-java-how-to-use-file-storage/) - Oferece armazenamento compartilhado para aplicativos herdados que usam o protocolo padrão de bloco de mensagens de servidor (SMB). O armazenamento de arquivo é usado de maneira semelhante ao EFS da plataforma AWS.
-
-
-
-
  
 #### <a name="glacier-and-azure-storage"></a>Glacier e Armazenamento do Azure 
-O [Arquivo Padrão do Armazenamento do Azure](/azure/storage/blobs/storage-blob-storage-tiers) oferece um equivalente direto ao arquivamento Glacier de longo prazo do AWS. Para os dados de longa duração acessados com menos frequência, o Azure oferece a [camada de armazenamento estática otimizada do Azure](/azure/storage/blobs/storage-blob-storage-tiers).
-O armazenamento otimizado é mais econômico, com desempenho mais baixo do que o armazenamento de blobs padrão, e é comparável ao S3 do AWS - acesso pouco frequente.
+
+O [Armazenamento de Blobs de Arquivo Morto do Azure](/azure/storage/blobs/storage-blob-storage-tiers#archive-access-tier) é comparável ao serviço de armazenamento AWS Glacier. Ele se destina a dados acessados raramente que ficam armazenados por pelo menos 180 dias e podem tolerar várias horas de latência de recuperação. 
+
+Para dados que são acessados com pouca frequência, mas devem estar disponíveis imediatamente quando acessados, a [Camada de Armazenamento de Blobs Fria do Azure](/azure/storage/blobs/storage-blob-storage-tiers#cool-access-tier) fornece armazenamento mais barato do que o armazenamento de blobs padrão. Esta camada de armazenamento é comparável ao AWS S3 – serviço de armazenamento de Acesso Não Frequente.
 
 #### <a name="see-also"></a>Consulte também
 

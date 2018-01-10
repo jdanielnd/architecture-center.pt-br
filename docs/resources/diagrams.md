@@ -1,11 +1,11 @@
 ---
 title: "Ícones e outros ativos para diagramas de arquitetura"
 description: "Ícones, modelos do Visio, arquivos PNG e arquivos SVG úteis para a produção dos seus próprios diagramas de arquitetura"
-ms.openlocfilehash: d02e2ddcb4068ac1656fd848d14e162aecb8543c
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 863c5cd479e6c4b6d57299176b80d02661e5466b
+ms.sourcegitcommit: 662f27f37d45f778ad1b6355fb6fb66e3c65558c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/11/2017
 ---
 # <a name="icons-and-diagrams"></a>Ícones e diagramas
 
@@ -33,7 +33,7 @@ Uma versão dos diagramas usados em [Arquiteturas de referência](../reference-a
 Um modelo do Visio está disponível para a produção de diagramas de arquitetura (isométricos) 3D.
 
 - [Assista ao vídeo de treinamento](http://aka.ms/3dBlueprintTemplateVideo) 
-- Baixe o [Modelo de planta 3D do Visio da Microsoft](http://aka.ms/3DBlueprintTemplate)
+- Baixe o [Modelo Visio de plano gráfico em 3D da Microsoft](http://aka.ms/3DBlueprintTemplate)
 
 ![Modelo de planta 3D do Visio da Microsoft](./_images/3DBlueprintVisioTemplate.png)
 
