@@ -3,17 +3,17 @@ title: "Projetar, criar e operar microsserviços no Azure com Kubernetes"
 description: "Projetar, criar e operar microsserviços no Azure"
 author: MikeWasson
 ms.date: 12/08/2017
-ms.openlocfilehash: c279546552d731a01ed970e7942ad7d4a56157da
-ms.sourcegitcommit: 94c769abc3d37d4922135ec348b5da1f4bbcaa0a
+ms.openlocfilehash: 857e91a8eeefec18b459f2e66fde9a4f8bbe7b21
+ms.sourcegitcommit: 744ad1381e01bbda6a1a7eff4b25e1a337385553
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/13/2017
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="designing-building-and-operating-microservices-on-azure"></a>Projetar, criar e operar microsserviços no Azure
 
 ![](./images/drone.svg)
 
-Microsserviços se tornaram um estilo popular de arquitetura para criar aplicativos de nuvem resilientes, altamente escalonáveis e capazes de evoluir rapidamente. No entanto, para serem mais do que apenas uma palavra de efeito, microsserviços exigem uma abordagem diferente para o design e criação de aplicativos. 
+Microsserviços se tornaram um estilo popular de arquitetura para criar aplicativos de nuvem resilientes, altamente escalonáveis, implantáveis independentemente e capazes de evoluir rapidamente. No entanto, para serem mais do que apenas uma palavra de efeito, microsserviços exigem uma abordagem diferente para o design e criação de aplicativos. 
 
 Nesse conjunto de artigos, exploraremos como compilar e executar uma arquitetura de microsserviços no Azure. Os tópicos incluem:
 
@@ -35,7 +35,7 @@ Mas primeiro, vamos começar com os conceitos básicos. O que são microsserviç
 Em um aplicativo de microsserviços, o aplicativo é composto de vários serviços pequenos e independentes. Aqui estão algumas características que definem microsserviços:
 
 - Cada microsserviço implementa um único recurso de negócios.
-- Um microsserviço é suficientemente pequeno para que uma única equipe pequena de desenvolvedores, normalmente 5 a 10 pessoas, possa escrever o código dele e mantê-lo.
+- Um microsserviço é suficientemente pequeno para que uma única equipe pequena de desenvolvedores possa escrever o código dele e mantê-lo.
 - Microsserviços são executados em processos separados, comunicando-se por meio de padrões de mensagens ou APIs bem definidas. 
 - Microsserviços não compartilham armazenamentos de dados nem esquemas de dados. Cada microsserviço é responsável por gerenciar seus próprios dados. 
 - Microsserviços têm bases de código separadas e não compartilham código-fonte. No entanto, eles podem usar bibliotecas de utilitários comuns.
