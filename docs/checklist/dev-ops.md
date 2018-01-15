@@ -1,8 +1,6 @@
 # <a name="devops-checklist"></a>Lista de verificação de DevOps
 
-DevOps é a integração do desenvolvimento, garantia de qualidade e operações de TI em uma cultura unificada e um conjunto de processos para entrega de software. 
-
-Use esta lista de verificação como um ponto de partida para avaliar seu processo e cultura de DevOps.
+DevOps é a integração do desenvolvimento, garantia de qualidade e operações de TI em uma cultura unificada e um conjunto de processos para entrega de software. Use esta lista de verificação como um ponto de partida para avaliar seu processo e cultura de DevOps.
 
 ## <a name="culture"></a>Cultura
 

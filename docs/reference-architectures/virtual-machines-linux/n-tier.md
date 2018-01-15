@@ -6,19 +6,19 @@ ms.date: 11/22/2017
 pnp.series.title: Linux VM workloads
 pnp.series.next: multi-region-application
 pnp.series.prev: multi-vm
-ms.openlocfilehash: 98814685e0f33f2a1258bf8307a86f92d8a81968
-ms.sourcegitcommit: 583e54a1047daa708a9b812caafb646af4d7607b
+ms.openlocfilehash: e875a58aa83339560fd1de5b03a960f071883927
+ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/28/2017
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="run-linux-vms-for-an-n-tier-application"></a>Executar VMs do Linux para um aplicativo de N camadas
 
-Essa arquitetura de referência mostra um conjunto de práticas comprovadas para executar VMs (máquinas virtuais) do Linux para um aplicativo de N camadas. [**Implantar esta solução**.](#deploy-the-solution)  
+Essa arquitetura de referência mostra um conjunto de práticas comprovadas para executar VMs (máquinas virtuais) do Linux para um aplicativo de N camadas. [**Implante essa solução**.](#deploy-the-solution)  
 
 ![[0]][0]
 
-*Baixe um [arquivo Visio][visio-download] dessa arquitetura.*
+*Baixe um [Arquivo Visio][visio-download] dessa arquitetura.*
 
 ## <a name="architecture"></a>Arquitetura
 
@@ -27,6 +27,7 @@ Há muitas maneiras de implementar uma arquitetura de N camadas. O diagrama most
 * **Conjuntos de disponibilidade.** Crie um [conjunto de disponibilidade][azure-availability-sets] para cada camada e provisione pelo menos duas VMs em cada camada.  Isso torna as VMs qualificadas para um [SLA (Contrato de Nível de Serviço)][vm-sla] mais elevado. É possível implantar uma VM única em um conjunto de disponibilidade, mas a VM única não se qualificará para uma garantia de SLA, a menos que a VM única esteja utilizando o Armazenamento Premium do Azure para todos discos de dados e SO.  
 * **Sub-redes.** Sempre crie uma sub-rede separada para cada camada. Especifique o intervalo de endereços e a máscara de sub-rede usando a notação [CIDR]. 
 * **Balanceadores de carga.** Use um [Balanceador de carga para a Internet][load-balancer-external] para distribuir o tráfego de entrada da Internet para a camada da Web e um [balanceador de carga interno][load-balancer-internal] para distribuir o tráfego de rede da camada da Web para a camada comercial.
+* **DNS do Azure**. [DNS do Azure][azure-dns] é um serviço de hospedagem para domínios DNS, que fornece resolução de nomes usando a infraestrutura do Microsoft Azure. Ao hospedar seus domínios no Azure, você pode gerenciar seus registros DNS usando as mesmas credenciais, APIs, ferramentas e cobrança que seus outros serviços do Azure.
 * **Jumpbox.** Também chamada de um [host bastião]. Uma VM protegida na rede que os administradores usam para se conectar às outras VMs. O jumpbox tem um NSG que permite o tráfego remoto apenas de endereços IP públicos em uma lista segura. O NSG deve permitir o tráfego SSH (secure shell).
 * **Monitoramento.** Softwares de monitoramento, como [Nagios], [Zabbix] ou [Icinga] podem fornecer informações sobre o tempo de resposta, tempo de atividade da VM e a integridade geral do sistema. Instale o software de monitoramento em uma VM que se encontra em uma sub-rede separada de gerenciamento.
 * **NSGs.** Use os NSGs [grupos de segurança de rede][nsg] para restringir o tráfego de rede na VNet. Por exemplo, na arquitetura de três camadas mostrada aqui, a camada de banco de dados não aceita o tráfego de front-end da Web, somente da camada comercial e da sub-rede de gerenciamento.
@@ -160,6 +161,7 @@ Para obter mais informações sobre a implantação dessa arquitetura de referê
 [azure-administration]: /azure/automation/automation-intro
 [azure-availability-sets]: /azure/virtual-machines/virtual-machines-linux-manage-availability
 [azure-cli-2]: https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest
+[azure-dns]: /azure/dns/dns-overview
 [host bastião]: https://en.wikipedia.org/wiki/Bastion_host
 [cassandra-in-azure]: https://docs.datastax.com/en/datastax_enterprise/4.5/datastax_enterprise/install/installAzure.html
 [cidr]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing

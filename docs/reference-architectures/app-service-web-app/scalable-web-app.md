@@ -7,11 +7,11 @@ pnp.series.prev: basic-web-app
 pnp.series.next: multi-region-web-app
 ms.date: 11/23/2016
 cardTitle: Improve scalability
-ms.openlocfilehash: b875b89b87edd5636d90da8b7f8211f965b39937
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 1fdaf6e3695cb814fa4c275a4a273f9fa9a7b71b
+ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="improve-scalability-in-a-web-application"></a>Melhorar a escalabilidade em um aplicativo Web
 
@@ -19,7 +19,7 @@ Essa arquitetura de referência mostra práticas comprovadas para melhorar a esc
 
 ![[0]][0]
 
-*Baixe um [arquivo Visio][visio-download] dessa arquitetura.*
+*Baixe um [Arquivo Visio][visio-download] dessa arquitetura.*
 
 ## <a name="architecture"></a>Arquitetura  
 
@@ -34,6 +34,7 @@ Essa arquitetura baseia-se naquela mostrada em [Aplicativo Web básico][basic-we
 * **Armazenamento de dados**. Use o [Banco de Dados SQL do Azure][sql-db] para dados relacionais. Para dados não relacionais, considere um repositório NoSQL, como [Cosmos DB][documentdb].
 * **Azure Search**. Use o [Azure Search][azure-search] para adicionar funcionalidade de pesquisa como sugestões de pesquisa, pesquisa difusa e pesquisa específica a um idioma. O Azure Search normalmente é usado junto com outro armazenamento de dados, especialmente se o armazenamento de dados primário exigir consistência estrita. Nessa abordagem, armazene dados autoritativos em outro armazenamento de dados e o índice de pesquisa no Azure Search. O Azure Search também pode ser usado para consolidar um único índice de pesquisa de vários armazenamentos de dados.  
 * **Email/SMS**. Use um serviço de terceiros, como o SendGrid ou Twilio, para enviar email ou mensagens SMS em vez de compilar essa funcionalidade diretamente no aplicativo.
+* **DNS do Azure**. [DNS do Azure][azure-dns] é um serviço de hospedagem para domínios DNS, que fornece resolução de nomes usando a infraestrutura do Microsoft Azure. Ao hospedar seus domínios no Azure, você pode gerenciar seus registros DNS usando as mesmas credenciais, APIs, ferramentas e cobrança que seus outros serviços do Azure.
 
 ## <a name="recommendations"></a>Recomendações
 
@@ -86,7 +87,7 @@ Aplicativos modernos geralmente processam grandes volumes de dados. Para dimensi
 
 ## <a name="scalability-considerations"></a>Considerações sobre escalabilidade
 
-A principal vantagem Serviço de Aplicativo do Azure é a capacidade de dimensionar seu aplicativo com base na carga. Aqui estão alguns pontos a considerar ao planejar o dimensionamento do seu aplicativo.
+Um grande benefício do Serviço de Aplicativo do Azure é a capacidade de dimensionar o aplicativo com base na carga. Aqui estão algumas considerações para ter em mente ao planejar dimensionar seu aplicativo.
 
 ### <a name="app-service-app"></a>Aplicativo de Serviço de Aplicativo
 Se sua solução inclui vários aplicativos do Serviço de Aplicativo, considere implantá-los em planos de Serviço de Aplicativo separados. Essa abordagem permite redimensioná-los independentemente por serem executados em instâncias separadas. 
@@ -103,7 +104,7 @@ Aumente a escalabilidade de um banco de dados SQL *fragmentando* o banco de dado
 O Azure Search remove a sobrecarga de execução de pesquisas de dados complexas de armazenamento de dados primário, podendo ser dimensionado para lidar com a carga. Consulte [Dimensionar os níveis de recursos para cargas de trabalho de consulta e indexação no Azure Search][azure-search-scaling].
 
 ## <a name="security-considerations"></a>Considerações de segurança
-Esta seção lista as considerações sobre segurança específicas para os serviços do Azure descritos neste artigo. Esta não é uma lista completa de práticas recomendadas de segurança. Para ver algumas considerações de segurança adicionais, consulte [Proteger um aplicativo no Serviço de Aplicativo do Azure][app-service-security].
+Esta seção lista as considerações sobre segurança específicas dos serviços do Azure descritos neste artigo. Esta não é uma lista completa de práticas recomendadas de segurança. Para obter algumas considerações de segurança adicionais, consulte [Proteger um aplicativo no Serviço de Aplicativo do Azure][app-service-security].
 
 ### <a name="cross-origin-resource-sharing-cors"></a>CORS (Compartilhamento de Recursos entre Origens)
 Se você criar um site e a API Web como aplicativos separados, o site não poderá fazer chamadas AJAX no lado do cliente para a API, a menos que você habilite o CORS.
@@ -127,6 +128,7 @@ Use [Transparent Data Encryption][sql-encryption] se você precisa criptografar 
 [app-service-api-app]: /azure/app-service-api/app-service-api-apps-why-best-platform
 [app-service-pricing]: https://azure.microsoft.com/pricing/details/app-service/
 [azure-cdn]: https://azure.microsoft.com/services/cdn/
+[azure-dns]: /azure/dns/dns-overview
 [azure-redis]: https://azure.microsoft.com/services/cache/
 [azure-search]: https://azure.microsoft.com/documentation/services/search/
 [azure-search-scaling]: /azure/search/search-capacity-planning

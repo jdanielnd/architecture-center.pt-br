@@ -4,11 +4,11 @@ description: "Arquitetura recomendada para aplicativo Web com alta disponibilida
 author: MikeWasson
 ms.date: 11/23/2016
 cardTitle: Run in multiple regions
-ms.openlocfilehash: 2d7d0c38bef3efc73a7ba2dd61e4190d07deb1b5
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 60caa121d0ce2f1aa2638650229bed8048804c22
+ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="run-a-web-application-in-multiple-regions"></a>Execute um aplicativo Web em várias regiões
 [!INCLUDE [header](../../_includes/header.md)]
@@ -17,13 +17,14 @@ Essa arquitetura de referência mostra como executar um aplicativo do Serviço d
 
 ![Arquitetura de referência: aplicativo Web com alta disponibilidade](./images/multi-region-web-app-diagram.png) 
 
-*Baixe um [arquivo Visio][visio-download] dessa arquitetura.*
+*Baixe um [Arquivo Visio][visio-download] dessa arquitetura.*
 
 ## <a name="architecture"></a>Arquitetura 
 
 Essa arquitetura baseia-se naquela mostrada em [Melhorar a escalabilidade em um aplicativo Web][guidance-web-apps-scalability]. As principais diferenças são:
 
 * **Regiões primárias e secundárias**. Essa arquitetura usa duas regiões para obter alta disponibilidade. O aplicativo está implantado em cada região. Durante as operações normais, o tráfego de rede é roteado para a região primária. Se a região primária ficar indisponível, o tráfego será roteado para a região secundária. 
+* **DNS do Azure**. [DNS do Azure][azure-dns] é um serviço de hospedagem para domínios DNS, que fornece resolução de nomes usando a infraestrutura do Microsoft Azure. Ao hospedar seus domínios no Azure, você pode gerenciar seus registros DNS usando as mesmas credenciais, APIs, ferramentas e cobrança que seus outros serviços do Azure.
 * **Gerenciador de Tráfego do Microsoft Azure**. O [Gerenciador de Tráfego][traffic-manager] roteia as solicitações de entrada para a região primária. Se o aplicativo em execução nessa região ficar indisponível, o Gerenciador de Tráfego fará failover para a região secundária.
 * **Replicação geográfica** do Banco de Dados SQL e Cosmos DB. 
 
@@ -40,7 +41,7 @@ Essa arquitetura de referência se concentra em ativo/passivo com espera ativa, 
 
 ## <a name="recommendations"></a>Recomendações
 
-Seus requisitos podem ser diferentes dos requisitos da arquitetura descrita aqui. Use as recomendações nesta seção como um ponto de partida.
+Seus requisitos podem ser diferentes dos requisitos da arquitetura descrita aqui. Use as recomendações nesta seção como um ponto inicial.
 
 ### <a name="regional-pairing"></a>Emparelhamento regional
 Cada região do Azure é emparelhada com outra na mesma área geográfica. Em geral, escolha regiões do mesmo par regional (por exemplo, Leste dos EUA 2 e EUA Central). Os benefícios de se fazer isso são:
@@ -147,6 +148,7 @@ Se o banco de dados primário falhar, realize um failover manual para o banco de
 <!-- links -->
 
 [azure-sql-db]: https://azure.microsoft.com/documentation/services/sql-database/
+[azure-dns]: /azure/dns/dns-overview
 [docdb-geo]: /azure/documentdb/documentdb-distribute-data-globally
 [guidance-web-apps-scalability]: ./scalable-web-app.md
 [health-endpoint-monitoring-pattern]: https://msdn.microsoft.com/library/dn589789.aspx

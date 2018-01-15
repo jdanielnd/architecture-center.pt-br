@@ -4,11 +4,11 @@ description: "Convenções de nomenclatura para recursos do Azure. Como nomear m
 author: telmosampaio
 ms.date: 05/18/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: 20f090c4cc39f96887cd58ffd2a9c7736e77de57
-ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
+ms.openlocfilehash: 364735dec9658b4d2a9d21330f38c57f6fa694bd
+ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/02/2018
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="naming-conventions"></a>Convenções de nomenclatura
 
@@ -109,7 +109,7 @@ Em geral, evite usar caracteres especiais (`-` ou `_`) como o primeiro ou últim
 | Entidade | Escopo | Comprimento | Capitalização | Caracteres válidos | Padrão sugerido | Exemplo |
 | --- | --- | --- | --- | --- | --- | --- |
 |Rede virtual (VNet) |Grupo de recursos |2-64 |Não diferencia maiúsculas de minúsculas |Alfanumérico, traço, sublinhado e ponto |`<service short name>-vnet` |`profx-vnet` |
-|Sub-rede |Rede virtual pai |2-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, sublinhado, traço e ponto |`<descriptive context>` |`web` |
+|Sub-rede |Rede virtual pai |2-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, traço, sublinhado e ponto |`<descriptive context>` |`web` |
 |Interface de rede |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, traço, sublinhado e ponto |`<vmname>-nic<num>` |`profx-sql1-nic1` |
 |Grupo de Segurança de Rede |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, traço, sublinhado e ponto |`<service short name>-<context>-nsg` |`profx-app-nsg` |
 |Regra de grupo de segurança de rede |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, traço, sublinhado e ponto |`<descriptive context>` |`sql-allow` |

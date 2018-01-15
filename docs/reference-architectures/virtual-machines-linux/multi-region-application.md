@@ -5,11 +5,11 @@ author: MikeWasson
 ms.date: 11/22/2016
 pnp.series.title: Linux VM workloads
 pnp.series.prev: n-tier
-ms.openlocfilehash: 3b68f6fc79ba4b29e41ba2b04537b834bb8859b0
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 7d720a004d21edbffc0ddeba54e291aa817550e0
+ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="run-linux-vms-in-multiple-regions-for-high-availability"></a>Executar VMs do Linux em várias regiões para ter alta disponibilidade
 
@@ -17,13 +17,14 @@ Essa arquitetura de referência mostra um conjunto de práticas comprovadas para
 
 ![[0]][0]
 
-*Baixe um [arquivo Visio][visio-download] dessa arquitetura.*
+*Baixe um [Arquivo Visio][visio-download] dessa arquitetura.*
 
 ## <a name="architecture"></a>Arquitetura 
 
 Essa arquitetura baseia-se naquela mostrada em [Executar VMs do Linux para um aplicativo de N camadas](n-tier.md). 
 
 * **Regiões primárias e secundárias**. Use duas regiões para obter alta disponibilidade. Uma é a região primária, a outra destina-se a failover.
+* **DNS do Azure**. [DNS do Azure][azure-dns] é um serviço de hospedagem para domínios DNS, que fornece resolução de nomes usando a infraestrutura do Microsoft Azure. Ao hospedar seus domínios no Azure, você pode gerenciar seus registros DNS usando as mesmas credenciais, APIs, ferramentas e cobrança que seus outros serviços do Azure.
 * **Gerenciador de Tráfego do Microsoft Azure**. O [Gerenciador de Tráfego][traffic-manager] roteia as solicitações de entrada para uma das regiões. Durante as operações normais, ele roteia as solicitações para a região primária. Se essa região ficar indisponível, o Gerenciador de Tráfego fará failover para a região secundária. Para obter mais informações, consulte a [Configuração do Gerenciador de Tráfego](#traffic-manager-configuration).
 * **Grupos de recursos**. Crie [grupos de recursos][resource groups] separados para a região primária, a região secundária e para o Gerenciador de Tráfego. Isso oferece flexibilidade para gerenciar cada região como uma única coleção de recursos. Por exemplo, você poderia reimplantar uma região sem interromper a outra. [Vincule os grupos de recursos][resource-group-links] para ser possível executar uma consulta para listar todos os recursos para o aplicativo.
 * **VNets**. Crie uma VNet separada para cada região. Verifique se que os espaços de endereço não se sobrepõem.
@@ -128,7 +129,7 @@ Meça o tempo de recuperação e verifique se ele cumpre seus requisitos de neg�
 
 <!-- Links -->
 [hybrid-vpn]: ../hybrid-networking/vpn.md
-
+[azure-dns]: /azure/dns/dns-overview
 [cassandra-in-azure]: https://academy.datastax.com/resources/deployment-guide-azure
 [cassandra-consistency]: http://docs.datastax.com/en/cassandra/2.0/cassandra/dml/dml_config_consistency_c.html
 [cassandra-replication]: http://www.planetcassandra.org/data-replication-in-nosql-databases-explained/

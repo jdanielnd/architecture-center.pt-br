@@ -6,19 +6,19 @@ ms.date: 11/22/2016
 pnp.series.title: Windows VM workloads
 pnp.series.next: multi-region-application
 pnp.series.prev: multi-vm
-ms.openlocfilehash: e25d10d661ac4759f209bd27384303dee2ee454e
-ms.sourcegitcommit: 583e54a1047daa708a9b812caafb646af4d7607b
+ms.openlocfilehash: 0654239a5bbd966a2aa776415b7f15ae723ffd63
+ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/28/2017
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="run-windows-vms-for-an-n-tier-application"></a>Executar VMs do Windows para um aplicativo de N camadas
 
-Essa arquitetura de referência mostra um conjunto de práticas comprovadas para executar VMs (máquinas virtuais) do Windows para um aplicativo de N camadas. [**Implantar esta solução**.](#deploy-the-solution) 
+Essa arquitetura de referência mostra um conjunto de práticas comprovadas para executar VMs (máquinas virtuais) do Windows para um aplicativo de N camadas. [**Implante essa solução**.](#deploy-the-solution) 
 
 ![[0]][0]
 
-*Baixe um [arquivo Visio][visio-download] dessa arquitetura.*
+*Baixe um [Arquivo Visio][visio-download] dessa arquitetura.*
 
 ## <a name="architecture"></a>Arquitetura 
 
@@ -32,6 +32,7 @@ Há muitas maneiras de implementar uma arquitetura de N camadas. O diagrama most
 * **NSGs.** Use os NSGs [grupos de segurança de rede][nsg] para restringir o tráfego de rede na VNet. Por exemplo, na arquitetura de três camadas mostrada aqui, a camada de banco de dados não aceita o tráfego de front-end da Web, somente da camada comercial e da sub-rede de gerenciamento.
 * **Grupo de Disponibilidade Always On do SQL Server.** Fornece alta disponibilidade na camada de dados, habilitando replicação e failover.
 * **Servidores AD DS (Active Directory Domain Services)**. Antes do Windows Server 2016, os Grupos de Disponibilidade Always On do SQL Server precisavam ser ingressados em um domínio. Isso ocorria porque os Grupos de Disponibilidade dependem da tecnologia do WSFC (Cluster de Failover do Windows Server). O Windows Server 2016 introduziu a capacidade de criar um Cluster de Failover sem o Active Directory e nesse caso os servidores do AD DS não são necessários para essa arquitetura. Para obter mais informações, consulte [Novidades no Clustering de Failover do Windows Server 2016][wsfc-whats-new].
+* **DNS do Azure**. [DNS do Azure][azure-dns] é um serviço de hospedagem para domínios DNS, que fornece resolução de nomes usando a infraestrutura do Microsoft Azure. Ao hospedar seus domínios no Azure, você pode gerenciar seus registros DNS usando as mesmas credenciais, APIs, ferramentas e cobrança que seus outros serviços do Azure.
 
 ## <a name="recommendations"></a>Recomendações
 
@@ -184,6 +185,7 @@ Para obter mais informações sobre a implantação dessa arquitetura de referê
 [azure-availability-sets]: /azure/virtual-machines/virtual-machines-windows-manage-availability#configure-each-application-tier-into-separate-availability-sets
 [azure-cli]: /azure/virtual-machines-command-line-tools
 [azure-cli-2]: https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest
+[azure-dns]: /azure/dns/dns-overview
 [azure-key-vault]: https://azure.microsoft.com/services/key-vault
 [host bastião]: https://en.wikipedia.org/wiki/Bastion_host
 [cidr]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing

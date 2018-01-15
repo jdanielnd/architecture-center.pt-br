@@ -6,11 +6,11 @@ ms.date: 12/12/2017
 pnp.series.title: Linux VM workloads
 pnp.series.next: multi-vm
 pnp.series.prev: ./index
-ms.openlocfilehash: a51e0d7ed4e35c5331241cf78d1715e63f9b4d86
-ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
+ms.openlocfilehash: 7caef46e53b42011b5a12ef53384c0352b9b9a72
+ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/02/2018
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="run-a-linux-vm-on-azure"></a>Executar uma VM do Linux no Azure
 
@@ -31,7 +31,7 @@ O provisionamento de uma VM do Azure requer componentes adicionais, como recurso
 * **Discos de dados.** Um [disco de dados][data-disk] é um VHD persistente usado para dados de aplicativo. Os discos de dados são armazenados no Armazenamento do Azure, como o disco do sistema operacional.
 * **Rede Virtual e sub-rede.** Cada VM do Azure é implantada em uma VNet que pode ser segmentada em várias sub-redes.
 * **Endereço IP público.** Um endereço IP público é necessário para se comunicar com a VM &mdash;, por exemplo, via SSH.
-* **DNS do Azure**. [DNS do Azure][azure-dns] é um serviço de hospedagem para domínios DNS, que fornece resolução de nomes usando a infraestrutura do Microsoft Azure. Ao hospedar seus domínios no Azure, você pode gerenciar seus registros DNS usando as mesmas credenciais, APIs, ferramentas e cobrança que seus outros serviços do Azure.  
+* **DNS do Azure**. [DNS do Azure][azure-dns] é um serviço de hospedagem para domínios DNS, que fornece resolução de nomes usando a infraestrutura do Microsoft Azure. Ao hospedar seus domínios no Azure, você pode gerenciar seus registros DNS usando as mesmas credenciais, APIs, ferramentas e cobrança que seus outros serviços do Azure.
 * **NIC (adaptador de rede)**. Uma NIC atribuída permite que a VM se comunique com a rede virtual.
 * **NSG (grupo de segurança de rede)**. [Grupos de segurança de rede][nsg] são utilizados para permitir ou recusar tráfego de rede a um recurso de rede. É possível associar um NSG a uma NIC individual ou a uma sub-rede. Se você associá-lo a uma sub-rede, as regras do NSG se aplicarão a todas as VMs na sub-rede.
 * **Diagnósticos.** O registro de diagnóstico é crucial para o gerenciamento e solução de problemas da VM.
@@ -151,7 +151,7 @@ Uma implantação para essa arquitetura está disponível no [GitHub][github-fol
   * Uma VM que executa a versão mais recente do Ubuntu 16.04.3 LTS.
   * Uma extensão de script personalizado de exemplo que formata os dois discos de dados e implanta o Servidor HTTP do Apache para a VM do Ubuntu.
 
-### <a name="prerequisites"></a>pré-requisitos
+### <a name="prerequisites"></a>Pré-requisitos
 
 Antes de implantar a arquitetura de referência para sua própria assinatura, você deve executar as etapas a seguir.
 

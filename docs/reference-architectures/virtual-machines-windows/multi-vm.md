@@ -6,19 +6,19 @@ ms.date: 11/16/2017
 pnp.series.title: Windows VM workloads
 pnp.series.next: n-tier
 pnp.series.prev: single-vm
-ms.openlocfilehash: c9b1e52044d38348ecf1bd29cb24b3c20d1d6a45
-ms.sourcegitcommit: 115db7ee008a0b1f2b0be50a26471050742ddb04
+ms.openlocfilehash: 14e7e023afd7cb7cbe0e8db8e224ba777f6fe863
+ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/17/2017
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="run-load-balanced-vms-for-scalability-and-availability"></a>Executar VMs com balanceamento de carga para ter escalabilidade e disponibilidade
 
-Essa arquitetura de referência mostra um conjunto de práticas comprovadas para executar várias VMs (máquinas virtuais) do Windows em um conjunto de dimensionamento atrás de um balanceador de carga para melhorar a disponibilidade e a escalabilidade. Essa arquitetura pode ser usada para qualquer carga de trabalho sem estado, como um servidor Web e é uma fundação para a implantação de aplicativos de N camadas. [**Implantar esta solução**.](#deploy-the-solution)
+Essa arquitetura de referência mostra um conjunto de práticas comprovadas para executar várias VMs (máquinas virtuais) do Windows em um conjunto de dimensionamento atrás de um balanceador de carga para melhorar a disponibilidade e a escalabilidade. Essa arquitetura pode ser usada para qualquer carga de trabalho sem estado, como um servidor Web e é uma fundação para a implantação de aplicativos de N camadas. [**Implante essa solução**.](#deploy-the-solution)
 
 ![[0]][0]
 
-*Baixe um [arquivo Visio][visio-download] dessa arquitetura.*
+*Baixe um [Arquivo Visio][visio-download] dessa arquitetura.*
 
 ## <a name="architecture"></a>Arquitetura
 
@@ -32,6 +32,7 @@ A arquitetura tem os seguintes componentes:
 * **Rede Virtual e sub-rede.** Cada VM do Azure é implantada em uma VNet que pode ser segmentada em várias sub-redes.
 * **Azure Load Balancer**. O [balanceador de carga][load-balancer] distribui as solicitações de entrada da Internet para as instâncias de VM. 
 * **Endereço IP público**. É necessário ter um endereço IP público para que o balanceador de carga possa receber o tráfego da Internet.
+* **DNS do Azure**. [DNS do Azure][azure-dns] é um serviço de hospedagem para domínios DNS, que fornece resolução de nomes usando a infraestrutura do Microsoft Azure. Ao hospedar seus domínios no Azure, você pode gerenciar seus registros DNS usando as mesmas credenciais, APIs, ferramentas e cobrança que seus outros serviços do Azure.
 * **Conjunto de dimensionamento de VM**. Um [conjunto de dimensionamento de VM][vm-scaleset] é um conjunto de VMs idênticas usado para hospedar uma carga de trabalho. Os conjuntos de dimensionamento permitem que o número de VMs seja reduzido horizontalmente dentro ou fora manualmente, ou automaticamente com base em regras predefinidas.
 * **Conjunto de disponibilidade**. O [conjunto de disponibilidade][availability-set] contém as VMs, tornando-as qualificadas para um [SLA (Contrato de Nível de Serviço)][vm-sla] mais elevado. Para que o SLA mais elevado seja aplicável, o conjunto de disponibilidade deve incluir um mínimo de duas VMs. Conjuntos de disponibilidade são conjuntos de dimensionamento implícitos. Se você criar VMs fora de um conjunto de dimensionamento, será necessário criar o conjunto de disponibilidade independentemente.
 * **Discos gerenciados**. O Azure Managed Disks gerenciam os arquivos VHD (disco rígido virtual) para os discos de VM. 
@@ -60,7 +61,7 @@ Para ver considerações adicionais, consulte [Considerações de design para co
 
 Se você não usar um conjunto de dimensionamento, considere usar pelo menos um conjunto de disponibilidade. Crie pelo menos duas VMs no conjunto de disponibilidade para dar suporte ao [SLA de disponibilidade para VMs do Azure][vm-sla]. O Azure Load Balancer também exige que as VMs com balanceamento de carga pertençam ao mesmo conjunto de disponibilidade.
 
-Cada assinatura do Azure tem limites padrão em vigor, incluindo um número máximo de VMs por região. Você pode aumentar o limite enviando uma solicitação de suporte. Para saber mais, consulte [Assinatura do Azure e limite de serviços, cotas e restrições][subscription-limits].
+Cada assinatura do Azure tem limites padrão em vigor, incluindo um número máximo de VMs por região. Você pode aumentar o limite enviando uma solicitação de suporte. Para saber mais, confira [Assinatura e limites de serviço, cotas e restrições do Azure][subscription-limits].
 
 ### <a name="network-recommendations"></a>Recomendações de rede
 
@@ -78,7 +79,7 @@ Para rotear o tráfego para uma VM específica, use as regras NAT. Por exemplo, 
 
 ### <a name="storage-account-recommendations"></a>Recomendações de conta de armazenamento
 
-Também é recomendável usar os [discos gerenciado](/azure/storage/storage-managed-disks-overview) com o [armazenamento premium][premium]. Discos gerenciados não exigem uma conta de armazenamento. Você simplesmente especifica o tamanho e o tipo de disco e é implantado como um recurso altamente disponível.
+Também é recomendável usar os [discos gerenciado](/azure/storage/storage-managed-disks-overview) com o [armazenamento premium][premium]. Os discos gerenciados não exigem uma conta de armazenamento. Você simplesmente especifica o tamanho e o tipo de disco e é implantado como um recurso altamente disponível.
 
 Se você estiver utilizando discos não gerenciados, crie contas de armazenamento do Azure separadas para cada VM para manter os VHDs (discos rígidos virtuais), para evitar atingir os [limites de IOPS][vm-disk-limits] (operações de entrada/saída por segundo) para contas de armazenamento.
 
@@ -169,6 +170,7 @@ Para obter mais informações sobre como implantar essa arquitetura de referênc
 [azure-automation]: /azure/automation/automation-intro
 [azure-cli]: /azure/virtual-machines-command-line-tools
 [azure-cli-2]: /azure/install-azure-cli?view=azure-cli-latest
+[azure-dns]: /azure/dns/dns-overview
 [git]: https://github.com/mspnp/reference-architectures/tree/master/virtual-machines/multi-vm
 [github-folder]: https://github.com/mspnp/reference-architectures/tree/master/virtual-machines/multi-vm
 [health-probe-log]: /azure/load-balancer/load-balancer-monitor-log
