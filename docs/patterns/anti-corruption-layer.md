@@ -3,15 +3,15 @@ title: "Padrão de Camada Anticorrupção"
 description: Implemente uma camada de fachada ou adaptador entre um aplicativo moderno e um sistema herdado.
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: 590d5f3676c92f5f18661360106e2b2fdd4efbe1
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: e41f080abbef772596ee7f8b10ad72bb03a3b829
+ms.sourcegitcommit: c93f1b210b3deff17cc969fb66133bc6399cfd10
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/05/2018
 ---
 # <a name="anti-corruption-layer-pattern"></a>Padrão de Camada Anticorrupção
 
-Implemente uma camada de fachada ou de adaptador entre um aplicativo moderno e um sistema herdado do qual ele depende. Essa camada converte solicitações entre o aplicativo moderno e o sistema herdado. Use esse padrão para garantir que o design do aplicativo não seja limitado por dependências em sistemas herdados.
+Implemente uma camada de fachada ou de adaptador entre um aplicativo moderno e um sistema herdado do qual ele depende. Essa camada converte solicitações entre o aplicativo moderno e o sistema herdado. Use esse padrão para garantir que o design do aplicativo não seja limitado por dependências em sistemas herdados. Esse padrão foi descrito pela primeira vez por Eric Evans em *Design orientado ao domínio*.
 
 ## <a name="context-and-problem"></a>Contexto e problema
 

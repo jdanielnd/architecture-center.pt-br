@@ -2,15 +2,15 @@
 title: "Estilo de arquitetura de microsserviços"
 description: "Descreve benefícios, desafios e melhores práticas para arquiteturas de N camadas no Azure"
 author: MikeWasson
-ms.openlocfilehash: 6426b3342a319832baf5eec35e9c783ba9348bdd
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 08fd39b6cf0b3c88af654b27e21b2d7dd9fb19b1
+ms.sourcegitcommit: 7764a804f000180c37a4f8dbab946b525f784f58
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/09/2018
 ---
 # <a name="microservices-architecture-style"></a>Estilo de arquitetura de microsserviços
 
-Uma arquitetura de microsserviços consiste em uma coleção de pequenos serviços autônomos. Cada serviço é independente e deve implementar uma única funcionalidade comercial. 
+Uma arquitetura de microsserviços consiste em uma coleção de pequenos serviços autônomos. Cada serviço é independente e deve implementar uma única funcionalidade comercial. Para obter orientações detalhadas sobre como criar uma arquitetura de microsserviços no Azure, consulte [Projetar, criar e operar microsserviços no Azure](../../microservices/index.md).
 
 ![](./images/microservices-logical.svg)
  
@@ -44,7 +44,7 @@ As vantagens de usar um gateway de API incluem:
 
 - O Gateway de API pode executar outras funções abrangentes, como autenticação, registro em log, terminação SSL e balanceamento de carga.
 
-## <a name="when-to-use-this-architecture"></a>Quando usar esta arquitetura
+## <a name="when-to-use-this-architecture"></a>Quando usar essa arquitetura
 
 Considere esse estilo de arquitetura para:
 
@@ -111,7 +111,7 @@ Considere esse estilo de arquitetura para:
 
 ## <a name="microservices-using-azure-container-service"></a>Microsserviços usando o Serviço de Contêiner do Azure 
 
-Você pode usar o Serviço de Contêiner do Azure para configurar e provisionar um cluster do Docker. Os Serviços de Contêiner do Azure dão suporte a vários orquestradores de contêiner populares, incluindo Kubernetes, DC/SO e Docker Swarm.
+Você pode usar o [Serviço de Contêiner do Azure](/azure/container-service/) para configurar e provisionar um cluster do Docker. Os Serviços de Contêiner do Azure dão suporte a vários orquestradores de contêiner populares, incluindo Kubernetes, DC/SO e Docker Swarm.
 
 ![](./images/microservices-acs.png)
  
@@ -133,11 +133,11 @@ O diagrama a seguir mostra três nós executando quatro serviços diferentes (in
 
 ## <a name="microservices-using-azure-service-fabric"></a>Microsserviços usando o Azure Service Fabric
 
-O diagrama a seguir mostra uma arquitetura de microsserviços usando o Azure Service Fabric.
+O diagrama a seguir mostra uma arquitetura de microsserviços usando o [Azure Service Fabric](/azure/service-fabric/).
 
 ![](./images/service-fabric.png)
 
-O Cluster do Service Fabric é implantado em um ou mais conjuntos de dimensionamento de VM. Você pode ter mais de um conjunto de dimensionamento de VM definido no cluster para ter uma combinação de tipos de VM. Um Gateway de API é colocado na frente do cluster do Service Fabric, com um balanceador externo de carga para receber solicitações do cliente.
+O cluster do Service Fabric é implantado em um ou mais conjuntos de dimensionamento de VMs. Você pode ter mais de um conjunto de dimensionamento de VM definido no cluster para ter uma combinação de tipos de VM. Um Gateway de API é colocado na frente do cluster do Service Fabric, com um balanceador externo de carga para receber solicitações do cliente.
 
 O tempo de execução do Service Fabric realiza o gerenciamento de cluster, incluindo posicionamento do serviço, failover de nó e monitoramento de integridade. O tempo de execução é implantado nos próprios nós de cluster. Não há um conjunto separado de VMs de gerenciamento de cluster.
 

@@ -4,11 +4,11 @@ description: Diretrizes sobre caching para melhorar o desempenho e a escalabilid
 author: dragon119
 ms.date: 05/24/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: f8bc25ef10847e8308e830b745e87a176438d200
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 7968c1578dfef2c7ad28576b9aafbbe2b6672cd9
+ms.sourcegitcommit: 3d6dba524cc7661740bdbaf43870de7728d60a01
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/11/2018
 ---
 # <a name="caching"></a>Cache
 
@@ -185,23 +185,13 @@ Se for necessário restringir o acesso a subconjuntos dos dados armazenados em c
 Você também deve proteger os dados conforme eles entram e saem do cache. Para fazer isso, você depende dos recursos de segurança fornecidos pela infraestrutura de rede usada pelos aplicativos cliente para se conectarem ao cache. Se o cache for implementado usando um servidor local dentro da mesma organização que hospeda os aplicativos cliente, pode ser que o isolamento da rede em si não exija etapas adicionais. Se o cache estiver localizado remotamente e exigir uma conexão TCP ou HTTP por uma rede pública (como a Internet), considere a possibilidade de implementar SSL.
 
 ## <a name="considerations-for-implementing-caching-with-microsoft-azure"></a>Considerações sobre como implementar caching com o Microsoft Azure
-O Azure fornece o Cache Redis do Azure. Isso é uma implementação do cache Redis, que é um software livre, executado como um serviço em um datacenter do Azure. Ele fornece um serviço de cache que pode ser acessado de qualquer aplicativo do Azure, seja o aplicativo implementado como um serviço de nuvem, um site, ou dentro de uma máquina virtual do Azure. Os caches podem ser compartilhados por aplicativos cliente que têm a chave de acesso apropriada.
+
+O [Cache Redis do Azure](/azure/redis-cache/) é uma implementação do cache Redis de código aberto que é executado como um serviço em um datacenter do Azure. Ele fornece um serviço de cache que pode ser acessado de qualquer aplicativo do Azure, seja o aplicativo implementado como um serviço de nuvem, um site, ou dentro de uma máquina virtual do Azure. Os caches podem ser compartilhados por aplicativos cliente que têm a chave de acesso apropriada.
 
 O Cache Redis do Azure é uma solução de caching de alto desempenho que oferece disponibilidade, escalabilidade e segurança. Normalmente, ele é executado como um serviço espalhado por um ou mais computadores dedicados. Ele tenta armazenar tanta informação quanto possível na memória para garantir o acesso rápido. Essa arquitetura destina-se a oferecer baixa latência e alta taxa de transferência, reduzindo a necessidade de executar operações de E/S lentas.
 
  O Cache Redis do Azure é compatível com muitas das várias APIs usadas por aplicativos cliente. Se você tem aplicativos que já usam o Cache Redis do Azure em execução localmente, o Cache Redis do Azure oferece um caminho de migração rápido para o caching na nuvem.
 
-> [!NOTE]
-> O Azure também fornece o Serviço de Cache Gerenciado. Esse serviço é baseado no mecanismo de Cache do Azure Service Fabric. Ele permite que você crie um cache distribuído que pode ser compartilhado por aplicativos vagamente vinculados. O cache é hospedado em servidores de alto desempenho em execução em um datacenter do Azure.
-> No entanto, essa opção não é mais recomendada e é fornecida apenas para oferecer suporte a aplicativos existentes que foram criados para usá-la. Para todos os novos desenvolvimentos, use o Cache Redis do Azure.
-> 
-> Além disso, o Azure oferece suporte a cache na função. Esse recurso permite que você crie um cache específico para um serviço de nuvem.
-> O cache é hospedado por instâncias de uma função Web ou de trabalho, e só pode ser acessado por funções que operam como parte da mesma unidade de implantação de serviço de nuvem. (Uma unidade de implantação é o conjunto de instâncias de função implantadas como um serviço de nuvem em uma região específica). O cache é clusterizado, e todas as instâncias da função dentro da mesma unidade de implantação que hospeda o cache tornam-se parte do mesmo cluster de cache. No entanto, essa opção não é mais recomendada e é fornecida apenas para oferecer suporte a aplicativos existentes que foram criados para usá-la. Para todos os novos desenvolvimentos, use o Cache Redis do Azure.
-> 
-> O Serviço de Cache Gerenciado do Azure e o Cache na Função do Azure estão atualmente programados para desativação em 16 de novembro de 2016.
-> Recomendamos que você migre para o Cache Redis do Azure antes da baixa. Para saber mais, veja [O que é a oferta de Cache Redis do Azure e qual tamanho devo usar?](/azure/redis-cache/cache-faq#what-redis-cache-offering-and-size-should-i-use).
-> 
-> 
 
 ### <a name="features-of-redis"></a>Recursos do Redis
  O Redis é mais do que um simples servidor de cache. Ele fornece um banco de dados distribuído na memória com um conjunto abrangente de comandos que oferece suporte a vários cenários comuns. Eles serão descritos posteriormente neste documento, na seção Como usar o caching Redis. Essa seção resume alguns dos principais recursos oferecidos pelo Redis.

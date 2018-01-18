@@ -3,11 +3,11 @@ title: "Identificando limites de microsserviço"
 description: "Identificando limites de microsserviço"
 author: MikeWasson
 ms.date: 12/08/2017
-ms.openlocfilehash: 046749191bd565813218b3834cb4674c4c5100e2
-ms.sourcegitcommit: a8453c4bc7c870fa1a12bb3c02e3b310db87530c
+ms.openlocfilehash: e4f11da9f970724c55ad99824f808a10c4558971
+ms.sourcegitcommit: 744ad1381e01bbda6a1a7eff4b25e1a337385553
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/29/2017
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="designing-microservices-identifying-microservice-boundaries"></a>Criando microsserviços: identificando limites de microsserviço
 
@@ -116,7 +116,7 @@ Aqui estão alguns fatores a considerar ao escolher entre uma abordagem de orque
 
 **Portabilidade**. Todos os orquestradores listados aqui (Kubernetes, DC/OS, Docker Swarm e Service Fabric) podem ser executados localmente ou em várias nuvens publicas. 
 
-**Integração de aplicativos**. Pode ser um desafio criar um aplicativo complexo usando uma arquitetura sem servidor. Uma opção no Azure é usar [Aplicativos Lógicos do Azure](/azure/logic-apps/) para coordenar um conjunto do Azure Functions. Para um exemplo dessa abordagem, consulte [Criar uma função que se integre aos Aplicativos Lógicos do Azure](/azure/azure-functions/functions-twitter-email.)
+**Integração de aplicativos**. Pode ser um desafio criar um aplicativo complexo usando uma arquitetura sem servidor. Uma opção no Azure é usar [Aplicativos Lógicos do Azure](/azure/logic-apps/) para coordenar um conjunto do Azure Functions. Para um exemplo dessa abordagem, consulte [Criar uma função que se integre aos Aplicativos Lógicos do Azure](/azure/azure-functions/functions-twitter-email).
 
 **Custo**. Com um orquestrador, você paga pelas VMs em execução no cluster. Com um aplicativo sem servidor, você paga apenas pelos recursos de computação real consumidos. Em ambos os casos, você precisa considerar o custo dos serviços adicionais, como armazenamento, bancos de dados e serviços de mensagens.
 

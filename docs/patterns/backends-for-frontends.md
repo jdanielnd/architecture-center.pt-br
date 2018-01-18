@@ -3,15 +3,15 @@ title: "Padrão de back-ends para front-ends"
 description: "Crie serviços de back-end separados a serem consumidos por aplicativos de front-end específico ou interfaces."
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: dd71b65e99ae21dff1443f5728ae5f0f54f8122c
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 87acd39d021c5e44594a2e7c9574e4dd363ce83b
+ms.sourcegitcommit: c93f1b210b3deff17cc969fb66133bc6399cfd10
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/05/2018
 ---
 # <a name="backends-for-frontends-pattern"></a>Padrão de back-ends para front-ends
 
-Crie serviços de back-end separados a serem consumidos por aplicativos de front-end específico ou interfaces. Esse padrão é útil quando você deseja evitar a personalização de um único back-end para várias interfaces.
+Crie serviços de back-end separados a serem consumidos por aplicativos de front-end específico ou interfaces. Esse padrão é útil quando você deseja evitar a personalização de um único back-end para várias interfaces. Esse padrão foi descrito pela primeira vez por Sam Newman.
 
 ## <a name="context-and-problem"></a>Contexto e problema
 
@@ -32,6 +32,8 @@ Crie um back-end por interface do usuário. Ajuste o comportamento e o desempenh
 ![](./_images/backend-for-frontend-example.png) 
 
 Como cada back-end é específico para uma interface, ele pode ser otimizado para essa interface. Como resultado, ele será menor, menos complexo e provavelmente mais rápido do que um back-end genérico que tenta satisfazer os requisitos de todas as interfaces. Cada equipe da interface tem autonomia para controlar seu próprio back-end e não depende de uma equipe centralizada de desenvolvimento de back-end. Isso dá flexibilidade à equipe da interface quanto à seleção da linguagem, cadência da versão, priorização de carga de trabalho e integração de recursos no back-end.
+
+Para obter mais informações, consulte [Padrão: back-ends para front-ends](http://samnewman.io/patterns/architectural/bff/).
 
 ## <a name="issues-and-considerations"></a>Problemas e considerações
 
