@@ -17,12 +17,14 @@
 - name: Arquiteturas de referência
   href: reference-architectures/index.md
   items:
+    - name: Aplicativos Web do Serviço de Aplicativo
+      href: reference-architectures/app-service-web-app/index.md
+    - name: Redes híbridas
+      href: reference-architectures/hybrid-networking/index.md
     - name: Gerenciamento de identidades
       href: reference-architectures/identity/index.md
-    - name: Rede híbrida
-      href: reference-architectures/hybrid-networking/index.md
-    - name: Aplicativo Web do Serviço de Aplicativo
-      href: reference-architectures/app-service-web-app/index.md
+    - name: Servidor Jenkins
+      href: reference-architectures/jenkins/index.md
     - name: DMZ da Rede
       href: reference-architectures/dmz/index.md
     - name: SAP NetWeaver e SAP HANA
@@ -115,7 +117,7 @@
       href: resiliency/failure-mode-analysis.md
 - name: Guias do cenário
   items:
-    - name: Azure para Profissionais do AWS
+    - name: Azure para profissionais do AWS
       href: aws-professional/index.md
     - name: Gerenciar a identidade em aplicativos multilocatários
       href: multitenant-identity/index.md
