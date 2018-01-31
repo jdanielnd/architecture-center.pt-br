@@ -5,11 +5,11 @@ keywords: "Especialistas em AWS, comparação com o Azure, comparação com o AW
 author: lbrader
 ms.date: 03/24/2017
 pnp.series.title: Azure for AWS Professionals
-ms.openlocfilehash: ac96110e3fe69b4bb69714e18fd0f193208bc244
-ms.sourcegitcommit: 744ad1381e01bbda6a1a7eff4b25e1a337385553
+ms.openlocfilehash: e5f7cb5062b0b4a8526f3b29a9fa4ddaff399fc0
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2018
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="azure-for-aws-professionals"></a>Azure para profissionais do AWS
 
@@ -311,7 +311,7 @@ Os custos de RDS do AWS são determinados pela quantidade de recursos de hardwar
 
 -   [Configurar a replicação geográfica para o Banco de Dados SQL do Azure com o portal do Azure](https://azure.microsoft.com/documentation/articles/sql-database-geo-replication-portal/)
 
--   [Introdução ao Cosmos DB: um banco de dados JSON NoSQL](https://azure.microsoft.com/documentation/articles/documentdb-introduction/)
+-   [Introdução ao Cosmos DB: um banco de dados JSON NoSQL](/azure/cosmos-db/sql-api-introduction)
 
 -   [Como usar o armazenamento de Tabela do Azure com Node.js](https://azure.microsoft.com/documentation/articles/storage-nodejs-how-to-use-table-storage/)
 
