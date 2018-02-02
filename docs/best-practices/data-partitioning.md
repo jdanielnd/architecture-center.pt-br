@@ -4,14 +4,13 @@ description: "Instruções de como separar partições a serem gerenciadas e ace
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: c139fd1ef59ea94235cd9519dd064d0722cee3c9
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: aa59a99ae87328424379e1f9c6fee8cc5887e61c
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="data-partitioning"></a>Particionamento de dados
-[!INCLUDE [header](../_includes/header.md)]
 
 Em muitas soluções de grande escala, os dados são divididos em partições separadas que podem ser gerenciadas e acessadas separadamente. A estratégia de particionamento deve ser cuidadosamente escolhida para maximizar os benefícios, ao mesmo tempo que minimiza os efeitos adversos. O particionamento pode ajudar a aprimorar o dimensionamento, a reduzir a contenção e a otimizar o desempenho. Outro benefício do particionamento é que ele pode fornecer um mecanismo para dividir dados pelo padrão de uso. Por exemplo, você pode arquivar dados antigos e menos ativos (passivos) em armazenamento de dados mais barato.
 
@@ -360,44 +359,31 @@ Considere os seguintes pontos ao decidir se ou como particionar uma fila ou um t
 * As filas e os tópicos particionados não podem ser configurados para serem excluídos automaticamente quando se tornam ociosos.
 * Atualmente, as filas e os tópicos particionados não podem ser usados com o AMQP (Advanced Message Queuing Protocol) se você estiver criando soluções híbridas ou entre plataformas.
 
-## <a name="partitioning-strategies-for-documentdb-api"></a>Estratégias de particionamento para a API do DocumentDB
-O Azure Cosmos DB é um banco de dados NoSQL pode armazenar documentos usando a [API do DocumentDB][documentdb-api]. Um documento no banco de dados do Cosmos DB é uma representação serializada pelo JSON de um objeto ou outro dado. Nenhum esquema fixo é imposto, exceto pelo fato de que cada documento deve conter uma ID exclusiva.
+## <a name="partitioning-strategies-for-cosmos-db"></a>Estratégias de particionamento para o Cosmos DB
+
+O Azure Cosmos DB é um banco de dados NoSQL pode armazenar documentos JSON usando a [API de SQL do Azure Cosmos DB][cosmosdb-sql-api]. Um documento no banco de dados do Cosmos DB é uma representação serializada pelo JSON de um objeto ou outro dado. Nenhum esquema fixo é imposto, exceto pelo fato de que cada documento deve conter uma ID exclusiva.
 
 Os documentos são organizados em coleções. Você pode agrupar documentos relacionados em uma coleção. Por exemplo, em um sistema que mantém postagens de blog, você pode armazenar o conteúdo de cada postagem de blog como um documento em uma coleção. Também é possível criar coleções para cada tipo de assunto. Como alternativa, em um aplicativo multilocatário, como um sistema em que diferentes autores controlam e gerenciam suas postagens de blog, você pode particionar os blogs por autor e criar coleções separadas para cada um deles. O espaço de armazenamento que é alocado às coleções é flexível e pode diminuir ou aumentar conforme necessário.
 
-As coleções de documentos fornecem um mecanismo natural para particionar dados em um banco de dados individual. Internamente, um banco de dados do Cosmos DB pode abranger vários servidores e pode tentar distribuir a carga com a distribuição de coleções entre servidores. A maneira mais simples de implementar a fragmentação é criar uma coleção para cada fragmento.
+O Cosmos DB suporta o particionamento automático de dados baseados numa chave de partição definida pelo aplicativo. Uma *partição lógica* é uma partição que armazena todos os dados para um valor de chave de partição única. Todos os documentos que compartilham o mesmo valor para a chave de partição são colocados na mesma partição lógica. O Cosmos DB distribui valores de acordo com o hash da chave de partição. Uma partição lógica tem um tamanho máximo de 10 GB. Portanto, a escolha da chave de partição é uma decisão importante no momento do design. Escolha uma propriedade com um amplo intervalo de valores e padrões de acesso regular. Para obter mais informações, veja [Partição e redução horizontal no Azure Cosmos DB](/azure/cosmos-db/partition-data).
 
 > [!NOTE]
-> Cada banco de dados do Cosmos DB tem um *nível de desempenho* que determina a quantidade de recursos que ele obtém. Um nível de desempenho é associado a um limite de taxa da *unidade de solicitação* (RU). O limite de taxa da RU especifica o volume de recursos que é reservado e disponibilizado para uso exclusivo dessa coleção. O custo de uma coleção depende do nível de desempenho que é selecionado para a coleção. Quanto maior o nível de desempenho (e o limite de taxa da RU), maior o custo. É possível ajustar o nível de desempenho de uma coleção usando o portal do Azure. Para saber mais, veja a página [Níveis de desempenho no Cosmos DB] no site da Microsoft.
+> Cada banco de dados do Cosmos DB tem um *nível de desempenho* que determina a quantidade de recursos que ele obtém. Um nível de desempenho é associado a um limite de taxa da *unidade de solicitação* (RU). O limite de taxa da RU especifica o volume de recursos que é reservado e disponibilizado para uso exclusivo dessa coleção. O custo de uma coleção depende do nível de desempenho que é selecionado para a coleção. Quanto maior o nível de desempenho (e o limite de taxa da RU), maior o custo. É possível ajustar o nível de desempenho de uma coleção usando o portal do Azure. Para obter mais informações, confira [Unidades de Solicitação no Azure Cosmos DB][cosmos-db-ru].
 >
 >
+
+Se o mecanismo de particionamento que o Cosmos DB fornece não for suficiente, pode precisar de fragmentar os dados ao nível do aplicativo. As coleções de documentos fornecem um mecanismo natural para particionar dados em um banco de dados individual. A maneira mais simples de implementar a fragmentação é criar uma coleção para cada fragmento. Os contêineres são recursos lógicos e podem abranger um ou mais servidores. Contêineres de tamanho fixo têm um limite máximo de 10 GB e taxa de transferência de 10.000 RU/s. Os contêineres ilimitados não têm um tamanho de armazenamento máximo, mas têm que especificar uma chave de partição. Com a fragmentação do aplicativo, o aplicativo cliente deve direcionar as solicitações ao fragmento adequado, normalmente pela implementação do seu próprio mecanismo de mapeamento com base em alguns atributos dos dados que definem a chave de fragmento. 
 
 Todos os bancos de dados são criados no contexto de uma conta de banco de dados do Cosmos DB. Uma única conta pode conter vários bancos de dados e especifica em qual região os bancos de dados são criados. Cada conta também impõe seu próprio controle de acesso. Você pode usar contas do Cosmos DB para localizar os fragmentos geograficamente (coleções nos bancos de dados) próximos aos usuários que precisam acessá-los e impor restrições para que somente esses usuários possam se conectar a eles.
 
-Cada conta do Cosmos DB tem uma cota que limita o número de bancos de dados e coleções que ela pode conter e a quantidade de armazenamento de documentos que é disponibilizada. Para saber mais, confira [Assinatura e limites de serviço, cotas e restrições do Azure][azure-limits]. É teoricamente possível que, se você implementar um sistema em que todos os fragmentos pertençam ao mesmo banco de dados, você atinja o limite de capacidade de armazenamento da conta.
+Considere os seguintes pontos ao decidir como particionar dados com a API do SQL do Cosmos DB:
 
-Nesse caso, talvez seja necessário criar contas e bancos de dados adicionais e distribuir os fragmentos entre esses bancos de dados. No entanto, mesmo que seja improvável atingir a capacidade de armazenamento do banco de dados, é uma boa prática usar vários bancos de dados. Isso porque cada banco de dados tem seu próprio conjunto de usuários e permissões, e você pode usar esse mecanismo para isolar o acesso a coleções por banco de dados.
-
-A Figura 8 ilustra a estrutura de alto nível da arquitetura da API do DocumentDB.
-
-![A estrutura da arquitetura de da API do DocumentDB](./images/data-partitioning/DocumentDBStructure.png)
-
-*Figura 8.  A estrutura da arquitetura da API do DocumentDB*
-
-É tarefa do aplicativo cliente direcionar as solicitações ao fragmento adequado, normalmente pela implementação do seu próprio mecanismo de mapeamento com base em alguns atributos dos dados que definem a chave de fragmento. A Figura 9 mostra dois bancos de dados da API do DocumentDB; cada um deles contendo duas coleções que estão atuando como fragmentos. Os dados são fragmentados por ID de locatário e contêm os dados de um locatário específico. Os bancos de dados são criados em contas separadas do Cosmos DB. Essas contas estão localizadas na mesma região que os locatários para os quais elas contêm dados. A lógica de roteamento no aplicativo cliente usa a ID do locatário como a chave de fragmento.
-
-![Implementação da fragmentação usando a API do DocumentDB](./images/data-partitioning/DocumentDBPartitions.png)
-
-*Figura 9. Implementação da fragmentação usando a API DocumentDB*
-
-Considere os seguintes pontos ao decidir como particionar dados com um banco de dados da API do DocumentDB:
-
-* **Os recursos disponíveis para um banco de dados da API do DocumentDB estão sujeitos às limitações de cota da conta**. Cada banco de dados pode conter um número de coleções (lembrando que há um limite) e cada coleção é associada a um nível de desempenho que rege o limite de taxa da RU (produtividade reservada) para essa coleção. Para saber mais, confira [Assinatura e limites de serviço, cotas e restrições do Azure].
+* **Os recursos disponíveis para um banco de dados do Cosmos DB estão sujeitos às limitações de cota da conta**. Cada banco de dados pode conter um número de coleções e cada coleção é associada a um nível de desempenho que rege o limite de taxa da RU (produtividade reservada) para essa coleção. Para saber mais, confira [Assinatura e limites de serviço, cotas e restrições do Azure][azure-limits].
 * **Cada documento deve ter um atributo que pode ser usado para identificar exclusivamente o documento dentro da coleção na qual ele é mantido**. Esse atributo é diferente da chave de fragmento, que define qual coleção mantém o documento. Uma coleção pode conter um grande número de documentos. Teoricamente, ela é limitada apenas pelo tamanho máximo da ID do documento. A ID do documento pode ter até 255 caracteres.
 * **Todas as operações em um documento são realizadas dentro do contexto de uma transação. As transações estão no escopo da coleção em que o documento está contido.** Se uma operação falhar, o trabalho realizado será revertido. Quando um documento está sujeito a uma operação, todas as alterações feitas estão sujeitas ao isolamento no nível do instantâneo. Esse mecanismo garante que se, por exemplo, houver uma falha em uma solicitação para a criação de um novo documento, outro usuário que estiver consultando o banco de dados simultaneamente não verá um documento parcial que será então removido.
 * **As consultas do banco de dados também estão dentro do escopo do nível da coleção**. Uma única consulta pode recuperar dados somente de uma coleção. Se precisar recuperar dados de várias coleções, você deverá consultar cada coleção individualmente e mesclar os resultados no código do aplicativo.
-* **Os bancos de dados da API do DocumentDB dão suporte aos itens programáveis que podem ser armazenados em uma coleção com os documentos**. Isso inclui procedimentos armazenados, funções definidas pelo usuário e gatilhos (escritos em JavaScript). Esses itens podem acessar qualquer documento na mesma coleção. Além disso, esses itens são executados dentro do escopo da transação de ambiente (no caso de um gatilho que é acionado como resultado de uma operação de criação, exclusão ou substituição executada em um documento) ou por iniciar uma nova transação (no caso de um procedimento armazenado executado como resultado de uma solicitação de cliente explícita). Se o código em um item programável lançar uma exceção, a transação será revertida. Você pode usar procedimentos armazenados e gatilhos para manter a integridade e a consistência entre documentos, mas esses documentos devem fazer parte da mesma coleção.
-* **Provavelmente, as coleções que você pretende manter nos bancos de dados não excederão os limites de taxa de transferência definidos pelos níveis de desempenho das coleções**. Para saber mais, veja [Unidades de Solicitação no Azure Cosmos DB][cosmos-db-ru]. Se você prevê que esses limites serão atingidos, considere dividir as coleções em bancos de dados em diferentes contas para reduzir a carga por coleção.
+* **O Cosmos DB oferece suporte aos itens programáveis que podem ser armazenados em uma coleção com os documentos**. Isso inclui procedimentos armazenados, funções definidas pelo usuário e gatilhos (escritos em JavaScript). Esses itens podem acessar qualquer documento na mesma coleção. Além disso, esses itens são executados dentro do escopo da transação de ambiente (no caso de um gatilho que é acionado como resultado de uma operação de criação, exclusão ou substituição executada em um documento) ou por iniciar uma nova transação (no caso de um procedimento armazenado executado como resultado de uma solicitação de cliente explícita). Se o código em um item programável lançar uma exceção, a transação será revertida. Você pode usar procedimentos armazenados e gatilhos para manter a integridade e a consistência entre documentos, mas esses documentos devem fazer parte da mesma coleção.
+* **Provavelmente, as coleções que você pretende manter nos bancos de dados não excederão os limites de taxa de transferência definidos pelos níveis de desempenho das coleções**. Para obter mais informações, confira [Unidades de Solicitação no Azure Cosmos DB][cosmos-db-ru]. Se você prevê que esses limites serão atingidos, considere dividir as coleções em bancos de dados em diferentes contas para reduzir a carga por coleção.
 
 ## <a name="partitioning-strategies-for-azure-search"></a>Estratégias de particionamento para o Azure Search
 A capacidade de pesquisar dados geralmente é o principal método de navegação e exploração fornecido por muitos aplicativos Web. Ela ajuda os usuários a encontrar recursos rapidamente (por exemplo, produtos em um aplicativo de comércio eletrônico) com base em combinações de critérios de pesquisa. O serviço de Azure Search fornece recursos de pesquisa de texto completo em relação ao conteúdo da Web e inclui recursos como consultas recomendadas de preenchimento automático com base em correspondências aproximadas e na navegação facetada. Uma descrição completa desses recursos está disponível na página [O que é o Azure Search?] no site da Microsoft.
@@ -454,11 +440,11 @@ Considere os seguintes pontos ao decidir como particionar dados com o Cache Redi
   * Tipos de agregação, como listas (que podem atuar como filas e pilhas)
   * Conjuntos (ordenados e não ordenados)
   * Hashes (que podem agrupar campos relacionados, como os itens que representam os campos em um objeto)
-* Os tipos de agregação permitem associar vários valores relacionados com a mesma chave. Uma chave do Redis identifica uma lista, um conjunto ou um hash em vez de itens de dados que ela contém. Esses tipos estão disponíveis com o Cache Redis do Azure e são descritos na página [Data types] no site do Redis. Por exemplo, em uma parte de um sistema de comércio eletrônico que rastreia os pedidos que são feitos pelos clientes, os detalhes de cada cliente podem ser armazenados em um hash do Redis que é digitado usando a ID do cliente. Cada hash pode manter uma coleção de IDs de pedido do cliente. Um conjunto separado do Redis pode manter os pedidos, novamente estruturados como hashes, e digitados com o uso da ID de pedido. A Figura 10 mostra essa estrutura. Observe que o Redis não implementa nenhuma forma de integridade referencial; portanto, é responsabilidade do desenvolvedor manter os relacionamentos entre clientes e pedidos.
+* Os tipos de agregação permitem associar vários valores relacionados com a mesma chave. Uma chave do Redis identifica uma lista, um conjunto ou um hash em vez de itens de dados que ela contém. Esses tipos estão disponíveis com o Cache Redis do Azure e são descritos na página [Data types] no site do Redis. Por exemplo, em uma parte de um sistema de comércio eletrônico que rastreia os pedidos que são feitos pelos clientes, os detalhes de cada cliente podem ser armazenados em um hash do Redis que é digitado usando a ID do cliente. Cada hash pode manter uma coleção de IDs de pedido do cliente. Um conjunto separado do Redis pode manter os pedidos, novamente estruturados como hashes, e digitados com o uso da ID de pedido. A Figura 8 mostra essa estrutura. Observe que o Redis não implementa nenhuma forma de integridade referencial; portanto, é responsabilidade do desenvolvedor manter os relacionamentos entre clientes e pedidos.
 
 ![Estrutura recomendada no armazenamento do Redis para registrar pedidos de clientes e seus detalhes](./images/data-partitioning/RedisCustomersandOrders.png)
 
-*Figura 10. Estrutura recomendada no armazenamento do Redis para registrar pedidos de clientes e seus detalhes*
+*Figura 8. Estrutura recomendada no armazenamento do Redis para registrar pedidos de clientes e seus detalhes*
 
 > [!NOTE]
 > No Redis, todas as chaves são valores de dados binários (como cadeias de caracteres do Redis) e podem conter até 512 MB de dados. Teoricamente, uma chave pode conter quase todo tipo de informação. No entanto, é recomendável adotar uma convenção de nomenclatura consistente para chaves que descrevam o tipo de dados e identifiquem a entidade, mas que não seja excessivamente longa. Uma abordagem comum é usar chaves na forma "entity_type: ID". Por exemplo, você pode usar "customer:99" para indicar a chave de um cliente com a ID 99.
@@ -552,28 +538,28 @@ Ao considerar estratégias para implementar a consistência de dados, os seguint
 * A página [Metas de desempenho e escalabilidade do Armazenamento do Azure](https://msdn.microsoft.com/library/azure/dn249410.aspx) , no site da Microsoft, documenta os limites atuais de tamanho e taxa de transferência do Armazenamento do Azure.
 * A página [Performing entity group transactions] , no site da Microsoft, fornece informações detalhadas sobre como implementar operações transacionais nas entidades que são armazenadas no armazenamento de tabelas do Azure.
 * O artigo [Guia de Design de tabela de armazenamento do Azure] , no site da Microsoft, contém informações detalhadas sobre como particionar dados no armazenamento de tabelas do Azure.
-* A página [Uso da Rede de Distribuição de Conteúdo do Azure] , no site da Microsoft, descreve como replicar os dados que são mantidos no armazenamento de blobs do Azure usando a Rede de Distribuição de Conteúdo do Azure.
+* A página [Uso da Rede de Distribuição de Conteúdo do Azure], no site da Microsoft, descreve como replicar os dados que são mantidos no armazenamento de blobs do Azure usando a Rede de Distribuição de Conteúdo do Azure.
 * A página [O que é o Azure Search?] , no site da Microsoft, fornece uma descrição completa dos recursos que estão disponíveis com o Azure Search.
 * A página [Limites de serviço no Azure Search] , no site da Microsoft, contém informações sobre a capacidade de cada instância do Azure Search.
 * A página [Supported data types (Azure Search)] , no site da Microsoft, resume os tipos de dados que podem ser usados em documentos e índices pesquisáveis.
 * A página [Cache Redis do Azure] , no site da Microsoft, fornece uma introdução ao Cache Redis do Azure.
 * A página [Partitioning: how to split data among multiple Redis instances] , no site do Redis, fornece informações sobre como implementar o particionamento com o Redis.
 * A página [Running Redis on a CentOS Linux VM in Azure] , no site da Microsoft, explica um exemplo que mostra como criar e configurar um nó do Redis em execução como uma VM do Azure.
-* A página [Data types] , no site do Redis, descreve os tipos de dados disponíveis com o Redis e o Cache Redis do Azure.
+* A página [Data types], no site do Redis, descreve os tipos de dados disponíveis com o Redis e o Cache Redis do Azure.
 
 [Disponibilidade e consistência nos Hubs de Eventos]: /azure/event-hubs/event-hubs-availability-and-consistency
-[azure-limits]: /azure/azure-subscription-service-limit
+[azure-limits]: /azure/azure-subscription-service-limits
 [Rede de Distribuição de Conteúdo do Azure]: /azure/cdn/cdn-overview
 [Cache Redis do Azure]: http://azure.microsoft.com/services/cache/
 [Azure Storage Scalability and Performance Targets]: /azure/storage/storage-scalability-targets
 [Azure Storage Table Design Guide]: /azure/storage/storage-table-design-guide
 [Criando uma solução Poliglota]: https://msdn.microsoft.com/library/dn313279.aspx
-[cosmos-db-ru]: /azure/documentdb/documentdb-request-units
+[cosmos-db-ru]: /azure/cosmos-db/request-units
 [Data Access for Highly-Scalable Solutions: Using SQL, NoSQL, and Polyglot Persistence]: https://msdn.microsoft.com/library/dn271399.aspx
 [Data Consistency Primer]: http://aka.ms/Data-Consistency-Primer
 [Data Partitioning Guidance]: https://msdn.microsoft.com/library/dn589795.aspx
 [Data Types]: http://redis.io/topics/data-types
-[documentdb-api]: /azure/documentdb/documentdb-introduction
+[cosmosdb-sql-api]: /azure/cosmos-db/sql-api-introduction
 [Visão geral dos recursos do Banco de Dados Elástico]: /azure/sql-database/sql-database-elastic-scale-introduction
 [event-hubs]: /azure/event-hubs
 [Federations Migration Utility]: https://code.msdn.microsoft.com/vstudio/Federations-Migration-ce61e9c1

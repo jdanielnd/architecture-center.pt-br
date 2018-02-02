@@ -1,21 +1,21 @@
 ---
-title: "Diretrizes da rede de distribuição de conteúdo"
+title: "Diretrizes da Rede de Distribuição de Conteúdo"
 description: "Diretriz na Rede de Distribuição de Conteúdo (CDN) para fornecer conteúdo de alta largura de banda hospedado no Azure."
 author: dragon119
 ms.date: 09/30/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 94036c803552d5e7061f99e6dd0ca9e563a32690
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: fffe0b0523c0a9c817f4346744ff3b5e3f11dede
+ms.sourcegitcommit: cf207fd10110f301f1e05f91eeb9f8dfca129164
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/29/2018
 ---
 # <a name="content-delivery-network"></a>Rede de Distribuição de Conteúdo
 [!INCLUDE [header](../_includes/header.md)]
 
-A CDN (Rede de Distribuição de Conteúdo) do Microsoft Azure oferece aos desenvolvedores uma solução global de fornecimento de conteúdo de alta largura de banda hospedada no Azure ou em qualquer outro local. Com a CDN, você pode armazenar em cache objetos publicamente disponíveis carregados do Armazenamento de Blobs do Azure, de um aplicativo Web, da máquina virtual, de uma pasta de aplicativo ou de outro local HTTP/HTTPS. O cache da CDN pode ser mantido em locais estratégicos para fornecer a máxima largura de banda para fornecimento de conteúdo aos usuários. A CDN normalmente é usada para fornecimento de conteúdo estático, como imagens, folhas de estilo, documentos, arquivos, scripts do lado do cliente e páginas HTML.
+A CDN [(Rede de Distribuição de Conteúdo)](/azure/cdn/cdn-overview) do Microsoft Azure oferece aos desenvolvedores uma solução global de fornecimento de conteúdo de alta largura de banda hospedada no Azure ou em qualquer outro local. Com a CDN, você pode armazenar em cache objetos publicamente disponíveis carregados do Armazenamento de Blobs do Azure, de um aplicativo Web, da máquina virtual, de uma pasta de aplicativo ou de outro local HTTP/HTTPS. O cache da CDN pode ser mantido em locais estratégicos para fornecer a máxima largura de banda para fornecimento de conteúdo aos usuários. A CDN normalmente é usada para fornecimento de conteúdo estático, como imagens, folhas de estilo, documentos, arquivos, scripts do lado do cliente e páginas HTML.
 
-Você também pode usar a CDN como um cache para servir conteúdo dinâmico, como um relatório em PDF ou um gráfico com base em entradas especificadas. Se os mesmos valores de entrada forem fornecidos por usuários diferentes, o resultado deverá ser o mesmo.
+Você também pode usar a CDN como um cache para servir conteúdo dinâmico, como um relatório em PDF ou um grafo com base em entradas especificadas. Se os mesmos valores de entrada forem fornecidos por usuários diferentes, o resultado deverá ser o mesmo.
 
 As principais vantagens de usar a CDN são latência mais baixa e fornecimento mais rápido de conteúdo aos usuários independentemente da localização geográfica em relação ao datacenter em que o aplicativo está hospedado.  
 
@@ -74,7 +74,7 @@ Os cenários onde o CDN pode ser menos útil incluem:
 Usar o CDN é uma boa maneira de reduzir a carga no seu aplicativo e maximizar a disponibilidade e o desempenho. Leve em consideração a adoção dessa estratégia para todos os recursos e conteúdos apropriados que o seu aplicativo usa. Considere os pontos nas seções a seguir ao projetar a sua estratégia para usar o CDN:  
 
 ### <a name="origin"></a>Origem
-Para implantar o conteúdo por meio da CDN, basta especificar um ponto de extremidade HTTP e/ou HTTPS que o serviço CDN usará para acessar e armazenar o conteúdo em cache.
+Para implantar o conteúdo por meio da CDN, basta especificar um [ponto de extremidade](/azure/cdn/cdn-create-new-endpoint) HTTP e/ou HTTPS que o serviço CDN usará para acessar e armazenar o conteúdo em cache.
 
 O ponto de extremidade pode especificar um contêiner de armazenamento de blobs do Azure com o conteúdo estático que você deseja enviar por meio da CDN. O contêiner deve ser marcado como público. Somente os blobs em um contêiner público que tem acesso público de leitura estão disponíveis por meio da CDN.
 
