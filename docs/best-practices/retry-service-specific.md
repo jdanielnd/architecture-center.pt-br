@@ -4,11 +4,11 @@ description: "Diretriz específica de serviço para configurar o mecanismo de re
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 0a416bc6297c7406de92fbc695b62c39c637de8f
-ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
+ms.openlocfilehash: da1145e2f2f91befd69505ae9ef2734d6110c1d0
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/02/2018
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="retry-guidance-for-specific-services"></a>Repetir as diretrizes para serviços específicos
 
@@ -26,11 +26,11 @@ A tabela a seguir resume os recursos de repetição para os serviços do Azure d
 | **[Banco de dados SQL com ADO.NET](#sql-database-using-adonet-retry-guidelines)** |[Polly](#transient-fault-handling-with-polly) |Programático e declarativo |Instruções ou blocos de código únicos |Personalizado |
 | **[Barramento de Serviço](#service-bus-retry-guidelines)** |Nativo no cliente |Programático |Gerenciador de Namespace, Messaging Factory e Cliente |ETW |
 | **[Cache Redis do Azure](#azure-redis-cache-retry-guidelines)** |Nativo no cliente |Programático |Cliente |TextWriter |
-| **[API do DocumentDB](#documentdb-api-retry-guidelines)** |Nativo no serviço |Não configurável |Global |TraceSource |
+| **[Cosmos DB](#cosmos-db-retry-guidelines)** |Nativo no serviço |Não configurável |Global |TraceSource |
 | **[Azure Search](#azure-storage-retry-guidelines)** |Nativo no cliente |Programático |Cliente |ETW ou Personalizado |
 | **[Azure Active Directory](#azure-active-directory-retry-guidelines)** |Nativo na biblioteca ADAL |Incorporado na biblioteca ADAL |Interna |Nenhum |
 | **[Service Fabric](#service-fabric-retry-guidelines)** |Nativo no cliente |Programático |Cliente |Nenhum | 
-| **[Hubs de eventos do Azure](#azure-event-hubs-retry-guidelines)** |Nativo no cliente |Programático |Cliente |Nenhum |
+| **[Hubs de Eventos do Azure](#azure-event-hubs-retry-guidelines)** |Nativo no cliente |Programático |Cliente |Nenhum |
 
 > [!NOTE]
 > Para a maioria dos mecanismos de repetição internos do Azure, atualmente não há meios de aplicar uma política de repetição diferente para diferentes tipos de erro ou exceção além da funcionalidade incluída na política de repetição. Portanto, a melhor diretriz disponível neste momento em que este documento está sendo escrito é configurar uma política que forneça uma média ideal de desempenho e disponibilidade. Uma maneira de ajustar a política é analisar arquivos de log para determinar o tipo de falha transitória que está ocorrendo. Por exemplo, se a maioria dos erros estiver relacionada aos problemas de conectividade de rede, você poderá tentar uma repetição imediata em vez de aguardar um longo período para a primeira repetição.
@@ -130,7 +130,7 @@ Considere as seguintes diretrizes ao acessar serviços de armazenamento do Azure
 * Se você precisar implementar uma repetição personalizada, evite criar wrappers em torno das classes do cliente de armazenamento. Em vez disso, use os recursos para estender as políticas existentes por meio da interface **IExtendedRetryPolicy** .
 * Se você estiver usando RA-GRS (armazenamento com redundância geográfica com acesso de leitura), será possível usar o **LocationMode** para especificar que as tentativas de repetição acessarão a cópia secundária somente leitura do repositório caso o acesso primário falhe. No entanto, ao usar essa opção, você deve garantir que seu aplicativo possa trabalhar perfeitamente com dados que talvez estejam obsoletos, se a replicação do repositório primário ainda não tiver sido concluída.
 
-Considere começar com as seguintes configurações para operações de repetição. Essas são configurações de finalidade geral, por isso, você deve monitorar as operações e ajustar os valores para que atendam ao seu cenário.  
+Considere começar com as seguintes configurações para operações de repetição. Essas são configurações de uso geral, por isso, você deve monitorar as operações e ajustar os valores para que atendam ao seu cenário.  
 
 | **Contexto** | **Exemplo de latênciaE2E<br />máxima de destino** | **Política de repetição** | **Configurações** | **Valores** | **Como funciona** |
 | --- | --- | --- | --- | --- | --- |
@@ -437,7 +437,7 @@ Considere as seguintes diretrizes ao acessar o Banco de Dados SQL usando o ADO.N
 * Quando o pool de conexões está em uso (o padrão), é provável que a mesma conexão seja escolhida no pool, mesmo depois de fechar e reabrir uma conexão. Se for esse o caso, uma técnica para resolver isso é chamar o método **ClearPool** da classe **SqlConnection** para marcar a conexão como não reutilizável. No entanto, isso deve ser feito somente depois que várias tentativas de conexão tiverem falhado, e somente ao encontrar a classe específica de falhas transitórias, como tempos limite de SQL (código de erro -2), relacionada às conexões com falha.
 * Se o código de acesso a dados usar transações iniciadas como instâncias **TransactionScope** , a lógica de repetição deverá reabrir a conexão e iniciar um novo escopo de transação. Por esse motivo, o bloco de código com nova tentativa deve englobar o escopo inteiro da transação.
 
-Considere começar com as seguintes configurações para operações de repetição. Essas são configurações de finalidade geral, por isso, você deve monitorar as operações e ajustar os valores para que atendam ao seu cenário.
+Considere começar com as seguintes configurações para operações de repetição. Essas são configurações de uso geral, por isso, você deve monitorar as operações e ajustar os valores para que atendam ao seu cenário.
 
 | **Contexto** | **Exemplo de latênciaE2E<br />máxima de destino** | **Estratégia de repetição** | **Configurações** | **Valores** | **Como funciona** |
 | --- | --- | --- | --- | --- | --- |
@@ -552,7 +552,7 @@ Considere as seguintes diretrizes ao usar o Barramento de Serviço:
 * Ao usar a implementação **RetryExponential** interna, não implemente uma operação de fallback, pois a política reage às exceções de Servidor Ocupado e alterna automaticamente para um modo de repetição apropriado.
 * O Barramento de Serviço oferece suporte a um recurso chamado Namespaces Emparelhados, que implementa failover automático para uma fila de backup em um namespace separado, caso a fila no namespace primário falhe. As mensagens da fila secundária podem ser enviadas de volta para a fila primária quando esta se recuperar. Esse recurso ajuda a corrigir falhas transitórias. Para saber mais, consulte [Padrões de mensagens assíncronas e alta disponibilidade](http://msdn.microsoft.com/library/azure/dn292562.aspx).
 
-Considere começar com as seguintes configurações para operações de repetição. Essas são configurações de finalidade geral, por isso, você deve monitorar as operações e ajustar os valores para que atendam ao seu cenário.
+Considere começar com as seguintes configurações para operações de repetição. Essas são configurações de uso geral, por isso, você deve monitorar as operações e ajustar os valores para que atendam ao seu cenário.
 
 | Contexto | Exemplo de latência máxima | Política de repetição | Configurações | Como ele funciona |
 |---------|---------|---------|---------|---------|
@@ -707,7 +707,7 @@ var options = new ConfigurationOptions
 ConnectionMultiplexer redis = ConnectionMultiplexer.Connect(options, writer);
 ```
 
-Como alternativa, você pode especificar as opções como uma cadeia de caracteres e passá-la ao método **Connect** . Observe que a propriedade **ReconnectRetryPolicy** não pode ser definida dessa forma, somente através de código.
+Como alternativa, você pode especificar as opções como uma cadeia de caracteres e passá-la ao método **Connect**. Observe que a propriedade **ReconnectRetryPolicy** não pode ser definida dessa forma, somente através de código.
 
 ```csharp
     var options = "localhost,connectRetry=3,connectTimeout=2000";
@@ -858,9 +858,9 @@ Para obter mais exemplos, consulte [Configuração](http://github.com/StackExcha
 ### <a name="more-information"></a>Mais informações
 * [Site do Redis](http://redis.io/)
 
-## <a name="documentdb-api-retry-guidelines"></a>Diretrizes de repetição da API do DocumentDB
+## <a name="cosmos-db-retry-guidelines"></a>Diretrizes de repetição do Cosmos DB
 
-O Cosmos DB é um banco de dados multimodelo totalmente gerenciado que oferece suporte a dados JSON sem esquema usando a [API do DocumentDB][documentdb-api]. Ele oferece desempenho configurável e confiável, processamento transacional nativo JavaScript, além de ser criado para a nuvem com escala elástica.
+O Cosmos DB é um banco de dados multimodelo totalmente gerenciado que oferece suporte a dados JSON sem esquema. Ele oferece desempenho configurável e confiável, processamento transacional nativo JavaScript, além de ser criado para a nuvem com escala elástica.
 
 ### <a name="retry-mechanism"></a>Mecanismo de repetição
 A classe `DocumentClient` repete automaticamente tentativas com falha. Para definir o número de repetições e o tempo de espera máximo, configure [ConnectionPolicy.RetryOptions]. As exceções que o cliente gera excedem a política de repetição ou não são erros transitórios.
@@ -897,7 +897,7 @@ Por exemplo, se você adicionar o seguinte ao arquivo App.config, rastreamentos 
     <sources>
       <source name="DocDBTrace" switchName="SourceSwitch" switchType="System.Diagnostics.SourceSwitch" >
         <listeners>
-          <add name="MyTextListener" type="System.Diagnostics.TextWriterTraceListener" traceOutputOptions="DateTime,ProcessId,ThreadId" initializeData="DocumentDBTrace.txt"></add>
+          <add name="MyTextListener" type="System.Diagnostics.TextWriterTraceListener" traceOutputOptions="DateTime,ProcessId,ThreadId" initializeData="CosmosDBTrace.txt"></add>
         </listeners>
       </source>
     </sources>
@@ -915,20 +915,20 @@ O comportamento de repetição no SDK do Azure Search é controlado pelo método
 ### <a name="telemetry"></a>Telemetria
 Rastreamento com o ETW ou por meio de registro de um provedor de rastreamento personalizado. Para obter mais informações, confira [Documentação do AutoRest][autorest].
 
-## <a name="azure-active-directory-retry-guidelines"></a>Diretrizes de repetição para o Active Directory do Azure
+## <a name="azure-active-directory-retry-guidelines"></a>Diretrizes de repetição para o Azure Active Directory
 O Azure Active Directory (Azure AD) é uma solução abrangente de nuvem para gerenciamento de acesso e identidade que combina serviços principais de diretório, governança avançada de identidade, segurança e gerenciamento de acesso a aplicativos. O AD do Azure também oferece aos desenvolvedores uma plataforma de gerenciamento de identidade para fornecer controle de acesso aos respectivos aplicativos, com base nas regras e políticas centralizadas.
 
 ### <a name="retry-mechanism"></a>Mecanismo de repetição
 Na Biblioteca de autenticação do Active Directory (ADAL) há um mecanismo interno de repetição para o Azure Active Directory. Para evitar bloqueios inesperados, recomendamos que o ADAL lide com as repetições e **não** permita que as bibliotecas de terceiros ou o código do aplicativo repitam as conexões com falhas. 
 
 ### <a name="retry-usage-guidance"></a>Diretriz de uso de repetição
-Considere as seguintes diretrizes ao usar o Active Directory do Azure:
+Considere as seguintes diretrizes ao usar o Azure Active Directory:
 
 * Quando possível, use a biblioteca ADAL e o suporte interno para repetições.
-* Se estiver usando a API REST do Active Directory do Azure, você deverá repetir a operação somente se o resultado for um erro no intervalo 5xx (como 500 Erro de Servidor Interno, 502 Gateway Incorreto, 503 Serviço Indisponível e 504 Tempo Limite do Gateway). Não repita para nenhum outro erro.
-* Uma política de retirada exponencial é recomendada para uso em cenários de lote com o Active Directory do Azure.
+* Se estiver usando a API REST do Azure Active Directory, você deverá repetir a operação somente se o resultado for um erro no intervalo 5xx (como 500 Erro de Servidor Interno, 502 Gateway Incorreto, 503 Serviço Indisponível e 504 Tempo Limite do Gateway). Não repita para nenhum outro erro.
+* Uma política de retirada exponencial é recomendada para uso em cenários de lote com o Azure Active Directory.
 
-Considere começar com as seguintes configurações para operações de repetição. Essas são configurações de finalidade geral, por isso, você deve monitorar as operações e ajustar os valores para que atendam ao seu cenário.
+Considere começar com as seguintes configurações para operações de repetição. Essas são configurações de uso geral, por isso, você deve monitorar as operações e ajustar os valores para que atendam ao seu cenário.
 
 | **Contexto** | **Exemplo de latênciaE2E<br />máxima de destino** | **Estratégia de repetição** | **Configurações** | **Valores** | **Como funciona** |
 | --- | --- | --- | --- | --- | --- |
@@ -968,10 +968,10 @@ Internamente, o Service Fabric gerencia esse tipo de falha transitória. Você p
 
 ## <a name="azure-event-hubs-retry-guidelines"></a>Diretrizes sobre repetição de hubs de eventos do Azure
 
-Os hubs de eventos do Azure são um serviço de ingestão de telemetria de hiperescala que coleta, transforma e armazena milhões de eventos.
+Os Hubs de Eventos do Azure são um serviço de ingestão de telemetria de hiperescala que coleta, transforma e armazena milhões de eventos.
 
 ### <a name="retry-mechanism"></a>Mecanismo de repetição
-O comportamento de repetição na biblioteca de cliente dos hubs de eventos do Azure é controlado pela propriedade `RetryPolicy` na classe `EventHubClient`. As tentativas de política padrão com retirada exponencial quando o Hub de eventos do Azure retorna um `EventHubsException` transitório ou um `OperationCanceledException`.
+O comportamento de repetição na biblioteca de cliente dos Hubs de Eventos do Azure é controlado pela propriedade `RetryPolicy` na classe `EventHubClient`. As tentativas de política padrão com retirada exponencial quando o Hub de eventos do Azure retorna um `EventHubsException` transitório ou um `OperationCanceledException`.
 
 ### <a name="example"></a>Exemplo
 ```csharp
@@ -980,7 +980,7 @@ client.RetryPolicy = RetryPolicy.Default;
 ```
 
 ### <a name="more-information"></a>Mais informações
-[Biblioteca de cliente padrão .NET para hubs de eventos do Azure](https://github.com/Azure/azure-event-hubs-dotnet)
+[Biblioteca de cliente padrão .NET para Hubs de Eventos do Azure](https://github.com/Azure/azure-event-hubs-dotnet)
 
 ## <a name="general-rest-and-retry-guidelines"></a>Diretrizes gerais de repetição e REST
 Considere o seguinte ao acessar os serviços do Azure ou de terceiros:
@@ -1006,7 +1006,7 @@ Considere o seguinte ao acessar os serviços do Azure ou de terceiros:
 ### <a name="retry-strategies"></a>Estratégias de repetição
 Veja a seguir os tipos comuns de intervalo de estratégias de repetição:
 
-* **Exponencial**: uma política de repetição que executa um determinado número de repetições usando uma abordagem de retirada exponencial aleatória para determinar o intervalo entre as repetições. Por exemplo: 
+* **Exponencial**: uma política de repetição que executa um determinado número de repetições usando uma abordagem de retirada exponencial aleatória para determinar o intervalo entre as repetições. Por exemplo:
 
         var random = new Random();
 
@@ -1016,11 +1016,11 @@ Veja a seguir os tipos comuns de intervalo de estratégias de repetição:
         var interval = (int)Math.Min(checked(this.minBackoff.TotalMilliseconds + delta),
                        this.maxBackoff.TotalMilliseconds);
         retryInterval = TimeSpan.FromMilliseconds(interval);
-* **Incremental**: uma estratégia de repetição com um número especificado de tentativas de repetição e um intervalo de tempo incremental entre entradas. Por exemplo: 
+* **Incremental**: uma estratégia de repetição com um número especificado de tentativas de repetição e um intervalo de tempo incremental entre entradas. Por exemplo:
 
         retryInterval = TimeSpan.FromMilliseconds(this.initialInterval.TotalMilliseconds +
                        (this.increment.TotalMilliseconds * currentRetryCount));
-* **LinearRetry**: uma política de repetição que executa um número especificado de repetições usando um intervalo de tempo fixo especificado entre as repetições. Por exemplo: 
+* **LinearRetry**: uma política de repetição que executa um número especificado de repetições usando um intervalo de tempo fixo especificado entre as repetições. Por exemplo:
 
         retryInterval = this.deltaBackoff;
 
@@ -1036,7 +1036,6 @@ Veja a seguir os tipos comuns de intervalo de estratégias de repetição:
 [autorest]: https://github.com/Azure/autorest/tree/master/docs
 [circuit-breaker]: ../patterns/circuit-breaker.md
 [ConnectionPolicy.RetryOptions]: https://msdn.microsoft.com/library/azure/microsoft.azure.documents.client.connectionpolicy.retryoptions.aspx
-[documentdb-api]: /azure/documentdb/documentdb-introduction
 [dotnet-foundation]: https://dotnetfoundation.org/
 [polly]: http://www.thepollyproject.org
 [redis-cache-troubleshoot]: /azure/redis-cache/cache-how-to-troubleshoot

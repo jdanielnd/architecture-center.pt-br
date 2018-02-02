@@ -2,17 +2,17 @@
 title: Pilares da qualidade de software
 description: "Descreve os cinco pilares de qualidade de software, escalabilidade, disponibilidade, resiliência, gerenciamento e segurança."
 author: MikeWasson
-ms.openlocfilehash: 78e613368a07718f5923d619ace335d399b0cc80
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 1d5e30602cafa0d39f92de3101974e77ae258595
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="pillars-of-software-quality"></a>Pilares da qualidade de software 
 
 Um aplicativo em nuvem bem-sucedido se concentrará nestes cinco pilares da qualidade de software: escalabilidade, disponibilidade, resiliência, gerenciamento e segurança.
 
-| Pilar | Descrição |
+| Pilar | DESCRIÇÃO |
 |--------|-------------|
 | Escalabilidade | A capacidade de um sistema para lidar com aumentos de carga. |
 | Disponibilidade | A proporção de tempo que um sistema está funcional e operando. |
@@ -153,7 +153,7 @@ Aplicativos de nuvem geralmente usam serviços gerenciados que têm chaves de ac
 
 Seus dados devem permanecer na zona geopolíticas correta ao usar o Azure altamente disponível. O armazenamento com replicação geográfica do Azure usa o conceito de uma [região emparelhada][paired-region] na mesma região geopolítica. 
 
-Use o Key Vault para proteger segredos e chaves de criptografia. Ao usar o Key Vault, você pode criptografar chaves e segredos usando as chaves protegidas por HSMs (módulos de segurança de hardware). Muitos serviços de banco de dados e armazenamento do Azure dão suporte para criptografia de dados em repouso, incluindo [Armazenamento do Azure][storage-encryption], [Banco de Dados SQL do Azure][sql-db-encryption], [SQL Data Warehouse do Azure][data-warehouse-encryption] e [Cosmos DB][documentdb-encryption].
+Use o Key Vault para proteger segredos e chaves de criptografia. Ao usar o Key Vault, você pode criptografar chaves e segredos usando as chaves protegidas por HSMs (módulos de segurança de hardware). Muitos serviços de banco de dados e armazenamento do Azure dão suporte para criptografia de dados em repouso, incluindo [Armazenamento do Azure][storage-encryption], [Banco de Dados SQL do Azure][sql-db-encryption], [SQL Data Warehouse do Azure][data-warehouse-encryption] e [Cosmos DB][cosmosdb-encryption].
 
 ### <a name="security-resources"></a>Recursos de segurança
 
@@ -171,7 +171,7 @@ Use o Key Vault para proteger segredos e chaves de criptografia. Ao usar o Key V
 
 [ad-subscriptions]: /azure/active-directory/active-directory-how-subscriptions-associated-directory
 [data-warehouse-encryption]: /azure/data-lake-store/data-lake-store-security-overview#data-protection
-[documentdb-encryption]: /azure/documentdb/documentdb-nosql-database-security
+[cosmosdb-encryption]: /azure/cosmos-db/database-security
 [rbac]: /azure/active-directory/role-based-access-control-what-is
 [paired-region]: /azure/best-practices-availability-paired-regions
 [resource-manager-auditing]: /azure/azure-resource-manager/resource-group-audit

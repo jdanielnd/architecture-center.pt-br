@@ -4,11 +4,11 @@ description: "Lista de verificação que fornece orientação para questões de 
 author: petertaylor9999
 ms.date: 01/10/2018
 ms.custom: resiliency, checklist
-ms.openlocfilehash: 66ff802c1f7b35db147ffe4279982c827570c3c1
-ms.sourcegitcommit: 3d6dba524cc7661740bdbaf43870de7728d60a01
+ms.openlocfilehash: 51f807715d0ac929806b9a5a13da4efa00566592
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/11/2018
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="resiliency-checklist"></a>Lista de verificação de resiliência
 
@@ -142,7 +142,7 @@ Resiliência é a capacidade de um sistema de se recuperar de falhas e continuar
 
 **Correlacione dados de log através de limites de serviços.** Em um aplicativo de n camadas típico, uma solicitação de usuário pode atravessar vários limites de serviço. Por exemplo, uma solicitação de usuário normalmente se origina na camada da Web e é passada para a camada de negócios e por fim é persistida na camada de dados. Em cenários mais complexos, uma solicitação de usuário pode ser distribuída a muitos armazenamentos de dados e serviços diferentes. Verifique se o sistema de registro em log correlaciona chamadas entre limites de serviço para que você possa rastrear a solicitação pelo seu aplicativo.
 
-## <a name="azure-resources"></a>Recursos do Azure.
+## <a name="azure-resources"></a>Recursos do Azure
 
 **Use modelos do Azure Resource Manager para provisionar recursos.** Modelos do Resource Manager facilitam a automatização de implantações por meio do PowerShell ou da CLI do Azure, o que leva a um processo de implantação mais confiável. Para saber mais, confira [Visão geral do Azure Resource Manager][resource-manager].
 
@@ -161,7 +161,7 @@ Os itens de lista de verificação a seguir se aplicam a serviços específicos 
 
 - [Serviço de Aplicativo](#app-service)
 - [Gateway de Aplicativo](#application-gateway)
-- [Banco de Dados Cosmos](#cosmos-db)
+- [Cosmos DB](#cosmos-db)
 - [Cache Redis](#redis-cache)
 - [Search](#search)
 - [Armazenamento](#storage)
@@ -199,12 +199,11 @@ Os itens de lista de verificação a seguir se aplicam a serviços específicos 
 
 ### <a name="application-gateway"></a>Gateway de Aplicativo
 
-
 **Provisione pelo menos duas instâncias.** Implante um Gateway de Aplicativo com pelo menos duas instâncias. Uma única instância é um ponto único de falha. Use duas ou mais instâncias para redundância e escalabilidade. Para se qualificar para o [SLA](https://azure.microsoft.com/support/legal/sla/application-gateway/v1_0/), você deverá provisionar duas ou mais instâncias médias ou maiores.
 
-### <a name="cosmos-db"></a>Banco de Dados Cosmos
+### <a name="cosmos-db"></a>Cosmos DB
 
-**Replique o banco de dados entre regiões.** O Cosmos DB permite associar qualquer número de regiões do Azure a uma conta de banco de dados do Cosmos DB. Um banco de dados do Azure Cosmos DB pode ter várias regiões de leitura e uma de gravação. Se houver uma falha na região de gravação, você poderá ler de outra réplica. O SDK do cliente lida com isso automaticamente. Você também pode fazer failover da região de gravação para outra região. Para obter mais informações, consulte [Como distribuir os dados globalmente com o Azure Cosmos DB?](/azure/documentdb/documentdb-distribute-data-globally)
+**Replique o banco de dados entre regiões.** O Cosmos DB permite associar qualquer número de regiões do Azure a uma conta de banco de dados do Cosmos DB. Um banco de dados do Azure Cosmos DB pode ter várias regiões de leitura e uma de gravação. Se houver uma falha na região de gravação, você poderá ler de outra réplica. O SDK do cliente lida com isso automaticamente. Você também pode fazer failover da região de gravação para outra região. Para obter mais informações, confira [Como distribuir os dados globalmente com o Azure Cosmos DB](/azure/cosmos-db/distribute-data-globally).
 
 ### <a name="redis-cache"></a>Cache Redis
 

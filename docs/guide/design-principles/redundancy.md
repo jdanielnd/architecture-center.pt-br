@@ -3,11 +3,11 @@ title: Tornar todas as coisas redundantes
 description: "Evite pontos únicos de falha com a criação de redundância em seu aplicativo."
 author: MikeWasson
 layout: LandingPage
-ms.openlocfilehash: 89a1e6d2d3b1217ab07c9a99a4c4fb3e8cd2cd29
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 05ccf78c2cfbcd4e2d26200e70463d388d54f671
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="make-all-things-redundant"></a>Tornar todas as coisas redundantes
 
@@ -25,7 +25,7 @@ Um aplicativo resiliente contorna a falha. Identifique os caminhos críticos em 
 
 **Replique os bancos de dados**. O Banco de Dados SQL do Azure e o Cosmos DB replicam automaticamente os dados dentro de uma região, e você pode habilitar a replicação geográfica entre regiões. Se você estiver usando uma solução de banco de dados de IaaS, escolha uma que dê suporte à replicação e failover, tal como os [Grupos de Alta Disponibilidade Always On do SQL Server][sql-always-on]. 
 
-**Habilite a replicação geográfica**. A replicação geográfica para o [Banco de Dados SQL do Azure][sql-geo-replication] e o [Cosmos DB][docdb-geo-replication] cria réplicas secundárias de leitura de seus dados em uma ou mais regiões secundárias. No caso de uma interrupção, o banco de dados poderá fazer failover para a região secundária para gravações.
+**Habilite a replicação geográfica**. A replicação geográfica para o [Banco de Dados SQL do Azure][sql-geo-replication] e o [Cosmos DB][cosmosdb-geo-replication] cria réplicas secundárias de leitura de seus dados em uma ou mais regiões secundárias. No caso de uma interrupção, o banco de dados poderá fazer failover para a região secundária para gravações.
 
 **Partição para disponibilidade**. O particionamento do banco de dados geralmente é usado para melhorar a escalabilidade, mas também pode melhorar a disponibilidade. Se um fragmento falhar, os outros fragmentos ainda poderão ser acessados. Uma falha em um fragmento interromperá apenas um subconjunto do total de transações. 
 
@@ -46,6 +46,6 @@ Um aplicativo resiliente contorna a falha. Identifique os caminhos críticos em 
 [multi-vm-blueprint]: ../../reference-architectures/virtual-machines-windows/multi-vm.md
 
 [cassandra]: http://cassandra.apache.org/
-[docdb-geo-replication]: /azure/documentdb/documentdb-distribute-data-globally
+[cosmosdb-geo-replication]: /azure/cosmos-db/distribute-data-globally
 [sql-always-on]: https://msdn.microsoft.com/library/hh510230.aspx
 [sql-geo-replication]: /azure/sql-database/sql-database-geo-replication-overview

@@ -3,11 +3,11 @@ title: "Minimizar a coordenação"
 description: "Minimizar a coordenação entre os serviços de aplicativos para atingir a escalabilidade"
 author: MikeWasson
 layout: LandingPage
-ms.openlocfilehash: 1f8caa8b7cd85593c937f1d99d582492d4cf9a8b
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 3cab05b539612234fd8e66517b140ac5257c3e70
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="minimize-coordination"></a>Minimizar a coordenação 
 
@@ -49,7 +49,7 @@ Esses dois padrões se complementam. Se o armazenamento de somente gravação CQ
 
 **Use a simultaneidade otimista quando possível**. O controle de simultaneidade pessimista usa bloqueios de banco de dados para evitar conflitos. Isso pode causar baixo desempenho e reduzir a disponibilidade. Com o controle de simultaneidade otimista, cada transação modifica uma cópia ou um instantâneo dos dados. Quando a transação é confirmada, o mecanismo de banco de dados valida a transação e rejeita qualquer transação que possa afetar a consistência do banco de dados. 
 
-O banco de dados SQL do Azure e o SQL Server oferecem suporte à simultaneidade otimista por meio de [isolamento de instantâneo][sql-snapshot-isolation]. Alguns serviços de armazenamento do Azure oferecem suporte à simultaneidade otimista com Etags, incluindo o uso da [API do DocumentDB][docdb-faq] e o [Armazenamento do Azure][storage-concurrency].
+O banco de dados SQL do Azure e o SQL Server oferecem suporte à simultaneidade otimista por meio de [isolamento de instantâneo][sql-snapshot-isolation]. Alguns serviços de armazenamento do Azure oferecem suporte à simultaneidade otimista com Etags, incluindo o [Azure Cosmos DB][cosmosdb-faq] e o [Armazenamento do Azure][storage-concurrency].
 
 **Considere o MapReduce ou outros algoritmos paralelos e distribuídos**. Dependendo dos dados e o tipo de trabalho a ser executado, você poderá dividir o trabalho em tarefas independentes que podem ser executadas por vários nós de trabalho em paralelo. Veja [Estilo de arquitetura de computação intensa][big-compute].
 
@@ -62,7 +62,7 @@ O banco de dados SQL do Azure e o SQL Server oferecem suporte à simultaneidade 
 [compensating-transaction]: ../../patterns/compensating-transaction.md
 [cqrs-style]: ../architecture-styles/cqrs.md
 [cqrs-pattern]: ../../patterns/cqrs.md
-[docdb-faq]: /azure/documentdb/documentdb-faq
+[cosmosdb-faq]: /azure/cosmos-db/faq
 [domain-event]: https://martinfowler.com/eaaDev/DomainEvent.html
 [event-sourcing]: ../../patterns/event-sourcing.md
 [leader-election]: ../../patterns/leader-election.md

@@ -4,11 +4,11 @@ description: "Arquitetura recomendada para aplicativo Web com alta disponibilida
 author: MikeWasson
 ms.date: 11/23/2016
 cardTitle: Run in multiple regions
-ms.openlocfilehash: 60caa121d0ce2f1aa2638650229bed8048804c22
-ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
+ms.openlocfilehash: 50ac9636e1e3c25bd0403c89281a3a06915d065f
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2018
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="run-a-web-application-in-multiple-regions"></a>Execute um aplicativo Web em várias regiões
 [!INCLUDE [header](../../_includes/header.md)]
@@ -68,10 +68,10 @@ Por outro lado, não use a investigação de integridade para verificar os servi
 ### <a name="sql-database"></a>Banco de dados SQL
 Use a [Replicação Geográfica Ativa][sql-replication] para criar uma réplica secundária legível em uma região diferente. Você pode ter até quatro réplicas secundárias legíveis. Faça failover para um banco de dados secundário se o banco de dados primário falhar ou precisar ser deixado offline. A replicação geográfica ativa pode ser configurada para qualquer banco de dados em qualquer pool de banco de dados elástico.
 
-### <a name="cosmos-db"></a>Banco de Dados Cosmos
+### <a name="cosmos-db"></a>Cosmos DB
 O Cosmos DB dá suporte à replicação geográfica entre regiões. Uma região é designada como gravável e outras como réplicas somente leitura.
 
-Se houver uma interrupção regional, será possível fazer failover selecionando outra região para ser a região de gravação. O SDK do cliente envia automaticamente solicitações de gravação para a região de gravação atual, portanto você não precisa atualizar a configuração do cliente após um failover. Para obter mais informações, consulte [Como distribuir os dados globalmente com o Azure Cosmos DB?][docdb-geo]
+Se houver uma interrupção regional, será possível fazer failover selecionando outra região para ser a região de gravação. O SDK do cliente envia automaticamente solicitações de gravação para a região de gravação atual, portanto você não precisa atualizar a configuração do cliente após um failover. Para obter mais informações, confira [Como distribuir os dados globalmente com o Azure Cosmos DB][cosmosdb-geo].
 
 > [!NOTE]
 > Todas as réplicas de pertencem ao mesmo grupo de recursos.
@@ -149,7 +149,7 @@ Se o banco de dados primário falhar, realize um failover manual para o banco de
 
 [azure-sql-db]: https://azure.microsoft.com/documentation/services/sql-database/
 [azure-dns]: /azure/dns/dns-overview
-[docdb-geo]: /azure/documentdb/documentdb-distribute-data-globally
+[cosmosdb-geo]: /azure/cosmos-db/distribute-data-globally
 [guidance-web-apps-scalability]: ./scalable-web-app.md
 [health-endpoint-monitoring-pattern]: https://msdn.microsoft.com/library/dn589789.aspx
 [ra-grs]: /azure/storage/storage-redundancy#read-access-geo-redundant-storage

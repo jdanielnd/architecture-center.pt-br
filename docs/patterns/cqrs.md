@@ -9,11 +9,11 @@ pnp.pattern.categories:
 - data-management
 - design-implementation
 - performance-scalability
-ms.openlocfilehash: f36f759b16566a6c46bf78b8c8b8df4fcd2c493d
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 80f4a8880cf2212acf82dadb67b0181e1cbae099
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="command-and-query-responsibility-segregation-cqrs-pattern"></a>Padrão CQRS (Segregação de Responsabilidade de Consulta e Comando)
 
@@ -79,7 +79,7 @@ Utilize esse padrão nas seguintes situações:
 
 - Interfaces de usuário baseadas em tarefas, onde os usuários são guiados por um processo complexo como uma série de etapas ou com modelos de domínio complexos. Além disso, é útil para equipes já familiarizadas com técnicas de design orientado por domínio (DDD). O modelo de gravação possui uma pilha de processamento de comando completa com lógica de negócios, validação de entrada e validação de negócios para garantir que tudo seja sempre consistente para cada um dos agregados (cada cluster de objetos associados tratados como uma unidade para alterações de dados) no modelo de gravação. O modelo de leitura não possui lógica de negócios ou pilha de validação e apenas retorna um DTO para uso em um modelo de exibição. O modelo de leitura é, eventualmente, consistente com o modelo de gravação.
 
-- Cenários onde o desempenho das leituras de dados deve ter ajuste fino separadamente do desempenho das gravações de dados, especialmente quando a relação de gravação/leitura é muito alta e quando um dimensionamento horizontal é necessário. Por exemplo, em muitos sistemas, o número de operações de leitura é muitas vezes maior que o número de operações de gravação. Para acomodar isso, considere dimensionar o modelo de leitura, mas executando o modelo de gravação em apenas uma ou algumas instâncias. Um pequeno número de instâncias de modelo de gravação também ajuda a minimizar a ocorrência de conflitos de mesclagem.
+- Cenários onde o desempenho das leituras de dados deve ter ajuste fino separadamente do desempenho das gravações de dados, especialmente quando a relação de gravação/leitura é muito alta e quando um dimensionamento horizontal é necessário. Por exemplo, em vários sistemas, o número de operações de leitura é muitas vezes maior que o número de operações de gravação. Para acomodar isso, considere dimensionar o modelo de leitura, mas executando o modelo de gravação em apenas uma ou algumas instâncias. Um pequeno número de instâncias de modelo de gravação também ajuda a minimizar a ocorrência de conflitos de mesclagem.
 
 - Cenários onde uma equipe de desenvolvedores pode se concentrar no modelo de domínio complexo que faz parte do modelo de gravação e outra equipe pode se concentrar no modelo de leitura e nas interfaces de usuário.
 

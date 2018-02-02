@@ -3,11 +3,11 @@ title: Executar um servidor Jenkins no Azure
 description: "Essa arquitetura de referência mostra como implantar e operar um servidor Jenkins escalonável, de nível corporativo, no Azure protegido com o logon único."
 author: njray
 ms.date: 01/21/18
-ms.openlocfilehash: d06b16c212951c629612d69b13fa2b32b1030475
-ms.sourcegitcommit: 9998334bebccb86be0f715ac7dffc0c3175aea68
+ms.openlocfilehash: 9cab4990b259695f310da339bfef3060b0905640
+ms.sourcegitcommit: 3426a9c5ed937f097725c487cf3d073ae5e2a347
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/26/2018
+ms.lasthandoff: 02/01/2018
 ---
 # <a name="run-a-jenkins-server-on-azure"></a>Executar um servidor Jenkins no Azure
 
@@ -27,7 +27,7 @@ Essa arquitetura consiste nos seguintes componentes:
 
 -   **Grupo de recursos.** Um [grupo de recursos][rg] é usado para agrupar os ativos do Azure para que eles possam ser gerenciados pelo tempo de vida, proprietário e outros critérios. Use os grupos de recursos para implantar e monitorar ativos do Azure como um grupo e rastrear custos de cobrança por grupo de recursos. Também é possível excluir recursos como um conjunto, o que é muito útil para implantações de teste.
 
--   **Servidor Jenkins**. Uma máquina virtual é implantada para executar o [Jenkins][azure-market] como um servidor de automação e servir como o mestre Jenkins. Essa arquitetura de referência usa o [modelo de solução para Jenkins no Azure][solution], instalado em uma máquina de virtual do Linux (Ubuntu 14.04 LTS) no Azure. Há outras ofertas Jenkins disponíveis no Azure Marketplace.
+-   **Servidor Jenkins**. Uma máquina virtual é implantada para executar o [Jenkins][azure-market] como um servidor de automação e servir como o mestre Jenkins. Esta arquitetura de referência usa o [modelo de solução para Jenkins no Azure][solution], instalado em uma máquina virtual do Linux (Ubuntu 16.04 LTS) no Azure. Há outras ofertas Jenkins disponíveis no Azure Marketplace.
 
     > [!NOTE]
     > O Nginx está instalado na máquina virtual para atuar como um proxy reverso para o Jenkins. Você pode configurar o Nginx para habilitar o SSL para o servidor Jenkins.

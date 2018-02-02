@@ -5,11 +5,11 @@ author: MikeWasson
 ms.date: 03/24/2017
 ms.custom: resiliency
 pnp.series.title: Design for Resiliency
-ms.openlocfilehash: 09d09468eebe5c6fe1c9cdab14e142ff46cf0b25
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: aca2088cb007728c5717a968969000c0a19bcd07
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="failure-mode-analysis"></a>Análise do modo de falha
 [!INCLUDE [header](../_includes/header.md)]
@@ -93,7 +93,7 @@ O [SDK .NET do Search][search-sdk] tenta novamente de maneira automática após 
 
 A política de novas tentativas padrão usa retirada exponencial. Para usar uma política de novas tentativas diferente, chame `SetRetryPolicy` na classe `SearchIndexClient` ou `SearchServiceClient`. Para obter mais informações, veja [Tentativas automáticas][auto-rest-client-retry].
 
-**Diagnóstico**. Use a [análise de tráfego de pesquisa][search-analytics].
+**Diagnóstico**. Use a [Análise de Tráfego de Pesquisa][search-analytics].
 
 ### <a name="reading-data-from-azure-search-fails"></a>Falha ao ler dados do Azure Search.
 **Detecção**. Detecte erros `Microsoft.Rest.Azure.CloudException`.
@@ -104,7 +104,7 @@ O [SDK .NET do Search][search-sdk] tenta novamente de maneira automática após 
 
 A política de novas tentativas padrão usa retirada exponencial. Para usar uma política de novas tentativas diferente, chame `SetRetryPolicy` na classe `SearchIndexClient` ou `SearchServiceClient`. Para obter mais informações, veja [Tentativas automáticas][auto-rest-client-retry].
 
-**Diagnóstico**. Use a [análise de tráfego de pesquisa][search-analytics].
+**Diagnóstico**. Use a [Análise de Tráfego de Pesquisa][search-analytics].
 
 ## <a name="cassandra"></a>Cassandra
 ### <a name="reading-or-writing-to-a-node-fails"></a>Falha de leitura ou de gravação em um nó.
@@ -124,7 +124,7 @@ A política de novas tentativas padrão usa retirada exponencial. Para usar uma 
 
 **Recuperação**. Substitua o método [RoleEntryPoint.OnStop][RoleEntryPoint.OnStop] para executar uma limpeza normal. Para obter mais informações, veja [The Right Way to Handle Azure OnStop Events][onstop-events] (A maneira correta de tratar eventos OnStop do Azure) (blog).
 
-## <a name="cosmos-db"></a>Banco de Dados Cosmos 
+## <a name="cosmos-db"></a>Cosmos DB 
 ### <a name="reading-data-fails"></a>Falha na leitura de dados.
 **Detecção**. Detecte `System.Net.Http.HttpRequestException` ou `Microsoft.Azure.Documents.DocumentClientException`.
 
@@ -133,7 +133,7 @@ A política de novas tentativas padrão usa retirada exponencial. Para usar uma 
 * O SDK tenta novamente de maneira automática em caso de tentativas com falha. Para definir o número de novas tentativas e o tempo de espera máximo, configure `ConnectionPolicy.RetryOptions`. As exceções que o cliente gera excedem a política de repetição ou não são erros transitórios.
 * Se o Cosmos DB limitar o cliente, ele retornará um erro HTTP 429. Confira o código de status no `DocumentClientException`. Se você estiver recebendo o erro 429 consistentemente, considere aumentar o valor da taxa de transferência da coleção.
     * Se você estiver usando a API do MongoDB, o serviço retornará o código de erro 16500 durante a limitação.
-* Replique o banco de dados do Cosmos DB em duas ou mais regiões. Todas as réplicas são legíveis. Usando os SDKs cliente, especifique o parâmetro `PreferredLocations`. Trata-se de uma lista ordenada de regiões do Azure. Todas as leituras serão enviadas para a primeira região disponível na lista. Se a solicitação falhar, o cliente tentará outras regiões na lista, em ordem. Para obter mais informações, veja [Como configurar a distribuição global do Azure Cosmos DB usando a API do DocumentDB][docdb-multi-region].
+* Replique o banco de dados do Cosmos DB em duas ou mais regiões. Todas as réplicas são legíveis. Usando os SDKs cliente, especifique o parâmetro `PreferredLocations`. Trata-se de uma lista ordenada de regiões do Azure. Todas as leituras serão enviadas para a primeira região disponível na lista. Se a solicitação falhar, o cliente tentará outras regiões na lista, em ordem. Para obter mais informações, confira [Como configurar a distribuição global do Azure Cosmos DB usando a API do SQL][cosmosdb-multi-region].
 
 **Diagnóstico**. Registre em log todos os erros no lado do cliente.
 
@@ -145,7 +145,7 @@ A política de novas tentativas padrão usa retirada exponencial. Para usar uma 
 * O SDK tenta novamente de maneira automática em caso de tentativas com falha. Para definir o número de novas tentativas e o tempo de espera máximo, configure `ConnectionPolicy.RetryOptions`. As exceções que o cliente gera excedem a política de repetição ou não são erros transitórios.
 * Se o Cosmos DB limitar o cliente, ele retornará um erro HTTP 429. Confira o código de status no `DocumentClientException`. Se você estiver recebendo o erro 429 consistentemente, considere aumentar o valor da taxa de transferência da coleção.
 * Replique o banco de dados do Cosmos DB em duas ou mais regiões. Se a região primária falhar, outra região será promovida para gravação. Você também pode disparar um failover manual. O SDK faz a descoberta e roteamento automáticos para que o código do aplicativo continue a funcionar após um failover. Durante o período do failover (normalmente alguns minutos), as operações de gravação terão latência mais alta, enquanto o SDK localizar a nova região de gravação.
-  Para obter mais informações, veja [Como configurar a distribuição global do Azure Cosmos DB usando a API do DocumentDB][docdb-multi-region].
+  Para obter mais informações, confira [Como configurar a distribuição global do Azure Cosmos DB usando a API do SQL][cosmosdb-multi-region].
 * Como fallback, mantenha o documento em uma fila de backup e processe a fila mais tarde.
 
 **Diagnóstico**. Registre em log todos os erros no lado do cliente.
@@ -453,7 +453,7 @@ Para obter mais informações sobre o processo FMA, veja [Resilience by design f
 [BrokeredMessage.TimeToLive]: https://msdn.microsoft.com/library/microsoft.servicebus.messaging.brokeredmessage.timetolive.aspx
 [cassandra-error-handling]: http://www.datastax.com/dev/blog/cassandra-error-handling-done-right
 [circuit-breaker]: https://msdn.microsoft.com/library/dn589784.aspx
-[docdb-multi-region]: /azure/documentdb/documentdb-developing-with-multiple-regions/
+[cosmosdb-multi-region]: /azure/cosmos-db/tutorial-global-distribution-sql-api
 [elasticsearch-azure]: ../elasticsearch/index.md
 [elasticsearch-client]: https://www.elastic.co/guide/en/elasticsearch/client/index.html
 [health-endpoint-monitoring-pattern]: https://msdn.microsoft.com/library/dn589789.aspx

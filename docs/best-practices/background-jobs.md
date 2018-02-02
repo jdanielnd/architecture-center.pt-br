@@ -4,11 +4,11 @@ description: "Diretrizes sobre as tarefas em segundo plano executadas independen
 author: dragon119
 ms.date: 05/24/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: d8c1d4dfe12208b72fd6991def805f90a830b5f0
-ms.sourcegitcommit: a8453c4bc7c870fa1a12bb3c02e3b310db87530c
+ms.openlocfilehash: 10c24afee4b880cfbf8ee534f4d7f945d2b046a9
+ms.sourcegitcommit: 3426a9c5ed937f097725c487cf3d073ae5e2a347
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/29/2017
+ms.lasthandoff: 02/01/2018
 ---
 # <a name="background-jobs"></a>Trabalhos em segundo plano
 [!INCLUDE [header](../_includes/header.md)]
@@ -100,7 +100,7 @@ Os Azure WebJobs têm as seguintes características:
 * **Registro em log**: Console.Out é tratado (marcado) como INFO. Console.Error é tratado como ERROR. Você pode acessar informações de monitoramento e diagnóstico usando o Portal do Azure. Você pode baixar os arquivos de log diretamente do site. Eles estão salvos nos seguintes locais:
   * Para execução disparada: Vfs/data/jobs/triggered/jobName
   * Para execução contínua: Vfs/data/jobs/continuous/jobName
-* **Configuração**: você pode configurar o WebJobs usando o portal, a API REST e o PowerShell. Você pode usar um arquivo de configuração chamado settings.job no mesmo diretório raiz que o script de trabalho para fornecer informações de configuração para um trabalho. Por exemplo: 
+* **Configuração**: você pode configurar o WebJobs usando o portal, a API REST e o PowerShell. Você pode usar um arquivo de configuração chamado settings.job no mesmo diretório raiz que o script de trabalho para fornecer informações de configuração para um trabalho. Por exemplo:
   * { "stopping_wait_time": 60 }
   * { "is_singleton": true }
 
@@ -244,7 +244,7 @@ Considere os seguintes pontos se você estiver implementando tarefas em segundo 
     }
     ```
     
-    * Adicione a definição da configuração **Congelar** como um valor booliano para os arquivos ServiceDefinition.csdef e ServiceConfiguration.*.cscfg para a função e defina-a como **false**. Se a função entra em um modo de reinicialização repetida, você pode alterar a configuração para **true** para congelar a execução da função e permitir que ela seja trocada por uma versão anterior.
+  * Adicione a definição da configuração **Congelar** como um valor booliano para os arquivos ServiceDefinition.csdef e ServiceConfiguration.\*.cscfg para a função e defina-a como **false**. Se a função entra em um modo de reinicialização repetida, você pode alterar a configuração para **true** para congelar a execução da função e permitir que ela seja trocada por uma versão anterior.
 
 #### <a name="more-information"></a>Mais informações
 * [Padrão de consolidação de recursos de computação](http://msdn.microsoft.com/library/dn589778.aspx)
