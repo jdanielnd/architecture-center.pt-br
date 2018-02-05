@@ -123,6 +123,8 @@
       href: multitenant-identity/index.md
     - name: Migrar dos Serviços de Nuvem para o Service Fabric
       href: service-fabric/migrate-from-cloud-services.md
+    - name: Refatorar um Aplicativo Azure Service Fabric migrado a partir dos Serviços de Nuvem do Azure
+      href: service-fabric/refactor-migrated-app.md
     - name: Executar o Elasticsearch no Azure
       href: elasticsearch/index.md
     - name: Estender a funcionalidade de modelo do Azure Resource Manager
