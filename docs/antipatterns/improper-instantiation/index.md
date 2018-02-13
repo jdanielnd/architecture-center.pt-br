@@ -3,11 +3,11 @@ title: "Antipadrão de instanciação inadequada"
 description: "Evite criar continuamente novas instâncias de um objeto que deve ser criado somente uma vez e depois compartilhado."
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: 4b217f7fc644901eb5c3e77319d151caed30eef1
-ms.sourcegitcommit: cf207fd10110f301f1e05f91eeb9f8dfca129164
+ms.openlocfilehash: 8955f37e76c8b5e66c1ed7737d200d11ed321612
+ms.sourcegitcommit: 9ba82cf84cee06ccba398ec04c51dab0e1ca8974
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/29/2018
+ms.lasthandoff: 02/13/2018
 ---
 # <a name="improper-instantiation-antipattern"></a>Antipadrão de instanciação inadequada
 
@@ -128,7 +128,7 @@ As seções a seguir aplicam essas etapas ao aplicativo de exemplo descrito ante
 
 ### <a name="identify-points-of-slow-down-or-failure"></a>Identificar pontos de lentidão ou falha
 
-A imagem a seguir mostra os resultados gerados usando o [Gerenciamento de Desempenho de Aplicativos (APM) da New Relic][new-relic], mostrando também as operações que têm um tempo de resposta ruim. Nesse caso, vale a pena fazer uma investigação mais detalhada do método `GetProductAsync` no controlador `NewHttpClientInstancePerRequest`. Observe que a taxa de erros também aumenta quando essas operações estão em execução. 
+A imagem a seguir mostra os resultados gerados usando o [Gerenciamento de Desempenho de Aplicativos (APM) da New Relic][new-relic], mostrando também as operações que têm um tempo de resposta ruim. Nesse caso, vale a pena fazer uma investigação mais detalhada ao método `GetProductAsync` no controlador `NewHttpClientInstancePerRequest`. Observe que a taxa de erros também aumenta quando essas operações estão em execução. 
 
 ![O painel do monitor da New Relic mostra o aplicativo de exemplo criando uma nova instância de um objeto HttpClient para cada solicitação][dashboard-new-HTTPClient-instance]
 
