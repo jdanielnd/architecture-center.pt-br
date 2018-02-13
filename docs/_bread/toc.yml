@@ -9,7 +9,7 @@
         - name: Práticas Recomendadas
           tocHref: /azure/architecture/best-practices
           topicHref: /azure/architecture/best-practices
-        - name: Azure para Profissionais do AWS
+        - name: Azure para profissionais do AWS
           tocHref: /azure/architecture/aws-professional
           topicHref: /azure/architecture/aws-professional
         - name: Design para Resiliência
@@ -32,6 +32,9 @@
         - name: Recursos
           tocHref: /azure/architecture/resources
           topicHref: /azure/architecture/resources
+        - name: Guia de Adoção
+          tocHref: /azure/architecture/cloud-adoption-guide/
+          topicHref: /azure/architecture/cloud-adoption-guide
         - name: Guia
           tocHref: /azure/architecture/guide
           topicHref: /azure/architecture/guide

@@ -1,5 +1,10 @@
 - name: Centro de Arquitetura do Azure
   href: index.md
+- name: Guia de Adoção da Nuvem do Azure
+  href: cloud-adoption-guide/index.md
+  items:
+    - name: Estágio de Adoção Fundamental
+      href: cloud-adoption-guide/adoption-intro/overview.md
 - name: Guia de Arquitetura do Aplicativo
   href: guide/index.md
   items:

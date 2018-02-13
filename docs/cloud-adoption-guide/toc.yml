@@ -1,0 +1,64 @@
+- name: Centro de Arquitetura do Azure
+  href: /azure/architecture
+- name: Guia de Adoção da Nuvem do Azure
+  href: index.md
+  items:
+    - name: Adoção Fundamental do Azure
+      href: adoption-intro/overview.md
+      items:
+        - name: Noções básicas sobre os componentes internos do Azure
+          items:
+            - name: 'Explicador: como funciona o Azure?'
+              href: adoption-intro/azure-explainer.md
+        - name: Noções básicas sobre a identidade digital no Azure
+          items:
+            - name: 'Explicador: o que é um locatário do Azure Active Directory?'
+              href: adoption-intro/tenant-explainer.md
+            - name: 'Aprenda a: obter um locatário do Azure Active Directory'
+              href: /azure/active-directory/develop/active-directory-howto-tenant?toc=/azure/architecture/cloud-adoption-guide/toc.json
+            - name: 'Diretrizes: design de locatário do Azure AD'
+              href: adoption-intro/tenant.md
+            - name: 'Aprenda a: adicionar um usuário a um locatário do Azure AD'
+              href: /azure/active-directory/add-users-azure-active-directory?toc=/azure/architecture/cloud-adoption-guide/toc.json
+        - name: Noções básicas sobre as assinaturas do Azure
+          items:
+            - name: 'Explicador: o que é uma assinatura do Azure?'
+              href: adoption-intro/subscription-explainer.md
+            - name: 'Diretrizes: design de assinatura do Azure'
+              href: adoption-intro/subscription.md
+        - name: Noções básicas sobre o gerenciamento de recursos no Azure
+          items:
+            - name: 'Explicador: o que é o Azure Resource Manager?'
+              href: adoption-intro/resource-manager-explainer.md
+            - name: 'Explicador: o que é um grupo de recursos do Azure?'
+              href: adoption-intro/resource-group-explainer.md
+            - name: 'Explicador: noções básicas sobre o acesso aos recursos no Azure'
+              href: /azure/active-directory/active-directory-understanding-resource-access?toc=/azure/architecture/cloud-adoption-guide/toc.json
+            - name: 'Aprenda a: criar um grupo de recursos com o portal'
+              href: /azure/azure-resource-manager/resource-group-portal?toc=/azure/architecture/cloud-adoption-guide/toc.json
+            - name: 'Diretrizes: design de grupo de recursos'
+              href: adoption-intro/resource-group.md
+            - name: 'Diretrizes: convenções de nomenclatura dos recursos do Azure'
+              href: /azure/architecture/best-practices/naming-conventions?toc=/azure/architecture/cloud-adoption-guide/toc.json
+        - name: Implantação de arquiteturas básicas para o Azure
+          items:
+            - name: Arquitetura da Plataforma como serviço (PaaS)
+              items:
+                - name: 'Aprenda a: implantar um aplicativo Web básico para o Azure'
+                  href: /azure/app-service?toc=/azure/architecture/cloud-adoption-guide/toc.json
+                - name: 'Diretrizes: práticas recomendadas para aplicativos Web no Azure'
+                  href: /azure/architecture/reference-architectures/app-service-web-app/basic-web-app?toc=/azure/architecture/cloud-adoption-guide/toc.json
+            - name: IaaS (Infraestrutura como serviço)
+              items:
+                - name: 'Explicador: o que é uma rede virtual do Azure?'
+                  href: /azure/virtual-network/virtual-networks-overview?toc=/azure/architecture/cloud-adoption-guide/toc.json
+                - name: 'Aprenda a: implantar uma rede virtual no Azure'
+                  href: /azure/virtual-network/virtual-networks-create-vnet-arm-pportal?toc=/azure/architecture/cloud-adoption-guide/toc.json
+                - name: 'Aprenda a: implantar uma carga de trabalho única de IaaS de VM do Windows no Azure'
+                  href: /azure/virtual-machines/windows/quick-create-portal?toc=/azure/architecture/cloud-adoption-guide/toc.json
+                - name: 'Diretrizes: práticas recomendadas para implantar uma VM do Windows no Azure'
+                  href: /azure/architecture/reference-architectures/virtual-machines-windows/single-vm?toc=/azure/architecture/cloud-adoption-guide/toc.json
+                - name: 'Aprenda a: implantar uma carga de trabalho única de IaaS de VM do Linux para o Azure'
+                  href: /azure/virtual-machines/linux/quick-create-portal?toc=/azure/architecture/cloud-adoption-guide/toc.json
+                - name: 'Diretrizes: práticas recomendadas para implantar uma VM do Linux no Azure'
+                  href: /azure/architecture/reference-architectures/virtual-machines-linux/single-vm?toc=/azure/architecture/cloud-adoption-guide/toc.json
