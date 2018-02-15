@@ -4,11 +4,11 @@ description: "Instruções de como separar partições a serem gerenciadas e ace
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: aa59a99ae87328424379e1f9c6fee8cc5887e61c
-ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
+ms.openlocfilehash: d1d9c1b3cf07f724eb010fc260d86ceb84b789ca
+ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/30/2018
+ms.lasthandoff: 02/09/2018
 ---
 # <a name="data-partitioning"></a>Particionamento de dados
 
@@ -144,7 +144,7 @@ Ao criar e implementar partições, considere os seguintes fatores que afetam a 
 * **O quanto os dados são fundamentais para as operações de negócios**. Alguns dados podem incluir informações comerciais críticas, como detalhes de faturas ou transações bancárias. Outros dados podem incluir dados operacionais menos críticos, como arquivos de log, rastreamentos de desempenho e assim por diante. Depois de identificar cada tipo de dados, considere:
   * Armazenar os dados críticos em partições altamente disponíveis com um plano de backup adequado.
   * Estabelecer mecanismos ou procedimentos separados de gerenciamento e monitoramento para os diferentes níveis de importância de cada conjunto de dados. Colocar os dados com o mesmo nível de importância na mesma partição para que eles possam ser armazenados juntos em backup com uma frequência adequada. Por exemplo, as partições que contêm dados de transações bancárias podem precisar de backup com mais frequência do que as partições que contêm informações de rastreamento ou registro em log.
-* **Como as partições individuais podem ser gerenciadas**. Criar partições para dar suporte ao gerenciamento e manutenção independentes oferece várias vantagens. Por exemplo:
+* **Como as partições individuais podem ser gerenciadas**. Criar partições para dar suporte ao gerenciamento e manutenção independentes oferece várias vantagens. Por exemplo: 
   * Se uma partição falhar, ela pode ser recuperada independentemente sem afetar as instâncias de aplicativos que acessam dados em outras partições.
   * O particionamento de dados por área geográfica permite que as tarefas de manutenção agendadas ocorram fora dos horários de pico de cada local. Verifique se as partições não são muito grandes para evitar a conclusão de qualquer manutenção planejada durante esse período.
 * **A possibilidade de replica dados críticos entre partições**. Essa estratégia pode melhorar a disponibilidade e o desempenho, embora também possa apresentar problemas de consistência. As alterações feitas nos dados em uma partição demoram para serem sincronizadas com cada réplica. Durante esse período, diferentes partições conterão valores de dados diferentes.
