@@ -2,11 +2,11 @@
 title: Centro de Arquitetura do Azure
 description: "O Centro de Arquitetura do Azure é o centro oficial de orientação, plantas, padrões e práticas recomendados para criar soluções com o Microsoft Azure. Ele é curadoria pela equipe de padrões e práticas da Microsoft."
 layout: LandingPage
-ms.openlocfilehash: 204d32c8de934665fff7b1a321bfdf893ac69983
-ms.sourcegitcommit: 441185360db49cfb3cf39527b68f318d17d4cb3d
+ms.openlocfilehash: eb069ae80ce70eb66ef57b1e0e21f7181d17d21f
+ms.sourcegitcommit: 475064f0a3c2fac23e1286ba159aaded287eec86
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/19/2018
+ms.lasthandoff: 02/19/2018
 ---
 # <a name="azure-architecture-center"></a>Centro de Arquitetura do Azure
 
@@ -64,26 +64,6 @@ ms.lasthandoff: 01/19/2018
 
 <!-- Second panel -->
 <ul class="panelContent cardsI">
-    <!-- Best practices -->
-    <li>
-        <a href="/azure/architecture/best-practices/">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                                <img src="_images/best-practices.svg" alt="Best Practices" height="100%" />
-                            </div>
-                        </div>
-                        <div class="cardText">
-                            <h3>Práticas recomendadas para aplicativos em nuvem</h3>
-                            <p>Práticas recomendadas para aplicativos em nuvem, que abrangem aspectos como o dimensionamento automático, o cache, o particionamento de dados, o design de APIs, entre outros.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </li>
     <!-- Microservices -->
     <li>
         <a href="/azure/architecture/microservices">
@@ -96,8 +76,88 @@ ms.lasthandoff: 01/19/2018
                             </div>
                         </div>
                         <div class="cardText">
-                            <h3>Compilar microsserviços no Azure</h3>
+                            <h3>Compilar Microsserviços no Azure</h3>
                             <p>Esta série de várias partes guia você pelo processo de criação e compilação de uma arquitetura de microsserviços no Azure. Uma implementação de referência está incluída.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li>
+    <!-- data guide -->
+    <li>
+        <a href="/azure/architecture/data-guide/">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card">
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="_images/data-guide.svg" alt="Data Architecture Guide"  />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h3>Guia de Arquitetura de Dados do Azure</h3>
+                            <p>Uma abordagem estruturada para criar soluções centradas nos dados no Microsoft Azure.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li>
+    <!-- Best practices -->
+    <li>
+        <a href="/azure/architecture/best-practices/">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card">
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="_images/best-practices.svg" alt="Best Practices" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h3>Práticas recomendadas para aplicativos em nuvem</h3>
+                            <p>Práticas recomendadas para aplicativos em nuvem, que abrangem aspectos como o dimensionamento automático, o cache, o particionamento de dados, o design de APIs, entre outros.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li>
+    <!-- Resiliency -->
+    <li>
+        <a href="/azure/architecture/resiliency">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card">
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="_images/resiliency.svg" alt="Designing for Resiliency" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h3>Design para Resiliência</h3>
+                            <p>Saiba como projetar aplicativos resilientes para o Azure.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li>
+    <!-- Building blocks -->
+    <li>
+        <a href="https://github.com/mspnp/template-building-blocks/wiki">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card">
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="_images/azbb.svg" alt="Azure Building Blocks" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h3>Blocos de Construção do Azure</h3>
+                            <p>Simplificar a implantação de recursos do Azure. Com um arquivo de configurações única, implante arquiteturas complexas no Azure.</p>
                         </div>
                     </div>
                 </div>
@@ -164,46 +224,6 @@ ms.lasthandoff: 01/19/2018
             </div>
         </a>
     </li>
-    <!-- Resiliency -->
-    <li>
-        <a href="/azure/architecture/resiliency">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                                <img src="_images/resiliency.svg" alt="Designing for Resiliency" />
-                            </div>
-                        </div>
-                        <div class="cardText">
-                            <h3>Design para Resiliência</h3>
-                            <p>Saiba como projetar aplicativos resilientes para o Azure.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </li>
-    <!-- Building blocks -->
-    <li>
-        <a href="https://github.com/mspnp/template-building-blocks/wiki">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                                <img src="_images/azbb.svg" alt="Azure Building Blocks" />
-                            </div>
-                        </div>
-                        <div class="cardText">
-                            <h3>Blocos de Construção do Azure</h3>
-                            <p>Simplificar a implantação de recursos do Azure. Com um arquivo de configurações única, implante arquiteturas complexas no Azure.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </li>
     <!-- Performance anti-practices -->
     <li>
         <a href="/azure/architecture/antipatterns">
@@ -216,7 +236,7 @@ ms.lasthandoff: 01/19/2018
                             </div>
                         </div>
                         <div class="cardText">
-                            <h3>Antipadrões de desempenho</h3>
+                            <h3>Antipadrões de Desempenho</h3>
                             <p>Como detectar e corrigir alguns comuns causas de problemas de desempenho e escalabilidade em aplicativos de nuvem.</p>
                         </div>
                     </div>
