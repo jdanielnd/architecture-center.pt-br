@@ -2,14 +2,14 @@
 title: "Implementação de uma topologia de rede hub-spoke no Azure"
 description: Como implementar uma topologia de rede hub-spoke no Azure.
 author: telmosampaio
-ms.date: 05/05/2017
+ms.date: 02/14/2018
 pnp.series.title: Implement a hub-spoke network topology in Azure
 pnp.series.prev: expressroute
-ms.openlocfilehash: e6f07a7962dd5728226b023700268340590d97a3
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: c03ecd4ba5ddbe50cfb17e56d75c18102b751cfb
+ms.sourcegitcommit: 475064f0a3c2fac23e1286ba159aaded287eec86
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 02/19/2018
 ---
 # <a name="implement-a-hub-spoke-network-topology-in-azure"></a>Implementar uma topologia de rede hub-spoke no Azure
 
@@ -26,7 +26,7 @@ Os benefícios dessa topologia incluem:
 * **Superar os limites de assinaturas** emparelhando VNets de assinaturas diferentes com o hub central.
 * **Separação de preocupações** entre TI central (SecOps, InfraOps) e cargas de trabalho (DevOps).
 
-Alguns usos típicos para essa arquitetura:
+Alguns usos típicos dessa arquitetura:
 
 * As cargas de trabalho implantadas em diferentes ambientes, como desenvolvimento, teste e produção, que exigem serviços compartilhados como DNS, IDS, NTP ou AD DS. Os serviços compartilhados são colocados na VNet do hub, enquanto cada ambiente é implantado em um spoke para manter o isolamento.
 * Cargas de trabalho que não exigem conectividade entre si, mas precisam de acesso aos serviços compartilhados.
@@ -34,13 +34,13 @@ Alguns usos típicos para essa arquitetura:
 
 ## <a name="architecture"></a>Arquitetura
 
-Essa arquitetura consiste nos seguintes componentes.
+A arquitetura consiste nos componentes a seguir.
 
 * **Rede local**. Uma rede de área local privada em execução dentro de uma organização.
 
 * **Dispositivo VPN**. Um dispositivo ou serviço que fornece conectividade externa para a rede local. O dispositivo VPN pode ser um dispositivo de hardware ou uma solução de software, como o RRAS (Serviço de Acesso Remoto e Roteamento) do Windows Server 2012. Para obter uma lista de dispositivos de VPN com suporte e informações sobre como configurar dispositivos de VPN selecionados para se conectar ao Azure, consulte [Sobre dispositivos VPN para conexões de Gateway de VPN Site a Site][vpn-appliance].
 
-* **Gateway de rede virtual de VPN ou gateway de ExpressRoute**. O gateway de rede virtual permite que a VNet se conecte ao dispositivo VPN ou ao circuito de ExpressRoute, usado para conectividade com a rede local. Para obter mais informações, consulte [Conectar uma rede local à rede virtual do Microsoft Azure][connect-to-an-Azure-vnet].
+* **Gateway de rede virtual de VPN ou gateway de ExpressRoute**. O gateway de rede virtual permite que a VNet se conecte ao dispositivo VPN ou ao circuito de ExpressRoute, usado para conectividade com a rede local. Para obter mais informações, consulte [Conectar uma rede local a uma rede virtual do Microsoft Azure][connect-to-an-Azure-vnet].
 
 > [!NOTE]
 > Os scripts de implantação dessa arquitetura de referência usam um gateway VPN para conectividade e uma VNet no Azure para simular a rede local.
@@ -51,7 +51,7 @@ Essa arquitetura consiste nos seguintes componentes.
 
 * **Sub-rede serviços compartilhados**. Uma sub-rede na VNet do hub usada para hospedar os serviços que podem ser compartilhados entre todos os spokes, como DNS ou AD DS.
 
-* **VNets de spoke**. Uma ou mais VNets do Azure que são usadas como spokes na topologia hub-spoke. Spokes podem ser usados para isolar as cargas de trabalho em suas próprias VNets, gerenciadas separadamente de outros spokes. Cada carga de trabalho pode incluir várias camadas, com várias sub-redes conectadas por meio de balanceadores de carga do Azure. Para obter mais informações sobre a infraestrutura do aplicativo, consulte [Executar cargas de trabalho de VM no Windows][windows-vm-ra] e [Executar cargas de trabalho de VM no Linux][linux-vm-ra].
+* **VNets de spoke**. Uma ou mais VNets do Azure que são usadas como spokes na topologia hub-spoke. Spokes podem ser usados para isolar as cargas de trabalho em suas próprias VNets, gerenciadas separadamente de outros spokes. Cada carga de trabalho pode incluir várias camadas, com várias sub-redes conectadas por meio de balanceadores de carga do Azure. Para obter mais informações sobre a infraestrutura do aplicativo, consulte [Execução de cargas de trabalho de VM do Windows][windows-vm-ra] e [Execução de cargas de trabalho de VM do Linux][linux-vm-ra].
 
 * **Emparelhamento VNet**. Duas VNets na mesma região do Azure podem ser conectadas usando uma [conexão de emparelhamento][vnet-peering]. Conexões de emparelhamento são conexões não transitivas de baixa latência entre VNets. Quando emparelhadas, as VNets trocam tráfego usando o backbone do Azure sem precisar de um roteador. Em uma topologia de rede hub-spoke, é necessário usar o emparelhamento VNet para conectar o hub a cada spoke.
 
@@ -69,7 +69,7 @@ A VNet do hub e a VNet de cada spoke, podem ser implementadas em diferentes grup
 
 ### <a name="vnet-and-gatewaysubnet"></a>VNet e GatewaySubnet
 
-Crie uma sub-rede denominada *GatewaySubnet* com um intervalo de endereços de /27. Essa sub-rede é exigida pelo gateway de rede virtual. Alocar 32 endereços para esta sub-rede ajudará a evitar que as limitações de tamanho de gateway sejam atingidas no futuro.
+Crie uma sub-rede denominada *GatewaySubnet* com um intervalo de endereços de /27. Essa sub-rede é necessária para o gateway de rede virtual. Alocar 32 endereços para esta sub-rede ajudará a evitar que as limitações de tamanho de gateway sejam atingidas no futuro.
 
 Para obter mais informações sobre como configurar o gateway, consulte as seguintes arquiteturas de referência, dependendo do seu tipo de conexão:
 
@@ -114,7 +114,7 @@ Além disso, considere quais serviços compartilhados no hub, para garantir que 
 
 Uma implantação para essa arquitetura está disponível no [GitHub][ref-arch-repo]. Ela usa VMs Ubuntu em cada VNet para testar a conectividade. Não há nenhum serviço hospedado na sub-rede **shared-services** na **VNet do hub**.
 
-### <a name="prerequisites"></a>Pré-requisitos
+### <a name="prerequisites"></a>pré-requisitos
 
 Antes de implantar a arquitetura de referência para sua própria assinatura, você deve executar as etapas a seguir.
 
@@ -339,68 +339,6 @@ Para verificar se a topologia hub-spoke conectada a uma implantação de datacen
 
   ```bash
   ping 10.1.1.37
-  ```
-
-### <a name="add-connectivity-between-spokes"></a>Adicionar conectividade entre spokes
-
-Se você quiser permitir que spokes se conectem entre si, será necessário implantar UDRs para cada spoke que encaminha o tráfego destinado a outros spokes para o gateway na VNet do hub. Execute as seguintes etapas para verificar se atualmente não é possível conectar-se de um spoke para outro e, em seguida, implante os UDRs e teste a conectividade novamente.
-
-1. Repita as etapas 1 a 4 acima se você não estiver mais conectado à VM de jumpbox.
-
-2. Conecte-se a um dos servidores Web no spoke 1.
-
-  ```bash
-  ssh 10.1.1.37
-  ```
-
-3. Teste a conectividade entre o spoke 1 e o spoke 2. Ela deve falhar.
-
-  ```bash
-  ping 10.1.2.37
-  ```
-
-4. Retorne para o prompt de comando do computador.
-
-5. Alterne para a pasta `hybrid-networking\hub-spoke\spokes` do repositório que você baixou na etapa de pré-requisitos acima.
-
-6. Execute o bash ou o comando do PowerShell abaixo para implantar um UDR no primeiro spoke. Substitua os valores por sua assinatura, nome do grupo de recursos e região do Azure.
-
-  ```bash
-  sh ./spoke.udr.deploy.sh --subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
-    --resourcegroup ra-spoke1-rg \
-    --location westus \
-    --spoke 1
-  ```
-
-  ```powershell
-  ./spoke.udr.deploy.ps1 -Subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx `
-    -ResourceGroup ra-spoke1-rg `
-    -Location westus `
-    -Spoke 1
-  ```
-
-7. Execute o bash ou o comando do PowerShell abaixo para implantar um UDR no segundo spoke. Substitua os valores por sua assinatura, nome do grupo de recursos e região do Azure.
-
-  ```bash
-  sh ./spoke.udr.deploy.sh --subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
-    --resourcegroup ra-spoke2-rg \
-    --location westus \
-    --spoke 2
-  ```
-
-  ```powershell
-  ./spoke.udr.deploy.ps1 -Subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx `
-    -ResourceGroup ra-spoke2-rg `
-    -Location westus `
-    -Spoke 2
-  ```
-
-8. Volte para o terminal de ssh.
-
-9. Teste a conectividade entre o spoke 1 e o spoke 2. Ela deve ter êxito.
-
-  ```bash
-  ping 10.1.2.37
   ```
 
 <!-- links -->
