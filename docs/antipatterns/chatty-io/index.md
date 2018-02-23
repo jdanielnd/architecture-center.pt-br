@@ -2,11 +2,11 @@
 title: "Antipadrão de E/S com ruídos"
 description: "Um grande número de solicitações de E/S pode prejudicar o desempenho e a capacidade de resposta."
 author: dragon119
-ms.openlocfilehash: 50001316939b56c9b57a119f6ae20f0878f54c0f
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 4f0e0e455ceb58317d3029d8ab4631d476802499
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="chatty-io-antipattern"></a>Antipadrão de E/S com ruídos
 
@@ -215,7 +215,7 @@ await SaveCustomerListToFileAsync(customers);
 
 - Ao gravar os dados, evite bloquear os recursos por mais tempo que o necessário para reduzir as chances de contenção durante uma operação demorada. Se uma operação de gravação se estender por vários armazenamentos de dados, arquivos ou serviços, adote uma abordagem consistente. Confira [Orientação para a Consistência de Dados][data-consistency-guidance].
 
-- Se você armazenar em buffer os dados na memória antes de gravá-los, eles ficarão vulneráveis se o processo falhar. Se a taxa de dados geralmente tem picos ou é relativamente esparsa, pode ser mais seguro colocar em buffer os dados em uma fila durável externa, como os [Hubs de Eventos](http://azure.microsoft.com/en-us/services/event-hubs/).
+- Se você armazenar em buffer os dados na memória antes de gravá-los, eles ficarão vulneráveis se o processo falhar. Se a taxa de dados geralmente tem picos ou é relativamente esparsa, pode ser mais seguro colocar em buffer os dados em uma fila durável externa, como os [Hubs de Eventos](http://azure.microsoft.com/services/event-hubs/).
 
 - Considere armazenar em cache os dados recuperados de um serviço ou banco de dados. Isso pode ajudar a reduzir o volume de E/S, evitando repetidas solicitações dos mesmos dados. Para obter mais informações, confira [Melhores Práticas do Cache][caching-guidance].
 

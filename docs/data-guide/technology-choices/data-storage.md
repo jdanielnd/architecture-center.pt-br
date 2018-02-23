@@ -3,15 +3,15 @@ title: Escolhendo uma tecnologia de armazenamento de dados
 description: 
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: a51c8d990818e0b0efb04dd7686b065e5b98338a
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: d8f831e758ddc8604758392644a68b56dc51cf57
+ms.sourcegitcommit: 475064f0a3c2fac23e1286ba159aaded287eec86
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 02/19/2018
 ---
 # <a name="choosing-a-big-data-storage-technology-in-azure"></a>Escolhendo uma tecnologia de armazenamento de Big Data no Azure
 
-Este tópico compara as opções de armazenamento de dados para soluções de Big Data &mdash; especificamente, o armazenamento de dados para ingestão de dados em massa e processamento em lotes, em detrimento dos [armazenamentos de dados analíticos](./analytical-data-stores.md) ou da [ingestão de streaming em tempo real](./real-time-ingestion.md)
+Este tópico compara as opções de armazenamento de dados para soluções de Big Data &mdash; especificamente, o armazenamento de dados para ingestão de dados em massa e processamento em lotes, em detrimento dos [armazenamentos de dados analíticos](./analytical-data-stores.md) ou da [ingestão de streaming em tempo real](./real-time-ingestion.md).
 
 ## <a name="what-are-your-options-when-choosing-data-storage-in-azure"></a>Quais são as opções disponíveis ao escolher um armazenamento de dados no Azure?
 

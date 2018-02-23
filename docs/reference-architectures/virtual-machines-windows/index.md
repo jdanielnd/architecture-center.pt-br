@@ -2,92 +2,104 @@
 title: "Cargas de trabalho de máquina virtual do Windows"
 description: "Explica algumas arquiteturas comuns para a implantação de máquinas virtuais que hospedam aplicativos de grande porte no Azure."
 layout: LandingPage
-ms.openlocfilehash: 05de929071031f43a7793c9c39390a3becc0c1b3
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 972a307c129598ecfab161d5246d0eb2abf7c7e5
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 02/23/2018
 ---
-# <a name="running-windows-vm-workloads"></a>Execução de cargas de trabalho de máquina virtual do Windows
+<!-- This file is generated! -->
+<!-- See the templates in ./build/reference-architectures  -->
+<!-- See data in index.json -->
 
-Essas arquiteturas mostram práticas comprovadas para executar máquinas virtuais do Windows no Azure. 
+# <a name="windows-vm-workloads"></a>Cargas de trabalho de máquina virtual do Windows
 
-<ul class="panelContent">
-    <li>
-        <a href="./single-vm.md">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                                <img src="./images/single-vm.svg"/>
-                            </div>
+Essas arquiteturas mostram práticas comprovadas para executar máquinas virtuais do Windows no Azure.
+
+<section class="series">
+    <ul class="panelContent">
+    <!-- Single VM -->
+<li style="display: flex; flex-direction: column;">
+    <a href="./single-vm.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
+            <div class="cardPadding" style="display: flex;">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="./images/single-vm.svg" height="140px" />
                         </div>
-                        <div class="cardText">
-                            <h3>VM única</h3>
-                            <p>Recomendações de linha de base para a execução de qualquer máquina virtual do Windows no Azure.</p>
-                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>VM única</h3>
+                        <p>Recomendações de linha de base para a execução de qualquer máquina virtual do Windows no Azure.</p>
                     </div>
                 </div>
             </div>
-        </a>
-    </li>
-    <li>
-        <a href="./multi-vm.md">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                            <img src="./images/multi-vm.svg">
-                            </div>
+        </div>
+    </a>
+</li>
+    <!-- Load balanced VMs -->
+<li style="display: flex; flex-direction: column;">
+    <a href="./multi-vm.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
+            <div class="cardPadding" style="display: flex;">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="./images/multi-vm.svg" height="140px" />
                         </div>
-                        <div class="cardText">
-                            <h3>VMs com balanceamento de carga</h3>
-                            <p>Várias VMs colocadas por trás de um balanceador de carga para escalabilidade e disponibilidade.</p>
-                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>VMs com balanceamento de carga</h3>
+                        <p>Várias VMs colocadas por trás de um balanceador de carga para escalabilidade e disponibilidade.</p>
                     </div>
                 </div>
             </div>
-        </a>
-    </li>
-    <li>
-        <a href="./n-tier.md">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                            <img src="./images/n-tier.svg">
-                            </div>
+        </div>
+    </a>
+</li>
+    <!-- N-tier application -->
+<li style="display: flex; flex-direction: column;">
+    <a href="./n-tier.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
+            <div class="cardPadding" style="display: flex;">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="./images/n-tier.svg" height="140px" />
                         </div>
-                        <div class="cardText">
-                            <h3>Aplicativo de N camadas</h3>
-                            <p>Máquinas virtuais configuradas para um aplicativo de N camadas com o SQL Server.</p>
-                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>Aplicativo de N camadas</h3>
+                        <p>Máquinas virtuais configuradas para um aplicativo de N camadas com o SQL Server.</p>
                     </div>
                 </div>
             </div>
-        </a>
-    </li>
-    <li>
-        <a href="./multi-region-application.md">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                            <img src="./images/multi-region-application.svg">
-                            </div>
+        </div>
+    </a>
+</li>
+    <!-- Multi-region application -->
+<li style="display: flex; flex-direction: column;">
+    <a href="./multi-region-application.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
+            <div class="cardPadding" style="display: flex;">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="./images/multi-region-application.svg" height="140px" />
                         </div>
-                        <div class="cardText">
-                            <h3>Aplicativo de várias regiões</h3>
-                            <p>Aplicativo de N camadas implantado em duas regiões para alta disponibilidade.</p>
-                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>Aplicativo de várias regiões</h3>
+                        <p>Aplicativo de N camadas implantado em duas regiões para alta disponibilidade.</p>
                     </div>
                 </div>
             </div>
-        </a>
-    </li>
+        </div>
+    </a>
+</li>
+    </ul>
+</section>
+
+<ul class="panelContent cardsI">
 </ul>
-

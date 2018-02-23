@@ -3,11 +3,11 @@ title: "Antipadrão de instanciação inadequada"
 description: "Evite criar continuamente novas instâncias de um objeto que deve ser criado somente uma vez e depois compartilhado."
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: 8955f37e76c8b5e66c1ed7737d200d11ed321612
-ms.sourcegitcommit: 9ba82cf84cee06ccba398ec04c51dab0e1ca8974
+ms.openlocfilehash: 4d5ef9ad9e675b46df94b51e81d7a4bd4c1b25e9
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/13/2018
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="improper-instantiation-antipattern"></a>Antipadrão de instanciação inadequada
 
@@ -22,9 +22,7 @@ Muitas bibliotecas fornecem abstrações de recursos externos. Internamente, ess
 - `Microsoft.Azure.Documents.Client.DocumentClient`. Conecta-se a uma instância do Cosmos DB
 - `StackExchange.Redis.ConnectionMultiplexer`. Conecta-se ao Redis, incluindo o Cache Redis do Azure.
 
-Essas classes são destinadas a serem instanciados uma vez e reutilizadas em todo o tempo de vida de um aplicativo. No entanto, é comum cometer o equívoco de achar que essas classes devem ser adquiridas somente quando necessário e lançadas rapidamente. (As classes listadas são de bibliotecas .NET, mas o padrão não é exclusivo para .NET.)
-
-O ASP.NET de exemplo a seguir cria uma instância de `HttpClient` para se comunicar com um serviço remoto. Você pode encontrar o exemplo completo [aqui][sample-app].
+Essas classes são destinadas a serem instanciados uma vez e reutilizadas em todo o tempo de vida de um aplicativo. No entanto, é comum cometer o equívoco de achar que essas classes devem ser adquiridas somente quando necessário e lançadas rapidamente. (As classes listadas são de bibliotecas .NET, mas o padrão não é exclusivo para .NET.) O ASP.NET de exemplo a seguir cria uma instância de `HttpClient` para se comunicar com um serviço remoto. Você pode encontrar o exemplo completo [aqui][sample-app].
 
 ```csharp
 public class NewHttpClientInstancePerRequestController : ApiController
@@ -76,18 +74,18 @@ O seguinte exemplo usa uma instância `HttpClient` estática, compartilhamento, 
 ```csharp
 public class SingleHttpClientInstanceController : ApiController
 {
-    private static readonly HttpClient HttpClient;
+    private static readonly HttpClient httpClient;
 
     static SingleHttpClientInstanceController()
     {
-        HttpClient = new HttpClient();
+        httpClient = new HttpClient();
     }
 
     // This method uses the shared instance of HttpClient for every call to GetProductAsync.
     public async Task<Product> GetProductAsync(string id)
     {
         var hostName = HttpContext.Current.Request.Url.Host;
-        var result = await HttpClient.GetStringAsync(string.Format("http://{0}:8080/api/...", hostName));
+        var result = await httpClient.GetStringAsync(string.Format("http://{0}:8080/api/...", hostName));
         return new Product { Name = result };
     }
 }

@@ -5,11 +5,11 @@ keywords: "Especialistas em AWS, comparação com o Azure, comparação com o AW
 author: lbrader
 ms.date: 03/24/2017
 pnp.series.title: Azure for AWS Professionals
-ms.openlocfilehash: e5f7cb5062b0b4a8526f3b29a9fa4ddaff399fc0
-ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
+ms.openlocfilehash: b8698675efa42bb3fae73cefe7b078942549b412
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/30/2018
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="azure-for-aws-professionals"></a>Azure para profissionais do AWS
 
@@ -351,7 +351,7 @@ O Simple Queueing Service (SQS) do AWS fornece um sistema de mensagens para cone
 
 -   [Armazenamento de Filas](https://azure.microsoft.com/documentation/articles/storage-nodejs-how-to-use-queues/) - Um serviço de mensagens em nuvem que permite a comunicação entre componentes de aplicativos na plataforma Azure.
 
--   [Barramento de Serviço](https://azure.microsoft.com/en-us/services/service-bus/) - Um sistema de mensagens mais robusto, para conectar aplicativos, serviços e dispositivos. Usando a [retransmissão do Barramento de Serviço](https://docs.microsoft.com/en-us/azure/service-bus-relay/relay-what-is-it) relacionada, o Barramento de Serviço também pode se conectar a aplicativos e serviços hospedados remotamente.
+-   [Barramento de Serviço](https://azure.microsoft.com/services/service-bus/) - Um sistema de mensagens mais robusto, para conectar aplicativos, serviços e dispositivos. Usando a [retransmissão do Barramento de Serviço](https://docs.microsoft.com/azure/service-bus-relay/relay-what-is-it) relacionada, o Barramento de Serviço também pode se conectar a aplicativos e serviços hospedados remotamente.
 
 #### <a name="device-farm"></a>Device Farm
 
