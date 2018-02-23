@@ -4,11 +4,11 @@ description: "Lista de verificação que fornece diretrizes relacionadas a DevOp
 author: dragon119
 ms.date: 01/10/2018
 ms.custom: checklist
-ms.openlocfilehash: c435ea0aed9571cb6508d7d23f93414a138998fe
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: 356fef2415347ae132915695a25fd9b50779bd8b
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="devops-checklist"></a>Lista de verificação de DevOps
 
@@ -126,7 +126,7 @@ Documentação compartilhada é algo essencial. Incentivamos que os membros da e
 
 **Use gerenciamento de configuração.** Alterações de configuração devem ser planejadas, visíveis para as operações e registradas. Isso pode assumir a forma de um banco de dados de gerenciamento de configuração ou uma abordagem de configuração como código. A configuração deve ser examinada regularmente para garantir que o que é esperado esteja realmente em vigor.
 
-**Obtenha um plano de suporte do Azure e entenda o processo.** O Azure oferece um número de [planos de suporte][azure-support-plans]. Determinar o plano certo para suas necessidades e verifique se toda a equipe sabe como usá-lo. Os membros da equipe devem entender os detalhes do plano, como funciona o processo de suporte e como abrir um tíquete de suporte com o Azure. Se você estiver prevendo um evento de grande escala, o suporte do Azure pode ajudar a aumentar os limites do serviço. Para obter mais informações, consulte as [Perguntas Frequentes do Suporte do Azure](https://azure.microsoft.com/en-us/support/faq/).
+**Obtenha um plano de suporte do Azure e entenda o processo.** O Azure oferece um número de [planos de suporte][azure-support-plans]. Determinar o plano certo para suas necessidades e verifique se toda a equipe sabe como usá-lo. Os membros da equipe devem entender os detalhes do plano, como funciona o processo de suporte e como abrir um tíquete de suporte com o Azure. Se você estiver prevendo um evento de grande escala, o suporte do Azure pode ajudar a aumentar os limites do serviço. Para obter mais informações, consulte as [Perguntas Frequentes do Suporte do Azure](https://azure.microsoft.com/support/faq/).
 
 **Siga os princípios de privilégios mínimos ao conceder acesso aos recursos.** Gerencie o acesso aos recursos cuidadosamente. O acesso deve ser negado por padrão, a menos que um usuário receba acesso a um recurso explicitamente. Conceda a um usuário apenas o acesso ao que ele precisa para concluir suas tarefas. Acompanhe as permissões de usuário e realize auditorias de segurança frequentes.
 

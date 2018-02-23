@@ -5,12 +5,13 @@ keywords: "padrão de design"
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories: resiliency
-ms.openlocfilehash: 6c02b384e71c068ecbc78f3170d28cea406538e2
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+pnp.pattern.categories:
+- resiliency
+ms.openlocfilehash: 73fdcbcc2bd75593a4c8e33dc2259c90593e14db
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="retry-pattern"></a>Padrão de repetição
 
@@ -48,7 +49,7 @@ O aplicativo deve encapsular todas as tentativas de acessar um serviço remoto n
 
 Um aplicativo deve registrar em log os detalhes das falhas e as falhas de operações. Essas informações são úteis para os operadores. Se um serviço fica indisponível ou ocupado com frequência, isso normalmente ocorre porque ele esgotou seus recursos. Você pode reduzir a frequência dessas falhas expandindo o serviço. Por exemplo, se um serviço de banco de dados fica continuamente sobrecarregado, pode ser benéfico particionar o banco de dados e distribuir a carga entre vários servidores.
 
-> O [Microsoft Entity Framework](https://docs.microsoft.com/ef/) fornece recursos para repetir operações de banco de dados. Além disso, a maioria dos serviços do Azure e SDKs do cliente incluem um mecanismo de repetição. Para saber mais, consulte [Diretrizes de repetição para serviços específicos](https://docs.microsoft.com/en-us/azure/architecture/best-practices/retry-service-specific).
+> O [Microsoft Entity Framework](https://docs.microsoft.com/ef/) fornece recursos para repetir operações de banco de dados. Além disso, a maioria dos serviços do Azure e SDKs do cliente incluem um mecanismo de repetição. Para saber mais, consulte [Diretrizes de repetição para serviços específicos](https://docs.microsoft.com/azure/architecture/best-practices/retry-service-specific).
 
 ## <a name="issues-and-considerations"></a>Problemas e considerações
 
@@ -172,5 +173,5 @@ private bool IsTransient(Exception ex)
 ## <a name="related-patterns-and-guidance"></a>Diretrizes e padrões relacionados
 
 - [Padrão de disjuntor](circuit-breaker.md). O Padrão de repetição é útil para tratar falhas transitórias. Se espera-se que uma falha seja mais duradoura, pode ser mais apropriado implementar o Padrão de disjuntor. O Padrão de repetição também pode ser usado junto com um disjuntor para fornecer uma abordagem abrangente para tratar falhas.
-- [Diretrizes de repetição para serviços específicos](https://docs.microsoft.com/en-us/azure/architecture/best-practices/retry-service-specific)
-- [Resiliência de Conexão](https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency)
+- [Diretrizes de repetição para serviços específicos](https://docs.microsoft.com/azure/architecture/best-practices/retry-service-specific)
+- [Resiliência de Conexão](https://docs.microsoft.com/ef/core/miscellaneous/connection-resiliency)

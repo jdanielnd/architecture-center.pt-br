@@ -3,11 +3,11 @@ title: "Escolhendo uma tecnologia de ingestão de mensagens em tempo real"
 description: 
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 4f76e63a50c1d689ea3a37219a44aa94477a2e2e
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: 2e6578b779950b5ef11bda7b8ba1fb2e45e09f4e
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="choosing-a-real-time-message-ingestion-technology-in-azure"></a>Escolhendo uma tecnologia de ingestão de mensagens em tempo real no Azure
 
@@ -62,12 +62,12 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 
 | | Hub IoT | Hubs de evento | Kafka no HDInsight |
 | --- | --- | --- | --- |
-| Comunicações da nuvem para o dispositivo | sim | Não  | Não  |
-| Upload de arquivo iniciado pelo dispositivo | sim | Não  | Não  |
+| Comunicações da nuvem para o dispositivo | sim | Não | Não  |
+| Upload de arquivo iniciado pelo dispositivo | sim | Não | Não  |
 | Informações de estado do dispositivo | [Dispositivos gêmeos](/azure/iot-hub/iot-hub-devguide-device-twins) | Não  | Não  |
 | Suporte a protocolo | MQTT, AMQP, HTTPS <sup>1</sup> | AMQP, HTTPS | [Protocolo do Kafka](https://cwiki.apache.org/confluence/display/KAFKA/A+Guide+To+The+Kafka+Protocol) |
 | Segurança | Identidade por dispositivo; controle de acesso revogável. | Políticas de acesso compartilhado; revogação limitada por meio de políticas do publicador. | Autenticação com SASL; autorização conectável; integração com serviços de autenticação externa compatíveis. |
 
 [1] Também use o [gateway de protocolo IoT do Azure](/azure/iot-hub/iot-hub-protocol-gateway) como um gateway personalizado para habilitar a adaptação de protocolo para o Hub IoT.
 
-Para obter mais informações, consulte [Comparação entre o Hub IoT do Azure e os Hubs de Eventos do Azure](/azure/iot-hub/iot-hub-compare-event-hubss).
+Para obter mais informações, consulte [Comparação entre o Hub IoT do Azure e os Hubs de Eventos do Azure](/azure/iot-hub/iot-hub-compare-event-hubs).

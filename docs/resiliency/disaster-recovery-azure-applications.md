@@ -3,11 +3,11 @@ title: "Recuperação de desastre para aplicativos do Azure"
 description: "Visão geral técnica e informações detalhadas sobre como projetar aplicativos para recuperação de desastre no Microsoft Azure."
 author: adamglick
 ms.date: 05/26/2017
-ms.openlocfilehash: 5ed6e2cec149571724f1545b40f628d6bbe1ad71
-ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
+ms.openlocfilehash: 7235e752cf1b96e392a700b223d63b07c0f85b66
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/08/2017
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="disaster-recovery-for-azure-applications"></a>Recuperação de desastre para aplicativos do Azure
 
@@ -268,7 +268,7 @@ Assim como no cenário híbrido, as implantações de failover nas arquiteturas 
 Se sua estratégia de recuperação de desastres depende de várias plataformas de nuvem, é importante incluir camadas de abstração no design da solução. Isso elimina a necessidade de desenvolver e manter duas versões diferentes do mesmo aplicativo para diferentes plataformas de nuvem em caso de desastre. Assim como no cenário híbrido, nesses casos, o uso das Máquinas Virtuais do Azure ou do Serviço de Contêiner do Azure pode ser mais fácil que o uso de designs de PaaS específicos de nuvem.
 
 ## <a name="automation"></a>Automação
-Alguns dos padrões que acabamos de discutir exigem ativação rápida de implantações offline, bem como restauração de partes específicas de um sistema. Scripts de automação podem ativar recursos sob demanda e implantar soluções rapidamente. Os exemplos de automação relacionados à recuperação de desastres abaixo usam o [Azure PowerShell](https://msdn.microsoft.com/library/azure/jj156055.aspx), mas usar a [CLI do Azure](https://docs.microsoft.com/en-us/cli/azure/get-started-with-azure-cli) ou a [API REST de gerenciamento de serviços](https://msdn.microsoft.com/library/azure/ee460799.aspx) também são boas opções.
+Alguns dos padrões que acabamos de discutir exigem ativação rápida de implantações offline, bem como restauração de partes específicas de um sistema. Scripts de automação podem ativar recursos sob demanda e implantar soluções rapidamente. Os exemplos de automação relacionados à recuperação de desastres abaixo usam o [Azure PowerShell](https://msdn.microsoft.com/library/azure/jj156055.aspx), mas usar a [CLI do Azure](https://docs.microsoft.com/cli/azure/get-started-with-azure-cli) ou a [API REST de gerenciamento de serviços](https://msdn.microsoft.com/library/azure/ee460799.aspx) também são boas opções.
 
 Os scripts de automação gerenciam os aspectos da recuperação de desastres que não são tratados de forma transparente pelo Azure. Isso produz resultados consistentes e reproduzíveis, minimizando o erro humano. Os scripts de recuperação de desastres predefinidos também reduz o tempo para recriação de um sistema e suas partes constituintes durante um desastre. Você não quer tentar descobrir manualmente como restaurar seu site enquanto ele está inativo e perdendo dinheiro a cada minuto.
 
@@ -277,7 +277,7 @@ Teste seus scripts repetidamente do início ao fim. Após verificar a funcionali
 Uma prática recomendada da automação é criar um repositório de scripts do PowerShell ou scripts de CLI (interface de linha de comando) para recuperação de desastre do Azure. Maque-os e categorize-os claramente para agilizar o acesso. Designe uma pessoa primária para gerenciar o repositório e controlar a versão dos scripts. Documente-os bem, com explicações de parâmetros e exemplos de uso dos scripts. Certifique-se também de manter esta documentação em sincronia com as implantações do Azure. Isso destaca o propósito de ter uma pessoa primária responsável por todas as partes do repositório.
 
 ## <a name="failure-detection"></a>detecção de falhas
-Para lidar corretamente com problemas de disponibilidade e recuperação de desastre, você precisa ser capaz de detectar e diagnosticar falhas. Execute monitoramento avançado do servidor e da implantação para reconhecer rapidamente quando um sistema ou seus componentes se tornam indisponíveis repentinamente. Ferramentas de monitoramento que avaliam a integridade geral do serviço de nuvem e suas dependências podem fazer parte desse trabalho. Uma ferramenta adequada da Microsoft é o [System Center 2016](https://www.microsoft.com/en-us/server-cloud/products/system-center-2016/). Ferramentas de terceiros também podem fornecer recursos de monitoramento. A maioria das soluções de monitoramento monitora os principais contadores de desempenho e a disponibilidade do serviço.
+Para lidar corretamente com problemas de disponibilidade e recuperação de desastre, você precisa ser capaz de detectar e diagnosticar falhas. Execute monitoramento avançado do servidor e da implantação para reconhecer rapidamente quando um sistema ou seus componentes se tornam indisponíveis repentinamente. Ferramentas de monitoramento que avaliam a integridade geral do serviço de nuvem e suas dependências podem fazer parte desse trabalho. Uma ferramenta adequada da Microsoft é o [System Center 2016](https://www.microsoft.com/server-cloud/products/system-center-2016/). Ferramentas de terceiros também podem fornecer recursos de monitoramento. A maioria das soluções de monitoramento monitora os principais contadores de desempenho e a disponibilidade do serviço.
 
 Embora essas ferramentas sejam vitais, você deve se planejar para a detecção de falhas e dos relatórios em um serviço de nuvem. Você também deve se planejar para usar adequadamente o Diagnóstico do Azure. Contadores de desempenho personalizados ou entradas de log de eventos também podem fazer parte da estratégia geral. Isso fornece mais dados durante falhas para diagnosticar o problema rapidamente e restaurar todos os recursos. Esse recurso também fornece métricas adicionais que as ferramentas de monitoramento podem usar para determinar a integridade do aplicativo. Para saber mais, confira [Habilitando o Diagnóstico do Azure nos Serviços de Nuvem do Azure](/azure/cloud-services/cloud-services-dotnet-diagnostics/). Para uma discussão sobre como planejar um "modelo de integridade" geral, confira [Failsafe: Guidance for Resilient Cloud Architectures](https://channel9.msdn.com/Series/FailSafe)(À prova de falhas: orientação para arquiteturas de nuvem resilientes).
 

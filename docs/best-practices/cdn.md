@@ -4,11 +4,11 @@ description: "Diretriz na Rede de Distribuição de Conteúdo (CDN) para fornece
 author: dragon119
 ms.date: 02/02/2018
 pnp.series.title: Best Practices
-ms.openlocfilehash: 73da41edec246b672564dd4a52b317eacf8ad649
-ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242
+ms.openlocfilehash: 9ee9099c85818af9486408f6ece41d3f6fcd9b44
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/09/2018
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="best-practices-for-using-content-delivery-networks-cdns"></a>Melhores práticas para uso das CDNs (redes de distribuição de conteúdo)
 
@@ -95,5 +95,3 @@ Se você entregar ativos estáticos (como arquivos de fonte) usando a CDN, talve
 
 ### <a name="cdn-fallback"></a>Fallback de CDN
 Leve em consideração como seu aplicativo lidará com uma falha ou indisponibilidade temporária da CDN. Os aplicativos cliente poderão usar cópias dos recursos que foram armazenados em cache localmente (no cliente) durante solicitações anteriores, ou eles podem incluir o código que detecta falhas e solicita, em vez disso, os recursos de origem (a pasta de aplicativo ou o contêiner de blob do Azure que contém os recursos) se o CDN não estiver disponível.
-
-O exemplo a seguir mostra um mecanismo de fallback

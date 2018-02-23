@@ -4,11 +4,11 @@ description: "Diretriz específica de serviço para configurar o mecanismo de re
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: da1145e2f2f91befd69505ae9ef2734d6110c1d0
-ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
+ms.openlocfilehash: 6bb623bd8be89573178f250570407bf83d62c098
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/30/2018
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="retry-guidance-for-specific-services"></a>Repetir as diretrizes para serviços específicos
 
@@ -416,7 +416,7 @@ using (var db = new BloggingContext())
 
 ### <a name="more-information"></a>Mais informações
 * [Resiliência de conexão](/ef/core/miscellaneous/connection-resiliency)
-* [Pontos de dados - Core EF 1.1](https://msdn.microsoft.com/en-us/magazine/mt745093.aspx)
+* [Pontos de dados - Core EF 1.1](https://msdn.microsoft.com/magazine/mt745093.aspx)
 
 ## <a name="sql-database-using-adonet-retry-guidelines"></a>Diretrizes de repetição para Banco de Dados SQL usando o ADO.NET
 O Banco de Dados SQL é um banco de dados SQL disponível em vários tamanhos e como um serviço padrão (compartilhado) e premium (não compartilhado).
@@ -1006,7 +1006,7 @@ Considere o seguinte ao acessar os serviços do Azure ou de terceiros:
 ### <a name="retry-strategies"></a>Estratégias de repetição
 Veja a seguir os tipos comuns de intervalo de estratégias de repetição:
 
-* **Exponencial**: uma política de repetição que executa um determinado número de repetições usando uma abordagem de retirada exponencial aleatória para determinar o intervalo entre as repetições. Por exemplo:
+* **Exponencial**: uma política de repetição que executa um determinado número de repetições usando uma abordagem de retirada exponencial aleatória para determinar o intervalo entre as repetições. Por exemplo: 
 
         var random = new Random();
 
@@ -1016,11 +1016,11 @@ Veja a seguir os tipos comuns de intervalo de estratégias de repetição:
         var interval = (int)Math.Min(checked(this.minBackoff.TotalMilliseconds + delta),
                        this.maxBackoff.TotalMilliseconds);
         retryInterval = TimeSpan.FromMilliseconds(interval);
-* **Incremental**: uma estratégia de repetição com um número especificado de tentativas de repetição e um intervalo de tempo incremental entre entradas. Por exemplo:
+* **Incremental**: uma estratégia de repetição com um número especificado de tentativas de repetição e um intervalo de tempo incremental entre entradas. Por exemplo: 
 
         retryInterval = TimeSpan.FromMilliseconds(this.initialInterval.TotalMilliseconds +
                        (this.increment.TotalMilliseconds * currentRetryCount));
-* **LinearRetry**: uma política de repetição que executa um número especificado de repetições usando um intervalo de tempo fixo especificado entre as repetições. Por exemplo:
+* **LinearRetry**: uma política de repetição que executa um número especificado de repetições usando um intervalo de tempo fixo especificado entre as repetições. Por exemplo: 
 
         retryInterval = this.deltaBackoff;
 

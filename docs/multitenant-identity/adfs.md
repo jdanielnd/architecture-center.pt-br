@@ -6,11 +6,11 @@ ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: token-cache
 pnp.series.next: client-assertion
-ms.openlocfilehash: a5dc25a4b61ffd13d86f1abb2b839054e5fb4c7f
-ms.sourcegitcommit: 475064f0a3c2fac23e1286ba159aaded287eec86
+ms.openlocfilehash: 08bf567085a940287de310f61b9f447d0ce5d5ec
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/19/2018
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="federate-with-a-customers-ad-fs"></a>Federar com o AD FS de um cliente
 
@@ -63,10 +63,10 @@ Por padrão, o aplicativo de terceira parte recebe apenas um conjunto fixo de de
 | exp |[Hora de expiração]. O tempo após o qual o token não será mais aceito. |
 | iat |Emitido em. A hora em que o token foi emitido. |
 | iss |Emissor. O valor dessa declaração sempre será o AD FS do parceiro de recurso. |
-| Nome |Nome de usuário. Exemplo: `john@corp.fabrikam.com`. |
+| Nome |Nome de usuário. Exemplo: `john@corp.fabrikam.com` |
 | nameidentifier |[Identificador de nome]. O identificador d o nome da entidade para a qual o token foi emitido. |
 | nonce |Nonce de sessão. Um valor exclusivo gerado pelo AD FS para ajudar a evitar ataques de repetição. |
-| upn |Nome UPN. Exemplo: john@corp.fabrikam.com |
+| upn |Nome UPN. Exemplo: `john@corp.fabrikam.com` |
 | pwd_exp |Período de expiração de senha. O número de segundos de validade da senha do usuário ou de um segredo de autenticação semelhante, como um PIN. expira. |
 
 > [!NOTE]
