@@ -3,11 +3,11 @@ title: "Refatorar um Aplicativo Azure Service Fabric migrado a partir dos Servi�
 description: "Como refatorar um Aplicativo do Azure Service Fabric existente migrado a partir dos Serviços de Nuvem do Azure"
 author: petertay
 ms.date: 01/30/2018
-ms.openlocfilehash: 18af7c7fe0c0933b1a2a132ee2ee0d8479d41b2a
-ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242
+ms.openlocfilehash: 450648fbd0b19cdc7585738701914a1ebc1ed779
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/09/2018
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="refactor-an-azure-service-fabric-application-migrated-from-azure-cloud-services"></a>Refatorar um Aplicativo Azure Service Fabric migrado a partir dos Serviços de Nuvem do Azure
 
@@ -78,7 +78,7 @@ O **Tailspin.SurveyAnalysisService** é um serviço sem estado que persiste dado
 
 O Azure Service Fabric oferece suporte aos modelos de programação a seguir:
 * O modelo convidado executável permite que qualquer executável seja empacotado como um serviço e implantado a um cluster do Service Fabric. O Service Fabric orquestra e gerencia a execução do convidado executável.
-* O modelo do contêiner permite a implantação de serviços em imagens de contêiner. O Service Fabric oferece suporte à criação e ao gerenciamento de contêineres sobre o kernel do Linux, bem como a contêineres do Windows Server. 
+* O modelo do contêiner permite a implantação de serviços em imagens de contêiner. O Service Fabric oferece suporte à criação e gerenciamento de contêineres sobre o kernel do Linux, bem como a contêineres do Windows Server. 
 * O modelo de programação de serviços confiável permite a criação de serviços com ou sem estado que se integram com todos os recursos de plataforma do Service Fabric. Os serviços com estado permitem que estados replicados sejam armazenados no cluster do Service Fabric. Os serviços sem estado não permitem.
 * O modelo confiável de programação de atores permite a criação de serviços que implementam o padrão de ator virtual.
 
@@ -151,7 +151,7 @@ O código do aplicativo Surveys está disponível no [GitHub][sample-code].
 Se você está apenas começando a usar o [Azure Service Fabric][service-fabric], primeiro configure seu ambiente de desenvolvimento, depois baixe a versão mais recente do [SDK do Azure][azure-sdk] e [SDK do Azure Service Fabric][service-fabric-sdk]. O SDK inclui o gerenciador de cluster OneBox para que você possa implantar e testar o aplicativo Surveys localmente com depuração F5 completa.
 
 <!-- links -->
-[azure-sdk]: https://azure.microsoft.com/en-us/downloads/archive-net-downloads/
+[azure-sdk]: https://azure.microsoft.com/downloads/archive-net-downloads/
 [container-scenarios]: /azure/service-fabric/service-fabric-containers-overview
 [kestrel]: https://docs.microsoft.com/aspnet/core/fundamentals/servers/kestrel?tabs=aspnetcore2x
 [kestrel-intro]: https://docs.microsoft.com/aspnet/core/fundamentals/servers/kestrel?tabs=aspnetcore1x

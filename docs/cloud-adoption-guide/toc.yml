@@ -1,6 +1,6 @@
 - name: Centro de Arquitetura do Azure
   href: /azure/architecture
-- name: Guia de Adoção da Nuvem do Azure
+- name: Guia de Adoção da Nuvem
   href: index.md
   items:
     - name: Adoção Fundamental do Azure
@@ -53,7 +53,7 @@
                 - name: 'Explicador: o que é uma rede virtual do Azure?'
                   href: /azure/virtual-network/virtual-networks-overview?toc=/azure/architecture/cloud-adoption-guide/toc.json
                 - name: 'Aprenda a: implantar uma rede virtual no Azure'
-                  href: /azure/virtual-network/virtual-networks-create-vnet-arm-portal?toc=/azure/architecture/cloud-adoption-guide/toc.json
+                  href: /azure/virtual-network/virtual-networks-create-vnet-arm-pportal?toc=/azure/architecture/cloud-adoption-guide/toc.json
                 - name: 'Aprenda a: implantar uma carga de trabalho única de IaaS de VM do Windows no Azure'
                   href: /azure/virtual-machines/windows/quick-create-portal?toc=/azure/architecture/cloud-adoption-guide/toc.json
                 - name: 'Diretrizes: práticas recomendadas para implantar uma VM do Windows no Azure'
