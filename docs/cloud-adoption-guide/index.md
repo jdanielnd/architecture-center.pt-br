@@ -1,12 +1,12 @@
 ---
 layout: LandingPage
-ms.openlocfilehash: e39a744b6f0226a5b0bb14d03a0b8a3d4479e01b
-ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242
+ms.openlocfilehash: b5c88ac0307c7d47f5bde73322bedd7063136576
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/09/2018
+ms.lasthandoff: 02/23/2018
 ---
-# <a name="azure-cloud-adoption-guide"></a>Guia de Adoção da Nuvem do Azure
+# <a name="cloud-adoption-guide"></a>Guia de Adoção da Nuvem
 
 A nuvem apresenta uma mudança fundamental na maneira como as empresas adquirem e utilizam os recursos de tecnologia. No passado, as empresas assumiam propriedade e responsabilidade de todos os níveis de tecnologia da infraestrutura para o software. Agora, a nuvem oferece o potencial para transformar a maneira como as empresas usam a tecnologia, provisionando e consumindo recursos conforme necessário.
 

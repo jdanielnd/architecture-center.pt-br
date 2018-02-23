@@ -1,6 +1,6 @@
 - name: Centro de Arquitetura do Azure
   href: /azure/architecture
-- name: Guia de Adoção da Nuvem do Azure
+- name: Guia de Adoção da Nuvem
   href: index.md
   items:
     - name: Adoção Fundamental do Azure
