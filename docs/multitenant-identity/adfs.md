@@ -6,11 +6,11 @@ ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: token-cache
 pnp.series.next: client-assertion
-ms.openlocfilehash: bf385ccc988a709a61d9bee5fb1ee084a133138d
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: a5dc25a4b61ffd13d86f1abb2b839054e5fb4c7f
+ms.sourcegitcommit: 475064f0a3c2fac23e1286ba159aaded287eec86
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 02/19/2018
 ---
 # <a name="federate-with-a-customers-ad-fs"></a>Federar com o AD FS de um cliente
 
@@ -55,7 +55,7 @@ Para obter um exemplo do uso da especificação Web Services Federation com ASP.
 ## <a name="limitations"></a>Limitações
 Por padrão, o aplicativo de terceira parte recebe apenas um conjunto fixo de declarações disponíveis no id_token, mostrado na tabela a seguir. Com o AD FS 2016, você pode personalizar o id_token em cenários de OpenID Connect. Para saber mais, veja [Tokens de ID personalizados do AD FS](/windows-server/identity/ad-fs/development/customize-id-token-ad-fs-2016).
 
-| Declaração | Descrição |
+| Declaração | DESCRIÇÃO |
 | --- | --- |
 | aud |Público-alvo. O aplicativo para o qual as declarações foram emitidas. |
 | authenticationinstant |[Instante da autenticação]. A hora em que a autenticação ocorreu. |
@@ -63,7 +63,7 @@ Por padrão, o aplicativo de terceira parte recebe apenas um conjunto fixo de de
 | exp |[Hora de expiração]. O tempo após o qual o token não será mais aceito. |
 | iat |Emitido em. A hora em que o token foi emitido. |
 | iss |Emissor. O valor dessa declaração sempre será o AD FS do parceiro de recurso. |
-| name |Nome de usuário. Exemplo: `john@corp.fabrikam.com`. |
+| Nome |Nome de usuário. Exemplo: `john@corp.fabrikam.com`. |
 | nameidentifier |[Identificador de nome]. O identificador d o nome da entidade para a qual o token foi emitido. |
 | nonce |Nonce de sessão. Um valor exclusivo gerado pelo AD FS para ajudar a evitar ataques de repetição. |
 | upn |Nome UPN. Exemplo: john@corp.fabrikam.com |

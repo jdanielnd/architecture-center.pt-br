@@ -4,11 +4,11 @@ description: "Convenções de nomenclatura para recursos do Azure. Como nomear m
 author: telmosampaio
 ms.date: 05/18/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: 364735dec9658b4d2a9d21330f38c57f6fa694bd
-ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
+ms.openlocfilehash: f814201901af69b816d7f1588e58057b252b22db
+ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2018
+ms.lasthandoff: 02/09/2018
 ---
 # <a name="naming-conventions"></a>Convenções de nomenclatura
 
@@ -96,10 +96,10 @@ Em geral, evite usar caracteres especiais (`-` ou `_`) como o primeiro ou últim
 | Entidade | Escopo | Comprimento | Capitalização | Caracteres válidos | Padrão sugerido | Exemplo |
 | --- | --- | --- | --- | --- | --- | --- |
 |Nome da conta de armazenamento (dados) |Global |3-24 |Letras minúsculas |Alfanumérico |`<globally unique name><number>` (use uma função para calcular um guid exclusivo de nomeação de contas de armazenamento) |`profxdata001` |
-|Nome da conta de armazenamento (discos) |Global |3-24 |Letras minúsculas |Alfanumérico |`<vm name without dashes>st<number>` |`profxsql001st0` |
-| Nome do contêiner |Conta de armazenamento |3-63 |Letras minúsculas |Alfanumérico e traço |`<context>` |`logs` |
+|Nome da conta de armazenamento (discos) |Global |3-24 |Letras minúsculas |Alfanumérico |`<vm name without hyphens>st<number>` |`profxsql001st0` |
+| Nome do contêiner |Conta de armazenamento |3-63 |Letras minúsculas |Alfanumérico e hífen |`<context>` |`logs` |
 |Nome de blob | Contêiner |1-1024 |Diferencia maiúsculas de minúsculas |Caracteres de URL |`<variable based on blob usage>` |`<variable based on blob usage>` |
-|Nome da fila |Conta de armazenamento |3-63 |Letras minúsculas |Alfanumérico e traço |`<service short name>-<context>-<num>` |`awesomeservice-messages-001` |
+|Nome da fila |Conta de armazenamento |3-63 |Letras minúsculas |Alfanumérico e hífen |`<service short name>-<context>-<num>` |`awesomeservice-messages-001` |
 |Nome da tabela | Conta de armazenamento |3-63 |Não diferencia maiúsculas de minúsculas |Alfanumérico |`<service short name><context>` |`awesomeservicelogs` |
 |Nome do arquivo | Conta de armazenamento |3-63 |Letras minúsculas | Alfanumérico |`<variable based on blob usage>` |`<variable based on blob usage>` |
 |Repositório Data Lake | Global |3-24 |Letras minúsculas | Alfanumérico |`<name>-dls` |`telemetry-dls` |
@@ -108,16 +108,16 @@ Em geral, evite usar caracteres especiais (`-` ou `_`) como o primeiro ou últim
 
 | Entidade | Escopo | Comprimento | Capitalização | Caracteres válidos | Padrão sugerido | Exemplo |
 | --- | --- | --- | --- | --- | --- | --- |
-|Rede virtual (VNet) |Grupo de recursos |2-64 |Não diferencia maiúsculas de minúsculas |Alfanumérico, traço, sublinhado e ponto |`<service short name>-vnet` |`profx-vnet` |
-|Sub-rede |Rede virtual pai |2-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, traço, sublinhado e ponto |`<descriptive context>` |`web` |
-|Interface de rede |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, traço, sublinhado e ponto |`<vmname>-nic<num>` |`profx-sql1-nic1` |
-|Grupo de Segurança de Rede |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, traço, sublinhado e ponto |`<service short name>-<context>-nsg` |`profx-app-nsg` |
-|Regra de grupo de segurança de rede |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, traço, sublinhado e ponto |`<descriptive context>` |`sql-allow` |
-|Endereço IP público |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, traço, sublinhado e ponto |`<vm or service name>-pip` |`profx-sql1-pip` |
-|Balanceador de carga |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, traço, sublinhado e ponto |`<service or role>-lb` |`profx-lb` |
-|Configuração de regras de balanceamento de carga |Balanceador de carga |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, traço, sublinhado e ponto |`<descriptive context>` |`http` |
-|Gateway de Aplicativo do Azure |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, traço, sublinhado e ponto |`<service or role>-agw` |`profx-agw` |
-|Perfil de Gerenciador de Tráfego |Grupo de recursos |1-63 |Não diferencia maiúsculas de minúsculas |Alfanumérico, traço e ponto |`<descriptive context>` |`app1` |
+|Rede virtual (VNet) |Grupo de recursos |2-64 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<service short name>-vnet` |`profx-vnet` |
+|Sub-rede |Rede virtual pai |2-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<descriptive context>` |`web` |
+|Interface de rede |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<vmname>-nic<num>` |`profx-sql1-nic1` |
+|Grupo de Segurança de Rede |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<service short name>-<context>-nsg` |`profx-app-nsg` |
+|Regra de grupo de segurança de rede |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<descriptive context>` |`sql-allow` |
+|Endereço IP público |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<vm or service name>-pip` |`profx-sql1-pip` |
+|Balanceador de carga |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<service or role>-lb` |`profx-lb` |
+|Configuração de regras de balanceamento de carga |Balanceador de carga |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<descriptive context>` |`http` |
+|Gateway de Aplicativo do Azure |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<service or role>-agw` |`profx-agw` |
+|Perfil de Gerenciador de Tráfego |Grupo de recursos |1-63 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen e ponto |`<descriptive context>` |`app1` |
 
 ## <a name="organize-resources-with-tags"></a>Organizar recursos com marcas
 

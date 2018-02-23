@@ -1,3 +1,15 @@
+---
+title: "Lista de verificação de DevOps"
+description: "Lista de verificação que fornece diretrizes relacionadas a DevOps."
+author: dragon119
+ms.date: 01/10/2018
+ms.custom: checklist
+ms.openlocfilehash: c435ea0aed9571cb6508d7d23f93414a138998fe
+ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.translationtype: HT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 02/14/2018
+---
 # <a name="devops-checklist"></a>Lista de verificação de DevOps
 
 DevOps é a integração do desenvolvimento, garantia de qualidade e operações de TI em uma cultura unificada e um conjunto de processos para entrega de software. Use esta lista de verificação como um ponto de partida para avaliar seu processo e cultura de DevOps.
@@ -16,7 +28,7 @@ DevOps é a integração do desenvolvimento, garantia de qualidade e operações
 
 **Aprenda com as falhas.** As falhas são inevitáveis, mas é importante aprender com as falhas para evitar repeti-las. Se uma falha operacional ocorrer, faça a triagem do problema, documente a causa e a solução e compartilhe as lições que foram aprendidas. Sempre que possível, atualize os processos de build para detectar automaticamente esse tipo de falha no futuro.
 
-**Otimize para velocidade e colete dados.** Todo aprimoramento planejado é uma hipótese. Trabalhe com os menores incrementos possíveis. Trate novas ideias como experimentos. Instrumente os experimentos de forma que você possa coletar dados de produção para avaliar a eficiência deles. Esteja preparado para fail-fast se a hipótese estiver errada.
+**Otimize para velocidade e colete dados.** Todo aprimoramento planejado é uma hipótese. Trabalhe com os menores incrementos possíveis. Trate novas ideias como experimentos. Instrumente os experimentos de forma que você possa coletar dados de produção para avaliar a eficiência deles. Esteja preparado para falhar rapidamente se a hipótese estiver errada.
 
 **Reserve tempo para o aprendizado.** Tanto êxitos quanto falhas fornecem boas oportunidades de aprendizado. Antes de passar para novos projetos, reserve tempo suficiente para reunir as lições importantes e verifique se as lições são absorvidas pela sua equipe. Dê também à equipe tempo para desenvolverem suas habilidades, experimentarem e aprenderem sobre novas ferramentas e técnicas. 
 
