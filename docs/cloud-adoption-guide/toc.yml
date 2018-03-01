@@ -58,7 +58,7 @@
                   href: /azure/virtual-machines/windows/quick-create-portal?toc=/azure/architecture/cloud-adoption-guide/toc.json
                 - name: 'Diretrizes: práticas recomendadas para implantar uma VM do Windows no Azure'
                   href: /azure/architecture/reference-architectures/virtual-machines-windows/single-vm?toc=/azure/architecture/cloud-adoption-guide/toc.json
-                - name: 'Aprenda a: implantar uma carga de trabalho única de IaaS de VM do Linux para o Azure'
+                - name: 'Aprenda a: implantar uma carga de trabalho única de IaaS de VM Linux para o Azure'
                   href: /azure/virtual-machines/linux/quick-create-portal?toc=/azure/architecture/cloud-adoption-guide/toc.json
                 - name: 'Diretrizes: práticas recomendadas para implantar uma VM do Linux no Azure'
                   href: /azure/architecture/reference-architectures/virtual-machines-linux/single-vm?toc=/azure/architecture/cloud-adoption-guide/toc.json
