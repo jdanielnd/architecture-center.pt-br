@@ -3,11 +3,11 @@ title: Arquiteturas de Big Data
 description: 
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 6ee44c6d94ae7ac5cb67cb5f16337deb1ffd4b70
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: 2a1336faea81470b082d4eef8e2cc53a082c63c7
+ms.sourcegitcommit: 023d88e781f7fe64c62b247d876441ee40921b1b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 02/28/2018
 ---
 # <a name="big-data-architectures"></a>Arquiteturas de Big Data
 
@@ -55,19 +55,6 @@ A maioria das arquiteturas de Big Data inclui alguns ou todos os seguintes compo
 * **Análise e relatórios**. A meta da maioria das soluções de Big Data é gerar insights sobre os dados por meio de análise e relatórios. Para capacitar os usuários a analisar os dados, a arquitetura pode incluir uma camada de modelagem de dados, como um cubo OLAP multidimensional ou um modelo de dados tabular no Azure Analysis Services. Também pode dar suporte a business intelligence de autoatendimento, usando as tecnologias de modelagem e visualização do Microsoft Power BI ou do Microsoft Excel. Análise e relatórios também podem assumir a forma de exploração de dados interativos por cientistas de dados ou analistas de dados. Para esses cenários, muitos serviços do Azure dão suporte a blocos de anotações analíticos, como Jupyter, permitindo que esses usuários aproveitem suas habilidades existentes com Python ou R. Para exploração de dados em larga escala, você pode usar o Microsoft R Server, seja no modo autônomo ou com Spark.
 
 * **Orquestração**. A maioria das soluções de Big Data consiste em operações de processamento de dados repetidas, encapsuladas em fluxos de trabalho, que transformam dados de origem, movem dados entre várias origens e coletores, carregam os dados processados em um armazenamento de dados analíticos ou enviam os resultados por push diretamente para um relatório ou painel. Para automatizar esses fluxos de trabalho, você pode usar uma tecnologia de orquestração, como Azure Data Factory ou Apache Oozie e Sqoop.
-
-## <a name="data-lake"></a>Data lake
-
-Se você leu algo sobre Big Data, é provável que tenha visto o termo _data lake_. Você pode ter visto a palavra usada para o nome de um produto ou talvez como um conceito sobre como armazenar grandes quantidades de dados. 
-
-Um data lake consiste no processamento e armazenamento. O armazenamento do data lake é criado com várias metas em mente: tolerância a falhas, escalabilidade infinita e ingestão de alta taxa de transferência de dados com vários formatos e tamanhos. O processamento do data lake envolve um ou mais mecanismos de processamento criados com essas metas em mente e pode operar em dados armazenados em um data lake em escala.
-
-Os data lake stores costumam ser usados em cenários de streaming de eventos ou de IoT, porque eles persistir grandes quantidades de dados relacionais e não relacionais sem transformação nem definição de esquema. Eles foram criados para lidar com grandes volumes de pequenas gravações em baixa latência e são otimizados para alta taxa de transferência.
-
-Outro termo geralmente usado em cenários de dados é _data mart_. Normalmente, um data mart é um repositório de dados que são limpos, empacotados e estruturados para fácil consumo. Ao contrário de um data mart, um data lake é projetado para ingerir dados brutos, deixando-os em sua forma original ou menos processada para permitir que perguntas sejam feitas de várias maneiras e em vários momentos. Se os dados são limpos e estruturados de uma forma específica, como em um data mart, é difícil adaptar como os dados são processados e analisados quando novas perguntas ou ferramentas surgem no futuro. É por isso que um data lake é composto por armazenamento e processamento como entidades separadas.
-
-Serviço do Azure relevante:
-- [Azure Data Lake](https://azure.microsoft.com/scenarios/data-lake/)
 
 ## <a name="lambda-architecture"></a>Arquitetura lambda
 
