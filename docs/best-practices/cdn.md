@@ -4,11 +4,11 @@ description: "Diretriz na Rede de Distribuição de Conteúdo (CDN) para fornece
 author: dragon119
 ms.date: 02/02/2018
 pnp.series.title: Best Practices
-ms.openlocfilehash: 9ee9099c85818af9486408f6ece41d3f6fcd9b44
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+ms.openlocfilehash: 42b73db08ecef858f5279ea292cf8c0df77b847c
+ms.sourcegitcommit: 29fbcb1eec44802d2c01b6d3bcf7d7bd0bae65fc
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/23/2018
+ms.lasthandoff: 02/27/2018
 ---
 # <a name="best-practices-for-using-content-delivery-networks-cdns"></a>Melhores práticas para uso das CDNs (redes de distribuição de conteúdo)
 
@@ -91,7 +91,7 @@ Se você entregar ativos estáticos (como arquivos de fonte) usando a CDN, talve
 
 * Configure a CDN para adicionar cabeçalhos CORS às respostas. Para obter mais informações, confira [Usando a CDN do Azure com o CORS](/azure/cdn/cdn-cors). 
 * Se a origem é o armazenamento de blobs do Azure, adicione regras do CORS ao ponto de extremidade de armazenamento. Para obter mais informações, consulte [Suporte de Compartilhamento de Recursos de Origens Cruzadas (CORS) para os serviços de armazenamento do Azure](http://msdn.microsoft.com/library/azure/dn535601.aspx).
-* Configure o aplicativo para definir os cabeçalhos CORS. Por exemplo, consulte [Habilitando o CORS (Solicitações Entre Origens)](/aspnet/core/security/cors) na documentação do ASP.NET Core.
+* Configure o aplicativo para definir os cabeçalhos CORS. Por exemplo, confira [Habilitando as Solicitações Entre Origens (CORS)](/aspnet/core/security/cors) na documentação do ASP.NET Core.
 
 ### <a name="cdn-fallback"></a>Fallback de CDN
 Leve em consideração como seu aplicativo lidará com uma falha ou indisponibilidade temporária da CDN. Os aplicativos cliente poderão usar cópias dos recursos que foram armazenados em cache localmente (no cliente) durante solicitações anteriores, ou eles podem incluir o código que detecta falhas e solicita, em vez disso, os recursos de origem (a pasta de aplicativo ou o contêiner de blob do Azure que contém os recursos) se o CDN não estiver disponível.

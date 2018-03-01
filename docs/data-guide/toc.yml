@@ -39,6 +39,8 @@
               href: concepts/non-relational-data.md
             - name: Trabalhando com arquivos CSV e JSON
               href: concepts/csv-and-json.md
+            - name: Data lakes
+              href: concepts/data-lake.md
             - name: Arquiteturas de Big Data
               href: concepts/big-data.md
             - name: Análise avançada

@@ -3,11 +3,11 @@ title: Executar um servidor Jenkins no Azure
 description: "Essa arquitetura de referência mostra como implantar e operar um servidor Jenkins escalonável, de nível corporativo, no Azure protegido com o logon único."
 author: njray
 ms.date: 01/21/18
-ms.openlocfilehash: 9cab4990b259695f310da339bfef3060b0905640
-ms.sourcegitcommit: 3426a9c5ed937f097725c487cf3d073ae5e2a347
+ms.openlocfilehash: 724185e43ed743013f52ded04b779552dd8e48c1
+ms.sourcegitcommit: 29fbcb1eec44802d2c01b6d3bcf7d7bd0bae65fc
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/01/2018
+ms.lasthandoff: 02/27/2018
 ---
 # <a name="run-a-jenkins-server-on-azure"></a>Executar um servidor Jenkins no Azure
 
@@ -44,7 +44,7 @@ Essa arquitetura consiste nos seguintes componentes:
 
 -   **Armazenamento de Blobs do Azure**. O [plug-in do Armazenamento do Microsoft Azure][configure-storage] usa o armazenamento de Blobs do Azure para armazenar os artefatos de compilação criados e compartilhados com outras compilações Jenkins.
 
--   **Azure Active Directory (Azure AD)**. O [Microsoft Azure Active Directory][azure-ad] dá suporte à autenticação de usuário, permitindo que você configure o logon único. As [entidades de serviço][service-principal] do Microsoft Azure Active Directory definem a política e as permissões para cada autorização de função no fluxo de trabalho por meio do [RBAC (controle de acesso baseado em função)][rbac]. Toda entidade de serviço está associada a um trabalho Jenkins.
+-   **Azure Active Directory (Azure AD)**. O [Microsoft Azure Active Directory][azure-ad] dá suporte à autenticação de usuário, permitindo que você configure o logon único. As [entidades de serviço][service-principal] do Azure AD definem a política e as permissões para cada autorização de função no fluxo de trabalho usando o [RBAC (controle de acesso baseado em função)][rbac]. Toda entidade de serviço está associada a um trabalho Jenkins.
 
 -   **Azure Key Vault.** Para gerenciar os segredos e as chaves de criptografia usados para provisionar recursos do Azure quando os segredos são necessários, essa arquitetura usa o [Azure Key Vault][key-vault]. Para obter mais ajuda com o armazenamento de segredos associados ao aplicativo no pipeline, consulte também o plug-in das [Credenciais do Azure][configure-credential] para o Jenkins.
 
@@ -139,7 +139,7 @@ Use as seguintes abordagens para ajudar a bloquear a segurança em um servidor J
 
 -   Instale o plug-in das [Credenciais do Azure][configure-credential] para usar o Key Vault para lidar com segredos dos ativos do Azure, com os agentes no pipeline e com os componentes de terceiros.
 
--   Crie um perfil de segurança que defina os recursos que os usuários, serviços e agentes de pipeline exigem para trabalhar — mas nada mais. Essa etapa se torna essencial ao considerar as configurações de segurança.
+-   Use o RBAC para restringir o acesso da entidade de serviço para o mínimo necessário para executar os trabalhos. Isso ajuda a limitar o escopo de danos de um trabalho invasor.
 
 Os trabalhos Jenkins geralmente requerem segredos para acessar os serviços do Azure que exigem autorização, como o Serviço de Contêiner do Azure. Use o [Key Vault][key-vault] juntamente com o [plug-in de Credencial do Azure][configure-credential] para gerenciar esses segredos com segurança. Use o Key Vault para armazenar credenciais da entidade de serviço, senhas, tokens e outros segredos.
 

@@ -2,11 +2,11 @@
 title: "Diretrizes: design de locatário do Azure AD"
 description: "Diretrizes de design de locatário do Azure como parte de uma estratégia básica de adoção da nuvem"
 author: telmosampaio
-ms.openlocfilehash: 5bf710f74bde04e041f2896b4a638c3513e4aa44
-ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242
+ms.openlocfilehash: 9ac52e9fd44bd8b9c777625002d5960f4f269be2
+ms.sourcegitcommit: 29fbcb1eec44802d2c01b6d3bcf7d7bd0bae65fc
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/09/2018
+ms.lasthandoff: 02/27/2018
 ---
 # <a name="guidance-azure-ad-tenant-design"></a>Diretrizes: design de locatário do Azure AD
 
@@ -15,7 +15,7 @@ Um locatário do Azure AD fornece serviços de identidade digital e namespaces u
 ## <a name="design-considerations"></a>Considerações sobre o design
 
 - No estágio básico de adoção, você pode começar com um único locatário do Azure AD. Caso sua organização tenha uma assinatura do Office 365 ou uma assinatura do Azure, você já tem um locatário do Azure AD que poderá usar. Caso não tenha nenhuma dessas, saiba mais sobre [como obter um locatário do Azure AD][how-to-get-aad-tenant]. 
-- Nos estágios intermediário e avançado de adoção, você aprenderá a sincronizar ou federar diretórios locais com o Azure AD. Isso permitirá que você use a identidade digital local no Azure AD. No entanto, no estágio básico, você adicionará novos usuários que têm identidade apenas no locatário único do Azure AD. Você é responsável por gerenciar essas identidades. Por exemplo, você precisará integrar novos usuários do Azure AD, transferir os usuários do Azure AD que você não deseja mais que tenham acesso aos recursos do Azure e outras alterações nas permissões de usuário.
+- Nos estágios intermediário e avançado de adoção, você aprenderá a sincronizar ou federar diretórios locais com o Azure AD. Isso permitirá que você use a identidade digital local no Azure AD. No entanto, no estágio básico, você adicionará novos usuários que têm identidade apenas no locatário único do Azure AD. Você será responsável por gerenciar essas identidades. Por exemplo, você precisará integrar novos usuários do Azure AD, transferir os usuários do Azure AD que você não deseja mais que tenham acesso aos recursos do Azure e outras alterações nas permissões de usuário.
 
 ## <a name="next-steps"></a>Próximas etapas
 
