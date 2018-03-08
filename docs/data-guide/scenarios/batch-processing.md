@@ -3,11 +3,11 @@ title: Processamento em lotes
 description: 
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 55113b61c2684a7826fa6c0034503f842cdb840f
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: d3d3b92034c251586ecc9caff2785ecd0808b2a7
+ms.sourcegitcommit: 943e671a8d522cef5ddc8c6e04848134b03c2de4
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 03/05/2018
 ---
 # <a name="batch-processing"></a>Processamento em lotes
 
@@ -19,7 +19,7 @@ Por exemplo, os logs de um servidor Web podem ser copiados para uma pasta e ent�
 
 ## <a name="when-to-use-this-solution"></a>Quando usar esta solução
 
-O processamento em lotes é usado em uma variedade de cenários, de transformações de dados simples a um pipeline ETL (extração, transformação e carregamento) mais completo. Em um contexto de Big Data, o processamento em lotes pode operar em conjuntos grandes de dados, em que o cálculo leva um tempo significativo para ser concluído. (Por exemplo, consulte [Arquitetura lambda](../concepts/big-data.md##lambda-architecture).) O processamento em lotes normalmente leva a uma exploração interativa posterior, fornece os dados prontos para modelagem para o aprendizado de máquina ou grava os dados em um armazenamento de dados que é otimizado para análise e visualização.
+O processamento em lotes é usado em uma variedade de cenários, de transformações de dados simples a um pipeline ETL (extração, transformação e carregamento) mais completo. Em um contexto de Big Data, o processamento em lotes pode operar em conjuntos grandes de dados, em que o cálculo leva um tempo significativo para ser concluído. (Por exemplo, consulte [Arquitetura lambda](../concepts/big-data.md#lambda-architecture).) O processamento em lotes normalmente leva a uma exploração interativa posterior, fornece os dados prontos para modelagem para o aprendizado de máquina ou grava os dados em um armazenamento de dados que é otimizado para análise e visualização.
 
 Um exemplo de processamento em lotes é transformar um conjunto grande de arquivos simples, CSV ou JSON semiestruturados em um formato esquematizado e estruturado pronto para consulta posterior. Normalmente, os dados são convertidos dos formatos brutos usados para ingestão (como CSV) em formatos binários que têm um melhor desempenho para consulta, pois eles armazenam dados em um formato de coluna e, geralmente, fornecem índices e estatísticas embutidas sobre os dados.
 
