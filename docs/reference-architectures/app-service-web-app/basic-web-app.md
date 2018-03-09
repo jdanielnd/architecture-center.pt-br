@@ -4,11 +4,11 @@ description: "Arquitetura recomendada para um aplicativo Web básico executado n
 author: MikeWasson
 ms.date: 12/12/2017
 cardTitle: Basic web application
-ms.openlocfilehash: 598eb547f0e96ae334af391183a792637caa8631
-ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
+ms.openlocfilehash: 38b0739cc61d679742b610b99e92aaad8d3b394d
+ms.sourcegitcommit: 2123c25b1a0b5501ff1887f98030787191cf6994
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/02/2018
+ms.lasthandoff: 03/08/2018
 ---
 # <a name="basic-web-application"></a>Aplicativo Web básico
 [!INCLUDE [header](../../_includes/header.md)]
@@ -40,7 +40,7 @@ A arquitetura tem os seguintes componentes:
 
 * **DNS do Azure**. [DNS do Azure][azure-dns] é um serviço de hospedagem para domínios DNS, que fornece resolução de nomes usando a infraestrutura do Microsoft Azure. Ao hospedar seus domínios no Azure, você pode gerenciar seus registros DNS usando as mesmas credenciais, APIs, ferramentas e cobrança que seus outros serviços do Azure. Para usar um nome de domínio personalizado (como `contoso.com`), crie registros DNS que mapeiem o nome de domínio personalizado até o endereço IP. Para obter mais informações, consulte [Configurar um nome de domínio personalizado no Serviço de Aplicativo do Azure][custom-domain-name].  
 
-* **Banco de dados SQL do Azure**. O [Banco de Dados SQL][sql-db] é um banco de dados relacional como um serviço na nuvem.
+* **Banco de dados SQL do Azure**. O [Banco de Dados SQL][sql-db] é um banco de dados relacional como um serviço na nuvem. O Banco de Dados SQL compartilha a sua base de código com o mecanismo do banco de dados do Microsoft SQL Server. Dependendo dos requisitos de aplicativo, você também pode usar o [banco de dados do Azure para MySQL](/azure/mysql) ou o [banco de dados do Azure para PostgreSQL](/azure/postgresql). Estes são serviços de banco de dados totalmente gerenciados, baseados no código-fonte aberto MySQL Server e nos mecanismos de banco de dados do Postgres, respectivamente.
 
 * **Servidor lógico**. No Banco de Dados SQL do Azure, um servidor lógico hospeda os seus bancos de dados. Você pode criar vários bancos de dados por servidor lógico.
 
