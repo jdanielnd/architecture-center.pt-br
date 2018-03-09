@@ -2,11 +2,11 @@
 title: Conectar uma rede local ao Azure
 description: "Arquiteturas recomendadas para conexões de rede seguras e robustas entre redes locais e o Azure."
 layout: LandingPage
-ms.openlocfilehash: b96601144099571768254af92788f75cca0b928c
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+ms.openlocfilehash: 372efb8ecf69245a5895c51e3da156a348bd665e
+ms.sourcegitcommit: 2123c25b1a0b5501ff1887f98030787191cf6994
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/23/2018
+ms.lasthandoff: 03/08/2018
 ---
 <!-- This file is generated! -->
 <!-- See the templates in ./build/reference-architectures  -->
@@ -14,7 +14,7 @@ ms.lasthandoff: 02/23/2018
 
 # <a name="connect-an-on-premises-network-to-azure"></a>Conectar uma rede local ao Azure
 
-Essas arquiteturas mostram práticas comprovadas para criar uma conexão de rede robusta entre uma rede local e o Azure. <br/>[Qual devo escolher?](./considerations.md)
+Essas arquiteturas mostram práticas comprovadas para criar uma conexão de rede robusta entre uma rede local e o Azure. [Qual devo escolher?](./considerations.md)
 
 <section class="series">
     <ul class="panelContent">
@@ -92,6 +92,26 @@ Essas arquiteturas mostram práticas comprovadas para criar uma conexão de rede
                     <div class="cardText">
                         <h3>Topologia hub-spoke</h3>
                         <p>O hub é um ponto central de conectividade para sua rede local. Os raios são VNets que ponto a ponto com o hub e pode ser usado para isolar as cargas de trabalho.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</li>
+    <!-- Hub-spoke topology with shared services -->
+<li style="display: flex; flex-direction: column;">
+    <a href="./shared-services.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
+            <div class="cardPadding" style="display: flex;">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="./images/shared-services.svg" height="140px" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>Topologia hub-spoke com serviços compartilhados</h3>
+                        <p>Implante uma topologia hub-spoke que inclui serviços compartilhados, incluindo os serviços do Active Directory e uma solução de virtualização de rede (NVA). Serviços compartilhados podem ser consumidos por todos os raios.</p>
                     </div>
                 </div>
             </div>

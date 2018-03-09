@@ -4,8 +4,10 @@
   items:
     - name: Design de aplicativos resilientes
       href: index.md
-    - name: Lista de verificação de resiliência
+    - name: Lista de verificação de resiliência (geral)
       href: ../checklist/resiliency.md?toc=/azure/architecture/resiliency/toc.json
+    - name: Lista de verificação de resiliência (serviços do Azure)
+      href: ../checklist/resiliency-per-service.md?toc=/azure/architecture/resiliency/toc.json
     - name: Análise do modo de falha
       href: failure-mode-analysis.md
     - name: Orientações adicionais
