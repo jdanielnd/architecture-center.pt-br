@@ -1,6 +1,6 @@
 ---
-title: "Estilo de arquitetura de computação intensa"
-description: "Descreve os benefícios, os desafios e as práticas recomendadas para arquiteturas de computação intensa no Azure"
+title: Estilo de arquitetura de computação intensa
+description: Descreve os benefícios, os desafios e as práticas recomendadas para arquiteturas de computação intensa no Azure
 author: MikeWasson
 ms.openlocfilehash: b16be4133143d7d73062eeb280b44779c390f387
 ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60

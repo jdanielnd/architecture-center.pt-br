@@ -1,6 +1,6 @@
 ---
 title: Diretrizes de trabalhos em segundo plano
-description: "Diretrizes sobre as tarefas em segundo plano executadas independentemente da interface do usuário."
+description: Diretrizes sobre as tarefas em segundo plano executadas independentemente da interface do usuário.
 author: dragon119
 ms.date: 05/24/2017
 pnp.series.title: Best Practices

@@ -1,6 +1,6 @@
 ---
-title: "Gerenciamento de Identidades para Aplicativos Multilocatários"
-description: "Práticas recomendadas para autenticação, autorização e gerenciamento de identidades em aplicativos multilocatários."
+title: Gerenciamento de Identidades para Aplicativos Multilocatários
+description: Práticas recomendadas para autenticação, autorização e gerenciamento de identidades em aplicativos multilocatários.
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications

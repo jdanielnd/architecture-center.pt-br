@@ -1,6 +1,6 @@
 ---
 title: Use o Key Vault para proteger segredos do aplicativo
-description: "Como usar o serviço Key Vault para armazenar segredos do aplicativo"
+description: Como usar o serviço Key Vault para armazenar segredos do aplicativo
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications

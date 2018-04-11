@@ -1,6 +1,6 @@
 ---
-title: "Antipadrões de desempenho para aplicativos em nuvem"
-description: "Práticas comuns que podem causar problemas de escalabilidade."
+title: Antipadrões de desempenho para aplicativos em nuvem
+description: Práticas comuns que podem causar problemas de escalabilidade.
 author: dragon119
 ms.date: 06/05/2017
 ms.openlocfilehash: 423fe6533e57268610f625f523714cd1bce89546

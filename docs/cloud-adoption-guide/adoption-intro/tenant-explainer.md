@@ -1,6 +1,6 @@
 ---
-title: "Explicador: o que é um locatário do Azure Active Directory?"
-description: "Explica o funcionamento interno do Azure Active Directory para fornecer IDaaS (identidade como serviço) no Azure"
+title: 'Explicador: o que é um locatário do Azure Active Directory?'
+description: Explica o funcionamento interno do Azure Active Directory para fornecer IDaaS (identidade como serviço) no Azure
 author: petertay
 ms.openlocfilehash: ce5a33b92047e1f360eee8fcbc7a726bcf8cd19f
 ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242

@@ -1,5 +1,5 @@
 ---
-title: "Explicador: o que é o Azure Resource Manager?"
+title: 'Explicador: o que é o Azure Resource Manager?'
 description: Explica o funcionamento interno do Azure Resource Manager
 author: petertay
 ms.openlocfilehash: 60f09901bdc4b292abd73335b78c7d56a76f27a6

@@ -1,6 +1,6 @@
 ---
-title: "Antipadrão de E/S síncrona"
-description: "O bloqueio do thread de chamada durante a conclusão da E/S pode reduzir o desempenho e afetar a escalabilidade vertical."
+title: Antipadrão de E/S síncrona
+description: O bloqueio do thread de chamada durante a conclusão da E/S pode reduzir o desempenho e afetar a escalabilidade vertical.
 author: dragon119
 ms.date: 06/05/2017
 ms.openlocfilehash: d5b3635565c6b71ef7716f54ee8cccc76093c3a3

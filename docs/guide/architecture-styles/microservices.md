@@ -1,6 +1,6 @@
 ---
-title: "Estilo de arquitetura de microsserviços"
-description: "Descreve benefícios, desafios e melhores práticas para arquiteturas de N camadas no Azure"
+title: Estilo de arquitetura de microsserviços
+description: Descreve benefícios, desafios e melhores práticas para arquiteturas de N camadas no Azure
 author: MikeWasson
 ms.openlocfilehash: 08fd39b6cf0b3c88af654b27e21b2d7dd9fb19b1
 ms.sourcegitcommit: 7764a804f000180c37a4f8dbab946b525f784f58

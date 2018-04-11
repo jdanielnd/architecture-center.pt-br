@@ -1,6 +1,6 @@
 ---
 title: Federar com o AD FS de um cliente
-description: "Como federar com o AD FS de um cliente em um aplicativo multilocatário"
+description: Como federar com o AD FS de um cliente em um aplicativo multilocatário
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications

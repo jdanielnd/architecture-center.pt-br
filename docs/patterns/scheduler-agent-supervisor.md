@@ -1,7 +1,7 @@
 ---
 title: Supervisor de Agente do Agendador
-description: "Coordene um conjunto de ações em um conjunto distribuído de serviços e outros recursos remotos."
-keywords: "padrão de design"
+description: Coordene um conjunto de ações em um conjunto distribuído de serviços e outros recursos remotos.
+keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns

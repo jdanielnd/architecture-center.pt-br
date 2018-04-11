@@ -1,7 +1,7 @@
 ---
-title: "Fragmentação"
-description: "Divida um armazenamento de dados em um conjunto de partições horizontais ou fragmentos."
-keywords: "padrão de design"
+title: Fragmentação
+description: Divida um armazenamento de dados em um conjunto de partições horizontais ou fragmentos.
+keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns

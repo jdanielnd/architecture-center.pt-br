@@ -1,6 +1,6 @@
 ---
-title: "Aplicativo Web do Serviço de Aplicativo"
-description: "Recomendado arquiteturas para uma Web de aplicativos em execução no Microsoft Azure."
+title: Aplicativo Web do Serviço de Aplicativo
+description: Recomendado arquiteturas para uma Web de aplicativos em execução no Microsoft Azure.
 layout: LandingPage
 ms.openlocfilehash: ea5ca6f0a1e2995ab35333095260d8f2c3db2600
 ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb

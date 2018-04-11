@@ -1,7 +1,7 @@
 ---
-title: "Repositório de configuração externo"
-description: "Mova as informações de configuração para fora do pacote de implantação de aplicativo para um local centralizado."
-keywords: "padrão de design"
+title: Repositório de configuração externo
+description: Mova as informações de configuração para fora do pacote de implantação de aplicativo para um local centralizado.
+keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns

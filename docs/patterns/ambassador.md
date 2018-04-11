@@ -1,6 +1,6 @@
 ---
-title: "Padrão embaixador"
-description: "Crie serviços auxiliares que enviam solicitações de rede em nome de um consumidor de serviço ou aplicativo."
+title: Padrão embaixador
+description: Crie serviços auxiliares que enviam solicitações de rede em nome de um consumidor de serviço ou aplicativo.
 author: dragon119
 ms.date: 06/23/2017
 ms.openlocfilehash: 6c545619aab6a5817e55854350e3769834df27cd

@@ -1,7 +1,7 @@
 ---
-title: "Limitação"
-description: "Controle o consumo de recursos usados por uma instância de um aplicativo, um locatário individual ou todo o serviço."
-keywords: "padrão de design"
+title: Limitação
+description: Controle o consumo de recursos usados por uma instância de um aplicativo, um locatário individual ou todo o serviço.
+keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns

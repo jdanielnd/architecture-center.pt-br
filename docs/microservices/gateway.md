@@ -1,6 +1,6 @@
 ---
 title: Gateways de API
-description: "Gateway de API em microsserviços"
+description: Gateway de API em microsserviços
 author: MikeWasson
 ms.date: 12/08/2017
 ms.openlocfilehash: 6483d416363e24f4084d6b856847a740bf4054d9

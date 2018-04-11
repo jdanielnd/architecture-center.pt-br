@@ -1,6 +1,6 @@
 ---
-title: "Antipadrão de E/S com ruídos"
-description: "Um grande número de solicitações de E/S pode prejudicar o desempenho e a capacidade de resposta."
+title: Antipadrão de E/S com ruídos
+description: Um grande número de solicitações de E/S pode prejudicar o desempenho e a capacidade de resposta.
 author: dragon119
 ms.openlocfilehash: 4f0e0e455ceb58317d3029d8ab4631d476802499
 ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb

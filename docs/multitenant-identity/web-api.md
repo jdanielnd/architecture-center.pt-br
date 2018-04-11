@@ -1,5 +1,5 @@
 ---
-title: "Proteger uma API Web de back-end em um aplicativo multilocatário"
+title: Proteger uma API Web de back-end em um aplicativo multilocatário
 description: Como proteger uma API Web de back-end
 author: MikeWasson
 ms:date: 07/21/2017

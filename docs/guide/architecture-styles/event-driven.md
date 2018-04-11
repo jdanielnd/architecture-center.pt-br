@@ -1,6 +1,6 @@
 ---
 title: Arquitetura orientada a eventos
-description: "Descreve os benefícios, os desafios e as práticas recomendadas para eventos e arquiteturas de IoT no Azure"
+description: Descreve os benefícios, os desafios e as práticas recomendadas para eventos e arquiteturas de IoT no Azure
 author: MikeWasson
 ms.openlocfilehash: 3289bf784b02d62e3d0c1a29b4839c9be3501134
 ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb

@@ -1,5 +1,5 @@
 ---
-title: "Explicador: o que é uma assinatura do Azure?"
+title: 'Explicador: o que é uma assinatura do Azure?'
 description: Explica as assinaturas, contas e ofertas do Azure
 author: alexbuckgit
 ms.openlocfilehash: 1650d90d6f78b46b7fe4128d2dab6a80bd6cca78

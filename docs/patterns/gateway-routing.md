@@ -1,6 +1,6 @@
 ---
-title: "Padrão de roteamento de gateway"
-description: "Faça o roteamento de solicitações para vários serviços usando um único ponto de extremidade."
+title: Padrão de roteamento de gateway
+description: Faça o roteamento de solicitações para vários serviços usando um único ponto de extremidade.
 author: dragon119
 ms.date: 06/23/2017
 ms.openlocfilehash: 53239b23cfd98fad1edc38ca37c2274d5a9d7a0f

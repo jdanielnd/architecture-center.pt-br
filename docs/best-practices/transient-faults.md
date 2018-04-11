@@ -1,6 +1,6 @@
 ---
-title: "Diretrizes gerais de repetição"
-description: "Orientações sobre repetição no tratamento de falhas transitórias."
+title: Diretrizes gerais de repetição
+description: Orientações sobre repetição no tratamento de falhas transitórias.
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices

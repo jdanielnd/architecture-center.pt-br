@@ -1,7 +1,7 @@
 ---
 title: Cache-Aside
 description: Carregar dados sob demanda em um cache de um armazenamento de dados
-keywords: "padrão de design"
+keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns

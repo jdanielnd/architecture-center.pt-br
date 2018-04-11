@@ -1,6 +1,6 @@
 ---
-title: "Estendendo soluções de dados locais para a nuvem"
-description: 
+title: Estendendo soluções de dados locais para a nuvem
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
 ms.openlocfilehash: 66fc225dc123202ba587d82f15ea0883e1bbf3b5

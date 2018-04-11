@@ -1,6 +1,6 @@
 ---
-title: "Recuperação de dados corrompidos ou exclusão acidental"
-description: "Artigo com noções básicas sobre como recuperar dados corrompidos ou de exclusão acidental e como criar aplicativos resilientes, altamente disponíveis, com tolerância a falhas, bem como planejamento de recuperação de desastres"
+title: Recuperação de dados corrompidos ou exclusão acidental
+description: Artigo com noções básicas sobre como recuperar dados corrompidos ou de exclusão acidental e como criar aplicativos resilientes, altamente disponíveis, com tolerância a falhas, bem como planejamento de recuperação de desastres
 author: MikeWasson
 ms.date: 01/10/2018
 ms.openlocfilehash: 76d2f996750d5a67b67bd5dc4977580f3b8abbc3

@@ -1,6 +1,6 @@
 ---
 title: Diretrizes de particionamento de dados
-description: "Instruções de como separar partições a serem gerenciadas e acessadas separadamente."
+description: Instruções de como separar partições a serem gerenciadas e acessadas separadamente.
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices

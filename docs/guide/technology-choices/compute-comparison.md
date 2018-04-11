@@ -1,6 +1,6 @@
 ---
-title: "Critérios para escolher uma opção de computação do Azure"
-description: "Compare os serviços de computação do Azure entre diversos eixos."
+title: Critérios para escolher uma opção de computação do Azure
+description: Compare os serviços de computação do Azure entre diversos eixos.
 author: MikeWasson
 layout: LandingPage
 ms.openlocfilehash: 36b57d1fb674b5a1452a0e8208de836963b2b01b

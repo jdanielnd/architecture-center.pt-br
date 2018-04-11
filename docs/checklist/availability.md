@@ -1,6 +1,6 @@
 ---
-title: "Lista de verificação de disponibilidade"
-description: "Lista de verificação que fornece orientação para questões de disponibilidade durante a criação."
+title: Lista de verificação de disponibilidade
+description: Lista de verificação que fornece orientação para questões de disponibilidade durante a criação.
 author: dragon119
 ms.date: 01/10/2018
 ms.custom: checklist

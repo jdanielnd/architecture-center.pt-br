@@ -1,6 +1,6 @@
 ---
-title: "Trabalhar com identidades baseadas em declarações em aplicativos multilocatários"
-description: "Como usar declarações para autorização e validação de emissor"
+title: Trabalhar com identidades baseadas em declarações em aplicativos multilocatários
+description: Como usar declarações para autorização e validação de emissor
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications

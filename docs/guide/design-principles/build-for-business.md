@@ -1,6 +1,6 @@
 ---
 title: Criar de acordo com as necessidades da empresa
-description: "Todas as decisões de design devem ser justificadas por um requisito de negócios"
+description: Todas as decisões de design devem ser justificadas por um requisito de negócios
 author: MikeWasson
 layout: LandingPage
 ms.openlocfilehash: 110a441ae74334d212a717da2cb038d60b24bb1f

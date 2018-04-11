@@ -1,6 +1,6 @@
 ---
-title: "Partição de limites"
-description: "Usar o particionamento para contornar os limites de banco de dados, de rede e de computação"
+title: Partição de limites
+description: Usar o particionamento para contornar os limites de banco de dados, de rede e de computação
 author: MikeWasson
 layout: LandingPage
 ms.openlocfilehash: 4371490385b24230551bf17db0075052f320b574

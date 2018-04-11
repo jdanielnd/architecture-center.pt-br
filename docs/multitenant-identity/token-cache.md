@@ -1,6 +1,6 @@
 ---
-title: "Armazenar em cache tokens de acesso em um aplicativo multilocatário"
-description: "Colocação em cache de tokens de acesso usados para chamar uma API Web de back-end"
+title: Armazenar em cache tokens de acesso em um aplicativo multilocatário
+description: Colocação em cache de tokens de acesso usados para chamar uma API Web de back-end
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications

@@ -1,5 +1,5 @@
 ---
-title: "Nenhum antipadrão de cache"
+title: Nenhum antipadrão de cache
 description: Buscar repetidamente os mesmos dados pode reduzir o desempenho e a escalabilidade.
 author: dragon119
 ms.date: 06/05/2017

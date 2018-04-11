@@ -1,6 +1,6 @@
 ---
-title: "Lista de verificação de escalabilidade"
-description: "Diretrizes de lista de verificação de escalabilidade para questões de design de dimensionamento automático do Azure."
+title: Lista de verificação de escalabilidade
+description: Diretrizes de lista de verificação de escalabilidade para questões de design de dimensionamento automático do Azure.
 author: dragon119
 ms.date: 01/10/2018
 ms.custom: checklist

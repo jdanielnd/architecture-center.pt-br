@@ -1,7 +1,7 @@
 ---
-title: "Tabela de Índice"
-description: "Crie índices nos campos em armazenamentos de dados que são frequentemente referenciados por consultas."
-keywords: "padrão de design"
+title: Tabela de Índice
+description: Crie índices nos campos em armazenamentos de dados que são frequentemente referenciados por consultas.
+keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns

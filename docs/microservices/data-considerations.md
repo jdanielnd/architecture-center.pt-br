@@ -1,6 +1,6 @@
 ---
-title: "Considerações de dados para microsserviços"
-description: "Considerações de dados para microsserviços"
+title: Considerações de dados para microsserviços
+description: Considerações de dados para microsserviços
 author: MikeWasson
 ms.date: 12/08/2017
 ms.openlocfilehash: 9bd7a8424309b5753b42cfb70559836288a3ce9d

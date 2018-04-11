@@ -1,6 +1,6 @@
 ---
-title: "Funções de aplicativo"
-description: "Como executar a autorização usando funções de aplicativo"
+title: Funções de aplicativo
+description: Como executar a autorização usando funções de aplicativo
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
