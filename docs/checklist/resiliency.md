@@ -1,6 +1,6 @@
 ---
-title: "Lista de verificação de resiliência"
-description: "Lista de verificação que fornece orientação para questões de resiliência durante a criação."
+title: Lista de verificação de resiliência
+description: Lista de verificação que fornece orientação para questões de resiliência durante a criação.
 author: petertaylor9999
 ms.date: 01/10/2018
 ms.custom: resiliency, checklist

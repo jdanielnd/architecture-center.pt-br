@@ -1,6 +1,6 @@
 ---
-title: "Diretrizes da Rede de Distribuição de Conteúdo"
-description: "Diretriz na Rede de Distribuição de Conteúdo (CDN) para fornecer conteúdo de alta largura de banda hospedado no Azure."
+title: Diretrizes da Rede de Distribuição de Conteúdo
+description: Diretriz na Rede de Distribuição de Conteúdo (CDN) para fornecer conteúdo de alta largura de banda hospedado no Azure.
 author: dragon119
 ms.date: 02/02/2018
 pnp.series.title: Best Practices
