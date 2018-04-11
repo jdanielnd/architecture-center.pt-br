@@ -1,6 +1,6 @@
 ---
-title: "Visão geral das opções de computação do Azure"
-description: "Visão geral das opções de computação do Azure"
+title: Visão geral das opções de computação do Azure
+description: Visão geral das opções de computação do Azure
 author: MikeWasson
 ms.openlocfilehash: a23dd49f24bc52db6f357540e3ebccb19e0497ee
 ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60

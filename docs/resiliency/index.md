@@ -1,6 +1,6 @@
 ---
 title: Desenvolvimento de aplicativos resilientes para o Azure
-description: "Como criar aplicativos resilientes no Azure, para alta disponibilidade e recuperação de desastres."
+description: Como criar aplicativos resilientes no Azure, para alta disponibilidade e recuperação de desastres.
 author: MikeWasson
 ms.date: 05/26/2017
 ms.custom: resiliency

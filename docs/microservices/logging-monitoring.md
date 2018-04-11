@@ -1,6 +1,6 @@
 ---
-title: "Registro em log e monitoramento em microsserviços"
-description: "Registro em log e monitoramento em microsserviços"
+title: Registro em log e monitoramento em microsserviços
+description: Registro em log e monitoramento em microsserviços
 author: MikeWasson
 ms.date: 12/08/2017
 ms.openlocfilehash: 1da67047daa9ae87cda5dd7dd581d6081183c428

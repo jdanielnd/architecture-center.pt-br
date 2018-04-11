@@ -1,6 +1,6 @@
 ---
-title: "Inscrição e integração de locatário em aplicativos multilocatário"
-description: "Como integrar locatários em um aplicativo multilocatário"
+title: Inscrição e integração de locatário em aplicativos multilocatário
+description: Como integrar locatários em um aplicativo multilocatário
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
@@ -260,4 +260,5 @@ private async Task<Tenant> SignUpTenantAsync(BaseControlContext context, TenantM
 
 [state]: http://openid.net/specs/openid-connect-core-1_0.html#AuthRequest
 [Autenticação]: authenticate.md
+[Authentication]: authenticate.md
 [sample application]: https://github.com/mspnp/multitenant-saas-guidance

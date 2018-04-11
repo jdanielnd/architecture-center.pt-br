@@ -1,6 +1,6 @@
 ---
-title: "Projetar, criar e operar microsserviços no Azure com Kubernetes"
-description: "Projetar, criar e operar microsserviços no Azure"
+title: Projetar, criar e operar microsserviços no Azure com Kubernetes
+description: Projetar, criar e operar microsserviços no Azure
 author: MikeWasson
 ms.date: 12/08/2017
 ms.openlocfilehash: 857e91a8eeefec18b459f2e66fde9a4f8bbe7b21

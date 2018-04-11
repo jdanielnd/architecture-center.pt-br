@@ -1,7 +1,7 @@
 ---
-title: "Limitação"
-description: "Controle o consumo de recursos usados por uma instância de um aplicativo, um locatário individual ou todo o serviço."
-keywords: "padrão de design"
+title: Limitação
+description: Controle o consumo de recursos usados por uma instância de um aplicativo, um locatário individual ou todo o serviço.
+keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
@@ -103,3 +103,4 @@ ms.lasthandoff: 11/14/2017
 - <span data-ttu-id="4ba18-197">[padrão de Fila de Prioridade][].</span><span class="sxs-lookup"><span data-stu-id="4ba18-197">[Priority Queue pattern][].</span></span> <span data-ttu-id="4ba18-198">Um sistema pode usar o enfileiramento prioritário como parte da sua estratégia de limitação para manter o desempenho de aplicativos críticos ou de maior valor, ao mesmo tempo reduzindo o desempenho de aplicativos menos importantes.</span><span class="sxs-lookup"><span data-stu-id="4ba18-198">A system can use priority queuing as part of its throttling strategy to maintain performance for critical or higher value applications, while reducing the performance of less important applications.</span></span>
 
 [padrão de Fila de Prioridade]: priority-queue.md
+[Priority Queue pattern]: priority-queue.md

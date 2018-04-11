@@ -1,5 +1,5 @@
 ---
-title: "Antipadrão de Banco de Dados Ocupado"
+title: Antipadrão de Banco de Dados Ocupado
 description: Descarregamento de processamento em um servidor de banco de dados pode causar problemas de desempenho e escalabilidade.
 author: dragon119
 ms.date: 06/05/2017

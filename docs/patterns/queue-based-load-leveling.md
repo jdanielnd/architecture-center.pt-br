@@ -1,7 +1,7 @@
 ---
 title: Nivelamento de Carga Baseado em Fila
-description: "Use uma fila que funcione como um buffer entre uma tarefa e um serviço que ela invoca para simplificar cargas pesadas intermitentes."
-keywords: "padrão de design"
+description: Use uma fila que funcione como um buffer entre uma tarefa e um serviço que ela invoca para simplificar cargas pesadas intermitentes.
+keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns

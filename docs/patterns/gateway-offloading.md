@@ -1,6 +1,6 @@
 ---
-title: "Padrão de descarregamento de gateway"
-description: "Descarregue a funcionalidade de serviço especializado ou compartilhado para um proxy do gateway."
+title: Padrão de descarregamento de gateway
+description: Descarregue a funcionalidade de serviço especializado ou compartilhado para um proxy do gateway.
 author: dragon119
 ms.date: 06/23/2017
 ms.openlocfilehash: 6b3e4541aae77349ca91c18c788ddb508912361d

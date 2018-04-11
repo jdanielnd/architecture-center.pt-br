@@ -1,6 +1,6 @@
 ---
-title: "Diretrizes de dimensionamento automático"
-description: "Diretrizes sobre como realizar o dimensionamento automático para alocar dinamicamente os recursos exigidos por um aplicativo."
+title: Diretrizes de dimensionamento automático
+description: Diretrizes sobre como realizar o dimensionamento automático para alocar dinamicamente os recursos exigidos por um aplicativo.
 author: dragon119
 ms.date: 05/17/2017
 pnp.series.title: Best Practices

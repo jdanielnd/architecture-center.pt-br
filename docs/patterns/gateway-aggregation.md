@@ -1,6 +1,6 @@
 ---
-title: "Padrão de agregação de gateway"
-description: "Use um gateway para agregar várias solicitações individuais em uma única solicitação."
+title: Padrão de agregação de gateway
+description: Use um gateway para agregar várias solicitações individuais em uma única solicitação.
 author: dragon119
 ms.date: 06/23/2017
 ms.openlocfilehash: f59c8b8b02c6db28024d13621b782997e63a4e9e

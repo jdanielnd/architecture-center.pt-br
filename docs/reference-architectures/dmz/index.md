@@ -1,6 +1,6 @@
 ---
 title: DMZ da Rede
-description: "Explica e compara os métodos diferentes disponíveis para proteger aplicativos e componentes em execução no Azure como parte de um sistema híbrido de acesso não autorizado."
+description: Explica e compara os métodos diferentes disponíveis para proteger aplicativos e componentes em execução no Azure como parte de um sistema híbrido de acesso não autorizado.
 layout: LandingPage
 ms.openlocfilehash: 98df0a25767c7a7282e67381c6465fe3263ce1fa
 ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb

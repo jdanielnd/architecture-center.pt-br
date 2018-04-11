@@ -1,11 +1,12 @@
 ---
 title: Gatekeeper
-description: "Proteger aplicativos e serviços usando uma instância de host dedicado que atua como intermediário entre clientes e o aplicativo ou serviço, valida e corrige solicitações e passa solicitações e dados entre eles."
-keywords: "padrão de design"
+description: Proteger aplicativos e serviços usando uma instância de host dedicado que atua como intermediário entre clientes e o aplicativo ou serviço, valida e corrige solicitações e passa solicitações e dados entre eles.
+keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories: security
+pnp.pattern.categories:
+- security
 ms.openlocfilehash: 39f8548bbccb5e19d433f65b2e7e09147d676996
 ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
 ms.translationtype: HT

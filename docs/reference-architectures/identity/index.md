@@ -1,6 +1,6 @@
 ---
 title: Gerenciamento de identidades
-description: "Explica e compara os métodos diferentes disponíveis para o gerenciamento de identidades em sistemas híbrida que abrangem o limite no local/em nuvem com o Azure."
+description: Explica e compara os métodos diferentes disponíveis para o gerenciamento de identidades em sistemas híbrida que abrangem o limite no local/em nuvem com o Azure.
 layout: LandingPage
 ms.openlocfilehash: de98ee30306f5e712759ab7140bd430cb6d4cd75
 ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb

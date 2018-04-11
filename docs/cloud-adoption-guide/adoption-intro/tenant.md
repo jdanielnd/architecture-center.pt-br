@@ -1,6 +1,6 @@
 ---
-title: "Diretrizes: design de locatário do Azure AD"
-description: "Diretrizes de design de locatário do Azure como parte de uma estratégia básica de adoção da nuvem"
+title: 'Diretrizes: design de locatário do Azure AD'
+description: Diretrizes de design de locatário do Azure como parte de uma estratégia básica de adoção da nuvem
 author: telmosampaio
 ms.openlocfilehash: 9ac52e9fd44bd8b9c777625002d5960f4f269be2
 ms.sourcegitcommit: 29fbcb1eec44802d2c01b6d3bcf7d7bd0bae65fc

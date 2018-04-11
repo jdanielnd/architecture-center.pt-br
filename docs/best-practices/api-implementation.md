@@ -1,6 +1,6 @@
 ---
-title: "Diretrizes para implementação de API"
-description: "Diretrizes para modo de implementação de uma API."
+title: Diretrizes para implementação de API
+description: Diretrizes para modo de implementação de uma API.
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices

@@ -1,7 +1,7 @@
 ---
 title: Retry
-description: "Permita que um aplicativo trate falhas previstas e temporárias quando tentar se conectar a um serviço ou recurso de rede ao repetir de forma transparente uma operação que falhou anteriormente."
-keywords: "padrão de design"
+description: Permita que um aplicativo trate falhas previstas e temporárias quando tentar se conectar a um serviço ou recurso de rede ao repetir de forma transparente uma operação que falhou anteriormente.
+keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns

@@ -1,6 +1,6 @@
 ---
-title: "Minimizar a coordenação"
-description: "Minimizar a coordenação entre os serviços de aplicativos para atingir a escalabilidade"
+title: Minimizar a coordenação
+description: Minimizar a coordenação entre os serviços de aplicativos para atingir a escalabilidade
 author: MikeWasson
 layout: LandingPage
 ms.openlocfilehash: 3cab05b539612234fd8e66517b140ac5257c3e70

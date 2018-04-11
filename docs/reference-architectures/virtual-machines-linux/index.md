@@ -1,6 +1,6 @@
 ---
 title: Cargas de trabalho de VM do Linux
-description: "Explica algumas arquiteturas comuns para a implantação de máquinas virtuais que hospedam aplicativos de grande porte no Azure."
+description: Explica algumas arquiteturas comuns para a implantação de máquinas virtuais que hospedam aplicativos de grande porte no Azure.
 layout: LandingPage
 ms.openlocfilehash: ef06fb93355f4676f44954930bcfeb2c2d012d43
 ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb

@@ -1,6 +1,6 @@
 ---
-title: "Antipadrão do front-end ocupado"
-description: "Um trabalho assíncrono em um grande número de threads em segundo plano pode enfraquecer outras tarefas de primeiro plano dos recursos."
+title: Antipadrão do front-end ocupado
+description: Um trabalho assíncrono em um grande número de threads em segundo plano pode enfraquecer outras tarefas de primeiro plano dos recursos.
 author: dragon119
 ms.date: 06/05/2017
 ms.openlocfilehash: cedb80ddac5ceb1eb901455df3165993fd28a138

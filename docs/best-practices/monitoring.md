@@ -1,6 +1,6 @@
 ---
-title: "Diretrizes de monitoramento e diagnóstico"
-description: "Práticas recomendadas para monitoramento de aplicativos distribuídos na nuvem."
+title: Diretrizes de monitoramento e diagnóstico
+description: Práticas recomendadas para monitoramento de aplicativos distribuídos na nuvem.
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices

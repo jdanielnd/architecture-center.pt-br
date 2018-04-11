@@ -1,6 +1,6 @@
 ---
-title: "Padrão de bulkhead"
-description: "Isole os elementos de um aplicativo em pools para que, se um falhar, os outros continuarão a funcionar"
+title: Padrão de bulkhead
+description: Isole os elementos de um aplicativo em pools para que, se um falhar, os outros continuarão a funcionar
 author: dragon119
 ms.date: 06/23/2017
 ms.openlocfilehash: a2c499d77fafc4bee6b74ee0e0d84e6c23b47851

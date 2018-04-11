@@ -1,6 +1,6 @@
 ---
-title: "Padrão sidecar"
-description: "Implante os componentes de um aplicativo em um processo ou contêiner separado para fornecer isolamento e encapsulamento."
+title: Padrão sidecar
+description: Implante os componentes de um aplicativo em um processo ou contêiner separado para fornecer isolamento e encapsulamento.
 author: dragon119
 ms.date: 06/23/2017
 ms.openlocfilehash: ec168009aa99f412c3f1222a1c404ea4ea5cb669

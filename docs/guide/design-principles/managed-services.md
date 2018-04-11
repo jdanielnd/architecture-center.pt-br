@@ -1,6 +1,6 @@
 ---
-title: "Usar serviços gerenciados"
-description: "Quando possível, utilize a plataforma como um serviço (PaaS) em vez da infraestrutura como um serviço (IaaS)"
+title: Usar serviços gerenciados
+description: Quando possível, utilize a plataforma como um serviço (PaaS) em vez da infraestrutura como um serviço (IaaS)
 author: MikeWasson
 layout: LandingPage
 ms.openlocfilehash: 7156c073db3e047fb38e031309ddb637a9e44c02

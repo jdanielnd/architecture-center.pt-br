@@ -1,6 +1,6 @@
 ---
-title: "Gerenciamento de Identidades para Aplicativos Multilocatários"
-description: "Práticas recomendadas para autenticação, autorização e gerenciamento de identidades em aplicativos multilocatários."
+title: Gerenciamento de Identidades para Aplicativos Multilocatários
+description: Práticas recomendadas para autenticação, autorização e gerenciamento de identidades em aplicativos multilocatários.
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
@@ -96,6 +96,7 @@ ms.lasthandoff: 11/14/2017
 [AzureAD]: /azure/active-directory
 
 [Federar com o AD FS de um cliente]: adfs.md
+[Federating with a customer's AD FS]: adfs.md
 [tailpin]: tailspin.md
 
 [running-the-app]: ./run-the-app.md

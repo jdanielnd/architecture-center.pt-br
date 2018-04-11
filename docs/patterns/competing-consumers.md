@@ -1,11 +1,12 @@
 ---
 title: Consumidores concorrentes
-description: "Habilite vários consumidores simultâneos para processar as mensagens recebidas no mesmo canal de mensagens."
-keywords: "padrão de design"
+description: Habilite vários consumidores simultâneos para processar as mensagens recebidas no mesmo canal de mensagens.
+keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories: messaging
+pnp.pattern.categories:
+- messaging
 ms.openlocfilehash: d72a09ef7613bebe3701634e4eac0716400e471d
 ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
 ms.translationtype: HT

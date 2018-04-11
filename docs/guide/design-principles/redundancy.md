@@ -1,6 +1,6 @@
 ---
 title: Tornar todas as coisas redundantes
-description: "Evite pontos únicos de falha com a criação de redundância em seu aplicativo."
+description: Evite pontos únicos de falha com a criação de redundância em seu aplicativo.
 author: MikeWasson
 layout: LandingPage
 ms.openlocfilehash: 05ccf78c2cfbcd4e2d26200e70463d388d54f671

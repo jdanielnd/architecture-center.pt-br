@@ -1,6 +1,6 @@
 ---
-title: "Escolhendo uma tecnologia de orquestração do pipeline de dados"
-description: 
+title: Escolhendo uma tecnologia de orquestração do pipeline de dados
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
 ms.openlocfilehash: 17aeb871bc815793295ed610795e5e83de72c637

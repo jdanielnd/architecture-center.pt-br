@@ -1,5 +1,5 @@
 ---
-title: "Proteger uma API Web de back-end em um aplicativo multilocatário"
+title: Proteger uma API Web de back-end em um aplicativo multilocatário
 description: Como proteger uma API Web de back-end
 author: MikeWasson
 ms:date: 07/21/2017
@@ -272,8 +272,11 @@ public void ConfigureServices(IServiceCollection services)
 [Tailspin Surveys]: tailspin.md
 [IdentityServer3]: https://github.com/IdentityServer/IdentityServer3
 [Atualizar os manifestos do aplicativo]: ./run-the-app.md#update-the-application-manifests
+[Update the application manifests]: ./run-the-app.md#update-the-application-manifests
 [Colocação de tokens em cache]: token-cache.md
+[Token caching]: token-cache.md
 [inscrição de locatários]: signup.md
+[tenant sign-up]: signup.md
 [claims-transformation]: claims.md#claims-transformations
 [Authorization]: authorize.md
 [sample application]: https://github.com/mspnp/multitenant-saas-guidance

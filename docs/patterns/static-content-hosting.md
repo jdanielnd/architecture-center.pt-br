@@ -1,7 +1,7 @@
 ---
-title: "Hospedagem de Conteúdo Estático"
-description: "Implante conteúdo estático em um serviço de armazenamento baseado em nuvem que pode enviá-lo diretamente para o cliente."
-keywords: "padrão de design"
+title: Hospedagem de Conteúdo Estático
+description: Implante conteúdo estático em um serviço de armazenamento baseado em nuvem que pode enviá-lo diretamente para o cliente.
+keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns

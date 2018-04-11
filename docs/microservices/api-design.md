@@ -1,6 +1,6 @@
 ---
 title: Design de API
-description: "Criando APIs para microsserviços"
+description: Criando APIs para microsserviços
 author: MikeWasson
 ms.date: 12/08/2017
 ms.openlocfilehash: d85407f3092ddb5f77aacfea8def2784c4741eb9

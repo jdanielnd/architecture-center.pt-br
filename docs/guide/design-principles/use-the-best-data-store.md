@@ -1,6 +1,6 @@
 ---
 title: Usar o melhor armazenamento de dados para o trabalho
-description: "Escolha a tecnologia de armazenamento mais adequada aos seus dados e como eles serão usados"
+description: Escolha a tecnologia de armazenamento mais adequada aos seus dados e como eles serão usados
 author: MikeWasson
 layout: LandingPage
 ms.openlocfilehash: ef9439f7a3766d13b498eac915e0f5afd23de4e2
