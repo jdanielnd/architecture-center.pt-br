@@ -1,13 +1,13 @@
 ---
 title: Processamento de idioma natural
-description: 
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: c03e2d017f9b4eb955a0e3494b5bc6c2603d1058
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: 0afd8ac9a8a2e56f79ade0b2e10328630866c03c
+ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="natural-language-processing"></a>Processamento de idioma natural
 
@@ -34,7 +34,7 @@ Ao usar o NLP para extrair informações e insights de um texto de forma livre, 
 
 ## <a name="architecture"></a>Arquitetura
 
-Em uma solução NLP, o processamento de texto de forma livre é executado em documentos que contêm parágrafos de texto. A arquitetura geral pode ser uma arquitetura de [processamento em lotes](./batch-processing.md) ou de [processamento de fluxo em tempo real](./real-time-processing.md).
+Em uma solução NLP, o processamento de texto de forma livre é executado em documentos que contêm parágrafos de texto. A arquitetura geral pode ser uma arquitetura de [processamento em lotes](../big-data/batch-processing.md) ou de [processamento de fluxo em tempo real](../big-data/real-time-processing.md).
 
 O processamento real varia de acordo com o resultado desejado, mas em termos do pipeline, o NLP pode ser aplicado em lotes ou em tempo real. Por exemplo, a análise de sentimento pode ser usada em blocos de texto para produzir uma pontuação de sentimento. Isso pode ser feito com a execução de um processo em lotes nos dados do armazenamento ou em tempo real usando partes menores de dados que fluem por meio de um serviço de mensagens.
 

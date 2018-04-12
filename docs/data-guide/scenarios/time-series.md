@@ -1,13 +1,13 @@
 ---
-title: "Dados de série temporal"
-description: 
+title: Dados de série temporal
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: ceb8f34d4fd950e5270edfea05945a824c4492f0
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: 80ff6c45988062afcb0eb92cc79e640d39dbb21f
+ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="time-series-solutions"></a>Soluções de série temporal
 
@@ -42,7 +42,7 @@ O uso da série temporal oferece os seguintes benefícios:
 
 Os dados coletados por dispositivos IoT são uma opção natural para o armazenamento e a análise de série temporal. Os dados de entrada são inseridos e raramente, ou nunca, atualizados. Os dados têm carimbo de data/hora e são inseridos na ordem em que foram recebidos. Esses dados normalmente são exibidos em ordem cronológica, permitindo aos usuários descobrir tendências, identificar anomalias e usar as informações para análise preditiva.
 
-Para obter mais informações, consulte [Internet das Coisas](../concepts/big-data.md#internet-of-things-iot).
+Para obter mais informações, consulte [Internet das Coisas](../big-data/index.md#internet-of-things-iot).
 
 ### <a name="real-time-analytics"></a>Análise em tempo real
 
@@ -57,7 +57,7 @@ O ideal é que você tenha uma camada de processamento de fluxo que pode manipul
 
 ## <a name="architecture"></a>Arquitetura
 
-Em muitos cenários que envolvem dados de série temporal, como IoT, os dados são capturados em tempo real. Dessa forma, uma arquitetura de [processamento em tempo real](./real-time-processing.md) é apropriada. 
+Em muitos cenários que envolvem dados de série temporal, como IoT, os dados são capturados em tempo real. Dessa forma, uma arquitetura de [processamento em tempo real](../big-data/real-time-processing.md) é apropriada. 
 
 Os dados de uma ou mais fontes de dados são ingeridos na camada de fluxo de buffer pelo [Hub IoT](/azure/iot-hub/), [Hubs de Eventos](/azure/event-hubs/) ou [Kafka no HDInsight](/azure/hdinsight/kafka/apache-kafka-introduction). Em seguida, os dados são processados na camada de processamento de fluxo que, opcionalmente, pode entregar os dados processados para um serviço de aprendizado de máquina para análise preditiva. Os dados processados são armazenados em um armazenamento de dados analíticos, como o [HBase](/azure/hdinsight/hbase/apache-hbase-overview), [Azure Cosmos DB](/azure/cosmos-db/), Azure Data Lake ou Armazenamento de Blobs. Um aplicativo ou serviço de análise e relatórios, como o Power BI ou o OpenTSDB (se for armazenado no HBase) pode ser usado para exibir os dados de série temporal para análise.
 

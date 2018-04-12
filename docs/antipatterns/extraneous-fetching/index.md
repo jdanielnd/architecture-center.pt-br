@@ -1,13 +1,13 @@
 ---
-title: "Antipadrão de busca externa"
-description: "Recuperar mais dados que o necessário para uma operação de negócios pode resultar em sobrecarga de E/S desnecessária e reduzir a capacidade de resposta."
+title: Antipadrão de busca externa
+description: Recuperar mais dados que o necessário para uma operação de negócios pode resultar em sobrecarga de E/S desnecessária e reduzir a capacidade de resposta.
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: 8a808dce62a1c80c126b7b1df536f74c46726ea1
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 7a72bfd3e4b2e206f3266a046fac2083224ecb4f
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="extraneous-fetching-antipattern"></a>Antipadrão de busca externa
 
@@ -232,7 +232,6 @@ Aqui está a telemetria correspondente para o método `AggregateOnDatabaseAsync`
 
 
 [BusyDatabase]: ../busy-database/index.md
-[chatty-io]: ../chatty-io.md
 [data-partitioning]: ../../best-practices/data-partitioning.md
 [new-relic]: https://newrelic.com/application-monitoring
 

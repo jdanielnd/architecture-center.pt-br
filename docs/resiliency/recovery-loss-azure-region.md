@@ -1,15 +1,16 @@
 ---
-title: "Recuperação de perda de uma região do Azure"
-description: "Artigo sobre compreensão e design de aplicativos resilientes, altamente disponíveis e tolerante a falhas, bem como planejamento de recuperação de desastre"
+title: Recuperação de perda de uma região do Azure
+description: Artigo sobre compreensão e design de aplicativos resilientes, altamente disponíveis e tolerante a falhas, bem como planejamento de recuperação de desastre
 author: adamglick
 ms.date: 08/18/2016
-ms.openlocfilehash: 42a7d865e101b43279f3198f3dd75df1b15a8565
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: f551e8af8aece8aa30abfba2438c41c3944209bd
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 [!INCLUDE [header](../_includes/header.md)]
+
 # <a name="azure-resiliency-technical-guidance-recovery-from-a-region-wide-service-disruption"></a>Orientações técnicas de resiliência do Azure: recuperação de uma interrupção de serviço em toda a região
 O Azure é dividido fisicamente e logicamente em unidades chamadas de regiões. Uma região consiste em um ou mais datacenters nas proximidades. 
 
@@ -75,7 +76,7 @@ Se ocorrer um failover geográfico, isso será postado no [Painel de Integridade
 Conforme discutido na seção sobre discos de VM, não há garantias de consistência de dados entre discos de VM após um failover. Para garantir a exatidão de backups, um produto de backup como o Data Protection Manager deve ser usado para fazer backup de dados de aplicativos e restaurá-los.
 
 ## <a name="database"></a>Banco de dados
-### <a name="sql-database"></a>Banco de Dados SQL
+### <a name="sql-database"></a>Banco de dados SQL
 O Banco de Dados SQL do Azure fornece dois tipos de recuperação: Restauração Geográfica e Replicação Geográfica Ativa.
 
 #### <a name="geo-restore"></a>Restauração geográfica

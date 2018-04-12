@@ -1,13 +1,13 @@
 ---
 title: Escolhendo um armazenamento de dados OLAP
-description: 
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
 ms.openlocfilehash: f3041b95696c9408a2c9ab747fe1ec3041db0743
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 03/31/2018
 ---
 # <a name="choosing-an-olap-data-store-in-azure"></a>Escolhendo um armazenamento de dados OLAP no Azure
 
@@ -54,12 +54,12 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 
 | | Azure Analysis Services | SQL Server Analysis Services | SQL Server com Índices Columnstore | Banco de dados SQL do Azure com Índices Columnstore |
 | --- | --- | --- | --- | --- |
-| É um serviço gerenciado | sim | Não  | Não  | sim |
-| Dá suporte a cubos multidimensionais | Não  | sim | Não  | Não  |
-| Dá suporte a modelos semânticos de tabela | sim | sim | Não  | Não  |
+| É um serviço gerenciado | sim | Não | Não  | sim |
+| Dá suporte a cubos multidimensionais | Não  | sim | Não | Não  |
+| Dá suporte a modelos semânticos de tabela | sim | sim | Não | Não  |
 | É integrado com facilidade a várias fontes de dados | sim | sim | Não <sup>1</sup> | Não <sup>1</sup> |
 | Dá suporte à análise em tempo real | Não  | Não  | sim | sim |
-| Exige que o processo copie dados das origens | sim | sim | Não  | Não  |
+| Exige que o processo copie dados das origens | sim | sim | Não | Não  |
 | Integração com o Azure AD | sim | Não  | Não <sup>2</sup> | sim |
 
 [1] Embora o SQL Server e o Banco de Dados SQL do Azure não possa ser usado para consultar e integrar várias fontes de dados externas, você ainda poderá criar um pipeline que faz isso para você usando o [SSIS](/sql/integration-services/sql-server-integration-services) ou o [Azure Data Factory](/azure/data-factory/). O SQL Server hospedado em uma VM do Azure traz opções adicionais, como servidores vinculados e o [PolyBase](/sql/relational-databases/polybase/polybase-guide). Para obter mais informações, consulte [Orquestração de pipeline, fluxo de controle e movimentação de dados](../technology-choices/pipeline-orchestration-data-movement.md).

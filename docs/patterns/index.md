@@ -1,12 +1,12 @@
 ---
-title: "Padrões de design na nuvem"
-description: "Padrões de design de nuvem para o Microsoft Azure"
-keywords: As tabelas
-ms.openlocfilehash: bf9fb2555f5c80cab9e4616ba52155bf1284d26f
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+title: Padrões de design na nuvem
+description: Padrões de design de nuvem para o Microsoft Azure
+keywords: Azure
+ms.openlocfilehash: 0b564931fe027e42b3a6db1a5d6a207e6441e536
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="cloud-design-patterns"></a>Padrões de design na nuvem
 
@@ -49,7 +49,7 @@ Cada padrão descreve o problema ao qual o padrão se destina, as consideraçõe
     <td style="width: 64px; vertical-align: middle;"><a href="./category/management-monitoring.md"><img src="_images/category/management-monitoring.svg" alt="Management and Monitoring" /></a></td>
     <td>
         <h3><a href="./category/management-monitoring.md">Gerenciamento e Monitoramento</a></h3>
-        <p>Os aplicativos de nuvem executados em um data center remoto em que você não tem controle total da infraestrutura ou, em alguns casos, o sistema operacional. Isso pode simplificar o gerenciamento e monitoramento mais difícil do que uma implantação local. Os aplicativos devem expor informações de tempo de execução que operadores e administradores podem usar para gerenciar e monitorar o sistema, bem como suporte para alteração requisitos de negócios e personalização sem a necessidade do aplicativo a ser interrompido ou reimplantado.</p>
+        <p>Os aplicativos de nuvem executados em um data center remoto em que você não tem controle total da infraestrutura ou, em alguns casos, o sistema operacional. Isso pode tornar o gerenciamento e o monitoramento mais difíceis do que uma implantação local. Os aplicativos devem expor informações de tempo de execução que operadores e administradores podem usar para gerenciar e monitorar o sistema, bem como suporte para alteração requisitos de negócios e personalização sem a necessidade do aplicativo a ser interrompido ou reimplantado.</p>
     </td>
 </tr>
 <tr>
@@ -63,51 +63,52 @@ Cada padrão descreve o problema ao qual o padrão se destina, as consideraçõe
     <td style="width: 64px; vertical-align: middle;"><a href="./category/resiliency.md"><img src="_images/category/resiliency.svg" alt="Resiliency" /></a></td>
     <td>
         <h3><a href="./category/resiliency.md">Resiliência</a></h3>
-        <p>A resiliência é a capacidade de um sistema para tratar normalmente e recuperar de falhas. A natureza da nuvem de hospedagem, em que os aplicativos são geralmente multilocatários, usa os serviços de plataforma compartilhada, concorre para recursos e largura de banda, se comunica pela Internet e executar no hardware de mercadoria significa que há uma maior probabilidade de que ocorram falhas transitórias e mais permanentes. Detecção de falhas e a recuperação rápida e eficaz, é necessário para manter a resiliência.</p>
+        <p>A resiliência é a capacidade de um sistema para tratar normalmente e recuperar de falhas. A natureza da hospedagem em nuvem, em que os aplicativos costumam ser multilocatário, usam serviços de plataforma compartilhada, competem por recursos e largura de banda, comunicam-se pela Internet e são executados no hardware de mercadoria significa que há uma maior probabilidade de que ocorram falhas tanto transitórias quanto mais permanentes. A detecção de falhas e a recuperação rápida e eficaz são necessárias para manter a resiliência.</p>
     </td>
 </tr>
 <tr>
     <td style="width: 64px; vertical-align: middle;"><a href="./category/security.md"><img src="_images/category/security.svg" alt="Security" /></a></td>
     <td>
         <h3><a href="./category/security.md">Segurança</a></h3>
-        <p>A segurança é a capacidade de um sistema para impedir ações acidentais ou mal-intencionado fora de uso projetado e para evitar a divulgação ou a perda de informações. Os aplicativos de nuvem são expostos na Internet fora dos limites de locais confiáveis, geralmente são abertos ao público e podem atender a usuários não confiáveis. Os aplicativos devem ser criados e implantados de maneira que protege contra ataques mal-intencionados, restringe o acesso a somente usuários aprovados e protege dados confidenciais.</p>
+        <p>A segurança é a capacidade de um sistema impedir ações acidentais ou mal-intencionadas fora do uso projetado e evitar a divulgação ou a perda de informações. Os aplicativos de nuvem são expostos na Internet fora dos limites de locais confiáveis e geralmente são abertos ao público e podem atender a usuários não confiáveis. Os aplicativos devem ser criados e implantados de maneira que protege contra ataques mal-intencionados, restringe o acesso a somente usuários aprovados e protege dados confidenciais.</p>
     </td>
 </tr>
 </table>
 
 ## <a name="catalog-of-patterns"></a>Catálogo de padrões
 
-| Padrão | Resumo |
-| ------- | ------- |
-| [Embaixador](./ambassador.md) | Crie serviços auxiliar que enviam solicitações de rede em nome de um consumidor de serviço ou aplicativo. |
-| [Camada contra Corrupção](./anti-corruption-layer.md) | Implemente uma camada de fachada ou adaptador entre um aplicativo moderno e um sistema herdado. |
-| [Back-ends para Front-ends](./backends-for-frontends.md) | Crie serviços de back-end separados a serem consumidos por aplicativos de front-end específico ou interfaces. |
-| [Bulkhead](./bulkhead.md) | Isole os elementos de um aplicativo em pools para que, se um falhar, os outros continuarão a funcionar. |
-| [Cache-Aside](./cache-aside.md) | Carregar dados sob demanda em um cache de um armazenamento de dados |
-| [Disjuntor](./circuit-breaker.md) | Trate as falhas que possam consumir uma quantidade variável de tempo em sua correção ao se conectar a um serviço ou recurso remoto. |
-| [CQRS](./cqrs.md) | Separar as operações que leem dados de operações que atualizam dados usando interfaces separadas. |
-| [Transação de Compensação](./compensating-transaction.md) | Desfaça o trabalho executado por uma série de etapas, que juntas definem uma operação finalmente consistente. |
-| [Consumidores Concorrentes](./competing-consumers.md) | Habilite vários consumidores simultâneos processar as mensagens recebidas no mesmo canal de mensagens. |
-| [Consolidação de Recursos de Computação](./compute-resource-consolidation.md) | Consolidar várias tarefas ou operações em uma única unidade de computação |
-| [Fornecimento de Evento](./event-sourcing.md) | Use um armazenamento só de acréscimo para registrar a série inteira de eventos que descrevem as ações realizadas nos dados em um domínio. |
-| [Armazenamento de Configuração Externa](./external-configuration-store.md) | Mova as informações de configuração para fora do pacote de implantação de aplicativo para um local centralizado. |
-| [Identidade Federada](./federated-identity.md) | Autenticação de delegado a um provedor de identidade externa. |
-| [Gatekeeper](./gatekeeper.md) | Proteger aplicativos e serviços usando uma instância de host dedicado que atua como intermediário entre clientes e o aplicativo ou serviço, valida e corrige solicitações e passa solicitações e dados entre eles. |
-| [Agregação de Gateway](./gateway-aggregation.md) | Use um gateway para agregar várias solicitações individuais em uma única solicitação. |
-| [Descarregamento de Gateway](./gateway-offloading.md) | Descarregar a funcionalidade de serviço especializado ou compartilhado a um proxy do gateway. |
-| [Roteamento de Gateway](./gateway-routing.md) | Rotear solicitações para vários serviços usando um único ponto de extremidade. |
-| [Monitoramento do Ponto de Extremidade de Integridade](./health-endpoint-monitoring.md) | Implemente verificações funcionais dentro de um aplicativo que ferramentas externas podem acessar por meio de pontos de extremidade expostos em intervalos regulares. |
-| [Tabela de Índice](./index-table.md) | Crie índices nos campos em armazenamentos de dados que são frequentemente referenciados por consultas. |
-| [Eleição de Líder](./leader-election.md) | Coordene as ações executadas por uma coleção de instâncias de tarefa de colaboração em um aplicativo distribuído ao escolher uma instância como o líder que assume a responsabilidade de gerenciamento de outras instâncias. |
-| [Exibição Materializada](./materialized-view.md) | Gere exibições pré-preenchidas nos dados em um ou mais armazenamentos de dados quando os dados não estiverem formatados como o ideal para as operações de consulta necessárias. |
-| [Pipes e Filtros](./pipes-and-filters.md) | Divida uma tarefa que executa processamento complexo em uma série de elementos separados que podem ser reutilizados. |
-| [Fila de Prioridade](./priority-queue.md) | Priorize as solicitações enviadas a serviços para que as solicitações com uma prioridade mais alta sejam recebidas e processadas mais rapidamente do que aquelas com uma prioridade mais baixa. |
-| [Nivelamento de Carga Baseado em Fila](./queue-based-load-leveling.md) | Use uma fila que funcione como um buffer entre uma tarefa e um serviço que invocar a fim de simplificar cargas pesadas intermitentes. |
-| [Repetir](./retry.md) | Permita que um aplicativo lide com falhas previstas e temporárias quando tentar se conectar a um recurso de rede ou serviço ao repetir de forma transparente uma operação que falhou anteriormente. |
-| [Supervisor de Agente do Agendador](./scheduler-agent-supervisor.md) | Coordene um conjunto de ações em um conjunto distribuído de serviços e outros recursos remotos. |
-| [Fragmentação](./sharding.md) | Divida um armazenamento de dados em um conjunto de partições horizontais ou fragmentos. |
-| [Sidecar](./sidecar.md) | Implante os componentes de um aplicativo em um processo ou contêiner separado para fornecer isolamento e encapsulamento. |
-| [Hospedagem de Conteúdo Estático](./static-content-hosting.md) | Implante o conteúdo estático para um serviço de armazenamento baseado em nuvem que pode enviá-las diretamente para o cliente. |
-| [Strangler](./strangler.md) | Migre incrementalmente um sistema herdado, substituindo gradualmente partes específicas de funcionalidade por serviços e aplicativos novos. |
-| [Limitação](./throttling.md) | Controle o consumo de recursos usados por uma instância de um aplicativo, um locatário individual ou todo o serviço. |
-| [Valet Key](./valet-key.md) | Use um token ou chave que fornece aos clientes acesso direto e restrito a um determinado recurso ou serviço. |
+|                                Padrão                                |                                                                                                         Resumo                                                                                                         |
+|-----------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                     [Embaixador](./ambassador.md)                     |                                                            Crie serviços auxiliares que enviam solicitações de rede em nome de um consumidor de serviço ou aplicativo.                                                            |
+|          [Camada anticorrupção](./anti-corruption-layer.md)          |                                                                  Implemente uma camada de fachada ou adaptador entre um aplicativo moderno e um sistema herdado.                                                                  |
+|         [Back-ends para Front-ends](./backends-for-frontends.md)         |                                                            Crie serviços de back-end separados a serem consumidos por aplicativos de front-end específico ou interfaces.                                                             |
+|                       [Bulkhead](./bulkhead.md)                       |                                                        Isole os elementos de um aplicativo em pools para que, se um falhar, os outros continuarão a funcionar.                                                        |
+|                    [Cache-Aside](./cache-aside.md)                    |                                                                                   Carregar dados sob demanda em um cache de um armazenamento de dados                                                                                    |
+|                [Disjuntor](./circuit-breaker.md)                |                                                     Trate as falhas que possam consumir uma quantidade variável de tempo em sua correção ao se conectar a um serviço ou recurso remoto.                                                     |
+|                           [CQRS](./cqrs.md)                           |                                                           Separar as operações que leem dados de operações que atualizam dados usando interfaces separadas.                                                            |
+|       [Transação de Compensação](./compensating-transaction.md)       |                                                         Desfaça o trabalho executado por uma série de etapas, que juntas definem uma operação finalmente consistente.                                                         |
+|            [Consumidores Concorrentes](./competing-consumers.md)            |                                                            Habilite vários consumidores simultâneos processar as mensagens recebidas no mesmo canal de mensagens.                                                             |
+| [Consolidação de Recursos de Computação](./compute-resource-consolidation.md) |                                                                        Consolidar várias tarefas ou operações em uma única unidade de computação                                                                        |
+|                 [Fornecimento de Evento](./event-sourcing.md)                 |                                                      Use um repositório somente de acréscimo para registrar a série inteira de eventos que descrevem as ações realizadas nos dados em um domínio.                                                      |
+|   [Armazenamento de Configuração Externa](./external-configuration-store.md)   |                                                           Mova as informações de configuração para fora do pacote de implantação de aplicativo para um local centralizado.                                                           |
+|             [Identidade Federada](./federated-identity.md)             |                                                                                Delegar autenticação a um provedor de identidade externa.                                                                                |
+|                     [Gatekeeper](./gatekeeper.md)                     | Proteger aplicativos e serviços usando uma instância de host dedicado que atua como intermediário entre clientes e o aplicativo ou serviço, valida e corrige solicitações e passa solicitações e dados entre eles. |
+|            [Agregação de Gateway](./gateway-aggregation.md)            |                                                                     Use um gateway para agregar várias solicitações individuais em uma única solicitação.                                                                      |
+|             [Descarregamento de Gateway](./gateway-offloading.md)             |                                                                         Descarregue a funcionalidade de serviço especializado ou compartilhado para um proxy do gateway.                                                                         |
+|                [Roteamento de Gateway](./gateway-routing.md)                |                                                                              Faça o roteamento de solicitações para vários serviços usando um único ponto de extremidade.                                                                               |
+|     [Monitoramento do ponto de extremidade de integridade](./health-endpoint-monitoring.md)     |                                              Implemente verificações funcionais dentro de um aplicativo que ferramentas externas podem acessar por meio de pontos de extremidade expostos em intervalos regulares.                                               |
+|                    [Tabela de Índice](./index-table.md)                    |                                                                Crie índices nos campos em armazenamentos de dados que são frequentemente referenciados por consultas.                                                                 |
+|                [Eleição de Líder](./leader-election.md)                |   Coordene as ações executadas por uma coleção de instâncias de tarefa de colaboração em um aplicativo distribuído ao escolher uma instância como o líder que assume a responsabilidade de gerenciamento de outras instâncias.    |
+|              [Exibição Materializada](./materialized-view.md)              |                                        Gere exibições pré-preenchidas nos dados em um ou mais armazenamentos de dados quando os dados não estiverem formatados como o ideal para as operações de consulta necessárias.                                        |
+|              [Pipes e Filtros](./pipes-and-filters.md)              |                                                        Dividir uma tarefa que executa processamento complexo em uma série de elementos separados que podem ser reutilizados.                                                        |
+|                 [Fila de Prioridade](./priority-queue.md)                 |                                 Priorize as solicitações enviadas a serviços para que as solicitações com uma prioridade mais alta sejam recebidas e processadas mais rapidamente do que aquelas com uma prioridade mais baixa.                                  |
+|      [Nivelamento de Carga Baseado em Fila](./queue-based-load-leveling.md)      |                                               Use uma fila que funcione como um buffer entre uma tarefa e um serviço que ela invoca para simplificar cargas pesadas intermitentes.                                               |
+|                          [Tentar Novamente](./retry.md)                          |               Permita que um aplicativo trate falhas previstas e temporárias quando tentar se conectar a um serviço ou recurso de rede ao repetir de forma transparente uma operação que falhou anteriormente.                |
+|     [Supervisor de Agente do Agendador](./scheduler-agent-supervisor.md)     |                                                              Coordene um conjunto de ações em um conjunto distribuído de serviços e outros recursos remotos.                                                               |
+|                       [Fragmentação](./sharding.md)                       |                                                                           Divida um armazenamento de dados em um conjunto de partições horizontais ou fragmentos.                                                                            |
+|                        [Sidecar](./sidecar.md)                        |                                                    Implante os componentes de um aplicativo em um processo ou contêiner separado para fornecer isolamento e encapsulamento.                                                     |
+|         [Hospedagem de Conteúdo Estático](./static-content-hosting.md)         |                                                          Implante o conteúdo estático para um serviço de armazenamento baseado em nuvem que pode enviá-las diretamente para o cliente.                                                           |
+|                      [Strangler](./strangler.md)                      |                                            Migre incrementalmente um sistema herdado substituindo gradualmente partes específicas de funcionalidade por serviços e aplicativos novos.                                            |
+|                     [Limitação](./throttling.md)                     |                                                 Controle o consumo de recursos usados por uma instância de um aplicativo, um locatário individual ou todo o serviço.                                                 |
+|                      [Valet Key](./valet-key.md)                      |                                                        Use um token ou chave que fornece aos clientes acesso direto e restrito a um determinado recurso ou serviço.                                                        |
+

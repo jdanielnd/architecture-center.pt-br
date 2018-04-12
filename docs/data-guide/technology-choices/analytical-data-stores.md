@@ -1,19 +1,19 @@
 ---
-title: "Escolhendo um armazenamento de dados analíticos"
-description: 
+title: Escolhendo um armazenamento de dados analíticos
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: b2e5e63982d4b89b95cd28e596d3b882a4a2263e
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: cdc32c16e30aec5e1c0cb6959182215f99d56b56
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="choosing-an-analytical-data-store-in-azure"></a>Escolhendo um armazenamento de dados analíticos no Azure
 
-Em uma arquitetura de [Big Data](../concepts/big-data.md), geralmente, há a necessidade de um armazenamento de dados analíticos que forneça dados processados em um formato estruturado que pode ser consultado com ferramentas analíticas. Os armazenamentos de dados analíticos que dão suporte à consulta de dados de caminho quente e frio são chamados em conjunto de camada de serviço ou armazenamento de serviço de dados.
+Em uma arquitetura de [Big Data](../big-data/index.md), geralmente, há a necessidade de um armazenamento de dados analíticos que forneça dados processados em um formato estruturado que pode ser consultado com ferramentas analíticas. Os armazenamentos de dados analíticos que dão suporte à consulta de dados de caminho quente e frio são chamados em conjunto de camada de serviço ou armazenamento de serviço de dados.
 
-A camada de serviço lida com os dados processados dos caminhos quente e frio. Na [arquitetura lambda](../concepts/big-data.md#lambda-architecture), a camada de serviço é subdividida em uma camada de _serviço de velocidade_, que armazena os dados que foram processados de forma incremental e uma camada de _serviço de lote_, que contém a saída processada em lotes. A camada de serviço exige suporte forte para leituras aleatórias com baixa latência. O armazenamento de dados para a camada de velocidade também deve dar suporte a gravações aleatórias, porque o carregamento em lotes dos dados nesse repositório introduzirá atrasos indesejados. Por outro lado, o armazenamento de dados da camada de lote não precisa dar suporte a gravações aleatórias, mas gravações em lotes.
+A camada de serviço lida com os dados processados dos caminhos quente e frio. Na [arquitetura lambda](../big-data/index.md#lambda-architecture), a camada de serviço é subdividida em uma camada de _serviço de velocidade_, que armazena os dados que foram processados de forma incremental e uma camada de _serviço de lote_, que contém a saída processada em lotes. A camada de serviço exige suporte forte para leituras aleatórias com baixa latência. O armazenamento de dados para a camada de velocidade também deve dar suporte a gravações aleatórias, porque o carregamento em lotes dos dados nesse repositório introduzirá atrasos indesejados. Por outro lado, o armazenamento de dados da camada de lote não precisa dar suporte a gravações aleatórias, mas gravações em lotes.
 
 Não há uma única opção de gerenciamento de dados que seja a melhor para todas as tarefas de armazenamento de dados. Soluções de gerenciamento de dados diferentes são otimizadas para tarefas diferentes. A maioria dos aplicativos de nuvem do mundo real e processos de Big Data tem uma variedade de requisitos de armazenamento de dados e geralmente usa uma combinação de soluções de armazenamento de dados.
 
@@ -65,12 +65,12 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
  
 ### <a name="scalability-capabilities"></a>Funcionalidades de escalabilidade
 
-| | Banco de dados SQL | SQL Data Warehouse | HBase/Phoenix no HDInsight | Hive LLAP no HDInsight | Azure Analysis Services | Cosmos DB |
-| --- | --- | --- | --- | --- | --- | --- |
-| Servidores regionais redundantes para alta disponibilidade  | sim | sim | sim | Não  | Não  | sim | sim |
-| Dá suporte à expansão da consulta  | Não  | sim | sim | sim | sim | sim |
-| Escalabilidade dinâmica (escalar verticalmente)  | sim | sim | Não  | Não  | sim | sim |
-| Dá suporte ao cache em memória de dados | sim | sim | Não  | sim | sim | Não  |
+|                                                  | Banco de dados SQL | SQL Data Warehouse | HBase/Phoenix no HDInsight | Hive LLAP no HDInsight | Azure Analysis Services | Cosmos DB |
+|--------------------------------------------------|--------------|--------------------|----------------------------|------------------------|-------------------------|-----------|
+| Servidores regionais redundantes para alta disponibilidade |     sim      |        sim         |            sim             |           Não           |           Não             |    sim    |
+|             Dá suporte à expansão da consulta             |      Não       |        sim         |            sim             |          sim           |           sim           |    sim    |
+|          Escalabilidade dinâmica (escalar verticalmente)          |     sim      |        sim         |             Não             |           Não            |           sim           |    sim    |
+|        Dá suporte ao cache em memória de dados        |     sim      |        sim         |             Não              |          sim           |           sim           |    Não      |
 
 ### <a name="security-capabilities"></a>Funcionalidades de segurança
 

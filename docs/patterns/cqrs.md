@@ -1,7 +1,7 @@
 ---
 title: CQRS
-description: "Separar as operações que leem dados de operações que atualizam dados usando interfaces separadas."
-keywords: "padrão de design"
+description: Separar as operações que leem dados de operações que atualizam dados usando interfaces separadas.
+keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
@@ -9,11 +9,11 @@ pnp.pattern.categories:
 - data-management
 - design-implementation
 - performance-scalability
-ms.openlocfilehash: 80f4a8880cf2212acf82dadb67b0181e1cbae099
-ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
+ms.openlocfilehash: ce8d20ae82ae7d5ba00b4bc264a5c4d90fc383bd
+ms.sourcegitcommit: ea7108f71dab09175ff69322874d1bcba800a37a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/30/2018
+ms.lasthandoff: 03/17/2018
 ---
 # <a name="command-and-query-responsibility-segregation-cqrs-pattern"></a>Padrão CQRS (Segregação de Responsabilidade de Consulta e Comando)
 
@@ -69,7 +69,7 @@ Considere os seguintes pontos ao decidir como implementar esse padrão:
 
 - Considere aplicar CQRS em seções limitadas do seu sistema, onde será mais valioso.
 
-- Uma abordagem típica para a implantação de coerência eventual é usar o fornecimento de evento em conjunto com o CQRS, de modo que o modelo de gravação seja um stream de eventos somente para anexos, conduzido pela execução de comandos. Esses eventos são utilizados para atualizar exibições materializadas que agem como o modelo de leitura. Para obter mais informações, consulte [Fornecimento de evento e CQRS](https://msdn.microsoft.com/library/dn568103.aspx#EventSourcingandCQRS).
+- Uma abordagem típica para a implantação de coerência eventual é usar o fornecimento de evento em conjunto com o CQRS, de modo que o modelo de gravação seja um stream de eventos somente para anexos, conduzido pela execução de comandos. Esses eventos são utilizados para atualizar exibições materializadas que agem como o modelo de leitura. Para obter mais informações, consulte [Fornecimento de evento e CQRS](/azure/architecture/patterns/cqrs#event-sourcing-and-cqrs).
 
 ## <a name="when-to-use-this-pattern"></a>Quando usar esse padrão
 

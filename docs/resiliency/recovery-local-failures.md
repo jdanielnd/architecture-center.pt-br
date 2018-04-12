@@ -1,15 +1,16 @@
 ---
-title: "Orientações técnicas: recuperação de falhas locais no Azure"
-description: "Artigo sobre compreensão e design de aplicativos resilientes, altamente disponíveis e tolerante a falhas, bem como planejamento de recuperação de desastre concentrado em falhas locais no Azure."
+title: 'Orientações técnicas: recuperação de falhas locais no Azure'
+description: Artigo sobre compreensão e design de aplicativos resilientes, altamente disponíveis e tolerante a falhas, bem como planejamento de recuperação de desastre concentrado em falhas locais no Azure.
 author: adamglick
 ms.date: 08/18/2016
-ms.openlocfilehash: 180eb465e5f82406bb03924a29d5b06d43bbaa24
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 5fc929bd1affe3dd6616f908bae0e7d2fefb89d5
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 [!INCLUDE [header](../_includes/header.md)]
+
 # <a name="azure-resiliency-technical-guidance-recovery-from-local-failures-in-azure"></a>Orientações técnicas de resiliência do Azure: recuperação de falhas locais no Azure
 
 Há duas ameaças básicas à disponibilidade de aplicativos:
@@ -87,7 +88,7 @@ As contas de armazenamento criadas depois de maio de 2014 podem ter até 500 TB 
 O disco de uma máquina virtual é armazenado como um blob de páginas no Armazenamento do Azure, o que dá a ele todas as mesmas propriedades de durabilidade e escalabilidade do armazenamento de Blobs. Esse design torna os dados em um disco de máquina virtual persistentes, mesmo se o servidor que executa a VM falhar e a VM precisa ser reiniciada em outro servidor.
 
 ## <a name="database"></a>Banco de dados
-### <a name="sql-database"></a>Banco de Dados SQL
+### <a name="sql-database"></a>Banco de dados SQL
 O Banco de Dados SQL do Azure fornece banco de dados como serviço. Ele permite que aplicativos sejam provisionados rapidamente, insiram dados e consultem bancos de dados relacionais. Ele fornece muitos dos recursos e funcionalidades conhecidos do SQL Server, ao mesmo tempo que abstrai a carga de hardware, configuração, aplicação de patch e resiliência.
 
 > [!NOTE]
@@ -155,7 +156,7 @@ Os dados associados ao HDInsight do Azure são armazenados por padrão no armaze
 8. Considere estratégias de dimensionamento automático.
 
 ### <a name="virtual-machines"></a>Máquinas Virtuais
-1. Confira a seção Máquinas Virtuais deste documento.
+1. Examinar a seção Máquinas Virtuais deste documento.
 2. Não use a unidade D para armazenamento persistente.
 3. Agrupe computadores em uma camada de serviço em um conjunto de disponibilidade.
 4. Configure o balanceamento de carga e investigações opcionais.
@@ -164,7 +165,7 @@ Os dados associados ao HDInsight do Azure são armazenados por padrão no armaze
 1. Examine a seção Armazenamento deste documento.
 2. Use várias contas de armazenamento quando dados ou largura de banda excederem as cotas.
 
-### <a name="sql-database"></a>Banco de Dados SQL
+### <a name="sql-database"></a>Banco de dados SQL
 1. Examinar a seção Banco de Dados SQL deste documento.
 2. Implemente uma política de repetição para tratar de erros transitórios.
 3. Use particionamento/fragmentação como uma estratégia de escalonamento horizontal.

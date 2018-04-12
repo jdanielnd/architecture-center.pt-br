@@ -7,11 +7,11 @@ pnp.series.title: Connect an on-premises network to Azure
 pnp.series.next: expressroute-vpn-failover
 pnp.series.prev: vpn
 cardTitle: ExpressRoute
-ms.openlocfilehash: 671be5118faaefab5ba5348de81642d8a8124b59
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: ada07f399925da6da28b24260f5c73f1e106fd7d
+ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="connect-an-on-premises-network-to-azure-using-expressroute"></a>Conectar uma rede local ao Azure usando o ExpressRoute
 
@@ -112,7 +112,7 @@ Crie um circuito do ExpressRoute conforme descrito a seguir:
 
 Você pode conectar múltiplas VNets localizadas em regiões diferentes ao mesmo circuito do ExpressRoute, desde que todas as VNets e o circuito do ExpressRoute estejam localizados na mesma região geopolítica.
 
-### <a name="troubleshooting"></a>Solucionar problemas 
+### <a name="troubleshooting"></a>solução de problemas 
 
 Se um circuito do ExpressRoute que funcionava anteriormente agora falha ao se conectar sem que tenha ocorrido nenhuma alteração de configuração local ou dentro de sua VNet privada, você provavelmente precisará entrar em contato com o provedor de conectividade e trabalhar com eles para corrigir o problema. Use os seguintes comandos do Powershell para verificar se o circuito do ExpressRoute foi configurado:
 
@@ -278,7 +278,7 @@ Para implantar a solução, execute as etapas a seguir.
 [expressroute-pricing]: https://azure.microsoft.com/pricing/details/expressroute/
 [expressroute-limits]: /azure/azure-subscription-service-limits#networking-limits
 [azurect]: https://github.com/Azure/NetworkMonitoring/tree/master/AzureCT
-[visio-download]: https://archcenter.azureedge.net/cdn/hybrid-network-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/hybrid-network-architectures.vsdx
 [er-circuit-parameters]: https://github.com/mspnp/reference-architectures/tree/master/hybrid-networking/expressroute/parameters/expressRouteCircuit.parameters.json
 [azure-powershell-download]: https://azure.microsoft.com/documentation/articles/powershell-install-configure/
 [azure-cli]: https://azure.microsoft.com/documentation/articles/xplat-cli-install/

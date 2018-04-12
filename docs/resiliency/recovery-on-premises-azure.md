@@ -1,15 +1,16 @@
 ---
-title: "Orientação técnica: recuperação do local para o Azure"
-description: "Artigo sobre a compreensão e criação de sistemas de recuperação da infraestrutura local para o Azure"
+title: 'Orientação técnica: recuperação do local para o Azure'
+description: Artigo sobre a compreensão e criação de sistemas de recuperação da infraestrutura local para o Azure
 author: adamglick
 ms.date: 08/18/2016
-ms.openlocfilehash: f5ce86dbd605fa7dc74e6a7cc97f0d6c6acd79e5
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 6992e27d148074b3d60c282318741f45974d1afd
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 [!INCLUDE [header](../_includes/header.md)]
+
 # <a name="azure-resiliency-technical-guidance-recovery-from-on-premises-to-azure"></a>Orientações técnicas de resiliência do Azure: recuperação do local para o Azure
 O Azure fornece um conjunto abrangente de serviços para habilitar a extensão de um datacenter local para o Azure para fins de recuperação de desastre e alta disponibilidade:
 
@@ -71,7 +72,7 @@ Para obter mais informações, confira [Alta disponibilidade e recuperação de 
 2. Realocar VMs entre o Hyper-V e o Azure.
 
 ### <a name="storage"></a>Armazenamento
-1. Examine a seção Armazenamento deste documento.
+1. Examinar a seção Armazenamento deste documento.
 2. Tirar proveito dos serviços do StorSimple para usar o armazenamento em nuvem.
 3. Usar o serviço de Backup do Azure.
 

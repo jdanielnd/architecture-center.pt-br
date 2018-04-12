@@ -1,22 +1,22 @@
 ---
-title: "Implantar soluções de virtualização de rede de alta disponibilidade"
-description: "Como implantar soluções de virtualização de rede em alta disponibilidade."
+title: Implantar soluções de virtualização de rede de alta disponibilidade
+description: Como implantar soluções de virtualização de rede em alta disponibilidade.
 author: telmosampaio
 ms.date: 12/06/2016
 pnp.series.title: Network DMZ
 pnp.series.prev: secure-vnet-dmz
 cardTitle: Deploy highly available network virtual appliances
-ms.openlocfilehash: 844c87f535d2a8cb415489cb2c8e840f8c585d7d
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: fe279eea3f9cb024d6c6c14943013b9b9a87bc9c
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="deploy-highly-available-network-virtual-appliances"></a>Implantar soluções de virtualização de rede altamente disponíveis
 
 Este artigo mostra como implantar um conjunto de NVAs (soluções de virtualização de rede) para alta disponibilidade no Azure. Uma NVA normalmente é usada para controlar o fluxo de tráfego de rede de uma rede de perímetro, também conhecida como DMZ, para outras redes ou sub-redes. Para saber mais sobre a implementação de uma DMZ no Azure, consulte [Serviços em nuvem da Microsoft e segurança de rede][cloud-security]. O artigo inclui as arquiteturas de exemplo apenas de entrada, apenas de saída e de entrada e saída. 
 
-**Pré-requisitos:** este artigo pressupõe um entendimento básico de redes do Azure, [balanceadores de carga do Azure][lb-overview] e UDRs [(rotas definidas pelo usuário)][udr-overview]. 
+<strong>Pré-requisitos:</strong> este artigo pressupõe um entendimento básico de redes do Azure, [balanceadores de carga do Azure][lb-overview] e UDRs [(rotas definidas pelo usuário)][udr-overview]. 
 
 
 ## <a name="architecture-diagrams"></a>Diagramas de arquitetura

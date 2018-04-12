@@ -1,18 +1,18 @@
 ---
 title: Fornecimento do evento
-description: "Use um repositório somente de acréscimo para registrar a série inteira de eventos que descrevem as ações realizadas nos dados em um domínio."
-keywords: "padrão de design"
+description: Use um repositório somente de acréscimo para registrar a série inteira de eventos que descrevem as ações realizadas nos dados em um domínio.
+keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - data-management
 - performance-scalability
-ms.openlocfilehash: d5d4e99a6ff49cb823f592c83590471c0d68bfd1
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 9a0bf170c9b54c3b2ee9cc91d6dcb5c55a13b96a
+ms.sourcegitcommit: ea7108f71dab09175ff69322874d1bcba800a37a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 03/17/2018
 ---
 # <a name="event-sourcing-pattern"></a>Padrão de fornecimento do evento
 
@@ -33,7 +33,7 @@ A abordagem CRUD tem algumas limitações:
 
 - A menos que haja um mecanismo de auditoria adicional que registre os detalhes de cada operação em um log separado, o histórico será perdido.
 
-> Para obter uma compreensão mais profunda dos limites da abordagem CRUD, consulte [CRUD, apenas quando viável](https://blogs.msdn.microsoft.com/maarten_mullender/2004/07/23/crud-only-when-you-can-afford-it-revisited/).
+> Para uma compreensão mais profunda dos limites da abordagem CRUD, consulte [CRUD, Somente quando você puder custear isso](https://blogs.msdn.microsoft.com/maarten_mullender/2004/07/23/crud-only-when-you-can-afford-it-revisited/).
 
 ## <a name="solution"></a>Solução
 
@@ -52,17 +52,17 @@ A figura mostra uma visão geral do padrão, incluindo algumas das opções para
 
 O padrão de fornecimento do evento fornece as seguintes vantagens:
 
-Eventos são imutáveis e podem ser armazenados usando uma operação somente de acréscimo. A interface do usuário, um fluxo de trabalho ou um processo que iniciou um evento pode continuar e tarefas que manipulam os eventos podem ser executadas em segundo plano. Isso, combinado com o fato de que não há nenhuma contenção durante o processamento de transações, pode melhorar muito o desempenho e a escalabilidade de aplicativos, especialmente para a interface do usuário ou o nível de apresentação.
+- Eventos são imutáveis e podem ser armazenados usando uma operação somente de acréscimo. A interface do usuário, um fluxo de trabalho ou um processo que iniciou um evento pode continuar e tarefas que manipulam os eventos podem ser executadas em segundo plano. Isso, combinado com o fato de que não há nenhuma contenção durante o processamento de transações, pode melhorar muito o desempenho e a escalabilidade de aplicativos, especialmente para a interface do usuário ou o nível de apresentação.
 
-Os eventos são objetos simples que descrevem uma ação que ocorreu, juntamente com quaisquer dados associados necessários para descrever a ação representada pelo evento. Eventos não atualizam um armazenamento de dados diretamente. Eles simplesmente são registrados para manipulação no momento apropriado. Isso pode simplificar a implementação e o gerenciamento.
+- Os eventos são objetos simples que descrevem uma ação que ocorreu, juntamente com quaisquer dados associados necessários para descrever a ação representada pelo evento. Eventos não atualizam um armazenamento de dados diretamente. Eles simplesmente são registrados para manipulação no momento apropriado. Isso pode simplificar a implementação e o gerenciamento.
 
-Eventos geralmente têm significado para um especialista de domínio, enquanto a [incompatibilidade de impedância relacional de objeto](https://en.wikipedia.org/wiki/Object-relational_impedance_mismatch) pode tornar as tabelas de banco de dados complexas difíceis de entender. As tabelas são construções artificiais que representam o estado atual do sistema, não os eventos que ocorreram.
+- Eventos geralmente têm significado para um especialista de domínio, enquanto a [incompatibilidade de impedância relacional de objeto](https://en.wikipedia.org/wiki/Object-relational_impedance_mismatch) pode tornar as tabelas de banco de dados complexas difíceis de entender. As tabelas são construções artificiais que representam o estado atual do sistema, não os eventos que ocorreram.
 
-O fornecimento do evento pode ajudar a evitar que atualizações simultâneas causem conflitos porque ele evita a necessidade de atualizar diretamente os objetos no armazenamento de dados. No entanto, o modelo de domínio ainda deve ser criado para se proteger de solicitações que podem resultar em um estado inconsistente.
+- O fornecimento do evento pode ajudar a evitar que atualizações simultâneas causem conflitos porque ele evita a necessidade de atualizar diretamente os objetos no armazenamento de dados. No entanto, o modelo de domínio ainda deve ser criado para se proteger de solicitações que podem resultar em um estado inconsistente.
 
-O armazenamento de eventos somente de acréscimo oferece um log de auditoria que pode ser usado para monitorar as ações executadas em um armazenamento de dados, gerar o estado atual como exibições materializadas ou projeções reproduzindo eventos a qualquer momento e ajudar a testar e a depurar o sistema. Além disso, o requisito para usar os eventos de compensação para cancelar as alterações fornece um histórico das alterações que foram revertidas, o que não ocorreria se o modelo simplesmente armazenasse o estado atual. A lista de eventos também pode ser usada para analisar o desempenho do aplicativo e detectar tendências de comportamento do usuário ou então para obter outras informações de negócios úteis.
+- O armazenamento de eventos somente de acréscimo oferece um log de auditoria que pode ser usado para monitorar as ações executadas em um armazenamento de dados, gerar o estado atual como exibições materializadas ou projeções reproduzindo eventos a qualquer momento e ajudar a testar e a depurar o sistema. Além disso, o requisito para usar os eventos de compensação para cancelar as alterações fornece um histórico das alterações que foram revertidas, o que não ocorreria se o modelo simplesmente armazenasse o estado atual. A lista de eventos também pode ser usada para analisar o desempenho do aplicativo e detectar tendências de comportamento do usuário ou então para obter outras informações de negócios úteis.
 
-O repositório de eventos aciona eventos e tarefas executam operações em resposta a esses eventos. Desassociar as tarefas dos eventos desse modo fornece flexibilidade e extensibilidade. As tarefas sabem sobre o tipo de evento e os dados de evento, mas não sobre a operação que disparou o evento. Além disso, múltiplas tarefas podem manipular cada evento. Isso permite uma integração fácil com outros serviços e sistemas que escutam somente novos eventos acionados pelo repositório de eventos. No entanto, os eventos de fornecimento do evento tendem a ser de nível muito baixo e pode ser necessário gerar eventos de integração específicos em vez deles.
+- O repositório de eventos aciona eventos e tarefas executam operações em resposta a esses eventos. Desassociar as tarefas dos eventos desse modo fornece flexibilidade e extensibilidade. As tarefas sabem sobre o tipo de evento e os dados de evento, mas não sobre a operação que disparou o evento. Além disso, múltiplas tarefas podem manipular cada evento. Isso permite uma integração fácil com outros serviços e sistemas que escutam somente novos eventos acionados pelo repositório de eventos. No entanto, os eventos de fornecimento do evento tendem a ser de nível muito baixo e pode ser necessário gerar eventos de integração específicos em vez deles.
 
 > O fornecimento do evento é geralmente combinado com o padrão CQRS executando-se as tarefas de gerenciamento de dados em resposta aos eventos e materializando exibições dos eventos armazenados.
 

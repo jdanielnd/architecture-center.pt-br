@@ -3,11 +3,11 @@ title: Processamento em tempo real
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: f1054ce5e8c2053aa4f80d8b472604125ba47187
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.openlocfilehash: 8d3497c37d15dc0aa4645ddfce3bd30740217b2c
+ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/31/2018
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="real-time-processing"></a>Processamento em tempo real
 
@@ -49,7 +49,7 @@ Para obter mais informações, consulte [Ingestão de mensagens em tempo real](.
 
 ### <a name="data-storage"></a>Armazenamento de dados
 
-- **Contêineres do Azure Storage Blob** ou **Azure Data Lake Store**. Os dados de entrada em tempo real normalmente são capturados em um agente de mensagens (veja acima), mas em alguns cenários, pode fazer sentido monitorar os novos arquivos de uma pasta e processá-los conforme eles são criados ou atualizados. Além disso, muitas soluções de processamento em tempo real combinam dados de streaming com os dados de referência estática, que podem ser armazenados em um repositório de arquivos. Por fim, o armazenamento de arquivos pode ser usado como um destino de saída para os dados capturados em tempo real para arquivamento ou para um processamento em lotes posterior em uma [arquitetura lambda](../concepts/big-data.md#lambda-architecture).
+- **Contêineres do Azure Storage Blob** ou **Azure Data Lake Store**. Os dados de entrada em tempo real normalmente são capturados em um agente de mensagens (veja acima), mas em alguns cenários, pode fazer sentido monitorar os novos arquivos de uma pasta e processá-los conforme eles são criados ou atualizados. Além disso, muitas soluções de processamento em tempo real combinam dados de streaming com os dados de referência estática, que podem ser armazenados em um repositório de arquivos. Por fim, o armazenamento de arquivos pode ser usado como um destino de saída para os dados capturados em tempo real para arquivamento ou para um processamento em lotes posterior em uma [arquitetura lambda](../big-data/index.md#lambda-architecture).
 
 Para obter mais informações, consulte [Armazenamento de dados](../technology-choices/data-storage.md).
 

@@ -1,17 +1,17 @@
 ---
-title: "Aplicativo Web escalonável"
-description: "Melhoria da escalabilidade em um aplicativo Web em execução no Microsoft Azure."
+title: Aplicativo Web escalonável
+description: Melhoria da escalabilidade em um aplicativo Web em execução no Microsoft Azure.
 author: MikeWasson
 pnp.series.title: Azure App Service
 pnp.series.prev: basic-web-app
 pnp.series.next: multi-region-web-app
 ms.date: 11/23/2016
 cardTitle: Improve scalability
-ms.openlocfilehash: 4ad12fb041a79fcb706530c9968fd0f96211d7f9
-ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
+ms.openlocfilehash: 6459acebfa25491332e2118b9e8fe51d5fc79ff3
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/30/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="improve-scalability-in-a-web-application"></a>Melhorar a escalabilidade em um aplicativo Web
 
@@ -30,7 +30,7 @@ Essa arquitetura baseia-se naquela mostrada em [Aplicativo Web básico][basic-we
 * **WebJob**. Use o [Azure WebJobs][webjobs] para executar tarefas de longa execução em segundo plano. O WebJobs pode ser executado seguindo um agendamento, continuamente ou em resposta a um gatilho, tal como colocando uma mensagem em uma fila. Um WebJob é executado como um processo em segundo plano no contexto de um aplicativo do Serviço de Aplicativo.
 * **Fila**. Na arquitetura mostrada aqui, o aplicativo coloca tarefas na fila em segundo plano, posicionando uma mensagem em uma fila do [Armazenamento de Filas do Azure][queue-storage]. A mensagem dispara uma função no WebJob. Outra opção é usar filas do Barramento de Serviço. Para comparação, consulte [Filas do Azure e filas do Barramento de Serviço – comparações e contrastes][queues-compared].
 * **Cache**. Armazenar dados semi-estáticos no [Cache Redis do Azure][azure-redis].  
-* **CDN**. Use a CDN ([Rede de Distribuição de Conteúdo do Microsoft Azure][azure-cdn]) para armazenar em cache o conteúdo disponível publicamente para latência mais baixa e distribuição mais rápida do conteúdo.
+* <strong>CDN</strong>. Use a CDN ([Rede de Distribuição de Conteúdo do Microsoft Azure][azure-cdn]) para armazenar em cache o conteúdo disponível publicamente para latência mais baixa e distribuição mais rápida do conteúdo.
 * **Armazenamento de dados**. Use o [Banco de Dados SQL do Azure][sql-db] para dados relacionais. Para dados não relacionais, considere um repositório NoSQL, como [Cosmos DB][cosmosdb].
 * **Azure Search**. Use o [Azure Search][azure-search] para adicionar funcionalidade de pesquisa como sugestões de pesquisa, pesquisa difusa e pesquisa específica a um idioma. O Azure Search normalmente é usado junto com outro armazenamento de dados, especialmente se o armazenamento de dados primário exigir consistência estrita. Nessa abordagem, armazene dados autoritativos em outro armazenamento de dados e o índice de pesquisa no Azure Search. O Azure Search também pode ser usado para consolidar um único índice de pesquisa de vários armazenamentos de dados.  
 * **Email/SMS**. Use um serviço de terceiros, como o SendGrid ou Twilio, para enviar email ou mensagens SMS em vez de compilar essa funcionalidade diretamente no aplicativo.
@@ -148,7 +148,7 @@ Use [Transparent Data Encryption][sql-encryption] se você precisa criptografar 
 [sql-elastic]: /azure/sql-database/sql-database-elastic-scale-introduction
 [sql-encryption]: https://msdn.microsoft.com/library/dn948096.aspx
 [tm]: https://azure.microsoft.com/services/traffic-manager/
-[visio-download]: https://archcenter.azureedge.net/cdn/app-service-reference-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/app-service-reference-architectures.vsdx
 [web-app-multi-region]: ./multi-region.md
 [webjobs-guidance]: ../../best-practices/background-jobs.md
 [webjobs]: /azure/app-service/app-service-webjobs-readme

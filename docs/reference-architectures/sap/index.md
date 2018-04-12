@@ -1,28 +1,28 @@
 ---
 title: Implantar o SAP NetWeaver e o SAP HANA no Azure
-description: "Práticas comprovadas para executar o SAP HANA em um ambiente de alta disponibilidade no Azure."
+description: Práticas comprovadas para executar o SAP HANA em um ambiente de alta disponibilidade no Azure.
 author: njray
 ms.date: 06/29/2017
-ms.openlocfilehash: 27a97103c0c6f305cb8e830d670c8d0ba7e22aa5
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 33171164c59a520a87ef3209c5bb1b208377221c
+ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="deploy-sap-netweaver-and-sap-hana-on-azure"></a>Implantar o SAP NetWeaver e o SAP HANA no Azure
 
-Essa arquitetura de referência mostra um conjunto de práticas comprovadas para executar o SAP HANA em um ambiente de alta disponibilidade no Azure. [**Implantar esta solução**.](#deploy-the-solution)
+Essa arquitetura de referência mostra um conjunto de práticas comprovadas para executar o SAP HANA em um ambiente de alta disponibilidade no Azure. [**Implante essa solução**.](#deploy-the-solution)
 
 ![0][0]
 
-*Baixar um [arquivo Visio][visio-download] dessa arquitetura.*
+*Baixe um [Arquivo Visio][visio-download] dessa arquitetura.*
 
 > [!NOTE]
 > Implantar essa arquitetura de referência requer um licenciamento apropriado de produtos SAP e outras tecnologias que não são da Microsoft. Para obter informações sobre a parceria entre a Microsoft e o SAP, consulte [SAP HANA no Azure][sap-hana-on-azure].
 
 ## <a name="architecture"></a>Arquitetura
 
-Essa arquitetura consiste nos seguintes componentes.
+A arquitetura consiste nos componentes a seguir.
 
 - **Rede virtual (VNet)**. Uma rede virtual é uma representação de uma rede isolada logicamente no Azure. Todas as VMs nesta arquitetura de referência são implantadas para a mesma rede virtual. A rede virtual é, posteriormente, subdividida em sub-redes. Crie uma sub-rede separada para cada camada, incluindo o aplicativo (SAP NetWeaver), o banco de dados (SAP HANA), gerenciamento (o jumpbox) e o Active Directory.
 
@@ -133,7 +133,7 @@ Considere o uso de [grupos de segurança de rede][nsg] (NSGs) para restringir o 
 Os scripts de implantação para essa arquitetura de referência estão disponíveis no [GitHub][github].
 
 
-### <a name="prerequisites"></a>Pré-requisitos
+### <a name="prerequisites"></a>pré-requisitos
 
 - Você deve ter acesso ao Centro de Download de Software SAP para concluir a instalação.
  
@@ -161,7 +161,7 @@ Uma única instância do SAP HANA é implantada. Para as VMs de aplicativo, o n�
 
 Você pode implantar essa arquitetura incrementalmente ou de uma só vez. Na primeira vez, é recomendável uma implantação incremental, para que você possa ver o que cada etapa da implantação faz. Especificar o incremento usando um dos seguintes parâmetros de *modo*
 
-| Modo           | O que faz                                                                                                            |
+| Mode           | O que faz                                                                                                            |
 |----------------|-----------------------------------------------------|
 | infrastructure | Definir a infraestrutura de rede no Azure.        |
 | workload       | Implanta os servidores SAP na rede.             |
@@ -235,7 +235,7 @@ Depois de implantar a infraestrutura do SAP, instale e configure seus aplicativo
 [sap-hana-on-azure]: https://azure.microsoft.com/services/virtual-machines/sap-hana/
 [sap-netweaver-dr]: http://download.microsoft.com/download/9/5/6/956FEDC3-702D-4EFB-A7D3-2DB7505566B6/SAP%20NetWeaver%20-%20Building%20an%20Azure%20based%20Disaster%20Recovery%20Solution%20V1_5%20.docx
 [sap-security]: https://archive.sap.com/documents/docs/DOC-62943
-[visio-download]: https://archcenter.azureedge.net/cdn/SAP-HANA-architecture.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/SAP-HANA-architecture.vsdx
 [vm-sizes-mem]: /azure/virtual-machines/windows/sizes-memory
 [swd]: https://help.sap.com/doc/saphelp_nw70ehp2/7.02.16/en-us/48/8fe37933114e6fe10000000a421937/frameset.htm
 [0]: ./images/sap-hana.png "Arquitetura SAP HANA usando Microsoft Azure"

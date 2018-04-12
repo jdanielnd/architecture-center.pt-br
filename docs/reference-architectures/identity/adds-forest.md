@@ -1,17 +1,20 @@
 ---
 title: Criar uma floresta de recursos do AD DS no Azure
-description: "Como criar um domínio confiável do Active Directory no Azure.\nguidance,vpn-gateway,expressroute,load-balancer,virtual-network,active-directory"
+description: >-
+  Como criar um domínio confiável do Active Directory no Azure.
+
+  guidance,vpn-gateway,expressroute,load-balancer,virtual-network,active-directory
 author: telmosampaio
 ms.date: 11/28/2016
 pnp.series.title: Identity management
 pnp.series.prev: adds-extend-domain
 pnp.series.next: adfs
 cardTitle: Create an AD DS forest in Azure
-ms.openlocfilehash: b946afa91e8bd303c51f97e18be170c4105cc8c5
-ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
+ms.openlocfilehash: e32a6420821e70c84e77d2c39614f0c45efbb7e2
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/08/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="create-an-active-directory-domain-services-ad-ds-resource-forest-in-azure"></a>Criar uma floresta de recursos do AD DS (Active Directory Domain Services) no Azure
 
@@ -117,8 +120,8 @@ Há uma solução disponível no [GitHub][github] para implantar essa arquitetur
      
 5. Se você estiver usando a configuração local simulada, defina a relação de confiança de entrada:
    
-   1. Conecte-se ao jump box (*ra-adtrust-mgmt-vm1* no grupo de recursos *ra-adtrust-security-rg*). Faça logon como *testuser* com a senha *AweS0me@PW*.
-   2. No jump box, abra uma sessão RDP na primeira VM no domínio *contoso.com* (o domínio local). Essa VM tem o endereço IP 192.168.0.4. O nome de usuário é *contoso\testuser* com a senha *AweS0me@PW*.
+   1. Conecte-se ao jump box (<em>ra-adtrust-mgmt-vm1</em> no grupo de recursos <em>ra-adtrust-security-rg</em>). Faça logon como <em>testuser</em> com a senha <em>AweS0me@PW</em>.
+   2. No jump box, abra uma sessão RDP na primeira VM no domínio <em>contoso.com</em> (o domínio local). Essa VM tem o endereço IP 192.168.0.4. O nome de usuário é <em>contoso\testuser</em> com a senha <em>AweS0me@PW</em>.
    3. Baixe o script [incoming-trust.ps1][incoming-trust] e execute-o para criar a relação de confiança de entrada do *treyresearch.com*.
 
 6. Se você estiver usando sua própria infraestrutura local:
@@ -127,7 +130,7 @@ Há uma solução disponível no [GitHub][github] para implantar essa arquitetur
    2. Edite o script e substitua o valor da variável `$TrustedDomainName` pelo nome do seu próprio domínio.
    3. Execute o script.
 
-7. No jump-box, conecte-se à primeira VM no domínio *treyresearch.com* (o domínio na nuvem). Essa VM tem o endereço IP 10.0.4.4. O nome de usuário é *treyresearch\testuser* com a senha *AweS0me@PW*.
+7. No jump-box, conecte-se à primeira VM no domínio <em>treyresearch.com</em> (o domínio na nuvem). Essa VM tem o endereço IP 10.0.4.4. O nome de usuário é <em>treyresearch\testuser</em> com a senha <em>AweS0me@PW</em>.
 
 8. Baixe o script [outgoing-trust.ps1][outgoing-trust] e execute-o para criar a relação de confiança de entrada do *treyresearch.com*. Se você estiver usando seus próprios computadores locais, edite o script primeiro. Definir a variável `$TrustedDomainName` para o nome do seu domínio local e especifique os endereços IP dos servidores do Active Directory DS para esse domínio na variável `$TrustedDomainDnsIpAddresses`.
 
@@ -162,5 +165,5 @@ Há uma solução disponível no [GitHub][github] para implantar essa arquitetur
 [standby-operations-masters]: https://technet.microsoft.com/library/cc794737(v=ws.10).aspx
 [outgoing-trust]: https://raw.githubusercontent.com/mspnp/reference-architectures/master/identity/adds-forest/extensions/outgoing-trust.ps1
 [verify-a-trust]: https://technet.microsoft.com/library/cc753821.aspx
-[visio-download]: https://archcenter.azureedge.net/cdn/identity-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/identity-architectures.vsdx
 [0]: ./images/adds-forest.png "Proteger a arquitetura de rede híbrida com domínios separados do Active Directory"

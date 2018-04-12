@@ -1,13 +1,13 @@
 ---
 title: Escolhendo um armazenamento de dados OLTP
-description: 
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
 ms.openlocfilehash: 1c27d7d5f3b78f40822de6b77664dbf49b1367f6
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 03/31/2018
 ---
 # <a name="choosing-an-oltp-data-store-in-azure"></a>Escolhendo um armazenamento de dados OLTP no Azure
 
@@ -60,37 +60,37 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 | | Banco de Dados SQL do Azure | SQL Server em uma máquina virtual do Azure| Banco de Dados do Azure para MySQL | Banco de Dados do Azure para PostgreSQL|
 | --- | --- | --- | --- | --- | --- |
 | Tamanho máximo da instância do banco de dados | [4 TB](/azure/sql-database/sql-database-resource-limits) | 256 TB | [1 TB](/azure/mysql/concepts-limits) | [1 TB](/azure/postgresql/concepts-limits) |
-| Dá suporte a pools de capacidade  | sim | sim | Não  | Não  |
-| Dá suporte à expansão de clusters  | Não  | sim | Não  | Não  |
+| Dá suporte a pools de capacidade  | sim | sim | Não | Não  |
+| Dá suporte à expansão de clusters  | Não  | sim | Não | Não  |
 | Escalabilidade dinâmica (escalar verticalmente)  | sim | Não  | sim | sim |
 
 ### <a name="analytic-workload-capabilities"></a>Funcionalidades de carga de trabalho analítica
 | | Banco de Dados SQL do Azure | SQL Server em uma máquina virtual do Azure| Banco de Dados do Azure para MySQL | Banco de Dados do Azure para PostgreSQL|
 | --- | --- | --- | --- | --- | --- | 
-| Tabelas temporais | sim | sim | Não  | Não  |
-| Tabelas em memória (com otimização de memória) | sim | sim | Não  | Não  |
-| Suporte de columnstore | sim | sim | Não  | Não  |
-| Processamento de consulta adaptável | sim | sim | Não  | Não  |
+| Tabelas temporais | sim | sim | Não | Não  |
+| Tabelas em memória (com otimização de memória) | sim | sim | Não | Não  |
+| Suporte de columnstore | sim | sim | Não | Não  |
+| Processamento de consulta adaptável | sim | sim | Não | Não  |
 
 ### <a name="availability-capabilities"></a>Recursos de disponibilidade
 | | Banco de Dados SQL do Azure | SQL Server em uma máquina virtual do Azure| Banco de Dados do Azure para MySQL | Banco de Dados do Azure para PostgreSQL|
 | --- | --- | --- | --- | --- | --- | 
-| Secundários legíveis | sim | sim | Não  | Não  | 
-| Replicação geográfica | sim | sim | Não  | Não  | 
-| Failover automático para o secundário | sim | Não  | Não  | Não |
+| Secundários legíveis | sim | sim | Não | Não  | 
+| Replicação geográfica | sim | sim | Não | Não  | 
+| Failover automático para o secundário | sim | Não | Não  | Não |
 | Restauração pontual | sim | sim | sim | sim |
 
 ### <a name="security-capabilities"></a>Funcionalidades de segurança
 | | Banco de Dados SQL do Azure | SQL Server em uma máquina virtual do Azure| Banco de Dados do Azure para MySQL | Banco de Dados do Azure para PostgreSQL|
 | --- | --- | --- | --- | --- | --- | 
 | Segurança em nível de linha | sim | sim | sim | sim |
-| Mascaramento de dados | sim | sim | Não  | Não  |
+| Mascaramento de dados | sim | sim | Não | Não  |
 | Transparent Data Encryption | sim | sim | sim | sim |
 | Restringir o acesso a endereços IP específicos | sim | sim | sim | sim |
-| Restringir o acesso para permitir apenas o acesso da VNET | sim | sim | Não  | Não  |
-| Autenticação do Azure Active Directory | sim | sim | Não  | Não  |
-| Autenticação do Active Directory | Não  | sim | Não  | Não  |
-| Autenticação multifator | sim | sim | Não  | Não  |
-| Dá suporte ao [Always Encrypted](/sql/relational-databases/security/encryption/always-encrypted-database-engine) | sim | sim | sim | Não  | Não  |
-| IP Privado | Não  | sim | sim | Não  | Não  |
+| Restringir o acesso para permitir apenas o acesso da VNET | sim | sim | Não | Não  |
+| Autenticação do Azure Active Directory | sim | sim | Não | Não  |
+| Autenticação do Active Directory | Não  | sim | Não | Não  |
+| Autenticação multifator | sim | sim | Não | Não  |
+| Dá suporte ao [Always Encrypted](/sql/relational-databases/security/encryption/always-encrypted-database-engine) | sim | sim | sim | Não | Não  |
+| IP Privado | Não  | sim | sim | Não | Não  |
 

@@ -3,11 +3,11 @@ title: Executar o aplicativo Surveys
 description: Como executar o aplicativo de exemplo Surveys localmente
 author: MikeWasson
 ms:date: 07/21/2017
-ms.openlocfilehash: d17cd939c1172edd0947b30ea13657806060b5f1
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 28d976374e5d6dbad434873eef149704f26a1f3f
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="run-the-surveys-application"></a>Executar o aplicativo Surveys
 
@@ -22,7 +22,7 @@ Aqui está um resumo das etapas:
 5. Executar o aplicativo e inscrever um novo locatário.
 6. Adicione funções de aplicativo aos usuários.
 
-## <a name="prerequisites"></a>Pré-requisitos
+## <a name="prerequisites"></a>pré-requisitos
 -   [Visual Studio 2017][VS2017]
 -   Conta do [Microsoft Azure](https://azure.microsoft.com)
 
@@ -52,15 +52,15 @@ Para completar o cenário de ponta a ponta, você precisará de um segundo diret
 
 3. Clique em **Registros do aplicativo** > **Novo registro de aplicativo**.
 
-4.  Na folha **Criar**, insira as seguintes informações:
+4. Na folha **Criar**, insira as seguintes informações:
 
-  - **Nome**: `Surveys.WebAPI`
+   - **Nome**: `Surveys.WebAPI`
 
-  - **Tipo de Aplicativo**: `Web app / API`
+   - **Tipo de Aplicativo**: `Web app / API`
 
-  - **URL de logon**: `https://localhost:44301/`
+   - **URL de logon**: `https://localhost:44301/`
    
-  ![](./images/running-the-app/register-web-api.png) 
+   ![](./images/running-the-app/register-web-api.png) 
 
 5. Clique em **Criar**.
 
@@ -78,15 +78,15 @@ Para completar o cenário de ponta a ponta, você precisará de um segundo diret
 
 ## <a name="register-the-surveys-web-app"></a>Registrar o aplicativo Web Surveys 
 
-1.  Navegue de volta para a folha **Registros do aplicativo** e clique em **Novo registro de aplicativo**.
+1. Navegue de volta para a folha **Registros do aplicativo** e clique em **Novo registro de aplicativo**.
 
-2.  Na folha **Criar**, insira as seguintes informações:
+2. Na folha **Criar**, insira as seguintes informações:
 
-  - **Nome**: `Surveys`
-  - **Tipo de Aplicativo**: `Web app / API`
-  - **URL de logon**: `https://localhost:44300/`
+   - **Nome**: `Surveys`
+   - **Tipo de Aplicativo**: `Web app / API`
+   - **URL de logon**: `https://localhost:44300/`
    
-    Observe que a URL de entrada tem um número da porta diferente do aplicativo `Surveys.WebAPI` na etapa anterior.
+   Observe que a URL de entrada tem um número da porta diferente do aplicativo `Surveys.WebAPI` na etapa anterior.
 
 3. Clique em **Criar**.
  
@@ -150,36 +150,36 @@ Para completar o cenário de ponta a ponta, você precisará de um segundo diret
 
     ![](./images/running-the-app/manifest.png)
  
-3.  Adicione o seguinte JSON ao elemento `appRoles`. Gere novos GUIDs para as propriedades `id`.
+3. Adicione o seguinte JSON ao elemento `appRoles`. Gere novos GUIDs para as propriedades `id`.
 
-    ```json
-    {
-      "allowedMemberTypes": ["User"],
-      "description": "Creators can create surveys",
-      "displayName": "SurveyCreator",
-      "id": "<Generate a new GUID. Example: 1b4f816e-5eaf-48b9-8613-7923830595ad>",
-      "isEnabled": true,
-      "value": "SurveyCreator"
-    },
-    {
-      "allowedMemberTypes": ["User"],
-      "description": "Administrators can manage the surveys in their tenant",
-      "displayName": "SurveyAdmin",
-      "id": "<Generate a new GUID>",  
-      "isEnabled": true,
-      "value": "SurveyAdmin"
-    }
-    ```
+   ```json
+   {
+     "allowedMemberTypes": ["User"],
+     "description": "Creators can create surveys",
+     "displayName": "SurveyCreator",
+     "id": "<Generate a new GUID. Example: 1b4f816e-5eaf-48b9-8613-7923830595ad>",
+     "isEnabled": true,
+     "value": "SurveyCreator"
+   },
+   {
+     "allowedMemberTypes": ["User"],
+     "description": "Administrators can manage the surveys in their tenant",
+     "displayName": "SurveyAdmin",
+     "id": "<Generate a new GUID>",  
+     "isEnabled": true,
+     "value": "SurveyAdmin"
+   }
+   ```
 
-5.  Na propriedade `knownClientApplications`, adicione a ID do aplicativo para o aplicativo Web Surveys, que você obteve ao registrar o aplicativo Surveys anteriormente. Por exemplo:
+4. Na propriedade `knownClientApplications`, adicione a ID do aplicativo para o aplicativo Web Surveys, que você obteve ao registrar o aplicativo Surveys anteriormente. Por exemplo: 
 
-  ```json
-  "knownClientApplications": ["be2cea23-aa0e-4e98-8b21-2963d494912e"],
-  ```
+   ```json
+   "knownClientApplications": ["be2cea23-aa0e-4e98-8b21-2963d494912e"],
+   ```
 
-  Essa configuração adiciona o aplicativo Surveys à lista de clientes autorizado a chamar a API Web.
+   Essa configuração adiciona o aplicativo Surveys à lista de clientes autorizado a chamar a API Web.
 
-6.  Clique em **Salvar**.
+5. Clique em **Salvar**.
 
 Agora, repita as mesmas etapas para o aplicativo Surveys, mas não adicione uma entrada para `knownClientApplications`. Usar as mesmas definições de função, mas gere novos GUIDs para as IDs.
 

@@ -1,14 +1,14 @@
 ---
-title: "Lista de verificação de DevOps"
-description: "Lista de verificação que fornece diretrizes relacionadas a DevOps."
+title: Lista de verificação de DevOps
+description: Lista de verificação que fornece diretrizes relacionadas a DevOps.
 author: dragon119
 ms.date: 01/10/2018
 ms.custom: checklist
-ms.openlocfilehash: 356fef2415347ae132915695a25fd9b50779bd8b
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+ms.openlocfilehash: 2e338d2f2e61b404223001a61f44e06e89e7f563
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/23/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="devops-checklist"></a>Lista de verificação de DevOps
 
@@ -130,7 +130,7 @@ Documentação compartilhada é algo essencial. Incentivamos que os membros da e
 
 **Siga os princípios de privilégios mínimos ao conceder acesso aos recursos.** Gerencie o acesso aos recursos cuidadosamente. O acesso deve ser negado por padrão, a menos que um usuário receba acesso a um recurso explicitamente. Conceda a um usuário apenas o acesso ao que ele precisa para concluir suas tarefas. Acompanhe as permissões de usuário e realize auditorias de segurança frequentes.
 
-**Use o controle de acesso baseado em função.** Atribuir contas de usuário e o acesso a recursos não deve ser um processo manual. Use o RBAC ([controle de acesso baseado em função][rbac]) para conceder acesso com base em identidades e grupos do [Azure Active Directory][azure-ad]. 
+<strong>Use o controle de acesso baseado em função.</strong> Atribuir contas de usuário e o acesso a recursos não deve ser um processo manual. Use o RBAC ([controle de acesso baseado em função][rbac]) para conceder acesso com base em identidades e grupos do [Azure Active Directory][azure-ad]. 
 
 **Use um sistema de acompanhamento de bugs para acompanhar problemas.** Sem uma boa maneira de acompanhar problemas, é fácil deixar itens passarem despercebidos, duplicar o trabalho ou introduzir problemas adicionais. Não confie na comunicação informal para acompanhar o status de bugs. Use uma ferramenta de acompanhamento de bugs para registrar detalhes sobre problemas, atribuir recursos para solucioná-los e fornecer um log de auditoria de progresso e status. 
 

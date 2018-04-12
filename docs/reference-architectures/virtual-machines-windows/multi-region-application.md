@@ -1,15 +1,15 @@
 ---
-title: "Executar VMs do Windows em várias regiões do Azure para ter alta disponibilidade"
-description: "Como implantar VMs em várias regiões no Azure para alta disponibilidade e resiliência."
+title: Executar VMs do Windows em várias regiões do Azure para ter alta disponibilidade
+description: Como implantar VMs em várias regiões no Azure para alta disponibilidade e resiliência.
 author: MikeWasson
 ms.date: 11/22/2016
 pnp.series.title: Windows VM workloads
 pnp.series.prev: n-tier
-ms.openlocfilehash: 9c54959da96115e55ba8a5c9e0f3c358d29ce5dd
-ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
+ms.openlocfilehash: 9772d57e6a11711d77032b049168565d52d919b8
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="run-windows-vms-in-multiple-regions-for-high-availability"></a>Executar VMs do Windows em várias regiões para ter alta disponibilidade
 
@@ -114,9 +114,9 @@ Para configurar o grupo de disponibilidade:
 * Crie um cluster WSFC ([Clustering de Failover do Windows Server][wsfc]) que inclui as instâncias do SQL Server em ambas as regiões. 
 * Crie um único Grupo de Disponibilidade Always On do SQL Server que inclui instâncias do SQL Server em ambas as regiões primária e secundária. Consulte [Estendendo o Grupo de Disponibilidade Always On para o Datacenter Remoto do Azure (PowerShell)](https://blogs.msdn.microsoft.com/sqlcat/2014/09/22/extending-alwayson-availability-group-to-remote-azure-datacenter-powershell/) para ver as etapas.
 
-    * Coloque a réplica primária na região primária.
-    * Coloque uma ou mais réplicas secundárias na região primária. Configure-as para usar a confirmação síncrona com failover automático.
-    * Coloque uma ou mais réplicas secundárias na região secundária. Configure-as para usar a confirmação *assíncrona*, por motivos de desempenho. (Caso contrário, todas as transações de T-SQL precisarão aguardar uma viagem de ida e volta pela rede para a região secundária.)
+  * Coloque a réplica primária na região primária.
+  * Coloque uma ou mais réplicas secundárias na região primária. Configure-as para usar a confirmação síncrona com failover automático.
+  * Coloque uma ou mais réplicas secundárias na região secundária. Configure-as para usar a confirmação *assíncrona*, por motivos de desempenho. (Caso contrário, todas as transações de T-SQL precisarão aguardar uma viagem de ida e volta pela rede para a região secundária.)
 
     > [!NOTE]
     > Réplicas de confirmação assíncrona não dão suporte a failover automático.
@@ -182,7 +182,7 @@ Meça o tempo de recuperação e verifique se ele cumpre seus requisitos de neg�
 [tm-routing]: /azure/traffic-manager/traffic-manager-routing-methods
 [tm-sla]: https://azure.microsoft.com/support/legal/sla/traffic-manager/v1_0/
 [traffic-manager]: https://azure.microsoft.com/services/traffic-manager/
-[visio-download]: https://archcenter.azureedge.net/cdn/vm-reference-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/vm-reference-architectures.vsdx
 [vnet-dns]: /azure/virtual-network/virtual-networks-manage-dns-in-vnet
 [vnet-to-vnet]: /azure/vpn-gateway/vpn-gateway-vnet-vnet-rm-ps
 [vpn-gateway]: /azure/vpn-gateway/vpn-gateway-about-vpngateways

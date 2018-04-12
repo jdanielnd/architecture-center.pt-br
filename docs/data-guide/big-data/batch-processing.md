@@ -3,11 +3,11 @@ title: Processamento em lotes
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: d3d3b92034c251586ecc9caff2785ecd0808b2a7
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.openlocfilehash: d6843bf4e20c3eb26e61cfa09300ad533e969c2e
+ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/31/2018
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="batch-processing"></a>Processamento em lotes
 
@@ -19,7 +19,7 @@ Por exemplo, os logs de um servidor Web podem ser copiados para uma pasta e ent�
 
 ## <a name="when-to-use-this-solution"></a>Quando usar esta solução
 
-O processamento em lotes é usado em uma variedade de cenários, de transformações de dados simples a um pipeline ETL (extração, transformação e carregamento) mais completo. Em um contexto de Big Data, o processamento em lotes pode operar em conjuntos grandes de dados, em que o cálculo leva um tempo significativo para ser concluído. (Por exemplo, consulte [Arquitetura lambda](../concepts/big-data.md#lambda-architecture).) O processamento em lotes normalmente leva a uma exploração interativa posterior, fornece os dados prontos para modelagem para o aprendizado de máquina ou grava os dados em um armazenamento de dados que é otimizado para análise e visualização.
+O processamento em lotes é usado em uma variedade de cenários, de transformações de dados simples a um pipeline ETL (extração, transformação e carregamento) mais completo. Em um contexto de Big Data, o processamento em lotes pode operar em conjuntos grandes de dados, em que o cálculo leva um tempo significativo para ser concluído. (Por exemplo, consulte [Arquitetura lambda](../big-data/index.md#lambda-architecture).) O processamento em lotes normalmente leva a uma exploração interativa posterior, fornece os dados prontos para modelagem para o aprendizado de máquina ou grava os dados em um armazenamento de dados que é otimizado para análise e visualização.
 
 Um exemplo de processamento em lotes é transformar um conjunto grande de arquivos simples, CSV ou JSON semiestruturados em um formato esquematizado e estruturado pronto para consulta posterior. Normalmente, os dados são convertidos dos formatos brutos usados para ingestão (como CSV) em formatos binários que têm um melhor desempenho para consulta, pois eles armazenam dados em um formato de coluna e, geralmente, fornecem índices e estatísticas embutidas sobre os dados.
 

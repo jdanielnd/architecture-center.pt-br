@@ -1,18 +1,18 @@
 ---
-title: "Eleição de Líder"
-description: "Coordene as ações executadas por uma coleção de instâncias de tarefa de colaboração em um aplicativo distribuído elegendo uma instância como a líder que assume a responsabilidade por gerenciar as demais instâncias."
-keywords: "padrão de design"
+title: Eleição de Líder
+description: Coordene as ações executadas por uma coleção de instâncias de tarefa de colaboração em um aplicativo distribuído elegendo uma instância como a líder que assume a responsabilidade por gerenciar as demais instâncias.
+keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - design-implementation
 - resiliency
-ms.openlocfilehash: ddb61097ed3229ed0ed517b94c280d3ef892c999
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 3e7d47f70f660f2507f0619e1c41bf9a32a25be4
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="leader-election-pattern"></a>Padrão de eleição de líder
 
@@ -26,7 +26,7 @@ Um aplicativo de nuvem típico tem muitas tarefas que funcionam de maneira coord
 
 As instâncias de tarefa poderão ser executadas separadamente pela maior parte do tempo, mas também pode ser necessário coordenar as ações de cada instância para garantir que eles não entrem em conflito, causem contenção dos recursos compartilhados ou interfiram acidentalmente no trabalho que outras instâncias de tarefa estão executando.
 
-Por exemplo:
+Por exemplo: 
 
 - Em um sistema baseado em nuvem que implementa o dimensionamento horizontal, várias instâncias da mesma tarefa podem estar em execução ao mesmo tempo com cada instância atendendo a um usuário diferente. Se essas instâncias gravarem em um recurso compartilhado, será necessário coordenar suas ações para impedir que cada instância substitua as alterações feitas por outras.
 - Se as tarefas estão executando elementos individuais de um cálculo complexo em paralelo, os resultados precisam ser agregados quando todos forem concluídos.
@@ -70,9 +70,9 @@ Esse padrão pode não ser útil se:
 O projeto DistributedMutex na solução LeaderElection (um exemplo que demonstra esse padrão está disponível no [GitHub](https://github.com/mspnp/cloud-design-patterns/tree/master/leader-election)) mostra como usar uma concessão em um Azure Storage Blob para fornecer um mecanismo para implementar um mutex compartilhado e distribuído. O mutex pode ser usado para eleger um líder dentre um grupo de instâncias de função em um serviço de nuvem do Azure. A primeira instância de função a adquirir a concessão é eleita como líder e permanece dessa forma até liberar a concessão ou não for capaz de renová-la. Outras instâncias de função podem continuar a monitorar a concessão de blob caso o líder não esteja mais disponível.
 
 >  Uma concessão de blob é um bloqueio de gravação exclusivo em um blob. Um único blob pode estar sujeito a apenas uma concessão ao mesmo tempo. Uma instância de função pode solicitar uma concessão em um blob especificado e ele receberá a concessão se nenhuma outra instância de função mantém uma concessão no mesmo blob. Caso contrário, a solicitação gerará uma exceção.
-
+> 
 > Para evitar que uma instância de função com falha retenha a concessão indefinidamente, especifique um tempo de vida para a concessão. Quando ele expirar, a concessão ficará disponível. No entanto, enquanto uma instância de função contém a concessão, ela pode solicitar a renovação da concessão e ela será concedida por um período adicional. A instância de função pode repetir continuamente esse processo se desejar manter a concessão.
-Para obter mais informações sobre como conceder um blob, consulte [Blob de concessão (API REST)](https://msdn.microsoft.com/library/azure/ee691972.aspx).
+> Para obter mais informações sobre como conceder um blob, consulte [Blob de concessão (API REST)](https://msdn.microsoft.com/library/azure/ee691972.aspx).
 
 A classe `BlobDistributedMutex` no exemplo de C# a seguir contém o método `RunTaskWhenMutexAquired` que permite que uma instância de função tente adquirir uma concessão em um blob especificado. Os detalhes do blob (o nome, contêiner e conta de armazenamento) são passados para o construtor em um objeto `BlobSettings` quando o objeto `BlobDistributedMutex` é criado (esse objeto é uma struct simples incluído no código de exemplo). O construtor também aceita um `Task` que referencia o código que a instância de função deve executar se adquirir a concessão do blob com êxito e for eleito como líder. Observe que o código que manipula os detalhes de nível baixo da aquisição da concessão é implementado em uma classe auxiliar separada chamada `BlobLeaseManager`.
 

@@ -1,13 +1,13 @@
 ---
 title: Escolhendo uma tecnologia de processamento em lotes
-description: 
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: bfb850ee8e9d8fd41927b4ca3b612e15b5ae6b11
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: 0117798af82f2caa6704dc86e88be57f09c381ea
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="choosing-a-batch-processing-technology-in-azure"></a>Escolhendo uma tecnologia de processamento em lotes no Azure
 
@@ -46,29 +46,32 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 | | Análise Azure Data Lake | SQL Data Warehouse do Azure | HDInsight com Spark | HDInsight com Hive | HDInsight com Hive LLAP |
 | --- | --- | --- | --- | --- | --- |
 | É um serviço gerenciado | sim | sim | Sim <sup>1</sup> | Sim <sup>1</sup> | Sim <sup>1</sup> |
-| Dá suporte à pausa de computação | Não  | sim | Não  | Não  | Não  |
-| Armazenamento de dados relacionais | sim | sim | Não  | Não  | Não  |
+| Dá suporte à pausa de computação | Não  | sim | Não | Não  | Não  |
+| Armazenamento de dados relacionais | sim | sim | Não | Não  | Não  |
 | Programação | U-SQL | T-SQL | Python, Scala, Java, R | HiveQL | HiveQL |
 | Paradigma de programação | Combinação de declarativo e imperativo  | Declarativo | Combinação de declarativo e imperativo | Declarativo | Declarativo | 
 | Modelo de preços | Por trabalho em lotes | Por hora de cluster | Por hora de cluster | Por hora de cluster | Por hora de cluster |  
 
 [1] Com configuração manual e dimensionamento.
- 
+
 ### <a name="integration-capabilities"></a>Funcionalidades de integração
+
 | | Análise Azure Data Lake | SQL Data Warehouse | HDInsight com Spark | HDInsight com Hive | HDInsight com Hive LLAP |
 | --- | --- | --- | --- | --- | --- |
 | Acesso por meio do Azure Data Lake Store | sim | sim | sim | sim | sim |
 | Consulta por meio do Armazenamento do Azure | sim | sim | sim | sim | sim |
-| Consulta por meio de relational stores externos | sim | Não  | sim | Não  | Não  |
+| Consulta por meio de relational stores externos | sim | Não  | sim | Não | Não  |
 
 ### <a name="scalability-capabilities"></a>Funcionalidades de escalabilidade
+
 | | Análise Azure Data Lake | SQL Data Warehouse | HDInsight com Spark | HDInsight com Hive | HDInsight com Hive LLAP |
 | --- | --- | --- | --- | --- | --- |
 | Granularidade de expansão  | Por trabalho | Por cluster | Por cluster | Por cluster | Por cluster |
-| Rápida expansão (menos de 1 minuto) | sim | sim | Não  | Não  | Não  |
+| Rápida expansão (menos de 1 minuto) | sim | sim | Não | Não  | Não  |
 | Cache em memória de dados | Não  | sim | sim | Não  | sim | 
 
 ### <a name="security-capabilities"></a>Funcionalidades de segurança
+
 | | Análise Azure Data Lake | SQL Data Warehouse | HDInsight com Spark | Apache Hive no HDInsight | Hive LLAP no HDInsight |
 | --- | --- | --- | --- | --- | --- |
 | Autenticação  | Active Directory do Azure (Azure AD) | SQL/Azure AD | Não  | local/Azure AD <sup>1</sup> | local/Azure AD <sup>1</sup> |

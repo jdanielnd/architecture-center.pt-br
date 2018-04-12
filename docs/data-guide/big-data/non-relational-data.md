@@ -3,17 +3,17 @@ title: Dados não relacionais e NoSQL
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 8dd8f2b9dfef680f99c9c6b32aacf019c13095b0
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.openlocfilehash: 2c284099bd7e8bbb85f1252a24d699d9fca09eae
+ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/31/2018
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="non-relational-data-and-nosql"></a>Dados não relacionais e NoSQL
 
 Um *banco de dados não relacional* é um banco de dados que não usa o esquema de tabela de linhas e colunas encontrado na maioria dos sistemas de banco de dados tradicionais. Em vez disso, os bancos de dados não relacionais usam um modelo de armazenamento otimizado para os requisitos específicos do tipo de dados que está sendo armazenado. Por exemplo, os dados podem ser armazenados como pares chave/valor simples, como documentos JSON ou como um gráfico que consiste em bordas e vértices. 
 
-O que esses armazenamentos de dados têm em comum é que eles não usam um [modelo relacional](./relational-data.md). Além disso, eles tendem a ser mais específicos no tipo de dados ao qual dão suporte e no modo como os dados podem ser consultados. Por exemplo, os armazenamento de dados de série temporal são otimizados para consultas de sequências de dados baseadas em tempo, enquanto os armazenamentos de dados de gráficos são otimizados para exploração de relações ponderadas entre entidades. Nenhum dos dois formatos será bem generalizado para a tarefa de gerenciamento de dados transacionais. 
+O que esses armazenamentos de dados têm em comum é que eles não usam um [modelo relacional](../relational-data/index.md). Além disso, eles tendem a ser mais específicos no tipo de dados ao qual dão suporte e no modo como os dados podem ser consultados. Por exemplo, os armazenamento de dados de série temporal são otimizados para consultas de sequências de dados baseadas em tempo, enquanto os armazenamentos de dados de gráficos são otimizados para exploração de relações ponderadas entre entidades. Nenhum dos dois formatos será bem generalizado para a tarefa de gerenciamento de dados transacionais. 
 
 O termo *NoSQL* refere-se a armazenamentos de dados que não usam o SQL para consultas, mas usam outras linguagens de programação e constructos para consultar os dados. Na prática, "NoSQL" significa "banco de dados não relacionais", mesmo que muitos desses bancos de dados deem suporte a consultas compatíveis com SQL. No entanto, a estratégia de execução de consulta subjacente é geralmente muito diferente da maneira como um RDBMS tradicional executa a mesma consulta SQL.
 

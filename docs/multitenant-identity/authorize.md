@@ -1,16 +1,16 @@
 ---
-title: "Autorização em aplicativos multilocatário"
-description: "Como executar a autorização em um aplicativo multilocatário"
+title: Autorização em aplicativos multilocatário
+description: Como executar a autorização em um aplicativo multilocatário
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: app-roles
 pnp.series.next: web-api
-ms.openlocfilehash: 86c308d21f19bb3ac2a4a2240a9a03a504de5cf4
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 03c4d5fa10c75437a7b066534619ba9a123c350c
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="role-based-and-resource-based-authorization"></a>Autorização baseada em funções e recursos
 
@@ -102,7 +102,6 @@ Em versões anteriores do ASP.NET, você definiria a propriedade **Funções** d
 ```csharp
 // old way
 [Authorize(Roles = "SurveyCreator")]
-
 ```
 
 Ainda existe suporte para isso no ASP.NET Core, mas existem algumas desvantagens em comparação a políticas de autorização:

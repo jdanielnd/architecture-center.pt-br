@@ -1,13 +1,13 @@
 ---
-title: "Usar um objeto como um parâmetro em um modelo do Azure Resource Manager"
-description: "Descreve como estender a funcionalidade dos modelos do Azure Resource Manager para usar objetos como parâmetros"
+title: Usar um objeto como um parâmetro em um modelo do Azure Resource Manager
+description: Descreve como estender a funcionalidade dos modelos do Azure Resource Manager para usar objetos como parâmetros
 author: petertay
 ms.date: 06/09/2017
-ms.openlocfilehash: 08ee1cf2924f78ce366c58e20e84a512785f85cc
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 76f8b9d459f4ab3147b52762b7c26552ec92c7a3
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="use-an-object-as-a-parameter-in-an-azure-resource-manager-template"></a>Usar um objeto como um parâmetro em um modelo do Azure Resource Manager
 
@@ -294,7 +294,6 @@ Agora vamos dar uma olhada no nosso modelo. Nosso primeiro recurso chamado `NSG1
   ],          
   "outputs": {}
 }
-
 ```
 
 Vamos examinar mais detalhadamente como podemos especificar os valores de propriedade no recurso filho `securityRules`. Todas as nossas propriedades são referenciadas usando a função `parameter()` e, em seguida, use o operador ponto para fazer referência à nossa matriz `securityRules` indexada pelo valor atual da iteração. Por fim, usamos outro operador de ponto para fazer referência ao nome do objeto. 
@@ -304,7 +303,7 @@ Vamos examinar mais detalhadamente como podemos especificar os valores de propri
 Para experimentar esse modelo, siga estas etapas: 
 
 1.  Visite o portal do Azure, selecione o ícone **+** e pesquise pelo tipo de recurso **implantação de modelo** e selecione-o.
-2.  Quando chegar à página **Implantação de modelo**, selecione o botão **criar**. Esse botão abre a folha **Implantação personalizada**.
+2.  Quando chegar à página **Implantação de modelo**, selecione o botão **criar**. Esse botão abre a folha **implantação personalizada**.
 3.  Selecione o botão **Editar modelo**.
 4.  Exclua o modelo vazio. 
 5.  Copie e cole o modelo de exemplo no painel direito.

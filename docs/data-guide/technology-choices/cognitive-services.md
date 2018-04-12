@@ -1,13 +1,13 @@
 ---
-title: "Escolhendo uma tecnologia de serviços cognitivos"
-description: 
+title: Escolhendo uma tecnologia de serviços cognitivos
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: d97e166abed4670e4bdc797cc8075be3314e677a
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: 055769188fbd6742b94094ee18766293812849fa
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="choosing-a-microsoft-cognitive-services-technology"></a>Escolhendo uma tecnologia de serviços cognitivos da Microsoft
 
@@ -54,35 +54,37 @@ Para restringir as opções, comece respondendo a estas perguntas:
 As tabelas a seguir resumem as principais diferenças em funcionalidades. 
 
 ### <a name="uses-prebuilt-models"></a>Usa modelos predefinidos
-| | Tipo de entrada | Principal benefício |
-| --- | --- | --- |
-| API de Análise de Texto | Texto | Avalie sentimento e tópicos para entender o que os usuários querem. |
-| API de Vinculação de Entidade| Texto | Fortaleça os links de dados do aplicativo com desambiguidade e reconhecimento de entidade nomeada. |
-| Serviço Inteligente de Reconhecimento Vocal (LUIS)| Texto | Ensine seus aplicativos a entenderem os comandos dos usuários. |
-| Serviço QnA Maker| Texto | Extraia informações formatadas em perguntas frequentes em respostas com formato de conversação e de fácil navegação. |
-| API de Análise Linguística | Texto | Simplifique conceitos de linguagem complexos e analise o texto. |
-| Serviço de Exploração de Conhecimento | Texto | Habilite experiências de pesquisa interativa em dados estruturados por meio de entradas de idioma natural. | 
-| API de Modelo de Linguagem da Web | Texto | Use os modelos de linguagem preditiva treinados em dados na escala da Web. | 
-| API de Conhecimento Acadêmico | Texto | Alcance a riqueza do conteúdo acadêmico no Microsoft Academic Graph populado pelo Bing. |
-| API de Sugestão Automática do Bing | Texto | Dê ao seu aplicativo opções inteligentes de sugestão automática para pesquisas. |
-| API de Verificação Ortográfica do Bing | Texto | Detecte e corrija erros de ortografia em seu aplicativo. |
-| API de Tradução de Texto | Texto | Tradução automática. |
-| API de Recomendações | Texto | Preveja e recomende itens que seus clientes querem. |
-| API de Pesquisa de Entidade do Bing | Texto (consulta da pesquisa na Web) | Identifique e aumente as informações de entidade da Web. |
-| API de Pesquisa de Imagem do Bing | Texto (consulta da pesquisa na Web) | Pesquise imagens. |
-| API de Pesquisa de Notícias do Bing | Texto (consulta da pesquisa na Web) | Pesquise notícias. |
-| API de Pesquisa de Vídeo do Bing | Texto (consulta da pesquisa na Web) | Pesquise vídeos. |
-| API de Pesquisa na Web do Bing | Texto (consulta da pesquisa na Web) | Obtenha detalhes de pesquisa aprimorados de bilhões de documentos da Web. |.
-| API de Fala do Bing | Texto ou fala | Converta fala em texto e vice-versa. |
-| API de Reconhecimento do Locutor | Fala | Use a fala para identificar e autenticar locutores individuais. |
-| API de Tradução de Fala | Fala | Realize a tradução de fala em tempo real. |
-| API da Pesquisa Visual Computacional | Imagens (ou quadros de vídeo) | Extraia informações acionáveis de imagens, crie descrição de fotos automaticamente, obtenha marcas, reconheça celebridades, extraia texto e crie miniaturas precisas. |
-| Content Moderator | Texto, imagens ou vídeo | Moderação automatizada de imagem, texto e vídeo. |
-| API de Detecção de Emoções | Imagens (fotos com sujeitos humanos) | Identifique a variação de emoções de sujeitos humanos. |
-| API de Detecção Facial | Imagens (fotos com sujeitos humanos) | Detecte, identifique, analise, organize e marque rostos em fotos. |
-| Indexador de Vídeo | Vídeo | Insights de vídeos como sentimento, transcrição de fala, tradução de fala, reconhecimento de rostos e emoções e extração de palavras-chave. | 
+
+|                                                   |             Tipo de entrada              |                                                                                Principal benefício                                                                                |
+|---------------------------------------------------|-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                API de Análise de Texto                 |                Texto                 |                                                       Avalie sentimento e tópicos para entender o que os usuários querem.                                                        |
+|                API de Vinculação de Entidade                 |                Texto                 |                                               Fortaleça os links de dados do aplicativo com desambiguidade e reconhecimento de entidade nomeada.                                               |
+| Serviço Inteligente de Reconhecimento Vocal (LUIS) |                Texto                 |                                                          Ensine seus aplicativos a entenderem os comandos dos usuários.                                                          |
+|                 Serviço QnA Maker                 |                Texto                 |                                             Extraia informações formatadas em perguntas frequentes em respostas com formato de conversação e de fácil navegação.                                              |
+|              API de Análise Linguística              |                Texto                 |                                                            Simplifique conceitos de linguagem complexos e analise o texto.                                                             |
+|           Serviço de Exploração de Conhecimento           |                Texto                 |                                          Habilite experiências de pesquisa interativa em dados estruturados por meio de entradas de idioma natural.                                          |
+|              API de Modelo de Linguagem da Web               |                Texto                 |                                                         Use os modelos de linguagem preditiva treinados em dados na escala da Web.                                                         |
+|              API de Conhecimento Acadêmico               |                Texto                 |                                        Alcance a riqueza do conteúdo acadêmico no Microsoft Academic Graph populado pelo Bing.                                         |
+|               API de Sugestão Automática do Bing                |                Texto                 |                                                        Dê ao seu aplicativo opções inteligentes de sugestão automática para pesquisas.                                                        |
+|               API de Verificação Ortográfica do Bing                |                Texto                 |                                                             Detecte e corrija erros de ortografia em seu aplicativo.                                                             |
+|                API de Tradução de Texto                |                Texto                 |                                                                           Tradução automática.                                                                            |
+|                API de Recomendações                |                Texto                 |                                                             Preveja e recomende itens que seus clientes querem.                                                              |
+|              API de Pesquisa de Entidade do Bing               |       Texto (consulta da pesquisa na Web)       |                                                           Identifique e aumente as informações de entidade da Web.                                                           |
+|               API de Pesquisa de Imagem do Bing               |       Texto (consulta da pesquisa na Web)       |                                                                            Pesquise imagens.                                                                             |
+|               API de Pesquisa de Notícias do Bing                |       Texto (consulta da pesquisa na Web)       |                                                                             Pesquise notícias.                                                                              |
+|               API de Pesquisa de Vídeo do Bing               |       Texto (consulta da pesquisa na Web)       |                                                                            Pesquise vídeos.                                                                             |
+|                API de Pesquisa na Web do Bing                |       Texto (consulta da pesquisa na Web)       |                                                        Obtenha detalhes de pesquisa aprimorados de bilhões de documentos da Web.                                                        |
+|                  API de Fala do Bing                  |           Texto ou fala            |                                                                  Converta fala em texto e vice-versa.                                                                   |
+|              API de Reconhecimento do Locutor              |               Fala                |                                                       Use a fala para identificar e autenticar locutores individuais.                                                        |
+|               API de Tradução de Fala               |               Fala                |                                                                   Realize a tradução de fala em tempo real.                                                                   |
+|                API da Pesquisa Visual Computacional                |    Imagens (ou quadros de vídeo)    | Extraia informações acionáveis de imagens, crie descrição de fotos automaticamente, obtenha marcas, reconheça celebridades, extraia texto e crie miniaturas precisas. |
+|                 Content Moderator                 |        Texto, imagens ou vídeo        |                                                               Moderação automatizada de imagem, texto e vídeo.                                                                |
+|                    API de Detecção de Emoções                    | Imagens (fotos com sujeitos humanos) |                                                              Identifique a variação de emoções de sujeitos humanos.                                                               |
+|                     API de Detecção Facial                      | Imagens (fotos com sujeitos humanos) |                                                       Detecte, identifique, analise, organize e marque rostos em fotos.                                                       |
+|                   Indexador de Vídeo                   |                Vídeo                |                        Insights de vídeos como sentimento, transcrição de fala, tradução de fala, reconhecimento de rostos e emoções e extração de palavras-chave.                         |
 
 ### <a name="trained-with-custom-data-you-provide"></a>Treinado com os dados personalizados fornecidos
+
 | | Tipo de entrada | Principal benefício |
 | --- | --- | --- |
 | Serviço de Visão Personalizada | Imagens (ou quadros de vídeo) | Personalize seus próprios modelos de visão computacional. |

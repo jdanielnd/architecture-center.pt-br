@@ -1,15 +1,15 @@
 ---
-title: "Análise do modo de falha"
-description: "Diretrizes para executar a análise do modo de falha para soluções de nuvem baseadas no Azure."
+title: Análise do modo de falha
+description: Diretrizes para executar a análise do modo de falha para soluções de nuvem baseadas no Azure.
 author: MikeWasson
 ms.date: 03/24/2017
 ms.custom: resiliency
 pnp.series.title: Design for Resiliency
-ms.openlocfilehash: aca2088cb007728c5717a968969000c0a19bcd07
-ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
+ms.openlocfilehash: 8786c411249267e502003a90d5f2ff5e4c786803
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/30/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="failure-mode-analysis"></a>Análise do modo de falha
 [!INCLUDE [header](../_includes/header.md)]
@@ -122,7 +122,7 @@ A política de novas tentativas padrão usa retirada exponencial. Para usar uma 
 ### <a name="web-or-worker-roles-are-unexpectedlybeing-shut-down"></a>Funções de trabalho ou Web estão sendo desligadas inesperadamente.
 **Detecção**. O evento [RoleEnvironment.Stopping][RoleEnvironment.Stopping] é disparado.
 
-**Recuperação**. Substitua o método [RoleEntryPoint.OnStop][RoleEntryPoint.OnStop] para executar uma limpeza normal. Para obter mais informações, veja [The Right Way to Handle Azure OnStop Events][onstop-events] (A maneira correta de tratar eventos OnStop do Azure) (blog).
+<strong>Recuperação</strong>. Substitua o método [RoleEntryPoint.OnStop][RoleEntryPoint.OnStop] para executar uma limpeza normal. Para obter mais informações, veja [The Right Way to Handle Azure OnStop Events][onstop-events] (A maneira correta de tratar eventos OnStop do Azure) (blog).
 
 ## <a name="cosmos-db"></a>Cosmos DB 
 ### <a name="reading-data-fails"></a>Falha na leitura de dados.

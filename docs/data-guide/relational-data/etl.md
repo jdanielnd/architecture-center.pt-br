@@ -3,11 +3,11 @@ title: ETL (extrair, transformar e carregar)
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: a980c1f8aef99fc263083e5e496b1340204f7dac
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.openlocfilehash: 1879b649fa3dfdf5c00f8ee30e53b83f7139fbf0
+ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/31/2018
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="extract-transform-and-load-etl"></a>ETL (extrair, transformar e carregar)
 
@@ -21,7 +21,7 @@ O ETL (extração, transformação e carregamento) é um pipeline de dados usado
 
 A transformação de dados ocorrida geralmente envolve diversas operações, como filtragem, classificação, agregação, junção de dados, limpeza de dados, eliminação de duplicação e validação de dados.
 
-![Processo ETL (extração, transformação e carregamento)](./images/etl.png)
+![Processo ETL (extração, transformação e carregamento)](../images/etl.png)
 
 Com frequência, as três fases de ETL são executadas em paralelo para economizar tempo. Por exemplo, enquanto os dados estão sendo extraídos, um processo de transformação pode trabalhar nos dados já recebidos e prepará-los o para carregamento e um processo de carregamento pode começar a trabalhar com os dados preparados, em vez de aguardar a conclusão de todo o processo de extração.
 
@@ -35,7 +35,7 @@ Outras ferramentas:
 
 O ELT (extração, carregamento e transformação) difere do ETL somente no local em que ocorre a transformação. No pipeline de ELT, a transformação ocorre no armazenamento de dados de destino. Em vez de usar um mecanismo de transformação separado, as funcionalidades de processamento do armazenamento de dados de destino são usadas para transformar os dados. Isso simplifica a arquitetura pela remoção do mecanismo de transformação do pipeline. Outro benefício dessa abordagem é que o dimensionamento do armazenamento de dados de destino também dimensiona o desempenho do pipeline ELT. No entanto, o ELT só funciona bem quando o sistema de destino é poderoso o suficiente para transformar os dados com eficiência.
 
-![Processo de ELT (extração, carregamento e transformação)](./images/elt.png)
+![Processo de ELT (extração, carregamento e transformação)](../images/elt.png)
 
 Os casos típicos de uso do ELT se enquadram no âmbito do Big Data. Por exemplo, você pode começar com a extração de todos os dados de origem em arquivos simples em um armazenamento escalonável, como o HDFS (sistema de arquivos distribuído do Hadoop) ou o Azure Data Lake Store. Tecnologias, como o Spark, Hive ou PolyBase, podem então ser usadas para consultar os dados de origem. O ponto-chave do ELT é que o armazenamento de dados usado para executar a transformação é o mesmo armazenamento de dados no qual os dados são, em última análise, consumidos. Esse armazenamento de dados lê diretamente do armazenamento escalonável, em vez de carregar os dados em seu próprio armazenamento proprietário. Essa abordagem ignora a etapa de cópia de dados presente no ETL, que pode ser uma operação demorada para conjuntos grandes de dados.
 
@@ -62,7 +62,7 @@ No contexto de pipelines de dados, o fluxo de controle garante o processamento o
 
 Os fluxos de controle executam fluxos de dados como uma tarefa. Em uma tarefa de fluxo de dados, os dados são extraídos de uma fonte, transformados ou carregados em um armazenamento de dados. A saída de uma tarefa de fluxo de dados pode ser a entrada para a próxima tarefa de fluxo de dados e os fluxos de dados podem ser executados em paralelo. Ao contrário de fluxos de controle, não é possível adicionar restrições entre tarefas em um fluxo de dados. No entanto, é possível adicionar um visualizador de dados para observar os dados conforme eles são processados por cada tarefa.
 
-![Fluxo de Dados executado como uma tarefa em um Fluxo de Controle](./images/control-flow-data-flow.png)
+![Fluxo de Dados executado como uma tarefa em um Fluxo de Controle](../images/control-flow-data-flow.png)
 
 No diagrama acima, há várias tarefas dentro do fluxo de controle, cada uma sendo uma tarefa de fluxo de dados. Uma das tarefas é aninhada em um contêiner. Os contêineres podem ser usados para fornecer estrutura às tarefas, fornecendo uma unidade de trabalho. Um exemplo disso são elementos de repetição em uma coleção, como arquivos em uma pasta ou instruções de banco de dados.
 
@@ -74,7 +74,7 @@ Outras ferramentas:
 
 ## <a name="technology-choices"></a>Opções de tecnologia
 
-- [Armazenamentos de dados OLTP (Processamento de Transações Online)](../technology-choices/oltp-data-stores.md)
-- [Armazenamentos de dados OLAP (processamento analítico online)](../technology-choices/olap-data-stores.md)
-- [Data warehouses](../technology-choices/data-warehouses.md)
+- [Armazenamentos de dados OLTP (Processamento de Transações Online)](./online-transaction-processing.md#oltp-in-azure)
+- [Armazenamentos de dados OLAP (processamento analítico online)](./online-analytical-processing.md#olap-in-azure)
+- [Data warehouses](./data-warehousing.md)
 - [Orquestração de pipeline](../technology-choices/pipeline-orchestration-data-movement.md)

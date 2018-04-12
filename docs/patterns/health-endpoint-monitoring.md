@@ -1,7 +1,7 @@
 ---
 title: Monitoramento do Ponto de Extremidade de Integridade
-description: "Implemente verificações funcionais dentro de um aplicativo cujas ferramentas externas podem acessar por meio de pontos de extremidade expostos em intervalos regulares."
-keywords: "padrão de design"
+description: Implemente verificações funcionais dentro de um aplicativo cujas ferramentas externas podem acessar por meio de pontos de extremidade expostos em intervalos regulares.
+keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
@@ -9,11 +9,11 @@ pnp.pattern.categories:
 - availability
 - management-monitoring
 - resiliency
-ms.openlocfilehash: 36171d568b9b5bfbbd48ee762b16adea695cf0e9
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 3b3bce46b460148af17bfe6064cd052a5f9a6458
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="health-endpoint-monitoring-pattern"></a>Padrão de monitoramento do ponto de extremidade de integridade
 
@@ -82,9 +82,9 @@ Como configurar a segurança para os pontos de extremidade de monitoramento para
 
 - Proteger o ponto de extremidade exigindo autenticação. É possível fazer isso, utilizando uma chave de segurança de autenticação no cabeçalho da solicitação ou passando as credenciais com a solicitação, desde que o serviço de monitoramento ou a ferramenta forneça suporte à autenticação.
 
- - Utilizar um ponto de extremidade oculto ou obscuro. Por exemplo, exponha o ponto de extremidade em um endereço IP diferente ao utilizado pela URL do aplicativo padrão, configure o ponto de extremidade em uma porta HTTP não padronizada e/ou utilize um caminho complexo para a página de teste. Normalmente, você pode especificar portas e endereços de ponto de extremidade adicionais na configuração do aplicativo e adicionar entradas para esses pontos de extremidade ao servidor DNS, se necessário para evitar ter que especificar o endereço IP diretamente.
+  - Utilizar um ponto de extremidade oculto ou obscuro. Por exemplo, exponha o ponto de extremidade em um endereço IP diferente ao utilizado pela URL do aplicativo padrão, configure o ponto de extremidade em uma porta HTTP não padronizada e/ou utilize um caminho complexo para a página de teste. Normalmente, você pode especificar portas e endereços de ponto de extremidade adicionais na configuração do aplicativo e adicionar entradas para esses pontos de extremidade ao servidor DNS, se necessário para evitar ter que especificar o endereço IP diretamente.
 
- - Expor um método em um ponto de extremidade que aceite um parâmetro, como um valor de chave ou um valor de modo de operação. Dependendo do valor fornecido para esse parâmetro, quando uma solicitação é recebida, o código pode executar um teste específico ou conjunto de testes, ou retornar um erro 404 (Não Encontrado) se o valor do parâmetro não for reconhecido. Os valores de parâmetros reconhecidos podem ser configurados na configuração do aplicativo.
+  - Expor um método em um ponto de extremidade que aceite um parâmetro, como um valor de chave ou um valor de modo de operação. Dependendo do valor fornecido para esse parâmetro, quando uma solicitação é recebida, o código pode executar um teste específico ou conjunto de testes, ou retornar um erro 404 (Não Encontrado) se o valor do parâmetro não for reconhecido. Os valores de parâmetros reconhecidos podem ser configurados na configuração do aplicativo.
 
      >  Os ataques de negação de serviço provavelmente terão menos impacto em um ponto de extremidade separado que executa testes funcionais básicos sem comprometer a operação do aplicativo. O ideal é evitar usar um teste que possa expor informações confidenciais. Se for necessário retornar informações que possam ser úteis a um invasor, considere como irá proteger o ponto de extremidade e os dados contra acesso não autorizado. Neste caso, apenas confiar na obscuridade não é suficiente. Também será necessário considerar usar uma conexão HTTPS e criptografar quaisquer dados confidenciais, embora isso aumente a carga no servidor.
 

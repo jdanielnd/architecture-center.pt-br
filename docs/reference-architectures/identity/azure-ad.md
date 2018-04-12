@@ -1,17 +1,17 @@
 ---
-title: "Integrar domínios do AD local ao Azure Active Directory"
-description: "Como implementar uma arquitetura de rede híbrida segura usando o Azure Active Directory."
+title: Integrar domínios do AD local ao Azure Active Directory
+description: Como implementar uma arquitetura de rede híbrida segura usando o Azure Active Directory.
 author: telmosampaio
 pnp.series.title: Identity management
 ms.date: 11/28/2016
 pnp.series.next: adds-extend-domain
 pnp.series.prev: ./index
 cardTitle: Integrate on-premises AD with Azure AD
-ms.openlocfilehash: dd4cf0369974ea68d240ed294b1c50972d361d74
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 431de4b2e08c79f70cc9830fda8315e07bf22c64
+ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="integrate-on-premises-active-directory-domains-with-azure-active-directory"></a>Integrar domínios do Active Directory local ao Azure Active Directory
 
@@ -119,7 +119,7 @@ Para obter mais informações sobre essas topologias, consulte [Topologias para 
 
 ### <a name="user-authentication"></a>Autenticação de usuário
 
-Por padrão, o servidor de sincronização do Azure AD Connect configura a sincronização de senha entre o domínio local e o Azure AD, e o serviço do Azure AD pressupõe que os usuários se autenticam fornecendo a mesma senha que usam localmente. Para muitas organizações, isso é apropriado, mas você deve considerar as políticas e a infraestrutura existentes da sua organização. Por exemplo:
+Por padrão, o servidor de sincronização do Azure AD Connect configura a sincronização de senha entre o domínio local e o Azure AD, e o serviço do Azure AD pressupõe que os usuários se autenticam fornecendo a mesma senha que usam localmente. Para muitas organizações, isso é apropriado, mas você deve considerar as políticas e a infraestrutura existentes da sua organização. Por exemplo: 
 
 * A política de segurança da sua organização pode proibir a sincronização de hashes de senha para a nuvem.
 * Você pode exigir que os usuários usem um SSO (logon único) perfeito ao acessar os recursos em nuvem por meio de computadores ingressados no domínio na rede corporativa.
@@ -260,7 +260,7 @@ Uma implantação de uma arquitetura de referência que implementa essas conside
 [considerations]: ./considerations.md
 [resource-manager-overview]: /azure/azure-resource-manager/resource-group-overview
 [sla-aad]: https://azure.microsoft.com/support/legal/sla/active-directory/v1_0/
-[visio-download]: https://archcenter.azureedge.net/cdn/identity-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/identity-architectures.vsdx
 
 
 [0]: ./images/azure-ad.png "Arquitetura de identidade de nuvem usando o Azure Active Directory"

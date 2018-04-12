@@ -1,19 +1,19 @@
 ---
 title: Escolhendo uma tecnologia de processamento de fluxo
-description: 
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 23d9849c14964b0905300f191a41084b589fd127
-ms.sourcegitcommit: 943e671a8d522cef5ddc8c6e04848134b03c2de4
+ms.openlocfilehash: 29e4cd3d5ea6e10f036bfe226152290512dafa65
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/05/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="choosing-a-stream-processing-technology-in-azure"></a>Escolhendo uma tecnologia de processamento de fluxo no Azure
 
 Este artigo compara as opções de tecnologia de processamento de fluxo em tempo real no Azure.
 
-O processamento de fluxo em tempo real consome mensagens do armazenamento baseado em fila ou em arquivo, processa as mensagens e encaminha o resultado para outra fila de mensagens, repositório de arquivos ou banco de dados. O processamento pode incluir consulta, filtragem e agregação de mensagens. Os mecanismos de processamento de fluxo precisam conseguir consumir intermináveis fluxos de dados e produzir resultados com latência mínima. Para obter mais informações, consulte [Processamento em tempo real](../scenarios/real-time-processing.md).
+O processamento de fluxo em tempo real consome mensagens do armazenamento baseado em fila ou em arquivo, processa as mensagens e encaminha o resultado para outra fila de mensagens, repositório de arquivos ou banco de dados. O processamento pode incluir consulta, filtragem e agregação de mensagens. Os mecanismos de processamento de fluxo precisam conseguir consumir intermináveis fluxos de dados e produzir resultados com latência mínima. Para obter mais informações, consulte [Processamento em tempo real](../big-data/real-time-processing.md).
 
 ## <a name="what-are-your-options-when-choosing-a-technology-for-real-time-processing"></a>Quais são as opções disponíveis ao escolher uma tecnologia de processamento em tempo real?
 No Azure, todos os seguintes armazenamentos de dados atenderão aos requisitos básicos que dão suporte ao processamento em tempo real:
@@ -41,6 +41,7 @@ Para cenários de processamento em tempo real, comece escolhendo o serviço apro
 As tabelas a seguir resumem as principais diferenças em funcionalidades. 
 
 ### <a name="general-capabilities"></a>Funcionalidades gerais
+
 | | Stream Analytics do Azure | HDInsight com Spark Streaming | Apache Spark no Azure Databricks | HDInsight com Storm | Funções do Azure | WebJobs no Serviço de Aplicativo do Azure |
 | --- | --- | --- | --- | --- | --- | --- | 
 | Programação | Linguagem de consulta do Stream Analytics, JavaScript | Scala, Python, Java | Scala, Python, Java, R | Java, C# | C#, F#, Node.js | C#, Node.js, PHP, Java, Python |
@@ -48,21 +49,23 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 | Modelo de preços | [Unidades de streaming](https://azure.microsoft.com/pricing/details/stream-analytics/) | Por hora de cluster | [Unidades do Databricks](https://azure.microsoft.com/pricing/details/databricks/) | Por hora de cluster | Por execução de função e consumo de recursos | Por hora do plano de serviço de aplicativo |  
 
 ### <a name="integration-capabilities"></a>Funcionalidades de integração
+
 | | Stream Analytics do Azure | HDInsight com Spark Streaming | Apache Spark no Azure Databricks | HDInsight com Storm | Funções do Azure | WebJobs no Serviço de Aplicativo do Azure |
 | --- | --- | --- | --- | --- | --- | --- | 
 | Entradas | [Entradas do Stream Analytics](/azure/stream-analytics/stream-analytics-define-inputs)  | Hubs de Eventos, Hub IoT, Kafka, HDFS, Blobs de Armazenamento, Azure Data Lake Store  | Hubs de Eventos, Hub IoT, Kafka, HDFS, Blobs de Armazenamento, Azure Data Lake Store  | Hubs de Eventos, Hub IoT, Blobs de Armazenamento, Azure Data Lake Store  | [Associações compatíveis](/azure/azure-functions/functions-triggers-bindings#supported-bindings) | Barramento de Serviço, Filas de Armazenamento, Blobs de Armazenamento, Hubs de Eventos, WebHooks, Cosmos DB, Arquivos |
 | Coletores |  [Saídas do Stream Analytics](/azure/stream-analytics/stream-analytics-define-outputs) | HDFS, Kafka, Blobs de armazenamento, Azure Data Lake Store, Cosmos DB | HDFS, Kafka, Blobs de armazenamento, Azure Data Lake Store, Cosmos DB | Hubs de Eventos, Barramento de Serviço, Kafka | [Associações compatíveis](/azure/azure-functions/functions-triggers-bindings#supported-bindings) | Barramento de Serviço, Filas de Armazenamento, Blobs de Armazenamento, Hubs de Eventos, WebHooks, Cosmos DB, Arquivos | 
 
 ### <a name="processing-capabilities"></a>Funcionalidades de processamento
+
 | | Stream Analytics do Azure | HDInsight com Spark Streaming | Apache Spark no Azure Databricks | HDInsight com Storm | Funções do Azure | WebJobs no Serviço de Aplicativo do Azure |
 | --- | --- | --- | --- | --- | --- | --- | 
-| Suporte a janelas internas/temporal | sim | Sim | Sim | Sim | Não | Não  |
+| Suporte a janelas internas/temporal | sim | sim | sim | sim | Não | Não  |
 | Formatos de dados de entrada | Avro, JSON ou CSV, codificados em UTF-8 | Qualquer formato que usa um código personalizado | Qualquer formato que usa um código personalizado | Qualquer formato que usa um código personalizado | Qualquer formato que usa um código personalizado | Qualquer formato que usa um código personalizado |
 | Escalabilidade | [Partições de consulta](/azure/stream-analytics/stream-analytics-parallelization) | Limitado pelo tamanho do cluster | Limitado pela configuração de escala de cluster do Databricks | Limitado pelo tamanho do cluster | Até 200 instâncias de aplicativo de funções processadas em paralelo | Limitado pela capacidade do plano de serviço de aplicativo | 
-| Suporte à chegada tardia e manipulação de eventos fora de ordem | sim | Sim | Sim | Sim | Não | Não  |
+| Suporte à chegada tardia e manipulação de eventos fora de ordem | sim | sim | sim | sim | Não | Não  |
 
 Consulte também:
 
 - [Escolhendo uma tecnologia de ingestão de mensagens em tempo real](./real-time-ingestion.md)
 - [Comparando o Apache Storm com o Azure Stream Analytics](/azure/stream-analytics/stream-analytics-comparison-storm)
-- [Processamento em tempo real](../scenarios/real-time-processing.md)
+- [Processamento em tempo real](../big-data/real-time-processing.md)

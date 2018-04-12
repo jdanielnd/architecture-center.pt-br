@@ -1,16 +1,17 @@
 ---
 title: Disjuntor
-description: "Trate as falhas que possam consumir uma quantidade variável de tempo para serem corrigidas ao se conectar a um serviço ou recurso remoto."
-keywords: "padrão de design"
+description: Trate as falhas que possam consumir uma quantidade variável de tempo para serem corrigidas ao se conectar a um serviço ou recurso remoto.
+keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories: resiliency
-ms.openlocfilehash: ce110d0bbda600575d328895f2feca5aa253479d
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+pnp.pattern.categories:
+- resiliency
+ms.openlocfilehash: 0f93c1ef664c8e7385895e3854835699f674ee0e
+ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="circuit-breaker-pattern"></a>Padrão de Disjuntor
 
@@ -56,7 +57,7 @@ O padrão é personalizável e pode ser adaptado de acordo com o tipo de falha p
 
 ## <a name="issues-and-considerations"></a>Problemas e considerações
 
-Você deve considerar os seguintes pontos ao decidir como implementar esse padrão:
+Os seguintes pontos devem ser considerados ao decidir como implementar esse padrão:
 
 **Tratamento de exceção**. Um aplicativo invocando uma operação por meio de um disjuntor deverá estar preparado para tratar as exceções geradas se a operação não estiver disponível. A maneira como são as exceções são tratadas dependerá do aplicativo. Por exemplo, um aplicativo pode sofrer uma degradação temporária de sua funcionalidade, invocar uma operação alternativa para tentar executar a mesma tarefa ou obter os mesmos dados ou relatar a exceção ao usuário e pedir a que ele tente novamente mais tarde.
 
@@ -212,7 +213,7 @@ Além disso, ele usará um bloqueio para impedir que o disjuntor tente realizar 
         bool lockTaken = false;
         try
         {
-          Monitor.TryEnter(halfOpenSyncObject, ref lockTaken)
+          Monitor.TryEnter(halfOpenSyncObject, ref lockTaken);
           if (lockTaken)
           {
             // Set the circuit breaker state to HalfOpen.
