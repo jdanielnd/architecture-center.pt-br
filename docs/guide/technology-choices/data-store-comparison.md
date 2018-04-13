@@ -1,12 +1,12 @@
 ---
-title: "Critérios para escolher um armazenamento de dados"
-description: "Visão geral das opções de computação do Azure"
+title: Critérios para escolher um armazenamento de dados
+description: Visão geral das opções de computação do Azure
 author: MikeWasson
-ms.openlocfilehash: 7fb75cd334438c5b985fa04ad8afe3236f2391f8
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 9cb2f77b854a38450490bc96bf0b6a2998ceb1c7
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="criteria-for-choosing-a-data-store"></a>Critérios para escolher um armazenamento de dados
 
@@ -61,7 +61,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
 ## <a name="relational-database-management-systems-rdbms"></a>RDBMS
 
 <table>
-<tr><td>**Carga de trabalho**</td>
+<tr><td><strong>Carga de trabalho</strong></td>
     <td>
         <ul>
             <li>Tanto a criação de novos registros quanto atualizações em dados existentes ocorrem regularmente.</li>
@@ -74,7 +74,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td>**Tipo de dados**</td>
+<tr><td><strong>Tipo de dados</strong></td>
     <td>
         <ul>
             <li>Os dados são altamente normalizados.</li>
@@ -87,7 +87,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td>**Exemplos**</td>
+<tr><td><strong>Exemplos</strong></td>
     <td>
         <ul>
             <li>Linha de negócios (gerenciamento de capital humano, gerenciamento de relacionamento com o cliente, planejamento de recursos da empresa)</li>
@@ -105,7 +105,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
 ## <a name="document-databases"></a>Bancos de dados de documentos
 
 <table>
-<tr><td>**Carga de trabalho**</td>
+<tr><td><strong>Carga de trabalho</strong></td>
     <td>
         <ul>
             <li>Uso geral.</li>
@@ -117,7 +117,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
             <li>Os documentos individuais são recuperados e gravados como um único bloco.</li>
     </td>
 </tr>
-<tr><td>**Tipo de dados**</td>
+<tr><td><strong>Tipo de dados</strong></td>
     <td>
         <ul>
             <li>Os dados podem ser gerenciados de forma desordenada.</li>
@@ -129,7 +129,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td>**Exemplos**</td>
+<tr><td><strong>Exemplos</strong></td>
     <td>
         <ul>
             <li>Catálogo de produtos</li>
@@ -146,10 +146,10 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
 </tr>
 </table>
 
-## <a name="keyvalue-stores"></a>Repositórios de chave/valor
+## <a name="keyvalue-stores"></a>Armazenamentos de valor/chave
 
 <table>
-<tr><td>**Carga de trabalho**</td>
+<tr><td><strong>Carga de trabalho</strong></td>
     <td>
         <ul>
             <li>Os dados são identificados e acessados usando uma única chave de ID, como um dicionário.</li>
@@ -160,7 +160,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td>**Tipo de dados**</td>
+<tr><td><strong>Tipo de dados</strong></td>
     <td>
         <ul>
             <li>O tamanho dos dados tende a ser grande.</li>
@@ -170,7 +170,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td>**Exemplos**</td>
+<tr><td><strong>Exemplos</strong></td>
     <td>
         <ul>
             <li>Armazenamento de dados em cache</li>
@@ -183,10 +183,10 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
 </tr>
 </table>
 
-## <a name="graph-databases"></a>Bancos de dados de gráfico
+## <a name="graph-databases"></a>Bancos de dados de grafo
 
 <table>
-<tr><td>**Carga de trabalho**</td>
+<tr><td><strong>Carga de trabalho</strong></td>
     <td>
         <ul>
             <li>As relações entre os itens de dados são muito complexas, o que envolve vários saltos entre os itens de dados relacionados.</li>
@@ -195,7 +195,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td>**Tipo de dados**</td>
+<tr><td><strong>Tipo de dados</strong></td>
     <td>
         <ul>
             <li>Os dados são compostos por nós e relações.</li>
@@ -205,7 +205,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td>**Exemplos**</td>
+<tr><td><strong>Exemplos</strong></td>
     <td>
         <ul>
             <li>Quadros da organização</li>
@@ -218,10 +218,10 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
 </tr>
 </table>
 
-## <a name="column-family-databases"></a>Bancos de dados de famílias de colunas
+## <a name="column-family-databases"></a>Bancos de dados de família de coluna
 
 <table>
-<tr><td>**Carga de trabalho**</td>
+<tr><td><strong>Carga de trabalho</strong></td>
     <td>
         <ul>
             <li>A maioria dos bancos de dados de famílias de colunas executam operações de gravação muito rapidamente.</li>
@@ -232,7 +232,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td>**Tipo de dados**</td>
+<tr><td><strong>Tipo de dados</strong></td>
     <td>
         <ul>
             <li>Os dados são armazenados em tabelas compostas por uma coluna de chave e uma ou mais famílias de colunas.</li>
@@ -242,7 +242,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td>**Exemplos**</td>
+<tr><td><strong>Exemplos</strong></td>
     <td>
         <ul>
             <li>Recomendações</li>
@@ -262,7 +262,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
 ## <a name="search-engine-databases"></a>Bancos de dados de mecanismo de pesquisa
 
 <table>
-<tr><td>**Carga de trabalho**</td>
+<tr><td><strong>Carga de trabalho</strong></td>
     <td>
         <ul>
             <li>Indexação de dados de várias fontes e serviços.</li>
@@ -274,7 +274,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td>**Tipo de dados**</td>
+<tr><td><strong>Tipo de dados</strong></td>
     <td>
         <ul>
             <li>Dados semi-estruturados ou não estruturados</li>
@@ -283,7 +283,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td>**Exemplos**</td>
+<tr><td><strong>Exemplos</strong></td>
     <td>
         <ul>
             <li>Catálogos de produtos</li>
@@ -299,7 +299,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
 ## <a name="data-warehouse"></a>Data warehouse
 
 <table>
-<tr><td>**Carga de trabalho**</td>
+<tr><td><strong>Carga de trabalho</strong></td>
     <td>
         <ul>
             <li>Análise de dados</li>
@@ -307,17 +307,17 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td>**Tipo de dados**</td>
+<tr><td><strong>Tipo de dados</strong></td>
     <td>
         <ul>
             <li>Dados históricos de várias fontes.</li>
-            <li>Geralmente desordenado em um esquema de “estrela” ou “floco de neve”, consistindo em tabelas de dimensões e fatos.</li>
+            <li>Geralmente desnormalizado em um esquema de &quot;estrela&quot; ou &quot;floco de neve&quot;, consistindo em tabelas de dimensões e fatos.</li>
             <li>Geralmente é carregado com novos dados de forma programada.</li>
-            <li>As tabelas de dimensões geralmente incluem várias versões históricas de uma entidade, conhecida como uma *dimensão de alteração lenta*.</li>
+            <li>As tabelas de dimensões geralmente incluem várias versões históricas de uma entidade, conhecida como uma <em>dimensão de alteração lenta</em>.</li>
         </ul>
     </td>
 </tr>
-<tr><td>**Exemplos**</td>
+<tr><td><strong>Exemplos</strong></td>
     <td>Um data warehouse corporativo que fornece dados para os modelos, relatórios e painéis analíticos.
     </td>
 </tr>
@@ -327,7 +327,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
 ## <a name="time-series-databases"></a>Bancos de dados de séries temporais
 
 <table>
-<tr><td>**Carga de trabalho**</td>
+<tr><td><strong>Carga de trabalho</strong></td>
     <td>
         <ul>
             <li>Um proporção predominante das operações (95% a 99%) são gravações.</li>
@@ -340,7 +340,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td>**Tipo de dados**</td>
+<tr><td><strong>Tipo de dados</strong></td>
     <td>
         <ul>
             <li>Um carimbo de data/hora que é usado a chave primária e o mecanismo de classificação.</li>
@@ -349,7 +349,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td>**Exemplos**</td>
+<tr><td><strong>Exemplos</strong></td>
     <td>
         <ul>
             <li>Monitoramento e telemetria de evento.</li>
@@ -362,7 +362,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
 ## <a name="object-storage"></a>Armazenamento de objetos
 
 <table>
-<tr><td>**Carga de trabalho**</td>
+<tr><td><strong>Carga de trabalho</strong></td>
     <td>
         <ul>
             <li>Identificado pela chave.</li>
@@ -372,7 +372,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td>**Tipo de dados**</td>
+<tr><td><strong>Tipo de dados</strong></td>
     <td>
         <ul>
             <li>O tamanho dos dados é grande.</li>
@@ -381,7 +381,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td>**Exemplos**</td>
+<tr><td><strong>Exemplos</strong></td>
     <td>
         <ul>
             <li>Imagens, vídeos, documentos do office e PDFs</li>
@@ -397,7 +397,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
 ## <a name="shared-files"></a>Arquivos compartilhados
 
 <table>
-<tr><td>**Carga de trabalho**</td>
+<tr><td><strong>Carga de trabalho</strong></td>
     <td>
         <ul>
             <li>Migração de aplicativos existentes que interagem com o sistema de arquivos.</li>
@@ -405,7 +405,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td>**Tipo de dados**</td>
+<tr><td><strong>Tipo de dados</strong></td>
     <td>
         <ul>
             <li>Arquivos em um conjunto hierárquico de pastas.</li>
@@ -413,7 +413,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td>**Exemplos**</td>
+<tr><td><strong>Exemplos</strong></td>
     <td>
         <ul>
             <li>Arquivos herdados</li>

@@ -1,17 +1,17 @@
 ---
-title: "Padrão de Camada Anticorrupção"
+title: Padrão de Camada Anticorrupção
 description: Implemente uma camada de fachada ou adaptador entre um aplicativo moderno e um sistema herdado.
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: e41f080abbef772596ee7f8b10ad72bb03a3b829
-ms.sourcegitcommit: c93f1b210b3deff17cc969fb66133bc6399cfd10
+ms.openlocfilehash: efb1f90be33c2621c7a24c42730da9fffe70dfad
+ms.sourcegitcommit: ea7108f71dab09175ff69322874d1bcba800a37a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/05/2018
+ms.lasthandoff: 03/17/2018
 ---
 # <a name="anti-corruption-layer-pattern"></a>Padrão de Camada Anticorrupção
 
-Implemente uma camada de fachada ou de adaptador entre um aplicativo moderno e um sistema herdado do qual ele depende. Essa camada converte solicitações entre o aplicativo moderno e o sistema herdado. Use esse padrão para garantir que o design do aplicativo não seja limitado por dependências em sistemas herdados. Esse padrão foi descrito pela primeira vez por Eric Evans em *Design orientado ao domínio*.
+Implemente uma camada de fachada ou de adaptador entre diferentes subsistemas que não compartilham a mesma semântica. Essa camada move solicitações feitas por um subsistema para o outro subsistema. Use esse padrão para garantir que o design do aplicativo não seja limitado por dependências em subsistemas externos. Esse padrão foi descrito pela primeira vez por Eric Evans em *Design orientado ao domínio*.
 
 ## <a name="context-and-problem"></a>Contexto e problema
 
@@ -21,13 +21,15 @@ Geralmente, esses sistemas herdados sofrem problemas de qualidade, como esquemas
 
 Manter o acesso entre sistemas herdados e novos pode forçar o novo sistema a aderir a pelo menos algumas das APIs do sistema herdado ou outras semânticas. Quando esses recursos herdados tiverem problemas de qualidade, o suporte a eles "corrompe" o que, caso contrário, seria um aplicativo moderno projetado corretamente. 
 
+Problemas semelhantes podem surgir com qualquer sistema externo que sua equipe de desenvolvimento não controle, e não apenas com sistemas herdados. 
+
 ## <a name="solution"></a>Solução
 
-Isole os sistemas herdados e modernos, colocando uma camada anticorrupção entre eles. Essa camada converte as comunicações entre os dois sistemas, permitindo que o sistema herdado permaneça inalterada, enquanto o aplicativo moderno pode evitar o comprometimento de seu design e abordagem tecnológica.
+Isole os diferentes subsistemas colocando uma camada anticorrupção entre eles. Essa camada move as comunicações entre os dois sistemas, permitindo que um sistema permaneça inalterado, enquanto o outro pode evitar comprometer seu design e sua abordagem tecnológica.
 
 ![](./_images/anti-corruption-layer.png) 
 
-A comunicação entre o aplicativo moderno e a camada anticorrupção sempre usa o modelo de dados e a arquitetura do aplicativo. As chamadas da camada anticorrupção ao sistema herdado estão em conformidade com o modelo de dados ou métodos do sistema. A camada anticorrupção contém toda a lógica necessária para traduzir entre os dois sistemas. A camada pode ser implementada como um componente do aplicativo ou como um serviço independente.
+O diagrama acima mostra um aplicativo com dois subsistemas. O Subsistema A chama para o Subsistema B por meio de uma camada anticorrupção. A comunicação entre o Subsistema A e a camada anticorrupção sempre usa o modelo de dados e a arquitetura do subsistema A. Chamadas da camada anticorrupção para o Subsistema B estão em conformidade com o modelo de dados ou os métodos desse subsistema. A camada anticorrupção contém toda a lógica necessária para traduzir entre os dois sistemas. A camada pode ser implementada como um componente do aplicativo ou como um serviço independente.
 
 ## <a name="issues-and-considerations"></a>Problemas e considerações
 
@@ -37,20 +39,18 @@ A comunicação entre o aplicativo moderno e a camada anticorrupção sempre usa
 - Considere se você precisa de mais de uma camada anticorrupção. Talvez você queira decompor a funcionalidade em vários serviços usando tecnologias ou linguagens diferentes, ou pode haver outros motivos para particionar a camada anticorrupção.
 - Considere como a camada anticorrupção será gerenciada em relação com outros aplicativos ou serviços. Como ele será integrado aos processos de monitoramento, versão e configuração?
 - Certifique-se de que a transação e a consistência de dados sejam mantidas e que possam ser monitoradas.
-- Considere se a camada anticorrupção precisará lidar com toda a comunicação entre sistemas herdados e modernos, ou apenas com um subconjunto de recursos. 
-- Considere se a camada anticorrupção deve ser permanente ou eventualmente preterida, uma vez toda a funcionalidade herdada tiver sido migrada.
+- Leve em consideração se a camada anticorrupção precisa lidar com toda a comunicação entre diferentes subsistemas ou apenas com um subconjunto de recursos. 
+- Se a camada anticorrupção fizer parte de uma estratégia de migração, leve em consideração se ela será permanente ou se será desativada depois que todas as funcionalidades herdadas forem migradas.
 
 ## <a name="when-to-use-this-pattern"></a>Quando usar esse padrão
 
 Use esse padrão quando:
 
 - Haja um plano de migração que acontecerá em vários estágios, mas a integração entre os sistemas novo e herdado precisará ser mantida.
-- O sistema novo e o herdado têm uma semântica, mas ainda precisam se comunicar.
+- Dois ou mais subsistemas têm semânticas diferentes, mas ainda precisam se comunicar. 
 
 Esse padrão poderá não ser adequado se não houver nenhuma diferença significativa semântica entre os sistemas herdados e novos. 
 
 ## <a name="related-guidance"></a>Diretrizes relacionadas
 
-- [Padrão do Estrangulador][strangler]
-
-[strangler]: ./strangler.md
+- [Padrão do estrangulador](./strangler.md)

@@ -1,16 +1,16 @@
 ---
 title: Executar VMs com balanceamento de carga no Azure para escalabilidade e disponibilidade
-description: "Como executar várias VMs do Windows no Azure para ter escalabilidade e disponibilidade."
+description: Como executar várias VMs do Windows no Azure para ter escalabilidade e disponibilidade.
 author: telmosampaio
 ms.date: 11/16/2017
 pnp.series.title: Windows VM workloads
 pnp.series.next: n-tier
 pnp.series.prev: single-vm
-ms.openlocfilehash: 14e7e023afd7cb7cbe0e8db8e224ba777f6fe863
-ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
+ms.openlocfilehash: d624ba74e3173b5f4218009de3ca6019f5f18143
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="run-load-balanced-vms-for-scalability-and-availability"></a>Executar VMs com balanceamento de carga para ter escalabilidade e disponibilidade
 
@@ -125,11 +125,11 @@ Uma implantação para essa arquitetura está disponível no [GitHub][github-fol
   * Um balanceador de carga localizado na frente do conjunto de dimensionamento da VM.
   * Um NSG com duas regras de entrada que permite tráfego HTTP para o conjunto de dimensionamento da VM.
 
-### <a name="prerequisites"></a>Pré-requisitos
+### <a name="prerequisites"></a>pré-requisitos
 
 Antes de implantar a arquitetura de referência para sua própria assinatura, você deve executar as etapas a seguir.
 
-1. Clone, crie fork ou baixe o arquivo zip para as [arquiteturas de referência AzureCAT][ref-arch-repo] no repositório GitHub.
+1. Clone, crie um fork ou baixe o arquivo zip das [arquiteturas de referência][ref-arch-repo] no repositório GitHub.
 
 2. Verifique se a CLI do Azure 2.0 está instalada no computador. Para obter instruções de instalação da CLI, consulte [Instalar a CLI 2.0 do Azure][azure-cli-2].
 
@@ -137,9 +137,9 @@ Antes de implantar a arquitetura de referência para sua própria assinatura, vo
 
 4. Em um prompt de comando, bash prompt ou prompt do PowerShell, faça logon na sua conta do Azure usando um dos comandos abaixo e siga os prompts.
 
-  ```bash
-  az login
-  ```
+   ```bash
+   az login
+   ```
 
 ### <a name="deploy-the-solution-using-azbb"></a>Implantar a solução usando azbb
 
@@ -149,16 +149,16 @@ Para implantar a carga de trabalho de VM única de exemplo, siga estas etapas:
 
 2. Abra o arquivo `multi-vm-v2.json` e insira um nome de usuário e senha entre aspas, conforme mostrado abaixo e salve o arquivo.
 
-  ```bash
-  "adminUsername": "",
-  "adminPassword": "",
-  ```
+   ```bash
+   "adminUsername": "",
+   "adminPassword": "",
+   ```
 
 3. Execute `azbb` para implantar as VMs conforme mostrado abaixo.
 
-  ```bash
-  azbb -s <subscription_id> -g <resource_group_name> -l <location> -p multi-vm-v2.json --deploy
-  ```
+   ```bash
+   azbb -s <subscription_id> -g <resource_group_name> -l <location> -p multi-vm-v2.json --deploy
+   ```
 
 Para obter mais informações sobre como implantar essa arquitetura de referência de exemplo, visite nosso [Repositório GitHub][git].
 
@@ -187,7 +187,7 @@ Para obter mais informações sobre como implantar essa arquitetura de referênc
 [runbook-gallery]: /azure/automation/automation-runbook-gallery#runbooks-in-runbook-gallery
 [single-vm]: single-vm.md
 [subscription-limits]: /azure/azure-subscription-service-limits
-[visio-download]: https://archcenter.azureedge.net/cdn/vm-reference-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/vm-reference-architectures.vsdx
 [vm-disk-limits]: /azure/azure-subscription-service-limits#virtual-machine-disk-limits
 [vm-scaleset]: /azure/virtual-machine-scale-sets/virtual-machine-scale-sets-overview
 [vm-sizes]: https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/

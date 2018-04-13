@@ -1,16 +1,16 @@
 ---
 title: Executar uma VM do Linux no Azure
-description: "Como executar uma VM Linux no Azure, prestando atenção na escalabilidade, na resiliência, na capacidade de gerenciamento e na segurança."
+description: Como executar uma VM Linux no Azure, prestando atenção na escalabilidade, na resiliência, na capacidade de gerenciamento e na segurança.
 author: telmosampaio
-ms.date: 12/12/2017
+ms.date: 04/03/2018
 pnp.series.title: Linux VM workloads
 pnp.series.next: multi-vm
 pnp.series.prev: ./index
-ms.openlocfilehash: 7caef46e53b42011b5a12ef53384c0352b9b9a72
-ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
+ms.openlocfilehash: 50e23b00dd898c0b8e6230730ecf27323ee50d14
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="run-a-linux-vm-on-azure"></a>Executar uma VM do Linux no Azure
 
@@ -22,31 +22,37 @@ Essa arquitetura de referência mostra um conjunto de práticas comprovadas para
 
 ## <a name="architecture"></a>Arquitetura
 
-O provisionamento de uma VM do Azure requer componentes adicionais, como recursos de armazenamento, rede e computação.
+O provisionamento de uma VM do Azure requer alguns componentes adicionais além da própria VM, incluindo recursos de rede, armazenamento e computação.
 
-* **Grupo de recursos.** Um [grupo de recursos][resource-manager-overview] é um contêiner que armazena os recursos relacionados. Em geral, você deve agrupar recursos em uma solução baseada no tempo de vida e quem gerenciará os recursos. Para uma carga de trabalho de VM única, você pode querer criar um grupo de recursos único para todos os recursos.
+* **Grupo de recursos.** Um [grupo de recursos][resource-manager-overview] é um contêiner lógico que armazena os recursos relacionados ao Azure. Em geral, recursos de grupo baseados em seu tempo de vida e que vão gerenciá-los. 
+
 * **VM**. Você pode provisionar uma VM a partir de uma lista de imagens publicadas, de um arquivo gerenciado personalizado ou um arquivo de VHD (disco rígido virtual) carregado no armazenamento Blobs do Azure. O Azure dá suporte à execução de várias distribuições Linux populares, incluindo CentOS, Debian, Red Hat Enterprise, Ubuntu e FreeBSD. Para obter mais informações, veja [Azure e Linux][azure-linux].
-* **Disco do sistema operacional.** O disco de OS é um VHD armazenado no [Armazenamento do Microsoft Azure ][azure-storage], de modo que ele persiste mesmo quando o computador host está desligado. Para VMs do Linux, o disco de SO é `/dev/sda1`.
-* **Disco temporário.** A VM é criada com um disco temporário. Esse disco é armazenado em uma unidade física no computador host. Ele **não** é salvo no Armazenamento do Microsoft Azure e pode ser excluído durante a reinicialização e outros eventos de ciclo de vida da VM. Use esse disco somente para dados temporários, como arquivos de paginação ou de permuta. Para VMs do Linux, o disco temporário é `/dev/sdb1` e é montado em `/mnt/resource` ou `/mnt`.
-* **Discos de dados.** Um [disco de dados][data-disk] é um VHD persistente usado para dados de aplicativo. Os discos de dados são armazenados no Armazenamento do Azure, como o disco do sistema operacional.
-* **Rede Virtual e sub-rede.** Cada VM do Azure é implantada em uma VNet que pode ser segmentada em várias sub-redes.
+
+* **Managed Disks**. Os [Azure Managed Disks][managed-disks] simplificam o gerenciamento de disco ao manipular o armazenamento para você. O disco de OS é um VHD armazenado no [Armazenamento do Microsoft Azure ][azure-storage], de modo que ele persiste mesmo quando o computador host está desligado. Para VMs do Linux, o disco de SO é `/dev/sda1`. Também é recomendável criar um ou mais [discos de dados][data-disk], que são VHDs persistentes usados para dados de aplicativo. 
+
+* **Disco temporário.** A VM é criada com um disco temporário. Esse disco é armazenado em uma unidade física no computador host. Ele *não* é salvo no Armazenamento do Microsoft Azure e pode ser excluído durante a reinicialização e outros eventos de ciclo de vida da VM. Use esse disco somente para dados temporários, como arquivos de paginação ou de permuta. Para VMs do Linux, o disco temporário é `/dev/sdb1` e é montado em `/mnt/resource` ou `/mnt`.
+
+* **Rede virtual (VNet).** Cada VM do Azure é implantada em uma VNet que pode ser segmentada em várias sub-redes.
+
+* **NIC (adaptador de rede)**. A NIC permite que a VM se comunique com a rede virtual.
+
 * **Endereço IP público.** Um endereço IP público é necessário para se comunicar com a VM &mdash;, por exemplo, via SSH.
+
 * **DNS do Azure**. [DNS do Azure][azure-dns] é um serviço de hospedagem para domínios DNS, que fornece resolução de nomes usando a infraestrutura do Microsoft Azure. Ao hospedar seus domínios no Azure, você pode gerenciar seus registros DNS usando as mesmas credenciais, APIs, ferramentas e cobrança que seus outros serviços do Azure.
-* **NIC (adaptador de rede)**. Uma NIC atribuída permite que a VM se comunique com a rede virtual.
-* **NSG (grupo de segurança de rede)**. [Grupos de segurança de rede][nsg] são utilizados para permitir ou recusar tráfego de rede a um recurso de rede. É possível associar um NSG a uma NIC individual ou a uma sub-rede. Se você associá-lo a uma sub-rede, as regras do NSG se aplicarão a todas as VMs na sub-rede.
+
+* **NSG (grupo de segurança de rede)**. Os [Grupos de segurança de rede][nsg] são utilizados para permitir ou recusar o tráfego de rede a VMs. Os NSGs podem ser associados com sub-redes ou com instâncias VM individuais.
+
 * **Diagnósticos.** O registro de diagnóstico é crucial para o gerenciamento e solução de problemas da VM.
 
 ## <a name="recommendations"></a>Recomendações
 
-Essa arquitetura mostra as recomendações de linha de base para executar uma VM do Linux no Azure. Contudo, não recomendamos usar uma única VM para cargas de trabalho críticas, pois elas criam um ponto único de falha. Para obter maior disponibilidade, é necessário implantar várias VMs em um [conjunto de disponibilidade][availability-set]. Para saber mais, confira [Executando várias VMs no Azure][multi-vm]. 
+Essa arquitetura mostra as recomendações de linha de base para executar uma VM do Linux no Azure. Contudo, não recomendamos usar uma única VM para cargas de trabalho críticas, pois elas criam um ponto único de falha. Para maior disponibilidade, implante duas ou mais VMs de balanceamento de carga. Para saber mais, confira [Executando várias VMs no Azure][multi-vm].
 
 ### <a name="vm-recommendations"></a>Recomendações de VM
 
-O Azure oferece vários tamanhos de máquinas virtuais diferentes. [Armazenamento Premium][premium-storage] é recomendado devido ao seu alto desempenho e baixa latência e [ fornece suporte para tamanhos específicos de VM][premium-storage-supported]. Selecione um desses tamanhos, a menos que você tenha uma carga de trabalho especializada, como a computação de alto desempenho. Para obter mais informações, consulte os [tamanhos de máquina virtual][virtual-machine-sizes].
+O Azure oferece vários tamanhos de máquinas virtuais diferentes. Para obter mais informações, confira [Tamanhos das máquinas virtuais no Azure][virtual-machine-sizes]. Se você estiver movendo uma carga de trabalho existente para o Azure, deverá começar com o tamanho da VM que mais se aproxima de seus servidores locais. Em seguida, meça o desempenho da carga de trabalho real com relação à CPU, memória e operações de entrada/saída de disco e ajuste o tamanho conforme necessário. Se você precisar de várias NICs para sua VM, esteja ciente de que um número máximo de NICs está definido para cada [tamanho de VM][vm-size-tables].
 
-Se você estiver movendo uma carga de trabalho existente para o Azure, deverá começar com o tamanho da VM que mais se aproxima de seus servidores locais. Em seguida, meça o desempenho da carga de trabalho real com relação à CPU, memória e operações de entrada/saída de disco e ajuste o tamanho conforme necessário. Se você precisar de várias NICs para sua VM, esteja ciente de que um número máximo de NICs está definido para cada [tamanho de VM][vm-size-tables].
-
-Ao fornecer recursos do Azure, será necessário especificar uma região. Em geral, escolha uma região mais próxima de seus usuários internos ou de seus clientes. No entanto, nem todos os tamanhos de VM estão disponíveis em todas as regiões. Para obter mais informações, consulte [Serviços por região][services-by-region]. Para obter uma lista dos tamanhos de VM disponíveis em uma região específica, execute o seguinte comando a partir da interface de linha de comando do Azure (CLI):
+Em geral, escolha a região do Azure que esteja mais próxima de seus usuários internos ou clientes. No entanto, nem todos os tamanhos de VM estão disponíveis em todas as regiões. Para obter mais informações, consulte [Serviços por região][services-by-region]. Para obter uma lista dos tamanhos de VM disponíveis em uma região específica, execute o seguinte comando a partir da interface de linha de comando do Azure (CLI):
 
 ```
 az vm list-sizes --location <location>
@@ -60,13 +66,9 @@ Habilite o monitoramento e diagnóstico, incluindo métricas de integridade bás
 
 Para um melhor desempenho de E/S de disco, recomendamos o [Armazenamento Premium][premium-storage], que armazena dados em SSDs (unidades de estado sólido). O custo é baseado na capacidade do disco provisionado. O IOPS e a taxa de transferência (ou seja, a taxa de transferência de dados) também dependem do tamanho do disco. Portanto, ao provisionar um disco, considere todos os três fatores (capacidade, IOPS e taxa de transferência). 
 
-Também é recomendável usar [discos gerenciado](/azure/storage/storage-managed-disks-overview). Os discos gerenciados não exigem uma conta de armazenamento. Você simplesmente especifica o tamanho e o tipo de disco e é implantado como um recurso altamente disponível.
+Também é recomendável usar [Managed Disks][managed-disks]. Os discos gerenciados não exigem uma conta de armazenamento. Você simplesmente especifica o tamanho e o tipo de disco e é implantado como um recurso altamente disponível.
 
-Se você estiver utilizando discos não gerenciados, crie contas de armazenamento do Azure separadas para cada VM para manter VHDs (discos rígidos virtuais), para evitar atingir os [ limites de IOPS][vm-disk-limits] para contas de armazenamento.
-
-Adicione um ou mais discos de dados. Quando você cria um VHD, ele não está formatado. Faça logon na VM para formatar o disco. Se você não estiver usando discos gerenciados e tiver uma grande quantidade de discos de dados, esteja ciente dos limites totais de E/S da conta de armazenamento. Para saber mais, confira [limites de disco da máquina virtual][vm-disk-limits].
-
-No shell do Linux, os discos de dados são exibidos como `/dev/sdc`, `/dev/sdd` e assim por diante. Você pode executar `lsblk` para listar os dispositivos de bloco, incluindo os discos. Para usar um disco de dados, crie uma partição e o sistema de arquivos e monte o disco. Por exemplo: 
+Adicione um ou mais discos de dados. Quando você cria um VHD, ele não está formatado. Faça logon na VM para formatar o disco. No shell do Linux, os discos de dados são exibidos como `/dev/sdc`, `/dev/sdd` e assim por diante. Você pode executar `lsblk` para listar os dispositivos de bloco, incluindo os discos. Para usar um disco de dados, crie uma partição e o sistema de arquivos e monte o disco. Por exemplo: 
 
 ```bat
 # Create a partition.
@@ -84,7 +86,11 @@ Quando você adiciona um disco de dados, uma ID de LUN (número de unidade lógi
 
 Convém alterar o agendador de E/S para otimizar o desempenho em SSDs, pois os discos para VMs com contas de armazenamento premium são SSDs. Uma recomendação comum é usar o agendador NOOP para SSDs, mas é necessário usar uma ferramenta como [iostat] para monitorar o desempenho de E/S de disco para sua carga de trabalho.
 
-Para maximizar o desempenho, crie uma conta de armazenamento separada para manter logs de diagnóstico. Uma conta LRS (armazenamento com redundância local) padrão é suficiente para os logs de diagnóstico.
+Crie uma conta de armazenamento para manter os logs de diagnóstico. Uma conta LRS (armazenamento com redundância local) padrão é suficiente para os logs de diagnóstico.
+
+> [!NOTE]
+> Se você não estiver usando Managed Disks, crie contas de armazenamento do Azure separadas para que cada VM contenha os VHDs (discos rígidos virtuais), evitando, assim, atingir os [limites (de IOPS)][vm-disk-limits] para contas de armazenamento. Esteja ciente dos limites de E/S totais da conta de armazenamento. Para saber mais, confira [limites de disco da máquina virtual][vm-disk-limits].
+
 
 ### <a name="network-recommendations"></a>Recomendações de rede
 
@@ -99,15 +105,13 @@ Para habilitar o SSH, adicione uma regra NSG que permita o tráfego de entrada p
 
 ## <a name="scalability-considerations"></a>Considerações sobre escalabilidade
 
-Você pode escalar uma VM vertical ou horizontalmente [alterando o tamanho da VM][vm-resize]. Para aumentar horizontalmente, coloque duas ou mais VMs atrás de um balanceador de carga. Para obter mais informações, consulte [Várias VMs em execução no Azure para escalabilidade e disponibilidade][multi-vm].
+Você pode escalar uma VM vertical ou horizontalmente [alterando o tamanho da VM][vm-resize]. Para aumentar horizontalmente, coloque duas ou mais VMs atrás de um balanceador de carga. Para obter mais informações, consulte [Executar VMs com balanceamento de carga para escalabilidade e disponibilidade][multi-vm].
 
 ## <a name="availability-considerations"></a>Considerações sobre disponibilidade
 
 Para obter maior disponibilidade, implante várias VMs em um conjunto de disponibilidade. Isso também fornece [SLA (Contrato de Nível de Serviço)][vm-sla] mais elevado.
 
 Sua VM pode ser afetada por uma [manutenção planejada][planned-maintenance] ou [manutenção não planejada][manage-vm-availability]. Você pode usar os[ logs de reinicialização da VM][reboot-logs] para determinar se uma reinicialização da VM foi causada por manutenção planejada.
-
-Os VHDs são armazenados no [	Armazenamento do Microsoft Azure][azure-storage]. O Armazenamento do Microsoft Azure é replicado para durabilidade e disponibilidade.
 
 Para se proteger contra perda acidental de dados durante operações normais (por exemplo, devido ao erro do usuário), você também deve implementar backups pontuais usando [instantâneos de blob][blob-snapshot] ou outra ferramenta.
 
@@ -117,13 +121,9 @@ Para se proteger contra perda acidental de dados durante operações normais (po
 
 **SSH**. Antes de criar uma VM do Linux, gere um par de chaves pública-privada do RSA de 2048 bits. Use o arquivo de chave pública ao criar a VM. Para saber mais, veja [Como usar SSH com Linux e Mac no Azure][ssh-linux].
 
-**Interrompendo uma VM.** O Azure faz uma distinção entre os estados "parado" e "desalocado". Você será cobrado quando o status da VM for interrompido, mas não quando a VM for desalocada.
+**Interrompendo uma VM.** O Azure faz uma distinção entre os estados "parado" e "desalocado". Você será cobrado quando o status da VM for interrompido, mas não quando a VM for desalocada. No Portal do Azure, o botão **Parar** desaloca a VM. No entanto, se você desligar por meio do sistema operacional enquanto estiver conectado, a VM será interrompida, mas **não** desalocada e, portanto, você ainda será cobrado.
 
-No Portal do Azure, o botão **Parar** desaloca a VM. No entanto, se você desligar por meio do sistema operacional enquanto estiver conectado, a VM será interrompida, mas **não** desalocada e, portanto, você ainda será cobrado.
-
-**Excluindo uma VM.** Se você excluir uma VM, os VHDs não serão excluídos. Isso significa que você poderá excluir com segurança a VM sem perda de dados. No entanto, você ainda será cobrado pelo armazenamento. Para excluir o VHD, exclua o arquivo do [Armazenamento de blobs][blob-storage].
-
-Para evitar a exclusão acidental, use um [bloqueio de recurso][resource-lock] para bloquear o grupo de recursos inteiro ou bloquear recursos individuais, como uma VM.
+**Excluindo uma VM.** Se você excluir uma VM, os VHDs não serão excluídos. Isso significa que você poderá excluir com segurança a VM sem perda de dados. No entanto, você ainda será cobrado pelo armazenamento. Para excluir o VHD, exclua o arquivo do [Armazenamento de blobs][blob-storage]. Para evitar a exclusão acidental, use um [bloqueio de recurso][resource-lock] para bloquear o grupo de recursos inteiro ou bloquear recursos individuais, como uma VM.
 
 ## <a name="security-considerations"></a>Considerações de segurança
 
@@ -151,42 +151,50 @@ Uma implantação para essa arquitetura está disponível no [GitHub][github-fol
   * Uma VM que executa a versão mais recente do Ubuntu 16.04.3 LTS.
   * Uma extensão de script personalizado de exemplo que formata os dois discos de dados e implanta o Servidor HTTP do Apache para a VM do Ubuntu.
 
-### <a name="prerequisites"></a>Pré-requisitos
+### <a name="prerequisites"></a>pré-requisitos
 
-Antes de implantar a arquitetura de referência para sua própria assinatura, você deve executar as etapas a seguir.
-
-1. Clone, crie fork ou baixe o arquivo zip para as [arquiteturas de referência AzureCAT][ref-arch-repo] no repositório GitHub.
+1. Clone, crie um fork ou baixe o arquivo zip das [arquiteturas de referência][ref-arch-repo] no repositório GitHub.
 
 2. Verifique se a CLI do Azure 2.0 está instalada no computador. Para obter instruções de instalação da CLI, consulte [Instalar a CLI 2.0 do Azure][azure-cli-2].
 
 3. Instale os pacote npm dos [Blocos de construção do Azure][azbb].
 
-4. Em um prompt de comando, bash prompt ou prompt do PowerShell, faça logon na sua conta do Azure usando um dos comandos abaixo e siga os prompts.
+4. Em um prompt de comando, prompt de bash ou o prompt do PowerShell, digite o seguinte comando para fazer logon em sua conta do Azure.
 
-  ```bash
-  az login
-  ```
+   ```bash
+   az login
+   ```
+
+5. Crie um par de chaves SSH. Para obter mais informações, consulte [Como criar e usar um par de chaves SSH pública e privada para VMs Linux no Azure](/azure/virtual-machines/linux/mac-create-ssh-keys).
 
 ### <a name="deploy-the-solution-using-azbb"></a>Implantar a solução usando azbb
 
-Para implantar a carga de trabalho de VM única de exemplo, siga estas etapas:
+Para implantar essa arquitetura de referência, siga estas etapas:
 
-1. Navegue até a pasta `virtual-machines\single-vm\parameters\linux` do repositório que você fez o download na etapa de pré-requisitos acima.
+1. Navegue até a pasta `virtual-machines/single-vm/parameters/linux` do repositório que você fez o download na etapa de pré-requisitos acima.
 
-2. Abra o arquivo `single-vm-v2.json` e insira um nome de usuário e a chave SSH pública entre aspas, conforme mostrado abaixo e salve o arquivo.
+2. Abra o arquivo `single-vm-v2.json` e insira um nome de usuário e a chave SSH pública entre aspas, depois salve o arquivo.
 
-  ```bash
-  "adminUsername": "",
-  "sshPublicKey": "",
-  ```
+   ```bash
+   "adminUsername": "<your username>",
+   "sshPublicKey": "ssh-rsa AAAAB3NzaC1...",
+   ```
 
 3. Execute `azbb` para implantar a VM de exemplo conforme mostrado abaixo.
 
-  ```bash
-  azbb -s <subscription_id> -g <resource_group_name> -l <location> -p single-vm-v2.json --deploy
-  ```
+   ```bash
+   azbb -s <subscription_id> -g <resource_group_name> -l <location> -p single-vm-v2.json --deploy
+   ```
 
-Para obter mais informações sobre como implantar essa arquitetura de referência de exemplo, visite nosso [Repositório GitHub][git].
+Para verificar a implantação, execute o seguinte comando da CLI do Azure para localizar o endereço IP público da VM:
+
+```bash
+az vm show -n ra-single-linux-vm1 -g <resource-group-name> -d -o table
+```
+
+Se você navegar até esse endereço em um navegador da Web, deve ver a página inicial padrão do Apache2.
+
+Para obter informações sobre como personalizar essa implantação, visite nosso [repositório GitHub][git].
 
 ## <a name="next-steps"></a>Próximas etapas
 
@@ -214,6 +222,7 @@ Para obter mais informações sobre como implantar essa arquitetura de referênc
 [github-folder]: https://github.com/mspnp/reference-architectures/tree/master/virtual-machines/single-vm
 [iostat]: https://en.wikipedia.org/wiki/Iostat
 [manage-vm-availability]: /azure/virtual-machines/virtual-machines-linux-manage-availability
+[managed-disks]: /azure/storage/storage-managed-disks-overview
 [multi-vm]: multi-vm.md
 [naming-conventions]: /azure/architecture/best-practices/naming-conventions.md
 [nsg]: /azure/virtual-network/virtual-networks-nsg
@@ -236,7 +245,7 @@ Para obter mais informações sobre como implantar essa arquitetura de referênc
 [ssh-linux]: /azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys
 [static-ip]: /azure/virtual-network/virtual-networks-reserved-public-ip
 [virtual-machine-sizes]: /azure/virtual-machines/virtual-machines-linux-sizes
-[visio-download]: https://archcenter.azureedge.net/cdn/vm-reference-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/vm-reference-architectures.vsdx
 [vm-disk-limits]: /azure/azure-subscription-service-limits#virtual-machine-disk-limits
 [vm-resize]: /azure/virtual-machines/virtual-machines-linux-change-vm-size
 [vm-size-tables]: /azure/virtual-machines/virtual-machines-linux-sizes

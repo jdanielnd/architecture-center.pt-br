@@ -1,13 +1,13 @@
 ---
-title: "Padrão de back-ends para front-ends"
-description: "Crie serviços de back-end separados a serem consumidos por aplicativos de front-end específico ou interfaces."
+title: Padrão de back-ends para front-ends
+description: Crie serviços de back-end separados a serem consumidos por aplicativos de front-end específico ou interfaces.
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: 87acd39d021c5e44594a2e7c9574e4dd363ce83b
-ms.sourcegitcommit: c93f1b210b3deff17cc969fb66133bc6399cfd10
+ms.openlocfilehash: 2991d7a3e05b3ce6cd5148a552bae6d4ba8f7c4c
+ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/05/2018
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="backends-for-frontends-pattern"></a>Padrão de back-ends para front-ends
 
@@ -17,7 +17,7 @@ Crie serviços de back-end separados a serem consumidos por aplicativos de front
 
 Inicialmente, um aplicativo pode ser direcionado a uma interface do usuário da Web da área de trabalho. Normalmente, um serviço de back-end é desenvolvido paralelamente, o que fornece os recursos necessários para essa interface do usuário. À medida que a base de usuários do aplicativo aumenta, é desenvolvido um aplicativo móvel que deve interagir com o mesmo back-end. O serviço de back-end se torna um back-end para fins gerais, atendendo aos requisitos de ambas as interfaces móvel e de área de trabalho.
 
-Mas os recursos de um dispositivo móvel são muito diferentes de um navegador de área de trabalho em relação ao tamanho da tela, desempenho e limitações da tela. Como resultado, os requisitos para um back-end aplicativo móvel diferem da interface do usuário da Web da área de trabalho. 
+Mas os recursos de um dispositivo móvel são muito diferentes de um navegador de área de trabalho quanto ao tamanho da tela, ao desempenho e às limitações de exibição. Como resultado, os requisitos para um back-end aplicativo móvel diferem da interface do usuário da Web da área de trabalho. 
 
 Essas diferenças resultam em requisitos concorrentes do back-end. O back-end requer alterações regulares e significativas para atender à interface do usuário da área de trabalho da Web de e ao aplicativo móvel. Muitas vezes, equipes de interface separadas trabalham em cada front-end, fazendo com que o back-end vire um gargalo no processo de desenvolvimento. Requisitos conflitantes de atualização e a necessidade de manter o serviço funcionando para ambos os front-ends podem fazer com que se ponha muito esforço em um único recurso implantável.
 

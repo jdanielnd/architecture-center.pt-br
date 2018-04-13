@@ -6,11 +6,11 @@ ms.date: 11/22/2017
 pnp.series.title: Linux VM workloads
 pnp.series.next: multi-region-application
 pnp.series.prev: multi-vm
-ms.openlocfilehash: e875a58aa83339560fd1de5b03a960f071883927
-ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
+ms.openlocfilehash: 8d3e6e5124a0abb27a3c72e1ecbd52a1a1da2a33
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="run-linux-vms-for-an-n-tier-application"></a>Executar VMs do Linux para um aplicativo de N camadas
 
@@ -30,7 +30,7 @@ Há muitas maneiras de implementar uma arquitetura de N camadas. O diagrama most
 * **DNS do Azure**. [DNS do Azure][azure-dns] é um serviço de hospedagem para domínios DNS, que fornece resolução de nomes usando a infraestrutura do Microsoft Azure. Ao hospedar seus domínios no Azure, você pode gerenciar seus registros DNS usando as mesmas credenciais, APIs, ferramentas e cobrança que seus outros serviços do Azure.
 * **Jumpbox.** Também chamada de um [host bastião]. Uma VM protegida na rede que os administradores usam para se conectar às outras VMs. O jumpbox tem um NSG que permite o tráfego remoto apenas de endereços IP públicos em uma lista segura. O NSG deve permitir o tráfego SSH (secure shell).
 * **Monitoramento.** Softwares de monitoramento, como [Nagios], [Zabbix] ou [Icinga] podem fornecer informações sobre o tempo de resposta, tempo de atividade da VM e a integridade geral do sistema. Instale o software de monitoramento em uma VM que se encontra em uma sub-rede separada de gerenciamento.
-* **NSGs.** Use os NSGs [grupos de segurança de rede][nsg] para restringir o tráfego de rede na VNet. Por exemplo, na arquitetura de três camadas mostrada aqui, a camada de banco de dados não aceita o tráfego de front-end da Web, somente da camada comercial e da sub-rede de gerenciamento.
+* <strong>NSGs.</strong> Use os NSGs [grupos de segurança de rede][nsg] para restringir o tráfego de rede na VNet. Por exemplo, na arquitetura de três camadas mostrada aqui, a camada de banco de dados não aceita o tráfego de front-end da Web, somente da camada comercial e da sub-rede de gerenciamento.
 * **Banco de dados Apache Cassandra**. Fornece alta disponibilidade na camada de dados, habilitando replicação e failover.
 
 ## <a name="recommendations"></a>Recomendações
@@ -116,25 +116,25 @@ Simplifique o gerenciamento de todo o sistema usando ferramentas de administraç
 
 Uma implantação para essa arquitetura de referência está disponível no [GitHub][github-folder]. 
 
-### <a name="prerequisites"></a>Pré-requisitos
+### <a name="prerequisites"></a>pré-requisitos
 
 Antes de implantar a arquitetura de referência para sua própria assinatura, você deve executar as etapas a seguir.
 
-1. Clone, crie fork ou baixe o arquivo zip para as [arquiteturas de referência AzureCAT][ref-arch-repo] no repositório GitHub.
+1. Clone, crie um fork ou baixe o arquivo zip das [arquiteturas de referência][ref-arch-repo] no repositório GitHub.
 
 2. Verifique se a CLI do Azure 2.0 está instalada no computador. Para instalar a CLI, siga as instruções em [Instalar a CLI do Azure 2.0][azure-cli-2].
 
 3. Instale os pacote npm dos [Blocos de construção do Azure][azbb].
 
-  ```bash
-  npm install -g @mspnp/azure-building-blocks
-  ```
+   ```bash
+   npm install -g @mspnp/azure-building-blocks
+   ```
 
 4. Em um prompt de comando, bash prompt ou prompt do PowerShell, faça logon na sua conta do Azure usando um dos comandos abaixo e siga os prompts.
 
-  ```bash
-  az login
-  ```
+   ```bash
+   az login
+   ```
 
 ### <a name="deploy-the-solution-using-azbb"></a>Implantar a solução usando azbb
 
@@ -146,9 +146,9 @@ Para implantar as VMs do Linux para uma arquitetura de referência de aplicativo
 
 3. Implante a arquitetura de referência usando a ferramenta de linha de comando **azbb** conforme mostrado abaixo.
 
-  ```bash
-  azbb -s <your subscription_id> -g <your resource_group_name> -l <azure region> -p n-tier-linux.json --deploy
-  ```
+   ```bash
+   azbb -s <your subscription_id> -g <your resource_group_name> -l <azure region> -p n-tier-linux.json --deploy
+   ```
 
 Para obter mais informações sobre a implantação dessa arquitetura de referência de exemplo utilizando blocos de construção Blocos de Construção do Azure, visite o repositório [GitHub][git].
 
@@ -183,7 +183,7 @@ Para obter mais informações sobre a implantação dessa arquitetura de referê
 [ref-arch-repo]: https://github.com/mspnp/reference-architectures
 [vm-sla]: https://azure.microsoft.com/support/legal/sla/virtual-machines
 [vnet faq]: /azure/virtual-network/virtual-networks-faq
-[visio-download]: https://archcenter.azureedge.net/cdn/vm-reference-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/vm-reference-architectures.vsdx
 [Nagios]: https://www.nagios.org/
 [Zabbix]: http://www.zabbix.com/
 [Icinga]: http://www.icinga.org/

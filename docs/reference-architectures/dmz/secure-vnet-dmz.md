@@ -1,17 +1,17 @@
 ---
-title: "Implementação de uma DMZ entre o Azure e a Internet"
-description: "Como implementar uma arquitetura de rede híbrida segura com acesso à Internet no Azure."
+title: Implementação de uma DMZ entre o Azure e a Internet
+description: Como implementar uma arquitetura de rede híbrida segura com acesso à Internet no Azure.
 author: telmosampaio
 ms.date: 11/23/2016
 pnp.series.title: Network DMZ
 pnp.series.next: nva-ha
 pnp.series.prev: secure-vnet-hybrid
 cardTitle: DMZ between Azure and the Internet
-ms.openlocfilehash: 372d5bb0fc0e3c272843e062210dec5c15b2b78a
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: c88545b1fcae49b413e7e2b6ac5bd92d3fd3456d
+ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="dmz-between-azure-and-the-internet"></a>DMZ entre o Azure e a Internet
 
@@ -19,7 +19,7 @@ Essa arquitetura de referência mostra uma rede híbrido segura que estende a um
 
 [![0]][0] 
 
-*Baixe um [arquivo Visio][visio-download] dessa arquitetura.*
+*Baixe um [Arquivo Visio][visio-download] dessa arquitetura.*
 
 Essa arquitetura de referência estende a arquitetura descrita em [Implementação de uma DMZ entre o Azure e seu datacenter local][implementing-a-secure-hybrid-network-architecture]. Ela adiciona uma DMZ que manipula o tráfego da Internet, além da DMZ privada que manipula o tráfego da rede local 
 
@@ -30,7 +30,7 @@ Alguns usos típicos para essa arquitetura:
 
 ## <a name="architecture"></a>Arquitetura
 
-Essa arquitetura consiste nos seguintes componentes.
+A arquitetura consiste nos componentes a seguir.
 
 * **Endereço IP público (PIP)**. O endereço IP do ponto de extremidade público. Usuários externos conectados à Internet podem acessar o sistema por meio desse endereço.
 * **NVA (Solução de Virtualização de Rede)**. Essa arquitetura inclui um pool separado de NVAs para tráfego originado na Internet.
@@ -64,7 +64,7 @@ O balanceador de carga para a Internet requer que cada NVA na sub-rede de entrad
 
 ## <a name="manageability-considerations"></a>Considerações sobre capacidade de gerenciamento
 
-Todo monitoramento e gerenciamento para NVAs na DMZ pública devem ser realizados pelo jumpbox na sub-rede de gerenciamento. Conforme discutido em [Implementação de uma DMZ entre o Azure e seu datacenter local][implementing-a-secure-hybrid-network-architecture], defina uma única rota de rede da rede local por meio do gateway para o jumpbox, a fim de restringir o acesso.
+Todos os monitoramentos e gerenciamentos para NVAs na rede de perímetro pública devem ser realizados pelo jumpbox na sub-rede de gerenciamento. Conforme discutido em [Implementação de uma DMZ entre o Azure e seu datacenter local][implementing-a-secure-hybrid-network-architecture], defina uma única rota de rede da rede local por meio do gateway para o jumpbox, a fim de restringir o acesso.
 
 Se a conectividade de gateway da rede local para o Azure estiver inativa, você ainda poderá acessar o jumpbox implantando um endereço IP público, adicionando-o ao jumpbox e fazendo logon da Internet.
 
@@ -107,7 +107,7 @@ Uma implantação para uma arquitetura de referência que implementa essas recom
    * Analise os termos e condições e clique na caixa de seleção **Concordo com os termos e condições declarados acima**.
    * Clique no botão **Comprar**.
 9. Aguarde até que a implantação seja concluída.
-10. Os arquivos de parâmetro incluem um nome de usuário e senha de administrador embutido em código para todas as VMs e é altamente recomendável alterar ambos imediatamente. Clique em cada VM na implantação, selecione-a no Portal do Azure e, em seguida, clique em **Redefinir senha** na folha **Suporte + solução de problemas**. Selecione **Redefinir senha** na caixa suspensa **Modo** e escolha um novo **Nome de usuário** e **Senha**. Clique no botão **Atualizar** para salvar.
+10. Os arquivos de parâmetro incluem um nome e uma senha de usuário administrador embutidos em código para todas as VMs e é altamente recomendável alterá-los imediatamente. Clique em cada VM na implantação, selecione-a no Portal do Azure e, em seguida, clique em **Redefinir senha** na folha **Suporte + solução de problemas**. Selecione **Redefinir senha** na caixa suspensa **Modo** e escolha um novo **Nome de usuário** e **Senha**. Clique no botão **Atualizar** para salvar.
 
 
 [availability-set]: /azure/virtual-machines/virtual-machines-windows-manage-availability
@@ -119,7 +119,7 @@ Uma implantação para uma arquitetura de referência que implementa essas recom
 [load-balancer]: /azure/load-balancer/load-balancer-Internet-overview
 [network-security-group]: /azure/virtual-network/virtual-networks-nsg
 
-[visio-download]: https://archcenter.azureedge.net/cdn/dmz-reference-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/dmz-reference-architectures.vsdx
 
 
 [0]: ./images/dmz-public.png "Arquitetura de rede híbrida protegida"

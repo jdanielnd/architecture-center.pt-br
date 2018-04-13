@@ -1,16 +1,16 @@
 ---
 title: Executar VMs do Windows para uma arquitetura de N camadas
-description: "Como implementar uma arquitetura multicamadas no Azure, atentando-se em especial para a disponibilidade, segurança, escalabilidade e capacidade de gerenciamento da segurança."
+description: Como implementar uma arquitetura multicamadas no Azure, atentando-se em especial para a disponibilidade, segurança, escalabilidade e capacidade de gerenciamento da segurança.
 author: MikeWasson
 ms.date: 11/22/2016
 pnp.series.title: Windows VM workloads
 pnp.series.next: multi-region-application
 pnp.series.prev: multi-vm
-ms.openlocfilehash: 0654239a5bbd966a2aa776415b7f15ae723ffd63
-ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
+ms.openlocfilehash: 5ed94eb9ab8203d35d9597336e367d54e03944d7
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="run-windows-vms-for-an-n-tier-application"></a>Executar VMs do Windows para um aplicativo de N camadas
 
@@ -29,7 +29,7 @@ Há muitas maneiras de implementar uma arquitetura de N camadas. O diagrama most
 * **Balanceadores de carga.** Use um [Balanceador de carga para a Internet][load-balancer-external] para distribuir o tráfego de entrada da Internet para a camada da Web e um [balanceador de carga interno][load-balancer-internal] para distribuir o tráfego de rede da camada da Web para a camada comercial.
 * **Jumpbox.** Também chamada de um [host bastião]. Uma VM protegida na rede que os administradores usam para se conectar às outras VMs. O jumpbox tem um NSG que permite o tráfego remoto apenas de endereços IP públicos em uma lista segura. O NSG deve permitir o tráfego de RDP (área de trabalho remota).
 * **Monitoramento.** Softwares de monitoramento, como [Nagios], [Zabbix] ou [Icinga] podem fornecer informações sobre o tempo de resposta, tempo de atividade da VM e a integridade geral do sistema. Instale o software de monitoramento em uma VM que se encontra em uma sub-rede separada de gerenciamento.
-* **NSGs.** Use os NSGs [grupos de segurança de rede][nsg] para restringir o tráfego de rede na VNet. Por exemplo, na arquitetura de três camadas mostrada aqui, a camada de banco de dados não aceita o tráfego de front-end da Web, somente da camada comercial e da sub-rede de gerenciamento.
+* <strong>NSGs.</strong> Use os NSGs [grupos de segurança de rede][nsg] para restringir o tráfego de rede na VNet. Por exemplo, na arquitetura de três camadas mostrada aqui, a camada de banco de dados não aceita o tráfego de front-end da Web, somente da camada comercial e da sub-rede de gerenciamento.
 * **Grupo de Disponibilidade Always On do SQL Server.** Fornece alta disponibilidade na camada de dados, habilitando replicação e failover.
 * **Servidores AD DS (Active Directory Domain Services)**. Antes do Windows Server 2016, os Grupos de Disponibilidade Always On do SQL Server precisavam ser ingressados em um domínio. Isso ocorria porque os Grupos de Disponibilidade dependem da tecnologia do WSFC (Cluster de Failover do Windows Server). O Windows Server 2016 introduziu a capacidade de criar um Cluster de Failover sem o Active Directory e nesse caso os servidores do AD DS não são necessários para essa arquitetura. Para obter mais informações, consulte [Novidades no Clustering de Failover do Windows Server 2016][wsfc-whats-new].
 * **DNS do Azure**. [DNS do Azure][azure-dns] é um serviço de hospedagem para domínios DNS, que fornece resolução de nomes usando a infraestrutura do Microsoft Azure. Ao hospedar seus domínios no Azure, você pode gerenciar seus registros DNS usando as mesmas credenciais, APIs, ferramentas e cobrança que seus outros serviços do Azure.
@@ -82,10 +82,10 @@ Configure um grupo de disponibilidade Always On do SQL Server da seguinte maneir
 3. Crie um ouvinte do grupo de disponibilidade e mapeie o nome DNS do ouvinte para o endereço IP de um balanceador de carga interno. 
 4. Crie uma regra do balanceador de carga para a porta de escuta do SQL Server (porta TCP 1433 por padrão). A regra do balanceador de carga deve habilitar *IP flutuante*, também chamado de Retorno de Servidor Direto. Isso faz com que a VM responda diretamente para o cliente, o que permite uma conexão direta com a réplica primária.
   
-  > [!NOTE]
-  > Quando o IP flutuante está habilitado, o número da porta de front-end deve ser igual ao número da porta de back-end na regra do balanceador de carga.
-  > 
-  > 
+   > [!NOTE]
+   > Quando o IP flutuante está habilitado, o número da porta de front-end deve ser igual ao número da porta de back-end na regra do balanceador de carga.
+   > 
+   > 
 
 Quando um cliente SQL tenta se conectar, o balanceador de carga roteia a solicitação de conexão para a réplica primária. Se houver um failover para outra réplica, o balanceador de carga encaminhará automaticamente as solicitações subsequentes para uma nova réplica primária. Para obter mais informações, consulte [Configurar um ouvinte de ILB para Grupos de Disponibilidade Always On do SQL Server][sql-alwayson-ilb].
 
@@ -131,25 +131,25 @@ Simplifique o gerenciamento de todo o sistema usando ferramentas de administraç
 
 Uma implantação para essa arquitetura de referência está disponível no [GitHub][github-folder]. 
 
-### <a name="prerequisites"></a>Pré-requisitos
+### <a name="prerequisites"></a>pré-requisitos
 
 Antes de implantar a arquitetura de referência para sua própria assinatura, você deve executar as etapas a seguir.
 
-1. Clone, crie fork ou baixe o arquivo zip para as [arquiteturas de referência AzureCAT][ref-arch-repo] no repositório GitHub.
+1. Clone, crie um fork ou baixe o arquivo zip das [arquiteturas de referência][ref-arch-repo] no repositório GitHub.
 
 2. Verifique se a CLI do Azure 2.0 está instalada no computador. Para instalar a CLI, siga as instruções em [Instalar a CLI do Azure 2.0][azure-cli-2].
 
 3. Instale os pacote npm dos [Blocos de construção do Azure][azbb].
 
-  ```bash
-  npm install -g @mspnp/azure-building-blocks
-  ```
+   ```bash
+   npm install -g @mspnp/azure-building-blocks
+   ```
 
 4. Em um prompt de comando, bash prompt ou prompt do PowerShell, faça logon na sua conta do Azure usando um dos comandos abaixo e siga os prompts.
 
-  ```bash
-  az login
-  ```
+   ```bash
+   az login
+   ```
 
 ### <a name="deploy-the-solution-using-azbb"></a>Implantar a solução usando azbb
 
@@ -159,18 +159,18 @@ Para implantar as VMs do Windows para uma arquitetura de referência de aplicati
 
 2. O arquivo de parâmetro especifica um nome de usuário e senha de administrador padrão para cada VM na implantação. Você deverá alterá-los antes de implantar a arquitetura de referência. Abra o arquivo `n-tier-windows.json` e substitua cada campo **adminUsername** e **adminPassword** com suas novas configurações.
   
-  > [!NOTE]
-  > Há vários scripts que são executados durante essa implantação tanto nos objetos **VirtualMachineExtension** quanto nas configurações de **extensões** para alguns dos objetos **VirtualMachine**. Alguns desses scripts requerem o nome de usuário e a senha do administrador que você acabou de alterar. É recomendável revisar esses scripts para garantir que você especificou as credenciais corretas. A implantação poderá falhar se você não especificou as credenciais corretas.
-  > 
-  > 
+   > [!NOTE]
+   > Há vários scripts que são executados durante essa implantação tanto nos objetos **VirtualMachineExtension** quanto nas configurações de **extensões** para alguns dos objetos **VirtualMachine**. Alguns desses scripts requerem o nome de usuário e a senha do administrador que você acabou de alterar. É recomendável revisar esses scripts para garantir que você especificou as credenciais corretas. A implantação poderá falhar se você não especificou as credenciais corretas.
+   > 
+   > 
 
 Salve o arquivo.
 
 3. Implante a arquitetura de referência usando a ferramenta de linha de comando **azbb** conforme mostrado abaixo.
 
-  ```bash
-  azbb -s <your subscription_id> -g <your resource_group_name> -l <azure region> -p n-tier-windows.json --deploy
-  ```
+   ```bash
+   azbb -s <your subscription_id> -g <your resource_group_name> -l <azure region> -p n-tier-windows.json --deploy
+   ```
 
 Para obter mais informações sobre a implantação dessa arquitetura de referência de exemplo utilizando blocos de construção Blocos de Construção do Azure, visite o repositório [GitHub][git].
 
@@ -216,5 +216,5 @@ Para obter mais informações sobre a implantação dessa arquitetura de referê
 [Nagios]: https://www.nagios.org/
 [Zabbix]: http://www.zabbix.com/
 [Icinga]: http://www.icinga.org/
-[visio-download]: https://archcenter.azureedge.net/cdn/vm-reference-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/vm-reference-architectures.vsdx
 [0]: ./images/n-tier-diagram.png "Arquitetura de N camadas usando o Microsoft Azure"

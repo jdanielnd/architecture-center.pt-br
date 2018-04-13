@@ -1,14 +1,14 @@
 ---
 title: Diretrizes de design de API
-description: "Orientação sobre como criar uma API da Web bem projetada."
+description: Orientação sobre como criar uma API da Web bem projetada.
 author: dragon119
 ms.date: 01/12/2018
 pnp.series.title: Best Practices
-ms.openlocfilehash: f0813c18da03b9deeabbf529a560c60e8ce579d8
-ms.sourcegitcommit: c93f1b210b3deff17cc969fb66133bc6399cfd10
+ms.openlocfilehash: a8c4a81835ebd3ebdba2fd2cec624a9a9d5646f5
+ms.sourcegitcommit: ea7108f71dab09175ff69322874d1bcba800a37a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/05/2018
+ms.lasthandoff: 03/17/2018
 ---
 # <a name="api-design"></a>Design de API
 
@@ -42,7 +42,7 @@ Aqui estão alguns dos princípios de design mais importante de APIs RESTful usa
     {"orderId":1,"orderValue":99.90,"productId":1,"quantity":1}
     ```
 
-- As APIs REST usam uma interface uniforme, o que ajuda a separar as implementações de cliente e de serviço. Para APIs REST baseadas em HTTP, a interface uniforme inclui o uso de verbos HTTP padrão que executam operações em recursos. As operações mais comuns são GET, POST, PUT, PATCH e DELETE. 
+- As APIs REST usam uma interface uniforme, o que ajuda a separar as implementações de cliente e de serviço. Para APIs REST baseadas em HTTP, a interface uniforme inclui o uso de verbos HTTP padrão para executar operações em recursos. As operações mais comuns são GET, POST, PUT, PATCH e DELETE. 
 
 - As APIs REST usam um modelo de solicitação sem estado. Solicitações HTTP devem ser independentes e podem ocorrer em qualquer pedido, portanto, não é viável manter informações de estado transitório entre as solicitações. O único local onde as informações são armazenadas é nos próprios recursos, e cada solicitação deve ser uma operação atômica. Essa restrição permite que serviços Web sejam altamente dimensionáveis porque não é necessário manter nenhum tipo de afinidade entre clientes e servidores específicos. Todos os servidores podem tratar de solicitações de qualquer cliente. Dito isso, outros fatores podem limitar a escalabilidade. Por exemplo, muitos serviços Web gravam um armazenamento de dados de back-end, o que pode ser difícil de escalar horizontalmente. (O artigo [Partição de dados](./data-partitioning.md) descreve estratégias para escalar horizontalmente um armazenamento de dados.)
 
@@ -422,7 +422,7 @@ Aplicativos cliente existentes podem continuar funcionando corretamente se forem
 ### <a name="uri-versioning"></a>Controle de versão de URI
 Cada vez que você modifica a API da Web ou altera o esquema de recursos, você adiciona um número de versão ao URI para cada recurso. Os URIs previamente existentes devem continuar a funcionar como antes, recuperando recursos que estão em conformidade com seu esquema original.
 
-Estendendo o exemplo anterior, se o campo `address` é reestruturado em subcampos contendo cada parte constituinte do endereço (como `streetAddress`, `city`, `state` e `zipCode`), esta versão do recurso pode ser exposta por meio de um URI contendo um número de versão, como http://adventure-works.com/v2/customers/3:
+Estendendo o exemplo anterior, se o campo `address` for reestruturado em subcampos contendo cada parte constituinte do endereço (como `streetAddress`, `city`, `state` e `zipCode`), esta versão do recurso pode ser exposta por meio de um URI contendo um número de versão, como http://adventure-works.com/v2/customers/3:
 
 ```HTTP
 HTTP/1.1 200 OK
@@ -434,7 +434,7 @@ Content-Type: application/json; charset=utf-8
 Esse mecanismo de controle de versão é muito simples, mas depende do servidor realizar o roteamento da solicitação para o ponto de extremidade apropriado. No entanto, ele pode se tornar inviável conforme a API da Web amadurece ao passar por várias iterações e o servidor tem que oferecer suporte a um número de versões diferentes. Além disso, de um ponto de vista purista, em todos os casos os aplicativos cliente estão buscando os mesmos dados (cliente 3), portanto o URI não deve ser diferente, independentemente de qual for a versão. Esse esquema também complica a implementação de HATEOAS, já que todos os links precisarão incluir o número da versão em seus URIs.
 
 ### <a name="query-string-versioning"></a>Controle de versão de cadeia de consulta
-Em vez de fornecer vários URIs, você pode especificar a versão do recurso usando um parâmetro de cadeia de consulta acrescentada à solicitação HTTP, como *http://adventure-works.com/customers/3?version=2*. O parâmetro de versão, caso seja omitido por aplicativos cliente mais antigos, deve passar a usar um valor padrão significativo, como 1.
+Em vez de fornecer vários URIs, você pode especificar a versão do recurso usando um parâmetro dentro da cadeia de consulta acrescentada à solicitação HTTP, como *http://adventure-works.com/customers/3?version=2*. O parâmetro de versão, caso seja omitido por aplicativos cliente mais antigos, deve passar a usar um valor padrão significativo, como 1.
 
 Essa abordagem tem a vantagem de semântica que o mesmo recurso é sempre recuperado do mesmo URI, mas para isso, é necessário que o código que processa a solicitação analise a cadeia de consulta e envie de volta a resposta HTTP apropriada. Essa abordagem também tem as mesmas complicações para implementar HATEOAS como o mecanismo de controle de versão do URI.
 

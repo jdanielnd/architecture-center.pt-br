@@ -1,11 +1,11 @@
 ---
-title: "Ícones e outros ativos para diagramas de arquitetura"
-description: "Ícones, modelos do Visio, arquivos PNG e arquivos SVG úteis para a produção dos seus próprios diagramas de arquitetura"
-ms.openlocfilehash: 58a2046c0d463c1f331ea3f950f0c11c273ffc36
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+title: Ícones e outros ativos para diagramas de arquitetura
+description: Ícones, modelos do Visio, arquivos PNG e arquivos SVG úteis para a produção dos seus próprios diagramas de arquitetura
+ms.openlocfilehash: f65a09450ba1b7154e6d43bbc7bdb65212b21828
+ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/23/2018
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="icons-and-diagrams"></a>Ícones e diagramas
 
@@ -27,6 +27,10 @@ Símbolos adicionais para o Microsoft Office e tecnologias relacionadas estão d
 ## <a name="reference-architectures-visio-template"></a>Modelo do Visio de arquiteturas de referência 
 
 Uma versão dos diagramas usados em [Arquiteturas de referência](../reference-architectures/index.md) está disponível para [download no formato Visio](https://aka.ms/arch-diagrams).
+
+## <a name="solution-architecture-diagrams"></a>Diagramas da arquitetura da solução
+
+A Microsoft publica [arquiteturas da solução e diagramas de acompanhamento](https://azure.microsoft.com/solutions/architecture/). Os diagramas estão disponíveis para download no formato SVG. O SVG pode ser aberto e modificado por várias ferramentas, incluindo Visio e PowerPoint. Se você desagrupar o diagrama, pode selecionar os ícones individuais.   
 
 ## <a name="3d-blueprint-visio-template"></a>Modelo de planta 3D do Visio
 
