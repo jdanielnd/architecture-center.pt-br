@@ -1,4 +1,4 @@
-- name: As tabelas
+- name: Azure
   tocHref: /azure/
   topicHref: /azure
   items:
@@ -38,13 +38,9 @@
         - name: Guia de arquitetura de dados
           tocHref: /azure/architecture/data-guide
           topicHref: /azure/architecture/data-guide
+        - name: Projetar microsserviços
+          tocHref: /azure/architecture/microservices
+          topicHref: /azure/architecture/microservices
         - name: Antipadrões de Desempenho
           tocHref: /azure/architecture/antipatterns
           topicHref: /azure/architecture/
-        - name: Conformidade
-          tocHref: /azure/architecture/compliance
-          topicHref: /azure/architecture/compliance
-          items:
-            - name: PCI-DSS
-              tocHref: /azure/architecture/compliance/pci-dss
-              topicHref: /azure/architecture/compliance/pci-dss
