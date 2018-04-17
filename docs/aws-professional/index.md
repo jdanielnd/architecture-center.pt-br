@@ -5,11 +5,11 @@ keywords: Especialistas em AWS, comparação com o Azure, comparação com o AWS
 author: lbrader
 ms.date: 03/24/2017
 pnp.series.title: Azure for AWS Professionals
-ms.openlocfilehash: b8698675efa42bb3fae73cefe7b078942549b412
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+ms.openlocfilehash: 0af0890d383d22db0ed9d3b445cdd5b561b498ae
+ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/23/2018
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="azure-for-aws-professionals"></a>Azure para profissionais do AWS
 
@@ -118,7 +118,7 @@ A tabela a seguir resume cada opção.
 | Escopo da falha | Rack | Datacenter | Região |
 | Roteamento de solicitação | Balanceador de carga | Load Balancer entre zonas | Gerenciador de Tráfego |
 | Latência da rede | Muito baixa | Baixo | Média a alta |
-| Rede Virtual  | VNET | VNET | Emparelhamento VNET entre regiões (versão prévia) |
+| Rede Virtual  | VNET | VNET | Emparelhamento VNET entre regiões |
 
 ### <a name="availability-sets"></a>Conjuntos de disponibilidade 
 
@@ -130,7 +130,7 @@ Os conjuntos de disponibilidade devem ser organizados pela função da instânci
 
 ![Conjuntos de disponibilidade do Azure para cada função de aplicativo](./images/three-tier-example.png "Conjuntos de disponibilidade para cada função de aplicativo")
 
-### <a name="availability-zones-preview"></a>Zonas de disponibilidade (versão prévia)
+### <a name="availability-zones"></a>Zonas de disponibilidade
 
 Uma [Zona de Disponibilidade](/azure/availability-zones/az-overview) é uma zona fisicamente separada em uma região do Azure. Cada zona de disponibilidade tem uma rede, resfriamento e fonte de energia distintos. A implantação de VMs em zonas de disponibilidade ajuda a proteger um aplicativo contra falhas em todo o datacenter. 
 
