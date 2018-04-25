@@ -4,11 +4,11 @@ description: Convenções de nomenclatura para recursos do Azure. Como nomear m�
 author: telmosampaio
 ms.date: 05/18/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: f814201901af69b816d7f1588e58057b252b22db
-ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242
+ms.openlocfilehash: f3f010ceb3c810caafa53523de63aa787d392aa1
+ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/09/2018
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="naming-conventions"></a>Convenções de nomenclatura
 
@@ -102,7 +102,7 @@ Em geral, evite usar caracteres especiais (`-` ou `_`) como o primeiro ou últim
 |Nome da fila |Conta de armazenamento |3-63 |Letras minúsculas |Alfanumérico e hífen |`<service short name>-<context>-<num>` |`awesomeservice-messages-001` |
 |Nome da tabela | Conta de armazenamento |3-63 |Não diferencia maiúsculas de minúsculas |Alfanumérico |`<service short name><context>` |`awesomeservicelogs` |
 |Nome do arquivo | Conta de armazenamento |3-63 |Letras minúsculas | Alfanumérico |`<variable based on blob usage>` |`<variable based on blob usage>` |
-|Repositório Data Lake | Global |3-24 |Letras minúsculas | Alfanumérico |`<name>-dls` |`telemetry-dls` |
+|Repositório Data Lake | Global |3-24 |Letras minúsculas | Alfanumérico |`<name>dls` |`telemetrydls` |
 
 ### <a name="networking"></a>Rede
 
