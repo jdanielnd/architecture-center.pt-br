@@ -20,14 +20,17 @@
           href: architecture-styles/big-data.md
         - name: Computação intensa
           href: architecture-styles/big-compute.md
-    - name: Opções de tecnologia
-      href: technology-choices/index.md
+    - name: Escolhendo um serviço de computação
       items:
-        - name: Visão geral das opções de computação
+        - name: Visão geral
           href: technology-choices/compute-overview.md
+        - name: Árvore de decisão
+          href: technology-choices/compute-decision-tree.md
         - name: Comparação de computação
           href: technology-choices/compute-comparison.md
-        - name: Visão geral de armazenamento de dados
+    - name: Escolhendo um armazenamento de dados
+      items:
+        - name: Visão geral
           href: technology-choices/data-store-overview.md
         - name: Comparação de armazenamento de dados
           href: technology-choices/data-store-comparison.md

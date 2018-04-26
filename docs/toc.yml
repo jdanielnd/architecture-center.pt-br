@@ -10,9 +10,10 @@
   items:
     - name: Estilos de arquitetura
       href: guide/architecture-styles/index.md
-    - name: Opções de tecnologia
-      href: guide/technology-choices/index.md
-      items: null
+    - name: Escolhendo um serviço de computação
+      href: guide/technology-choices/compute-overview.md
+    - name: Escolhendo um armazenamento de dados
+      href: guide/technology-choices/data-store-overview.md
     - name: Princípios de design
       href: guide/design-principles/index.md
     - name: Pilares da qualidade de software

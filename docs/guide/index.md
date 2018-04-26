@@ -1,15 +1,17 @@
 ---
 layout: LandingPage
 ms.topic: landing-page
-ms.openlocfilehash: 530844a0d3b1256cec807e7bad509a40dca304f6
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: 80cb7fde0694257a5c413b702505e27f18aed8d3
+ms.sourcegitcommit: d702b4d27e96e7a5a248dc4f2f0e25cf6e82c134
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/06/2018
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="azure-application-architecture-guide"></a>Guia de Arquitetura do Aplicativo do Azure
 
 Este guia apresenta uma abordagem estruturada para a criação de aplicativos do Azure que são escalonáveis, flexíveis e altamente disponíveis. Ele se baseia nas práticas comprovadas que aprendemos nos contratos com clientes.
+
+<br/>
 
 <img src="./images/guide-steps.svg" style="max-width:800px;"/>
 
@@ -53,25 +55,49 @@ Este guia destina-se a arquitetos de aplicativos, desenvolvedores e equipes de o
 
 O Guia de Arquitetura do Aplicativo do Azure é organizado como uma série de etapas de arquitetura e design para implementação. Para cada etapa, há diretrizes de suporte que ajudarão você com o design de arquitetura de seu aplicativo.
 
-**[Estilos de arquitetura][arch-styles]**. O primeiro ponto de decisão é o mais importante. Que tipo de arquitetura está compilando? Pode ser uma arquitetura de microsserviços, um aplicativo de N camadas mais tradicional ou uma solução de big data. Nós identificamos sete estilos de arquitetura distintos. Há benefícios e desafios para cada um.
+### <a name="architecture-styles"></a>Estilos de arquitetura
 
-> &#10148; [Arquiteturas de Referência do Azure][ref-archs] mostra as implantações no Azure, junto com as considerações sobre escalabilidade, disponibilidade, capacidade de gerenciamento e segurança. A maioria inclui também modelos implantáveis do Resource Manager.
+O primeiro ponto de decisão é o mais importante. Que tipo de arquitetura está compilando? Pode ser uma arquitetura de microsserviços, um aplicativo de N camadas mais tradicional ou uma solução de big data. Identificamos vários estilos de arquitetura diferentes. Há benefícios e desafios para cada um.
 
-**[Opções de Tecnologia][technology-choices]**. Duas opções de tecnologia devem ser decididas logo no início, porque elas afetam toda a sua arquitetura. Essas são as opções de computação e de tecnologias armazenamento. O termo *computação* refere-se ao modelo de hospedagem para os recursos de computação em que seus aplicativos são executados. O armazenamento inclui bancos de dados, assim como o armazenamento de filas de mensagens, caches, dados da IoT, dados de log não estruturados e tudo mais que um aplicativo possa encaminhar para o armazenamento. 
+Saiba mais:
 
-> &#10148; [Opções de computação][compute-options] e [opções de armazenamento][storage-options] fornecem critérios de comparação detalhados para a seleção de serviços de computação e armazenamento.
+- [Estilos de arquitetura][arch-styles]
+- [Arquiteturas de referência do Azure][ref-archs]
 
-**[Princípios de design][design-principles]**. Durante o processo de design, mantenha esses dez princípios de design de alto nível. 
+### <a name="technology-choices"></a>Opções de tecnologia
 
-> &#10148; [Práticas recomendadas][best-practices] fornecem diretrizes específicas em áreas como o dimensionamento automático, cache, particionamento de dados, design de API e outras.   
+Duas opções de tecnologia devem ser decididas logo no início, porque elas afetam toda a sua arquitetura. São a escolha do serviço de computação e armazenamentos de dados. *Computação* se refere ao modelo de hospedagem dos recursos de computação em que seu aplicativo é executado. *Armazenamentos de dados* incluem bancos de dados, mas também o armazenamento das filas de mensagens, caches, logs e tudo que um aplicativo pode manter no armazenamento. 
 
-**[Pilares][pillars]**. Um aplicativo em nuvem bem-sucedido deverá focar nestes cinco pilares de qualidade do software: escalabilidade, disponibilidade, resiliência, gerenciamento e segurança. 
+Saiba mais:
 
-> &#10148; Use nossas [listas de verificação para a análise do design][checklists] para avaliar o design de acordo com esses pilares de qualidade. 
+- [Escolhendo um serviço de computação](./technology-choices/compute-overview.md)
+- [Escolhendo um armazenamento de dados](./technology-choices/data-store-overview.md)
 
-**[Padrões de Design na Nuvem][patterns]**. Esses padrões de design são úteis para a criação de aplicativos confiáveis, escalonáveis e seguros no Azure. Cada padrão descreve um problema, um padrão que resolva o problema e um exemplo baseado no Azure.
+### <a name="design-principles"></a>Princípios de design
 
-> &#10148; Exibir o [Catálogo completo de padrões de design na nuvem](../patterns/index.md).
+Identificamos dez princípios de design de alto nível que tornarão seu aplicativo mais escalonável, flexível e gerenciável. Esses princípios de design se aplicam a todos os estilos arquitetura. Durante o processo de design, mantenha esses dez princípios de design de alto nível. Em seguida, considere o conjunto de práticas recomendadas para aspectos específicos da arquitetura, como o dimensionamento automático, cache, particionamento de dados, design da API e outros.
+
+Saiba mais:
+
+- [Princípios de design para aplicativos do Azure][design-principles]
+- [Práticas recomendadas ao compilar para a nuvem][best-practices]
+
+### <a name="quality-pillars"></a>Pilares da qualidade
+
+Um aplicativo na nuvem bem-sucedido focará os cinco pilares de qualidade do software: escalabilidade, disponibilidade, flexibilidade, gerenciamento e segurança. Use nossas listas de verificação do design para avaliar a arquitetura de acordo com os pilares da qualidade.
+
+Saiba mais:
+
+- [Pilares de qualidade do software][pillars]
+- [Listas de verificação do design][checklists] 
+
+### <a name="cloud-design-patterns"></a>Padrões de design na nuvem
+
+Padrões de design são soluções gerais para os problemas comuns de design do software. Identificamos um conjunto de padrões de design especialmente úteis ao criar aplicativos distribuídos para a nuvem.
+
+Saiba mais:
+
+- [Catálogo de padrões de design na nuvem](../patterns/index.md)
 
 
 [arch-styles]: ./architecture-styles/index.md
