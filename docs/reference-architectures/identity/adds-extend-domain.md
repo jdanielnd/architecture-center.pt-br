@@ -1,23 +1,20 @@
 ---
-title: Extensão do AD DS (Active Directory Domain Services) para o Azure
-description: >-
-  Como implementar uma arquitetura de rede híbrida segura com autorização do Active Directory no Azure.
-
-  guidance,vpn-gateway,expressroute,load-balancer,virtual-network,active-directory
+title: Estender o AD DS (Active Directory Domain Services) para o Azure
+description: Estender o seu domínio do Active Directory local ao Azure
 author: telmosampaio
-ms.date: 11/28/2016
+ms.date: 04/13/2018
 pnp.series.title: Identity management
 pnp.series.prev: azure-ad
 pnp.series.next: adds-forest
-ms.openlocfilehash: 007d244f29bf11c6e2bd703c7f4f245d22c02f0f
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.openlocfilehash: bcd1e2b1b925a5d64665c5651c24589a77e39ec9
+ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/30/2018
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="extend-active-directory-domain-services-ad-ds-to-azure"></a>Estender o AD DS (Active Directory Domain Services) para o Azure
 
-Essa arquitetura de referência mostra como estender seu ambiente do Active Directory para o Azure para fornecer serviços de autenticação distribuídos usando o [AD DS (Active Directory Domain Services)][active-directory-domain-services].  [**Implante essa solução**.](#deploy-the-solution)
+Essa arquitetura de referência mostra como estender seu ambiente do Active Directory para o Azure a fim de fornecer serviços de autenticação distribuídos usando o AD DS (Active Directory Domain Services). [**Implante essa solução**.](#deploy-the-solution)
 
 [![0]][0] 
 
@@ -103,27 +100,113 @@ Use a criptografia do BitLocker ou do disco do Azure para criptografar o disco q
 
 ## <a name="deploy-the-solution"></a>Implantar a solução
 
-Há uma solução disponível no [GitHub][github] para implantar essa arquitetura de referência. Você precisará da versão mais recente da [CLI do Azure][azure-powershell] para executar o script do Powershell que implanta a solução. Para implantar a arquitetura de referência, siga estas etapas:
+Uma implantação para essa arquitetura está disponível no [GitHub][github]. Observe que toda a implantação pode levar até duas horas, o que inclui a criação do gateway de VPN e a execução dos scripts que configuram o AD DS.
 
-1. Baixe ou clone a pasta da solução do [GitHub][github] em seu computador local.
+### <a name="prerequisites"></a>pré-requisitos
 
-2. Abra a CLI do Azure e navegue até a pasta da solução local.
+1. Clone, crie um fork ou baixe o arquivo zip para o [arquiteturas de referência][ref-arch-repo] repositório GitHub.
 
-3. Execute o comando a seguir:
-    ```Powershell
-    .\Deploy-ReferenceArchitecture.ps1 <subscription id> <location> <mode>
+2. Instale a [CLI do Azure 2.0][azure-cli-2].
+
+3. Instale os pacote npm dos [Blocos de construção do Azure][azbb].
+
+4. Em um prompt de comando, prompt do bash ou prompt do PowerShell, faça logon na sua conta do Azure usando o comando abaixo.
+
+   ```bash
+   az login
+   ```
+
+### <a name="deploy-the-simulated-on-premises-datacenter"></a>Implantar o datacenter local simulado
+
+1. Navegue até a pasta `identity/adds-extend-domain` do repositório de arquiteturas de referência.
+
+2. Abra o arquivo `onprem.json` . Procure `adminPassword` e adicione valores para as senhas. Há três instâncias no arquivo.
+
+    ```bash
+    "adminUsername": "testuser",
+    "adminPassword": "<password>",
     ```
-    Substitua `<subscription id>` por sua ID da assinatura do Azure.
-    Para `<location>`, especifique uma região do Azure, como `eastus` ou `westus`.
-    O parâmetro `<mode>` controla a granularidade da implantação e pode ser um dos seguintes valores:
-    * `Onpremise`: implanta o ambiente local simulado.
-    * `Infrastructure`: implanta a infraestrutura e jump box da VNet no Azure.
-    * `CreateVpn`: implanta o gateway de rede virtual do Azure e conecta-o à rede local simulada.
-    * `AzureADDS`: implanta as VMs que atuam como servidores do AD DS, implante o Active Directory nessas VMs e implanta o domínio no Azure.
-    * `Workload`: implanta as DMZs pública e privada, e da camada de carga de trabalho.
-    * `All`: implanta todas as implantações anteriores. **Essa é a opção recomendada se você não tem uma rede local existente, mas deseja implantar a arquitetura de referência completa descrita acima para teste ou avaliação.**
 
-4. Aguarde até que a implantação seja concluída. Se você estiver realizando a implantação de `All`, isso levará várias horas.
+3. No mesmo arquivo, procure `protectedSettings` e adicione valores para as senhas. Há duas instâncias de `protectedSettings`, uma para cada servidor do AD.
+
+    ```bash
+    "protectedSettings": {
+      "configurationArguments": {
+        ...
+        "AdminCreds": {
+          "UserName": "testadminuser",
+          "Password": "<password>"
+        },
+        "SafeModeAdminCreds": {
+          "UserName": "testsafeadminuser",
+          "Password": "<password>"
+        }
+      }
+    }
+    ```
+
+4. Execute o seguinte comando e aguarde a conclusão da implantação:
+
+    ```bash
+    azbb -s <subscription_id> -g <resource group> -l <location> -p onprem.json --deploy
+    ```
+
+### <a name="deploy-the-azure-vnet"></a>Implantar a VNET do Azure
+
+1. Abra o arquivo `azure.json` .  Procure `adminPassword` e adicione valores para as senhas. Há três instâncias no arquivo.
+
+    ```bash
+    "adminUsername": "testuser",
+    "adminPassword": "<password>",
+    ```
+
+2. No mesmo arquivo, procure `protectedSettings` e adicione valores para as senhas. Há duas instâncias de `protectedSettings`, uma para cada servidor do AD.
+
+    ```bash
+    "protectedSettings": {
+      "configurationArguments": {
+        ...
+        "AdminCreds": {
+          "UserName": "testadminuser",
+          "Password": "<password>"
+        },
+        "SafeModeAdminCreds": {
+          "UserName": "testsafeadminuser",
+          "Password": "<password>"
+        }
+      }
+    }
+    ```
+
+3. Em `sharedKey`, insira uma chave compartilhada para a conexão VPN. Há duas instâncias de `sharedKey` no arquivo de parâmetros.
+
+    ```bash
+    "sharedKey": "",
+    ```
+
+4. Execute o comando a seguir e aguarde a conclusão da implantação.
+
+    ```bash
+    azbb -s <subscription_id> -g <resource group> -l <location> -p onoprem.json --deploy
+    ```
+
+   Implante no mesmo grupo de recursos da VNET local.
+
+### <a name="test-connectivity-with-the-azure-vnet"></a>Testar a conectividade com a VNET do Azure
+
+Após a conclusão da implantação, você pode testar a conexão do ambiente simulado local para a VNET do Azure.
+
+1. Você pode usar o portal do Azure para encontrar a VM denominada `ra-onpremise-mgmt-vm1`.
+
+2. Clique em `Connect` para abrir uma sessão de área de trabalho remota para a VM. O nome de usuário é `contoso\testuser` e a senha é aquela especificada no arquivo de parâmetros `onprem.json`.
+
+3. De dentro de sua sessão de área de trabalho remota, abra outra sessão de área de trabalho remota para 10.0.4.4, que é o endereço IP da VM denominada `adds-vm1`. O nome de usuário é `contoso\testuser` e a senha é aquela especificada no arquivo de parâmetros `azure.json`.
+
+4. De dentro da sessão da área de trabalho remota para `adds-vm1`, vá para o **Gerenciador do Servidor** e clique em **Adicionar outros servidores para gerenciar.** 
+
+5. Na guia **Active Directory**, clique em **Localizar agora**. Você deve ver uma lista das VMs do AD, do AD DS e da Web.
+
+   ![](./images/add-servers-dialog.png)
 
 ## <a name="next-steps"></a>Próximas etapas
 
@@ -131,27 +214,27 @@ Há uma solução disponível no [GitHub][github] para implantar essa arquitetur
 * Conheça as práticas recomendadas para [criar uma infraestrutura do Serviços de Federação do Active Directory (AD FS)][adfs] no Azure.
 
 <!-- links -->
+
 [adds-resource-forest]: adds-forest.md
 [adfs]: adfs.md
-
+[azure-cli-2]: /azure/install-azure-cli
+[azbb]: https://github.com/mspnp/template-building-blocks/wiki/Install-Azure-Building-Blocks
 [implementing-a-secure-hybrid-network-architecture]: ../dmz/secure-vnet-hybrid.md
 [implementing-a-secure-hybrid-network-architecture-with-internet-access]: ../dmz/secure-vnet-dmz.md
 
-[active-directory-domain-services]: https://technet.microsoft.com/library/dd448614.aspx
 [adds-data-disks]: https://msdn.microsoft.com/library/azure/jj156090.aspx#BKMK_PlaceDB
 [ad-ds-operations-masters]: https://technet.microsoft.com/library/cc779716(v=ws.10).aspx
 [ad-ds-ports]: https://technet.microsoft.com/library/dd772723(v=ws.11).aspx
 [availability-set]: /azure/virtual-machines/virtual-machines-windows-create-availability-set
-[azure-expressroute]: https://azure.microsoft.com/documentation/articles/expressroute-introduction/
-[azure-powershell]: /powershell/azureps-cmdlets-docs
-[azure-vpn-gateway]: https://azure.microsoft.com/documentation/articles/vpn-gateway-about-vpngateways/
+[azure-expressroute]: /azure/expressroute/expressroute-introduction
+[azure-vpn-gateway]: /azure/vpn-gateway/vpn-gateway-about-vpngateways
 [capacity-planning-for-adds]: http://social.technet.microsoft.com/wiki/contents/articles/14355.capacity-planning-for-active-directory-domain-services.aspx
 [considerations]: ./considerations.md
 [GitHub]: https://github.com/mspnp/reference-architectures/tree/master/identity/adds-extend-domain
 [microsoft_systems_center]: https://www.microsoft.com/server-cloud/products/system-center-2016/
 [monitoring_ad]: https://msdn.microsoft.com/library/bb727046.aspx
 [security-considerations]: #security-considerations
-[set-a-static-ip-address]: https://azure.microsoft.com/documentation/articles/virtual-networks-static-private-ip-arm-pportal/
+[set-a-static-ip-address]: /azure/virtual-network/virtual-networks-static-private-ip-arm-pportal
 [standby-operations-masters]: https://technet.microsoft.com/library/cc794737(v=ws.10).aspx
 [visio-download]: https://archcenter.blob.core.windows.net/cdn/identity-architectures.vsdx
 [vm-windows-sizes]: /azure/virtual-machines/virtual-machines-windows-sizes

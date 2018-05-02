@@ -7,11 +7,11 @@ ms.date: 11/28/2016
 pnp.series.next: adds-extend-domain
 pnp.series.prev: ./index
 cardTitle: Integrate on-premises AD with Azure AD
-ms.openlocfilehash: 431de4b2e08c79f70cc9830fda8315e07bf22c64
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.openlocfilehash: 9475d669b2cb8888a7ceabed7e36317fe63681fd
+ms.sourcegitcommit: d702b4d27e96e7a5a248dc4f2f0e25cf6e82c134
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/30/2018
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="integrate-on-premises-active-directory-domains-with-azure-active-directory"></a>Integrar domínios do Active Directory local ao Azure Active Directory
 
@@ -119,9 +119,9 @@ Para obter mais informações sobre essas topologias, consulte [Topologias para 
 
 ### <a name="user-authentication"></a>Autenticação de usuário
 
-Por padrão, o servidor de sincronização do Azure AD Connect configura a sincronização de senha entre o domínio local e o Azure AD, e o serviço do Azure AD pressupõe que os usuários se autenticam fornecendo a mesma senha que usam localmente. Para muitas organizações, isso é apropriado, mas você deve considerar as políticas e a infraestrutura existentes da sua organização. Por exemplo: 
+Por padrão, o servidor de sincronização do Azure AD Connect configura a sincronização de hashes de senha entre o domínio local e o Azure AD, e o serviço do Azure AD pressupõe que os usuários se autenticam fornecendo a mesma senha que usam localmente. Para muitas organizações, isso é apropriado, mas você deve considerar as políticas e a infraestrutura existentes da sua organização. Por exemplo: 
 
-* A política de segurança da sua organização pode proibir a sincronização de hashes de senha para a nuvem.
+* A política de segurança da sua organização pode proibir a sincronização de hashes de senha para a nuvem. Nesse caso, sua organização deve considerar a [autenticação de passagem](/azure/active-directory/connect/active-directory-aadconnect-pass-through-authentication).
 * Você pode exigir que os usuários usem um SSO (logon único) perfeito ao acessar os recursos em nuvem por meio de computadores ingressados no domínio na rede corporativa.
 * Talvez sua organização já tenha o Serviços de Federação do Active Directory (AD FS) ou uma implantação de provedor de federação de terceiros. Você pode configurar o Azure AD para usar essa infraestrutura para implementar a autenticação e SSO, em vez de usar informações de senha mantidas na nuvem.
 

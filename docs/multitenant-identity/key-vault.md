@@ -5,11 +5,11 @@ author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: client-assertion
-ms.openlocfilehash: 45d1564c255f2450f68c5e92ebe0d7de0c40ae31
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: d49129a38d0413f6006095f03b817885e1ce6c92
+ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="use-azure-key-vault-to-protect-application-secrets"></a>Usar o Azure Key Vault para proteger os segredos do aplicativo
 
@@ -23,7 +23,7 @@ ms.lasthandoff: 11/14/2017
 
 Como prática de segurança recomendada, nunca armazene esses segredos no controle do código-fonte. É muito fácil vazar &mdash;, mesmo se o repositório de código-fonte for privado. E não se trata apenas de guardar os segredos do público geral. Em projetos maiores, talvez você queira restringir quais desenvolvedores e operadores podem acessar os segredos de produção. (As configurações para ambientes de teste ou de desenvolvimento são diferentes).
 
-Uma opção mais segura é armazenar esses segredos no [Azure Key Vault][KeyVault]. O Cofre da Chave é um serviço hospedado na nuvem para gerenciamento de chaves de criptografia e de outros segredos. Este artigo mostra como usar o Cofre da Chave para armazenar as definições de configuração para seu aplicativo.
+Uma opção mais segura é armazenar esses segredos no [Azure Key Vault][KeyVault]. O Cofre da Chave é um serviço hospedado na nuvem para gerenciamento de chaves de criptografia e de outros segredos. Este artigo mostra como usar o Key Vault para armazenar as definições de configuração para seu aplicativo.
 
 No aplicativo [Tailspin Surveys][Surveys] aplicativo, as configurações a seguir são secretas:
 
@@ -167,7 +167,7 @@ Agora atribua esse usuário como o proprietário da assinatura.
     ```
     .\Setup-KeyVault.ps1 -KeyVaultName <<key vault name> -KeyName Redis--Configuration -KeyValue "<<Redis DNS name>>.redis.cache.windows.net,password=<<Redis access key>>,ssl=true" 
     ```
-    onde 
+    onde
    
    * nome do cofre da chave = o nome que você deu ao cofre da chave na etapa anterior.
    * nome DNS de Redis = o nome DNS de sua instância de cache Redis.

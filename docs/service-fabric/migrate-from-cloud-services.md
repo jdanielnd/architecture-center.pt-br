@@ -3,11 +3,11 @@ title: Migrar um aplicativo dos Serviços de Nuvem do Azure para o Azure Service
 description: Como migrar um aplicativo dos Serviços de Nuvem do Azure para o Azure Service Fabric.
 author: MikeWasson
 ms.date: 04/27/2017
-ms.openlocfilehash: ce9c138a6b093fb7f0329c619c75bd4f4aacc2e7
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+ms.openlocfilehash: b9ecbc88ae74da99a0ff3bb8814a9cb3422f79d5
+ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/23/2018
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="migrate-an-azure-cloud-services-application-to-azure-service-fabric"></a>Migrar um aplicativo dos Serviços de Nuvem do Azure para o Azure Service Fabric 
 
@@ -75,7 +75,7 @@ A tabela a seguir resume algumas das diferenças importantes entre os Serviços 
 | Densidade |Uma instância de função por VM | Vários serviços em um único nó |
 | Número mínimo de nós | 2 por função | 5 por cluster, para implantações de produção |
 | Gerenciamento de estado | Sem estado | Sem estado ou com estado* |
-| Hosting | As tabelas | Em nuvem ou local |
+| Hosting | Azure | Em nuvem ou local |
 | Hospedagem na Web | IIS** | Hospedagem interna |
 | Modelo de implantação | [Modelo de implantação clássico][azure-deployment-models] | [Gerenciador de Recursos][azure-deployment-models]  |
 | Empacotamento | Arquivos de pacote de serviço de nuvem (.cspkg) | Aplicativo e pacotes de serviço |
@@ -141,9 +141,9 @@ O aplicativo Surveys original usa ASP.NET MVC. Como o ASP.NET MVC não pode ser 
 
 - As funções da web do ASP.NET Core, que podem ser hospedadas internamente.
 - Converter o site da web em um aplicativo de página única (SPA) que chama uma API web implementada usando a API Web ASP.NET. Isso exigiria remodelar completamente o front-end da web.
-- Manter o código existente do ASP.NET MVC e implantar o IIS em um contêiner do Windows Server para Service Fabric. Essa abordagem requer pouca ou nenhuma alteração de código. No entanto, o [suporte a contêineres][sf-containers] no Service Fabric ainda está na versão prévia.
+- Manter o código existente do ASP.NET MVC e implantar o IIS em um contêiner do Windows Server para Service Fabric. Essa abordagem requer pouca ou nenhuma alteração de código. 
 
-Com base nessas considerações, selecionamos a primeira opção, portando para ASP.NET Core. Para fazer isso, seguimos as etapas descritas em [Migrar do ASP.NET MVC para ASP.NET Core MVC][aspnet-migration]. 
+A primeira opção, portabilidade para o ASP.NET Core, nos permitiu aproveitar os recursos mais recentes no ASP.NET Core. Para fazer a conversão, seguimos as etapas descritas em [Migrando do ASP.NET MVC para o ASP.NET Core MVC][aspnet-migration]. 
 
 > [!NOTE]
 > Ao usar o ASP.NET Core com Kestrel, você deve colocar um proxy reverso na frente do Kestrel para lidar com o tráfego da Internet, por motivos de segurança. Para obter mais informações, consulte [Implementação do servidor web Kestrel no ASP.NET Core][kestrel]. A seção [Implantar o aplicativo](#deploying-the-application) descreve uma implantação recomendada do Azure.

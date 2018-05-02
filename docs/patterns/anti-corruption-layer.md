@@ -3,11 +3,11 @@ title: Padrão de Camada Anticorrupção
 description: Implemente uma camada de fachada ou adaptador entre um aplicativo moderno e um sistema herdado.
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: efb1f90be33c2621c7a24c42730da9fffe70dfad
-ms.sourcegitcommit: ea7108f71dab09175ff69322874d1bcba800a37a
+ms.openlocfilehash: ac898519c9aa0a0aa2301da9f48756db0eb2af7c
+ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/17/2018
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="anti-corruption-layer-pattern"></a>Padrão de Camada Anticorrupção
 
@@ -21,7 +21,7 @@ Geralmente, esses sistemas herdados sofrem problemas de qualidade, como esquemas
 
 Manter o acesso entre sistemas herdados e novos pode forçar o novo sistema a aderir a pelo menos algumas das APIs do sistema herdado ou outras semânticas. Quando esses recursos herdados tiverem problemas de qualidade, o suporte a eles "corrompe" o que, caso contrário, seria um aplicativo moderno projetado corretamente. 
 
-Problemas semelhantes podem surgir com qualquer sistema externo que sua equipe de desenvolvimento não controle, e não apenas com sistemas herdados. 
+Problemas semelhantes podem surgir com qualquer sistema externo que sua equipe de desenvolvimento não controle, não apenas com sistemas herdados. 
 
 ## <a name="solution"></a>Solução
 

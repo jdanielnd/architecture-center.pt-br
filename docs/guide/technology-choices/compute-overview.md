@@ -2,11 +2,12 @@
 title: Visão geral das opções de computação do Azure
 description: Visão geral das opções de computação do Azure
 author: MikeWasson
-ms.openlocfilehash: a23dd49f24bc52db6f357540e3ebccb19e0497ee
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.date: 04/21/2018
+ms.openlocfilehash: 6781e1f1f6e239e3853920cb544092538cccfc62
+ms.sourcegitcommit: d702b4d27e96e7a5a248dc4f2f0e25cf6e82c134
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="overview-of-azure-compute-options"></a>Visão geral das opções de computação do Azure
 
@@ -42,4 +43,6 @@ Ao selecionar uma opção de computação, estes são alguns fatores a serem con
 - Quais são as limitações gerais de cada serviço? 
 - Quais tipos de arquiteturas de aplicativo são apropriados para esse serviço? 
 
-Para obter uma comparação mais detalhada das opções de computação no Azure, confira [Critérios para escolher uma opção de computação do Azure](./compute-comparison.md).
+Para ter ajuda na hora de selecionar um serviço de computação para o seu aplicativo, use a [árvore de decisão para serviços de computação do Azure](./compute-decision-tree.md)
+
+Para obter uma comparação mais detalhada das opções de computação no Azure, confira [Critérios para escolher um serviço de computação do Azure](./compute-comparison.md).

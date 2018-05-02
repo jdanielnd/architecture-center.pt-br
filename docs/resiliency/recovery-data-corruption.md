@@ -3,11 +3,11 @@ title: Recuperação de dados corrompidos ou exclusão acidental
 description: Artigo com noções básicas sobre como recuperar dados corrompidos ou de exclusão acidental e como criar aplicativos resilientes, altamente disponíveis, com tolerância a falhas, bem como planejamento de recuperação de desastres
 author: MikeWasson
 ms.date: 01/10/2018
-ms.openlocfilehash: 76d2f996750d5a67b67bd5dc4977580f3b8abbc3
-ms.sourcegitcommit: 3d6dba524cc7661740bdbaf43870de7728d60a01
+ms.openlocfilehash: b0716de39fe69d607b9a63e51356d28bbcdbfeae
+ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/11/2018
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="recover-from-data-corruption-or-accidental-deletion"></a>Recuperação de dados corrompidos ou exclusão acidental 
 
@@ -23,7 +23,7 @@ O Armazenamento do Azure fornece resiliência de dados por meio de réplicas aut
 
 - **Blobs de blocos**. Crie um instantâneo pontual de cada blob de blocos. Para obter mais informações, consulte [Criar um instantâneo de um blob](/rest/api/storageservices/creating-a-snapshot-of-a-blob). Para cada instantâneo, você é cobrado apenas pelo armazenamento necessário para armazenar as diferenças no blob desde o último estado do instantâneo. Os instantâneos são dependentes da existência do blob original nos quais se baseiam, portanto, uma operação de cópia para outro blob ou até mesmo outra conta de armazenamento é aconselhável. Isso garante que os dados de backup estejam adequadamente protegidos contra exclusão acidental. É possível usar [AzCopy](/azure/storage/common/storage-use-azcopy) ou [Azure PowerShell](/azure/storage/common/storage-powershell-guide-full) para copiar os blobs para outra conta de armazenamento.
 
-- **Arquivos**. Use [compartilhar instantâneos (versão prévia)](/azure/storage/files/storage-how-to-use-files-snapshots) ou use AzCopy ou PowerShell para copiar os arquivos para outra conta de armazenamento.
+- **Arquivos**. Use [instantâneos de compartilhamento](/azure/storage/files/storage-snapshots-files) ou use AzCopy ou PowerShell a fim de copiar os arquivos para outra conta de armazenamento.
 
 - **Tabelas**. Use AzCopy para exportar os dados da tabela para outra conta de armazenamento em outra região.
 
@@ -31,7 +31,7 @@ O Armazenamento do Azure fornece resiliência de dados por meio de réplicas aut
 
 ### <a name="azure-sql-database"></a>Banco de Dados SQL do Azure 
 
-O Banco de Dados SQL executa automaticamente uma combinação de backups de banco de dados semanais, backups de bancos de dados diferenciais por hora e backups de logs de transação a cada cinco a dez minutos para proteger sua empresa contra a perda de dados. Use a restauração pontual para restaurar um banco de dados para um momento anterior. Para obter mais informações, confira:
+O Banco de Dados SQL executa automaticamente uma combinação de backups de banco de dados semanais, backups de bancos de dados diferenciais por hora e backups de logs de transação a cada cinco a dez minutos para proteger sua empresa contra a perda de dados. Use a restauração pontual para restaurar um banco de dados para um momento anterior. Para obter mais informações, consulte:
 
 - [Recuperar um banco de dados SQL do Azure usando backups de banco de dados automatizados](/azure/sql-database/sql-database-recovery-using-backups)
 
@@ -47,7 +47,7 @@ O Azure Cosmos DB faz backups automaticamente em intervalos regulares. Os backup
 
 ### <a name="azure-database-for-mysql-azure-database-for-postresql"></a>Banco de Dados do Azure para MySQL, Banco de Dados do Azure para PostreSQL
 
-Ao usar o Banco de Dados do Azure para MySQL ou o Banco de Dados para PostreSQL, o serviço banco de dados faz um backup do serviço automaticamente a cada cinco minutos. Com esse recurso de backup automático você pode restaurar o servidor e todos os seus bancos de dados em um novo servidor em um ponto anterior no tempo. Para obter mais informações, confira:
+Ao usar o Banco de Dados do Azure para MySQL ou o Banco de Dados para PostreSQL, o serviço banco de dados faz um backup do serviço automaticamente a cada cinco minutos. Com esse recurso de backup automático você pode restaurar o servidor e todos os seus bancos de dados em um novo servidor em um ponto anterior no tempo. Para obter mais informações, consulte:
 
 - [Como fazer backup e restaurar um servidor no Banco de Dados do Azure para MySQL usando o portal do Azure](/azure/mysql/howto-restore-server-portal)
 

@@ -8,11 +8,11 @@ pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - data-management
 - performance-scalability
-ms.openlocfilehash: 1536a33884c9c9faa1e3702c951067249e691bf8
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+ms.openlocfilehash: d4d7c9dcd612c780e3e494509a57b6b4a0144423
+ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/23/2018
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="cache-aside-pattern"></a>Padrão Cache-Aside
 
@@ -84,7 +84,7 @@ private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionM
 public static ConnectionMultiplexer Connection => lazyConnection.Value;
 ```
 
-O método `GetMyEntityAsync` no exemplo de código a seguir mostra uma implementação do padrão Cache-Aside com base no Cache Redis do Azure. Esse método recupera um objeto do cache usando a abordagem read-though.
+O método `GetMyEntityAsync` no exemplo de código a seguir mostra uma implementação do padrão Cache-Aside com base no Cache Redis do Azure. Esse método recupera um objeto do cache usando a abordagem read-through.
 
 Um objeto é identificado usando uma ID inteira como chave. O método `GetMyEntityAsync` tenta recuperar um item com essa chave do cache. Se um item correspondente for encontrado, ele é retornado. Se não houver nenhuma correspondência no cache, o método `GetMyEntityAsync` recupera o objeto de um armazenamento de dados, adiciona-o ao cache e, em seguida, retorna-o. O código que realmente lê os dados do armazenamento de dados não é mostrado aqui, pois ele depende do armazenamento de dados. Observe que o item de cache é configurado para expirar, a fim de impedir que ele se torne obsoleto, caso tenha se atualizado em outro lugar.
 
