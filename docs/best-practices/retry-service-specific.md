@@ -4,11 +4,11 @@ description: Diretriz específica de serviço para configurar o mecanismo de rep
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 332f96e73def360926b6a934bbb1361b2254ec41
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: c80a4aa232cca1283d84368a36dd7341cab8a314
+ms.sourcegitcommit: 3846a0ab2b2b2552202a3c9c21af0097a145ffc6
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/06/2018
+ms.lasthandoff: 04/29/2018
 ---
 # <a name="retry-guidance-for-specific-services"></a>Repetir as diretrizes para serviços específicos
 
@@ -924,7 +924,7 @@ Na Biblioteca de autenticação do Active Directory (ADAL) há um mecanismo inte
 Considere as seguintes diretrizes ao usar o Azure Active Directory:
 
 * Quando possível, use a biblioteca ADAL e o suporte interno para repetições.
-* Se estiver usando a API REST do Azure Active Directory, você deverá repetir a operação somente se o resultado for um erro no intervalo 5xx (como 500 Erro de Servidor Interno, 502 Gateway Incorreto, 503 Serviço Indisponível e 504 Tempo Limite do Gateway). Não repita para nenhum outro erro.
+* Se estiver a usar a API REST do Azure Active Directory, tente novamente a operação se o código de resultado for 429 (Muitos Pedidos) ou for um erro no intervalo 5xx. Não repita para nenhum outro erro.
 * Uma política de retirada exponencial é recomendada para uso em cenários de lote com o Azure Active Directory.
 
 Considere começar com as seguintes configurações para operações de repetição. Essas são configurações de uso geral, por isso, você deve monitorar as operações e ajustar os valores para que atendam ao seu cenário.
@@ -989,6 +989,7 @@ Considere o seguinte ao acessar os serviços do Azure ou de terceiros:
 * A lógica de detecção transitória dependerá da API de cliente real que você usa para invocar as chamadas REST. Alguns clientes, como a classe mais recente **HttpClient** , não lançam exceções para solicitações concluídas com um código de status HTTP sem sucesso. Isso melhora o desempenho, mas impede o uso do Bloco de Aplicativos para Tratamento de Falhas Transitórias. Nesse caso, você pode encapsular a chamada à API REST com o código que gera exceções para códigos de status HTTP sem sucesso, que pode então ser processada pelo bloco. Como alternativa, é possível usar um mecanismo diferente para orientar as repetições.
 * O código de status HTTP retornado do serviço pode ajudar a indicar se a falha é transitória. Talvez seja necessário examinar as exceções geradas por um cliente ou pela estrutura de repetição para acessar o código de status ou determinar o tipo de exceção equivalente. Os seguintes códigos HTTP geralmente indicam que uma repetição é apropriada:
   * 408 Tempo Limite da Solicitação
+  * 429 Número excessivo de solicitações
   * 500 Erro Interno do Servidor
   * 502 Gateway Incorreto
   * 503 Serviço Indisponível
