@@ -3,11 +3,11 @@ title: Executar um servidor Jenkins no Azure
 description: Essa arquitetura de referência mostra como implantar e operar um servidor Jenkins escalonável, de nível corporativo, no Azure protegido com o logon único.
 author: njray
 ms.date: 01/21/18
-ms.openlocfilehash: c07a341bbe4d0304087e4535408967c45d36199e
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: 5f9c54e71a8750e88de1ae633ccc1316f8375d3a
+ms.sourcegitcommit: 0de300b6570e9990e5c25efc060946cb9d079954
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/06/2018
+ms.lasthandoff: 05/03/2018
 ---
 # <a name="run-a-jenkins-server-on-azure"></a>Executar um servidor Jenkins no Azure
 
@@ -58,7 +58,7 @@ As seguintes recomendações aplicam-se à maioria dos cenários. Siga estas rec
 
 O locatário do [Azure AD][azure-ad] referente à sua assinatura é usado para habilitar o logon único para usuários do Jenkins e configurar [entidades de serviço][service-principal] que permitem aos trabalhos do Jenkins acessar os recursos do Azure.
 
-A autenticação e a autorização do logon único são implementadas pelo plug-in do Microsoft Azure Active Directory, instalado no servidor Jenkins. O logon único permite que você se autentique usando as credenciais de organização do Microsoft Azure Active Directory ao fazer logon no servidor Jenkins. Ao configurar o plug-in do Microsoft Azure Active Directory, você pode especificar o nível do acesso autorizado de um usuário para o servidor Jenkin.
+A autenticação e a autorização do logon único são implementadas pelo plug-in do Microsoft Azure Active Directory, instalado no servidor Jenkins. O logon único permite que você se autentique usando as credenciais de organização do Microsoft Azure Active Directory ao fazer logon no servidor Jenkins. Ao configurar o plug-in do Azure AD, você pode especificar o nível do acesso autorizado de um usuário para o servidor Jenkins.
 
 Para fornecer aos trabalhos Jenkins acesso aos recursos do Azure, um administrador do Microsoft Azure Active Directory cria entidades de serviço. Essas entidades concedem aos aplicativos — nesse caso, os trabalhos Jenkins — [acesso autenticado e autorizado][ad-sp] aos recursos do Azure.
 
@@ -74,7 +74,7 @@ O modelo de solução para o Jenkins no Azure instala vários plug-ins do Azure.
 
 -   O [plug-in do Microsoft Azure Active Directory][configure-azure-ad] permite que o servidor Jenkins suporte o logon único para usuários com base no Microsoft Azure Active Directory.
 
--   O plug-in de [Agentes de VM do Azure][configure-agent] usa um modelo do ARM (Azure Resource Manager) para criar agentes do Jenkins nas máquinas virtuais do Azure.
+-   O plug-in [Agentes de VM do Azure][configure-agent] usa um modelo Azure Resource Manager para criar agentes do Jenkins nas máquinas virtuais do Azure.
 
 -   O plug-in de [Credenciais do Azure][configure-credential] permite que você armazene as credenciais da entidade de serviço do Microsoft Azure no Jenkins.
 
@@ -113,13 +113,13 @@ A seleção do tamanho de servidor correto depende do tamanho da carga de trabal
 
 ## <a name="availability-considerations"></a>Considerações sobre disponibilidade
 
-Avalie os requisitos de disponibilidade para o fluxo de trabalho e como recuperar o estado Jenkin caso o servidor Jenkin fique inoperante. Para avaliar seus requisitos de disponibilidade, considere duas métricas comuns:
+Disponibilidade no contexto de um servidor Jenkins significa ser capaz de recuperar as informações do estado associadas a seu fluxo de trabalho, como os resultados do teste, bibliotecas criadas ou outros artefatos. O estado do fluxo de trabalho crítico ou artefatos devem ser mantidos para recuperar o fluxo de trabalho, caso o servidor Jenkins falhe. Para avaliar seus requisitos de disponibilidade, considere duas métricas comuns:
 
 -   O RTO (Objetivo de Tempo de Recuperação) especifica quanto tempo você pode prosseguir sem o Jenkins.
 
 -   O RPO (Objetivo de Ponto de Recuperação) indica a quantidade de dados que você pode perder caso uma interrupção no serviço afete o Jenkins.
 
-Na prática, o RTO e o RPO implicam redundância e backup. A disponibilidade não é uma questão de recuperação de hardware, que faz parte do Azure, mas sim de garantir que você mantenha o estado do servidor Jenkins. Essa arquitetura de referência usa o [contrato de nível de serviço do Azure][sla] (SLA), que garante que um tempo de atividade de 99,9% para uma única máquina virtual. Se esse SLA não atender aos seus requisitos de tempo de atividade, garanta que tem um plano de recuperação de desastres ou considere o uso da implantação de um [servidor Jenkins de vários mestres][multi-master] (não abordado neste documento).
+Na prática, o RTO e o RPO implicam redundância e backup. A disponibilidade não é uma questão de recuperação de hardware, que faz parte do Azure, mas sim de garantir que você mantenha o estado do servidor Jenkins. A Microsoft oferece um [contrato de nível de serviço][sla] (SLA) para as instâncias únicas da VM. Se esse SLA não atender aos seus requisitos de tempo de atividade, garanta que tem um plano de recuperação de desastres ou considere o uso da implantação de um [servidor Jenkins de vários mestres][multi-master] (não abordado neste documento).
 
 Considere o uso de [scripts][disaster] da recuperação de desastres na etapa 7 da implantação para criar uma conta de Armazenamento do Microsoft Azure com discos gerenciados para armazenar o estado do servidor Jenkins. Se o Jenkins falhar, poderá ser restaurado para o estado armazenado nesta conta de armazenamento separada.
 
@@ -127,7 +127,7 @@ Considere o uso de [scripts][disaster] da recuperação de desastres na etapa 7 
 
 Use as seguintes abordagens para ajudar a bloquear a segurança em um servidor Jenkins básico, já que em seu estado básico ele não é seguro.
 
--   Configure uma maneira de fazer logon seguro no servidor Jenkin. HTTP não é seguro. Por padrão, essa arquitetura usa HTTP e tem um IP público. Considere a configuração de [HTTPS no servidor Nginx][nginx] que está sendo usado para um logon seguro.
+-   Configure uma maneira segura de fazer logon no servidor Jenkins. Essa arquitetura usa HTTP e tem um IP público, mas o HTTP não é seguro por padrão. Considere a configuração de [HTTPS no servidor Nginx][nginx] que está sendo usado para um logon seguro.
 
     > [!NOTE]
     > Ao adicionar o SSL ao servidor, crie uma regra NSG para a sub-rede Jenkins a fim de abrir a porta 443. Para obter mais informações, consulte [Como abrir portas em uma máquina virtual com o portal do Azure][port443].
@@ -175,7 +175,7 @@ Para implantar essa arquitetura, siga as etapas abaixo para instalar o [modelo d
 
 ### <a name="step-1-deploy-the-jenkins-server"></a>Etapa 1: Implantar o servidor Jenkins
 
-1.  Abra a [imagem do marketplace do Azure para o Jenkins][azure-market] no seu navegador da Web e selecione **OBTER AGORA** no lado esquerdo da página.
+1.  Abra a [imagem do Marketplace do Azure para Jenkins][azure-market] em seu navegador da Web e selecione **OBTER AGORA** no lado esquerdo da página.
 
 2.  Examine os detalhes de preços e selecione **Continuar**. Em seguida, selecione **Criar** para configurar o servidor Jenkins no portal do Azure.
 
@@ -185,7 +185,7 @@ Para obter instruções detalhadas, consulte [Criar um servidor Jenkins em uma V
 
 A etapa é executada pelo administrador Jenkins, que também deve ter uma conta de usuário no diretório do Microsoft Azure Active Directory da assinatura e deve receber a função de Colaborador.
 
-Use o [plug-in do Microsoft Azure Active Directory][configure-azure-ad] do centro da atualização Jenkins no servidor Jenkin e siga as instruções para configurar o SSO.
+Use o [Plug-in do Azure AD][configure-azure-ad] no Centro de Atualização Jenkins no servidor Jenkins e siga as instruções para configurar o SSO.
 
 ### <a name="step-3-provision-jenkins-server-with-azure-vm-agent-plugin"></a>Etapa 3: Provisionar ao servidor Jenkins um plug-in do Agente de VM do Azure
 

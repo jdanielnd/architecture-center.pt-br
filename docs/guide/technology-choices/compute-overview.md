@@ -3,17 +3,17 @@ title: Visão geral das opções de computação do Azure
 description: Visão geral das opções de computação do Azure
 author: MikeWasson
 ms.date: 04/21/2018
-ms.openlocfilehash: 6781e1f1f6e239e3853920cb544092538cccfc62
-ms.sourcegitcommit: d702b4d27e96e7a5a248dc4f2f0e25cf6e82c134
+ms.openlocfilehash: 8ee508aaa07d87ac77ef484e20d572fdf2b9fb40
+ms.sourcegitcommit: 3846a0ab2b2b2552202a3c9c21af0097a145ffc6
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/23/2018
+ms.lasthandoff: 04/29/2018
 ---
 # <a name="overview-of-azure-compute-options"></a>Visão geral das opções de computação do Azure
 
 O termo *computação* refere-se ao modelo de hospedagem para os recursos de computação em que seu aplicativo é executado. 
 
-Em uma extremidade do espectro está a **infraestrutura como serviço (IaaS)**. Com o IaaS, você provisiona as VMs de que precisa, juntamente com componentes associados de rede e armazenamento. Depois implante os software e aplicativos que desejar nas VMs. Esse modelo é o mais próximo a um ambiente local tradicional, com a exceção de que a Microsoft gerencia a infraestrutura. Você ainda gerencia as VMs individuais.  
+Em uma extremidade do espectro está a **Infraestrutura como serviço (IaaS)**. Com o IaaS, você provisiona as VMs de que precisa, juntamente com componentes associados de rede e armazenamento. Depois implante os software e aplicativos que desejar nas VMs. Esse modelo é o mais próximo a um ambiente local tradicional, com a exceção de que a Microsoft gerencia a infraestrutura. Você ainda gerencia as VMs individuais.  
 
 A **Plataforma como serviço** (PaaS) fornece um ambiente de hospedagem gerenciado, no qual você pode implantar seu aplicativo sem a necessidade de gerenciar VMs ou recursos de rede. Por exemplo, em vez de criar VMs individuais, você especifica uma contagem de instâncias, e o serviço vai provisionar, configurar e gerenciar os recursos necessários. O Serviço de Aplicativo do Azure é um exemplo de um serviço de PaaS.
 
