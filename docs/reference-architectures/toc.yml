@@ -3,7 +3,7 @@
 - name: Arquiteturas de referência
   href: index.md
   items:
-    - name: Aplicativos Web do Serviço de Aplicativo
+    - name: Aplicativo Web do Serviço de Aplicativo
       href: app-service-web-app/index.md
       items:
         - name: Aplicativo Web básico
@@ -44,6 +44,19 @@
           href: identity/adds-forest.md
         - name: Estender o AD FS para o Azure
           href: identity/adfs.md
+    - name: Aplicativo de N camadas
+      href: n-tier/index.md
+      items:
+        - name: Aplicativo de n camadas com SQL Server
+          href: n-tier/n-tier-sql-server.md
+        - name: Aplicativo de n camadas de várias regiões
+          href: n-tier/multi-region-sql-server.md
+        - name: Aplicativo de n camadas com Cassandra
+          href: n-tier/n-tier-cassandra.md
+        - name: Implantar VM do Linux
+          href: n-tier/linux-vm.md
+        - name: Implantar VM do Windows
+          href: n-tier/windows-vm.md
     - name: DMZ da Rede
       href: dmz/index.md
       items:
@@ -53,28 +66,6 @@
           href: dmz/secure-vnet-dmz.md
         - name: Dispositivos virtuais de rede altamente disponíveis
           href: dmz/nva-ha.md
-    - name: Cargas de trabalho de VM (Linux)
-      href: virtual-machines-linux/index.md
-      items:
-        - name: VM única
-          href: virtual-machines-linux/single-vm.md
-        - name: VMs com balanceamento de carga
-          href: virtual-machines-linux/multi-vm.md
-        - name: Aplicativo de N camadas
-          href: virtual-machines-linux/n-tier.md
-        - name: Aplicativo de várias regiões
-          href: virtual-machines-linux/multi-region-application.md
-    - name: Cargas de trabalho de VM (Windows)
-      href: virtual-machines-windows/index.md
-      items:
-        - name: VM única
-          href: virtual-machines-windows/single-vm.md
-        - name: VMs com balanceamento de carga
-          href: virtual-machines-windows/multi-vm.md
-        - name: Aplicativo de N camadas
-          href: virtual-machines-windows/n-tier.md
-        - name: Aplicativo de várias regiões
-          href: virtual-machines-windows/multi-region-application.md
     - name: Servidor Jenkins
       href: jenkins/index.md
     - name: SAP NetWeaver e SAP HANA

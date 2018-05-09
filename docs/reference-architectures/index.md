@@ -3,11 +3,11 @@ title: Arquiteturas de referência do Azure
 description: Arquiteturas de referência, plantas e diretrizes de implementação prescritivas para cargas de trabalho comuns no Azure.
 layout: LandingPage
 ms.topic: landing-page
-ms.openlocfilehash: 9708c975e543a04cafe22f38194e833be44d7b81
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: 4c0006404ed0c0f603e9599cd9c04e6d02fdbfeb
+ms.sourcegitcommit: a5e549c15a948f6fb5cec786dbddc8578af3be66
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/06/2018
+ms.lasthandoff: 05/06/2018
 ---
 <!-- This file is generated! -->
 <!-- See the templates in ./build/reference-architectures  -->
@@ -19,47 +19,30 @@ Nossas arquiteturas de referência são organizadas por cenário, com arquitetur
 
 <section class="series">
     <ul class="panelContent">
-    <!-- Windows VM workloads -->
+
+<!-- N-tier -->
 <li style="display: flex; flex-direction: column;">
-    <a href="./virtual-machines-windows/index.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+    <a href="./n-tier/index.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
             <div class="cardPadding" style="display: flex;">
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="./virtual-machines-windows/images/n-tier.svg" height="140px" />
+                            <img src="./n-tier/images/n-tier-sql-server.svg" />
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Cargas de trabalho de máquina virtual do Windows</h3>
-                        <p>Esta série começa com as práticas recomendadas para executar uma única VM do Windows e então várias VMs com balanceamento de carga e, por fim, um aplicativo de N camadas de várias regiões.</p>
+                        <h3>Aplicativo de N camadas</h3>
+                        <p>Implante um aplicativo de n camadas no Azure, para Windows ou Linux.</p>
+                        <p>As configurações são mostradas para o SQL Server e Apache Cassandra. Para ter alta disponibilidade, implante uma configuração ativo-passiva em duas regiões.</p>
                     </div>
                 </div>
             </div>
         </div>
     </a>
 </li>
-    <!-- Linux VM workloads -->
-<li style="display: flex; flex-direction: column;">
-    <a href="./virtual-machines-linux/index.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardImageOuter">
-                        <div class="cardImage">
-                            <img src="./virtual-machines-linux/images/n-tier.svg" height="140px" />
-                        </div>
-                    </div>
-                    <div class="cardText">
-                        <h3>Cargas de trabalho de VM do Linux</h3>
-                        <p>Esta série começa com as práticas recomendadas para executar uma única VM do Linux e então várias VMs com balanceamento de carga e, por fim, um aplicativo de N camadas de várias regiões.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-    <!-- Hybrid network -->
+
+<!-- Hybrid network -->
 <li style="display: flex; flex-direction: column;">
     <a href="./hybrid-networking/index.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -73,6 +56,7 @@ Nossas arquiteturas de referência são organizadas por cenário, com arquitetur
                     <div class="cardText">
                         <h3>Rede híbrida</h3>
                         <p>Esta série mostra as opções para criar uma conexão de rede entre uma rede local e o Azure.</p>
+                        <p>As configurações incluem o VPN site a site ou o Azure ExpressRoute para uma conexão privada e dedicada.</p>
                     </div>
                 </div>
             </div>
