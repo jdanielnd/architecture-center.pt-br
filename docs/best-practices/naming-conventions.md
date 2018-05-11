@@ -4,11 +4,11 @@ description: Convenções de nomenclatura para recursos do Azure. Como nomear m�
 author: telmosampaio
 ms.date: 05/18/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: f3f010ceb3c810caafa53523de63aa787d392aa1
-ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
+ms.openlocfilehash: b4f40c427fc91c6b00d934c9a5dacdca91a55690
+ms.sourcegitcommit: 0de300b6570e9990e5c25efc060946cb9d079954
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/16/2018
+ms.lasthandoff: 05/03/2018
 ---
 # <a name="naming-conventions"></a>Convenções de nomenclatura
 
@@ -102,7 +102,7 @@ Em geral, evite usar caracteres especiais (`-` ou `_`) como o primeiro ou últim
 |Nome da fila |Conta de armazenamento |3-63 |Letras minúsculas |Alfanumérico e hífen |`<service short name>-<context>-<num>` |`awesomeservice-messages-001` |
 |Nome da tabela | Conta de armazenamento |3-63 |Não diferencia maiúsculas de minúsculas |Alfanumérico |`<service short name><context>` |`awesomeservicelogs` |
 |Nome do arquivo | Conta de armazenamento |3-63 |Letras minúsculas | Alfanumérico |`<variable based on blob usage>` |`<variable based on blob usage>` |
-|Repositório Data Lake | Global |3-24 |Letras minúsculas | Alfanumérico |`<name>dls` |`telemetrydls` |
+|Data Lake Store | Global |3-24 |Letras minúsculas | Alfanumérico |`<name>dls` |`telemetrydls` |
 
 ### <a name="networking"></a>Rede
 
@@ -114,8 +114,8 @@ Em geral, evite usar caracteres especiais (`-` ou `_`) como o primeiro ou últim
 |Grupo de Segurança de Rede |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<service short name>-<context>-nsg` |`profx-app-nsg` |
 |Regra de grupo de segurança de rede |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<descriptive context>` |`sql-allow` |
 |Endereço IP público |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<vm or service name>-pip` |`profx-sql1-pip` |
-|Balanceador de carga |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<service or role>-lb` |`profx-lb` |
-|Configuração de regras de balanceamento de carga |Balanceador de carga |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<descriptive context>` |`http` |
+|Load Balancer |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<service or role>-lb` |`profx-lb` |
+|Configuração de regras de balanceamento de carga |Load Balancer |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<descriptive context>` |`http` |
 |Gateway de Aplicativo do Azure |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<service or role>-agw` |`profx-agw` |
 |Perfil de Gerenciador de Tráfego |Grupo de recursos |1-63 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen e ponto |`<descriptive context>` |`app1` |
 

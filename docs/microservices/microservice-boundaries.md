@@ -3,11 +3,11 @@ title: Identificando limites de microsserviço
 description: Identificando limites de microsserviço
 author: MikeWasson
 ms.date: 12/08/2017
-ms.openlocfilehash: e4f11da9f970724c55ad99824f808a10c4558971
-ms.sourcegitcommit: 744ad1381e01bbda6a1a7eff4b25e1a337385553
+ms.openlocfilehash: d35b92ffd97c4fda5d6599340925ce3dfea7f15b
+ms.sourcegitcommit: a5e549c15a948f6fb5cec786dbddc8578af3be66
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2018
+ms.lasthandoff: 05/06/2018
 ---
 # <a name="designing-microservices-identifying-microservice-boundaries"></a>Criando microsserviços: identificando limites de microsserviço
 

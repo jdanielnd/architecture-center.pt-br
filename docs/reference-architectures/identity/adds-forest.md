@@ -5,16 +5,16 @@ description: >-
 
   guidance,vpn-gateway,expressroute,load-balancer,virtual-network,active-directory
 author: telmosampaio
-ms.date: 11/28/2016
+ms.date: 05/02/2018
 pnp.series.title: Identity management
 pnp.series.prev: adds-extend-domain
 pnp.series.next: adfs
 cardTitle: Create an AD DS forest in Azure
-ms.openlocfilehash: e32a6420821e70c84e77d2c39614f0c45efbb7e2
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: 047ecea41ba30ce4cccf17b8c4964a37ae60150f
+ms.sourcegitcommit: 0de300b6570e9990e5c25efc060946cb9d079954
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/06/2018
+ms.lasthandoff: 05/03/2018
 ---
 # <a name="create-an-active-directory-domain-services-ad-ds-resource-forest-in-azure"></a>Criar uma floresta de recursos do AD DS (Active Directory Domain Services) no Azure
 
@@ -90,51 +90,71 @@ Para considerações de segurança específicas do Active Directory, consulte a 
 
 ## <a name="deploy-the-solution"></a>Implantar a solução
 
-Há uma solução disponível no [GitHub][github] para implantar essa arquitetura de referência. Você precisará da versão mais recente da CLI do Azure para executar o script do Powershell que implanta a solução. Para implantar a arquitetura de referência, siga estas etapas:
+Uma implantação para essa arquitetura está disponível no [GitHub][github]. Observe que toda a implantação pode levar até duas horas, o que inclui a criação do gateway de VPN e a execução dos scripts que configuram o AD DS.
 
-1. Baixe ou clone a pasta da solução do [GitHub][github] em seu computador local.
+### <a name="prerequisites"></a>pré-requisitos
 
-2. Abra a CLI do Azure e navegue até a pasta da solução local.
+1. Clone, crie um fork ou baixe o arquivo zip das [arquiteturas de referência][github] no repositório GitHub.
 
-3. Execute o comando a seguir:
-   
-    ```Powershell
-    .\Deploy-ReferenceArchitecture.ps1 <subscription id> <location> <mode>
+2. Instale a [CLI do Azure 2.0][azure-cli-2].
+
+3. Instale os pacote npm dos [Blocos de construção do Azure][azbb].
+
+4. Em um prompt de comando, prompt do bash ou prompt do PowerShell, faça logon na sua conta do Azure usando o comando abaixo.
+
+   ```bash
+   az login
+   ```
+
+### <a name="deploy-the-simulated-on-premises-datacenter"></a>Implantar o datacenter local simulado
+
+1. Navegue até a pasta `identity/adds-forest` do repositório do GitHub.
+
+2. Abra o arquivo `onprem.json` . Pesquise instâncias de `adminPassword` e `Password` adicione valores para as senhas.
+
+3. Execute o seguinte comando e aguarde a conclusão da implantação:
+
+    ```bash
+    azbb -s <subscription_id> -g <resource group> -l <location> -p onprem.json --deploy
     ```
-   
-    Substitua `<subscription id>` por sua ID da assinatura do Azure.
-   
-    Para `<location>`, especifique uma região do Azure, como `eastus` ou `westus`.
-   
-    O parâmetro `<mode>` controla a granularidade da implantação e pode ser um dos seguintes valores:
-   
-   * `Onpremise`: implanta o ambiente local simulado.
-   * `Infrastructure`: implanta a infraestrutura e jump box da VNet no Azure.
-   * `CreateVpn`: implanta o gateway de rede virtual do Azure e conecta-o à rede local simulada.
-   * `AzureADDS`: implanta as VMs que atuam como servidores do Active Directory DS, implante o Active Directory nessas VMs e implanta o domínio no Azure.
-   * `WebTier`: implanta as VMs e o balanceador de carga na camada da Web.
-   * `Prepare`: implanta todas as implantações anteriores. **Essa é a opção recomendada se você não tem uma rede local existente, mas deseja implantar a arquitetura de referência completa descrita acima para teste ou avaliação.** 
-   * `Workload`: implanta as VMs e o balanceador de carga na camada de dados e comercial. Observe que essas VMs não são incluídas na implantação `Prepare`.
 
-4. Aguarde até que a implantação seja concluída. Se você estiver realizando a implantação de `Prepare`, isso levará várias horas.
-     
-5. Se você estiver usando a configuração local simulada, defina a relação de confiança de entrada:
-   
-   1. Conecte-se ao jump box (<em>ra-adtrust-mgmt-vm1</em> no grupo de recursos <em>ra-adtrust-security-rg</em>). Faça logon como <em>testuser</em> com a senha <em>AweS0me@PW</em>.
-   2. No jump box, abra uma sessão RDP na primeira VM no domínio <em>contoso.com</em> (o domínio local). Essa VM tem o endereço IP 192.168.0.4. O nome de usuário é <em>contoso\testuser</em> com a senha <em>AweS0me@PW</em>.
-   3. Baixe o script [incoming-trust.ps1][incoming-trust] e execute-o para criar a relação de confiança de entrada do *treyresearch.com*.
+### <a name="deploy-the-azure-vnet"></a>Implantar a VNET do Azure
 
-6. Se você estiver usando sua própria infraestrutura local:
-   
-   1. Baixe o script [incoming-trust.ps1][incoming-trust].
-   2. Edite o script e substitua o valor da variável `$TrustedDomainName` pelo nome do seu próprio domínio.
-   3. Execute o script.
+1. Abra o arquivo `azure.json` . Pesquise instâncias de `adminPassword` e `Password` adicione valores para as senhas.
 
-7. No jump-box, conecte-se à primeira VM no domínio <em>treyresearch.com</em> (o domínio na nuvem). Essa VM tem o endereço IP 10.0.4.4. O nome de usuário é <em>treyresearch\testuser</em> com a senha <em>AweS0me@PW</em>.
+2. No mesmo arquivo, procure por instâncias de `sharedKey` e insira as chaves compartilhadas para a conexão VPN. 
 
-8. Baixe o script [outgoing-trust.ps1][outgoing-trust] e execute-o para criar a relação de confiança de entrada do *treyresearch.com*. Se você estiver usando seus próprios computadores locais, edite o script primeiro. Definir a variável `$TrustedDomainName` para o nome do seu domínio local e especifique os endereços IP dos servidores do Active Directory DS para esse domínio na variável `$TrustedDomainDnsIpAddresses`.
+    ```bash
+    "sharedKey": "",
+    ```
 
-9. Aguarde alguns minutos para que as etapas anteriores sejam concluídas, conecte-se a uma VM local e execute as etapas descritas no artigo [Verificar uma relação de confiança][verify-a-trust] para determinar se a relação de confiança entre os domínios *contoso.com* e *treyresearch.com* está configurada corretamente.
+3. Execute o comando a seguir e aguarde a conclusão da implantação.
+
+    ```bash
+    azbb -s <subscription_id> -g <resource group> -l <location> -p onoprem.json --deploy
+    ```
+
+   Implante no mesmo grupo de recursos da VNET local.
+
+
+### <a name="test-the-ad-trust-relation"></a>Testar a relação de confiança do AD
+
+1. Use o portal do Azure, navegue até o grupo de recursos que você criou.
+
+2. Você pode usar o portal do Azure para encontrar a VM denominada `ra-adt-mgmt-vm1`.
+
+2. Clique em `Connect` para abrir uma sessão de área de trabalho remota para a VM. O nome de usuário é `contoso\testuser` e a senha é aquela especificada no arquivo de parâmetros `onprem.json`.
+
+3. De dentro de sua sessão de área de trabalho remota, abra outra sessão de área de trabalho remota para 192.168.0.4, que é o endereço IP da VM denominada `ra-adtrust-onpremise-ad-vm1`. O nome de usuário é `contoso\testuser` e a senha é aquela especificada no arquivo de parâmetros `azure.json`.
+
+4. De dentro da sessão da área de trabalho remota para `ra-adtrust-onpremise-ad-vm1`, vá para o **Gerenciador do Servidor** e clique em **Ferramentas** > **Domínios e Relações de Confiança do Active Directory**. 
+
+5. No painel esquerdo, clique com botão direito do contoso.com e selecione **Propriedades**.
+
+6. Clique na guia **Relações de Confiança**. Você deve ver treyresearch.net listado como uma relação de confiança recebida.
+
+![](./images/ad-forest-trust.png)
+
 
 ## <a name="next-steps"></a>Próximas etapas
 
@@ -144,6 +164,8 @@ Há uma solução disponível no [GitHub][github] para implantar essa arquitetur
 <!-- links -->
 [adds-extend-domain]: adds-extend-domain.md
 [adfs]: adfs.md
+[azure-cli-2]: /azure/install-azure-cli
+[azbb]: https://github.com/mspnp/template-building-blocks/wiki/Install-Azure-Building-Blocks
 
 [implementing-a-secure-hybrid-network-architecture]: ../dmz/secure-vnet-hybrid.md
 [implementing-a-secure-hybrid-network-architecture-with-internet-access]: ../dmz/secure-vnet-dmz.md

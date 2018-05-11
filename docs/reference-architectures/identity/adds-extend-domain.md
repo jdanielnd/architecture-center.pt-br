@@ -2,15 +2,15 @@
 title: Estender o AD DS (Active Directory Domain Services) para o Azure
 description: Estender o seu domínio do Active Directory local ao Azure
 author: telmosampaio
-ms.date: 04/13/2018
+ms.date: 05/02/2018
 pnp.series.title: Identity management
 pnp.series.prev: azure-ad
 pnp.series.next: adds-forest
-ms.openlocfilehash: bcd1e2b1b925a5d64665c5651c24589a77e39ec9
-ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
+ms.openlocfilehash: 763fffd321a1b50a562ef462dab59aafae717908
+ms.sourcegitcommit: 0de300b6570e9990e5c25efc060946cb9d079954
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/16/2018
+ms.lasthandoff: 05/03/2018
 ---
 # <a name="extend-active-directory-domain-services-ad-ds-to-azure"></a>Estender o AD DS (Active Directory Domain Services) para o Azure
 
@@ -104,7 +104,7 @@ Uma implantação para essa arquitetura está disponível no [GitHub][github]. O
 
 ### <a name="prerequisites"></a>pré-requisitos
 
-1. Clone, crie um fork ou baixe o arquivo zip para o [arquiteturas de referência][ref-arch-repo] repositório GitHub.
+1. Clone, crie um fork ou baixe o arquivo zip das [arquiteturas de referência][github] no repositório GitHub.
 
 2. Instale a [CLI do Azure 2.0][azure-cli-2].
 
@@ -118,34 +118,11 @@ Uma implantação para essa arquitetura está disponível no [GitHub][github]. O
 
 ### <a name="deploy-the-simulated-on-premises-datacenter"></a>Implantar o datacenter local simulado
 
-1. Navegue até a pasta `identity/adds-extend-domain` do repositório de arquiteturas de referência.
+1. Navegue até a pasta `identity/adds-extend-domain` do repositório do GitHub.
 
-2. Abra o arquivo `onprem.json` . Procure `adminPassword` e adicione valores para as senhas. Há três instâncias no arquivo.
+2. Abra o arquivo `onprem.json` . Pesquise instâncias de `adminPassword` e `Password` adicione valores para as senhas.
 
-    ```bash
-    "adminUsername": "testuser",
-    "adminPassword": "<password>",
-    ```
-
-3. No mesmo arquivo, procure `protectedSettings` e adicione valores para as senhas. Há duas instâncias de `protectedSettings`, uma para cada servidor do AD.
-
-    ```bash
-    "protectedSettings": {
-      "configurationArguments": {
-        ...
-        "AdminCreds": {
-          "UserName": "testadminuser",
-          "Password": "<password>"
-        },
-        "SafeModeAdminCreds": {
-          "UserName": "testsafeadminuser",
-          "Password": "<password>"
-        }
-      }
-    }
-    ```
-
-4. Execute o seguinte comando e aguarde a conclusão da implantação:
+3. Execute o seguinte comando e aguarde a conclusão da implantação:
 
     ```bash
     azbb -s <subscription_id> -g <resource group> -l <location> -p onprem.json --deploy
@@ -153,38 +130,15 @@ Uma implantação para essa arquitetura está disponível no [GitHub][github]. O
 
 ### <a name="deploy-the-azure-vnet"></a>Implantar a VNET do Azure
 
-1. Abra o arquivo `azure.json` .  Procure `adminPassword` e adicione valores para as senhas. Há três instâncias no arquivo.
+1. Abra o arquivo `azure.json` .  Pesquise instâncias de `adminPassword` e `Password` adicione valores para as senhas. 
 
-    ```bash
-    "adminUsername": "testuser",
-    "adminPassword": "<password>",
-    ```
-
-2. No mesmo arquivo, procure `protectedSettings` e adicione valores para as senhas. Há duas instâncias de `protectedSettings`, uma para cada servidor do AD.
-
-    ```bash
-    "protectedSettings": {
-      "configurationArguments": {
-        ...
-        "AdminCreds": {
-          "UserName": "testadminuser",
-          "Password": "<password>"
-        },
-        "SafeModeAdminCreds": {
-          "UserName": "testsafeadminuser",
-          "Password": "<password>"
-        }
-      }
-    }
-    ```
-
-3. Em `sharedKey`, insira uma chave compartilhada para a conexão VPN. Há duas instâncias de `sharedKey` no arquivo de parâmetros.
+2. No mesmo arquivo, procure por instâncias de `sharedKey` e insira as chaves compartilhadas para a conexão VPN. 
 
     ```bash
     "sharedKey": "",
     ```
 
-4. Execute o comando a seguir e aguarde a conclusão da implantação.
+3. Execute o comando a seguir e aguarde a conclusão da implantação.
 
     ```bash
     azbb -s <subscription_id> -g <resource group> -l <location> -p onoprem.json --deploy
@@ -196,15 +150,17 @@ Uma implantação para essa arquitetura está disponível no [GitHub][github]. O
 
 Após a conclusão da implantação, você pode testar a conexão do ambiente simulado local para a VNET do Azure.
 
-1. Você pode usar o portal do Azure para encontrar a VM denominada `ra-onpremise-mgmt-vm1`.
+1. Use o portal do Azure, navegue até o grupo de recursos que você criou.
 
-2. Clique em `Connect` para abrir uma sessão de área de trabalho remota para a VM. O nome de usuário é `contoso\testuser` e a senha é aquela especificada no arquivo de parâmetros `onprem.json`.
+2. Encontre a VM denominada `ra-onpremise-mgmt-vm1`.
 
-3. De dentro de sua sessão de área de trabalho remota, abra outra sessão de área de trabalho remota para 10.0.4.4, que é o endereço IP da VM denominada `adds-vm1`. O nome de usuário é `contoso\testuser` e a senha é aquela especificada no arquivo de parâmetros `azure.json`.
+3. Clique em `Connect` para abrir uma sessão de área de trabalho remota para a VM. O nome de usuário é `contoso\testuser` e a senha é aquela especificada no arquivo de parâmetros `onprem.json`.
 
-4. De dentro da sessão da área de trabalho remota para `adds-vm1`, vá para o **Gerenciador do Servidor** e clique em **Adicionar outros servidores para gerenciar.** 
+4. De dentro de sua sessão de área de trabalho remota, abra outra sessão de área de trabalho remota para 10.0.4.4, que é o endereço IP da VM denominada `adds-vm1`. O nome de usuário é `contoso\testuser` e a senha é aquela especificada no arquivo de parâmetros `azure.json`.
 
-5. Na guia **Active Directory**, clique em **Localizar agora**. Você deve ver uma lista das VMs do AD, do AD DS e da Web.
+5. De dentro da sessão da área de trabalho remota para `adds-vm1`, vá para o **Gerenciador do Servidor** e clique em **Adicionar outros servidores para gerenciar.** 
+
+6. Na guia **Active Directory**, clique em **Localizar agora**. Você deve ver uma lista das VMs do AD, do AD DS e da Web.
 
    ![](./images/add-servers-dialog.png)
 
