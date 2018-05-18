@@ -3,11 +3,11 @@ title: Árvore de decisão para serviços de computação do Azure
 description: Um fluxograma para selecionar um serviço de computação
 author: MikeWasson
 ms.date: 04/21/2018
-ms.openlocfilehash: e601dcb653ed1809ea3f9bbda8db8b40efb460a5
-ms.sourcegitcommit: 3846a0ab2b2b2552202a3c9c21af0097a145ffc6
+ms.openlocfilehash: 3dcfbd156d4fced863a56bcc8bb74483aa665f9f
+ms.sourcegitcommit: 7ced70ebc11aa0df0dc0104092d3cc6ad5c28bd6
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/29/2018
+ms.lasthandoff: 05/11/2018
 ---
 # <a name="decision-tree-for-azure-compute-services"></a>Árvore de decisão para serviços de computação do Azure
 
