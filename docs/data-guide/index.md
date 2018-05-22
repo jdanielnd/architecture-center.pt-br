@@ -5,11 +5,11 @@ author: zoinerTejada
 ms:date: 02/12/2018
 layout: LandingPage
 ms.topic: landing-page
-ms.openlocfilehash: 0975d056aa971c627ca91c9fc05c4e16e07b6fc0
-ms.sourcegitcommit: d08f6ee27e1e8a623aeee32d298e616bc9bb87ff
+ms.openlocfilehash: 63c1cca45fe9d99b5d0679360ef487c3a42da956
+ms.sourcegitcommit: bb348bd3a8a4e27ef61e8eee74b54b07b65dbf98
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 05/07/2018
+ms.lasthandoff: 05/21/2018
 ---
 # <a name="azure-data-architecture-guide"></a>Guia de arquitetura de dados do Azure
 
