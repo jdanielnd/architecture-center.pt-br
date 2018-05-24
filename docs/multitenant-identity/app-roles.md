@@ -6,11 +6,11 @@ ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: signup
 pnp.series.next: authorize
-ms.openlocfilehash: a39c64f003c26f860086701dd988a8bb21fab5bf
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: ec563936e5f00aba79d65844762feeed97ad547d
+ms.sourcegitcommit: bb348bd3a8a4e27ef61e8eee74b54b07b65dbf98
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 05/21/2018
 ---
 # <a name="application-roles"></a>Funções de aplicativo
 
@@ -53,7 +53,7 @@ As desvantagens:
 ### <a name="implementation"></a>Implementação
 **Defina as funções.** O provedor de SaaS declara as funções de aplicativo no [manifesto do aplicativo]. Por exemplo, esta é a entrada do manifesto do aplicativo Surveys:
 
-```
+```json
 "appRoles": [
   {
     "allowedMemberTypes": [
@@ -123,7 +123,7 @@ As desvantagens:
 ### <a name="implementation"></a>Implementação
 No manifesto do aplicativo, defina a propriedade `groupMembershipClaims` como "SecurityGroup". Isso é necessário para obter as declarações de associação de grupo do AAD.
 
-```
+```json
 {
    // ...
    "groupMembershipClaims": "SecurityGroup",
