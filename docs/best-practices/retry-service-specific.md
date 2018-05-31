@@ -4,11 +4,12 @@ description: Diretriz específica de serviço para configurar o mecanismo de rep
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: d03cc9dd1af92a91bbfab1ebc8c438e6312eeb49
-ms.sourcegitcommit: d08f6ee27e1e8a623aeee32d298e616bc9bb87ff
+ms.openlocfilehash: 65206c5f39a74d228c7eaa0fea0c5b1b0710b22f
+ms.sourcegitcommit: bb348bd3a8a4e27ef61e8eee74b54b07b65dbf98
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 05/07/2018
+ms.lasthandoff: 05/21/2018
+ms.locfileid: "34423010"
 ---
 # <a name="retry-guidance-for-specific-services"></a>Repetir as diretrizes para serviços específicos
 
@@ -855,7 +856,7 @@ As tabelas a seguir mostram as configurações padrão para as políticas de rep
 
 | **Configuração** | **Valor padrão** | **Significado** |
 | --- | --- | --- |
-| MaximumExecutionTime | 120 segundos | Tempo máximo de execução para a solicitação, incluindo todas as tentativas de repetição potenciais. |
+| MaximumExecutionTime | Nenhum | Tempo máximo de execução para a solicitação, incluindo todas as tentativas de repetição potenciais. Se não for especificada, a quantidade de tempo que uma solicitação pode levar é ilimitada. Em outras palavras, a solicitação pode travar. |
 | ServerTimeout | Nenhum | O intervalo do tempo limite do servidor para a solicitação (o valor é arredondado para segundos). Se não for especificado, será usado o valor padrão para todas as solicitações ao servidor. Normalmente, a melhor opção é omitir essa configuração para que o padrão de servidor seja usado. | 
 | LocationMode | Nenhum | Se a conta de armazenamento for criada com a opção de replicação RA-GRS (armazenamento com redundância geográfica com acesso de leitura), você poderá usar o modo de local para indicar qual local deve receber a solicitação. Por exemplo, se **PrimaryThenSecondary** for especificado, as solicitações sempre serão enviadas para o local primário primeiro. Se uma solicitação falhar, ela será enviada para o local secundário. |
 | RetryPolicy | ExponentialPolicy | Veja abaixo os detalhes de cada opção. |
