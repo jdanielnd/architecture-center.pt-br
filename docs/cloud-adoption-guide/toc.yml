@@ -10,6 +10,8 @@
           items:
             - name: 'Explicador: como funciona o Azure?'
               href: adoption-intro/azure-explainer.md
+            - name: 'Explicação: o que é a governança dos recursos da nuvem'
+              href: adoption-intro/governance-explainer.md
         - name: Noções básicas sobre a identidade digital no Azure
           items:
             - name: 'Explicador: o que é um locatário do Azure Active Directory?'
@@ -62,3 +64,8 @@
                   href: /azure/virtual-machines/linux/quick-create-portal?toc=/azure/architecture/cloud-adoption-guide/toc.json
                 - name: 'Diretrizes: práticas recomendadas para implantar uma VM do Linux no Azure'
                   href: /azure/architecture/reference-architectures/virtual-machines-linux/single-vm?toc=/azure/architecture/cloud-adoption-guide/toc.json
+    - name: Adoção intermédia do Azure
+      href: intermediate-stage/overview.md
+      items:
+        - name: Guia de design da governança
+          href: intermediate-stage/governance-design-guide.md
