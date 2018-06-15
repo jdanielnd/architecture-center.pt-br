@@ -127,12 +127,16 @@
   items:
     - name: Azure para profissionais do AWS
       href: aws-professional/index.md
+    - name: Criar microsserviços no Azure
+      href: ./microservices/index.md
     - name: Gerenciar a identidade em aplicativos multilocatários
       href: multitenant-identity/index.md
-    - name: Migrar dos Serviços de Nuvem para o Service Fabric
-      href: service-fabric/migrate-from-cloud-services.md
-    - name: Refatorar um Aplicativo Azure Service Fabric migrado a partir dos Serviços de Nuvem do Azure
-      href: service-fabric/refactor-migrated-app.md
+    - name: Migrar para o Service Fabric a partir dos Serviços de Nuvem
+      items:
+        - name: Migrar um aplicativo dos Serviços de Nuvem para o Service Fabric
+          href: service-fabric/migrate-from-cloud-services.md
+        - name: Refatorar um aplicativo do Service Fabric
+          href: service-fabric/refactor-migrated-app.md
     - name: Estender a funcionalidade de modelo do Azure Resource Manager
       href: building-blocks/extending-templates/index.md
 - name: Recursos
