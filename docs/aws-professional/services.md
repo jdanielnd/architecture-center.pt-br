@@ -5,11 +5,12 @@ keywords: comparação de serviços de nuvem, serviços de nuvem comparados, mul
 author: lbrader
 ms.date: 11/30/2017
 pnp.series.title: Azure for AWS Professionals
-ms.openlocfilehash: 5a564c7b4825340deb3c6deb037f755108cb0896
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: 096721348d525eb95767ab3cf188d21a32236cc6
+ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/06/2018
+ms.lasthandoff: 06/11/2018
+ms.locfileid: "35253036"
 ---
 # <a name="aws-to-azure-services-comparison"></a>Comparação entre os serviços do AWS e do Azure
 
@@ -174,7 +175,7 @@ Para obter uma visão geral do Azure para usuários AWS, consulte [Introdução 
 |        Serviços de diretório        | AWS Directory Service + Windows Server Active Directory no AWS |                                       [Azure Active Directory Domain Services + Windows Server Active Directory no Azure IaaS](https://azure.microsoft.com/services/active-directory/)                                        | Solução abrangente de gerenciamento de acesso e de identidade para nuvem que fornece um robusto conjunto de funcionalidades para gerenciar usuários e grupos. Ele ajuda a proteger o acesso a aplicativos na nuvem e locais, incluindo serviços online da Microsoft como o Office 365 e muitos aplicativos SaaS não Microsoft. |
 |     <strong>&nbsp;</strong>      |                            Cognito                             |                                                                   [Azure Active Directory B2C](https://azure.microsoft.com/services/active-directory-b2c/)                                                                    |                                                                          Um serviço de gerenciamento de identidade global e altamente disponível para aplicativos voltados para o consumidor que pode ser dimensionado para centenas de milhões de identidades.                                                                           |
 |     <strong>&nbsp;</strong>      |                     AWS Directory Service                      |                                                                 [Windows Server Active Directory](https://azure.microsoft.com/services/active-directory-ds/)                                                                  |                                                                                                                Serviços para oferecer suporte ao Microsoft Active Directory na nuvem.                                                                                                                |
-|            Conformidade            |                          AWS Artifact                          |                                                                   [Portal de confiança do serviço Microsoft](https://www.microsoft.com/TrustCenter/STP/default.aspx)                                                                    |                                                                                              Fornece acesso a relatórios de auditoria, guias de conformidade e documentos de confiança dos serviços de nuvem.                                                                                              |
+|            Conformidade            |                          AWS Artifact                          |                                                                   [Plataforma de Confiança do Serviço](https://www.microsoft.com/en-us/TrustCenter/STP/default.aspx)                                                                    |                                                                                              Fornece acesso a relatórios de auditoria, guias de conformidade e documentos de confiança dos serviços de nuvem.                                                                                              |
 |             Segurança             |                           AWS Shield                           |                                                      [Serviço de Proteção contra DDoS do Azure (Versão prévia)](https://azure.microsoft.com/blog/azure-ddos-protection-service-preview/)                                                       |                                                                                                  Fornece serviços de nuvem com proteção contra ataques de negação de serviço distribuído (DDoS).                                                                                                   |
 
 ## <a name="developer-tools"></a>Ferramentas de desenvolvedor

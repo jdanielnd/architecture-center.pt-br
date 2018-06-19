@@ -2,11 +2,12 @@
 title: Pilares da qualidade de software
 description: Descreve os cinco pilares de qualidade de software, escalabilidade, disponibilidade, resiliência, gerenciamento e segurança.
 author: MikeWasson
-ms.openlocfilehash: 1d5e30602cafa0d39f92de3101974e77ae258595
-ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
+ms.openlocfilehash: 117706046ca1a9b7f3203a99737347809d0c323f
+ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/30/2018
+ms.lasthandoff: 06/11/2018
+ms.locfileid: "35252780"
 ---
 # <a name="pillars-of-software-quality"></a>Pilares da qualidade de software 
 
@@ -83,7 +84,7 @@ Resiliência é a capacidade de um sistema de se recuperar de falhas e continuar
 No desenvolvimento de aplicativos tradicionais, o foco era em como reduzir o MTBF (tempo médio entre falhas). Era feito um esforço para impedir que o sistema falhasse. Em computação em nuvem, uma mentalidade diferente é necessária devido a vários fatores:
 
 - Sistemas distribuídos são complexos e uma falha em um ponto potencialmente pode se disseminar em cascata por todo o sistema.
-- Os custos para ambientes em nuvem são mantidos baixos com o uso de hardware de 	mercadoria, de modo que falhas de hardware ocasionais devem ser esperadas. 
+- Os custos para ambientes em nuvem são mantidos baixos com o uso de hardware de mercadoria, portanto falhas ocasionais de hardware devem ser esperadas. 
 - Aplicativos geralmente dependem de serviços externos, que podem ficar temporariamente indisponíveis ou limitar usuários de alto volume. 
 - Os usuários atuais esperam que um aplicativo esteja disponível 24/7 sem nunca ficar offline.
 
@@ -93,7 +94,7 @@ Todos esses fatores significam que os aplicativos de nuvem devem ser criados par
 - Os Azure Managed Disks são colocados automaticamente em unidades de escala de armazenamento diferentes para limitar os efeitos das falhas de hardware.
 - VMs em um conjunto de disponibilidade são distribuídas entre vários domínios de falha. Um domínio de falha é um grupo de VMs que compartilham uma mesma fonte de energia e um mesmo comutador de rede. Distribuir as VMs entre domínios de falha limita o impacto de falhas de hardware, indisponibilidades da rede ou interrupções de energia.
 
-Dito isso, você ainda precisa criar resiliência para seu aplicativo. Estratégias de resiliência podem ser aplicadas em todos os níveis da arquitetura. Algumas mitigações de risco têm natureza mais tática &mdash; por exemplo, repetir uma chamada remota após uma falha transitória de rede. Outras mitigações de risco são mais estratégicas, como fazer failover de todo o aplicativo para uma região secundária. Táticas de mitigação de risco podem fazer uma grande diferença. Embora seja raro que toda a região sofra uma interrupção, problemas transitórios, como o congestionamento de rede, são mais comuns &mdash; assim, foque primeiro nisso. Também é importante ter o monitoramento e o diagnóstico certos, tanto para detectar falhas quando elas ocorrem quanto para localizar a causa raiz.
+Dito isso, você ainda precisa criar resiliência em seu aplicativo. Estratégias de resiliência podem ser aplicadas em todos os níveis da arquitetura. Algumas mitigações de risco têm natureza mais tática &mdash; por exemplo, repetir uma chamada remota após uma falha transitória de rede. Outras mitigações de risco são mais estratégicas, como fazer failover de todo o aplicativo para uma região secundária. Táticas de mitigação de risco podem fazer uma grande diferença. Embora seja raro que toda a região sofra uma interrupção, problemas transitórios, como o congestionamento de rede, são mais comuns &mdash; assim, foque primeiro nisso. Também é importante ter o monitoramento e o diagnóstico certos, tanto para detectar falhas quando elas ocorrem quanto para localizar a causa raiz.
 
 Ao criar um aplicativo para ser resiliente, você deve entender seus requisitos de disponibilidade. Quanto tempo de inatividade é aceitável? Trata-se parcialmente de uma questão de custo. Quanto o tempo de inatividade em potencial custará para sua empresa? Quanto você deve investir para tornar o aplicativo altamente disponível?
 

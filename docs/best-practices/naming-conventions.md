@@ -4,11 +4,12 @@ description: Convenções de nomenclatura para recursos do Azure. Como nomear m�
 author: telmosampaio
 ms.date: 05/18/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: df536a4b34a29b93edc4e03fa1142e20fe84a6a7
-ms.sourcegitcommit: bb348bd3a8a4e27ef61e8eee74b54b07b65dbf98
+ms.openlocfilehash: 42d91da3eacdcda66b82dff82ba444170c11d7d1
+ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 05/21/2018
+ms.lasthandoff: 06/11/2018
+ms.locfileid: "35253053"
 ---
 # <a name="naming-conventions"></a>Convenções de nomenclatura
 
@@ -166,7 +167,7 @@ Há dois casos de uso primário para contas de armazenamento: backup de discos p
 > [!TIP]
 > Contas de armazenamento — quer seja para dados ou discos — devem seguir uma convenção de nomenclatura que permita que várias contas de armazenamento sejam aproveitadas (ou seja, sempre usar um sufixo numérico).
 
-É possível configurar um nome de domínio personalizado para acessar dados de blob em sua Conta de Armazenamento do Microsoft Azure. O ponto de extremidade padrão para o serviço Blob é https://<name>.blob.core.windows.net`.
+É possível configurar um nome de domínio personalizado para acessar dados de blob em sua Conta de Armazenamento do Microsoft Azure. O ponto de extremidade padrão para o serviço Blob é https://\<nome\>.blob.core.windows.net.
 
 Porém, se você mapear um domínio personalizado (como www.contoso.com) para o ponto de extremidade do blob de sua conta de armazenamento, também poderá acessar dados do blob em sua conta de armazenamento usando esse domínio. Por exemplo, com um nome de domínio personalizado, `http://mystorage.blob.core.windows.net/mycontainer/myblob` pode ser acessada como `http://www.contoso.com/mycontainer/myblob`.
 

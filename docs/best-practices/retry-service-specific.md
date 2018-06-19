@@ -4,12 +4,12 @@ description: Diretriz específica de serviço para configurar o mecanismo de rep
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 65206c5f39a74d228c7eaa0fea0c5b1b0710b22f
-ms.sourcegitcommit: bb348bd3a8a4e27ef61e8eee74b54b07b65dbf98
+ms.openlocfilehash: f02843f179671da04bc2f09326b58075b432ba95
+ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 05/21/2018
-ms.locfileid: "34423010"
+ms.lasthandoff: 06/11/2018
+ms.locfileid: "35253070"
 ---
 # <a name="retry-guidance-for-specific-services"></a>Repetir as diretrizes para serviços específicos
 
@@ -38,6 +38,9 @@ A tabela a seguir resume os recursos de repetição para os serviços do Azure d
 
 ## <a name="azure-active-directory"></a>Azure Active Directory
 O Azure Active Directory (Azure AD) é uma solução abrangente de nuvem para gerenciamento de acesso e identidade que combina serviços principais de diretório, governança avançada de identidade, segurança e gerenciamento de acesso a aplicativos. O AD do Azure também oferece aos desenvolvedores uma plataforma de gerenciamento de identidade para fornecer controle de acesso aos respectivos aplicativos, com base nas regras e políticas centralizadas.
+
+> [!NOTE]
+> Para obter diretrizes sobre a repetição em pontos de extremidade de identidade de serviço gerenciado, veja [como usar uma MSI (Identidade de Serviço Gerenciada) de VM do Azure para aquisição de token](/azure/active-directory/managed-service-identity/how-to-use-vm-token#error-handling).
 
 ### <a name="retry-mechanism"></a>Mecanismo de repetição
 Na Biblioteca de autenticação do Active Directory (ADAL) há um mecanismo interno de repetição para o Azure Active Directory. Para evitar bloqueios inesperados, recomendamos que o ADAL lide com as repetições e **não** permita que as bibliotecas de terceiros ou o código do aplicativo repitam as conexões com falhas. 

@@ -3,11 +3,12 @@ title: Data warehouse e data marts
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 552cdfad2d571c93f83bc1e4ff0d09ac12d0b6a4
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: 9b90d77ce1a81cd4a7532f5d4230ada8b4991d13
+ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/06/2018
+ms.lasthandoff: 06/11/2018
+ms.locfileid: "35252798"
 ---
 # <a name="data-warehousing-and-data-marts"></a>Data warehouse e data marts
 
@@ -142,7 +143,7 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 | --- | --- | --- | --- | --- | --- | -- |
 | Servidores regionais redundantes para alta disponibilidade  | sim | sim | sim | Não | Não  |
 | Dá suporte à expansão da consulta (consultas distribuídas)  | Não  | Não  | sim | sim | sim |
-| Escalabilidade dinâmica (escalar verticalmente)  | sim | Não  | Sim <sup>1</sup> | Não  | Não  |
+| Dimensionamento dinâmico | sim | Não  | Sim <sup>1</sup> | Não  | Não  |
 | Dá suporte ao cache em memória de dados | sim |  sim | Não  | sim | sim |
 
 [1] O SQL Data Warehouse permite escalar ou reduzir verticalmente ajustando o número de DWUs (unidades de data warehouse). Consulte [Gerenciar o poder de computação no SQL Data Warehouse do Azure](/azure/sql-data-warehouse/sql-data-warehouse-manage-compute-overview).

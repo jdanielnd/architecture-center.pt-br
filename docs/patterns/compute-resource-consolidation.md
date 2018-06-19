@@ -7,11 +7,12 @@ ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - design-implementation
-ms.openlocfilehash: 85191fc630549559f8a1395e5a8622a7a6140a2d
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 6e05a30245fbf5183a4e50a54650505f5a5f2aa8
+ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 06/11/2018
+ms.locfileid: "35252917"
 ---
 # <a name="compute-resource-consolidation-pattern"></a>Padrão de consolidação de recursos de computação
 
@@ -88,7 +89,7 @@ Ao compilar um serviço de nuvem no Azure, é possível consolidar o processamen
 
 A função responsável por iniciar e interromper as tarefas. Quando o controlador de malha do Azure carrega uma função, isso eleva o evento `Start` para a função. Você pode substituir o `OnStart` método da classe`WebRole` ou `WorkerRole` para lidar com esse evento, talvez para inicializar os dados e outros recursos que as tarefas desse método dependem.
 
-Quando o `OnStart `método for concluído, a função poderá iniciar a resposta às solicitações. É possível localizar mais informações e diretrizes sobre como usar os métodos `OnStart` e `Run` em uma função na seção [Processos de inicialização do aplicativo](https://msdn.microsoft.com/library/ff803371.aspx#sec16) nas diretrizes [Mover aplicativos para a nuvem](https://msdn.microsoft.com/library/ff728592.aspx).
+Quando o método `OnStart` for concluído, a função poderá começar a responder às solicitações. É possível localizar mais informações e diretrizes sobre como usar os métodos `OnStart` e `Run` em uma função na seção [Processos de inicialização do aplicativo](https://msdn.microsoft.com/library/ff803371.aspx#sec16) nas diretrizes [Mover aplicativos para a nuvem](https://msdn.microsoft.com/library/ff728592.aspx).
 
 > Mantenha o código no método `OnStart` o mais conciso possível. O Azure não impõe qualquer limite ao tempo necessário para que esse método seja concluído, mas a função não poderá iniciar a responder às solicitações de rede enviadas até que esse método seja concluído.
 

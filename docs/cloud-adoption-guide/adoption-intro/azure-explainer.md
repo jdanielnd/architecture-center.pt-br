@@ -2,11 +2,12 @@
 title: 'Explicador: como funciona o Azure?'
 description: Explica o funcionamento interno do Azure
 author: petertay
-ms.openlocfilehash: b4830fec69ac6d256d934d91ea2c295219925a9a
-ms.sourcegitcommit: ea7108f71dab09175ff69322874d1bcba800a37a
+ms.openlocfilehash: 1cebcc001b8d2ae93d8b0271c48d54617281c7c2
+ms.sourcegitcommit: b3d74d8a89b2224fc796ce0e89cea447af43a0d4
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/17/2018
+ms.lasthandoff: 06/11/2018
+ms.locfileid: "35290502"
 ---
 # <a name="explainer-how-does-azure-work"></a>Explicador: como funciona o Azure?
 
@@ -28,7 +29,7 @@ Portanto, em termos simples, o Azure é uma grande coleção de servidores e har
 
 ## <a name="next-steps"></a>Próximas etapas
 
-* Agora que você entendeu o funcionamento interno do Azure, a primeira etapa para a adoção do Azure é [entender a identidade digital no Azure](tenant-explainer.md). Em seguida, você estará pronto para [criar seu primeiro usuário no Azure AD][docs-add-users-to-aad].
+* Agora que você entende o funcionamento interno do Azure, saiba mais sobre a [governança de acesso de recursos](governance-explainer.md). Em seguida, passe para a primeira etapa de adoção do Azure, que é [entender a identidade digital no Azure](tenant-explainer.md). Depois de concluir esta etapa, você está pronto para [criar seu primeiro usuário no Azure AD][docs-add-users-to-aad].
 
 <!-- Links -->
 

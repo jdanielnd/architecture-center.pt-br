@@ -2,11 +2,12 @@
 title: Escolher o armazenamento de dados correto
 description: Visão geral de escolha dos armazenamento de dados no Azure
 author: MikeWasson
-ms.openlocfilehash: 3a5780c4a2dbd8a41e9c7bfa7f68d8a7916a7374
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 4836ae1997f86d35d8ab8aa66bbc63b4ef826d23
+ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 06/11/2018
+ms.locfileid: "35252627"
 ---
 # <a name="choose-the-right-data-store"></a>Escolher o armazenamento de dados correto
 
@@ -69,11 +70,11 @@ Muitos bancos de dados de documentos fornecem suporte a atualizações in loco, 
 
 Serviço do Azure relevante: [Cosmos DB][cosmosdb]
 
-## <a name="graph-databases"></a>Bancos de dados de gráfico
+## <a name="graph-databases"></a>Bancos de dados de grafo
 
 Um banco de dados de gráfico armazena dois tipos de informações, nós e bordas. Você pode pensar em nós como entidades. Bordas que especificam as relações entre os nós. Ambos os nós e as bordas podem ter propriedades que fornecem informações sobre esse nó ou borda, semelhante às colunas em uma tabela. As bordas também podem ter uma direção indicando a natureza do relacionamento.
 
-O objetivo de um banco de dados de gráfico é permitir que um aplicativo execute eficientemente consultas que atravessam a rede de nós e arestas e analise as relações entre entidades. O diagrama a seguir mostra o banco de dados de pessoal de uma organização estruturado como um gráfico. As entidades são funcionários e departamentos, e as bordas indicam os relacionamentos de relatórios e o departamento em que os funcionários trabalham. Neste gráfico, as setas nas bordas mostram a direção das relações.
+O objetivo de um banco de dados de gráfico é permitir que um aplicativo execute eficientemente consultas que atravessam a rede de nós e arestas e analise as relações entre entidades. O diagrama a seguir mostra o banco de dados de pessoal de uma organização estruturado como um grafo. As entidades são funcionários e departamentos, e as bordas indicam os relacionamentos de relatórios e o departamento em que os funcionários trabalham. Neste gráfico, as setas nas bordas mostram a direção das relações.
  
 ![](./images/graph.png)
 

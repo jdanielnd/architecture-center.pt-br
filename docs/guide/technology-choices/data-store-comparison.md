@@ -2,11 +2,12 @@
 title: Critérios para escolher um armazenamento de dados
 description: Visão geral das opções de computação do Azure
 author: MikeWasson
-ms.openlocfilehash: 9cb2f77b854a38450490bc96bf0b6a2998ceb1c7
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: 70f746f80c29623004620d83eb38747777df7f84
+ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/06/2018
+ms.lasthandoff: 06/11/2018
+ms.locfileid: "35252866"
 ---
 # <a name="criteria-for-choosing-a-data-store"></a>Critérios para escolher um armazenamento de dados
 
@@ -330,7 +331,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
 <tr><td><strong>Carga de trabalho</strong></td>
     <td>
         <ul>
-            <li>Um proporção predominante das operações (95% a 99%) são gravações.</li>
+            <li>Um proporção predominante das operações (95% a 99%) é composta por gravações.</li>
             <li>Os registros são geralmente anexados sequencialmente em ordem cronológica.</li>
             <li>As atualizações são raras.</li>
             <li>As exclusões ocorrem em massa e são realizadas em blocos ou registros contíguos.</li>

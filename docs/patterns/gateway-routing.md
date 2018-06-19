@@ -3,11 +3,12 @@ title: Padrão de roteamento de gateway
 description: Faça o roteamento de solicitações para vários serviços usando um único ponto de extremidade.
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: 53239b23cfd98fad1edc38ca37c2274d5a9d7a0f
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: ea0bc4d31b745043a7ac3afb277dfc46d87ff109
+ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 06/11/2018
+ms.locfileid: "35252593"
 ---
 # <a name="gateway-routing-pattern"></a>Padrão de roteamento de gateway
 

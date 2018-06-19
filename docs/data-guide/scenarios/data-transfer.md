@@ -3,11 +3,12 @@ title: Escolhendo uma tecnologia de transferência de dados
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: bb0732b0f771a4c9e1a4e565875576c08484490a
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: 53dcf8a69ad8ae100dbdbb230a9280efd419342a
+ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 06/11/2018
+ms.locfileid: "35252746"
 ---
 # <a name="transferring-data-to-and-from-azure"></a>Transferindo dados bidirecionalmente no Azure
 
@@ -18,31 +19,31 @@ Há várias opções de transferência de dados bidirecionalmente no Azure, depe
 O uso do hardware físico para transferir dados para o Azure é uma boa opção quando:
 
 - A rede está lenta ou não é confiável.
-- A obtenção da largura de banda de rede adicional é cara.
+- O custo da obtenção de mais largura de banda para a rede é proibitivo.
 - As políticas organizacionais ou de segurança não permitem conexões de saída ao lidar com os dados confidenciais. 
 
-Se a principal preocupação é a duração de transferência dos dados, é recomendável executar um teste para verificar se a transferência de rede é realmente mais lenta do que o transporte físico.
+Se a principal preocupação for o tempo necessário para a transferência dos dados, é recomendável executar um teste para verificar se a transferência pela rede é realmente mais lenta do que o transporte físico.
 
 Há duas opções principais para o transporte físico de dados para o Azure:
-- **Importação/Exportação do Azure**. O [serviço de Importação/Exportação do Azure](/azure/storage/common/storage-import-export-service) permite que você transfira grandes quantidades de dados com segurança para o Armazenamento de Blobs do Azure pelo envio de HDDs ou SDDs SATA internos para um datacenter do Azure. Também use esse serviço para transferir dados do Armazenamento do Azure para unidades de disco rígido e enviá-los a você para o carregamento local.
+- **Importação/Exportação do Azure**. O [serviço de Importação/Exportação do Azure](/azure/storage/common/storage-import-export-service) permite que você transfira grandes quantidades de dados com segurança para o Armazenamento de Blobs do Azure pelo envio de HDDs ou SDDs SATA internos para um datacenter do Azure. Use esse serviço também para transferir dados do Armazenamento do Azure para unidades de disco rígido e envie essas unidades a você para o armazenamento local.
 
-- **Azure Data Box**. O [Azure Data Box](https://azure.microsoft.com/services/storage/databox/) é um dispositivo fornecido pela Microsoft que funciona de modo muito semelhante ao serviço de Importação/Exportação do Azure. A Microsoft fornece um dispositivo proprietário, seguro e de transferência resistente a adulterações e cuida da logística de ponta a ponta, que você pode controlar por meio do portal. Um benefício do serviço Azure Data Box é a facilidade de uso. Você não precisa comprar várias unidades de disco rígido, prepará-los e transferir arquivos para cada uma. O Azure Data Box é compatível com vários parceiros líderes do setor do Azure para facilitar a utilização perfeita do transporte offline para a nuvem de seus produtos. 
+- **Azure Data Box**. O [Azure Data Box](https://azure.microsoft.com/services/storage/databox/) é um dispositivo fornecido pela Microsoft que funciona de modo muito semelhante ao serviço de Importação/Exportação do Azure. A Microsoft fornece um dispositivo proprietário, seguro e de transferência resistente a adulterações e cuida da logística de ponta a ponta, que você pode controlar por meio do portal. Um benefício do serviço Azure Data Box é a facilidade de uso. Você não precisa comprar várias unidades de disco rígido, prepará-las e transferir arquivos para cada uma delas. O Azure Data Box é compatível com vários parceiros do Azure, líderes do setor, para facilitar o transporte offline ininterrupto entre o produto e a nuvem. 
 
 ## <a name="command-line-tools-and-apis"></a>Ferramentas de linha de comando e APIs
 
 Considere estas opções quando desejar fazer uma transferência de dados programática e com script.
 
-- **CLI do Azure**. A [CLI do Azure](/azure/hdinsight/hdinsight-upload-data#commandline) é uma ferramenta de multiplaforma que permite que você gerencie os serviços do Azure e carregue dados para o Armazenamento do Azure. 
+- **CLI do Azure**. A [CLI do Azure](/azure/hdinsight/hdinsight-upload-data#commandline) é uma ferramenta para várias plataformas que permite que você gerencie os serviços do Azure e carregue dados no Armazenamento do Azure. 
 
 - **AzCopy**. Use o AzCopy em uma linha de comando do [Windows](/azure/storage/common/storage-use-azcopy?toc=%2fazure%2fstorage%2fblobs%2ftoc.json) ou [Linux](/azure/storage/common/storage-use-azcopy-linux?toc=%2fazure%2fstorage%2fblobs%2ftoc.json) para copiar dados com facilidade bidirecionalmente no armazenamento de Blobs, Arquivos e Tabelas do Azure com um desempenho ideal. O AzCopy dá suporte à simultaneidade e ao paralelismo e à capacidade de retomar as operações de cópia quando elas forem interrompidas. Ele também é mais rápido do que a maioria das outras opções. Para o acesso programático, a [Biblioteca de Movimentação de Dados do Armazenamento do Microsoft Azure](/azure/storage/common/storage-use-data-movement-library) é a estrutura básica que habilita o AzCopy. Ela é fornecida como uma biblioteca .NET Core. 
 
 - **PowerShell**. O [cmdlet `Start-AzureStorageBlobCopy` do PowerShell](/powershell/module/azure.storage/start-azurestorageblobcopy?view=azurermps-5.0.0) é uma opção para os administradores do Windows que estão acostumados com o PowerShell.  
 
-- **AdlCopy**. O [AdlCopy](/azure/data-lake-store/data-lake-store-copy-data-azure-storage-blob) permite a cópia de dados de Azure Storage Blobs para o Data Lake Store. Ele também pode ser usado para copiar dados entre duas contas do Azure Data Lake Store. No entanto, não pode ser usado para copiar dados do Data Lake Store para Storage Blobs.
+- **AdlCopy**. O [AdlCopy](/azure/data-lake-store/data-lake-store-copy-data-azure-storage-blob) permite a cópia de dados do Azure Storage Blobs para o Data Lake Store. Ele também pode ser usado para copiar dados entre duas contas do Azure Data Lake Store. No entanto, não pode ser usado para copiar dados do Data Lake Store para Storage Blobs.
 
 - **Distcp**. Se você tem um cluster HDInsight com acesso ao Data Lake Store, use as ferramentas do ecossistema do Hadoop, como o [Distcp](/azure/data-lake-store/data-lake-store-copy-data-wasb-distcp), para copiar dados bidirecionalmente em um armazenamento de cluster do HDInsight (WASB) para uma conta do Data Lake Store.
 
-- **Sqoop**. O [Sqoop](/azure/hdinsight/hadoop/hdinsight-use-sqoop) é um projeto do Apache e uma parte do ecossistema do Hadoop. Ele vem pré-instalado em todos os clusters HDInsight. Permite a transferência de dados entre um cluster HDInsight e bancos de dados relacionais, como o SQL, Oracle, MySQL e assim por diante. O Sqoop é uma coleção de ferramentas relacionadas, incluindo importação e exportação. O Sqoop funciona com clusters HDInsight usando blobs do Armazenamento do Azure ou o armazenamento anexado do Data Lake Store.
+- **Sqoop**. O [Sqoop](/azure/hdinsight/hadoop/hdinsight-use-sqoop) é um projeto do Apache e faz parte do ecossistema do Hadoop. Ele vem pré-instalado em todos os clusters HDInsight. Permite a transferência de dados entre um cluster HDInsight e bancos de dados relacionais, como o SQL, Oracle, MySQL e assim por diante. O Sqoop é uma coleção de ferramentas relacionadas, incluindo importação e exportação. O Sqoop funciona com clusters HDInsight usando blobs do Armazenamento do Azure ou o armazenamento anexado do Data Lake Store.
 
 - **PolyBase**. O [PolyBase](/sql/relational-databases/polybase/get-started-with-polybase) é uma tecnologia que acessa dados fora do banco de dados por meio da linguagem T-SQL. No SQL Server 2016, ele permite executar consultas em dados externos no Hadoop ou importar/exportar dados do Armazenamento de Blobs do Azure. No SQL Data Warehouse do Azure, você pode importar/exportar dados do Armazenamento de Blobs do Azure e do Azure Data Lake Store. Atualmente, o PolyBase é o método mais rápido de importar dados para o SQL Data Warehouse.
 
@@ -52,9 +53,9 @@ Considere estas opções quando desejar fazer uma transferência de dados progra
 
 Considere as opções a seguir caso esteja transferindo apenas alguns arquivos ou objetos de dados e não precisar automatizar o processo.
 
-- **Gerenciador de Armazenamento do Azure**. O [Gerenciador de Armazenamento do Azure](https://azure.microsoft.com/features/storage-explorer/) é uma ferramenta de multiplaforma que permite que você gerencie o conteúdo de suas contas de armazenamento do Azure. Ele permite carregar, baixar e gerenciar blogs, arquivos, filas, tabelas e entidades do Azure Cosmos DB. Use-o com o armazenamento de Blobs para gerenciar blobs e pastas, bem como carregar e baixar blobs entre o sistema de arquivos local e o armazenamento de Blobs ou entre contas de armazenamento.
+- **Gerenciador de Armazenamento do Azure**. O [Gerenciador de Armazenamento do Azure](https://azure.microsoft.com/features/storage-explorer/) é uma ferramenta para várias plataformas que permite que você gerencie o conteúdo de suas contas de armazenamento do Azure. Ele permite carregar, baixar e gerenciar blogs, arquivos, filas, tabelas e entidades do Azure Cosmos DB. Use-o com o armazenamento de Blobs para gerenciar blobs e pastas, bem como carregar e baixar blobs entre o sistema de arquivos local e o armazenamento de Blobs ou entre contas de armazenamento.
 
-- **Portal do Azure**. O armazenamento de Blobs e o Data Lake Store fornecem uma interface baseada na Web para explorar arquivos e carregar novos arquivos um de cada vez. Essa é uma boa opção se você não deseja instalar nenhuma ferramenta nem emitir comandos para explorar rapidamente os arquivos ou para simplesmente carregar uma série de novos.
+- **Portal do Azure**. O armazenamento de Blobs e o Data Lake Store fornecem uma interface baseada na Web para explorar arquivos e carregar novos arquivos um de cada vez. Essa é uma boa opção se você não deseja instalar nenhuma ferramenta nem emitir comandos para explorar rapidamente os arquivos ou para simplesmente carregar novos arquivos.
 
 ## <a name="data-pipeline"></a>Pipeline de dados
 
