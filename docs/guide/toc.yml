@@ -60,4 +60,5 @@
     - name: Pilares da qualidade de software
       href: pillars.md
     - name: Padrões de design
-      href: ../patterns/index.md?toc=/azure/architecture/guide/toc.json
+      href: ../patterns/index.md
+      maintainContext: true
