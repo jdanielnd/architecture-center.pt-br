@@ -11,6 +11,7 @@ ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 11/14/2017
+ms.locfileid: "24541906"
 ---
 # <a name="work-with-claims-based-identities"></a><span data-ttu-id="33709-103">Trabalhar com identidades baseadas em declarações</span><span class="sxs-lookup"><span data-stu-id="33709-103">Work with claims-based identities</span></span>
 

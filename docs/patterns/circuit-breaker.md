@@ -12,6 +12,7 @@ ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 03/30/2018
+ms.locfileid: "30270465"
 ---
 # <a name="circuit-breaker-pattern"></a><span data-ttu-id="811a8-104">Padrão de Disjuntor</span><span class="sxs-lookup"><span data-stu-id="811a8-104">Circuit Breaker pattern</span></span>
 

@@ -7,6 +7,7 @@ ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 11/14/2017
+ms.locfileid: "24539778"
 ---
 # <a name="big-compute-architecture-style"></a><span data-ttu-id="6891d-103">Estilo de arquitetura de computação intensa</span><span class="sxs-lookup"><span data-stu-id="6891d-103">Big compute architecture style</span></span>
 

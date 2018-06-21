@@ -8,6 +8,7 @@ ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 04/03/2018
+ms.locfileid: "30298664"
 ---
 # <a name="non-relational-data-and-nosql"></a><span data-ttu-id="e749a-102">Dados não relacionais e NoSQL</span><span class="sxs-lookup"><span data-stu-id="e749a-102">Non-relational data and NoSQL</span></span>
 

@@ -8,6 +8,7 @@ ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 04/06/2018
+ms.locfileid: "30848658"
 ---
 # <a name="choosing-a-batch-processing-technology-in-azure"></a><span data-ttu-id="e8926-102">Escolhendo uma tecnologia de processamento em lotes no Azure</span><span class="sxs-lookup"><span data-stu-id="e8926-102">Choosing a batch processing technology in Azure</span></span>
 

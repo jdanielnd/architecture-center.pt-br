@@ -13,6 +13,7 @@ ms.sourcegitcommit: ea7108f71dab09175ff69322874d1bcba800a37a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 03/17/2018
+ms.locfileid: "29963203"
 ---
 # <a name="event-sourcing-pattern"></a><span data-ttu-id="b8668-104">Padrão de fornecimento do evento</span><span class="sxs-lookup"><span data-stu-id="b8668-104">Event Sourcing pattern</span></span>
 

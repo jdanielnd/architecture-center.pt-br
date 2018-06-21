@@ -8,6 +8,7 @@ ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 04/06/2018
+ms.locfileid: "30848641"
 ---
 # <a name="choosing-a-stream-processing-technology-in-azure"></a><span data-ttu-id="590c6-102">Escolhendo uma tecnologia de processamento de fluxo no Azure</span><span class="sxs-lookup"><span data-stu-id="590c6-102">Choosing a stream processing technology in Azure</span></span>
 

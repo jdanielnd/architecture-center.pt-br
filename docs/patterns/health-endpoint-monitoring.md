@@ -14,6 +14,7 @@ ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 04/06/2018
+ms.locfileid: "30847842"
 ---
 # <a name="health-endpoint-monitoring-pattern"></a><span data-ttu-id="42ab2-104">Padrão de monitoramento do ponto de extremidade de integridade</span><span class="sxs-lookup"><span data-stu-id="42ab2-104">Health Endpoint Monitoring pattern</span></span>
 

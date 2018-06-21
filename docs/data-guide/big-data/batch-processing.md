@@ -8,6 +8,7 @@ ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 04/03/2018
+ms.locfileid: "30298654"
 ---
 # <a name="batch-processing"></a><span data-ttu-id="ff93a-102">Processamento em lotes</span><span class="sxs-lookup"><span data-stu-id="ff93a-102">Batch processing</span></span>
 

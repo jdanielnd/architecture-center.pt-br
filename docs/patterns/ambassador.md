@@ -8,6 +8,7 @@ ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 11/14/2017
+ms.locfileid: "24540786"
 ---
 # <a name="ambassador-pattern"></a><span data-ttu-id="170f0-103">Padrão embaixador</span><span class="sxs-lookup"><span data-stu-id="170f0-103">Ambassador pattern</span></span>
 

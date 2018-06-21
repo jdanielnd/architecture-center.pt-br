@@ -8,6 +8,7 @@ ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 03/30/2018
+ms.locfileid: "30270115"
 ---
 # <a name="run-a-high-availability-sharepoint-server-2016-farm-in-azure"></a><span data-ttu-id="afb6f-103">Executar um farm do SharePoint Server 2016 de alta disponibilidade no Azure</span><span class="sxs-lookup"><span data-stu-id="afb6f-103">Run a high availability SharePoint Server 2016 farm in Azure</span></span>
 

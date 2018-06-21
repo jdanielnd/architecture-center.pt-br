@@ -8,6 +8,7 @@ ms.sourcegitcommit: 786bafefc731245414c3c1510fc21027afe303dc
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 12/12/2017
+ms.locfileid: "26652987"
 ---
 # <a name="designing-microservices-logging-and-monitoring"></a><span data-ttu-id="a6271-103">Projetando microsserviços: registro em log e monitoramento</span><span class="sxs-lookup"><span data-stu-id="a6271-103">Designing microservices: Logging and monitoring</span></span>
 

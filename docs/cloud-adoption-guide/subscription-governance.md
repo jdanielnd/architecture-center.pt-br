@@ -19,6 +19,7 @@ ms.sourcegitcommit: 4ec010846b9b5545c843a32e08293f906e512302
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 05/17/2018
+ms.locfileid: "34299880"
 ---
 # <a name="azure-enterprise-scaffold---prescriptive-subscription-governance"></a><span data-ttu-id="3d6c9-103">Andaime empresarial do Azure — governança de assinatura prescritiva</span><span class="sxs-lookup"><span data-stu-id="3d6c9-103">Azure enterprise scaffold - prescriptive subscription governance</span></span>
 <span data-ttu-id="3d6c9-104">As empresas estão adotando cada vez mais a nuvem pública em busca de agilidade e flexibilidade.</span><span class="sxs-lookup"><span data-stu-id="3d6c9-104">Enterprises are increasingly adopting the public cloud for its agility and flexibility.</span></span> <span data-ttu-id="3d6c9-105">Elas estão usando os pontos fortes da nuvem para gerar receita ou otimizar recursos para os negócios.</span><span class="sxs-lookup"><span data-stu-id="3d6c9-105">They are utilizing the cloud's strengths to generate revenue or optimize resources for the business.</span></span> <span data-ttu-id="3d6c9-106">O Microsoft Azure fornece uma variedade de serviços que as empresas podem montar como blocos de construção para atender a uma ampla gama de aplicativos e cargas de trabalho.</span><span class="sxs-lookup"><span data-stu-id="3d6c9-106">Microsoft Azure provides a multitude of services that enterprises can assemble like building blocks to address a wide array of workloads and applications.</span></span> 

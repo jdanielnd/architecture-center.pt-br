@@ -8,6 +8,7 @@ ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 04/16/2018
+ms.locfileid: "31012698"
 ---
 # <a name="bulkhead-pattern"></a><span data-ttu-id="3ab0a-103">Padrão de bulkhead</span><span class="sxs-lookup"><span data-stu-id="3ab0a-103">Bulkhead pattern</span></span>
 

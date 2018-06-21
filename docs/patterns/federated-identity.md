@@ -12,6 +12,7 @@ ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 11/14/2017
+ms.locfileid: "24542626"
 ---
 # <a name="federated-identity-pattern"></a><span data-ttu-id="df071-104">Padrão de identidade federada</span><span class="sxs-lookup"><span data-stu-id="df071-104">Federated Identity pattern</span></span>
 

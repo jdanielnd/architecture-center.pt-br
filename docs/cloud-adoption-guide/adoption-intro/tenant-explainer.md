@@ -7,6 +7,7 @@ ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 02/09/2018
+ms.locfileid: "29062034"
 ---
 # <a name="explainer-what-is-an-azure-active-directory-tenant"></a><span data-ttu-id="6a44e-103">Explicador: o que é um locatário do Azure Active Directory?</span><span class="sxs-lookup"><span data-stu-id="6a44e-103">Explainer: What is an Azure Active Directory tenant?</span></span>
 

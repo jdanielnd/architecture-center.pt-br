@@ -9,6 +9,7 @@ ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 02/23/2018
+ms.locfileid: "29478452"
 ---
 # <a name="autoscaling"></a><span data-ttu-id="fcfa6-103">Dimensionamento automático</span><span class="sxs-lookup"><span data-stu-id="fcfa6-103">Autoscaling</span></span>
 [!INCLUDE [header](../_includes/header.md)]

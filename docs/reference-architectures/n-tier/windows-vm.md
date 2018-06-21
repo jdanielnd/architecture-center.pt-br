@@ -5,8 +5,10 @@ author: telmosampaio
 ms.date: 04/03/2018
 ms.openlocfilehash: 748bcfcf599c7fa0e82691632d14e0f78fd78582
 ms.sourcegitcommit: a5e549c15a948f6fb5cec786dbddc8578af3be66
+ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 05/06/2018
+ms.locfileid: "33673598"
 ---
 # <a name="run-a-windows-vm-on-azure"></a><span data-ttu-id="7f9b7-103">Executar uma VM do Windows no Azure</span><span class="sxs-lookup"><span data-stu-id="7f9b7-103">Run a Windows VM on Azure</span></span>
 

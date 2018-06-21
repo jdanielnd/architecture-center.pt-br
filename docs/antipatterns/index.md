@@ -8,6 +8,7 @@ ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 11/14/2017
+ms.locfileid: "24538706"
 ---
 # <a name="performance-antipatterns-for-cloud-applications"></a><span data-ttu-id="5232d-103">Antipadrões de desempenho para aplicativos em nuvem</span><span class="sxs-lookup"><span data-stu-id="5232d-103">Performance antipatterns for cloud applications</span></span>
 

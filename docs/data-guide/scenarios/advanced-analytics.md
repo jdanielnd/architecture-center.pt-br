@@ -8,6 +8,7 @@ ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 04/03/2018
+ms.locfileid: "30298684"
 ---
 # <a name="advanced-analytics"></a><span data-ttu-id="5e599-102">Análise avançada</span><span class="sxs-lookup"><span data-stu-id="5e599-102">Advanced analytics</span></span>
 

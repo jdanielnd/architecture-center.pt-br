@@ -9,6 +9,7 @@ ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 03/30/2018
+ms.locfileid: "30270281"
 ---
 # <a name="run-a-web-application-in-multiple-regions"></a><span data-ttu-id="c2057-103">Execute um aplicativo Web em várias regiões</span><span class="sxs-lookup"><span data-stu-id="c2057-103">Run a web application in multiple regions</span></span>
 [!INCLUDE [header](../../_includes/header.md)]

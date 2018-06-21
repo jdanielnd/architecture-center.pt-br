@@ -8,6 +8,7 @@ ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 04/03/2018
+ms.locfileid: "30298634"
 ---
 # <a name="extract-transform-and-load-etl"></a><span data-ttu-id="7b98c-102">ETL (extrair, transformar e carregar)</span><span class="sxs-lookup"><span data-stu-id="7b98c-102">Extract, transform, and load (ETL)</span></span>
 

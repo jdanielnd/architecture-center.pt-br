@@ -13,6 +13,7 @@ ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 11/14/2017
+ms.locfileid: "24542274"
 ---
 # <a name="external-configuration-store-pattern"></a><span data-ttu-id="b256b-104">Padrão de repositório de configuração externo</span><span class="sxs-lookup"><span data-stu-id="b256b-104">External Configuration Store pattern</span></span>
 

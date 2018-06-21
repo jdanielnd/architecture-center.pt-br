@@ -10,6 +10,7 @@ ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 04/06/2018
+ms.locfileid: "30847791"
 ---
 # <a name="design-and-implementation-patterns"></a><span data-ttu-id="c3740-105">Padrões de design e implementação</span><span class="sxs-lookup"><span data-stu-id="c3740-105">Design and Implementation patterns</span></span>
 

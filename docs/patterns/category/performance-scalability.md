@@ -10,6 +10,7 @@ ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 04/06/2018
+ms.locfileid: "30848522"
 ---
 # <a name="performance-and-scalability-patterns"></a><span data-ttu-id="9c92a-108">Padrões de desempenho e Escalabilidade</span><span class="sxs-lookup"><span data-stu-id="9c92a-108">Performance and Scalability patterns</span></span>
 

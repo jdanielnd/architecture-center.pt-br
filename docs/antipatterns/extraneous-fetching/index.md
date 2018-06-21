@@ -8,6 +8,7 @@ ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 04/06/2018
+ms.locfileid: "30846596"
 ---
 # <a name="extraneous-fetching-antipattern"></a><span data-ttu-id="c9efa-103">Antipadrão de busca externa</span><span class="sxs-lookup"><span data-stu-id="c9efa-103">Extraneous Fetching antipattern</span></span>
 

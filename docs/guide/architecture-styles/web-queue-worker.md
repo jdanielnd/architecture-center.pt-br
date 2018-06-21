@@ -7,6 +7,7 @@ ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 11/14/2017
+ms.locfileid: "24539794"
 ---
 # <a name="web-queue-worker-architecture-style"></a><span data-ttu-id="c14e4-103">Estilo de arquitetura de trabalho de fila da Web</span><span class="sxs-lookup"><span data-stu-id="c14e4-103">Web-Queue-Worker architecture style</span></span>
 
