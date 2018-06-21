@@ -2,12 +2,12 @@
 title: 'Explicação: o que é a governança de nuvem?'
 description: Explica o conceito de governança de recursos para o Azure e a nuvem
 author: petertay
-ms.openlocfilehash: 63b04089aad5fc736641f8aaa6ff5247ea8ba13e
-ms.sourcegitcommit: b3d74d8a89b2224fc796ce0e89cea447af43a0d4
+ms.openlocfilehash: 3404beaa719177ee7638feed8a8442b5c3b455c6
+ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 06/11/2018
-ms.locfileid: "35290971"
+ms.lasthandoff: 06/19/2018
+ms.locfileid: "36206473"
 ---
 # <a name="explainer-what-is-cloud-resource-governance"></a>Explicação: o que é a governança dos recursos da nuvem?
 
@@ -16,6 +16,8 @@ Na explicação [Como funciona o Azure?](azure-explainer.md), você aprendeu que
 No entanto, enquanto irrestrito fornecendo acesso a recursos para desenvolvedores pode torná-los muito ágil, também poderá causar consequências não intencionais de custo. Por exemplo, uma equipe de desenvolvimento pode ser aprovada para implantar um conjunto de recursos para teste, mas esquecer de excluí-las quando o teste for concluído. Esses recursos continuarão a gerar custos, embora seu uso não seja mais necessário ou aprovado. 
 
 A solução para esse problema é a **governança** de acesso a recursos. Governança refere-se ao processo contínuo de gerenciamento, monitoramento e auditoria, o uso de recursos do Azure para atender as metas e requisitos da sua organização. 
+
+> [!VIDEO https://www.microsoft.com/en-us/videoplayer/embed/RE2ii94] 
 
 Essas metas e requisitos são exclusivos de cada organização e, portanto, não é possível ter uma abordagem única para governança. Em vez disso, o Azure implementa duas ferramentas de administração primária, **recursos com base em controle de acesso (RBAC)**, e **diretiva recursos**, e depende de cada organização para criar seu modelo de governança usá-los.
 

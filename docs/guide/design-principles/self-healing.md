@@ -2,12 +2,12 @@
 title: Design de autorrecuperação
 description: Aplicativos resilientes podem recuperar-se de falhas sem intervenção manual.
 author: MikeWasson
-layout: LandingPage
-ms.openlocfilehash: 0782b65b77615f7c006724264ab0ca2d2c7c04e2
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 508341ba428b294cf268e34e922aced9d2d67579
+ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 06/19/2018
+ms.locfileid: "36206498"
 ---
 # <a name="design-for-self-healing"></a>Design de autorrecuperação
 
@@ -29,7 +29,7 @@ Além disso, não considere apenas grandes eventos, como interrupções regionai
 
 **Repita as operações com falha**. As falhas transitórias podem ocorrer por perda momentânea de conectividade de rede, interrupção na conexão de banco de dados ou tempo limite atingido quando um serviço está ocupado. Crie lógica de novas tentativas em seu aplicativo para lidar com falhas transitórias. Para muitos serviços do Azure, o SDK do cliente implementa novas tentativas automáticas. Para saber mais, confira [Transient fault handling][transient-fault-handling] (Tratamento de falha transitória) e [Retry Pattern][retry] (Padrão de nova tentativa).
 
-**Proteger os serviços remotos com falha (interruptor de circuito)**. É bom tentar novamente após uma falha temporária, mas se a falha persistir, você poderá acabar com muitos chamadores insistindo em um serviço com falha. Isso pode levar a falhas em cascata, conforme as solicitações se acumulam. Use o [Padrão de Interruptor de Circuito][circuit-breaker] para realizar uma falha rápida (sem fazer a chamada remota) quando uma operação provavelmente for falhar.  
+**Proteger os serviços remotos com falha (interruptor de circuito)**. É bom tentar novamente após uma falha temporária, mas se a falha persistir, você poderá acabar com muitos chamadores insistindo em um serviço com falha. Isso pode levar a falhas em cascata, conforme as solicitações se acumulam. Use o [Padrão de Interruptor de Circuito][circuit-breaker] para falhar rapidamente (sem fazer a chamada remota) quando uma operação provavelmente for falhar.  
 
 **Isolar recursos críticos (bulkhead)**. Falhas em um subsistema às vezes podem formar uma cascata. Isso pode acontecer se uma falha impedir que alguns recursos, como threads ou soquetes, sejam liberados em tempo hábil, exaurindo recursos. Para evitar isso, particione um sistema em grupos isolados para que a falha em uma partição não deixe todo o sistema inoperante.  
 

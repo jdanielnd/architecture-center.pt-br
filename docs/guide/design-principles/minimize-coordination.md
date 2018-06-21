@@ -2,12 +2,12 @@
 title: Minimizar a coordenação
 description: Minimizar a coordenação entre os serviços de aplicativos para atingir a escalabilidade
 author: MikeWasson
-layout: LandingPage
-ms.openlocfilehash: 3cab05b539612234fd8e66517b140ac5257c3e70
-ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
+ms.openlocfilehash: f26222148db2b48743c52293011ea0a5a58ebe07
+ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/30/2018
+ms.lasthandoff: 06/19/2018
+ms.locfileid: "36206491"
 ---
 # <a name="minimize-coordination"></a>Minimizar a coordenação 
 

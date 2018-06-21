@@ -2,12 +2,12 @@
 title: Tornar todas as coisas redundantes
 description: Evite pontos únicos de falha com a criação de redundância em seu aplicativo.
 author: MikeWasson
-layout: LandingPage
-ms.openlocfilehash: 05ccf78c2cfbcd4e2d26200e70463d388d54f671
-ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
+ms.openlocfilehash: 4f6e3404b2aaf9c28dfd6812975c2709d8cc8c85
+ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/30/2018
+ms.lasthandoff: 06/19/2018
+ms.locfileid: "36206497"
 ---
 # <a name="make-all-things-redundant"></a>Tornar todas as coisas redundantes
 
