@@ -8,6 +8,7 @@ ms.sourcegitcommit: c7f46b14ad7d55cf553b2d0b01045c9c25aefcdb
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 12/09/2017
+ms.locfileid: "26587749"
 ---
 # <a name="designing-microservices-data-considerations"></a>Criando microsserviços: considerações de dados
 

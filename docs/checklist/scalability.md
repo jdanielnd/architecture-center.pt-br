@@ -9,6 +9,7 @@ ms.sourcegitcommit: 3d6dba524cc7661740bdbaf43870de7728d60a01
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 01/11/2018
+ms.locfileid: "27766098"
 ---
 # <a name="scalability-checklist"></a>Lista de verificação de escalabilidade
 

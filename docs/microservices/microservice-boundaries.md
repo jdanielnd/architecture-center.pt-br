@@ -8,6 +8,7 @@ ms.sourcegitcommit: a5e549c15a948f6fb5cec786dbddc8578af3be66
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 05/06/2018
+ms.locfileid: "33673395"
 ---
 # <a name="designing-microservices-identifying-microservice-boundaries"></a>Criando microsserviços: identificando limites de microsserviço
 

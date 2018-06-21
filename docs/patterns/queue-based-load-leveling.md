@@ -15,6 +15,7 @@ ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 12/08/2017
+ms.locfileid: "26359312"
 ---
 # <a name="queue-based-load-leveling-pattern"></a>Padrão de nivelamento de carga baseado em fila
 

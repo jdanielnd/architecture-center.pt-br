@@ -8,6 +8,7 @@ ms.sourcegitcommit: a5e549c15a948f6fb5cec786dbddc8578af3be66
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 05/06/2018
+ms.locfileid: "33673608"
 ---
 # <a name="n-tier-application-with-apache-cassandra"></a>Aplicativo de N camadas com Apache Cassandra
 

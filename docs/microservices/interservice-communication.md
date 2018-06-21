@@ -8,6 +8,7 @@ ms.sourcegitcommit: a8453c4bc7c870fa1a12bb3c02e3b310db87530c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 12/29/2017
+ms.locfileid: "27549120"
 ---
 # <a name="designing-microservices-interservice-communication"></a>Criando microsserviços: comunicação entre serviços
 

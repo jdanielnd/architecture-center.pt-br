@@ -9,6 +9,7 @@ ms.sourcegitcommit: c93f1b210b3deff17cc969fb66133bc6399cfd10
 ms.translationtype: HT
 ms.contentlocale: pt-BR
 ms.lasthandoff: 01/05/2018
+ms.locfileid: "27596012"
 ---
 # <a name="api-implementation"></a>Implementação da API
 
@@ -623,7 +624,7 @@ Você pode implementar um mecanismo de pesquisa simples, fornecendo um URI de *s
 3. A API da Web inicia o processamento como uma tarefa separada. A API da Web registra o estado da tarefa na tabela como *Em execução*.
 4. A API da Web retorna uma mensagem de resposta com código de status HTTP 202 (Aceito) e a GUID da entrada da tabela no corpo da mensagem.
 5. Quando a tarefa for concluída, a API da Web armazenará os resultados na tabela e definirá o estado da tarefa como *Concluída*. Observe que, se a tarefa falhar, a API da Web poderá também armazenar informações sobre a falha e definir o status como *Falha*.
-6. Enquanto a tarefa é executada, o cliente pode continuar a executar seu próprio processamento. Ele pode enviar periodicamente uma solicitação para o URI*/polling/{guid}* onde *{guid}* é a GUID retornada na mensagem de resposta 202 pela API da Web.
+6. Enquanto a tarefa é executada, o cliente pode continuar a executar seu próprio processamento. Ele pode enviar periodicamente uma solicitação para o URI */polling/{guid}* onde *{guid}* é a GUID retornada na mensagem de resposta 202 pela API da Web.
 7. A API da Web no URI */polling/{guid}* consulta o estado da tarefa correspondente na tabela e retorna uma mensagem de resposta, com código de status HTTP 200 (OK) e contendo esse estado (*Running*, *Complete* ou *Failed*). Se a tarefa foi concluída ou falhou, a mensagem de resposta também pode incluir os resultados de processamento ou quaisquer informações disponíveis sobre o motivo da falha.
 
 Entre as opções para implementar notificações, temos:
