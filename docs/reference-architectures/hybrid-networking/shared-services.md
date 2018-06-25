@@ -2,253 +2,255 @@
 title: Implementação de uma topologia de rede hub-spoke com serviços compartilhados no Azure
 description: Como implementar uma topologia de rede hub-spoke com serviços compartilhados no Azure.
 author: telmosampaio
-ms.date: 02/25/2018
+ms.date: 06/19/2018
 pnp.series.title: Implement a hub-spoke network topology with shared services in Azure
 pnp.series.prev: hub-spoke
-ms.openlocfilehash: 83367a3be2f7a1e33c2ef7018d42f70aae99104d
-ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
+ms.openlocfilehash: 5e5029dd7de78c6953229364f9e8ae2789c2b348
+ms.sourcegitcommit: f7418f8bdabc8f5ec33ae3551e3fbb466782caa5
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/16/2018
+ms.lasthandoff: 06/19/2018
+ms.locfileid: "36209552"
 ---
-# <a name="implement-a-hub-spoke-network-topology-with-shared-services-in-azure"></a><span data-ttu-id="981b5-103">Implementar uma topologia de rede hub-spoke com serviços compartilhados no Azure</span><span class="sxs-lookup"><span data-stu-id="981b5-103">Implement a hub-spoke network topology with shared services in Azure</span></span>
+# <a name="implement-a-hub-spoke-network-topology-with-shared-services-in-azure"></a><span data-ttu-id="3f8f2-103">Implementar uma topologia de rede hub-spoke com serviços compartilhados no Azure</span><span class="sxs-lookup"><span data-stu-id="3f8f2-103">Implement a hub-spoke network topology with shared services in Azure</span></span>
 
-<span data-ttu-id="981b5-104">Essa arquitetura de referência se baseia na arquitetura de referência do [hub-spoke] [ guidance-hub-spoke] para incluir serviços compartilhados no hub que pode ser consumido por todos os spokes.</span><span class="sxs-lookup"><span data-stu-id="981b5-104">This reference architecture builds on the [hub-spoke][guidance-hub-spoke] reference architecture to include shared services in the hub that can be consumed by all spokes.</span></span> <span data-ttu-id="981b5-105">Como uma primeira etapa para migrar um datacenter para a nuvem, e criando um [datacenter virtual], os primeiros serviços que você precisa compartilhar são identidade e segurança.</span><span class="sxs-lookup"><span data-stu-id="981b5-105">As a first step toward migrating a datacenter to the cloud, and building a [virtual datacenter], the first services you need to share are identity and security.</span></span> <span data-ttu-id="981b5-106">Esta arquitetura de referência mostra como estender seus serviços do Active Directory de seu datacenter local para o do Azure e como adicionar uma NVA (solução de virtualização de rede), que pode agir como um firewall, em uma topologia hub-spoke.</span><span class="sxs-lookup"><span data-stu-id="981b5-106">This reference architecture shows you how to extend your Active Directory services from your on-premises datacenter to Azure, and how to add a network virtual appliance (NVA) that can act as a firewall, in a hub-spoke topology.</span></span>  <span data-ttu-id="981b5-107">[**Implantar esta solução**](#deploy-the-solution).</span><span class="sxs-lookup"><span data-stu-id="981b5-107">[**Deploy this solution**](#deploy-the-solution).</span></span>
+<span data-ttu-id="3f8f2-104">Essa arquitetura de referência se baseia na arquitetura de referência do [hub-spoke] [ guidance-hub-spoke] para incluir serviços compartilhados no hub que pode ser consumido por todos os spokes.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-104">This reference architecture builds on the [hub-spoke][guidance-hub-spoke] reference architecture to include shared services in the hub that can be consumed by all spokes.</span></span> <span data-ttu-id="3f8f2-105">Como uma primeira etapa para migrar um datacenter para a nuvem, e criando um [datacenter virtual], os primeiros serviços que você precisa compartilhar são identidade e segurança.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-105">As a first step toward migrating a datacenter to the cloud, and building a [virtual datacenter], the first services you need to share are identity and security.</span></span> <span data-ttu-id="3f8f2-106">Esta arquitetura de referência mostra como estender seus serviços do Active Directory de seu datacenter local para o do Azure e como adicionar uma NVA (solução de virtualização de rede), que pode agir como um firewall, em uma topologia hub-spoke.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-106">This reference architecture shows you how to extend your Active Directory services from your on-premises datacenter to Azure, and how to add a network virtual appliance (NVA) that can act as a firewall, in a hub-spoke topology.</span></span>  <span data-ttu-id="3f8f2-107">[**Implantar esta solução**](#deploy-the-solution).</span><span class="sxs-lookup"><span data-stu-id="3f8f2-107">[**Deploy this solution**](#deploy-the-solution).</span></span>
 
-<span data-ttu-id="981b5-108">![[0]][0]</span><span class="sxs-lookup"><span data-stu-id="981b5-108">![[0]][0]</span></span>
+<span data-ttu-id="3f8f2-108">![[0]][0]</span><span class="sxs-lookup"><span data-stu-id="3f8f2-108">![[0]][0]</span></span>
 
-<span data-ttu-id="981b5-109">*Baixar um [arquivo Visio][visio-download] dessa arquitetura*</span><span class="sxs-lookup"><span data-stu-id="981b5-109">*Download a [Visio file][visio-download] of this architecture*</span></span>
+<span data-ttu-id="3f8f2-109">*Baixar um [arquivo Visio][visio-download] dessa arquitetura*</span><span class="sxs-lookup"><span data-stu-id="3f8f2-109">*Download a [Visio file][visio-download] of this architecture*</span></span>
 
-<span data-ttu-id="981b5-110">Os benefícios dessa topologia incluem:</span><span class="sxs-lookup"><span data-stu-id="981b5-110">The benefits of this topology include:</span></span>
+<span data-ttu-id="3f8f2-110">Os benefícios dessa topologia incluem:</span><span class="sxs-lookup"><span data-stu-id="3f8f2-110">The benefits of this topology include:</span></span>
 
-* <span data-ttu-id="981b5-111">**Redução de custos** com a centralização de serviços que podem ser compartilhados por diversas cargas de trabalho, tais como NVAs (soluções de virtualização de rede) e servidores DNS, em um único local.</span><span class="sxs-lookup"><span data-stu-id="981b5-111">**Cost savings** by centralizing services that can be shared by multiple workloads, such as network virtual appliances (NVAs) and DNS servers, in a single location.</span></span>
-* <span data-ttu-id="981b5-112">**Superar os limites de assinaturas** emparelhando VNets de assinaturas diferentes com o hub central.</span><span class="sxs-lookup"><span data-stu-id="981b5-112">**Overcome subscriptions limits** by peering VNets from different subscriptions to the central hub.</span></span>
-* <span data-ttu-id="981b5-113">**Separação de preocupações** entre TI central (SecOps, InfraOps) e cargas de trabalho (DevOps).</span><span class="sxs-lookup"><span data-stu-id="981b5-113">**Separation of concerns** between central IT (SecOps, InfraOps) and workloads (DevOps).</span></span>
+* <span data-ttu-id="3f8f2-111">**Redução de custos** com a centralização de serviços que podem ser compartilhados por diversas cargas de trabalho, tais como NVAs (soluções de virtualização de rede) e servidores DNS, em um único local.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-111">**Cost savings** by centralizing services that can be shared by multiple workloads, such as network virtual appliances (NVAs) and DNS servers, in a single location.</span></span>
+* <span data-ttu-id="3f8f2-112">**Superar os limites de assinaturas** emparelhando VNets de assinaturas diferentes com o hub central.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-112">**Overcome subscriptions limits** by peering VNets from different subscriptions to the central hub.</span></span>
+* <span data-ttu-id="3f8f2-113">**Separação de preocupações** entre TI central (SecOps, InfraOps) e cargas de trabalho (DevOps).</span><span class="sxs-lookup"><span data-stu-id="3f8f2-113">**Separation of concerns** between central IT (SecOps, InfraOps) and workloads (DevOps).</span></span>
 
-<span data-ttu-id="981b5-114">Alguns usos típicos dessa arquitetura:</span><span class="sxs-lookup"><span data-stu-id="981b5-114">Typical uses for this architecture include:</span></span>
+<span data-ttu-id="3f8f2-114">Alguns usos típicos dessa arquitetura:</span><span class="sxs-lookup"><span data-stu-id="3f8f2-114">Typical uses for this architecture include:</span></span>
 
-* <span data-ttu-id="981b5-115">As cargas de trabalho implantadas em diferentes ambientes, como desenvolvimento, teste e produção, que exigem serviços compartilhados como DNS, IDS, NTP ou AD DS.</span><span class="sxs-lookup"><span data-stu-id="981b5-115">Workloads deployed in different environments, such as development, testing, and production, that require shared services such as DNS, IDS, NTP, or AD DS.</span></span> <span data-ttu-id="981b5-116">Os serviços compartilhados são colocados na VNet do hub, enquanto cada ambiente é implantado em um spoke para manter o isolamento.</span><span class="sxs-lookup"><span data-stu-id="981b5-116">Shared services are placed in the hub VNet, while each environment is deployed to a spoke to maintain isolation.</span></span>
-* <span data-ttu-id="981b5-117">Cargas de trabalho que não exigem conectividade entre si, mas precisam de acesso aos serviços compartilhados.</span><span class="sxs-lookup"><span data-stu-id="981b5-117">Workloads that do not require connectivity to each other, but require access to shared services.</span></span>
-* <span data-ttu-id="981b5-118">Empresas que exigem o controle centralizado sobre aspectos de segurança, como um firewall no hub como uma DMZ e gerenciamento separado para cargas de trabalho em cada spoke.</span><span class="sxs-lookup"><span data-stu-id="981b5-118">Enterprises that require central control over security aspects, such as a firewall in the hub as a DMZ, and segregated management for the workloads in each spoke.</span></span>
+* <span data-ttu-id="3f8f2-115">As cargas de trabalho implantadas em diferentes ambientes, como desenvolvimento, teste e produção, que exigem serviços compartilhados como DNS, IDS, NTP ou AD DS.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-115">Workloads deployed in different environments, such as development, testing, and production, that require shared services such as DNS, IDS, NTP, or AD DS.</span></span> <span data-ttu-id="3f8f2-116">Os serviços compartilhados são colocados na VNet do hub, enquanto cada ambiente é implantado em um spoke para manter o isolamento.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-116">Shared services are placed in the hub VNet, while each environment is deployed to a spoke to maintain isolation.</span></span>
+* <span data-ttu-id="3f8f2-117">Cargas de trabalho que não exigem conectividade entre si, mas precisam de acesso aos serviços compartilhados.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-117">Workloads that do not require connectivity to each other, but require access to shared services.</span></span>
+* <span data-ttu-id="3f8f2-118">Empresas que exigem o controle centralizado sobre aspectos de segurança, como um firewall no hub como uma DMZ e gerenciamento separado para cargas de trabalho em cada spoke.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-118">Enterprises that require central control over security aspects, such as a firewall in the hub as a DMZ, and segregated management for the workloads in each spoke.</span></span>
 
-## <a name="architecture"></a><span data-ttu-id="981b5-119">Arquitetura</span><span class="sxs-lookup"><span data-stu-id="981b5-119">Architecture</span></span>
+## <a name="architecture"></a><span data-ttu-id="3f8f2-119">Arquitetura</span><span class="sxs-lookup"><span data-stu-id="3f8f2-119">Architecture</span></span>
 
-<span data-ttu-id="981b5-120">A arquitetura consiste nos componentes a seguir.</span><span class="sxs-lookup"><span data-stu-id="981b5-120">The architecture consists of the following components.</span></span>
+<span data-ttu-id="3f8f2-120">A arquitetura consiste nos componentes a seguir.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-120">The architecture consists of the following components.</span></span>
 
-* <span data-ttu-id="981b5-121">**Rede local**.</span><span class="sxs-lookup"><span data-stu-id="981b5-121">**On-premises network**.</span></span> <span data-ttu-id="981b5-122">Uma rede de área local privada em execução dentro de uma organização.</span><span class="sxs-lookup"><span data-stu-id="981b5-122">A private local-area network running within an organization.</span></span>
+* <span data-ttu-id="3f8f2-121">**Rede local**.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-121">**On-premises network**.</span></span> <span data-ttu-id="3f8f2-122">Uma rede de área local privada em execução dentro de uma organização.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-122">A private local-area network running within an organization.</span></span>
 
-* <span data-ttu-id="981b5-123">**Dispositivo VPN**.</span><span class="sxs-lookup"><span data-stu-id="981b5-123">**VPN device**.</span></span> <span data-ttu-id="981b5-124">Um dispositivo ou serviço que fornece conectividade externa para a rede local.</span><span class="sxs-lookup"><span data-stu-id="981b5-124">A device or service that provides external connectivity to the on-premises network.</span></span> <span data-ttu-id="981b5-125">O dispositivo VPN pode ser um dispositivo de hardware ou uma solução de software, como o RRAS (Serviço de Acesso Remoto e Roteamento) do Windows Server 2012.</span><span class="sxs-lookup"><span data-stu-id="981b5-125">The VPN device may be a hardware device, or a software solution such as the Routing and Remote Access Service (RRAS) in Windows Server 2012.</span></span> <span data-ttu-id="981b5-126">Para obter uma lista de dispositivos de VPN com suporte e informações sobre como configurar dispositivos de VPN selecionados para se conectar ao Azure, consulte [Sobre dispositivos VPN para conexões de Gateway de VPN Site a Site][vpn-appliance].</span><span class="sxs-lookup"><span data-stu-id="981b5-126">For a list of supported VPN appliances and information on configuring selected VPN appliances for connecting to Azure, see [About VPN devices for Site-to-Site VPN Gateway connections][vpn-appliance].</span></span>
+* <span data-ttu-id="3f8f2-123">**Dispositivo VPN**.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-123">**VPN device**.</span></span> <span data-ttu-id="3f8f2-124">Um dispositivo ou serviço que fornece conectividade externa para a rede local.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-124">A device or service that provides external connectivity to the on-premises network.</span></span> <span data-ttu-id="3f8f2-125">O dispositivo VPN pode ser um dispositivo de hardware ou uma solução de software, como o RRAS (Serviço de Acesso Remoto e Roteamento) do Windows Server 2012.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-125">The VPN device may be a hardware device, or a software solution such as the Routing and Remote Access Service (RRAS) in Windows Server 2012.</span></span> <span data-ttu-id="3f8f2-126">Para obter uma lista de dispositivos de VPN com suporte e informações sobre como configurar dispositivos de VPN selecionados para se conectar ao Azure, consulte [Sobre dispositivos VPN para conexões de Gateway de VPN Site a Site][vpn-appliance].</span><span class="sxs-lookup"><span data-stu-id="3f8f2-126">For a list of supported VPN appliances and information on configuring selected VPN appliances for connecting to Azure, see [About VPN devices for Site-to-Site VPN Gateway connections][vpn-appliance].</span></span>
 
-* <span data-ttu-id="981b5-127">**Gateway de rede virtual de VPN ou gateway de ExpressRoute**.</span><span class="sxs-lookup"><span data-stu-id="981b5-127">**VPN virtual network gateway or ExpressRoute gateway**.</span></span> <span data-ttu-id="981b5-128">O gateway de rede virtual permite que a VNet se conecte ao dispositivo VPN ou ao circuito de ExpressRoute, usado para conectividade com a rede local.</span><span class="sxs-lookup"><span data-stu-id="981b5-128">The virtual network gateway enables the VNet to connect to the VPN device, or ExpressRoute circuit, used for connectivity with your on-premises network.</span></span> <span data-ttu-id="981b5-129">Para obter mais informações, consulte [Conectar uma rede local a uma rede virtual do Microsoft Azure][connect-to-an-Azure-vnet].</span><span class="sxs-lookup"><span data-stu-id="981b5-129">For more information, see [Connect an on-premises network to a Microsoft Azure virtual network][connect-to-an-Azure-vnet].</span></span>
-
-> [!NOTE]
-> <span data-ttu-id="981b5-130">Os scripts de implantação dessa arquitetura de referência usam um gateway VPN para conectividade e uma VNet no Azure para simular a rede local.</span><span class="sxs-lookup"><span data-stu-id="981b5-130">The deployment scripts for this reference architecture use a VPN gateway for connectivity, and a VNet in Azure to simulate your on-premises network.</span></span>
-
-* <span data-ttu-id="981b5-131">**VNet do hub**.</span><span class="sxs-lookup"><span data-stu-id="981b5-131">**Hub VNet**.</span></span> <span data-ttu-id="981b5-132">VNet do Azure usada como o hub na topologia hub-spoke.</span><span class="sxs-lookup"><span data-stu-id="981b5-132">Azure VNet used as the hub in the hub-spoke topology.</span></span> <span data-ttu-id="981b5-133">O hub é o ponto central de conectividade para sua rede local e um local para hospedar os serviços que podem ser consumidos por diferentes cargas de trabalho hospedadas nas VNets do spoke.</span><span class="sxs-lookup"><span data-stu-id="981b5-133">The hub is the central point of connectivity to your on-premises network, and a place to host services that can be consumed by the different workloads hosted in the spoke VNets.</span></span>
-
-* <span data-ttu-id="981b5-134">**Sub-rede do gateway**.</span><span class="sxs-lookup"><span data-stu-id="981b5-134">**Gateway subnet**.</span></span> <span data-ttu-id="981b5-135">Os gateways de rede virtual são mantidos na mesma sub-rede.</span><span class="sxs-lookup"><span data-stu-id="981b5-135">The virtual network gateways are held in the same subnet.</span></span>
-
-* <span data-ttu-id="981b5-136">**Sub-rede serviços compartilhados**.</span><span class="sxs-lookup"><span data-stu-id="981b5-136">**Shared services subnet**.</span></span> <span data-ttu-id="981b5-137">Uma sub-rede na VNet do hub usada para hospedar os serviços que podem ser compartilhados entre todos os spokes, como DNS ou AD DS.</span><span class="sxs-lookup"><span data-stu-id="981b5-137">A subnet in the hub VNet used to host services that can be shared among all spokes, such as DNS or AD DS.</span></span>
-
-* <span data-ttu-id="981b5-138">**Sub-rede de perímetro**.</span><span class="sxs-lookup"><span data-stu-id="981b5-138">**DMZ subnet**.</span></span> <span data-ttu-id="981b5-139">Uma sub-rede na rede virtual do hub usada para hospedar NVAs que podem agir como dispositivos de segurança, como firewalls.</span><span class="sxs-lookup"><span data-stu-id="981b5-139">A subnet in the hub VNet used to host NVAs that can act as security appliances, such as firewalls.</span></span>
-
-* <span data-ttu-id="981b5-140">**VNets de spoke**.</span><span class="sxs-lookup"><span data-stu-id="981b5-140">**Spoke VNets**.</span></span> <span data-ttu-id="981b5-141">Uma ou mais VNets do Azure que são usadas como spokes na topologia hub-spoke.</span><span class="sxs-lookup"><span data-stu-id="981b5-141">One or more Azure VNets that are used as spokes in the hub-spoke topology.</span></span> <span data-ttu-id="981b5-142">Spokes podem ser usados para isolar as cargas de trabalho em suas próprias VNets, gerenciadas separadamente de outros spokes.</span><span class="sxs-lookup"><span data-stu-id="981b5-142">Spokes can be used to isolate workloads in their own VNets, managed separately from other spokes.</span></span> <span data-ttu-id="981b5-143">Cada carga de trabalho pode incluir várias camadas, com várias sub-redes conectadas por meio de balanceadores de carga do Azure.</span><span class="sxs-lookup"><span data-stu-id="981b5-143">Each workload might include multiple tiers, with multiple subnets connected through Azure load balancers.</span></span> <span data-ttu-id="981b5-144">Para obter mais informações sobre a infraestrutura do aplicativo, consulte [Execução de cargas de trabalho de VM do Windows][windows-vm-ra] e [Execução de cargas de trabalho de VM do Linux][linux-vm-ra].</span><span class="sxs-lookup"><span data-stu-id="981b5-144">For more information about the application infrastructure, see [Running Windows VM workloads][windows-vm-ra] and [Running Linux VM workloads][linux-vm-ra].</span></span>
-
-* <span data-ttu-id="981b5-145">**Emparelhamento VNet**.</span><span class="sxs-lookup"><span data-stu-id="981b5-145">**VNet peering**.</span></span> <span data-ttu-id="981b5-146">Duas VNets na mesma região do Azure podem ser conectadas usando uma [conexão de emparelhamento][vnet-peering].</span><span class="sxs-lookup"><span data-stu-id="981b5-146">Two VNets in the same Azure region can be connected using a [peering connection][vnet-peering].</span></span> <span data-ttu-id="981b5-147">Conexões de emparelhamento são conexões não transitivas de baixa latência entre VNets.</span><span class="sxs-lookup"><span data-stu-id="981b5-147">Peering connections are non-transitive, low latency connections between VNets.</span></span> <span data-ttu-id="981b5-148">Quando emparelhadas, as VNets trocam tráfego usando o backbone do Azure sem precisar de um roteador.</span><span class="sxs-lookup"><span data-stu-id="981b5-148">Once peered, the VNets exchange traffic by using the Azure backbone, without the need for a router.</span></span> <span data-ttu-id="981b5-149">Em uma topologia de rede hub-spoke, é necessário usar o emparelhamento VNet para conectar o hub a cada spoke.</span><span class="sxs-lookup"><span data-stu-id="981b5-149">In a hub-spoke network topology, you use VNet peering to connect the hub to each spoke.</span></span>
+* <span data-ttu-id="3f8f2-127">**Gateway de rede virtual de VPN ou gateway de ExpressRoute**.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-127">**VPN virtual network gateway or ExpressRoute gateway**.</span></span> <span data-ttu-id="3f8f2-128">O gateway de rede virtual permite que a VNet se conecte ao dispositivo VPN ou ao circuito de ExpressRoute, usado para conectividade com a rede local.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-128">The virtual network gateway enables the VNet to connect to the VPN device, or ExpressRoute circuit, used for connectivity with your on-premises network.</span></span> <span data-ttu-id="3f8f2-129">Para obter mais informações, consulte [Conectar uma rede local a uma rede virtual do Microsoft Azure][connect-to-an-Azure-vnet].</span><span class="sxs-lookup"><span data-stu-id="3f8f2-129">For more information, see [Connect an on-premises network to a Microsoft Azure virtual network][connect-to-an-Azure-vnet].</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="981b5-150">Este artigo aborda apenas implantações do [Resource Manager](/azure/azure-resource-manager/resource-group-overview), mas também é possível conectar uma VNet clássica a uma VNet do Resource Manager na mesma assinatura.</span><span class="sxs-lookup"><span data-stu-id="981b5-150">This article only covers [Resource Manager](/azure/azure-resource-manager/resource-group-overview) deployments, but you can also connect a classic VNet to a Resource Manager VNet in the same subscription.</span></span> <span data-ttu-id="981b5-151">Dessa forma, seus spokes podem hospedar implantações clássicas e ainda aproveitar os serviços compartilhados no hub.</span><span class="sxs-lookup"><span data-stu-id="981b5-151">That way, your spokes can host classic deployments and still benefit from services shared in the hub.</span></span>
+> <span data-ttu-id="3f8f2-130">Os scripts de implantação dessa arquitetura de referência usam um gateway VPN para conectividade e uma VNet no Azure para simular a rede local.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-130">The deployment scripts for this reference architecture use a VPN gateway for connectivity, and a VNet in Azure to simulate your on-premises network.</span></span>
 
-## <a name="recommendations"></a><span data-ttu-id="981b5-152">Recomendações</span><span class="sxs-lookup"><span data-stu-id="981b5-152">Recommendations</span></span>
+* <span data-ttu-id="3f8f2-131">**VNet do hub**.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-131">**Hub VNet**.</span></span> <span data-ttu-id="3f8f2-132">VNet do Azure usada como o hub na topologia hub-spoke.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-132">Azure VNet used as the hub in the hub-spoke topology.</span></span> <span data-ttu-id="3f8f2-133">O hub é o ponto central de conectividade para sua rede local e um local para hospedar os serviços que podem ser consumidos por diferentes cargas de trabalho hospedadas nas VNets do spoke.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-133">The hub is the central point of connectivity to your on-premises network, and a place to host services that can be consumed by the different workloads hosted in the spoke VNets.</span></span>
 
-<span data-ttu-id="981b5-153">Todas as recomendações para a arquitetura de referência do [hub-spoke] [ guidance-hub-spoke] também se aplicam à arquitetura de referência de serviços compartilhados.</span><span class="sxs-lookup"><span data-stu-id="981b5-153">All the recommendations for the [hub-spoke][guidance-hub-spoke] reference architecture also apply to the shared services reference architecture.</span></span> 
+* <span data-ttu-id="3f8f2-134">**Sub-rede do gateway**.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-134">**Gateway subnet**.</span></span> <span data-ttu-id="3f8f2-135">Os gateways de rede virtual são mantidos na mesma sub-rede.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-135">The virtual network gateways are held in the same subnet.</span></span>
 
-<span data-ttu-id="981b5-154">Além disso, as seguintes recomendações se aplicam para a maioria dos cenários em serviços compartilhados.</span><span class="sxs-lookup"><span data-stu-id="981b5-154">ALso, the following recommendations apply for most scenarios under shared services.</span></span> <span data-ttu-id="981b5-155">Siga estas recomendações, a menos que você tenha um requisito específico que as substitua.</span><span class="sxs-lookup"><span data-stu-id="981b5-155">Follow these recommendations unless you have a specific requirement that overrides them.</span></span>
+* <span data-ttu-id="3f8f2-136">**Sub-rede serviços compartilhados**.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-136">**Shared services subnet**.</span></span> <span data-ttu-id="3f8f2-137">Uma sub-rede na VNet do hub usada para hospedar os serviços que podem ser compartilhados entre todos os spokes, como DNS ou AD DS.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-137">A subnet in the hub VNet used to host services that can be shared among all spokes, such as DNS or AD DS.</span></span>
 
-### <a name="identity"></a><span data-ttu-id="981b5-156">Identidade</span><span class="sxs-lookup"><span data-stu-id="981b5-156">Identity</span></span>
+* <span data-ttu-id="3f8f2-138">**Sub-rede de perímetro**.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-138">**DMZ subnet**.</span></span> <span data-ttu-id="3f8f2-139">Uma sub-rede na rede virtual do hub usada para hospedar NVAs que podem agir como dispositivos de segurança, como firewalls.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-139">A subnet in the hub VNet used to host NVAs that can act as security appliances, such as firewalls.</span></span>
 
-<span data-ttu-id="981b5-157">A maioria das empresas tem um ambiente de Active Directory Domain Services (ADDS) em seu datacenter local.</span><span class="sxs-lookup"><span data-stu-id="981b5-157">Most enterprise organizations have an Active Directory Directory Services (ADDS) environment in their on-premises datacenter.</span></span> <span data-ttu-id="981b5-158">Para facilitar o gerenciamento de ativos movidos para o Azure de sua rede local que dependem do ADDS, é recomendável hospedar os controladores de domínio ADDS no Azure.</span><span class="sxs-lookup"><span data-stu-id="981b5-158">To facilitate management of assets moved to Azure from your on-premises network that depend on ADDS, it is recommended to host ADDS domain controllers in Azure.</span></span>
+* <span data-ttu-id="3f8f2-140">**VNets de spoke**.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-140">**Spoke VNets**.</span></span> <span data-ttu-id="3f8f2-141">Uma ou mais VNets do Azure que são usadas como spokes na topologia hub-spoke.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-141">One or more Azure VNets that are used as spokes in the hub-spoke topology.</span></span> <span data-ttu-id="3f8f2-142">Spokes podem ser usados para isolar as cargas de trabalho em suas próprias VNets, gerenciadas separadamente de outros spokes.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-142">Spokes can be used to isolate workloads in their own VNets, managed separately from other spokes.</span></span> <span data-ttu-id="3f8f2-143">Cada carga de trabalho pode incluir várias camadas, com várias sub-redes conectadas por meio de balanceadores de carga do Azure.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-143">Each workload might include multiple tiers, with multiple subnets connected through Azure load balancers.</span></span> <span data-ttu-id="3f8f2-144">Para obter mais informações sobre a infraestrutura do aplicativo, consulte [Execução de cargas de trabalho de VM do Windows][windows-vm-ra] e [Execução de cargas de trabalho de VM do Linux][linux-vm-ra].</span><span class="sxs-lookup"><span data-stu-id="3f8f2-144">For more information about the application infrastructure, see [Running Windows VM workloads][windows-vm-ra] and [Running Linux VM workloads][linux-vm-ra].</span></span>
 
-<span data-ttu-id="981b5-159">Se você usar objetos da Política de Grupo que você deseja controlar separadamente para o Azure e seu ambiente local, use um site diferente do AD para cada região do Azure.</span><span class="sxs-lookup"><span data-stu-id="981b5-159">If you make use of Group Policy Objects, that you want to control separately for Azure and your on-premises environment, use a different AD site for each Azure region.</span></span> <span data-ttu-id="981b5-160">Coloque os controladores de domínio em uma rede virtual central (hub) que pode ser acessada por cargas de trabalho dependentes.</span><span class="sxs-lookup"><span data-stu-id="981b5-160">Place your domain controllers in a central VNet (hub) that dependent workloads can access.</span></span>
-
-### <a name="security"></a><span data-ttu-id="981b5-161">Segurança</span><span class="sxs-lookup"><span data-stu-id="981b5-161">Security</span></span>
-
-<span data-ttu-id="981b5-162">Ao mover cargas de trabalho do seu ambiente local para o Azure, algumas dessas cargas de trabalho exigem ser hospedadas em máquinas virtuais.</span><span class="sxs-lookup"><span data-stu-id="981b5-162">As you move workloads from your on-premises environment to Azure, some of these workloads will require to be hosted in VMs.</span></span> <span data-ttu-id="981b5-163">Por motivos de conformidade, talvez seja necessário impor restrições sobre o tráfego que passa por essas cargas de trabalho.</span><span class="sxs-lookup"><span data-stu-id="981b5-163">For compliance reasons, you may need to enforce restrictions on traffic traversing those workloads.</span></span> 
-
-<span data-ttu-id="981b5-164">Você pode usar soluções de virtualização de rede (NVAs) no Azure para hospedar tipos diferentes de segurança e de serviços de desempenho.</span><span class="sxs-lookup"><span data-stu-id="981b5-164">You can use network virtual appliances (NVAs) in Azure to host different types of security and performance services.</span></span> <span data-ttu-id="981b5-165">Se você estiver atualmente familiarizado com um determinado conjunto de dispositivos locais, é recomendável usar os mesmos dispositivos virtualizados no Azure, onde aplicável.</span><span class="sxs-lookup"><span data-stu-id="981b5-165">If you are familiar with a given set of appliances on-premises today, it is recommended to use the same virtualized appliances in Azure, where applicable.</span></span>
+* <span data-ttu-id="3f8f2-145">**Emparelhamento VNet**.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-145">**VNet peering**.</span></span> <span data-ttu-id="3f8f2-146">Duas VNets na mesma região do Azure podem ser conectadas usando uma [conexão de emparelhamento][vnet-peering].</span><span class="sxs-lookup"><span data-stu-id="3f8f2-146">Two VNets in the same Azure region can be connected using a [peering connection][vnet-peering].</span></span> <span data-ttu-id="3f8f2-147">Conexões de emparelhamento são conexões não transitivas de baixa latência entre VNets.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-147">Peering connections are non-transitive, low latency connections between VNets.</span></span> <span data-ttu-id="3f8f2-148">Quando emparelhadas, as VNets trocam tráfego usando o backbone do Azure sem precisar de um roteador.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-148">Once peered, the VNets exchange traffic by using the Azure backbone, without the need for a router.</span></span> <span data-ttu-id="3f8f2-149">Em uma topologia de rede hub-spoke, é necessário usar o emparelhamento VNet para conectar o hub a cada spoke.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-149">In a hub-spoke network topology, you use VNet peering to connect the hub to each spoke.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="981b5-166">Os scripts de implantação para esta arquitetura de referência usam uma VM Ubuntu com encaminhamento de IP ativado para simular uma solução de virtualização de rede.</span><span class="sxs-lookup"><span data-stu-id="981b5-166">The deployment scripts for this reference architecture use an Ubuntu VM with IP forwarding enabled to mimic a network virtual appliance.</span></span>
+> <span data-ttu-id="3f8f2-150">Este artigo aborda apenas implantações do [Resource Manager](/azure/azure-resource-manager/resource-group-overview), mas também é possível conectar uma VNet clássica a uma VNet do Resource Manager na mesma assinatura.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-150">This article only covers [Resource Manager](/azure/azure-resource-manager/resource-group-overview) deployments, but you can also connect a classic VNet to a Resource Manager VNet in the same subscription.</span></span> <span data-ttu-id="3f8f2-151">Dessa forma, seus spokes podem hospedar implantações clássicas e ainda aproveitar os serviços compartilhados no hub.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-151">That way, your spokes can host classic deployments and still benefit from services shared in the hub.</span></span>
 
-## <a name="considerations"></a><span data-ttu-id="981b5-167">Considerações</span><span class="sxs-lookup"><span data-stu-id="981b5-167">Considerations</span></span>
+## <a name="recommendations"></a><span data-ttu-id="3f8f2-152">Recomendações</span><span class="sxs-lookup"><span data-stu-id="3f8f2-152">Recommendations</span></span>
 
-### <a name="overcoming-vnet-peering-limits"></a><span data-ttu-id="981b5-168">Superar os limites de emparelhamento VNet</span><span class="sxs-lookup"><span data-stu-id="981b5-168">Overcoming VNet peering limits</span></span>
+<span data-ttu-id="3f8f2-153">Todas as recomendações para a arquitetura de referência do [hub-spoke] [ guidance-hub-spoke] também se aplicam à arquitetura de referência de serviços compartilhados.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-153">All the recommendations for the [hub-spoke][guidance-hub-spoke] reference architecture also apply to the shared services reference architecture.</span></span> 
 
-<span data-ttu-id="981b5-169">Não deixe de considerar a [limitação do número de emparelhamentos de VNet por VNet][vnet-peering-limit] no Azure.</span><span class="sxs-lookup"><span data-stu-id="981b5-169">Make sure you consider the [limitation on number of VNets peerings per VNet][vnet-peering-limit] in Azure.</span></span> <span data-ttu-id="981b5-170">Se você precisar de mais spokes do que o permitido pelo limite, considere criar uma topologia hub-spoke-hub-spoke, na qual o primeiro nível de spokes também funciona como hubs.</span><span class="sxs-lookup"><span data-stu-id="981b5-170">If you decide you need more spokes than the limit will allow, consider creating a hub-spoke-hub-spoke topology, where the first level of spokes also act as hubs.</span></span> <span data-ttu-id="981b5-171">O diagrama a seguir mostra essa abordagem.</span><span class="sxs-lookup"><span data-stu-id="981b5-171">The following diagram shows this approach.</span></span>
+<span data-ttu-id="3f8f2-154">Além disso, as seguintes recomendações se aplicam para a maioria dos cenários em serviços compartilhados.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-154">ALso, the following recommendations apply for most scenarios under shared services.</span></span> <span data-ttu-id="3f8f2-155">Siga estas recomendações, a menos que você tenha um requisito específico que as substitua.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-155">Follow these recommendations unless you have a specific requirement that overrides them.</span></span>
 
-<span data-ttu-id="981b5-172">![[3]][3]</span><span class="sxs-lookup"><span data-stu-id="981b5-172">![[3]][3]</span></span>
+### <a name="identity"></a><span data-ttu-id="3f8f2-156">Identidade</span><span class="sxs-lookup"><span data-stu-id="3f8f2-156">Identity</span></span>
 
-<span data-ttu-id="981b5-173">Além disso, considere quais serviços compartilhados no hub, para garantir que o hub seja dimensionado para um número maior de spokes.</span><span class="sxs-lookup"><span data-stu-id="981b5-173">Also consider what services are shared in the hub, to ensure the hub scales for a larger number of spokes.</span></span> <span data-ttu-id="981b5-174">Por exemplo, se seu hub fornecer serviços de firewall, considere os limites de largura de banda da sua solução de firewall ao adicionar vários spokes.</span><span class="sxs-lookup"><span data-stu-id="981b5-174">For instance, if your hub provides firewall services, consider the bandwidth limits of your firewall solution when adding multiple spokes.</span></span> <span data-ttu-id="981b5-175">Pode ser útil mover alguns desses serviços compartilhados para um segundo nível de hubs.</span><span class="sxs-lookup"><span data-stu-id="981b5-175">You might want to move some of these shared services to a second level of hubs.</span></span>
+<span data-ttu-id="3f8f2-157">A maioria das empresas tem um ambiente de Active Directory Domain Services (ADDS) em seu datacenter local.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-157">Most enterprise organizations have an Active Directory Directory Services (ADDS) environment in their on-premises datacenter.</span></span> <span data-ttu-id="3f8f2-158">Para facilitar o gerenciamento de ativos movidos para o Azure de sua rede local que dependem do ADDS, é recomendável hospedar os controladores de domínio ADDS no Azure.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-158">To facilitate management of assets moved to Azure from your on-premises network that depend on ADDS, it is recommended to host ADDS domain controllers in Azure.</span></span>
 
-## <a name="deploy-the-solution"></a><span data-ttu-id="981b5-176">Implantar a solução</span><span class="sxs-lookup"><span data-stu-id="981b5-176">Deploy the solution</span></span>
+<span data-ttu-id="3f8f2-159">Se você usar objetos da Política de Grupo que você deseja controlar separadamente para o Azure e seu ambiente local, use um site diferente do AD para cada região do Azure.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-159">If you make use of Group Policy Objects, that you want to control separately for Azure and your on-premises environment, use a different AD site for each Azure region.</span></span> <span data-ttu-id="3f8f2-160">Coloque os controladores de domínio em uma rede virtual central (hub) que pode ser acessada por cargas de trabalho dependentes.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-160">Place your domain controllers in a central VNet (hub) that dependent workloads can access.</span></span>
 
-<span data-ttu-id="981b5-177">Uma implantação para essa arquitetura está disponível no [GitHub][ref-arch-repo].</span><span class="sxs-lookup"><span data-stu-id="981b5-177">A deployment for this architecture is available on [GitHub][ref-arch-repo].</span></span> <span data-ttu-id="981b5-178">Ela usa VMs Ubuntu em cada VNet para testar a conectividade.</span><span class="sxs-lookup"><span data-stu-id="981b5-178">It uses Ubuntu VMs in each VNet to test connectivity.</span></span> <span data-ttu-id="981b5-179">Não há nenhum serviço hospedado na sub-rede **shared-services** na **VNet do hub**.</span><span class="sxs-lookup"><span data-stu-id="981b5-179">There are no actual services hosted in the **shared-services** subnet in the **hub VNet**.</span></span>
+### <a name="security"></a><span data-ttu-id="3f8f2-161">Segurança</span><span class="sxs-lookup"><span data-stu-id="3f8f2-161">Security</span></span>
 
-### <a name="prerequisites"></a><span data-ttu-id="981b5-180">pré-requisitos</span><span class="sxs-lookup"><span data-stu-id="981b5-180">Prerequisites</span></span>
+<span data-ttu-id="3f8f2-162">Ao mover cargas de trabalho do seu ambiente local para o Azure, algumas dessas cargas de trabalho exigem ser hospedadas em máquinas virtuais.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-162">As you move workloads from your on-premises environment to Azure, some of these workloads will require to be hosted in VMs.</span></span> <span data-ttu-id="3f8f2-163">Por motivos de conformidade, talvez seja necessário impor restrições sobre o tráfego que passa por essas cargas de trabalho.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-163">For compliance reasons, you may need to enforce restrictions on traffic traversing those workloads.</span></span> 
 
-<span data-ttu-id="981b5-181">Antes de implantar a arquitetura de referência para sua própria assinatura, você deve executar as etapas a seguir.</span><span class="sxs-lookup"><span data-stu-id="981b5-181">Before you can deploy the reference architecture to your own subscription, you must perform the following steps.</span></span>
+<span data-ttu-id="3f8f2-164">Você pode usar soluções de virtualização de rede (NVAs) no Azure para hospedar tipos diferentes de segurança e de serviços de desempenho.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-164">You can use network virtual appliances (NVAs) in Azure to host different types of security and performance services.</span></span> <span data-ttu-id="3f8f2-165">Se você estiver atualmente familiarizado com um determinado conjunto de dispositivos locais, é recomendável usar os mesmos dispositivos virtualizados no Azure, onde aplicável.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-165">If you are familiar with a given set of appliances on-premises today, it is recommended to use the same virtualized appliances in Azure, where applicable.</span></span>
 
-1. <span data-ttu-id="981b5-182">Clone, crie um fork ou baixe o arquivo zip das [arquiteturas de referência][ref-arch-repo] no repositório GitHub.</span><span class="sxs-lookup"><span data-stu-id="981b5-182">Clone, fork, or download the zip file for the [reference architectures][ref-arch-repo] GitHub repository.</span></span>
+> [!NOTE]
+> <span data-ttu-id="3f8f2-166">Os scripts de implantação para esta arquitetura de referência usam uma VM Ubuntu com encaminhamento de IP ativado para simular uma solução de virtualização de rede.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-166">The deployment scripts for this reference architecture use an Ubuntu VM with IP forwarding enabled to mimic a network virtual appliance.</span></span>
 
-2. <span data-ttu-id="981b5-183">Verifique se a CLI do Azure 2.0 está instalada no computador.</span><span class="sxs-lookup"><span data-stu-id="981b5-183">Make sure you have the Azure CLI 2.0 installed on your computer.</span></span> <span data-ttu-id="981b5-184">Para obter instruções de instalação da CLI, consulte [Instalar a CLI 2.0 do Azure][azure-cli-2].</span><span class="sxs-lookup"><span data-stu-id="981b5-184">For CLI installation instructions, see [Install Azure CLI 2.0][azure-cli-2].</span></span>
+## <a name="considerations"></a><span data-ttu-id="3f8f2-167">Considerações</span><span class="sxs-lookup"><span data-stu-id="3f8f2-167">Considerations</span></span>
 
-3. <span data-ttu-id="981b5-185">Instale os pacote npm dos [Blocos de construção do Azure][azbb].</span><span class="sxs-lookup"><span data-stu-id="981b5-185">Install the [Azure building blocks][azbb] npm package.</span></span>
+### <a name="overcoming-vnet-peering-limits"></a><span data-ttu-id="3f8f2-168">Superar os limites de emparelhamento VNet</span><span class="sxs-lookup"><span data-stu-id="3f8f2-168">Overcoming VNet peering limits</span></span>
 
-4. <span data-ttu-id="981b5-186">Em um prompt de comando, bash prompt ou prompt do PowerShell, faça logon na sua conta do Azure usando o comando abaixo e siga os prompts.</span><span class="sxs-lookup"><span data-stu-id="981b5-186">From a command prompt, bash prompt, or PowerShell prompt, login to your Azure account by using the command below, and follow the prompts.</span></span>
+<span data-ttu-id="3f8f2-169">Não deixe de considerar a [limitação do número de emparelhamentos de VNet por VNet][vnet-peering-limit] no Azure.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-169">Make sure you consider the [limitation on number of VNets peerings per VNet][vnet-peering-limit] in Azure.</span></span> <span data-ttu-id="3f8f2-170">Se você precisar de mais spokes do que o permitido pelo limite, considere criar uma topologia hub-spoke-hub-spoke, na qual o primeiro nível de spokes também funciona como hubs.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-170">If you decide you need more spokes than the limit will allow, consider creating a hub-spoke-hub-spoke topology, where the first level of spokes also act as hubs.</span></span> <span data-ttu-id="3f8f2-171">O diagrama a seguir mostra essa abordagem.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-171">The following diagram shows this approach.</span></span>
+
+<span data-ttu-id="3f8f2-172">![[3]][3]</span><span class="sxs-lookup"><span data-stu-id="3f8f2-172">![[3]][3]</span></span>
+
+<span data-ttu-id="3f8f2-173">Além disso, considere quais serviços compartilhados no hub, para garantir que o hub seja dimensionado para um número maior de spokes.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-173">Also consider what services are shared in the hub, to ensure the hub scales for a larger number of spokes.</span></span> <span data-ttu-id="3f8f2-174">Por exemplo, se seu hub fornecer serviços de firewall, considere os limites de largura de banda da sua solução de firewall ao adicionar vários spokes.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-174">For instance, if your hub provides firewall services, consider the bandwidth limits of your firewall solution when adding multiple spokes.</span></span> <span data-ttu-id="3f8f2-175">Pode ser útil mover alguns desses serviços compartilhados para um segundo nível de hubs.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-175">You might want to move some of these shared services to a second level of hubs.</span></span>
+
+## <a name="deploy-the-solution"></a><span data-ttu-id="3f8f2-176">Implantar a solução</span><span class="sxs-lookup"><span data-stu-id="3f8f2-176">Deploy the solution</span></span>
+
+<span data-ttu-id="3f8f2-177">Uma implantação para essa arquitetura está disponível no [GitHub][ref-arch-repo].</span><span class="sxs-lookup"><span data-stu-id="3f8f2-177">A deployment for this architecture is available on [GitHub][ref-arch-repo].</span></span> <span data-ttu-id="3f8f2-178">A implantação cria os seguintes grupos de recursos em sua assinatura:</span><span class="sxs-lookup"><span data-stu-id="3f8f2-178">The deployment creates the following resource groups in your subscription:</span></span>
+
+- <span data-ttu-id="3f8f2-179">hub-adds-rg</span><span class="sxs-lookup"><span data-stu-id="3f8f2-179">hub-adds-rg</span></span>
+- <span data-ttu-id="3f8f2-180">hub-nva-rg</span><span class="sxs-lookup"><span data-stu-id="3f8f2-180">hub-nva-rg</span></span>
+- <span data-ttu-id="3f8f2-181">hub-vnet-rg</span><span class="sxs-lookup"><span data-stu-id="3f8f2-181">hub-vnet-rg</span></span>
+- <span data-ttu-id="3f8f2-182">onprem-vnet-rg</span><span class="sxs-lookup"><span data-stu-id="3f8f2-182">onprem-vnet-rg</span></span>
+- <span data-ttu-id="3f8f2-183">spoke1-vnet-rg</span><span class="sxs-lookup"><span data-stu-id="3f8f2-183">spoke1-vnet-rg</span></span>
+- <span data-ttu-id="3f8f2-184">spoke2-vent-rg</span><span class="sxs-lookup"><span data-stu-id="3f8f2-184">spoke2-vent-rg</span></span>
+
+<span data-ttu-id="3f8f2-185">Os arquivos de parâmetros de modelo se referem a esses nomes e, portanto, se você alterá-los, atualize os arquivos de parâmetros para que correspondam.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-185">The template parameter files refer to these names, so if you change them, update the parameter files to match.</span></span>
+
+### <a name="prerequisites"></a><span data-ttu-id="3f8f2-186">pré-requisitos</span><span class="sxs-lookup"><span data-stu-id="3f8f2-186">Prerequisites</span></span>
+
+1. <span data-ttu-id="3f8f2-187">Clone, crie um fork ou baixe o arquivo zip das [arquiteturas de referência][ref-arch-repo] no repositório GitHub.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-187">Clone, fork, or download the zip file for the [reference architectures][ref-arch-repo] GitHub repository.</span></span>
+
+2. <span data-ttu-id="3f8f2-188">Instale a [CLI do Azure 2.0][azure-cli-2].</span><span class="sxs-lookup"><span data-stu-id="3f8f2-188">Install [Azure CLI 2.0][azure-cli-2].</span></span>
+
+3. <span data-ttu-id="3f8f2-189">Instale os pacote npm dos [Blocos de construção do Azure][azbb].</span><span class="sxs-lookup"><span data-stu-id="3f8f2-189">Install the [Azure building blocks][azbb] npm package.</span></span>
+
+4. <span data-ttu-id="3f8f2-190">Em um prompt de comando, prompt do bash ou prompt do PowerShell, faça logon na sua conta do Azure usando o comando abaixo.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-190">From a command prompt, bash prompt, or PowerShell prompt, login to your Azure account by using the command below.</span></span>
 
    ```bash
    az login
    ```
 
-### <a name="deploy-the-simulated-on-premises-datacenter-using-azbb"></a><span data-ttu-id="981b5-187">Implantar o datacenter local simulado usand azbb</span><span class="sxs-lookup"><span data-stu-id="981b5-187">Deploy the simulated on-premises datacenter using azbb</span></span>
+### <a name="deploy-the-simulated-on-premises-datacenter-using-azbb"></a><span data-ttu-id="3f8f2-191">Implantar o datacenter local simulado usand azbb</span><span class="sxs-lookup"><span data-stu-id="3f8f2-191">Deploy the simulated on-premises datacenter using azbb</span></span>
 
-<span data-ttu-id="981b5-188">Para implantar o datacenter local simulado como uma rede virtual do Azure, siga as seguintes as etapas:</span><span class="sxs-lookup"><span data-stu-id="981b5-188">To deploy the simulated on-premises datacenter as an Azure VNet, follow these steps:</span></span>
+<span data-ttu-id="3f8f2-192">Esta etapa implanta o datacenter local simulado como uma rede virtual do Azure.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-192">This step deploys the simulated on-premises datacenter as an Azure VNet.</span></span>
 
-1. <span data-ttu-id="981b5-189">Navegue até a pasta `hybrid-networking\shared-services-stack\` do repositório que você baixou na etapa de pré-requisitos acima.</span><span class="sxs-lookup"><span data-stu-id="981b5-189">Navigate to the `hybrid-networking\shared-services-stack\` folder for the repository you downloaded in the pre-requisites step above.</span></span>
+1. <span data-ttu-id="3f8f2-193">Navegue até a pasta `hybrid-networking\shared-services-stack\` do repositório do GitHub.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-193">Navigate to the `hybrid-networking\shared-services-stack\` folder of the GitHub repository.</span></span>
 
-2. <span data-ttu-id="981b5-190">Abra o arquivo `onprem.json` e insira um nome de usuário e senha entre aspas nas linhas 45 e 46, conforme mostrado abaixo e salve o arquivo.</span><span class="sxs-lookup"><span data-stu-id="981b5-190">Open the `onprem.json` file and enter a username and password between the quotes in line 45 and 46, as shown below, then save the file.</span></span>
+2. <span data-ttu-id="3f8f2-194">Abra o arquivo `onprem.json` .</span><span class="sxs-lookup"><span data-stu-id="3f8f2-194">Open the `onprem.json` file.</span></span> 
+
+3. <span data-ttu-id="3f8f2-195">Pesquise todas as instâncias de `Password` e `adminPassword`.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-195">Search for all instances of `Password` and `adminPassword`.</span></span> <span data-ttu-id="3f8f2-196">Insira valores para o nome de usuário e a senha nos parâmetros e salve o arquivo.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-196">Enter values for the user name and password in the parameters and save the file.</span></span> 
+
+4. <span data-ttu-id="3f8f2-197">Execute o comando a seguir:</span><span class="sxs-lookup"><span data-stu-id="3f8f2-197">Run the following command:</span></span>
 
    ```bash
-   "adminUsername": "XXX",
-   "adminPassword": "YYY",
+   azbb -s <subscription_id> -g onprem-vnet-rg -l <location> -p onprem.json --deploy
+   ```
+5. <span data-ttu-id="3f8f2-198">Aguarde até que a implantação seja concluída.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-198">Wait for the deployment to finish.</span></span> <span data-ttu-id="3f8f2-199">Essa implantação cria uma rede virtual, uma máquina virtual que executa Windows e um gateway de VPN.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-199">This deployment creates a virtual network, a virtual machine running Windows, and a VPN gateway.</span></span> <span data-ttu-id="3f8f2-200">A criação do gateway de VPN pode levar mais de 40 minutos para ser concluída.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-200">The VPN gateway creation can take more than 40 minutes to complete.</span></span>
+
+### <a name="deploy-the-hub-vnet"></a><span data-ttu-id="3f8f2-201">Implantar a VNET do hub</span><span class="sxs-lookup"><span data-stu-id="3f8f2-201">Deploy the hub VNet</span></span>
+
+<span data-ttu-id="3f8f2-202">Esta etapa implanta o hub de rede virtual e conecta-se à rede virtual local simulada.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-202">This step deploys the hub VNet and connects it to the simulated on-premises VNet.</span></span>
+
+1. <span data-ttu-id="3f8f2-203">Abra o arquivo `hub-vnet.json` .</span><span class="sxs-lookup"><span data-stu-id="3f8f2-203">Open the `hub-vnet.json` file.</span></span> 
+
+2. <span data-ttu-id="3f8f2-204">Pesquise `adminPassword` e insira um nome de usuário e senha nos parâmetros.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-204">Search for `adminPassword` and enter a user name and password in the parameters.</span></span> 
+
+3. <span data-ttu-id="3f8f2-205">Pesquise todas as instâncias de `sharedKey` e insira um valor para uma chave compartilhada.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-205">Search for all instances of `sharedKey` and enter a value for a shared key.</span></span> <span data-ttu-id="3f8f2-206">Salve o arquivo.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-206">Save the file.</span></span>
+
+   ```bash
+   "sharedKey": "abc123",
    ```
 
-3. <span data-ttu-id="981b5-191">Execute `azbb` para implantar o ambiente simulado local, conforme mostrado abaixo.</span><span class="sxs-lookup"><span data-stu-id="981b5-191">Run `azbb` to deploy the simulated onprem environment as shown below.</span></span>
+4. <span data-ttu-id="3f8f2-207">Execute o comando a seguir:</span><span class="sxs-lookup"><span data-stu-id="3f8f2-207">Run the following command:</span></span>
 
    ```bash
-   azbb -s <subscription_id> -g onprem-vnet-rg - l <location> -p onoprem.json --deploy
-   ```
-   > [!NOTE]
-   > <span data-ttu-id="981b5-192">Se você decidir usar um nome do grupo de recursos distinto (diferente de `onprem-vnet-rg`), pesquise todos os arquivos de parâmetro que usam esse nome e edite-os para usar seu próprio nome do grupo de recursos.</span><span class="sxs-lookup"><span data-stu-id="981b5-192">If you decide to use a different resource group name (other than `onprem-vnet-rg`), make sure to search for all parameter files that use that name and edit them to use your own resource group name.</span></span>
-
-4. <span data-ttu-id="981b5-193">Aguarde até que a implantação seja concluída.</span><span class="sxs-lookup"><span data-stu-id="981b5-193">Wait for the deployment to finish.</span></span> <span data-ttu-id="981b5-194">Essa implantação cria uma rede virtual, uma máquina virtual que executa Windows e um gateway de VPN.</span><span class="sxs-lookup"><span data-stu-id="981b5-194">This deployment creates a virtual network, a virtual machine running Windows, and a VPN gateway.</span></span> <span data-ttu-id="981b5-195">A criação do gateway de VPN pode levar mais de 40 minutos para ser concluída.</span><span class="sxs-lookup"><span data-stu-id="981b5-195">The VPN gateway creation can take more than 40 minutes to complete.</span></span>
-
-### <a name="azure-hub-vnet"></a><span data-ttu-id="981b5-196">VNet do hub do Azure</span><span class="sxs-lookup"><span data-stu-id="981b5-196">Azure hub VNet</span></span>
-
-<span data-ttu-id="981b5-197">Para implantar a VNet de hub e conectar-se à VNet local simulada criada acima, execute as seguintes etapas.</span><span class="sxs-lookup"><span data-stu-id="981b5-197">To deploy the hub VNet, and connect to the simulated on-premises VNet created above, perform the following steps.</span></span>
-
-1. <span data-ttu-id="981b5-198">Abra o arquivo `hub-vnet.json` e insira um nome de usuário e senha entre aspas nas linhas 50 e 51, conforme mostrado abaixo.</span><span class="sxs-lookup"><span data-stu-id="981b5-198">Open the `hub-vnet.json` file and enter a username and password between the quotes in line 50 and 51, as shown below.</span></span>
-
-   ```bash
-   "adminUsername": "XXX",
-   "adminPassword": "YYY",
+   azbb -s <subscription_id> -g hub-vnet-rg -l <location> -p hub-vnet.json --deploy
    ```
 
-2. <span data-ttu-id="981b5-199">Na linha 52, para `osType`, digite `Windows` ou `Linux` para instalar o Windows Server 2016 Datacenter ou o Ubuntu 16.04 como o sistema operacional para o jumpbox.</span><span class="sxs-lookup"><span data-stu-id="981b5-199">On line 52, for `osType`, type `Windows` or `Linux` to install either Windows Server 2016 Datacenter, or Ubuntu 16.04 as the operating system for the jumpbox.</span></span>
+5. <span data-ttu-id="3f8f2-208">Aguarde até que a implantação seja concluída.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-208">Wait for the deployment to finish.</span></span> <span data-ttu-id="3f8f2-209">Essa implantação cria uma rede virtual, uma máquina virtual, um gateway de VPN e uma conexão com o gateway criado na seção anterior.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-209">This deployment creates a virtual network, a virtual machine, a VPN gateway, and a connection to the gateway created in the previous section.</span></span> <span data-ttu-id="3f8f2-210">O gateway de VPN pode levar mais de 40 minutos para ser concluído.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-210">The VPN gateway can take more than 40 minutes to complete.</span></span>
 
-3. <span data-ttu-id="981b5-200">Insira uma chave compartilhada entre as aspas na linha 83, conforme mostrado abaixo, e salve o arquivo.</span><span class="sxs-lookup"><span data-stu-id="981b5-200">Enter a shared key between the quotes in line 83, as shown below, then save the file.</span></span>
+### <a name="deploy-ad-ds-in-azure"></a><span data-ttu-id="3f8f2-211">Implantar o Active Directory Domain Services no Azure</span><span class="sxs-lookup"><span data-stu-id="3f8f2-211">Deploy AD DS in Azure</span></span>
 
-   ```bash
-   "sharedKey": "",
-   ```
+<span data-ttu-id="3f8f2-212">Esta etapa implanta os controladores de domínio do Active Directory Domain Services no Azure.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-212">This step deploys AD DS domain controllers in Azure.</span></span>
 
-4. <span data-ttu-id="981b5-201">Execute `azbb` para implantar o ambiente simulado local, conforme mostrado abaixo.</span><span class="sxs-lookup"><span data-stu-id="981b5-201">Run `azbb` to deploy the simulated onprem environment as shown below.</span></span>
+1. <span data-ttu-id="3f8f2-213">Abra o arquivo `hub-adds.json` .</span><span class="sxs-lookup"><span data-stu-id="3f8f2-213">Open the `hub-adds.json` file.</span></span>
 
-   ```bash
-   azbb -s <subscription_id> -g hub-vnet-rg - l <location> -p hub-vnet.json --deploy
-   ```
-   > [!NOTE]
-   > <span data-ttu-id="981b5-202">Se você decidir usar um nome do grupo de recursos distinto (diferente de `hub-vnet-rg`), pesquise todos os arquivos de parâmetro que usam esse nome e edite-os para usar seu próprio nome do grupo de recursos.</span><span class="sxs-lookup"><span data-stu-id="981b5-202">If you decide to use a different resource group name (other than `hub-vnet-rg`), make sure to search for all parameter files that use that name and edit them to use your own resource group name.</span></span>
+2. <span data-ttu-id="3f8f2-214">Pesquise todas as instâncias de `Password` e `adminPassword`.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-214">Search for all instances of `Password` and `adminPassword`.</span></span> <span data-ttu-id="3f8f2-215">Insira valores para o nome de usuário e a senha nos parâmetros e salve o arquivo.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-215">Enter values for the user name and password in the parameters and save the file.</span></span> 
 
-5. <span data-ttu-id="981b5-203">Aguarde até que a implantação seja concluída.</span><span class="sxs-lookup"><span data-stu-id="981b5-203">Wait for the deployment to finish.</span></span> <span data-ttu-id="981b5-204">Essa implantação cria uma rede virtual, uma máquina virtual, um gateway de VPN e uma conexão com o gateway criado na seção anterior.</span><span class="sxs-lookup"><span data-stu-id="981b5-204">This deployment creates a virtual network, a virtual machine, a VPN gateway, and a connection to the gateway created in the previous section.</span></span> <span data-ttu-id="981b5-205">A criação do gateway de VPN pode levar mais de 40 minutos para ser concluída.</span><span class="sxs-lookup"><span data-stu-id="981b5-205">The VPN gateway creation can take more than 40 minutes to complete.</span></span>
-
-### <a name="adds-in-azure"></a><span data-ttu-id="981b5-206">Exibir no ADDS</span><span class="sxs-lookup"><span data-stu-id="981b5-206">ADDS in Azure</span></span>
-
-<span data-ttu-id="981b5-207">Para implantar os controladores de domínio ADDS no Azure, execute as etapas a seguir.</span><span class="sxs-lookup"><span data-stu-id="981b5-207">To deploy the ADDS domain controllers in Azure, perform the following steps.</span></span>
-
-1. <span data-ttu-id="981b5-208">Abra o arquivo `hub-adds.json` e insira um nome de usuário e senha entre aspas nas linhas 14 e 15, conforme mostrado abaixo, e salve o arquivo.</span><span class="sxs-lookup"><span data-stu-id="981b5-208">Open the `hub-adds.json` file and enter a username and password between the quotes in lines 14 and 15, as shown below, then save the file.</span></span>
+3. <span data-ttu-id="3f8f2-216">Execute o comando a seguir:</span><span class="sxs-lookup"><span data-stu-id="3f8f2-216">Run the following command:</span></span>
 
    ```bash
-   "adminUsername": "XXX",
-   "adminPassword": "YYY",
-   ```
-
-2. <span data-ttu-id="981b5-209">Execute `azbb` para implantar os controladores de domínio ADDS, conforme mostrado abaixo.</span><span class="sxs-lookup"><span data-stu-id="981b5-209">Run `azbb` to deploy the ADDS domain controllers as shown below.</span></span>
-
-   ```bash
-   azbb -s <subscription_id> -g hub-adds-rg - l <location> -p hub-adds.json --deploy
+   azbb -s <subscription_id> -g hub-adds-rg -l <location> -p hub-adds.json --deploy
    ```
   
-   > [!NOTE]
-   > <span data-ttu-id="981b5-210">Se você decidir usar um nome do grupo de recursos distinto (diferente de `hub-adds-rg`), pesquise todos os arquivos de parâmetro que usam esse nome e edite-os para usar seu próprio nome do grupo de recursos.</span><span class="sxs-lookup"><span data-stu-id="981b5-210">If you decide to use a different resource group name (other than `hub-adds-rg`), make sure to search for all parameter files that use that name and edit them to use your own resource group name.</span></span>
+<span data-ttu-id="3f8f2-217">Esta etapa de implantação poderá levar vários minutos, porque adiciona as duas máquinas virtuais ao domínio hospedado no datacenter simulado local e instala o AD DS neles.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-217">This deployment step may take several minutes, because it joins the two VMs to the domain hosted in the simulated on-premises datacenter, and installs AD DS on them.</span></span>
 
-   > [!NOTE]
-   > <span data-ttu-id="981b5-211">Esta parte da implantação pode levar vários minutos, pois requer a união das duas máquinas virtuais ao domínio hospedado no datacenter local simulado, instalando o AD DS neles.</span><span class="sxs-lookup"><span data-stu-id="981b5-211">This part of the deployment may take several minutes, since it requires joining the two VMs to the domain hosted int he simulated on-premises datacenter, then installing AD DS on them.</span></span>
+### <a name="deploy-the-spoke-vnets"></a><span data-ttu-id="3f8f2-218">Implantar as redes virtuais spoke</span><span class="sxs-lookup"><span data-stu-id="3f8f2-218">Deploy the spoke VNets</span></span>
 
-### <a name="nva"></a><span data-ttu-id="981b5-212">NVA</span><span class="sxs-lookup"><span data-stu-id="981b5-212">NVA</span></span>
+<span data-ttu-id="3f8f2-219">Esta etapa implanta as redes virtuais spoke.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-219">This step deploys the spoke VNets.</span></span>
 
-<span data-ttu-id="981b5-213">Para implantar uma NVA na sub-rede `dmz`, execute as seguintes etapas:</span><span class="sxs-lookup"><span data-stu-id="981b5-213">To deploy an NVA in the `dmz` subnet, perform the following steps:</span></span>
+1. <span data-ttu-id="3f8f2-220">Abra o arquivo `spoke1.json` .</span><span class="sxs-lookup"><span data-stu-id="3f8f2-220">Open the `spoke1.json` file.</span></span>
 
-1. <span data-ttu-id="981b5-214">Abra o arquivo `hub-nva.json` e insira um nome de usuário e senha entre aspas nas linhas 13 e 14, conforme mostrado abaixo, e salve o arquivo.</span><span class="sxs-lookup"><span data-stu-id="981b5-214">Open the `hub-nva.json` file and enter a username and password between the quotes in lines 13 and 14, as shown below, then save the file.</span></span>
+2. <span data-ttu-id="3f8f2-221">Pesquise `adminPassword` e insira um nome de usuário e senha nos parâmetros.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-221">Search for `adminPassword` and enter a user name and password in the parameters.</span></span> 
 
-   ```bash
-   "adminUsername": "XXX",
-   "adminPassword": "YYY",
-   ```
-2. <span data-ttu-id="981b5-215">Execute `azbb` para implantar a VM NVA e as rotas de usuário definidas.</span><span class="sxs-lookup"><span data-stu-id="981b5-215">Run `azbb` to deploy the NVA VM and user defined routes.</span></span>
+3. <span data-ttu-id="3f8f2-222">Execute o comando a seguir:</span><span class="sxs-lookup"><span data-stu-id="3f8f2-222">Run the following command:</span></span>
 
    ```bash
-   azbb -s <subscription_id> -g hub-nva-rg - l <location> -p hub-nva.json --deploy
-   ```
-   > [!NOTE]
-   > <span data-ttu-id="981b5-216">Se você decidir usar um nome do grupo de recursos distinto (diferente de `hub-nva-rg`), pesquise todos os arquivos de parâmetro que usam esse nome e edite-os para usar seu próprio nome do grupo de recursos.</span><span class="sxs-lookup"><span data-stu-id="981b5-216">If you decide to use a different resource group name (other than `hub-nva-rg`), make sure to search for all parameter files that use that name and edit them to use your own resource group name.</span></span>
-
-### <a name="azure-spoke-vnets"></a><span data-ttu-id="981b5-217">VNets de spoke do Azure</span><span class="sxs-lookup"><span data-stu-id="981b5-217">Azure spoke VNets</span></span>
-
-<span data-ttu-id="981b5-218">Para implantar as redes virtuais spoke, execute as etapas a seguir.</span><span class="sxs-lookup"><span data-stu-id="981b5-218">To deploy the spoke VNets, perform the following steps.</span></span>
-
-1. <span data-ttu-id="981b5-219">Abra o arquivo `spoke1.json` e insira um nome de usuário e senha entre aspas nas linhas 52 e 53, conforme mostrado abaixo, e salve o arquivo.</span><span class="sxs-lookup"><span data-stu-id="981b5-219">Open the `spoke1.json` file and enter a username and password between the quotes in lines 52 and 53, as shown below, then save the file.</span></span>
-
-   ```bash
-   "adminUsername": "XXX",
-   "adminPassword": "YYY",
-   ```
-
-2. <span data-ttu-id="981b5-220">Na linha 54, para `osType`, digite `Windows` ou `Linux` para instalar o Windows Server 2016 Datacenter ou o Ubuntu 16.04 como o sistema operacional para o jumpbox.</span><span class="sxs-lookup"><span data-stu-id="981b5-220">On line 54, for `osType`, type `Windows` or `Linux` to install either Windows Server 2016 Datacenter, or Ubuntu 16.04 as the operating system for the jumpbox.</span></span>
-
-3. <span data-ttu-id="981b5-221">Execute `azbb` para implantar o primeiro ambiente de rede virtual spoke, conforme mostrado abaixo.</span><span class="sxs-lookup"><span data-stu-id="981b5-221">Run `azbb` to deploy the first spoke VNet environment as shown below.</span></span>
-
-   ```bash
-   azbb -s <subscription_id> -g spoke1-vnet-rg - l <location> -p spoke1.json --deploy
+   azbb -s <subscription_id> -g spoke1-vnet-rg -l <location> -p spoke1.json --deploy
    ```
   
-   > [!NOTE]
-   > <span data-ttu-id="981b5-222">Se você decidir usar um nome do grupo de recursos distinto (diferente de `spoke1-vnet-rg`), pesquise todos os arquivos de parâmetro que usam esse nome e edite-os para usar seu próprio nome do grupo de recursos.</span><span class="sxs-lookup"><span data-stu-id="981b5-222">If you decide to use a different resource group name (other than `spoke1-vnet-rg`), make sure to search for all parameter files that use that name and edit them to use your own resource group name.</span></span>
+4. <span data-ttu-id="3f8f2-223">Repita as etapas 1 e 2 para o arquivo `spoke2.json`.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-223">Repeat steps 1 and 2 for the file `spoke2.json`.</span></span>
 
-4. <span data-ttu-id="981b5-223">Repita a etapa 1 acima para o arquivo `spoke2.json`.</span><span class="sxs-lookup"><span data-stu-id="981b5-223">Repeat step 1 above for file `spoke2.json`.</span></span>
-
-5. <span data-ttu-id="981b5-224">Execute `azbb` para implantar o segundo ambiente de rede virtual spoke, conforme mostrado abaixo.</span><span class="sxs-lookup"><span data-stu-id="981b5-224">Run `azbb` to deploy the second spoke VNet environment as shown below.</span></span>
+5. <span data-ttu-id="3f8f2-224">Execute o comando a seguir:</span><span class="sxs-lookup"><span data-stu-id="3f8f2-224">Run the following command:</span></span>
 
    ```bash
-   azbb -s <subscription_id> -g spoke2-vnet-rg - l <location> -p spoke2.json --deploy
+   azbb -s <subscription_id> -g spoke2-vnet-rg -l <location> -p spoke2.json --deploy
    ```
-   > [!NOTE]
-   > <span data-ttu-id="981b5-225">Se você decidir usar um nome do grupo de recursos distinto (diferente de `spoke2-vnet-rg`), pesquise todos os arquivos de parâmetro que usam esse nome e edite-os para usar seu próprio nome do grupo de recursos.</span><span class="sxs-lookup"><span data-stu-id="981b5-225">If you decide to use a different resource group name (other than `spoke2-vnet-rg`), make sure to search for all parameter files that use that name and edit them to use your own resource group name.</span></span>
 
-### <a name="azure-hub-vnet-peering-to-spoke-vnets"></a><span data-ttu-id="981b5-226">Emparelhamento VNet do hub do Azure para VNets de spoke</span><span class="sxs-lookup"><span data-stu-id="981b5-226">Azure hub VNet peering to spoke VNets</span></span>
+### <a name="peer-the-hub-vnet-to-the-spoke-vnets"></a><span data-ttu-id="3f8f2-225">Nivelar a rede virtual do hub com as redes virtuais spoke</span><span class="sxs-lookup"><span data-stu-id="3f8f2-225">Peer the hub VNet to the spoke VNets</span></span>
 
-<span data-ttu-id="981b5-227">Para criar uma conexão de emparelhamento da rede virtual do hub para as redes virtuais spoke, execute as etapas a seguir.</span><span class="sxs-lookup"><span data-stu-id="981b5-227">To create a peering connection from the hub VNet to the spoke VNets, perform the following steps.</span></span>
+<span data-ttu-id="3f8f2-226">Para criar uma conexão de emparelhamento da rede virtual do hub para as redes virtuais spoke, execute o comando a seguir:</span><span class="sxs-lookup"><span data-stu-id="3f8f2-226">To create a peering connection from the hub VNet to the spoke VNets, run the following command:</span></span>
 
-1. <span data-ttu-id="981b5-228">Abra o arquivo `hub-vnet-peering.json` e verifique se o nome do grupo de recursos e o nome da rede virtual para cada um dos emparelhamentos de rede virtual, começando na linha 29, estão corretos.</span><span class="sxs-lookup"><span data-stu-id="981b5-228">Open the `hub-vnet-peering.json` file and verify that the resource group name, and virtual network name for each of the virtual network peerings starting in line 29 are correct.</span></span>
+```bash
+azbb -s <subscription_id> -g hub-vnet-rg -l <location> -p hub-vnet-peering.json --deploy
+```
 
-2. <span data-ttu-id="981b5-229">Execute `azbb` para implantar o primeiro ambiente de rede virtual spoke, conforme mostrado abaixo.</span><span class="sxs-lookup"><span data-stu-id="981b5-229">Run `azbb` to deploy the first spoke VNet environment as shown below.</span></span>
+### <a name="deploy-the-nva"></a><span data-ttu-id="3f8f2-227">Implantar a NVA</span><span class="sxs-lookup"><span data-stu-id="3f8f2-227">Deploy the NVA</span></span>
+
+<span data-ttu-id="3f8f2-228">Esta etapa implanta uma NVA na sub-rede `dmz`.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-228">This step deploys an NVA in the `dmz` subnet.</span></span>
+
+1. <span data-ttu-id="3f8f2-229">Abra o arquivo `hub-nva.json` .</span><span class="sxs-lookup"><span data-stu-id="3f8f2-229">Open the `hub-nva.json` file.</span></span>
+
+2. <span data-ttu-id="3f8f2-230">Pesquise `adminPassword` e insira um nome de usuário e senha nos parâmetros.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-230">Search for `adminPassword` and enter a user name and password in the parameters.</span></span> 
+
+3. <span data-ttu-id="3f8f2-231">Execute o comando a seguir:</span><span class="sxs-lookup"><span data-stu-id="3f8f2-231">Run the following command:</span></span>
 
    ```bash
-   azbb -s <subscription_id> -g hub-vnet-rg - l <location> -p hub-vnet-peering.json --deploy
+   azbb -s <subscription_id> -g hub-nva-rg -l <location> -p hub-nva.json --deploy
    ```
 
-   > [!NOTE]
-   > <span data-ttu-id="981b5-230">Se você decidir usar um nome do grupo de recursos distinto (diferente de `hub-vnet-rg`), pesquise todos os arquivos de parâmetro que usam esse nome e edite-os para usar seu próprio nome do grupo de recursos.</span><span class="sxs-lookup"><span data-stu-id="981b5-230">If you decide to use a different resource group name (other than `hub-vnet-rg`), make sure to search for all parameter files that use that name and edit them to use your own resource group name.</span></span>
+### <a name="test-connectivity"></a><span data-ttu-id="3f8f2-232">Testar a conectividade</span><span class="sxs-lookup"><span data-stu-id="3f8f2-232">Test connectivity</span></span> 
+
+<span data-ttu-id="3f8f2-233">Testar a conexão do ambiente local simulado para a VNET do hub.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-233">Test conectivity from the simulated on-premises environment to the hub VNet.</span></span>
+
+1. <span data-ttu-id="3f8f2-234">Usar o portal do Azure para encontrar a VM denominada `jb-vm1` no grupo de recursos `onprem-jb-rg`.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-234">Use the Azure portal to find the VM named `jb-vm1` in the `onprem-jb-rg` resource group.</span></span>
+
+2. <span data-ttu-id="3f8f2-235">Clique em `Connect` para abrir uma sessão de área de trabalho remota para a VM.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-235">Click `Connect` to open a remote desktop session to the VM.</span></span> <span data-ttu-id="3f8f2-236">Use a senha que você especificou no arquivo de parâmetro `onprem.json`.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-236">Use the password that you specified in the `onprem.json` parameter file.</span></span>
+
+3. <span data-ttu-id="3f8f2-237">Abra um console do PowerShell na VM e use o cmdlet `Test-NetConnection` para verificar se você pode se conectar à VM jumpbox na Vnet do hub.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-237">Open a PowerShell console in the VM, and use the `Test-NetConnection` cmdlet to verify that you can connect to the jumpbox VM in the hub VNet.</span></span>
+
+   ```powershell
+   Test-NetConnection 10.0.0.68 -CommonTCPPort RDP
+   ```
+<span data-ttu-id="3f8f2-238">O resultado deve ser semelhante ao seguinte:</span><span class="sxs-lookup"><span data-stu-id="3f8f2-238">The output should look similar to the following:</span></span>
+
+```powershell
+ComputerName     : 10.0.0.68
+RemoteAddress    : 10.0.0.68
+RemotePort       : 3389
+InterfaceAlias   : Ethernet 2
+SourceAddress    : 192.168.1.000
+TcpTestSucceeded : True
+```
+
+> [!NOTE]
+> <span data-ttu-id="3f8f2-239">Por padrão, as máquinas virtuais do Windows Server não permitem respostas do ICMP no Azure.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-239">By default, Windows Server VMs do not allow ICMP responses in Azure.</span></span> <span data-ttu-id="3f8f2-240">Se você quiser usar `ping` para testar a conectividade, você precisa habilitar o tráfego ICMP no Firewall Avançado do Windows para cada VM.</span><span class="sxs-lookup"><span data-stu-id="3f8f2-240">If you want to use `ping` to test connectivity, you need to enable ICMP traffic in the Windows Advanced Firewall for each VM.</span></span>
+
+<span data-ttu-id="3f8f2-241">Repita as mesmas etapas para testar a conectividade com as redes virtuais spoke:</span><span class="sxs-lookup"><span data-stu-id="3f8f2-241">Repeat the sames steps to test connectivity to the spoke VNets:</span></span>
+
+```powershell
+Test-NetConnection 10.1.0.68 -CommonTCPPort RDP
+Test-NetConnection 10.2.0.68 -CommonTCPPort RDP
+```
+
 
 <!-- links -->
 
