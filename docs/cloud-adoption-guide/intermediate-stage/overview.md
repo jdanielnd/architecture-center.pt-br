@@ -2,12 +2,12 @@
 title: 'Adoção do Azure: intermediário'
 description: Descreve o nível intermediário de conhecimento de que uma empresa precisa para adotar o Azure
 author: petertay
-ms.openlocfilehash: 39b98595dd615ba1aa36921e48a0b23797bebaa0
-ms.sourcegitcommit: b3d74d8a89b2224fc796ce0e89cea447af43a0d4
+ms.openlocfilehash: 227d9558647ed8076b2832d95e192f2f0c43b9db
+ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 06/11/2018
-ms.locfileid: "35290984"
+ms.lasthandoff: 06/19/2018
+ms.locfileid: "36206354"
 ---
 # <a name="azure-cloud-adoption-guide-intermediate-overview"></a>Guia de adoção do Azure Cloud: visão geral intermediária
 
@@ -53,31 +53,31 @@ O modelo de controle de nuvem da organização representa a interseção entre a
 Siga estas etapas:
 
 1. Crie uma [conta do Azure](/azure/active-directory/sign-up-organization) se sua organização ainda não tiver uma. A pessoa que se inscreve na conta do Azure se torna o administrador da conta do Azure e liderança de sua organização deve selecionar um indivíduo para assumir essa função. Essa pessoa será responsável por:
-  * criação de assinaturas e
-  * criando e administrando locatários do [Azure Active Directory (AD)](/azure/active-directory/active-directory-whatis) que armazenam a identidade do usuário para as assinaturas.    
+    * Criação de assinaturas e
+    * Criando e administrando locatários do [Azure Active Directory (AD)](/azure/active-directory/active-directory-whatis) que armazenam a identidade do usuário para as assinaturas.    
 2. A equipe de liderança de sua organização decide quais pessoas são responsáveis por:
-  * Gerenciamento de identidade do usuário. um [locatário do Azure AD](/azure/active-directory/develop/active-directory-howto-tenant) é criado por padrão quando a conta do Azure da sua organização é criada, e o administrador da conta é adicionado como o [administrador global do Azure AD](/azure/active-directory/active-directory-assign-admin-roles-azure-portal#details-about-the-global-administrator-role) por padrão. Sua organização pode escolher outro usuário para gerenciar a identidade do usuário por [atribuir a função de administrador global do Azure AD para que o usuário](/azure/active-directory/active-directory-users-assign-role-azure-portal). 
-  * Assinaturas, o que significa que esses usuários:
-    * gerencie os custos associados ao uso de recursos nessa assinatura,
-    * implementar e manter o modelo de permissão mínima para acesso a recursos e
-    * controlar os limites de serviço.
-  * Infraestrutura de serviços compartilhados (se a sua organização decidir usar esse modelo), o que significa que esse usuário é responsável por:
-    * local para conectividade de rede do Azure e 
-    * propriedade de conectividade de rede no Azure por meio do emparelhamento de rede virtual.
-  * Proprietários da carga de trabalho. 
+    * Gerenciamento de identidade do usuário. um [locatário do Azure AD](/azure/active-directory/develop/active-directory-howto-tenant) é criado por padrão quando a conta do Azure da sua organização é criada, e o administrador da conta é adicionado como o [administrador global do Azure AD](/azure/active-directory/active-directory-assign-admin-roles-azure-portal#details-about-the-global-administrator-role) por padrão. Sua organização pode escolher outro usuário para gerenciar a identidade do usuário por [atribuir a função de administrador global do Azure AD para que o usuário](/azure/active-directory/active-directory-users-assign-role-azure-portal). 
+    * Assinaturas, o que significa que esses usuários:
+        * Gerencie os custos associados ao uso de recursos nessa assinatura,
+        * Implemente e mantenha o modelo de permissão mínima para acesso a recursos e
+        * Controle os limites de serviço.
+    * Infraestrutura de serviços compartilhados (se a sua organização decidir usar esse modelo), o que significa que esse usuário é responsável por:
+        * Local para conectividade de rede do Azure e 
+        * Propriedade de conectividade de rede no Azure por meio do emparelhamento de rede virtual.
+    * Proprietários da carga de trabalho. 
 3. O administrador global do Azure AD [cria novas contas de usuário](/azure/active-directory/add-users-azure-active-directory) para:
-  * a pessoa que será o **proprietário da assinatura** para cada assinatura associada a cada ambiente. Observe que isso é necessário apenas se o **administrador de serviço** da assinatura não for o responsável por gerenciar o acesso a recursos para cada assinatura/ambiente.
-  * a pessoa que será o **usuário de operações de rede** e
-  * as pessoas que são **proprietários da carga de trabalho**.
+    * A pessoa que será o **proprietário da assinatura** para cada assinatura associada a cada ambiente. Observe que isso é necessário apenas se o **administrador de serviço** da assinatura não for o responsável por gerenciar o acesso a recursos para cada assinatura/ambiente.
+    * A pessoa que será o **usuário de operações de rede** e
+    * As pessoas que são **proprietárias da carga de trabalho**.
 4. O administrador da conta do Azure cria as seguintes três assinaturas usando o [portal de conta do Azure](https://account.azure.com):
-  * uma assinatura para o ambiente de **infraestrutura compartilhada**,
-  * uma assinatura para o ambiente de **produção** e 
-  * uma assinatura para o ambiente de **desenvolvimento**. 
+    * Uma assinatura para o ambiente de **infraestrutura compartilhada**,
+    * Uma assinatura para o ambiente de **produção** e 
+    * Uma assinatura para o ambiente de **desenvolvimento**. 
 5. O administrador da conta do Azure [adiciona o proprietário do serviço de assinatura para cada assinatura](/azure/billing/billing-add-change-azure-subscription-administrator#add-an-rbac-owner-admin-for-a-subscription-in-azure-portal).
-6. Crie um processo de aprovação para **proprietários da carga de trabalho** para solicitar a criação de grupos de recursos. O processo de aprovação pode ser implementado de diversas maneiras, como por email, ou você pode usar uma ferramenta de gerenciamento do processo como [fluxos de trabalho do](https://support.office.com/article/introduction-to-sharepoint-workflow-07982276-54e8-4e17-8699-5056eff4d9e3). O processo de aprovação pode seguir estas etapas:
-  1. O **proprietário da carga de trabalho** prepara uma lista de materiais dos recursos do Azure necessários no **desenvolvimento** ambiente, **produção** ambiente, ou ambos e envia para o **proprietário da assinatura**.
-  2. O **proprietário da assinatura** examina a lista de materiais e valida os recursos solicitados para garantir que os recursos solicitados são apropriados para seu uso planejado - por exemplo, a verificação de que a solicitação [ tamanhos de máquina virtual](/azure/virtual-machines/windows/sizes) estão corretas.
-  3. Se a solicitação não for aprovada, o **proprietário da carga de trabalho** será notificado. Se a solicitação for aprovada, o **proprietário da assinatura** [cria o grupo de recurso solicitado](/azure/azure-resource-manager/resource-group-portal#manage-resource-groups) após sua organização [convenções de nomenclatura](/azure/architecture/best-practices/naming-conventions), [ Adiciona o **proprietário da carga de trabalho** ](/azure/role-based-access-control/role-assignments-portal#add-access) com o [ **colaborador** função](/azure/role-based-access-control/built-in-roles#contributor) e envia uma notificação para o **proprietário de carga de trabalho** que o grupo de recursos foi criado.
+6. Crie um processo de aprovação para **proprietários da carga de trabalho** para solicitar a criação de grupos de recursos. O processo de aprovação pode ser implementado de diversas maneiras, como por email, ou você pode usar uma ferramenta de gerenciamento do processo como [fluxos de trabalho do](https://support.office.com/article/introduction-to-sharepoint-workflow-07982276-54e8-4e17-8699-5056eff4d9e3). O processo de aprovação pode seguir estas etapas:  
+    * O **proprietário da carga de trabalho** prepara uma lista de materiais dos recursos do Azure necessários no **desenvolvimento** ambiente, **produção** ambiente, ou ambos e envia para o **proprietário da assinatura**.
+    * O **proprietário da assinatura** examina a lista de materiais e valida os recursos solicitados para garantir que os recursos solicitados são apropriados para seu uso planejado - por exemplo, a verificação de que a solicitação [ tamanhos de máquina virtual](/azure/virtual-machines/windows/sizes) estão corretas.
+    * Se a solicitação não for aprovada, o **proprietário da carga de trabalho** será notificado. Se a solicitação for aprovada, o **proprietário da assinatura** [cria o grupo de recurso solicitado](/azure/azure-resource-manager/resource-group-portal#manage-resource-groups) após sua organização [convenções de nomenclatura](/azure/architecture/best-practices/naming-conventions), [ Adiciona o **proprietário da carga de trabalho** ](/azure/role-based-access-control/role-assignments-portal#add-access) com o [ **colaborador** função](/azure/role-based-access-control/built-in-roles#contributor) e envia uma notificação para o **proprietário de carga de trabalho** que o grupo de recursos foi criado.
 7. Crie um processo de aprovação para os proprietários da carga de trabalho solicitar uma emparelhamento de conexão do proprietário infraestrutura compartilhada de rede virtual. Assim como acontece com a etapa anterior, esse processo de aprovação pode ser implementado usando email ou uma ferramenta de gerenciamento de processos.
 
 Agora que você já implementou o seu modelo de controle, poderá implantar seus serviços de infraestrutura compartilhada.

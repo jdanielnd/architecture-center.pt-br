@@ -4,12 +4,12 @@ description: Convenções de nomenclatura para recursos do Azure. Como nomear m�
 author: telmosampaio
 ms.date: 05/18/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: 42d91da3eacdcda66b82dff82ba444170c11d7d1
-ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
+ms.openlocfilehash: a92b6a1a23b35e7379f586d477b6f7cc6ccfc7e1
+ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 06/11/2018
-ms.locfileid: "35253053"
+ms.lasthandoff: 06/19/2018
+ms.locfileid: "36206371"
 ---
 # <a name="naming-conventions"></a>Convenções de nomenclatura
 
@@ -34,7 +34,7 @@ Este é um padrão recomendado para nomear assinaturas:
 `<Company> <Department (optional)> <Product Line (optional)> <Environment>`
 
 * A empresa seria a mesma para cada assinatura. No entanto, algumas empresas podem ter empresas filho dentro da estrutura organizacional. Essas empresas podem ser gerenciadas por um grupo central de TI. Nesses casos, elas podem ser diferenciadas tendo o nome da empresa pai (*Contoso*) e o nome da empresa filho (*Northwind*).
-* O departamento é um nome dentro da organização no qual um grupo de indivíduos trabalha. Esse item no namespace é opcional.
+* O departamento é um nome dentro da organização que contém um grupo de indivíduos. Esse item no namespace é opcional.
 * A linha de produtos é um nome específico de um produto ou uma função executada de dentro do departamento. Geralmente isso opcional para serviços e aplicativos internos. Porém, é altamente recomendado para uso em serviços públicos que exigem separação e identificação fácil (como no caso da separação clara de registros de cobrança).
 * O ambiente é o nome que descreve o ciclo de vida de implantação dos aplicativos ou serviços, como Desenvolvimento, Controle de Qualidade ou Produção.
 

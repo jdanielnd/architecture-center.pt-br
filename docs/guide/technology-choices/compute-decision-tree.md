@@ -2,12 +2,13 @@
 title: Árvore de decisão para serviços de computação do Azure
 description: Um fluxograma para selecionar um serviço de computação
 author: MikeWasson
-ms.date: 04/21/2018
-ms.openlocfilehash: 3dcfbd156d4fced863a56bcc8bb74483aa665f9f
-ms.sourcegitcommit: 7ced70ebc11aa0df0dc0104092d3cc6ad5c28bd6
+ms.date: 06/13/2018
+ms.openlocfilehash: 60bb84d4bf210888d3d43498db043b6e452f6a80
+ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 05/11/2018
+ms.lasthandoff: 06/19/2018
+ms.locfileid: "36206515"
 ---
 # <a name="decision-tree-for-azure-compute-services"></a>Árvore de decisão para serviços de computação do Azure
 
@@ -25,5 +26,20 @@ O Azure oferece várias maneiras de hospedar o código do seu aplicativo. O term
 
 Se o aplicativo tem várias cargas de trabalho, avalie cada carga de trabalho separadamente. Uma solução completa pode incorporar dois ou mais serviços de computação.
 
+## <a name="flowchart"></a>Fluxograma
+
 ![](../images/compute-decision-tree.svg)
 
+## <a name="definitions"></a>Definições
+
+- **Greenfield** descreve um projeto de software que é completamente novo e criado do zero. Ele não inclui códigos herdados. 
+
+- **Brownfield** descreve um projeto de software que se baseia em um aplicativo existente. Ele pode herdar um código herdado ou estruturas.
+
+- **Lift and shift** é uma estratégia de migração de uma carga de trabalho para a nuvem sem recriar o aplicativo ou fazer alterações de código. Também chamado de *nova hospedagem*. Para obter mais informações, consulte a [Central de migrações do Azure](https://azure.microsoft.com/migration/).
+
+- **Nuvem otimizada** é uma estratégia de migração para a nuvem por meio da refatoração de um aplicativo para aproveitar os recursos e funcionalidades de nuvem nativos.
+
+## <a name="next-steps"></a>Próximas etapas
+
+Para conhecer critérios adicionais a serem considerados, consulte [Critérios para escolher um serviço de computação do Azure](./compute-comparison.md).
