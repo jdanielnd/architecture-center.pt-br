@@ -4,12 +4,12 @@ description: Diretriz específica de serviço para configurar o mecanismo de rep
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: f02843f179671da04bc2f09326b58075b432ba95
-ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
+ms.openlocfilehash: 77cf5d90373da2118d34301bd5c790080d3cf63f
+ms.sourcegitcommit: 9a2d56ac7927f0a2bbfee07198d43d9c5cb85755
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 06/11/2018
-ms.locfileid: "35253070"
+ms.lasthandoff: 06/22/2018
+ms.locfileid: "36327680"
 ---
 # <a name="retry-guidance-for-specific-services"></a>Repetir as diretrizes para serviços específicos
 
@@ -325,7 +325,7 @@ O Barramento de Serviço implementa repetições usando implementações da clas
 * A [classe RetryExponential](http://msdn.microsoft.com/library/microsoft.servicebus.retryexponential.aspx). Ela expõe propriedades que controlam o intervalo de retirada, a contagem de repetições e a propriedade **TerminationTimeBuffer** que é usada para limitar o tempo total para a operação ser concluída.
 * A [classe NoRetry](http://msdn.microsoft.com/library/microsoft.servicebus.noretry.aspx). É usada quando as repetições no nível de API do Barramento de Serviço não são exigidas, como quando são gerenciadas por outro processo como parte de uma operação em lote ou de várias etapas.
 
-As ações do Barramento de Serviço podem retornar uma gama de exceções, conforme listado no [Apêndice: exceções de mensagens](http://msdn.microsoft.com/library/hh418082.aspx). A lista fornece informações que indicam se repetir a operação é adequado. Por exemplo, um [ServerBusyException](http://msdn.microsoft.com/library/microsoft.servicebus.messaging.serverbusyexception.aspx) indica que o cliente deve esperar um período de tempo, depois repetir a operação. A ocorrência de um **ServerBusyException** também faz com que o Barramento de Serviço alterne para um modo diferente, no qual um intervalo extra de 10 segundos é adicionado aos intervalos de repetição computados. Esse modo é redefinido após um curto período.
+As ações do Barramento de Serviço podem retornar várias exceções, conforme listado em [Exceções de mensagem do Barramento de Serviço](/azure/service-bus-messaging/service-bus-messaging-exceptions). A lista fornece informações que indicam se repetir a operação é adequado. Por exemplo, um **ServerBusyException** indica que o cliente deve esperar um período de tempo, depois repetir a operação. A ocorrência de um **ServerBusyException** também faz com que o Barramento de Serviço alterne para um modo diferente, no qual um intervalo extra de 10 segundos é adicionado aos intervalos de repetição computados. Esse modo é redefinido após um curto período.
 
 As exceções retornadas do Barramento de Serviço expõem a propriedade **IsTransient** que indica se o cliente deve repetir a operação. A política interna **RetryExponential** depende da propriedade **IsTransient** na classe **MessagingException**, que é a classe base para todas as exceções do Barramento de Serviço. Se você criar implementações personalizadas da classe base **RetryPolicy**, será possível usar uma combinação do tipo de exceção e da propriedade **IsTransient** para fornecer um controle mais refinado sobre as ações de repetição. Por exemplo, é possível detectar um **QuotaExceededException** e tomar providências para diminuir a fila antes de tentar enviar novamente uma mensagem para ela.
 

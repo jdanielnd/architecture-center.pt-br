@@ -2,16 +2,13 @@
 title: Aplicativo de n camadas com SQL Server
 description: Como implementar uma arquitetura multicamadas no Azure, para obter disponibilidade, segurança, escalabilidade e capacidade de gerenciamento.
 author: MikeWasson
-ms.date: 05/03/2018
-pnp.series.title: Windows VM workloads
-pnp.series.next: multi-region-application
-pnp.series.prev: multi-vm
-ms.openlocfilehash: 0f170f2fbcbbfeace53db199cb5d3949415b5546
-ms.sourcegitcommit: a5e549c15a948f6fb5cec786dbddc8578af3be66
+ms.date: 06/23/2018
+ms.openlocfilehash: 050ea9b3104a2dc9af4cdaad3b4540cd75434e9d
+ms.sourcegitcommit: 767c8570d7ab85551c2686c095b39a56d813664b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 05/06/2018
-ms.locfileid: "33673588"
+ms.lasthandoff: 06/24/2018
+ms.locfileid: "36746665"
 ---
 # <a name="n-tier-application-with-sql-server"></a>Aplicativo de n camadas com SQL Server
 
@@ -43,9 +40,11 @@ A arquitetura tem os seguintes componentes:
 
 * **Jumpbox.** Também chamada de um [host bastião]. Uma VM protegida na rede que os administradores usam para se conectar às outras VMs. O jumpbox tem um NSG que permite o tráfego remoto apenas de endereços IP públicos em uma lista segura. O NSG deve permitir o tráfego de RDP (área de trabalho remota).
 
-* **Grupo de Disponibilidade Always On do SQL Server.** Fornece alta disponibilidade na camada de dados, habilitando replicação e failover.
+* **Grupo de Disponibilidade Always On do SQL Server.** Fornece alta disponibilidade na camada de dados, habilitando replicação e failover. Usa a tecnologia WSFC (Cluster de Failover do Windows Server) para o failover.
 
-* **Servidores AD DS (Active Directory Domain Services)**. Os grupos de disponibilidade Always On do SQL Server são adicionados a um domínio para habilitar a tecnologia de Cluster de Failover do Windows Server (WSFC) para failover. 
+* **Servidores AD DS (Active Directory Domain Services)**. Os objetos de computação do cluster de failover e suas funções em cluster associadas são criados no Active Directory Domain Services (AD DS).
+
+* **Testemunha de Nuvem**. Um cluster de failover requer mais da metade dos seus nós em execução, que é conhecido como ter quorum. Se o cluster tem apenas dois nós, uma partição de rede pode fazer com que cada nó pense que é o principal. Nesse caso, é necessário uma *testemunha* para desempatar e estabelecer o quorum. Testemunha é um recurso, como um disco compartilhado, que pode agir como um desempate para estabelecer o quorum. A Testemunha de Nuvem é um tipo que usa o Armazenamento de Blobs do Azure. Para saber mais sobre o conceito de quorum, consulte [Entendendo o cluster e o quorum de pool](/windows-server/storage/storage-spaces/understand-quorum). Para obter mais informações sobre a Testemunha de Nuvem, consulte [Implantar uma Testemunha de Nuvem para um Cluster de Failover](/windows-server/failover-clustering/deploy-cloud-witness). 
 
 * **DNS do Azure**. [DNS do Azure][azure-dns] é um serviço de hospedagem para domínios DNS, que fornece resolução de nomes usando a infraestrutura do Microsoft Azure. Ao hospedar seus domínios no Azure, você pode gerenciar seus registros DNS usando as mesmas credenciais, APIs, ferramentas e cobrança que seus outros serviços do Azure.
 
@@ -157,13 +156,13 @@ Criptografe dados confidenciais em repouso e use o [Azure Key Vault][azure-key-v
 
 ## <a name="deploy-the-solution"></a>Implantar a solução
 
-Uma implantação para essa arquitetura de referência está disponível no [GitHub][github-folder]. 
+Uma implantação para essa arquitetura de referência está disponível no [GitHub][github-folder]. Observe que a implantação inteira pode levar até duas horas, que inclui a execução de scripts para configurar o AD DS, o cluster de failover do Windows Server e o grupo de disponibilidade do SQL Server.
 
 ### <a name="prerequisites"></a>pré-requisitos
 
 1. Clone, crie um fork ou baixe o arquivo zip das [arquiteturas de referência][ref-arch-repo] no repositório GitHub.
 
-2. Verifique se a CLI do Azure 2.0 está instalada no computador. Para instalar a CLI, siga as instruções em [Instalar a CLI do Azure 2.0][azure-cli-2].
+2. Instale a [CLI do Azure 2.0][azure-cli-2].
 
 3. Instale os pacote npm dos [Blocos de construção do Azure][azbb].
 
@@ -171,32 +170,80 @@ Uma implantação para essa arquitetura de referência está disponível no [Git
    npm install -g @mspnp/azure-building-blocks
    ```
 
-4. Em um prompt de comando, bash prompt ou prompt do PowerShell, faça logon na sua conta do Azure usando um dos comandos abaixo e siga os prompts.
+4. Em um prompt de comando, prompt do bash ou prompt do PowerShell, faça logon na sua conta do Azure usando o comando abaixo.
 
    ```bash
    az login
    ```
 
-### <a name="deploy-the-solution-using-azbb"></a>Implantar a solução usando azbb
+### <a name="deploy-the-solution"></a>Implantar a solução 
 
-Para implantar as VMs do Windows para uma arquitetura de referência de aplicativo de n camada, siga essas etapas:
+1. Execute o seguinte comando para criar um grupo de recursos.
 
-1. Navegue até a pasta `virtual-machines\n-tier-windows` para o repositório que você clonou na etapa 1 dos pré-requisitos acima.
+    ```bash
+    az group create --location <location> --name <resource-group-name>
+    ```
 
-2. O arquivo de parâmetro especifica um nome de usuário e senha de administrador padrão para cada VM na implantação. Você deverá alterá-los antes de implantar a arquitetura de referência. Abra o arquivo `n-tier-windows.json` e substitua cada campo **adminUsername** e **adminPassword** com suas novas configurações.
-  
-   > [!NOTE]
-   > Há vários scripts que são executados durante essa implantação tanto nos objetos **VirtualMachineExtension** quanto nas configurações de **extensões** para alguns dos objetos **VirtualMachine**. Alguns desses scripts requerem o nome de usuário e a senha do administrador que você acabou de alterar. É recomendável revisar esses scripts para garantir que você especificou as credenciais corretas. A implantação poderá falhar se você não especificou as credenciais corretas.
-   > 
-   > 
+2. Execute o seguinte comando para criar uma conta de Armazenamento para a Testemunha de Nuvem.
 
-Salve o arquivo.
+    ```bash
+    az storage account create --location <location> \
+      --name <storage-account-name> \
+      --resource-group <resource-group-name> \
+      --sku Standard_LRS
+    ```
 
-3. Implante a arquitetura de referência usando a ferramenta de linha de comando **azbb** conforme mostrado abaixo.
+3. Navegue para a pasta `virtual-machines\n-tier-windows` do repositório GitHub de arquiteturas de referência.
 
-   ```bash
-   azbb -s <your subscription_id> -g <your resource_group_name> -l <azure region> -p n-tier-windows.json --deploy
-   ```
+4. Abra o arquivo `n-tier-windows.json` . 
+
+5. Procurar todas as instâncias de "witnessStorageBlobEndPoint" e substitua o texto do espaço reservado pelo nome da conta de Armazenamento da etapa 2.
+
+    ```json
+    "witnessStorageBlobEndPoint": "https://[replace-with-storageaccountname].blob.core.windows.net",
+    ```
+
+6. Execute o comando a seguir para enumerar as chaves de conta para a conta de armazenamento.
+
+    ```bash
+    az storage account keys list \
+      --account-name <storage-account-name> \
+      --resource-group <resource-group-name>
+    ```
+
+    A saída deve parecer com o seguinte. Copie o valor de `key1`.
+
+    ```json
+    [
+    {
+        "keyName": "key1",
+        "permissions": "Full",
+        "value": "..."
+    },
+    {
+        "keyName": "key2",
+        "permissions": "Full",
+        "value": "..."
+    }
+    ]
+    ```
+
+7. No arquivo `n-tier-windows.json`, procure todas as instâncias de "witnessStorageAccountKey e cole na chave de conta.
+
+    ```json
+    "witnessStorageAccountKey": "[replace-with-storagekey]"
+    ```
+
+8. No arquivo `n-tier-windows.json`, procure todas as instâncias `testPassw0rd!23`, `test$!Passw0rd111` e `AweS0me@SQLServicePW`. Substitua-as por suas próprias senhas e salve o arquivo.
+
+    > [!NOTE]
+    > Se você alterar o nome de usuário do administrador, também terá que atualizar os blocos `extensions` no arquivo JSON. 
+
+9. Execute o seguinte comando para implantar a arquitetura.
+
+    ```bash
+    azbb -s <your subscription_id> -g <resource_group_name> -l <location> -p n-tier-windows.json --deploy
+    ```
 
 Para obter mais informações sobre a implantação dessa arquitetura de referência de exemplo utilizando blocos de construção Blocos de Construção do Azure, visite o repositório [GitHub][git].
 

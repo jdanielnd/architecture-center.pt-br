@@ -3,12 +3,12 @@ title: Árvore de decisão para serviços de computação do Azure
 description: Um fluxograma para selecionar um serviço de computação
 author: MikeWasson
 ms.date: 06/13/2018
-ms.openlocfilehash: 60bb84d4bf210888d3d43498db043b6e452f6a80
-ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
+ms.openlocfilehash: 689ec3f265e563273a75ad98268d03624a7b4536
+ms.sourcegitcommit: ce2fa8ac2d310f7078317cade12f1b89db1ffe06
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 06/19/2018
-ms.locfileid: "36206515"
+ms.lasthandoff: 06/23/2018
+ms.locfileid: "36338176"
 ---
 # <a name="decision-tree-for-azure-compute-services"></a>Árvore de decisão para serviços de computação do Azure
 
@@ -25,6 +25,8 @@ O Azure oferece várias maneiras de hospedar o código do seu aplicativo. O term
 - [Tabelas de comparação de computação](./compute-comparison.md)
 
 Se o aplicativo tem várias cargas de trabalho, avalie cada carga de trabalho separadamente. Uma solução completa pode incorporar dois ou mais serviços de computação.
+
+Para obter mais informações sobre as opções de hospedagem de contêineres no Azure, consulte https://azure.microsoft.com/overview/containers/.
 
 ## <a name="flowchart"></a>Fluxograma
 
