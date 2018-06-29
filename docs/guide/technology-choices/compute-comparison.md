@@ -4,12 +4,12 @@ description: Compare os serviços de computação do Azure entre diversos eixos
 author: MikeWasson
 layout: LandingPage
 ms.date: 06/13/2018
-ms.openlocfilehash: 29c21c44bdf3a3bfa29f17015565eecf5f86163b
-ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
+ms.openlocfilehash: 24ef204441d92b5b810da0349063a28beea4b0f1
+ms.sourcegitcommit: ce2fa8ac2d310f7078317cade12f1b89db1ffe06
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 06/19/2018
-ms.locfileid: "36206499"
+ms.lasthandoff: 06/23/2018
+ms.locfileid: "36338193"
 ---
 # <a name="criteria-for-choosing-an-azure-compute-service"></a>Critérios para escolher um serviço de computação do Azure
 
@@ -20,13 +20,12 @@ O termo *computação* refere-se ao modelo de hospedagem para os recursos de com
 | Critérios | Máquinas Virtuais | Serviço de Aplicativo | Service Fabric | Funções do Azure | Serviço de Contêiner do Azure | Instâncias de Contêiner | Lote do Azure |
 |----------|-----------------|-------------|----------------|-----------------|-------------------------|----------------|-------------|
 | Composição de aplicativos | Independente | Aplicativos, contêineres | Serviços, executáveis do convidado, contêineres | Funções | Contêineres | Contêineres | Trabalhos agendados  |
-| Densidade | Independente | Vários aplicativos por instância via planos do aplicativo | Vários serviços por VM | Nenhuma instância dedicada <a href="#note1"><sup>1</sup></a> | Vários contêineres por VM |Sem instâncias dedicadas | Vários aplicativos por VM |
-| Número mínimo de nós | 1 <a href="#note2"><sup>2</sup></a>  | 1 | 5 <a href="#note3"><sup>3</sup></a> | Nenhum nó dedicado <a href="#note1"><sup>1</sup></a> | 3 | Sem nós dedicados | 1 <a href="#note4"><sup>4</sup></a> |
+| Densidade | Independente | Vários aplicativos por instância via planos do serviço de aplicativo | Vários serviços por VM | Sem servidor <a href="#note1"><sup>1</sup></a> | Vários contêineres por VM |Sem instâncias dedicadas | Vários aplicativos por VM |
+| Número mínimo de nós | 1 <a href="#note2"><sup>2</sup></a>  | 1 | 5 <a href="#note3"><sup>3</sup></a> | Sem servidor <a href="#note1"><sup>1</sup></a> | 3 | Sem nós dedicados | 1 <a href="#note4"><sup>4</sup></a> |
 | Gerenciamento de estado | Com Estado ou Sem Estado | Sem estado | Com estado ou sem estado | Sem estado | Com Estado ou Sem Estado | Sem estado | Sem estado |
 | Hospedagem na Web | Independente | Interno | Independente | Não aplicável | Independente | Independente | Não  |
-| SO | Windows, Linux | Windows, Linux  | Windows, Linux | Não aplicável | Windows (visualização),  Linux | Windows, Linux | Windows, Linux |
-| Pode ser implantado para VNet dedicada? | Com suporte | Com suporte <a href="#note5"><sup>5</sup></a> | Com suporte | Sem suporte | Com suporte | Sem suporte | Com suporte |
-| Conectividade híbrida | Com suporte | Com suporte <a href="#note1"><sup>6</sup></a>  | Com suporte | Sem suporte | Com suporte | Sem suporte | Com suporte |
+| Pode ser implantado para VNet dedicada? | Com suporte | Com suporte<a href="#note5"><sup>5</sup></a> | Com suporte | Com suporte <a href="#note5"><sup>5</sup></a> | Com suporte | Sem suporte | Com suporte |
+| Conectividade híbrida | Com suporte | Com suporte <a href="#note6"><sup>6</sup></a>  | Com suporte | Com suporte <a href="#node7"><sup>7</sup></a> | Com suporte | Sem suporte | Com suporte |
 
 Observações
 
@@ -35,15 +34,16 @@ Observações
 3. <span id="note3">Para ambientes de produção.</span>
 4. <span id="note4">Pode reduzir verticalmente até zero após o trabalho ser concluído.</span>
 5. <span id="note5">Requer ASE (Ambiente de Serviço de Aplicativo).</span>
-6. <span id="note7">Requer Conexões Híbridas do BizTalk ou ASE</span>
+6. <span id="note6">Use [Conexões Híbridas do Serviço de Aplicativo do Azure][app-service-hybrid].</span>
+7. <span id="note7">Requer o Plano do Serviço de Aplicativo.</span>
 
 ## <a name="devops"></a>DevOps
 
 | Critérios | Máquinas Virtuais | Serviço de Aplicativo | Service Fabric | Funções do Azure | Serviço de Contêiner do Azure | Instâncias de Contêiner | Lote do Azure |
 |----------|-----------------|-------------|----------------|-----------------|-------------------------|----------------|-------------|
-| Depuração local | Independente | IIS Express, outros <a href="#note1b"><sup>1</sup></a> | Cluster de nó local | CLI do Azure Functions | Tempo de execução do contêiner local | Tempo de execução do contêiner local | Sem suporte |
-| Modelo de programação | Independente | Aplicativo Web, WebJobs para tarefas em segundo plano | Executável convidado, modelo de Serviço, o modelo de Ator, Contêineres | Funções com gatilhos | Independente | Independente | Aplicativo de linha de comando |
-| Atualização do aplicativo | Não há suporte interno | Slots de implantação | Atualização sem interrupção (por serviço) | Não há suporte interno | Depende do orquestrador. A maioria dá suporte a atualizações sem interrupção | Atualizar imagem de contêiner | Não aplicável |
+| Depuração local | Independente | IIS Express, outros <a href="#note1b"><sup>1</sup></a> | Cluster de nó local | Visual Studio ou CLI do Azure Functions | Tempo de execução do contêiner local | Tempo de execução do contêiner local | Sem suporte |
+| Modelo de programação | Independente | Aplicativos da Web e da API, Trabalhos da Web para tarefas em segundo plano | Executável convidado, modelo de Serviço, o modelo de Ator, Contêineres | Funções com gatilhos | Independente | Independente | Aplicativo de linha de comando |
+| Atualização do aplicativo | Não há suporte interno | Slots de implantação | Atualização sem interrupção (por serviço) | Slots de implantação | Depende do orquestrador. A maioria dá suporte a atualizações sem interrupção | Atualizar imagem de contêiner | Não aplicável |
 
 Observações
 
@@ -57,13 +57,12 @@ Observações
 |----------|-----------------|-------------|----------------|-----------------|-------------------------|----------------|-------------|
 | Dimensionamento automático | Conjuntos de dimensionamento da VM | Serviço interno | Conjuntos de Dimensionamento da VM | Serviço interno | Sem suporte | Sem suporte | N/D |
 | Balanceador de carga | Azure Load Balancer | Integrado | Azure Load Balancer | Integrado | Azure Load Balancer |  Não há suporte interno | Azure Load Balancer |
-| Limite de escala | Imagem da plataforma: 1.000 nós por VMSS; imagem personalizada: 100 nós por VMSS | 20 instâncias, 50 com o Ambiente de Serviço de Aplicativo | 100 nós por VMSS | Infinito <a href="#note1c"><sup>1</sup></a> | 100 <a href="#note2c"><sup>2</sup></a> |20 grupos de contêiner por assinatura por padrão. Contate o atendimento ao cliente para aumento. <a href="#note3c"><sup>3</sup></a> | Limite de 20 núcleos por padrão. Contate o atendimento ao cliente para aumento. |
+| Limite de escala | Imagem da plataforma: 1.000 nós por VMSS; imagem personalizada: 100 nós por VMSS | 20 instâncias, 100 com Ambiente do Serviço de Aplicativo | 100 nós por VMSS | 200 instâncias por aplicativo de Função | 100 <a href="#note2c"><sup>1</sup></a> |20 grupos de contêiner por assinatura por padrão. Contate o atendimento ao cliente para aumento. <a href="#note3c"><sup>2</sup></a> | Limite de 20 núcleos por padrão. Contate o atendimento ao cliente para aumento. |
 
 Observações
 
-1. <span id="note1c">Se estiver usando o plano de Consumo. Se o plano de Serviço de Aplicativo, os limites de escala do Serviço de Aplicativo se aplicarão. Consulte [Escolher o plano de serviço correto para o Azure Functions][function-plans].</span>
-2. <span id="note2c">Consulte [Expandir nós de agente em um cluster do serviço de contêiner][scale-acs]</span>.
-3. <span id="note3c">Confira [Cotas e disponibilidade de região para Instâncias de Contêiner do Azure](/azure/container-instances/container-instances-quotas).</span>
+2. <span id="note1c">Consulte [Expandir nós de agente em um cluster do serviço de contêiner][scale-acs]</span>.
+3. <span id="note2c">Confira [Cotas e disponibilidade de região para Instâncias de Contêiner do Azure](/azure/container-instances/container-instances-quotas).</span>
 
 
 ## <a name="availability"></a>Disponibilidade
@@ -79,7 +78,7 @@ Observações
 |----------|-----------------|-------------|----------------|-----------------|-------------------------|----------------|-------------|
 | SSL | Configurado na VM | Com suporte | Com suporte  | Com suporte | Configurado na VM | Suporte com o contêiner sidecar | Com suporte |
 | Custo | [Windows][cost-windows-vm], [Linux][cost-linux-vm] | [Preços do Serviço de Aplicativo][cost-app-service] | [Preços do Service Fabric][cost-service-fabric] | [Preços do Azure Functions][cost-functions] | [Preços do Serviço de Contêiner do Azure][cost-acs] | [Preço das Instâncias de Contêiner](https://azure.microsoft.com/pricing/details/container-instances/) | [Preço do Lote do Azure][cost-batch]
-| Estilos de arquitetura adequados | [N camadas][n-tier], [Big compute] [ big-compute] (HPC) | [Trabalhador de fila da Web][w-q-w] | [Microsserviços][microservices], [arquitetura orientada a eventos][event-driven] | [Microsserviços][microservices], [arquitetura orientada a eventos][event-driven] | [Microsserviços][microservices], [arquitetura orientada a eventos][event-driven] | [Microsserviços][microservices], automação de tarefas, trabalhos em lotes  | [Big compute][big-compute] (HPC) |
+| Estilos de arquitetura adequados | [N camadas][n-tier], [Big compute] [ big-compute] (HPC) | [Trabalhado de Fila da Web][w-q-w], [N Camadas][n-tier] | [Microsserviços][microservices], [arquitetura orientada a eventos][event-driven] | [Microsserviços][microservices], [arquitetura orientada a eventos][event-driven] | [Microsserviços][microservices], [arquitetura orientada a eventos][event-driven] | [Microsserviços][microservices], automação de tarefas, trabalhos em lotes  | [Big compute][big-compute] (HPC) |
 
 [cost-linux-vm]: https://azure.microsoft.com/pricing/details/virtual-machines/linux/
 [cost-windows-vm]: https://azure.microsoft.com/pricing/details/virtual-machines/windows/
@@ -107,3 +106,4 @@ Observações
 [big-date]: ../architecture-styles/big-data.md
 [big-compute]: ../architecture-styles/big-compute.md
 
+[app-service-hybrid]: /azure/app-service/app-service-hybrid-connections
