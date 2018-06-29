@@ -6,12 +6,12 @@ ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: app-roles
 pnp.series.next: web-api
-ms.openlocfilehash: 03c4d5fa10c75437a7b066534619ba9a123c350c
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: 321dc52a3e6f803a032288c2341e490cdba8c20a
+ms.sourcegitcommit: 9a2d56ac7927f0a2bbfee07198d43d9c5cb85755
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30849664"
+ms.lasthandoff: 06/22/2018
+ms.locfileid: "36327646"
 ---
 # <a name="role-based-and-resource-based-authorization"></a>Autorização baseada em funções e recursos
 
@@ -33,7 +33,7 @@ Por exemplo, o aplicativo [Tailspin Surveys][Tailspin] define as seguintes funç
 
 As funções se aplicam a *usuários* do aplicativo. No aplicativo Surveys, o usuário pode ser um administrador, um criador ou um leitor.
 
-Para uma discussão sobre como definir e gerenciar funções, confira [Funções de aplicativo].
+Para uma discussão sobre como definir e gerenciar funções, confira [Funções do aplicativo].
 
 Independentemente de como você gerenciar as funções, seu código de autorização terá uma aparência semelhante. O ASP.NET Core tem uma abstração chamada [políticas de autorização][policies]. Com esse recurso, você define políticas de autorização no código e depois aplica-as às ações do controlador. A política é dissociada do controlador.
 
@@ -84,7 +84,7 @@ services.AddAuthorization(options =>
 });
 ```
 
-Esse código também define o esquema de autenticação, que diz ao ASP.NET qual middleware de autenticação deverá ser executado se a autorização falhar. Nesse caso, especificamos o middleware de autenticação de cookie, porque o middleware de autenticação de cookie pode redirecionar o usuário para uma página "Proibida". O local da página Proibida é definido na opção `AccessDeniedPath` para o middleware de cookie; consulte [Configurando o middleware de autenticação].
+Esse código também define o esquema de autenticação, que diz ao ASP.NET qual middleware de autenticação deverá ser executado se a autorização falhar. Nesse caso, especificamos o middleware de autenticação de cookie, porque o middleware de autenticação de cookie pode redirecionar o usuário para uma página "Proibida". O local da página Proibida é definido na opção `AccessDeniedPath` para o middleware de cookie; consulte [Configuração do middleware de autenticação].
 
 ### <a name="authorize-controller-actions"></a>Autorizar ações do controlador
 Por fim, para autorizar uma ação em um controlador MVC, defina a política no atributo `Authorize` :
@@ -218,7 +218,7 @@ public class SurveyAuthorizationHandler : AuthorizationHandler<OperationAuthoriz
 }
 ```
 
-Em um aplicativo multilocatário, você deve garantir que as permissões não "vazem" para os dados de outro locatário. No aplicativo de Pesquisas, a permissão de Colaborador é permitida entre locatários &mdash; você pode designar alguém de outro locatário como colaborador. Os outros tipos de permissão são restritos a recursos que pertencem ao locatário do usuário. Para impor a esse requisito, o código verifica a ID de locatário antes de conceder a permissão. (O campo `TenantId` é atribuído quando a pesquisa é criada.)
+Em um aplicativo multilocatário, você deve garantir que as permissões não "vazem" para os dados de outro locatário. No aplicativo de Pesquisas, a permissão de Colaborador é permitida entre os locatários &mdash;. Você pode atribuir alguém de outro locatário como um colaborador. Os outros tipos de permissão são restritos a recursos que pertencem ao locatário do usuário. Para impor a esse requisito, o código verifica a ID de locatário antes de conceder a permissão. (O campo `TenantId` é atribuído quando a pesquisa é criada.)
 
 A próxima etapa é verificar a operação (leitura, atualização, exclusão, etc.) em relação às permissões. O aplicativo Surveys implementa esta etapa usando uma tabela de pesquisa de funções:
 
@@ -250,9 +250,9 @@ static readonly Dictionary<OperationAuthorizationRequirement, Func<List<UserPerm
 <!-- Links -->
 [Tailspin]: tailspin.md
 
-[Funções de aplicativo]: app-roles.md
+[Funções do aplicativo]: app-roles.md
 [policies]: /aspnet/core/security/authorization/policies
 [implementação de referência]: tailspin.md
-[Configurando o middleware de autenticação]: authenticate.md#configure-the-auth-middleware
+[Configuração do middleware de autenticação]: authenticate.md#configure-the-auth-middleware
 [sample application]: https://github.com/mspnp/multitenant-saas-guidance
 [web-api]: web-api.md
