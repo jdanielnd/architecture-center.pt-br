@@ -3,12 +3,12 @@ title: Executar uma VM do Windows no Azure
 description: Como executar uma VM do Windows no Azure, atentando-se para a escalabilidade, resiliência, capacidade de gerenciamento e segurança.
 author: telmosampaio
 ms.date: 04/03/2018
-ms.openlocfilehash: 748bcfcf599c7fa0e82691632d14e0f78fd78582
-ms.sourcegitcommit: a5e549c15a948f6fb5cec786dbddc8578af3be66
+ms.openlocfilehash: d790c9a6693dca751e0ba05f1fd3c23756cf53bb
+ms.sourcegitcommit: 58d93e7ac9a6d44d5668a187a6827d7cd4f5a34d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 05/06/2018
-ms.locfileid: "33673598"
+ms.lasthandoff: 07/02/2018
+ms.locfileid: "37142209"
 ---
 # <a name="run-a-windows-vm-on-azure"></a>Executar uma VM do Windows no Azure
 
@@ -127,17 +127,7 @@ Uma implantação para essa arquitetura está disponível no [GitHub][github-fol
 
 ### <a name="prerequisites"></a>pré-requisitos
 
-1. Clone, crie um fork ou baixe o arquivo zip das [arquiteturas de referência][ref-arch-repo] no repositório GitHub.
-
-2. Verifique se a CLI do Azure 2.0 está instalada no computador. Para obter instruções de instalação da CLI, consulte [Instalar a CLI 2.0 do Azure][azure-cli-2].
-
-3. Instale os pacote npm dos [Blocos de construção do Azure][azbb].
-
-4. Em um prompt de comando, prompt de bash ou o prompt do PowerShell, digite o seguinte comando para fazer logon em sua conta do Azure.
-
-  ```bash
-  az login
-  ```
+[!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 
 ### <a name="deploy-the-solution-using-azbb"></a>Implantar a solução usando azbb
 

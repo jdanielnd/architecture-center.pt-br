@@ -3,12 +3,12 @@ title: Aplicativo de N camadas com Apache Cassandra
 description: Como executar VMs do Linux para uma arquitetura de N camadas no Microsoft Azure.
 author: MikeWasson
 ms.date: 05/03/2018
-ms.openlocfilehash: 46e9a821a33dd3ea3ae9129ab5ad69172bfcd667
-ms.sourcegitcommit: a5e549c15a948f6fb5cec786dbddc8578af3be66
+ms.openlocfilehash: 7ee14088a2fae3cfc5c1119daf717236c75ecc6a
+ms.sourcegitcommit: 58d93e7ac9a6d44d5668a187a6827d7cd4f5a34d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 05/06/2018
-ms.locfileid: "33673608"
+ms.lasthandoff: 07/02/2018
+ms.locfileid: "37142226"
 ---
 # <a name="n-tier-application-with-apache-cassandra"></a>Aplicativo de N camadas com Apache Cassandra
 
@@ -144,21 +144,7 @@ Uma implantação para essa arquitetura de referência está disponível no [Git
 
 ### <a name="prerequisites"></a>pré-requisitos
 
-1. Clone, crie um fork ou baixe o arquivo zip das [arquiteturas de referência][ref-arch-repo] no repositório GitHub.
-
-2. Verifique se a CLI do Azure 2.0 está instalada no computador. Para instalar a CLI, siga as instruções em [Instalar a CLI do Azure 2.0][azure-cli-2].
-
-3. Instale os pacote npm dos [Blocos de construção do Azure][azbb].
-
-   ```bash
-   npm install -g @mspnp/azure-building-blocks
-   ```
-
-4. Em um prompt de comando, bash prompt ou prompt do PowerShell, faça logon na sua conta do Azure usando um dos comandos abaixo e siga os prompts.
-
-   ```bash
-   az login
-   ```
+[!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 
 ### <a name="deploy-the-solution-using-azbb"></a>Implantar a solução usando azbb
 

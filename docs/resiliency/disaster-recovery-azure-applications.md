@@ -3,12 +3,12 @@ title: Recuperação de desastre para aplicativos do Azure
 description: Visão geral técnica e informações detalhadas sobre como projetar aplicativos para recuperação de desastre no Microsoft Azure.
 author: adamglick
 ms.date: 05/26/2017
-ms.openlocfilehash: 7235e752cf1b96e392a700b223d63b07c0f85b66
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+ms.openlocfilehash: 2d890e479e008e03dcfce9b7240f8bcbaf270372
+ms.sourcegitcommit: e8f4786b187697b1bea374e5f35f217c65d2dfe0
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/23/2018
-ms.locfileid: "29477767"
+ms.lasthandoff: 07/02/2018
+ms.locfileid: "37343372"
 ---
 # <a name="disaster-recovery-for-azure-applications"></a>Recuperação de desastre para aplicativos do Azure
 
@@ -278,7 +278,7 @@ Teste seus scripts repetidamente do início ao fim. Após verificar a funcionali
 Uma prática recomendada da automação é criar um repositório de scripts do PowerShell ou scripts de CLI (interface de linha de comando) para recuperação de desastre do Azure. Maque-os e categorize-os claramente para agilizar o acesso. Designe uma pessoa primária para gerenciar o repositório e controlar a versão dos scripts. Documente-os bem, com explicações de parâmetros e exemplos de uso dos scripts. Certifique-se também de manter esta documentação em sincronia com as implantações do Azure. Isso destaca o propósito de ter uma pessoa primária responsável por todas as partes do repositório.
 
 ## <a name="failure-detection"></a>detecção de falhas
-Para lidar corretamente com problemas de disponibilidade e recuperação de desastre, você precisa ser capaz de detectar e diagnosticar falhas. Execute monitoramento avançado do servidor e da implantação para reconhecer rapidamente quando um sistema ou seus componentes se tornam indisponíveis repentinamente. Ferramentas de monitoramento que avaliam a integridade geral do serviço de nuvem e suas dependências podem fazer parte desse trabalho. Uma ferramenta adequada da Microsoft é o [System Center 2016](https://www.microsoft.com/server-cloud/products/system-center-2016/). Ferramentas de terceiros também podem fornecer recursos de monitoramento. A maioria das soluções de monitoramento monitora os principais contadores de desempenho e a disponibilidade do serviço.
+Para lidar corretamente com problemas de disponibilidade e recuperação de desastre, você precisa ser capaz de detectar e diagnosticar falhas. Execute monitoramento avançado do servidor e da implantação para reconhecer rapidamente quando um sistema ou seus componentes se tornam indisponíveis repentinamente. Ferramentas de monitoramento que avaliam a integridade geral do serviço de nuvem e suas dependências podem fazer parte desse trabalho. Uma ferramenta adequada da Microsoft é o [System Center 2016](https://www.microsoft.com/cloud-platform/system-center). Ferramentas de terceiros também podem fornecer recursos de monitoramento. A maioria das soluções de monitoramento monitora os principais contadores de desempenho e a disponibilidade do serviço.
 
 Embora essas ferramentas sejam vitais, você deve se planejar para a detecção de falhas e dos relatórios em um serviço de nuvem. Você também deve se planejar para usar adequadamente o Diagnóstico do Azure. Contadores de desempenho personalizados ou entradas de log de eventos também podem fazer parte da estratégia geral. Isso fornece mais dados durante falhas para diagnosticar o problema rapidamente e restaurar todos os recursos. Esse recurso também fornece métricas adicionais que as ferramentas de monitoramento podem usar para determinar a integridade do aplicativo. Para saber mais, confira [Habilitando o Diagnóstico do Azure nos Serviços de Nuvem do Azure](/azure/cloud-services/cloud-services-dotnet-diagnostics/). Para uma discussão sobre como planejar um "modelo de integridade" geral, confira [Failsafe: Guidance for Resilient Cloud Architectures](https://channel9.msdn.com/Series/FailSafe)(À prova de falhas: orientação para arquiteturas de nuvem resilientes).
 
@@ -300,7 +300,7 @@ Os tópicos a seguir descrevem os serviços do Azure específicos de recuperaç�
 | Serviço | Tópico |
 |---------|-------|
 | Serviços de Nuvem | [O que fazer no caso de uma interrupção de serviço do Azure que afete os Serviços de Nuvem do Azure](/azure/cloud-services/cloud-services-disaster-recovery-guidance) |
-| Cofre da Chave | [Redundância e disponibilidade de Azure Key Vault](/azure/key-vault/key-vault-disaster-recovery-guidance) |
+| Key Vault | [Redundância e disponibilidade de Azure Key Vault](/azure/key-vault/key-vault-disaster-recovery-guidance) |
 |Armazenamento | [O que fazer se uma ocorrer interrupção no Armazenamento do Microsoft Azure](/azure/storage/storage-disaster-recovery-guidance) |
 | Banco de dados SQL | [Restaurar um Banco de Dados SQL ou fazer failover para um secundário](/azure/sql-database/sql-database-disaster-recovery) |
 | Máquinas virtuais | [O que fazer caso uma interrupção de serviço do Azure afete as máquinas virtuais do Azure](/azure/virtual-machines/virtual-machines-disaster-recovery-guidance) |

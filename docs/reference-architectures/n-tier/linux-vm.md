@@ -3,12 +3,12 @@ title: Executar uma VM do Linux no Azure
 description: Como executar uma VM Linux no Azure, prestando atenção na escalabilidade, na resiliência, na capacidade de gerenciamento e na segurança.
 author: telmosampaio
 ms.date: 04/03/2018
-ms.openlocfilehash: f29b7225c2e0edbb1569c9e3a55d112d12041af8
-ms.sourcegitcommit: a5e549c15a948f6fb5cec786dbddc8578af3be66
+ms.openlocfilehash: 3d0492d05280e8c296cdfc4157aa0387a70337bf
+ms.sourcegitcommit: 58d93e7ac9a6d44d5668a187a6827d7cd4f5a34d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 05/06/2018
-ms.locfileid: "33673578"
+ms.lasthandoff: 07/02/2018
+ms.locfileid: "37142311"
 ---
 # <a name="run-a-linux-vm-on-azure"></a>Executar uma VM do Linux no Azure
 
@@ -144,17 +144,7 @@ Uma implantação está disponível no [GitHub][github-folder]. Ela implanta o s
 
 ### <a name="prerequisites"></a>pré-requisitos
 
-1. Clone, crie um fork ou baixe o arquivo zip das [arquiteturas de referência][ref-arch-repo] no repositório GitHub.
-
-2. Verifique se a CLI do Azure 2.0 está instalada no computador. Para obter instruções de instalação da CLI, consulte [Instalar a CLI 2.0 do Azure][azure-cli-2].
-
-3. Instale os pacote npm dos [Blocos de construção do Azure][azbb].
-
-4. Em um prompt de comando, prompt de bash ou o prompt do PowerShell, digite o seguinte comando para fazer logon em sua conta do Azure.
-
-  ```bash
-  az login
-  ```
+[!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 
 5. Crie um par de chaves SSH. Para obter mais informações, consulte [Como criar e usar um par de chaves SSH pública e privada para VMs Linux no Azure](/azure/virtual-machines/linux/mac-create-ssh-keys).
 

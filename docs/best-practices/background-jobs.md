@@ -4,12 +4,12 @@ description: Diretrizes sobre as tarefas em segundo plano executadas independent
 author: dragon119
 ms.date: 05/24/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: 10c24afee4b880cfbf8ee534f4d7f945d2b046a9
-ms.sourcegitcommit: 3426a9c5ed937f097725c487cf3d073ae5e2a347
+ms.openlocfilehash: 781d616dfcf24775525e2489e7e463174ec9bfa3
+ms.sourcegitcommit: e9d9e214529edd0dc78df5bda29615b8fafd0e56
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/01/2018
-ms.locfileid: "28907039"
+ms.lasthandoff: 06/28/2018
+ms.locfileid: "37091080"
 ---
 # <a name="background-jobs"></a>Trabalhos em segundo plano
 [!INCLUDE [header](../_includes/header.md)]
@@ -101,7 +101,7 @@ Os Azure WebJobs têm as seguintes características:
 * **Registro em log**: Console.Out é tratado (marcado) como INFO. Console.Error é tratado como ERROR. Você pode acessar informações de monitoramento e diagnóstico usando o Portal do Azure. Você pode baixar os arquivos de log diretamente do site. Eles estão salvos nos seguintes locais:
   * Para execução disparada: Vfs/data/jobs/triggered/jobName
   * Para execução contínua: Vfs/data/jobs/continuous/jobName
-* **Configuração**: você pode configurar o WebJobs usando o portal, a API REST e o PowerShell. Você pode usar um arquivo de configuração chamado settings.job no mesmo diretório raiz que o script de trabalho para fornecer informações de configuração para um trabalho. Por exemplo:
+* **Configuração**: você pode configurar o WebJobs usando o portal, a API REST e o PowerShell. Você pode usar um arquivo de configuração chamado settings.job no mesmo diretório raiz que o script de trabalho para fornecer informações de configuração para um trabalho. Por exemplo: 
   * { "stopping_wait_time": 60 }
   * { "is_singleton": true }
 
@@ -292,7 +292,7 @@ As tarefas em segundo plano devem ser resilientes para fornecer serviços confi�
   * As mensagens que devem ser processadas em uma ordem específica, como aquelas que alteram os dados com base em seu valor existente (por exemplo, adicionando um valor a um valor existente), podem não chegar na ordem original que foram enviadas. Como alternativa, eles podem ser tratados por diferentes instâncias de uma tarefa em segundo plano em uma ordem diferente devido a cargas diferentes em cada instância. As mensagens que devem ser processadas em uma ordem específica devem incluir um número de sequência, chave ou outro indicador que as tarefas em segundo plano podem usar para garantir que elas sejam processadas na ordem correta. Se estiver usando o Barramento de Serviço do Azure, você pode usar sessões de mensagens para garantir a ordem de entrega. No entanto, é geralmente mais eficiente, quando possível, projetar o processo para que a ordem das mensagens não seja importante.
   * Normalmente, uma tarefa em segundo plano inspecionará mensagens na fila, o que as oculta temporariamente de outros consumidores de mensagens. Em seguida, ela exclui as mensagens após elas serem processadas com êxito. Se uma tarefa em segundo plano falhar durante o processamento de uma mensagem, essa mensagem reaparecerá na fila após o tempo de inspeção terminar. Ela será processada por outra instância da tarefa ou durante o próximo ciclo de processamento desta instância. Se a mensagem causar consistentemente um erro ao consumidor, ela bloqueará a tarefa, a fila e, por fim, o próprio aplicativo quando a fila ficar cheia. Portanto, é vital detectar e remover mensagens suspeitas da fila. Se você estiver usando o Barramento de Serviço do Azure, as mensagens que causam um erro podem ser movidas automaticamente ou manualmente para uma fila de inatividade associada.
   * As filas são garantidas no *mínimo uma vez* nos mecanismos de entrega, mas elas podem entregar a mesma mensagem mais de uma vez. Além disso, se uma tarefa em segundo plano falhar após processar uma mensagem, mas antes de excluí-la da fila, a mensagem estará disponível para processamento novamente. As tarefas em segundo plano devem ser idempotentes, o que significa que processar a mesma mensagem mais de uma vez não causa um erro ou inconsistência nos dados do aplicativo. Algumas operações são naturalmente idempotentes, como a definição de um valor armazenado para um novo valor específico. No entanto, operações como adicionar um valor a um valor armazenado existente sem verificar que o valor armazenado ainda é o mesmo quando a mensagem foi enviada originalmente causará inconsistências. As filas do Barramento de Serviço do Azure podem ser configuradas para remover automaticamente as mensagens duplicadas.
-  * Alguns sistemas de mensagens, como as filas de armazenamento do Azure e as filas do Barramento de Serviço do Azure, dão suporte a uma propriedade de contagem de fila que indica o número de vezes que uma mensagem foi lida na fila. Isso pode ser útil ao lidar com mensagens suspeitas e repetidas. Para obter mais informações, consulte [Prévia de mensagens assíncronas](http://msdn.microsoft.com/library/dn589781.aspx) e [Padrões de idempotência](http://blog.jonathanoliver.com/2010/04/idempotency-patterns/).
+  * Alguns sistemas de mensagens, como as filas de armazenamento do Azure e as filas do Barramento de Serviço do Azure, dão suporte a uma propriedade de contagem de fila que indica o número de vezes que uma mensagem foi lida na fila. Isso pode ser útil ao lidar com mensagens suspeitas e repetidas. Para obter mais informações, consulte [Prévia de mensagens assíncronas](http://msdn.microsoft.com/library/dn589781.aspx) e [Padrões de idempotência](http://blog.jonathanoliver.com/idempotency-patterns/).
 
 ## <a name="scaling-and-performance-considerations"></a>Considerações sobre dimensionamento e desempenho
 As tarefas em segundo plano devem oferecer desempenho suficiente para garantir que elas não bloqueiem o aplicativo nem causem inconsistências devido à operação atrasada quando o sistema estiver sob carga. Normalmente, o desempenho é aprimorado expandindo as instâncias de computação que hospedam as tarefas em segundo plano. Quando estiver planejando e criando tarefas em segundo plano, considere os seguintes pontos ligados ao desempenho e à escalabilidade:
