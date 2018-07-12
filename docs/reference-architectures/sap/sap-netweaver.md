@@ -3,21 +3,23 @@ title: Implantar o SAP NetWeaver (Windows) para AnyDB em Máquinas Virtuais do A
 description: Práticas comprovadas para executar o SAP S/4HANA em um ambiente Linux no Azure com alta disponibilidade.
 author: lbrader
 ms.date: 05/11/2018
-ms.openlocfilehash: 0efe3e78d9e1809fdab52044b75e432742786b79
-ms.sourcegitcommit: bb348bd3a8a4e27ef61e8eee74b54b07b65dbf98
+ms.openlocfilehash: 90334e4872bdd15d59aa16286a031d07f3d1bb2f
+ms.sourcegitcommit: 86d86d71e392550fd65c4f76320d7ecf0b72e1f6
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 05/21/2018
-ms.locfileid: "34423028"
+ms.lasthandoff: 07/06/2018
+ms.locfileid: "37864531"
 ---
 # <a name="deploy-sap-netweaver-windows-for-anydb-on-azure-virtual-machines"></a>Implantar o SAP NetWeaver (Windows) para AnyDB em Máquinas Virtuais do Azure
 
 Essa arquitetura de referência mostra um conjunto de práticas comprovadas para executar o SAP NetWeaver em um ambiente Windows no Azure com alta disponibilidade. O banco de dados é o AnyDB, o termo da SAP para qualquer DBMS com suporte, além do SAP HANA. Essa arquitetura é implantada com tamanhos específicos de VM (máquina virtual) que podem ser alterados para acomodar as necessidades da sua organização.
 
-![](./images/sap-s4hana.png)
- 
+![](./images/sap-netweaver.png)
+
+*Baixe um [Arquivo Visio][visio-download] dessa arquitetura.*
+
 > [!NOTE] 
-> A implantação de produtos SAP de acordo com essa arquitetura de referência requer um licenciamento apropriado de produtos SAP e outras tecnologias que não são da Microsoft.
+> Implantar essa arquitetura de referência requer um licenciamento apropriado de produtos SAP e outras tecnologias que não são da Microsoft.
 
 ## <a name="architecture"></a>Arquitetura
 A arquitetura consiste na infraestrutura e nos componentes de software principais a seguir.
@@ -174,3 +176,4 @@ As comunidades podem responder a perguntas e ajudá-lo a configurar uma implanta
 - [Comunidade do SAP](https://www.sap.com/community.html)
 - [Stack Overflow](https://stackoverflow.com/tags/sap/)
 
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/sap-reference-architectures.vsdx

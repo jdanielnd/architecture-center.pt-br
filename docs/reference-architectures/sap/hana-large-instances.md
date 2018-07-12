@@ -3,18 +3,20 @@ title: Executar SAP HANA em Instâncias Grandes do Azure
 description: Práticas comprovadas para executar o SAP HANA em um ambiente de alta disponibilidade nas Instâncias Grandes do Azure.
 author: lbrader
 ms.date: 05/16/2018
-ms.openlocfilehash: 7605fa8a0012aaef3f7323c6f88614b640152e3b
-ms.sourcegitcommit: bb348bd3a8a4e27ef61e8eee74b54b07b65dbf98
+ms.openlocfilehash: 746161ac51335af5c48a559830d6e0345dcfb7b1
+ms.sourcegitcommit: 86d86d71e392550fd65c4f76320d7ecf0b72e1f6
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 05/21/2018
-ms.locfileid: "34423027"
+ms.lasthandoff: 07/06/2018
+ms.locfileid: "37864514"
 ---
 # <a name="run-sap-hana-on-azure-large-instances"></a>Executar SAP HANA em Instâncias Grandes do Azure
 
 Essa arquitetura de referência mostra um conjunto de práticas comprovadas para executar o SAP HANA no Azure (Instâncias Grandes) com alta disponibilidade e recuperação de desastre (DR). Chamada de Instâncias Grandes do HANA, essa oferta é implantada em servidores físicos em regiões do Azure. 
 
 ![0][0]
+
+*Baixe um [Arquivo Visio][visio-download] dessa arquitetura.*
 
 > [!NOTE]
 > Implantar essa arquitetura de referência requer um licenciamento apropriado de produtos SAP e outras tecnologias que não são da Microsoft.
@@ -201,3 +203,5 @@ As comunidades podem responder a perguntas e ajudá-lo a configurar uma implanta
 [type]: /azure/virtual-machines/workloads/sap/hana-installation
 [vnet]: /azure/virtual-network/virtual-networks-overview
 [0]: ./images/sap-hana-large-instances.png "Arquitetura do SAP HANA usando Instâncias Grandes do Azure"
+
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/sap-reference-architectures.vsdx
