@@ -3,12 +3,12 @@ title: Escolhendo uma tecnologia de processamento de fluxo
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 29e4cd3d5ea6e10f036bfe226152290512dafa65
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: fd93418c62b584e79f229e9f42703d148aeb0eca
+ms.sourcegitcommit: e9d9e214529edd0dc78df5bda29615b8fafd0e56
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30848641"
+ms.lasthandoff: 06/28/2018
+ms.locfileid: "37091056"
 ---
 # <a name="choosing-a-stream-processing-technology-in-azure"></a>Escolhendo uma tecnologia de processamento de fluxo no Azure
 
@@ -53,8 +53,8 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 
 | | Stream Analytics do Azure | HDInsight com Spark Streaming | Apache Spark no Azure Databricks | HDInsight com Storm | Funções do Azure | WebJobs no Serviço de Aplicativo do Azure |
 | --- | --- | --- | --- | --- | --- | --- | 
-| Entradas | [Entradas do Stream Analytics](/azure/stream-analytics/stream-analytics-define-inputs)  | Hubs de Eventos, Hub IoT, Kafka, HDFS, Blobs de Armazenamento, Azure Data Lake Store  | Hubs de Eventos, Hub IoT, Kafka, HDFS, Blobs de Armazenamento, Azure Data Lake Store  | Hubs de Eventos, Hub IoT, Blobs de Armazenamento, Azure Data Lake Store  | [Associações compatíveis](/azure/azure-functions/functions-triggers-bindings#supported-bindings) | Barramento de Serviço, Filas de Armazenamento, Blobs de Armazenamento, Hubs de Eventos, WebHooks, Cosmos DB, Arquivos |
-| Coletores |  [Saídas do Stream Analytics](/azure/stream-analytics/stream-analytics-define-outputs) | HDFS, Kafka, Blobs de armazenamento, Azure Data Lake Store, Cosmos DB | HDFS, Kafka, Blobs de armazenamento, Azure Data Lake Store, Cosmos DB | Hubs de Eventos, Barramento de Serviço, Kafka | [Associações compatíveis](/azure/azure-functions/functions-triggers-bindings#supported-bindings) | Barramento de Serviço, Filas de Armazenamento, Blobs de Armazenamento, Hubs de Eventos, WebHooks, Cosmos DB, Arquivos | 
+| Entradas | Hubs de Eventos do Azure, Hub IoT do Azure e Armazenamento de Blobs do Azure  | Hubs de Eventos, Hub IoT, Kafka, HDFS, Blobs de Armazenamento, Azure Data Lake Store  | Hubs de Eventos, Hub IoT, Kafka, HDFS, Blobs de Armazenamento, Azure Data Lake Store  | Hubs de Eventos, Hub IoT, Blobs de Armazenamento, Azure Data Lake Store  | [Associações compatíveis](/azure/azure-functions/functions-triggers-bindings#supported-bindings) | Barramento de Serviço, Filas de Armazenamento, Blobs de Armazenamento, Hubs de Eventos, WebHooks, Cosmos DB, Arquivos |
+| Coletores |  Azure Data Lake Store, Banco de Dados SQL do Azure, Blobs de armazenamento, Hubs de Eventos, Power BI, Armazenamento de Tabelas, Filas do Barramento de Serviço, Tópicos do Barramento de Serviço, Cosmos DB, Azure Functions  | HDFS, Kafka, Blobs de armazenamento, Azure Data Lake Store, Cosmos DB | HDFS, Kafka, Blobs de armazenamento, Azure Data Lake Store, Cosmos DB | Hubs de Eventos, Barramento de Serviço, Kafka | [Associações compatíveis](/azure/azure-functions/functions-triggers-bindings#supported-bindings) | Barramento de Serviço, Filas de Armazenamento, Blobs de Armazenamento, Hubs de Eventos, WebHooks, Cosmos DB, Arquivos | 
 
 ### <a name="processing-capabilities"></a>Funcionalidades de processamento
 

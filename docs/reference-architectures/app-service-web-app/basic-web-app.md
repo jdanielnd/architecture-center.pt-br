@@ -4,12 +4,12 @@ description: Arquitetura recomendada para um aplicativo Web básico executado no
 author: MikeWasson
 ms.date: 12/12/2017
 cardTitle: Basic web application
-ms.openlocfilehash: efd831b1f54fa0662bdfa9874318e7b314172215
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: bc8cf9b5c66fc451d097cbc992ecb9a249645dce
+ms.sourcegitcommit: e9d9e214529edd0dc78df5bda29615b8fafd0e56
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30846396"
+ms.lasthandoff: 06/28/2018
+ms.locfileid: "37091114"
 ---
 # <a name="basic-web-application"></a>Aplicativo Web básico
 [!INCLUDE [header](../../_includes/header.md)]
@@ -124,7 +124,7 @@ Para saber mais, consulte [Visão geral do Azure Resource Manager](/azure/azure-
 ### <a name="deployment"></a>Implantação
 A implantação envolve duas etapas:
 
-1. Provisionamento de recursos do Azure. Recomendamos que você use [Modelos do Azure Resource Manager][arm-template] para esta etapa. Os modelos facilitam a automatização das implantações por meio do PowerShell ou da CLI (interface de linha de comando) do Azure.
+1. Provisionamento de recursos do Azure. É recomendável que você use [Modelos do Azure Resource Manager][arm-template] para esta etapa. Os modelos facilitam a automatização das implantações por meio do PowerShell ou da CLI (interface de linha de comando) do Azure.
 2. Implantando o aplicativo (código, binários e arquivos de conteúdo). Existem várias opções, incluindo a implantação de um repositório Git local, usando o Visual Studio ou a implantação contínua usando o controle do código-fonte baseado em nuvem. Consulte [Implantar o aplicativo no Serviço de Aplicativo do Azure][deploy].  
 
 Um aplicativo do Serviço de Aplicativo sempre tem um slot de implantação denominado `production`, que representa o site de produção. É recomendável criar um slot de preparo para implantar atualizações. Os benefícios do uso de um slot de preparo incluem:

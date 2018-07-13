@@ -3,12 +3,12 @@ title: Processamento em tempo real
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 8d3497c37d15dc0aa4645ddfce3bd30740217b2c
-ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
+ms.openlocfilehash: 4abb159924f902b5babe0673cc021e80b00c8529
+ms.sourcegitcommit: e9d9e214529edd0dc78df5bda29615b8fafd0e56
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/03/2018
-ms.locfileid: "30298624"
+ms.lasthandoff: 06/28/2018
+ms.locfileid: "37090978"
 ---
 # <a name="real-time-processing"></a>Processamento em tempo real
 
@@ -56,7 +56,7 @@ Para obter mais informações, consulte [Armazenamento de dados](../technology-c
 
 ### <a name="stream-processing"></a>Processamento de fluxo
 
-- **Azure Stream Analytics**. O Azure Stream Analytics pode executar consultas perpétuas em um fluxo não associado de dados. Essas consultas consomem fluxos de dados de um armazenamento ou agentes de mensagens, filtram e agregam os dados com base em janelas temporais e gravam os resultados em coletores como armazenamento, bancos de dados ou diretamente em relatórios no Power BI.
+- **Azure Stream Analytics**. O Azure Stream Analytics pode executar consultas perpétuas em um fluxo não associado de dados. Essas consultas consomem fluxos de dados de um armazenamento ou agentes de mensagens, filtram e agregam os dados com base em janelas temporais e gravam os resultados em coletores como armazenamento, bancos de dados ou diretamente em relatórios no Power BI. O Stream Analytics usa uma linguagem de consulta baseada em SQL que oferece suporte a constructos temporais e geoespaciais e pode ser estendida usando JavaScript.
 - **Storm**. O Apache Storm é uma estrutura de software livre para processamento de fluxo que usa uma topologia de spouts e bolts para consumir, processar e gerar os resultados de fontes de dados de streaming em tempo real. Provisione o Storm em um cluster Azure HDInsight e implemente uma topologia em Java ou C#.
 - **Spark Streaming**. O Apache Spark é uma plataforma distribuída de software livre para processamento geral de dados. O Spark fornece a API do Spark Streaming, na qual você pode escrever um código em qualquer linguagem Spark compatível, incluindo Java, Scala e Python. O Spark 2.0 introduziu a API de Streaming Estruturado do Spark, que fornece um modelo de programação simples e mais consistente. O Spark 2.0 está disponível em um cluster Azure HDInsight.
 

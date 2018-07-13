@@ -2,21 +2,21 @@
 title: Implementação de uma DMZ entre o Azure e a Internet
 description: Como implementar uma arquitetura de rede híbrida segura com acesso à Internet no Azure.
 author: telmosampaio
-ms.date: 11/23/2016
+ms.date: 07/02/2018
 pnp.series.title: Network DMZ
 pnp.series.next: nva-ha
 pnp.series.prev: secure-vnet-hybrid
 cardTitle: DMZ between Azure and the Internet
-ms.openlocfilehash: c88545b1fcae49b413e7e2b6ac5bd92d3fd3456d
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.openlocfilehash: 7a062d2394ae8b3bd1b17c19cbdf512327f9a766
+ms.sourcegitcommit: 9b459f75254d97617e16eddd0d411d1f80b7fe90
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/30/2018
-ms.locfileid: "30270385"
+ms.lasthandoff: 07/03/2018
+ms.locfileid: "37403140"
 ---
 # <a name="dmz-between-azure-and-the-internet"></a>DMZ entre o Azure e a Internet
 
-Essa arquitetura de referência mostra uma rede híbrido segura que estende a uma rede local para o Azure e também aceita tráfego de Internet. 
+Essa arquitetura de referência mostra uma rede híbrido segura que estende a uma rede local para o Azure e também aceita tráfego de Internet. [**Implante essa solução**.](#deploy-the-solution)
 
 [![0]][0] 
 
@@ -79,37 +79,70 @@ Essa arquitetura de referência implementa vários níveis de segurança:
 
 Você deve registrar todas as solicitações de entrada em todas as portas. Audite os logs regularmente, prestando atenção às solicitações que estão fora dos parâmetros esperados, pois isso pode indicar tentativas de invasão.
 
-## <a name="solution-deployment"></a>Implantação da solução
 
-Uma implantação para uma arquitetura de referência que implementa essas recomendações está disponível no [GitHub][github-folder]. A arquitetura de referência pode ser implantada com VMs do Windows ou Linux seguindo as instruções abaixo:
+## <a name="deploy-the-solution"></a>Implantar a solução
 
-1. Clique no botão abaixo:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fdmz%2Fsecure-vnet-dmz%2FvirtualNetwork.azuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
-2. Depois que o link for aberto no portal do Azure, você deve inserir valores para algumas das configurações:
-   * O nome do **Grupo de recursos** já está definido no arquivo de parâmetros, portanto, selecione **Criar novo** e digite `ra-public-dmz-network-rg` na caixa de texto.
-   * Selecione a região na caixa suspensa **Local**.
-   * Não edite as caixas de texto **URI da raiz do modelo** ou **URI da raiz do parâmetro**.
-   * Selecione o **Tipo de SO** na caixa suspensa **windows** ou **linux**.
-   * Analise os termos e condições e clique na caixa de seleção **Concordo com os termos e condições declarados acima**.
-   * Clique no botão **Comprar**.
-3. Aguarde até que a implantação seja concluída.
-4. Clique no botão abaixo:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fdmz%2Fsecure-vnet-dmz%2Fworkload.azuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
-5. Depois que o link for aberto no portal do Azure, você deve inserir valores para algumas das configurações:
-   * O nome do **Grupo de recursos** já está definido no arquivo de parâmetros, portanto, selecione **Criar novo** e digite `ra-public-dmz-wl-rg` na caixa de texto.
-   * Selecione a região na caixa suspensa **Local**.
-   * Não edite as caixas de texto **URI da raiz do modelo** ou **URI da raiz do parâmetro**.
-   * Analise os termos e condições e clique na caixa de seleção **Concordo com os termos e condições declarados acima**.
-   * Clique no botão **Comprar**.
-6. Aguarde até que a implantação seja concluída.
-7. Clique no botão abaixo:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fdmz%2Fsecure-vnet-dmz%2Fsecurity.azuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
-8. Depois que o link for aberto no portal do Azure, você deve inserir valores para algumas das configurações:
-   * O nome do **Grupo de recursos** já está definido no arquivo de parâmetros, portanto, selecione **Usar Existente** e digite `ra-public-dmz-network-rg` na caixa de texto.
-   * Selecione a região na caixa suspensa **Local**.
-   * Não edite as caixas de texto **URI da raiz do modelo** ou **URI da raiz do parâmetro**.
-   * Analise os termos e condições e clique na caixa de seleção **Concordo com os termos e condições declarados acima**.
-   * Clique no botão **Comprar**.
-9. Aguarde até que a implantação seja concluída.
-10. Os arquivos de parâmetro incluem um nome e uma senha de usuário administrador embutidos em código para todas as VMs e é altamente recomendável alterá-los imediatamente. Clique em cada VM na implantação, selecione-a no Portal do Azure e, em seguida, clique em **Redefinir senha** na folha **Suporte + solução de problemas**. Selecione **Redefinir senha** na caixa suspensa **Modo** e escolha um novo **Nome de usuário** e **Senha**. Clique no botão **Atualizar** para salvar.
+Uma implantação para uma arquitetura de referência que implementa essas recomendações está disponível no [GitHub][github-folder]. 
 
+### <a name="prerequisites"></a>pré-requisitos
+
+[!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
+
+### <a name="deploy-resources"></a>Implantação de recursos
+
+1. Navegue para a pasta `/dmz/secure-vnet-hybrid` do repositório GitHub de arquiteturas de referência.
+
+2. Execute o comando a seguir:
+
+    ```bash
+    azbb -s <subscription_id> -g <resource_group_name> -l <region> -p onprem.json --deploy
+    ```
+
+3. Execute o comando a seguir:
+
+    ```bash
+    azbb -s <subscription_id> -g <resource_group_name> -l <region> -p secure-vnet-hybrid.json --deploy
+    ```
+
+### <a name="connect-the-on-premises-and-azure-gateways"></a>Conectar os gateways do Azure e locais
+
+Nesta etapa, você conectará os dois gateways de rede locais.
+
+1. No portal do Azure, navegue até o grupo de recursos que você criou. 
+
+2. Localize o recurso denominado `ra-vpn-vgw-pip` e copie o endereço IP mostrado na folha **Visão geral**.
+
+3. Encontre o recurso denominado `onprem-vpn-lgw`.
+
+4. Clique na folha **Configuração**. No **Endereço IP**, cole o endereço IP da etapa 2.
+
+    ![](./images/local-net-gw.png)
+
+5. Clique em **Salvar** e aguarde a conclusão da operação. Isso pode levar cerca de 5 minutos.
+
+6. Encontre o recurso denominado `onprem-vpn-gateway1-pip`. Copie o endereço IP mostrado na folha **Visão geral**.
+
+7. Encontre o recurso denominado `ra-vpn-lgw`. 
+
+8. Clique na folha **Configuração**. No **Endereço IP**, cole o endereço IP da etapa 6.
+
+9. Clique em **Salvar** e aguarde a conclusão da operação.
+
+10. Para verificar a conexão, vá até a folha **Conexões** de cada gateway. O status deve ser **Conectado**.
+
+### <a name="verify-that-network-traffic-reaches-the-web-tier"></a>Verificar se o tráfego de rede atinge a camada da Web
+
+1. No portal do Azure, navegue até o grupo de recursos que você criou. 
+
+2. Encontre o recurso denominado `pub-dmz-lb`, que é o balanceador de carga na frente da DMZ pública. 
+
+3. Copie o endereço IP público da folha **Visão geral** e abra-o em um navegador da Web. Você deve ver a home page padrão do servidor Apache2.
+
+4. Encontre o recurso denominado `int-dmz-lb`, que é o balanceador de carga na frente da DMZ privada. Copie o endereço IP privado da folha **Visão geral**.
+
+5. Encontre a VM denominada `jb-vm1`. Clique em **Conectar** e use a Área de Trabalho Remota para se conectar à VM. O nome de usuário e a senha são especificadas no arquivo onprem.json.
+
+6. Na sessão de Área de Trabalho Remota, abra um navegador da Web e navegue até o endereço IP da etapa 4. Você deve ver a home page padrão do servidor Apache2.
 
 [availability-set]: /azure/virtual-machines/virtual-machines-windows-manage-availability
 [github-folder]: https://github.com/mspnp/reference-architectures/tree/master/dmz/secure-vnet-dmz
@@ -123,4 +156,4 @@ Uma implantação para uma arquitetura de referência que implementa essas recom
 [visio-download]: https://archcenter.blob.core.windows.net/cdn/dmz-reference-architectures.vsdx
 
 
-[0]: ./images/dmz-public.png "Arquitetura de rede híbrida protegida"
+[0]: ./images/dmz-public.png "Arquitetura de rede híbrida segura"
