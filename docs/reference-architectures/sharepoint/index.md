@@ -3,12 +3,12 @@ title: Executar um farm do SharePoint Server 2016 de alta disponibilidade no Azu
 description: Práticas comprovadas para configurar uma farm do SharePoint Server 2016 de alta disponibilidade no Azure.
 author: njray
 ms.date: 08/01/2017
-ms.openlocfilehash: d1e3f0b73c94844ac649bf2abb6917809202fdb7
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.openlocfilehash: 9fe4fc09cf3babdf3ec8e8f27049f90e0047e9f0
+ms.sourcegitcommit: 776b8c1efc662d42273a33de3b82ec69e3cd80c5
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/30/2018
-ms.locfileid: "30270115"
+ms.lasthandoff: 07/12/2018
+ms.locfileid: "38987702"
 ---
 # <a name="run-a-high-availability-sharepoint-server-2016-farm-in-azure"></a>Executar um farm do SharePoint Server 2016 de alta disponibilidade no Azure
 
@@ -38,7 +38,9 @@ Essa arquitetura consiste nos seguintes componentes:
 
 - **Gateway**. O gateway fornece uma conexão entre a sua rede local e a rede virtual do Azure. A conexão pode usar ExpressRoute ou VPN site a site. Para obter mais informações, consulte [Conectar uma rede local ao Azure][hybrid-ra].
 
-- **Controladores de domínio do Active Directory (AD) do Windows Server**. Como o SharePoint Server 2016 não dá suporte ao uso do Azure Active Directory Domain Services, você deve implantar controladores de domínio do AD do Windows Server. Esses controladores de domínio são executados na rede virtual do Azure e possuem uma relação de confiança com a floresta do AD do Windows Server local. As solicitações da Web do cliente por recursos de farm do SharePoint podem ser autenticadas na rede virtual, em vez de enviar esse tráfego de autenticação pela conexão do gateway para a rede local. No DNS, os registros CNAME ou intranet um são criados para que os usuários da intranet possam resolver o nome do farm do SharePoint para o endereço IP privado do balanceador de carga interno.
+- **Controladores de domínio do Active Directory (AD) do Windows Server**. Essa arquitetura de referência implanta os controladores de domínio do AD do Windows Server. Esses controladores de domínio são executados na rede virtual do Azure e possuem uma relação de confiança com a floresta do AD do Windows Server local. As solicitações da Web do cliente por recursos de farm do SharePoint podem ser autenticadas na rede virtual, em vez de enviar esse tráfego de autenticação pela conexão do gateway para a rede local. No DNS, os registros CNAME ou intranet um são criados para que os usuários da intranet possam resolver o nome do farm do SharePoint para o endereço IP privado do balanceador de carga interno.
+
+  O SharePoint Server 2016 também suporta o uso do [Azure Active Directory Domain Services](/azure/active-directory-domain-services/). O Azure Active Directory Domain Services fornece serviços de domínio gerenciado para que você não precise implantar e gerenciar controladores de domínio no Azure.
 
 - **Grupo de Disponibilidade Always On do SQL Server**. Para obter alta disponibilidade do banco de dados do SQL Server, recomendamos os [Grupos de Disponibilidade AlwaysOn do SQL Server][sql-always-on]. Duas máquinas virtuais são usadas para o SQL Server. Uma contém a réplica do banco de dados primário e a outra contém a réplica secundária. 
 
