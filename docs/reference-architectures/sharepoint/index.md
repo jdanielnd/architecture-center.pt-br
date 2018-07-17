@@ -2,13 +2,13 @@
 title: Executar um farm do SharePoint Server 2016 de alta disponibilidade no Azure
 description: Práticas comprovadas para configurar uma farm do SharePoint Server 2016 de alta disponibilidade no Azure.
 author: njray
-ms.date: 08/01/2017
-ms.openlocfilehash: 9fe4fc09cf3babdf3ec8e8f27049f90e0047e9f0
-ms.sourcegitcommit: 776b8c1efc662d42273a33de3b82ec69e3cd80c5
+ms.date: 07/14/2018
+ms.openlocfilehash: ff690300cb5f4af301bcfac58ac10b9b3c47f96d
+ms.sourcegitcommit: 71cbef121c40ef36e2d6e3a088cb85c4260599b9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/12/2018
-ms.locfileid: "38987702"
+ms.lasthandoff: 07/14/2018
+ms.locfileid: "39060890"
 ---
 # <a name="run-a-high-availability-sharepoint-server-2016-farm-in-azure"></a>Executar um farm do SharePoint Server 2016 de alta disponibilidade no Azure
 
@@ -172,78 +172,104 @@ Além disso, sempre é aconselhável planejar para se ter uma segurança mais al
 
 ## <a name="deploy-the-solution"></a>Implantar a solução
 
-Os scripts de implantação para essa arquitetura de referência estão disponíveis no [GitHub][github]. 
+Uma implantação para essa arquitetura de referência está disponível no [GitHub][github]. Toda a implantação pode levar várias horas para ser concluída.
 
-Você pode implantar essa arquitetura incrementalmente ou de uma só vez. Na primeira vez, é recomendável uma implantação incremental, para que você possa ver o que faz cada implantação. Especificar o incremento usando um dos seguintes parâmetros de *modo*.
+A implantação cria os seguintes grupos de recursos em sua assinatura:
 
-| Mode           | O que faz                                                                                                            |
-|----------------|-------------------------------------------------------------------------------------------------------------------------|
-| onprem         | (Opcional) Implanta um ambiente de rede local simulado, para teste ou avaliação. Essa etapa não se conecta a uma rede local real. |
-| infrastructure | Implanta a infraestrutura de rede do SharePoint 2016 e a jumpbox do Azure.                                                |
-| createvpn      | Implanta um gateway de rede virtual em redes locais e do SharePoint e as conecta. Executar esta etapa somente se você executou a etapa `onprem`.                |
-| workload       | Implanta os servidores do SharePoint na rede do SharePoint.                                                               |
-| segurança       | Implanta o grupo de segurança de rede na rede do SharePoint.                                                           |
-| tudo            | Implanta todas as implantações anteriores.                            
+- ra-onprem-sp2016-rg
+- ra-sp2016-network-rg
 
+Os arquivos de parâmetros de modelo se referem a esses nomes e, portanto, se você alterá-los, atualize os arquivos de parâmetros para que correspondam. 
 
-Para implantar a arquitetura de forma incremental com um ambiente de rede local simulado, execute as seguintes etapas na ordem:
-
-1. onprem
-2. infrastructure
-3. createvpn
-4. workload
-5. segurança
-
-Para implantar a arquitetura de forma incremental sem um ambiente de rede local simulado, execute as seguintes etapas na ordem:
-
-1. infrastructure
-2. workload
-3. segurança
-
-Para implantar tudo em uma única etapa, use `all`. Observe que todo o processo pode levar várias horas.
+Os arquivos de parâmetro incluem uma senha embutida em código em vários locais. Altere esses valores antes de fazer a implantação.
 
 ### <a name="prerequisites"></a>pré-requisitos
 
-* Instale a versão mais recente do [Azure PowerShell][azure-ps].
+[!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 
-* Antes de implantar essa arquitetura de referência, verifique se sua assinatura possui uma cota suficiente — pelo menos 38 núcleos. Se você não tem o suficiente, use o portal do Azure para enviar uma solicitação de suporte para mais cota.
+### <a name="deploy-the-solution"></a>Implantar a solução 
 
-* Para estimar o custo da implantação, consulte a [Calculadora de Preços do Azure][azure-pricing].
+1. Execute o comando a seguir para implantar uma rede local simulada.
 
-### <a name="deploy-the-reference-architecture"></a>Implantar a arquitetura de referência
+    ```bash
+    azbb -s <subscription_id> -g ra-onprem-sp2016-rg -l <location> -p onprem.json --deploy
+    ```
 
-1.  Baixe ou clone o [repositório GitHub][github] no computador local.
+2. Execute o comando a seguir para implantar a VNet do Azure e o gateway de VPN.
 
-2.  Abra uma janela do PowerShell e navegue até a pasta `/sharepoint/sharepoint-2016`.
+    ```bash
+    azbb -s <subscription_id> -g ra-onprem-sp2016-rg -l <location> -p connections.json --deploy
+    ```
 
-3.  Execute o comando do PowerShell a seguir. Para \<subscription-id:\>, use a ID de sua assinatura do Azure. Para \<location\>, especifique uma região do Azure, tais como `eastus` ou `westus`. Para \<modo\>, especifique `onprem`, `infrastructure`, `createvpn`, `workload`, `security` ou `all`.
+3. Execute o comando a seguir para implantar o jumpbox, controladores de domínio do AD e VMs do SQL Server.
+
+    ```bash
+    azbb -s <subscription_id> -g ra-onprem-sp2016-rg -l <location> -p azure1.json --deploy
+    ```
+
+4. Execute o comando a seguir para criar o cluster de failover e o grupo de disponibilidade. 
+
+    ```bash
+    azbb -s <subscription_id> -g ra-onprem-sp2016-rg -l <location> -p azure2-cluster.json --deploy
+
+5. Run the following command to deploy the remaining VMs.
+
+    ```bash
+    azbb -s <subscription_id> -g ra-onprem-sp2016-rg -l <location> -p azure3.json --deploy
+    ```
+
+Neste ponto, verifique se você pode fazer uma conexão de TCP de front-end da Web ao balanceador de carga para o grupo de disponibilidade Always On do SQL Server. Para isso, execute as etapas a seguir:
+
+1. Usar o portal do Azure para encontrar a VM denominada `ra-sp-jb-vm1` no grupo de recursos `ra-sp2016-network-rg`. Esta é a VM do jumpbox.
+
+2. Clique em `Connect` para abrir uma sessão de área de trabalho remota para a VM. Use a senha que você especificou no arquivo de parâmetro `azure1.json`.
+
+3. Na sessão de Área de Trabalho Remota, faça logon no 10.0.5.4. Este é o endereço IP da VM denominada `ra-sp-app-vm1`.
+
+4. Abra um console do PowerShell na VM e use o cmdlet `Test-NetConnection` para verificar se você pode se conectar ao balanceador de carga.
 
     ```powershell
-    .\Deploy-ReferenceArchitecture.ps1 <subscription id> <location> <mode>
-    ```   
-4. Quando solicitado, entre em sua conta do Azure. Os scripts de implantação podem demorar várias horas para serem concluídos, dependendo do modo selecionado.
+    Test-NetConnection 10.0.3.100 -Port 1433
+    ```
 
-5. Quando a implantação for concluída, execute os scripts para configurar os Grupos de Disponibilidade Always On do SQL Server. Consulte o [Leiame][readme] para obter detalhes.
+O resultado deve ser semelhante ao seguinte:
 
-> [!WARNING]
-> Os arquivos de parâmetro incluem uma senha embutida (`AweS0me@PW`) em vários locais. Altere esses valores antes de fazer a implantação.
+```powershell
+ComputerName     : 10.0.3.100
+RemoteAddress    : 10.0.3.100
+RemotePort       : 1433
+InterfaceAlias   : Ethernet 3
+SourceAddress    : 10.0.0.132
+TcpTestSucceeded : True
+```
 
+Se ele falhar, use o Portal do Azure para reiniciar a VM denominada `ra-sp-sql-vm2`. Após a reinicialização da VM, execute o comando `Test-NetConnection` novamente. Você precisará aguardar cerca de um minuto após a VM ser reiniciada para que a conexão seja bem-sucedida. 
 
-## <a name="validate-the-deployment"></a>Validar a implantação
+Agora conclua a implantação da seguinte maneira.
 
-Depois de implantar essa arquitetura de referência, os grupos de recursos a seguir são listados sob a assinatura que você usou:
+1. Execute o comando a seguir para implantar o nó primário do farm do SharePoint.
 
-| Grupo de recursos        | Finalidade                                                                                         |
-|-----------------------|-------------------------------------------------------------------------------------------------|
-| ra-onprem-sp2016-rg   | Rede local simulada com o Active Directory, federada com a rede do SharePoint 2016 |
-| ra-sp2016-network-rg  | Infraestrutura para dar suporte à implantação do SharePoint                                                 |
-| ra-sp2016-workload-rg | Recursos de suporte e SharePoint                                                             |
+    ```bash
+    azbb -s <subscription_id> -g ra-onprem-sp2016-rg -l <location> -p azure4-sharepoint-server.json --deploy
+    ```
 
-### <a name="validate-access-to-the-sharepoint-site-from-the-on-premises-network"></a>Validar o acesso ao site do SharePoint a partir da rede local
+2. Execute o comando a seguir para implantar o cache do SharePoint, a pesquisa e a Web.
 
-1. No [portal do Azure][azure-portal], em **Grupos de recursos**, selecione o grupo de recursos `ra-onprem-sp2016-rg`.
+    ```bash
+    azbb -s <subscription_id> -g ra-onprem-sp2016-rg -l <location> -p azure5-sharepoint-farm.json --deploy
+    ```
 
-2. Na lista de recursos, selecione o recurso de VM chamado `ra-adds-user-vm1`. 
+3. Execute o comando a seguir para criar as regras do NSG.
+
+    ```bash
+    azbb -s <subscription_id> -g ra-onprem-sp2016-rg -l <location> -p azure6-security.json --deploy
+    ```
+
+### <a name="validate-the-deployment"></a>Validar a implantação
+
+1. No [portal do Azure][azure-portal], navegue até o grupo de recursos `ra-onprem-sp2016-rg`.
+
+2. Na lista de recursos, selecione o recurso de VM chamado `ra-onpr-u-vm1`. 
 
 3. Conecte-se à VM, conforme descrito em [Conectar-se à máquina virtual][connect-to-vm]. O nome de usuário é `\onpremuser`.
 
@@ -252,38 +278,6 @@ Depois de implantar essa arquitetura de referência, os grupos de recursos a seg
 6.  Na caixa **Segurança do Windows**, faça logon no portal do SharePoint usando `contoso.local\testuser` para o nome de usuário.
 
 Esse logon faz um túnel do domínio Fabrikam.com usado pela rede local até o domínio contoso.local usado pelo portal do SharePoint. Quando o site do SharePoint abre, você verá o site de demonstração de raiz.
-
-### <a name="validate-jumpbox-access-to-vms-and-check-configuration-settings"></a>Validar acesso à jumpbox para VMs e verificar as definições de configuração
-
-1.  No [portal do Azure][azure-portal], em **Grupos de recursos**, selecione o grupo de recursos `ra-sp2016-network-rg`.
-
-2.  Na lista de recursos, selecione o recurso de VM chamado `ra-sp2016-jb-vm1`, que é a jumpbox.
-
-3. Conecte-se à VM, conforme descrito em [Conectar-se à máquina virtual][connect-to-vm]. O nome de usuário é `testuser`.
-
-4.  Depois que você fizer logon na jumpbox, abra uma sessão RDP a partir da jumpbox. Conecte-se a outras VMs na rede virtual. O nome de usuário é `testuser`. Você pode ignorar o aviso sobre o certificado de segurança do computador remoto.
-
-5.  Quando a conexão remota para a máquina virtual abrir, examine a configuração e faça alterações usando as ferramentas administrativas, tais como o Gerenciador do Servidor.
-
-A tabela a seguir mostra as VMs que são implantadas. 
-
-| Nome do Recurso      | Finalidade                                   | Grupo de recursos        | Nome da VM                       |
-|--------------------|-------------------------------------------|-----------------------|-------------------------------|
-| Ra-sp2016-ad-vm1   | Active Directory + DNS                    | Ra-sp2016-network-rg  | Ad1.contoso.local             |
-| Ra-sp2016-ad-vm2   | Active Directory + DNS                    | Ra-sp2016-network-rg  | Ad2.contoso.local             |
-| Ra-sp2016-fsw-vm1  | SharePoint                                | Ra-sp2016-network-rg  | Fsw1.contoso.local            |
-| Ra-sp2016-jb-vm1   | Jumpbox                                   | Ra-sp2016-network-rg  | Jb (use o IP público para fazer logon) |
-| Ra-sp2016-sql-vm1  | SQL Always On - Failover                  | Ra-sp2016-network-rg  | Sq1.contoso.local             |
-| Ra-sp2016-sql-vm2  | SQL Always On - Primário                   | Ra-sp2016-network-rg  | Sq2.contoso.local             |
-| Ra-sp2016-app-vm1  | MinRole de aplicativo do SharePoint 2016       | Ra-sp2016-workload-rg | App1.contoso.local            |
-| Ra-sp2016-app-vm2  | MinRole de aplicativo do SharePoint 2016       | Ra-sp2016-workload-rg | App2.contoso.local            |
-| Ra-sp2016-dch-vm1  | MinRole de Cache distribuído do SharePoint 2016 | Ra-sp2016-workload-rg | Dch1.contoso.local            |
-| Ra-sp2016-dch-vm2  | MinRole de Cache distribuído do SharePoint 2016 | Ra-sp2016-workload-rg | Dch2.contoso.local            |
-| Ra-sp2016-srch-vm1 | MinRole de pesquisa do SharePoint 2016            | Ra-sp2016-workload-rg | Srch1.contoso.local           |
-| Ra-sp2016-srch-vm2 | MinRole de pesquisa do SharePoint 2016            | Ra-sp2016-workload-rg | Srch2.contoso.local           |
-| Ra-sp2016-wfe-vm1  | MinRole de front-end da Web do SharePoint 2016     | Ra-sp2016-workload-rg | Wfe1.contoso.local            |
-| Ra-sp2016-wfe-vm2  | MinRole de front-end da Web do SharePoint 2016     | Ra-sp2016-workload-rg | Wfe2.contoso.local            |
-
 
 **_Colaboradores dessa arquitetura de referência_** &mdash; Joe Davies, Bob Fox, Neil Hodgkinson, Paul Stork
 
