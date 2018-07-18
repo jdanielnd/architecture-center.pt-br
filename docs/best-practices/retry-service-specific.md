@@ -4,12 +4,12 @@ description: Diretriz específica de serviço para configurar o mecanismo de rep
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 77cf5d90373da2118d34301bd5c790080d3cf63f
-ms.sourcegitcommit: 9a2d56ac7927f0a2bbfee07198d43d9c5cb85755
+ms.openlocfilehash: 39d342dc96e3d0d923ce159c392d9427359a4639
+ms.sourcegitcommit: f7fa67e3bdbc57d368edb67bac0e1fdec63695d2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 06/22/2018
-ms.locfileid: "36327680"
+ms.lasthandoff: 07/05/2018
+ms.locfileid: "37843619"
 ---
 # <a name="retry-guidance-for-specific-services"></a>Repetir as diretrizes para serviços específicos
 
@@ -383,7 +383,7 @@ Considere começar com as seguintes configurações para operações de repetiç
 \*Não incluindo atraso que será adicionado se uma resposta Servidor Ocupado for recebida.
 
 ### <a name="telemetry"></a>Telemetria
-O Barramento de Serviço registra as repetições como eventos ETW usando um **EventSource**. Você deve anexar um **EventListener** à origem do evento para capturar os eventos e exibi-los no Visualizador de Desempenho ou gravá-los em um log de destino apropriado. Você pode usar o [Bloco de Aplicativos para Registro Semântico](http://msdn.microsoft.com/library/dn775006.aspx) para fazer isso. Os eventos de repetição são da seguinte forma:
+O Barramento de Serviço registra as repetições como eventos ETW usando um **EventSource**. Você deve anexar um **EventListener** à origem do evento para capturar os eventos e exibi-los no Visualizador de Desempenho ou gravá-los em um log de destino apropriado. Os eventos de repetição são da seguinte forma:
 
 ```text
 Microsoft-ServiceBus-Client/RetryPolicyIteration
@@ -985,8 +985,8 @@ namespace RetryCodeSamples
 Considere o seguinte ao acessar os serviços do Azure ou de terceiros:
 
 * Use uma abordagem sistemática para gerenciar repetições, talvez como código reutilizável, para que você possa aplicar uma metodologia consistente em todos os clientes e soluções.
-* Considere usar uma estrutura de repetição, como o Bloco de Aplicativos para Tratamento de Falhas Transitórias, para gerenciar repetições se o serviço ou cliente de destino não tiver algum mecanismo de repetição interno. Isso ajudará você a implementar um comportamento de repetição consistente, bem como pode fornecer uma estratégia de repetição padrão adequada para o serviço de destino. No entanto, talvez seja necessário criar código de repetição personalizado para serviços que tenham comportamento não padrão, que não dependem de exceções para indicar falhas transitórias, ou se desejar, use uma resposta **Retry-Response** para gerenciar o comportamento de repetição.
-* A lógica de detecção transitória dependerá da API de cliente real que você usa para invocar as chamadas REST. Alguns clientes, como a classe mais recente **HttpClient** , não lançam exceções para solicitações concluídas com um código de status HTTP sem sucesso. Isso melhora o desempenho, mas impede o uso do Bloco de Aplicativos para Tratamento de Falhas Transitórias. Nesse caso, você pode encapsular a chamada à API REST com o código que gera exceções para códigos de status HTTP sem sucesso, que pode então ser processada pelo bloco. Como alternativa, é possível usar um mecanismo diferente para orientar as repetições.
+* Considere o uso de uma estrutura de repetição, como [Polly][polly], para gerenciar as repetições de tentativa se o cliente ou serviço de destino não tiver nenhum mecanismo de repetição interno. Isso ajudará você a implementar um comportamento de repetição consistente, bem como pode fornecer uma estratégia de repetição padrão adequada para o serviço de destino. No entanto, talvez seja necessário criar código de repetição personalizado para serviços que tenham comportamento não padrão, que não dependem de exceções para indicar falhas transitórias, ou se desejar, use uma resposta **Retry-Response** para gerenciar o comportamento de repetição.
+* A lógica de detecção transitória dependerá da API de cliente real que você usa para invocar as chamadas REST. Alguns clientes, como a classe mais recente **HttpClient** , não lançam exceções para solicitações concluídas com um código de status HTTP sem sucesso. 
 * O código de status HTTP retornado do serviço pode ajudar a indicar se a falha é transitória. Talvez seja necessário examinar as exceções geradas por um cliente ou pela estrutura de repetição para acessar o código de status ou determinar o tipo de exceção equivalente. Os seguintes códigos HTTP geralmente indicam que uma repetição é apropriada:
   * 408 Tempo Limite da Solicitação
   * 429 Número excessivo de solicitações
@@ -999,7 +999,7 @@ Considere o seguinte ao acessar os serviços do Azure ou de terceiros:
   * WebExceptionStatus.ConnectFailure
   * WebExceptionStatus.Timeout
   * WebExceptionStatus.RequestCanceled
-* No caso de um status de serviço indisponível, o serviço pode indicar o atraso apropriado antes de tentar a repetição no cabeçalho da resposta **Retry-After** ou em um cabeçalho personalizado diferente. Os serviços também podem enviar informações adicionais como cabeçalhos personalizados ou inseridos no conteúdo da resposta. O Bloco de Aplicativos para Tratamento de Falhas Transitórias não pode usar os cabeçalhos “retry-after” padrão ou personalizados.
+* No caso de um status de serviço indisponível, o serviço pode indicar o atraso apropriado antes de tentar a repetição no cabeçalho da resposta **Retry-After** ou em um cabeçalho personalizado diferente. Os serviços também podem enviar informações adicionais como cabeçalhos personalizados ou inseridos no conteúdo da resposta. 
 * Não tente a repetição para códigos de status que representam erros de cliente (erros no intervalo 4xx), exceto para um 408 Tempo Limite de Solicitação.
 * Teste minuciosamente seus mecanismos e estratégias de repetição sob diversas condições, como estado diferente de rede e cargas variáveis de sistema.
 
