@@ -6,12 +6,12 @@ ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: authorize
 pnp.series.next: token-cache
-ms.openlocfilehash: 65529280c5849e36ed7ff23de08a0b485034d0d8
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 2d02ff7be04c6ebec888039453fe1ac7e957b301
+ms.sourcegitcommit: f7fa67e3bdbc57d368edb67bac0e1fdec63695d2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24541458"
+ms.lasthandoff: 07/05/2018
+ms.locfileid: "37843667"
 ---
 # <a name="secure-a-backend-web-api"></a>Proteger uma API Web de back-end
 
@@ -68,7 +68,7 @@ O aplicativo Tailspin implementa a identidade de usuário delegado. Aqui estão 
 Seja qual for a abordagem, o aplicativo Web deve obter um token de acesso que é a credencial necessária para chamar a API Web.
 
 * No caso da identidade de usuário delegado, o token tem de vir do IDP, que pode emitir um token em nome do usuário.
-* No caso das credenciais do cliente, um aplicativo pode obter o token do IDP ou hospedar seu próprio servidor de tokens. (Mas não grave um servidor de token do zero; use uma estrutura bem testada, como [IdentityServer3].) Se você autenticar com o Azure AD, é altamente recomendado obter o token de acesso do Azure AD, mesmo com o fluxo de credenciais do cliente.
+* No caso das credenciais do cliente, um aplicativo pode obter o token do IDP ou hospedar seu próprio servidor de tokens. (Mas não grave um servidor de token do zero; use uma estrutura bem testada, como [IdentityServer4].) Se você autenticar com o Azure AD, é altamente recomendado obter o token de acesso do Azure AD, mesmo com o fluxo de credenciais do cliente.
 
 O restante deste artigo pressupõe que o aplicativo esteja se autenticando com o Azure AD.
 
@@ -115,7 +115,7 @@ Estes são os vários parâmetros necessários:
 * `clientSecret`. O segredo do cliente do aplicativo Web.
 * `redirectUri`. O URI de redirecionamento que você definiu para a conexão do OpenID. Esse é o local onde o IDP retorna a chamada com o token.
 * `resourceID`. O URI da ID de aplicativo da API Web que você criou quando registrou a API Web no Azure AD
-* `tokenCache`. Um objeto que armazena os tokens de acesso em cache. Confira [Colocação de tokens em cache].
+* `tokenCache`. Um objeto que armazena os tokens de acesso em cache. Confira [Armazenamento de token em cache].
 
 Se `AcquireTokenByAuthorizationCodeAsync` for bem-sucedido, a ADAL armazenará o token em cache. Posteriormente, você pode obter o token do cache chamando AcquireTokenSilentAsync:
 
@@ -271,9 +271,9 @@ public void ConfigureServices(IServiceCollection services)
 [JwtBearer]: https://www.nuget.org/packages/Microsoft.AspNet.Authentication.JwtBearer
 
 [Tailspin Surveys]: tailspin.md
-[IdentityServer3]: https://github.com/IdentityServer/IdentityServer3
+[IdentityServer4]: https://github.com/IdentityServer/IdentityServer4
 [Atualizar os manifestos do aplicativo]: ./run-the-app.md#update-the-application-manifests
-[Colocação de tokens em cache]: token-cache.md
+[Armazenamento de token em cache]: token-cache.md
 [inscrição de locatários]: signup.md
 [claims-transformation]: claims.md#claims-transformations
 [Authorization]: authorize.md

@@ -4,12 +4,12 @@ description: Convenções de nomenclatura para recursos do Azure. Como nomear m�
 author: telmosampaio
 ms.date: 05/18/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: a92b6a1a23b35e7379f586d477b6f7cc6ccfc7e1
-ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
+ms.openlocfilehash: b9833654f63dc81ff6d05b9c49897e0c58de2683
+ms.sourcegitcommit: 86d86d71e392550fd65c4f76320d7ecf0b72e1f6
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 06/19/2018
-ms.locfileid: "36206371"
+ms.lasthandoff: 07/06/2018
+ms.locfileid: "37864548"
 ---
 # <a name="naming-conventions"></a>Convenções de nomenclatura
 
@@ -61,7 +61,7 @@ Os afixos podem se referir a diversos aspectos que descrevam os recursos em ques
 | Aspecto | Exemplo | Observações |
 | --- | --- | --- |
 | Ambiente |dev, prod, QA |Identifica o ambiente do recurso |
-| Local padrão |uw (Oeste dos EUA), ue (Leste dos EUA) |Identifica a região na qual o recurso foi implantado |
+| Localização |uw (Oeste dos EUA), ue (Leste dos EUA) |Identifica a região na qual o recurso foi implantado |
 | Instância |01, 02 |Para recursos com mais de uma instância nomeada (servidores Web etc.). |
 | Produto ou serviço |propriedade serviço |Identifica o produto, o aplicativo ou o serviço que recebe suporte do recurso |
 | Função |sql, web, messaging |Identifica a função do recurso associado |
@@ -122,7 +122,7 @@ Em geral, evite usar caracteres especiais (`-` ou `_`) como o primeiro ou últim
 
 ## <a name="organize-resources-with-tags"></a>Organizar recursos com marcas
 
-O Azure Resource Manager dá suporte à marcação de entidades com cadeias de caracteres de texto aleatórias com o objetivo de identificar o contexto e simplificar a automação.  Por exemplo, a marca `"sqlVersion: "sql2014ee"` pode identificar VMs em uma implantação que esteja executando o SQL Server 2014 Enterprise Edition para executar um script automatizado nelas.  As marcas devem ser usadas para ampliar e aprimorar o contexto junto com as convenções de nomenclatura escolhidas.
+O Azure Resource Manager dá suporte à marcação de entidades com cadeias de caracteres de texto aleatórias com o objetivo de identificar o contexto e simplificar a automação.  Por exemplo, a marca `"sqlVersion"="sql2014ee"` pode identificar VMs que estão executando o SQL Server 2014 Enterprise Edition. As marcas devem ser usadas para ampliar e aprimorar o contexto junto com as convenções de nomenclatura escolhidas.
 
 > [!TIP]
 > Outra vantagem das marcas é que elas abrangem grupos de recursos, permitindo que você vincule e correlacione entidades em implantações diferentes.
