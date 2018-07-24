@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 03/31/2017
 ms.author: rodend;karlku;tomfitz
-ms.openlocfilehash: 8bc2ed253b951ea04eb25b76f67dcc2092dc94ad
-ms.sourcegitcommit: 4ec010846b9b5545c843a32e08293f906e512302
+ms.openlocfilehash: b0c92667cc7f4cb2349cd87275c0ce63f2604978
+ms.sourcegitcommit: 776b8c1efc662d42273a33de3b82ec69e3cd80c5
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 05/17/2018
-ms.locfileid: "34299880"
+ms.lasthandoff: 07/12/2018
+ms.locfileid: "38987743"
 ---
 # <a name="azure-enterprise-scaffold---prescriptive-subscription-governance"></a>Andaime empresarial do Azure — governança de assinatura prescritiva
 As empresas estão adotando cada vez mais a nuvem pública em busca de agilidade e flexibilidade. Elas estão usando os pontos fortes da nuvem para gerar receita ou otimizar recursos para os negócios. O Microsoft Azure fornece uma variedade de serviços que as empresas podem montar como blocos de construção para atender a uma ampla gama de aplicativos e cargas de trabalho. 
@@ -140,6 +140,21 @@ Para exibir o funcionamento do seu ambiente, você precisa auditar a atividade d
 
 Os logs de atividades das implantações do Resource Manager permitem determinar as **operações** que ocorreram e quem as executou. Os logs de atividades podem ser coletados e agregados usando ferramentas como o Log Analytics.
 
+
+## <a name="resource-group"></a>Grupo de recursos
+O Resource Manager permite colocar recursos em grupos significativos para gerenciamento, cobrança ou afinidade natural. Conforme mencionado anteriormente, o Azure tem dois modelos de implantação. No modelo Clássico mais antigo, a unidade básica de gerenciamento era a assinatura. Era difícil dividir recursos em uma assinatura, o que levou à criação de um grande número de assinaturas. Com o modelo do Resource Manager, vimos a introdução dos grupos de recursos. Os grupos de recursos são contêineres de recursos que têm um ciclo de vida comum ou compartilham um atributo, como "todos os servidores SQL" ou "Aplicativo A".
+
+Os grupos de recursos não podem ser contidos um dentro do outro e os recursos podem pertencer apenas a um grupo de recursos. É possível aplicar determinadas ações em todos os recursos em um grupo de recursos. Por exemplo, a exclusão de um grupo de recursos remove todos os recursos do grupo de recursos. Normalmente, você coloca um aplicativo inteiro ou sistema relacionado no mesmo grupo de recursos. Por exemplo, um aplicativo de três camadas chamado Aplicativo Web da Contoso conteria o servidor Web, o servidor de aplicativos e o servidor SQL no mesmo grupo de recursos.
+
+> [!TIP]
+> O modo como organizar os grupos de recursos pode variar de cargas de trabalho de "TI Tradicional" a cargas de trabalho de "TI Ágil":
+> 
+> * As cargas de trabalho "TI Tradicional" são mais frequentemente agrupadas por itens no mesmo ciclo de vida, como um aplicativo. O agrupamento por aplicativo permite o gerenciamento individual de aplicativo.
+> * As cargas de trabalho "TI da Agile" tendem a se concentrar nos aplicativos de nuvem voltados para o cliente. Os grupos de recursos devem refletir as camadas da implantação (como Camada da Web, Camada de Aplicativo) e o gerenciamento.
+> 
+> Noções básicas sobre sua carga de trabalho ajudam a desenvolver uma estratégia de grupo de recursos.
+
+
 ## <a name="resource-tags"></a>Marcações de recursos
 Conforme os usuários em sua organização adicionam recursos à assinatura, torna-se cada vez mais importante associar recursos ao departamento, cliente e ambiente apropriados. Você pode anexar metadados a recursos por meio de [marcações](/azure/azure-resource-manager/resource-group-using-tags). Você pode usar marcações para fornecer informações sobre o recurso ou o proprietário. Além de permitir agregar e agrupar recursos de várias maneiras, as marcações usam esses dados para a finalidade de estorno. Você pode marcar recursos com até 15 pares de chave/valor. 
 
@@ -166,25 +181,14 @@ Para obter mais exemplos de marcações, confira [Convenções de nomenclatura r
 > 
 > Essa estratégia de marcação identifica nas assinaturas quais metadados são necessários para os negócios, as finanças, a segurança, o gerenciamento de riscos e o gerenciamento geral do ambiente. 
 
-## <a name="resource-group"></a>Grupo de recursos
-O Resource Manager permite colocar recursos em grupos significativos para gerenciamento, cobrança ou afinidade natural. Conforme mencionado anteriormente, o Azure tem dois modelos de implantação. No modelo Clássico mais antigo, a unidade básica de gerenciamento era a assinatura. Era difícil dividir recursos em uma assinatura, o que levou à criação de um grande número de assinaturas. Com o modelo do Resource Manager, vimos a introdução dos grupos de recursos. Os grupos de recursos são contêineres de recursos que têm um ciclo de vida comum ou compartilham um atributo, como "todos os servidores SQL" ou "Aplicativo A".
 
-Os grupos de recursos não podem ser contidos um dentro do outro e os recursos podem pertencer apenas a um grupo de recursos. É possível aplicar determinadas ações em todos os recursos em um grupo de recursos. Por exemplo, a exclusão de um grupo de recursos remove todos os recursos do grupo de recursos. Normalmente, você coloca um aplicativo inteiro ou sistema relacionado no mesmo grupo de recursos. Por exemplo, um aplicativo de três camadas chamado Aplicativo Web da Contoso conteria o servidor Web, o servidor de aplicativos e o servidor SQL no mesmo grupo de recursos.
-
-> [!TIP]
-> O modo como organizar os grupos de recursos pode variar de cargas de trabalho de "TI Tradicional" a cargas de trabalho de "TI Ágil":
-> 
-> * As cargas de trabalho "TI Tradicional" são mais frequentemente agrupadas por itens no mesmo ciclo de vida, como um aplicativo. O agrupamento por aplicativo permite o gerenciamento individual de aplicativo.
-> * As cargas de trabalho "TI da Agile" tendem a se concentrar nos aplicativos de nuvem voltados para o cliente. Os grupos de recursos devem refletir as camadas da implantação (como Camada da Web, Camada de Aplicativo) e o gerenciamento.
-> 
-> Noções básicas sobre sua carga de trabalho ajudam a desenvolver uma estratégia de grupo de recursos.
 
 ## <a name="role-based-access-control"></a>Controle de acesso baseado em função
 Você provavelmente está se perguntando: "quem deve ter acesso aos recursos?" e "como controlar esse acesso?" Permitir ou negar acesso ao portal do Azure, bem como controlar o acesso aos recursos no portal é essencial. 
 
 Quando o Azure foi inicialmente lançado, os controles de acesso para uma assinatura eram básicos: Administrador ou Coadministrador. O acesso a uma assinatura no modelo Clássico implicava acesso a todos os recursos no portal. Essa falta de um controle refinado levou à proliferação de assinaturas para fornecer um nível de controle de acesso razoável para uma Inscrição no Azure.
 
-Essa proliferação de assinaturas não é mais necessária. Com o controle de acesso baseado em função, você pode atribuir usuários às funções padrão (como tipos de função comuns "leitor" e "gravador"). Você também pode definir funções personalizadas.
+Essa proliferação de assinaturas não é mais necessária. Com o [controle de acesso baseado em função](/azure/role-based-access-control/overview), você pode atribuir usuários às funções padrão (como tipos de função comuns “leitor” e “gravador”). Você também pode definir funções personalizadas.
 
 > [!TIP]
 > Para implementar um controle de acesso baseado em função:
@@ -229,7 +233,7 @@ O acesso a recursos pode ser interno (dentro da rede da empresa) ou externo (por
 > 
 > Essas dicas lhe ajudarão a implementar recursos de rede seguros.
 
-### <a name="automation"></a>Automação
+## <a name="automation"></a>Automação
 Gerenciar recursos individualmente é demorado e potencialmente sujeito a erros para determinadas operações. O Azure fornece vários recursos de automação, incluindo Automação do Azure, Aplicativos Lógicos e Azure Functions. A [Automação do Azure](/azure/automation/automation-intro) permite aos administradores criar e definir runbooks para lidar com tarefas comuns no gerenciamento de recursos. Crie runbooks usando um editor de código do PowerShell ou um editor gráfico. Você pode produzir fluxos de trabalho complexos de vários estágios. A Automação do Azure geralmente é usada para lidar com tarefas comuns, como desligar recursos não utilizados ou criar recursos em resposta a um gatilho específico sem a necessidade de intervenção humana.
 
 > [!TIP]
