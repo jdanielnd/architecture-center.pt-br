@@ -458,75 +458,46 @@
       items:
         - name: Visão geral
           href: cloud-adoption-guide/adoption-intro/overview.md
-        - name: Noções básicas sobre os componentes internos do Azure
+        - name: Sobre as partes internas do Azure
           items:
-            - name: 'Explicador: como funciona o Azure?'
+            - name: Como funciona o Azure?
               href: cloud-adoption-guide/adoption-intro/azure-explainer.md
-            - name: 'Explicação: o que é a governança dos recursos da nuvem'
+            - name: O que é a governança dos recursos da nuvem?
               href: cloud-adoption-guide/adoption-intro/governance-explainer.md
-        - name: Noções básicas sobre a identidade digital no Azure
+        - name: Sobre a governança de acesso de recursos do Azure
           items:
-            - name: 'Explicador: o que é um locatário do Azure Active Directory?'
-              href: cloud-adoption-guide/adoption-intro/tenant-explainer.md
-            - name: 'Aprenda a: obter um locatário do Azure Active Directory'
-              href: /azure/active-directory/develop/active-directory-howto-tenant
-              maintainContext: true
-            - name: 'Diretrizes: design de locatário do Azure AD'
-              href: cloud-adoption-guide/adoption-intro/tenant.md
-            - name: 'Aprenda a: adicionar um usuário a um locatário do Azure AD'
-              href: /azure/active-directory/add-users-azure-active-directory
-              maintainContext: true
-        - name: Noções básicas sobre as assinaturas do Azure
-          items:
-            - name: 'Explicador: o que é uma assinatura do Azure?'
-              href: cloud-adoption-guide/adoption-intro/subscription-explainer.md
-            - name: 'Diretrizes: design de assinatura do Azure'
-              href: cloud-adoption-guide/adoption-intro/subscription.md
-        - name: Noções básicas sobre o gerenciamento de recursos no Azure
-          items:
-            - name: 'Explicador: o que é o Azure Resource Manager?'
-              href: cloud-adoption-guide/adoption-intro/resource-manager-explainer.md
-            - name: 'Explicador: o que é um grupo de recursos do Azure?'
-              href: cloud-adoption-guide/adoption-intro/resource-group-explainer.md
-            - name: 'Explicador: noções básicas sobre o acesso aos recursos no Azure'
-              href: /azure/active-directory/active-directory-understanding-resource-access
-              maintainContext: true
-            - name: 'Aprenda a: criar um grupo de recursos com o portal'
-              href: /azure/azure-resource-manager/resource-group-portal
-              maintainContext: true
-            - name: 'Diretrizes: design de grupo de recursos'
-              href: cloud-adoption-guide/adoption-intro/resource-group.md
-            - name: 'Diretrizes: convenções de nomenclatura dos recursos do Azure'
-              href: /azure/architecture/best-practices/naming-conventions
-              maintainContext: true
+            - name: Noções básicas sobre o gerenciamento de acesso aos recursos no Azure
+              href: cloud-adoption-guide/adoption-intro/azure-resource-access.md
+            - name: Guia de design da governança do Azure
+              href: cloud-adoption-guide/adoption-intro/governance-how-to.md
         - name: Implantação de arquiteturas básicas para o Azure
           items:
             - name: Arquitetura da Plataforma como serviço (PaaS)
               items:
-                - name: 'Aprenda a: implantar um aplicativo Web básico para o Azure'
+                - name: Implantar um aplicativo Web básico no Azure
                   href: /azure/app-service
                   maintainContext: true
-                - name: 'Diretrizes: práticas recomendadas para aplicativos Web no Azure'
+                - name: Práticas recomendadas para aplicativos Web no Azure
                   href: /azure/architecture/reference-architectures/app-service-web-app/basic-web-app
                   maintainContext: true
             - name: IaaS (Infraestrutura como serviço)
               items:
-                - name: 'Explicador: o que é uma rede virtual do Azure?'
+                - name: O que é uma rede virtual do Azure?
                   href: /azure/virtual-network/virtual-networks-overview
                   maintainContext: true
-                - name: 'Aprenda a: implantar uma rede virtual no Azure'
+                - name: Implantar uma rede virtual no Azure
                   href: /azure/virtual-network/virtual-networks-create-vnet-arm-pportal
                   maintainContext: true
-                - name: 'Aprenda a: implantar uma carga de trabalho única de IaaS de VM do Windows no Azure'
+                - name: Implantar uma carga de trabalho única de IaaS de VM do Windows no Azure
                   href: /azure/virtual-machines/windows/quick-create-portal
                   maintainContext: true
-                - name: 'Diretrizes: práticas recomendadas para implantar uma VM do Windows no Azure'
+                - name: Práticas recomendadas para implantar uma VM do Windows no Azure
                   href: /azure/architecture/reference-architectures/virtual-machines-windows/single-vm
                   maintainContext: true
-                - name: 'Aprenda a: implantar uma carga de trabalho única de IaaS de VM Linux para o Azure'
+                - name: Implantar uma carga de trabalho única de IaaS de VM do Linux no Azure
                   href: /azure/virtual-machines/linux/quick-create-portal
                   maintainContext: true
-                - name: 'Diretrizes: práticas recomendadas para implantar uma VM do Linux no Azure'
+                - name: Práticas recomendadas para implantar uma VM do Linux no Azure
                   href: /azure/architecture/reference-architectures/virtual-machines-linux/single-vm
                   maintainContext: true
     - name: Adoção intermédia do Azure
