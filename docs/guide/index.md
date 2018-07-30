@@ -1,20 +1,16 @@
 ---
 layout: LandingPage
 ms.topic: landing-page
-ms.openlocfilehash: 80cb7fde0694257a5c413b702505e27f18aed8d3
-ms.sourcegitcommit: d702b4d27e96e7a5a248dc4f2f0e25cf6e82c134
+ms.openlocfilehash: 3a667334be682e7e96c6dd30bd401a7e4c608108
+ms.sourcegitcommit: 8b5fc0d0d735793b87677610b747f54301dcb014
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/23/2018
-ms.locfileid: "31771679"
+ms.lasthandoff: 07/29/2018
+ms.locfileid: "39334259"
 ---
 # <a name="azure-application-architecture-guide"></a>Guia de Arquitetura do Aplicativo do Azure
 
 Este guia apresenta uma abordagem estruturada para a criação de aplicativos do Azure que são escalonáveis, flexíveis e altamente disponíveis. Ele se baseia nas práticas comprovadas que aprendemos nos contratos com clientes.
-
-<br/>
-
-<img src="./images/guide-steps.svg" style="max-width:800px;"/>
 
 ## <a name="introduction"></a>Introdução
 
@@ -62,8 +58,7 @@ O primeiro ponto de decisão é o mais importante. Que tipo de arquitetura está
 
 Saiba mais:
 
-- [Estilos de arquitetura][arch-styles]
-- [Arquiteturas de referência do Azure][ref-archs]
+- [Estilos de arquitetura](./architecture-styles/index.md)
 
 ### <a name="technology-choices"></a>Opções de tecnologia
 
@@ -80,36 +75,14 @@ Identificamos dez princípios de design de alto nível que tornarão seu aplicat
 
 Saiba mais:
 
-- [Princípios de design para aplicativos do Azure][design-principles]
-- [Práticas recomendadas ao compilar para a nuvem][best-practices]
+- [Princípios de design](./design-principles/index.md)
+
 
 ### <a name="quality-pillars"></a>Pilares da qualidade
 
 Um aplicativo na nuvem bem-sucedido focará os cinco pilares de qualidade do software: escalabilidade, disponibilidade, flexibilidade, gerenciamento e segurança. Use nossas listas de verificação do design para avaliar a arquitetura de acordo com os pilares da qualidade.
 
-Saiba mais:
-
-- [Pilares de qualidade do software][pillars]
-- [Listas de verificação do design][checklists] 
-
-### <a name="cloud-design-patterns"></a>Padrões de design na nuvem
-
-Padrões de design são soluções gerais para os problemas comuns de design do software. Identificamos um conjunto de padrões de design especialmente úteis ao criar aplicativos distribuídos para a nuvem.
-
-Saiba mais:
-
-- [Catálogo de padrões de design na nuvem](../patterns/index.md)
+- [Pilares de qualidade](./pillars.md)
 
 
-[arch-styles]: ./architecture-styles/index.md
-[best-practices]: ../best-practices/index.md
-[checklists]: ../checklist/index.md
-[compute-options]: ./technology-choices/compute-comparison.md
-[design-principles]: ./design-principles/index.md
 [ebook]: https://azure.microsoft.com/campaigns/cloud-application-architecture-guide/
-[patterns]: ../patterns/index.md?toc=/azure/architecture/guide/toc.json
-[pillars]: ./pillars.md
-[ref-archs]: ../reference-architectures/index.md
-[storage-options]: ./technology-choices/data-store-comparison.md
-[technology-choices]: ./technology-choices/index.md
-

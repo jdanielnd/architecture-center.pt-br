@@ -3,12 +3,12 @@ title: Executar um farm do SharePoint Server 2016 de alta disponibilidade no Azu
 description: Práticas comprovadas para configurar uma farm do SharePoint Server 2016 de alta disponibilidade no Azure.
 author: njray
 ms.date: 07/14/2018
-ms.openlocfilehash: ff690300cb5f4af301bcfac58ac10b9b3c47f96d
-ms.sourcegitcommit: 71cbef121c40ef36e2d6e3a088cb85c4260599b9
+ms.openlocfilehash: 04c69309e9f96e3bf7cd7faabeedd9b6d9da1ebd
+ms.sourcegitcommit: 8b5fc0d0d735793b87677610b747f54301dcb014
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/14/2018
-ms.locfileid: "39060890"
+ms.lasthandoff: 07/29/2018
+ms.locfileid: "39334123"
 ---
 # <a name="run-a-high-availability-sharepoint-server-2016-farm-in-azure"></a>Executar um farm do SharePoint Server 2016 de alta disponibilidade no Azure
 
@@ -66,19 +66,21 @@ A sub-rede de gateway deve ser nomeada *GatewaySubnet*. Atribua o espaço de end
 
 ### <a name="vm-recommendations"></a>Recomendações de VM
 
-Com base nos tamanhos de máquina virtual da série Standard DSv2, essa arquitetura exige um mínimo de 38 núcleos:
+Essa arquitetura exige um mínimo de 44 núcleos:
 
 - 8 servidores do SharePoint em Standard_DS3_v2 (4 núcleos cada) = 32 núcleos
 - 2 controladores de domínio do Active Directory em Standard_DS1_v2 (1 núcleo cada) = 2 núcleos
-- 2 VMs do SQL Server em Standard_DS1_v2 = 2 núcleos
+- 2 VMs do SQL Server em Standard_DS3_v2 = 8 núcleos
 - 1 nó principal em Standard_DS1_v2 = 1 núcleo
 - 1 servidor de gerenciamento em Standard_DS1_v2 = 1 núcleo
 
-O número total de núcleos dependerá dos tamanhos de VM que você selecionar. Para obter mais informações, consulte [Recomendações de SharePoint Server](#sharepoint-server-recommendations) abaixo.
-
 Certifique-se de que sua assinatura do Azure tem suficiente cota de núcleo da VM para a implantação ou a implantação falhará. Consulte [Assinatura do Azure e limites de serviço, cotas e restrições][quotas]. 
+
+Para todas as funções do SharePoint, exceto o Indexador da Pesquisa, é recomendável usar o tamanho de VM [Standard_DS3_v2][vm-sizes-general]. O indexador da pesquisa deve ser pelo menos do tamanho [Standard_DS13_v2][vm-sizes-memory]. Para teste, os arquivos de parâmetro para essa arquitetura de referência especificam o tamanho de DS3_v2 menor para a função do Indexador de Pesquisa. Para uma implantação de produção, atualize os arquivos de parâmetro para usar o tamanho DS13 ou maior. Para obter mais informações, confira [Requisitos de hardware e software para o SharePoint Server 2016][sharepoint-reqs]. 
+
+Para VMs do SQL Server, é recomendável um mínimo de 4 núcleos e 8 GB de RAM. Os arquivos de parâmetro para essa arquitetura de referência especificam o tamanho de DS3_v2. Para uma implantação de produção, talvez seja necessário especificar um tamanho maior de VM. Para obter mais informações, confira [Configuração e planejamento de capacidade de armazenamento e do SQL Server (SharePoint Server)](/sharepoint/administration/storage-and-sql-server-capacity-planning-and-configuration#estimate-memory-requirements). 
  
-### <a name="nsg-recommendations"></a>Recomendações do NSG
+### <a name="nsg-recommendations"></a>Recomendações de NSG
 
 É recomendável ter um NSG para cada sub-rede que contém máquinas virtuais, para permitir o isolamento de sub-rede. Se você quiser configurar o isolamento de sub-rede, adicione regras NSG que definem o tráfego de entrada ou saída permitido ou negado para cada sub-rede. Para obter mais informações, consulte [Filtrar o tráfego de rede com grupos de segurança de rede][virtual-networks-nsg]. 
 
@@ -109,18 +111,12 @@ Antes de configurar o farm do SharePoint, verifique se você tem uma conta de se
 - Conta de superusuário do cache
 - Conta de superleitor do cache
 
-Para todas as funções, exceto o indexador da pesquisa, é recomendável usar o tamanho de VM [Standard_DS3_v2][vm-sizes-general]. O indexador da pesquisa deve ser pelo menos do tamanho [Standard_DS13_v2][vm-sizes-memory]. 
-
-> [!NOTE]
-> O modelo do Resource Manager para esta arquitetura de referência usa o menor tamanho DS3 para o indexador de pesquisa, para fins de teste a implantação. Para uma implantação de produção, use o tamanho DS13 ou maior. 
-
-Para cargas de trabalho de produção, consulte [Requisitos de hardware e software para o SharePoint Server 2016][sharepoint-reqs]. 
-
 Para atender ao requisito de suporte para a taxa de transferência de disco de 200 MB por segundo mínimo, certifique-se de planejar a arquitetura de pesquisa. Consulte [Planejar a arquitetura de pesquisa no SharePoint Server 2013][sharepoint-search]. Siga também as diretrizes em [Melhores práticas para rastreamento no SharePoint Server 2016][sharepoint-crawling].
 
 Além disso, armazene os dados do componente de pesquisa em um volume de armazenamento separado ou partição com alto desempenho. Para reduzir a carga e melhorar a taxa de transferência, configure as contas de usuário de cache do objeto, que são necessárias nesta arquitetura. Dividir os arquivos do sistema operacional Windows Server, arquivos de programa do SharePoint Server 2016 e logs de diagnóstico em três partições ou volumes de armazenamento separados com desempenho normal. 
 
 Para obter mais informações sobre essas recomendações, consulte [Contas de serviço e administrativa da implantação inicial no SharePoint Server 2016][sharepoint-accounts].
+
 
 ### <a name="hybrid-workloads"></a>Cargas de trabalho híbridas
 
@@ -183,7 +179,7 @@ Os arquivos de parâmetros de modelo se referem a esses nomes e, portanto, se vo
 
 Os arquivos de parâmetro incluem uma senha embutida em código em vários locais. Altere esses valores antes de fazer a implantação.
 
-### <a name="prerequisites"></a>pré-requisitos
+### <a name="prerequisites"></a>Pré-requisitos
 
 [!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 
