@@ -3,12 +3,12 @@ title: Executar o aplicativo Surveys
 description: Como executar o aplicativo de exemplo Surveys localmente
 author: MikeWasson
 ms:date: 07/21/2017
-ms.openlocfilehash: 28d976374e5d6dbad434873eef149704f26a1f3f
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: d4fa8122794740e6935293147d999b26d9485d90
+ms.sourcegitcommit: c704d5d51c8f9bbab26465941ddcf267040a8459
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30848675"
+ms.lasthandoff: 07/24/2018
+ms.locfileid: "39229092"
 ---
 # <a name="run-the-surveys-application"></a>Executar o aplicativo Surveys
 
@@ -23,7 +23,7 @@ Aqui está um resumo das etapas:
 5. Executar o aplicativo e inscrever um novo locatário.
 6. Adicione funções de aplicativo aos usuários.
 
-## <a name="prerequisites"></a>pré-requisitos
+## <a name="prerequisites"></a>Pré-requisitos
 -   [Visual Studio 2017][VS2017]
 -   Conta do [Microsoft Azure](https://azure.microsoft.com)
 
@@ -35,7 +35,7 @@ Nesta etapa, você criará um diretório do Azure AD para Tailspin.
 
 1. Faça logon no [Portal do Azure][portal].
 
-2. Clique em **Novo** > **Segurança + Identidade** > **Azure Active Directory**.
+2. Clique em **+ Criar um Recurso** > **Identidade** > **Azure Active Directory**.
 
 3. Digite `Tailspin` para o nome da organização e insira um nome de domínio. O nome de domínio terá o formato `xxxx.onmicrosoft.com` e deverá ser globalmente exclusivo. 
 
@@ -67,7 +67,7 @@ Para completar o cenário de ponta a ponta, você precisará de um segundo diret
 
 6. Na folha **Registros do aplicativo**, selecione o novo aplicativo **Surveys.WebAPI**.
  
-7. Clique em **Propriedades**.
+7. Em seguida, clique em **Configurações** > **Propriedades**.
 
 8. Na caixa de edição **URI da ID do aplicativo**, digite `https://<domain>/surveys.webapi`, em que `<domain>` é o nome de domínio do diretório. Por exemplo: `https://tailspin.onmicrosoft.com/surveys.webapi`
 
@@ -188,13 +188,13 @@ Agora, repita as mesmas etapas para o aplicativo Surveys, mas não adicione uma 
 
 O aplicativo Surveys usa Redis para armazenar em cache tokens de acesso OAuth 2. Para criar o cache:
 
-1.  Vá para [Portal do Azure](https://portal.azure.com) e clique em **Novo** > **Bancos de Dados** > **Cache Redis**.
+1.  Vá para [Portal do Azure](https://portal.azure.com) e clique em **+ Criar um Recurso** > **Bancos de dados** > **Cache Redis**.
 
 2.  Preencha as informações necessárias, incluindo o nome DNS, o grupo de recursos, o local e o tipo de preço. Você pode criar um novo grupo de recursos ou usar um grupo de recursos existente.
 
 3. Clique em **Criar**.
 
-4. Depois que o cache de Resis é criado, navegue até o recurso no portal.
+4. Depois que o cache Redis é criado, navegue até o recurso no portal.
 
 5. Clique em **Chaves de acesso** e copie a chave primária.
 

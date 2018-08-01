@@ -2,12 +2,12 @@
 title: 'Adoção do Azure: intermediário'
 description: Descreve o nível intermediário de conhecimento de que uma empresa precisa para adotar o Azure
 author: petertay
-ms.openlocfilehash: 227d9558647ed8076b2832d95e192f2f0c43b9db
-ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
+ms.openlocfilehash: a1f93616f5f1ecf4f395ce39bbb037ef6ab5991b
+ms.sourcegitcommit: c704d5d51c8f9bbab26465941ddcf267040a8459
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 06/19/2018
-ms.locfileid: "36206354"
+ms.lasthandoff: 07/24/2018
+ms.locfileid: "39229228"
 ---
 # <a name="azure-cloud-adoption-guide-intermediate-overview"></a>Guia de adoção do Azure Cloud: visão geral intermediária
 
@@ -27,7 +27,7 @@ O público para este estágio do guia é composto pelas seguintes personas dentr
 
 No estágio de adoção básico, você obteve algumas noções básicas sobre aspectos internos do Azure e como os recursos são criados, lidos, atualizados e excluídos. Você também aprendeu sobre identidade e que o Azure só confia no Azure Active Directory (AD) para autenticar e autorizar os usuários que precisam de acesso a esses recursos.
 
-Você também começou a aprender como configurar as ferramentas de administração do Azure para gerenciar o uso de recursos do Azure pela organização. No estágio fundamental, examinamos como governar o acesso de uma única equipe aos recursos necessários para implantar uma carga de trabalho simples. Na realidade, sua organização vai ser composta de várias equipes trabalhando simultaneamente em várias cargas de trabalho. 
+Você também começou a aprender como configurar as ferramentas de administração do Azure para gerenciar o uso de recursos do Azure pela organização. Examinamos como governar o acesso de uma única equipe aos recursos necessários para implantar uma carga de trabalho simples. Na realidade, sua organização vai ser composta de várias equipes trabalhando simultaneamente em várias cargas de trabalho. 
 
 Antes de começar, vamos dar uma olhada no que o termo **carga de trabalho** realmente significa. É um termo que normalmente é entendido para definir uma unidade arbitrária de recursos, como um aplicativo ou serviço. Podemos pensar em uma carga de trabalho em termos de artefatos de código que são implantados em um servidor, bem como quaisquer outros serviços, como um banco de dados, que sejam necessários. Esta é uma definição útil para um aplicativo ou serviço local, mas na nuvem precisamos expandi-lo. 
 

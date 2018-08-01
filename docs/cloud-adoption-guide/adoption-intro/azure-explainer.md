@@ -1,15 +1,15 @@
 ---
-title: 'Explicador: como funciona o Azure?'
-description: Explica o funcionamento interno do Azure
+title: Como funciona o Azure?
+description: Explicação sobre o funcionamento interno do Azure
 author: petertay
-ms.openlocfilehash: 88514ba01efabe38a1b92d135321c2e44cef004e
-ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
+ms.openlocfilehash: bf301a05d69ed66aa03727dde3968477c2337790
+ms.sourcegitcommit: c704d5d51c8f9bbab26465941ddcf267040a8459
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 06/19/2018
-ms.locfileid: "36206456"
+ms.lasthandoff: 07/24/2018
+ms.locfileid: "39228959"
 ---
-# <a name="explainer-how-does-azure-work"></a>Explicador: como funciona o Azure?
+# <a name="how-does-azure-work"></a>Como funciona o Azure?
 
 O Azure é a plataforma de nuvem pública da Microsoft. O Azure oferece uma grande coleção de serviços, incluindo PaaS (plataforma como serviço), IaaS (infraestrutura como serviço), DBaaS (banco de dados como serviço) e muitos outros. Mas o que exatamente é o Azure e como ele funciona?
 
@@ -31,7 +31,7 @@ Portanto, em termos simples, o Azure é uma grande coleção de servidores e har
 
 ## <a name="next-steps"></a>Próximas etapas
 
-* Agora que você entende o funcionamento interno do Azure, saiba mais sobre a [governança de acesso de recursos](governance-explainer.md). Em seguida, passe para a primeira etapa de adoção do Azure, que é [entender a identidade digital no Azure](tenant-explainer.md). Depois de concluir esta etapa, você está pronto para [criar seu primeiro usuário no Azure AD][docs-add-users-to-aad].
+* Agora que você entende o funcionamento interno do Azure, saiba mais sobre a [governança de acesso de recursos](governance-explainer.md). 
 
 <!-- Links -->
 

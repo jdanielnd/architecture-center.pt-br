@@ -1,17 +1,17 @@
 ---
-title: 'Explicação: o que é a governança de nuvem?'
-description: Explica o conceito de governança de recursos para o Azure e a nuvem
+title: O que é a governança de nuvem?
+description: Explicação sobre o conceito de governança de acesso a recursos no Azure
 author: petertay
-ms.openlocfilehash: 3404beaa719177ee7638feed8a8442b5c3b455c6
-ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
+ms.openlocfilehash: 3338ed5652296c5cd01277a51be1cb5893320b65
+ms.sourcegitcommit: c704d5d51c8f9bbab26465941ddcf267040a8459
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 06/19/2018
-ms.locfileid: "36206473"
+ms.lasthandoff: 07/24/2018
+ms.locfileid: "39229194"
 ---
-# <a name="explainer-what-is-cloud-resource-governance"></a>Explicação: o que é a governança dos recursos da nuvem?
+# <a name="what-is-cloud-resource-governance"></a>O que é a governança dos recursos da nuvem?
 
-Na explicação [Como funciona o Azure?](azure-explainer.md), você aprendeu que o Azure é uma coleção de servidores e hardware de rede que executa software e hardware virtualizado em nome dos usuários. Azure permite o desenvolvimento de sua organização e os departamentos de TI para ser ágil, tornando mais fácil criar, ler, atualizar e excluir recursos conforme necessário.
+Em [Como funciona o Azure?](azure-explainer.md), você aprendeu que o Azure é uma coleção de servidores e hardware de rede que executa software e hardware virtualizado em nome dos usuários. Azure permite o desenvolvimento de sua organização e os departamentos de TI para ser ágil, tornando mais fácil criar, ler, atualizar e excluir recursos conforme necessário.
 
 No entanto, enquanto irrestrito fornecendo acesso a recursos para desenvolvedores pode torná-los muito ágil, também poderá causar consequências não intencionais de custo. Por exemplo, uma equipe de desenvolvimento pode ser aprovada para implantar um conjunto de recursos para teste, mas esquecer de excluí-las quando o teste for concluído. Esses recursos continuarão a gerar custos, embora seu uso não seja mais necessário ou aprovado. 
 
@@ -29,8 +29,4 @@ Ao configurar essas ferramentas, uma consideração importante é o balanceament
 
 ## <a name="next-steps"></a>Próximas etapas
 
-A próxima etapa na adoção do Azure é [entender a identidade digital no Azure](tenant-explainer.md) e [criar seu primeiro usuário no Azure AD][docs-add-users-to-aad].
-
-<!-- Links -->
-
-[docs-add-users-to-aad]: /azure/active-directory/add-users-azure-active-directory?toc=/azure/architecture/cloud-adoption-guide/toc.json
+Agora que você entende o conceito de governança de recursos de nuvem, comece a descobrir mais sobre [como o acesso aos recursos é gerenciado](azure-resource-access.md) no Azure em preparação para aprender [como criar um modelo de governança](governance-how-to.md).

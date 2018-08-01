@@ -2,13 +2,13 @@
 title: Aplicativo de n camadas com SQL Server
 description: Como implementar uma arquitetura multicamadas no Azure, para obter disponibilidade, segurança, escalabilidade e capacidade de gerenciamento.
 author: MikeWasson
-ms.date: 06/23/2018
-ms.openlocfilehash: 7c8184d25cf6b3bd358adc2728329fd3bd08503a
-ms.sourcegitcommit: 58d93e7ac9a6d44d5668a187a6827d7cd4f5a34d
+ms.date: 07/19/2018
+ms.openlocfilehash: 42ba18e9ffef32c6990fbb888cc41e980fb4abea
+ms.sourcegitcommit: c704d5d51c8f9bbab26465941ddcf267040a8459
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/02/2018
-ms.locfileid: "37142294"
+ms.lasthandoff: 07/24/2018
+ms.locfileid: "39229126"
 ---
 # <a name="n-tier-application-with-sql-server"></a>Aplicativo de n camadas com SQL Server
 
@@ -26,6 +26,8 @@ A arquitetura tem os seguintes componentes:
 
 * **Rede Virtual (VNet) e sub-redes.** Cada VM do Azure é implantada em uma VNet que pode ser segmentada em várias sub-redes. Sempre crie uma sub-rede separada para cada camada. 
 
+* **Gateway de aplicativo**. [O Gateway de Aplicativo do Azure](/azure/application-gateway/) é um balanceador de carga de camada 7. Nessa arquitetura, ele roteia as solicitações HTTP para o front-end da web. Gateway de Aplicativo também fornece um [firewall do aplicativo Web](/azure/application-gateway/waf-overview) (WAF) que protege o aplicativo contra vulnerabilidades e explorações comuns. 
+
 * **NSGs.** Use os NSGs [grupos de segurança de rede][nsg] para restringir o tráfego de rede na VNet. Por exemplo, na arquitetura de três camadas mostrada aqui, a camada de banco de dados não aceita o tráfego de front-end da Web, somente da camada comercial e da sub-rede de gerenciamento.
 
 * **Máquinas virtuais**. Para obter recomendações sobre como configurar máquinas virtuais, consulte [Executar uma VM do Windows no Azure](./windows-vm.md) e [Executar uma VM do Linux no Azure](./linux-vm.md).
@@ -34,9 +36,9 @@ A arquitetura tem os seguintes componentes:
 
 * **Conjunto de dimensionamento de VM** (não mostrado). Um [Conjunto de dimensionamento de VM] [ vmss] é uma alternativa ao uso de um conjunto de disponibilidade. Um conjunto de dimensionamento facilita o escalonamento horizontal de VMs em uma camada, seja manual ou automaticamente, com base em regras predefinidas.
 
-* **Balanceadores de carga do Azure.** Os [balanceadores de carga] [ load-balancer] distribuem solicitações de entrada da Internet para as instâncias de VM. Use um [balanceador de carga público][load-balancer-external] para distribuir o tráfego de entrada da Internet para a camada da Web e um [balanceador de carga interno][load-balancer-internal] para distribuir o tráfego de rede da camada da Web para a camada comercial.
+* **Balanceadores de carga.** Use o [Azure Load Balancer] [ load-balancer] para distribuir o tráfego de rede da camada da Web para a camada comercial e da camada comercial para o SQL Server.
 
-* **Endereço IP público**. É necessário ter um endereço IP para que o balanceador de carga possa receber o tráfego da Internet.
+* **Endereço IP público**. É necessário ter um endereço IP público para que aplicativo possa receber o tráfego da Internet.
 
 * **Jumpbox.** Também chamada de um [host bastião]. Uma VM protegida na rede que os administradores usam para se conectar às outras VMs. O jumpbox tem um NSG que permite o tráfego remoto apenas de endereços IP públicos em uma lista segura. O NSG deve permitir o tráfego de RDP (área de trabalho remota).
 
@@ -62,7 +64,7 @@ Crie as sub-redes levando em conta os requisitos de funcionalidade e de seguran�
 
 ### <a name="load-balancers"></a>Balanceadores de carga
 
-Não exponha as VMs diretamente à Internet, concedendo, em vez disso, um endereço IP privado a cada VM. Os clientes se conectam usando o endereço IP do balanceador de carga público.
+Não exponha as VMs diretamente à Internet, concedendo, em vez disso, um endereço IP privado a cada VM. Os clientes se conectam usando o endereço IP público associado com o Gateway de Aplicativo.
 
 Defina as regras do balanceador de carga para direcionar tráfego de rede para as VMs. Por exemplo, para permitir tráfego HTTP, crie uma regra que mapeie a porta 80 da configuração de front-end para a porta 80 no pool de endereços de back-end. Quando um cliente envia uma solicitação HTTP para a porta 80, o balanceador de carga seleciona um endereço IP de back-end usando um [algoritmo de hash][load-balancer-hashing] que inclui o endereço IP de origem. Dessa forma, as solicitações de cliente são distribuídas por todas as VMs.
 
@@ -148,8 +150,6 @@ Se você precisar de disponibilidade mais alta do que a fornecida pelo [SLA do A
 
 Redes virtuais são um limite de isolamento de tráfego no Azure. As VMs em uma VNet não podem se comunicar diretamente com VMs em uma VNet diferente. As VMs na mesma VNet podem se comunicar, a menos que você crie NSGs ([Grupos de Segurança de Rede][nsg]) para restringir o tráfego. Para obter mais informações, consulte [Serviços em nuvem da Microsoft e segurança de rede][network-security].
 
-Para tráfego de entrada da Internet, as regras do balanceador de carga definem qual tráfego pode alcançar o back-end. No entanto, as regras do balanceador de carga não dão suporte a listas de IP de confiança, por isso se você desejar adicionar determinados endereços IP públicos a uma lista de confiança, acrescente um NSG à sub-rede.
-
 Considere adicionar uma NVA (solução de virtualização de rede) para criar uma DMZ entre a Internet e a rede virtual do Azure. NVA é um termo genérico para uma solução de virtualização que pode executar tarefas relacionadas à rede, como firewall, inspeção de pacotes, auditoria e roteamento personalizado. Para obter mais informações, consulte [Implementação de uma DMZ entre o Azure e a Internet][dmz].
 
 Criptografe dados confidenciais em repouso e use o [Azure Key Vault][azure-key-vault] para gerenciar as chaves de criptografia de banco de dados. O Key Vault pode armazenar chaves de criptografia em HSMs (módulos de segurança de hardware). Para mais informações, consulte [Configurar a Integração do Azure Key Vault para o SQL nas VMs do Azure][sql-keyvault]. Também é recomendado para armazenar segredos do aplicativo, como cadeias de caracteres de conexão de banco de dados, no cofre de chaves.
@@ -158,7 +158,7 @@ Criptografe dados confidenciais em repouso e use o [Azure Key Vault][azure-key-v
 
 Uma implantação para essa arquitetura de referência está disponível no [GitHub][github-folder]. Observe que a implantação inteira pode levar até duas horas, que inclui a execução de scripts para configurar o AD DS, o cluster de failover do Windows Server e o grupo de disponibilidade do SQL Server.
 
-### <a name="prerequisites"></a>pré-requisitos
+### <a name="prerequisites"></a>Pré-requisitos
 
 [!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 
@@ -248,10 +248,6 @@ Para obter mais informações sobre a implantação dessa arquitetura de referê
 [chef]: https://www.chef.io/solutions/azure/
 [git]: https://github.com/mspnp/template-building-blocks
 [github-folder]: https://github.com/mspnp/reference-architectures/tree/master/virtual-machines/n-tier-windows
-[lb-external-create]: /azure/load-balancer/load-balancer-get-started-internet-portal
-[lb-internal-create]: /azure/load-balancer/load-balancer-get-started-ilb-arm-portal
-[load-balancer-external]: /azure/load-balancer/load-balancer-internet-overview
-[load-balancer-internal]: /azure/load-balancer/load-balancer-internal-overview
 [nsg]: /azure/virtual-network/virtual-networks-nsg
 [operations-management-suite]: https://www.microsoft.com/server-cloud/operations-management-suite/overview.aspx
 [plan-network]: /azure/virtual-network/virtual-network-vnet-plan-design-arm
@@ -275,7 +271,7 @@ Para obter mais informações sobre a implantação dessa arquitetura de referê
 [0]: ./images/n-tier-sql-server.png "Arquitetura de N camadas usando o Microsoft Azure"
 [resource-manager-overview]: /azure/azure-resource-manager/resource-group-overview 
 [vmss]: /azure/virtual-machine-scale-sets/virtual-machine-scale-sets-overview
-[load-balancer]: /azure/load-balancer/load-balancer-get-started-internet-arm-cli
+[load-balancer]: /azure/load-balancer/
 [load-balancer-hashing]: /azure/load-balancer/load-balancer-overview#load-balancer-features
 [vmss-design]: /azure/virtual-machine-scale-sets/virtual-machine-scale-sets-design-overview
 [subscription-limits]: /azure/azure-subscription-service-limits

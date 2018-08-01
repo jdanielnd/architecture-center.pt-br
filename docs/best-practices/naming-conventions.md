@@ -4,12 +4,12 @@ description: Convenções de nomenclatura para recursos do Azure. Como nomear m�
 author: telmosampaio
 ms.date: 05/18/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: 09bcfa3c0a0c46605f0025adad06f8049f109f1b
-ms.sourcegitcommit: 776b8c1efc662d42273a33de3b82ec69e3cd80c5
+ms.openlocfilehash: 6ad71a5ee39b8f1863c51dae0120dbdc7baf1f76
+ms.sourcegitcommit: c704d5d51c8f9bbab26465941ddcf267040a8459
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/12/2018
-ms.locfileid: "38987726"
+ms.lasthandoff: 07/24/2018
+ms.locfileid: "39229143"
 ---
 # <a name="naming-conventions"></a>Convenções de nomenclatura
 
@@ -119,6 +119,13 @@ Em geral, evite usar caracteres especiais (`-` ou `_`) como o primeiro ou últim
 |Configuração de regras de balanceamento de carga |Load Balancer |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<descriptive context>` |`http` |
 |Gateway de Aplicativo do Azure |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<service or role>-agw` |`profx-agw` |
 |Perfil de Gerenciador de Tráfego |Grupo de recursos |1-63 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen e ponto |`<descriptive context>` |`app1` |
+
+### <a name="containers"></a>Contêineres
+
+| Entidade | Escopo | Comprimento | Capitalização | Caracteres válidos | Padrão sugerido | Exemplo |
+| --- | --- | --- | --- | --- | --- | --- |
+|Registro de Contêiner | Global |5 a 50 |Não diferencia maiúsculas de minúsculas | Alfanumérico |`<service short name>registry` |`app1registry` |
+
 
 ## <a name="organize-resources-with-tags"></a>Organizar recursos com marcas
 

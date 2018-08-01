@@ -3,16 +3,16 @@ title: Renderização de vídeo em 3D no Azure
 description: Executar cargas de trabalho de HPC nativas no Azure usando o serviço de Lote do Azure
 author: adamboeglin
 ms.date: 07/13/2018
-ms.openlocfilehash: b3af0641642d7ec4b022e8c96f51693eeb0adee4
-ms.sourcegitcommit: 71cbef121c40ef36e2d6e3a088cb85c4260599b9
+ms.openlocfilehash: e629e2ba0b9490e534057fee33f7bededa9656af
+ms.sourcegitcommit: c704d5d51c8f9bbab26465941ddcf267040a8459
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/14/2018
-ms.locfileid: "39060997"
+ms.lasthandoff: 07/24/2018
+ms.locfileid: "39229177"
 ---
 # <a name="3d-video-rendering-on-azure"></a>Renderização de vídeo em 3D no Azure
 
-Renderização 3D é um processo demorado que exige uma quantidade significativa de tempo de CPU para ser concluída.  Em um único computador, o processo de geração de um arquivo de vídeo de ativos estáticos pode levar horas ou mesmo dias dependendo do tamanho e da complexidade do vídeo criado.  Muitas empresas compram computadores topo de linha para executar essas tarefas ou investem em grandes farms de renderização para os quais elas podem enviar trabalhos.  No entanto, ao tirar proveito do Lote do Azure, esse poder está disponível para você quando necessário e deixa de estar disponível quando você não precisa dele, tudo isso sem nenhum investimento de capital.
+A renderização 3D é um processo demorado que exige uma quantidade significativa de tempo de CPU para ser concluída.  Em um único computador, o processo de geração de um arquivo de vídeo de ativos estáticos pode levar horas ou mesmo dias dependendo do tamanho e da complexidade do vídeo criado.  Muitas empresas compram computadores topo de linha para executar essas tarefas ou investem em grandes farms de renderização para os quais elas podem enviar trabalhos.  No entanto, ao tirar proveito do Lote do Azure, esse poder está disponível para você quando necessário e deixa de estar disponível quando você não precisa dele, tudo isso sem nenhum investimento de capital.
 
 O Lote oferece uma experiência consistente de gerenciamento e agendamento de trabalhos, quer você opte por nós de computação do Windows Server ou do Linux. Com o Lote, você pode usar os seus aplicativos Windows ou Linux existentes, incluindo AutoDesk Maya e Blender, para executar em trabalhos de renderização de grande escala no Azure.
 

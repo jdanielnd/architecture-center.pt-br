@@ -4,13 +4,12 @@ description: Como criar aplicativos resilientes no Azure, para alta disponibilid
 author: MikeWasson
 ms.date: 05/26/2017
 ms.custom: resiliency
-pnp.series.title: Design for Resiliency
-ms.openlocfilehash: 9a6bd1332ea59923b32379018060403024b15e10
-ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
+ms.openlocfilehash: c32f093da4c47ef655dfca89b0410f063e9fe212
+ms.sourcegitcommit: 2154e93a0a075e1f7425a6eb11fc3f03c1300c23
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/16/2018
-ms.locfileid: "31012630"
+ms.lasthandoff: 07/30/2018
+ms.locfileid: "39352579"
 ---
 # <a name="designing-resilient-applications-for-azure"></a>Desenvolvimento de aplicativos resilientes para o Azure
 
@@ -47,11 +46,11 @@ Resiliência não é um complemento. Ela deve ser criada no sistema e colocada e
 4. **Teste** a implementação simulando falhas e disparando failovers forçados. 
 5. **Implante** o aplicativo em produção usando um processo confiável e reproduzível. 
 6. **Monitore** o aplicativo para detectar falhas. Ao monitorar o sistema, você pode medir a integridade do aplicativo e responder a incidentes, se necessário. 
-7. **Responda** se há incidentes que exijam intervenções manuais.
+7. **Responda** se houver falha que requer intervenções manuais.
 
 No restante deste artigo, vamos abordar cada uma dessas etapas mais detalhadamente.
 
-## <a name="defining-your-resiliency-requirements"></a>Definição dos seus requisitos de resiliência
+## <a name="define-your-availability-requirements"></a>Definir requisitos de disponibilidade
 O planejamento da resiliência começa com os requisitos de negócios. A seguir estão algumas abordagens para pensarmos sobre resiliência sob esses aspectos.
 
 ### <a name="decompose-by-workload"></a>Decompor por carga de trabalho
@@ -140,7 +139,28 @@ Além disso, o failover não é instantâneo e pode resultar em algum tempo de i
 
 O número calculado de SLA é uma linha de base útil, mas ela não informa a história toda sobre a disponibilidade. Geralmente, um aplicativo pode degradar normalmente quando um caminho não crítico falha. Considere um aplicativo que mostra um catálogo de livros. Se o aplicativo não pode recuperar a imagem em miniatura da capa, poderá mostrar uma imagem de espaço reservado. Nesse caso, a falha ao obter a imagem não reduz o tempo de atividade do aplicativo, embora afete a experiência do usuário.  
 
-## <a name="redundancy-and-designing-for-failure"></a>Redundância e a criação pensando em falha
+## <a name="design-for-resiliency"></a>Design para resiliência
+
+Durante a fase de design, você deve executar uma Análise do Modo de Falha (FMA). O objetivo de uma FMA é identificar possíveis pontos de falha e definir como o aplicativo responde a essas falhas.
+
+* Como o aplicativo detectará esse tipo de falha?
+* Como o aplicativo responderá a esse tipo de falha?
+* Como você pode fazer logon e monitorar esse tipo de falha? 
+
+Para obter mais informações sobre o processo FMA, com as recomendações específicas para o Azure, consulte [Orientação de resiliência do Azure: Análise de Falha de Modo][fma].
+
+### <a name="example-of-identifying-failure-modes-and-detection-strategy"></a>Exemplo de identificação de modos de falha e estratégia de detecção
+**Ponto de falha:** chamada para um serviço Web externo/API.
+
+| Modo de falha | Estratégia de detecção |
+| --- | --- |
+| O serviço está indisponível |HTTP 5xx |
+| Limitação |HTTP 429 (Número Excessivo de Solicitações) |
+| Autenticação |HTTP 401 (Não Autorizado) |
+| Resposta lenta |Tempo limite da solicitação atingido |
+
+
+### <a name="redundancy-and-designing-for-failure"></a>Redundância e a criação pensando em falha
 
 Falhas podem variar quanto ao escopo do seu impacto. Algumas falhas de hardware, como um disco com falha, podem afetar um único computador host. Um comutador de rede com falha pode afetar um rack de servidor inteiro. Menos comuns são falhas que interrompem um data center inteiro, tais como uma perda de energia em um data center. Raramente, toda uma região pode se tornar não disponível.
 
@@ -163,94 +183,47 @@ Quando você cria um aplicativo de várias regiões, leve em consideração que 
 | &nbsp; | Conjunto de disponibilidade | Zona de disponibilidade | Região emparelhada |
 |--------|------------------|-------------------|---------------|
 | Escopo da falha | Rack | Datacenter | Região |
-| Roteamento de solicitação | Balanceador de carga | Load Balancer entre zonas | Gerenciador de Tráfego |
+| Roteamento de solicitação | Load Balancer | Load Balancer entre zonas | Gerenciador de Tráfego |
 | Latência da rede | Muito baixa | Baixo | Média a alta |
 | Rede virtual  | VNET | VNET | Emparelhamento VNET entre regiões |
 
-## <a name="designing-for-resiliency"></a>Design para resiliência
-Durante a fase de design, você deve executar uma Análise do Modo de Falha (FMA). O objetivo de uma FMA é identificar possíveis pontos de falha e definir como o aplicativo responde a essas falhas.
-
-* Como o aplicativo detectará esse tipo de falha?
-* Como o aplicativo responderá a esse tipo de falha?
-* Como você pode fazer logon e monitorar esse tipo de falha? 
-
-Para obter mais informações sobre o processo FMA, com as recomendações específicas para o Azure, consulte [Orientação de resiliência do Azure: Análise de Falha de Modo][fma].
-
-### <a name="example-of-identifying-failure-modes-and-detection-strategy"></a>Exemplo de identificação de modos de falha e estratégia de detecção
-**Ponto de falha:** chamada para um serviço Web externo/API.
-
-| Modo de falha | Estratégia de detecção |
-| --- | --- |
-| O serviço está indisponível |HTTP 5xx |
-| Limitação |HTTP 429 (Número Excessivo de Solicitações) |
-| Autenticação |HTTP 401 (Não Autorizado) |
-| Resposta lenta |Tempo limite da solicitação atingido |
-
-## <a name="resiliency-strategies"></a>Estratégias de resiliência
+## <a name="implement-resiliency-strategies"></a>Implementar estratégias de resiliência
 Esta seção traz uma pesquisa de algumas estratégias comuns de resiliência. A maioria delas não se limita a uma tecnologia específica. As descrições nesta seção resumem a ideia geral de cada técnica, com links para leituras adicionais.
 
-### <a name="retry-transient-failures"></a>Repetição de falhas transitórias
-As falhas transitórias podem ser causadas por perda momentânea de conectividade de rede, interrupção na conexão com o banco de dados ou tempo limite atingido quando um serviço está ocupado. Frequentemente, uma falha temporária pode ser resolvida repetindo-se a solicitação. Em muitos serviços do Azure, o SDK do cliente implementa tentativas automáticas de forma transparente para o chamador. Consulte [Orientação específica sobre repetição de serviço][retry-service-specific guidance].
+**Repita as falhas temporárias**. As falhas transitórias podem ser causadas por perda momentânea de conectividade de rede, interrupção na conexão com o banco de dados ou tempo limite atingido quando um serviço está ocupado. Frequentemente, uma falha temporária pode ser resolvida repetindo-se a solicitação. Em muitos serviços do Azure, o SDK do cliente implementa tentativas automáticas de forma transparente para o chamador. Consulte [Orientação específica sobre repetição de serviço][retry-service-specific guidance].
 
-Cada tentativa de repetição é adicionada à latência total. Além disso, um número excessivo de solicitações com falha pode causar afunilamento, pois as solicitações pendentes se acumulam na fila. Essas solicitações bloqueadas podem reter recursos críticos do sistema, como memória, threads, conexões de banco de dados e outros, e provocar falhas em cascata. Para evitar isso, aumente o atraso entre as tentativas de repetição e limite o número total de solicitações com falha.
+Cada tentativa de repetição é adicionada à latência total. Além disso, um número excessivo de solicitações com falha pode causar afunilamento, pois as solicitações pendentes se acumulam na fila. Essas solicitações bloqueadas podem reter recursos críticos do sistema, como memória, threads, conexões de banco de dados e outros, e provocar falhas em cascata. Para evitar isso, aumente o atraso entre as tentativas de repetição e limite o número total de solicitações com falha. 
 
-![SLA composto](./images/retry.png)
+![](./images/retry.png)
 
-Para obter mais informações, consulte [Padrão de repetição][retry-pattern].
-
-### <a name="load-balance-across-instances"></a>Balanceamento de carga entre instâncias
-Para ter escalabilidade, um aplicativo em nuvem deve ser capaz de se expandir com a adição de mais instâncias. Essa abordagem também aumenta a resiliência, porque as instâncias não íntegras podem ser removidas da rotação.  
-
-Por exemplo: 
+**Balanceie a carga entre as instâncias**. Para ter escalabilidade, um aplicativo em nuvem deve ser capaz de se expandir com a adição de mais instâncias. Essa abordagem também aumenta a resiliência, porque as instâncias não íntegras podem ser removidas da rotação. Por exemplo: 
 
 * Coloque duas ou mais VMs por trás de um balanceador de carga. O balanceador de carga distribui o tráfego para todas as VMs. Consulte [Executar VMs com balanceamento de carga para escalabilidade e disponibilidade][ra-multi-vm].
 * Escale um aplicativo do Serviço de Aplicativo do Azure horizontalmente para várias instâncias. O Serviço de Aplicativo equilibra automaticamente a carga entre as instâncias. Consulte [Aplicativo Web básico][ra-basic-web].
 * Use o [Gerenciador de Tráfego do Azure][tm] para distribuir o tráfego em um conjunto de pontos de extremidade.
 
-### <a name="replicate-data"></a>Replicar dados
-A replicação de dados é uma estratégia geral para manipular falhas não transitórias em um armazenamento de dados. Muitas tecnologias de armazenamento fornecem replicação interna, inclusive o Banco de Dados SQL do Azure, Cosmos DB e Apache Cassandra.  
-
-É importante considerar os caminhos de leitura e gravação. Dependendo da tecnologia de armazenamento, você pode ter várias réplicas graváveis, ou uma só réplica gravável e várias somente leitura. 
+**Replique os dados**. A replicação de dados é uma estratégia geral para manipular falhas não transitórias em um armazenamento de dados. Muitas tecnologias de armazenamento fornecem replicação interna, inclusive o Banco de Dados SQL do Azure, Cosmos DB e Apache Cassandra. É importante considerar os caminhos de leitura e gravação. Dependendo da tecnologia de armazenamento, você pode ter várias réplicas graváveis, ou uma só réplica gravável e várias somente leitura. 
 
 Para maximizar a disponibilidade, as réplicas podem ser colocadas em várias regiões. No entanto, isso aumenta a latência na replicação de dados. Normalmente, a replicação entre regiões é feita de forma assíncrona, o que implica um modelo de consistência eventual e a possível perda de dados, se uma réplica falhar. 
 
-### <a name="degrade-gracefully"></a>Degradar normalmente
-Se um serviço falhar e não houver caminho de failover, o aplicativo pode conseguir degradar o serviço normalmente e continuar fornecendo uma experiência de usuário aceitável. Por exemplo: 
+**Degradar normalmente**. Se um serviço falhar e não houver caminho de failover, o aplicativo pode conseguir degradar o serviço normalmente e continuar fornecendo uma experiência de usuário aceitável. Por exemplo: 
 
 * Colocar um item de trabalho em uma fila a ser tratada mais tarde. 
 * Retornar um valor estimado.
 * Usar dados armazenados em cache localmente. 
 * Exibir uma mensagem de erro para o usuário. (Essa opção é melhor do que o aplicativo parar de responder às solicitações.)
 
-### <a name="throttle-high-volume-users"></a>Limitar os usuários de alto volume
-Às vezes, um pequeno número de usuários cria uma carga excessiva. Isso pode afetar os outros, reduzindo a disponibilidade geral do aplicativo.
+**Limite os usuários de alto volume**. Às vezes, um pequeno número de usuários cria uma carga excessiva. Isso pode afetar os outros, reduzindo a disponibilidade geral do aplicativo.
 
 Quando um único cliente faz um número excessivo de solicitações, o aplicativo pode limitá-lo por um determinado período. Durante o período de limitação, o aplicativo recusa algumas ou todas as solicitações desse cliente (dependendo da estratégia exata de limitação). A extensão da limitação pode depender da camada de serviço do cliente. 
 
-A limitação não significa necessariamente que o cliente estava mal-intencionado, mas apenas que ele excedeu sua cota de serviço. Pode acontecer que o consumidor exceda sua cota frequentemente, ou que seu comportamento seja, de alguma forma, incorreto. Nesse caso, você pode ser mais enérgico e bloquear esse usuário. Normalmente, isso é feito bloqueando-se uma chave de API ou um intervalo de endereços IP.
+A limitação não significa necessariamente que o cliente estava mal-intencionado, mas apenas que ele excedeu sua cota de serviço. Pode acontecer que o consumidor exceda sua cota frequentemente, ou que seu comportamento seja, de alguma forma, incorreto. Nesse caso, você pode ser mais enérgico e bloquear esse usuário. Normalmente, isso é feito bloqueando-se uma chave de API ou um intervalo de endereços IP. Para obter mais informações, consulte [Padrão de limitação][throttling-pattern].
 
-Para obter mais informações, consulte [Padrão de limitação][throttling-pattern].
+**Use um disjuntor**. O padrão [Disjuntor][circuit-breaker-pattern] pode impedir que um aplicativo tente repetidamente uma operação com probabilidade de falha. O disjuntor encapsula as chamadas em um serviço e controla o número de falhas recentes. Se a contagem de falhas exceder um limite, o disjuntor será iniciado retornando um código de erro sem chamar o serviço. Isso fornece ao serviço um tempo de recuperação. 
 
-### <a name="use-a-circuit-breaker"></a>Uso do disjuntor
-O uso do padrão de Disjuntor pode impedir que um aplicativo tente várias vezes repetir uma operação que provavelmente falhará. O princípio é semelhante ao do disjuntor físico, ou seja, um comutador que interrompe o fluxo de corrente quando um circuito está sobrecarregado.
+**Use o nivelamento de carga para suavizar os picos no tráfego**. Os aplicativos podem enfrentar picos repentinos no tráfego e sobrecarregar o serviços de back-end. Se um serviço de back-end não conseguir responder às solicitações rápido o suficiente, pode provocar um enfileiramento de solicitações (backup) ou fazer com que o serviço limite o aplicativo. Para evitar isso, você pode usar uma fila como buffer. Quando há um novo item de trabalho, em vez de chamar o serviço de back-end imediatamente, o aplicativo enfileira um item de trabalho para que seja executado de forma assíncrona. A fila atua como buffer e diminui os picos na carga. Para obter mais informações, consulte [Padrão de nivelamento de carga baseado em fila][load-leveling-pattern].
 
-O disjuntor encapsula chamadas para um serviço. Ele tem três estados:
-
-* **Fechado**. Este é o estado normal. O disjuntor envia solicitações ao serviço e um contador acompanha o número de falhas recentes. Se essa contagem exceder um limite em determinado período, o disjuntor alterna para o estado Aberto. 
-* **Aberto**. Nesse estado, o disjuntor cancela imediatamente todas as solicitações, sem chamar o serviço. O aplicativo deve usar um caminho de mitigação, como ler dados em uma réplica ou, simplesmente, retornar um erro para o usuário. Quando o disjuntor muda para o estado Aberto, aciona um temporizador. Quando esse temporizador expira, o disjuntor alterna para o estado Entreaberto.
-* **Entreaberto**. Nesse estado, o disjuntor permite a transmissão de um número limitado de solicitações ao serviço. Se elas forem bem-sucedidas, o serviço deverá ser recuperado e o disjuntor mudará para o estado Fechado. Se isso não ocorrer, ele voltará ao estado Aberto. O estado Entreaberto impede que um serviço de recuperação receba uma sobrecarga repentina de solicitações.
-
-Para obter mais informações, consulte [Padrão de disjuntor][circuit-breaker-pattern].
-
-### <a name="use-load-leveling-to-smooth-out-spikes-in-traffic"></a>Usar o nivelamento de carga para suavizar picos no tráfego
-Os aplicativos podem enfrentar picos repentinos no tráfego e sobrecarregar o serviços de back-end. Se um serviço de back-end não conseguir responder às solicitações rápido o suficiente, pode provocar um enfileiramento de solicitações (backup) ou fazer com que o serviço limite o aplicativo.
-
-Para evitar isso, você pode usar uma fila como buffer. Quando há um novo item de trabalho, em vez de chamar o serviço de back-end imediatamente, o aplicativo enfileira um item de trabalho para que seja executado de forma assíncrona. A fila atua como buffer e diminui os picos na carga. 
-
-Para obter mais informações, consulte [Padrão de nivelamento de carga baseado em fila][load-leveling-pattern].
-
-### <a name="isolate-critical-resources"></a>Isolar recursos críticos
-Às vezes, as falhas em um subsistema podem ocorrer em cascata, causando falhas em outras partes do aplicativo. Isso pode acontecer se uma falha impedir que alguns recursos, como threads ou soquetes, sejam liberados em tempo hábil, exaurindo recursos. 
+**Isole os recursos críticos**. Às vezes, as falhas em um subsistema podem ocorrer em cascata, causando falhas em outras partes do aplicativo. Isso pode acontecer se uma falha impedir que alguns recursos, como threads ou soquetes, sejam liberados em tempo hábil, exaurindo recursos. 
 
 Para evitar isso, você pode particionar um sistema em grupos isolados, para que a falha de uma partição não paralise todo o sistema. Essa técnica também é conhecida como padrão de Bulkhead.
 
@@ -260,19 +233,13 @@ Exemplos:
 * Usar pools de threads separados, para isolar as chamadas para diferentes serviços. Isso ajuda a evitar falhas em cascata, se houver falha em um dos serviços. Para ver um exemplo, consulte a [biblioteca Hystrix][hystrix] da Netflix.
 * Usar [contêineres][containers] para limitar os recursos disponíveis a um determinado subsistema. 
 
-![SLA composto](./images/bulkhead.png)
+![](./images/bulkhead.png)
 
-### <a name="apply-compensating-transactions"></a>Aplicar transações de compensação
-Uma transação de compensação é uma operação que desfaz os efeitos de outra transação concluída.
-
-Em um sistema distribuído, pode ser muito difícil obter uma consistência transacional sólida. As transações de compensação são uma forma de obter consistência usando uma série de transações individuais menores, que podem ser desfeitas em cada etapa.
+**Aplique transações de compensação**. Um [transação de compensação][compensating-transaction-pattern] é uma transação que desfaz os efeitos de outra transação concluída. Em um sistema distribuído, pode ser muito difícil obter uma consistência transacional sólida. As transações de compensação são uma forma de obter consistência usando uma série de transações individuais menores, que podem ser desfeitas em cada etapa.
 
 Por exemplo, para fazer uma viagem, um cliente pode precisar reservar um voo, acomodações de hotel e um carro. Se alguma dessas etapas falhar, toda a operação falhará. Em vez de tentar usar uma única transação distribuída em toda a operação, você pode definir uma transação de compensação para cada etapa. Por exemplo, para desfazer uma reserva de carro, cancelar essa reserva. Para concluir toda a operação, um coordenador executa cada etapa. Se alguma delas falhar, o coordenador aplica transações de compensação para desfazer todas as etapas concluídas. 
 
-Para obter mais informações, consulte [Padrão de transação de compensação][compensating-transaction-pattern]. 
-
-
-## <a name="testing-for-resiliency"></a>Teste de resiliência
+## <a name="test-for-resiliency"></a>Testar resiliência
 Em geral, não se pode testar a resiliência da mesma maneira que a funcionalidade do aplicativo (executando testes unitários e outros). Em vez disso, deve-se testar a execução da carga de trabalho de ponta a ponta sob condições de falha intermitentes.
 
 O teste é um processo iterativo. Teste o aplicativo, avalie o resultado, analise e resolva as falhas resultantes, e repita o processo.
@@ -294,12 +261,12 @@ Essa é outra razão pela qual é importante analisar possíveis pontos de falha
 
 **Teste de carga**. Faça testes de carga no aplicativo usando uma ferramenta como o [Visual Studio Team Services][vsts] ou o [Apache JMeter][jmeter]. O teste de carga é crucial para identificar falhas que só ocorrem sob condições de carga, como um banco de dados de back-end sobrecarregado ou limitações de serviço. Teste a carga de pico usando dados de produção ou sintéticos, desde que estes se aproximem o máximo possível dos dados de produção. O objetivo é observar como o aplicativo se comporta sob condições do mundo real.   
 
-## <a name="resilient-deployment"></a>Implantação resiliente
+## <a name="deploy-using-reliable-processes"></a>Implantar usando processos confiáveis
 Quando um aplicativo é implantado para produção, as atualizações são uma possível fonte de erros. Na pior das hipóteses, uma atualização corrompida pode causar inatividade. Para evitar isso, o processo de implantação deve ser repetível e previsível. A implantação inclui etapas de provisionamento de recursos do Azure, implantação do código do aplicativo e aplicação de definições de configuração. Uma atualização pode envolver todas ou parte dessas três. 
 
 O ponto fundamental é que implantações manuais são propensas a erro. Por isso, é recomendável um processo idempotente automatizado, que você pode executar sob demanda e, caso haja alguma falha, executar novamente. 
 
-* Use modelos do Resource Manager para automatizar o provisionamento de recursos do Azure.
+* Use modelos do Azure Resource Manager para automatizar o provisionamento de recursos do Azure.
 * Use o [Azure Automation Desired State Configuration][dsc] (DSC) para configurar VMs.
 * Use um processo de implantação automática para o código do aplicativo.
 
@@ -315,7 +282,7 @@ Outra questão é como lançar uma atualização do aplicativo. Recomendamos té
 
 Qualquer que seja a abordagem, certifique-se de poder reverter para a última implantação íntegra, caso a nova versão não funcione. Além disso, se houver erros, os logs de aplicativo devem indicar a versão causadora do erro. 
 
-## <a name="monitoring-and-diagnostics"></a>Monitoramento e diagnóstico
+## <a name="monitor-to-detect-failures"></a>Monitorar para detectar falhas
 O monitoramento e o diagnóstico são cruciais para garantir a resiliência. Se algo falhar, você precisa saber o que falhou, e também ter informações sobre a causa da falha. 
 
 O monitoramento de um sistema distribuído em larga escala representa um desafio significativo. Pense em um aplicativo executado em algumas dezenas de VMs; &mdash;não é prático fazer logon em cada uma delas e examinar seus arquivos de log para tentar solucionar um problema. Além disso, o número de instâncias de VM provavelmente não é estático. As VMs são adicionadas e removidas com a expansão e retração do aplicativo, e, ocasionalmente, uma instância pode falhar e precisar ser provisionada novamente. Além disso, um aplicativo de nuvem típico pode usar vários armazenamentos de dados (armazenamento do Azure, Banco de Dados SQL, Cosmos DB, cache Redis) e uma única ação do usuário pode abranger vários subsistemas. 
@@ -341,7 +308,7 @@ Os logs de aplicativo são uma fonte importante de dados de diagnóstico. Alguma
 
 Para obter mais informações sobre monitoramento e diagnóstico, consulte [Diretrizes de monitoramento e diagnóstico][monitoring-guidance].
 
-## <a name="manual-failure-responses"></a>Respostas de falha manual
+## <a name="respond-to-failures"></a>Responder a falhas
 As seções anteriores se concentraram em estratégias de recuperação automatizada, que são essenciais para a alta disponibilidade. No entanto, às vezes, a intervenção manual, é necessária.
 
 * **Alertas**. Monitore seu aplicativo, observando sinais de aviso que podem exigir intervenção proativa. Por exemplo, se você vir que o Banco de Dados SQL ou o Cosmos DB limitam repetidamente o seu aplicativo, talvez seja preciso aumentar a capacidade do banco de dados ou otimizar suas consultas. Neste exemplo, mesmo que o aplicativo consiga manipular esses erros de limitação de forma transparente, sua telemetria deve gerar um alerta, para que você possa acompanhar.  
