@@ -4,12 +4,12 @@ description: Lista de verificação que fornece orientação para questões de r
 author: petertaylor9999
 ms.date: 01/10/2018
 ms.custom: resiliency, checklist
-ms.openlocfilehash: ca4bf77c9348f6c656348d9cd61d3a1241d69ba8
-ms.sourcegitcommit: 2123c25b1a0b5501ff1887f98030787191cf6994
+ms.openlocfilehash: 883424d5d3535f822cdba61ecb9520ce05f75ec7
+ms.sourcegitcommit: 2154e93a0a075e1f7425a6eb11fc3f03c1300c23
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/08/2018
-ms.locfileid: "29782607"
+ms.lasthandoff: 07/30/2018
+ms.locfileid: "39352637"
 ---
 # <a name="resiliency-checklist"></a>Lista de verificação de resiliência
 
@@ -17,7 +17,7 @@ Resiliência é a capacidade de um sistema de se recuperar de falhas e continuar
 
 ## <a name="requirements"></a>Requisitos
 
-**Defina os requisitos de disponibilidade do seu cliente.** O cliente terá requisitos de disponibilidade para os componentes em seu aplicativo e isso afetará o design do seu aplicativo. Obtenha o contrato do cliente para os destinos de disponibilidade de cada parte do seu aplicativo, caso contrário, seu design poderá não atender às expectativas do cliente. Para obter mais informações, consulte [Definição dos seus requisitos de resiliência](../resiliency/index.md#defining-your-resiliency-requirements).
+**Defina os requisitos de disponibilidade do seu cliente.** O cliente terá requisitos de disponibilidade para os componentes em seu aplicativo e isso afetará o design do seu aplicativo. Obtenha o contrato do cliente para os destinos de disponibilidade de cada parte do seu aplicativo, caso contrário, seu design poderá não atender às expectativas do cliente. Para obter mais informações, consulte [Desenvolvimento de aplicativos resilientes para o Azure](../resiliency/index.md).
 
 ## <a name="application-design"></a>Design do aplicativo
 
@@ -58,7 +58,7 @@ Resiliência é a capacidade de um sistema de se recuperar de falhas e continuar
 
 **verifique se qualquer serviço de terceiros que você consome oferece um SLA.** Se seu aplicativo depende de um serviço de terceiros mas o terceiro não fornece nenhuma garantia de disponibilidade na forma de um SLA, a disponibilidade do aplicativo também não pode ser garantida. A qualidade do SLA é medida de acordo com o componente menos disponível do aplicativo.
 
-**Implemente padrões de resiliência para operações remotas quando apropriado.** Se seu aplicativo depende da comunicação entre serviços remotos, siga os padrões de design para lidar com falhas transitórias, assim como [Padrão de Repetição][retry-pattern] e [Padrão de Disjuntor][circuit-breaker]. Para obter mais informações, consulte [Estratégias de resiliência](../resiliency/index.md#resiliency-strategies).
+**Implemente padrões de resiliência para operações remotas quando apropriado.** Se seu aplicativo depende da comunicação entre serviços remotos, siga os [padrões de design](../patterns/category/resiliency.md) para lidar com falhas transitórias, assim como [Padrão de Repetição][retry-pattern] e [Padrão de Disjuntor][circuit-breaker]. 
 
 **Implementar operações assíncronas sempre que possível.** Operações síncronas podem monopolizar os recursos e bloquear outras operações enquanto o chamador aguarda a conclusão do processo. Crie cada parte do seu aplicativo para permitir operações assíncronas sempre que possível. Para obter mais informações sobre como implementar a programação assíncrona em C#, consulte [Programação assíncrona com async e await][asynchronous-c-sharp].
 
