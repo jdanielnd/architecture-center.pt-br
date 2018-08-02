@@ -3,12 +3,12 @@ title: Pipeline de CI/CD para cargas de trabalho baseados em contêiner
 description: Cenário comprovado para a criação de um pipeline DevOps para um aplicativo Web Node.js que usa Jenkins, Registro de Contêiner do Azure, Serviço de Kubernetes do Azure, Cosmos DB e Grafana.
 author: iainfoulds
 ms.date: 07/05/2018
-ms.openlocfilehash: d9f6571234a0c3e67a233cfda1a37f6fb32929a3
-ms.sourcegitcommit: 71cbef121c40ef36e2d6e3a088cb85c4260599b9
+ms.openlocfilehash: dceb4ad3c34ec43a54d802772f5817cacdd3929c
+ms.sourcegitcommit: 8b5fc0d0d735793b87677610b747f54301dcb014
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/14/2018
-ms.locfileid: "39060754"
+ms.lasthandoff: 07/29/2018
+ms.locfileid: "39334208"
 ---
 # <a name="cicd-pipeline-for-container-based-workloads"></a>Pipeline de CI/CD para cargas de trabalho baseados em contêiner
 
@@ -119,7 +119,7 @@ Pode levar 15 a 20 minutos para a implantação ser concluída.
 
 ## <a name="pricing"></a>Preços
 
-Para explorar o custo de executar esse cenário, todos os serviços são pré-configurados na calculadora de custos. Para ver como o preço seria alterado em seu caso de uso específico, altere as variáveis apropriadas de acordo com o tráfego esperado. corresponde ao tráfego esperado.
+Para explorar o custo de executar esse cenário, todos os serviços são pré-configurados na calculadora de custos. Para ver como o preço seria alterado em seu caso de uso específico, altere as variáveis apropriadas de acordo com o tráfego esperado.
 
 Nós fornecemos três perfis de custo de exemplo com base no número de imagens de contêiner a serem armazenados e nós de Kubernetes para executar seus aplicativos.
 

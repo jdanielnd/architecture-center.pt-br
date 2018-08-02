@@ -4,12 +4,12 @@ description: Lista de verificação que fornece orientação para questões de d
 author: dragon119
 ms.date: 01/10/2018
 ms.custom: checklist
-ms.openlocfilehash: 324d8200d822eb1a7dce95ba4b2a7f29b00fb291
-ms.sourcegitcommit: 441185360db49cfb3cf39527b68f318d17d4cb3d
+ms.openlocfilehash: cea5baf8c37bf793c5de60f6c2be809629df072b
+ms.sourcegitcommit: 2154e93a0a075e1f7425a6eb11fc3f03c1300c23
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/19/2018
-ms.locfileid: "27973103"
+ms.lasthandoff: 07/30/2018
+ms.locfileid: "39352620"
 ---
 # <a name="availability-checklist"></a>Lista de verificação de disponibilidade
 
@@ -21,7 +21,7 @@ Disponibilidade é a proporção de tempo na qual um sistema é funcional e est�
 
 **Decompor as cargas de trabalho por objetivo de nível de serviço.** Se um serviço for composto por cargas de trabalho críticas e outras menos críticas, gerencie-as de maneira diferente e especifique os recursos de serviço e o número de instâncias para atender aos requisitos de disponibilidade dessas cargas de trabalho.
 
-**Minimize e entenda as dependências de serviço.** Minimize o número de serviços diferentes usados sempre que possível e certifique-se de compreender todas as dependências de recurso e de serviço que existem no sistema. Isso inclui a natureza dessas dependências e o impacto da falha ou redução do desempenho em cada uma delas, no aplicativo como um todo. Confira [Definição dos seus requisitos de resiliência](../resiliency/index.md#defining-your-resiliency-requirements).
+**Minimize e entenda as dependências de serviço.** Minimize o número de serviços diferentes usados sempre que possível e certifique-se de compreender todas as dependências de recurso e de serviço que existem no sistema. Isso inclui a natureza dessas dependências e o impacto da falha ou redução do desempenho em cada uma delas, no aplicativo como um todo.
 
 **Criar tarefas e mensagens para serem idempotentes onde for possível**. Uma operação é idempotente caso possa ser repetida várias vezes e produzir o mesmo resultado. A idempotência pode garantir que solicitações duplicadas não causem problemas. Consumidores de mensagens e as operações que eles realizam devem ser idempotentes de modo que repetir uma operação executada anteriormente não torne os resultados inválidos. Isso pode significar detecção duplicada de mensagens, ou garantir a consistência usando uma abordagem otimista para tratar dos conflitos.
 

@@ -4,12 +4,12 @@ description: Diretriz específica de serviço para configurar o mecanismo de rep
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 39d342dc96e3d0d923ce159c392d9427359a4639
-ms.sourcegitcommit: f7fa67e3bdbc57d368edb67bac0e1fdec63695d2
+ms.openlocfilehash: 72dfb59c3357c5f14806a33ef5f6cdd3e7937915
+ms.sourcegitcommit: 8b5fc0d0d735793b87677610b747f54301dcb014
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/05/2018
-ms.locfileid: "37843619"
+ms.lasthandoff: 07/29/2018
+ms.locfileid: "39334157"
 ---
 # <a name="retry-guidance-for-specific-services"></a>Repetir as diretrizes para serviços específicos
 
@@ -23,7 +23,7 @@ A tabela a seguir resume os recursos de repetição para os serviços do Azure d
 | --- | --- | --- | --- | --- |
 | **[Azure Active Directory](#azure-active-directory)** |Nativo na biblioteca ADAL |Incorporado na biblioteca ADAL |Interna |Nenhum |
 | **[Cosmos DB](#cosmos-db)** |Nativo no serviço |Não configurável |Global |TraceSource |
-| **[Hubs de Eventos](#azure-event-hubs)** |Nativo no cliente |Programático |Cliente |Nenhum |
+| **[Hubs de Eventos](#event-hubs)** |Nativo no cliente |Programático |Cliente |Nenhum |
 | **[Cache Redis](#azure-redis-cache)** |Nativo no cliente |Programático |Cliente |TextWriter |
 | **[Pesquisa](#azure-search)** |Nativo no cliente |Programático |Cliente |ETW ou Personalizado |
 | **[Barramento de Serviço](#service-bus)** |Nativo no cliente |Programático |Gerenciador de Namespace, Messaging Factory e Cliente |ETW |
