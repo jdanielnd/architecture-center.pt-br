@@ -13,13 +13,13 @@ ms.locfileid: "36206790"
 
 Siga esses princípios de design para tornar seu aplicativo mais escalonável, flexível e gerenciável. 
 
-**[Design de autorrecuperação](self-healing.md)**. Em um sistema distribuído, falhas de acontecem. Projete seu aplicativo para ter autorrecuperação quando houver falhas.
+**[Design de autorrecuperação](self-healing.md)**. Em um sistema distribuído, falhas acontecem. Projete seu aplicativo para ter autorrecuperação quando houver falhas.
 
 **[Tornar todas as coisas redundantes](redundancy.md)**. Crie redundância no seu aplicativo, evite ter pontos únicos de falha.
  
 **[Minimizar a coordenação](minimize-coordination.md)**. Minimize a coordenação entre os serviços de aplicativos para atingir a escalabilidade.
  
-**[Design de expansão](scale-out.md)**. Crie seu aplicativo para que ele possa ser dimensionado horizontalmente, adicionando ou removendo novas instâncias como exige.
+**[Design de expansão](scale-out.md)**. Crie seu aplicativo para que ele possa ser dimensionado horizontalmente, adicionando ou removendo novas instâncias conforme a necessidade.
 
 **[Partição de limites](partition.md)**. Use particionamento para contornar o banco de dados, rede e limites de computação.
 
