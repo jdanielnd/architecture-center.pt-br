@@ -2,12 +2,12 @@
 title: Guia de design da governança do Azure
 description: Orientação para configurar os controles de governança do Azure para habilitar um usuário e implantar uma carga de trabalho simples
 author: petertay
-ms.openlocfilehash: 78545400fc0b09262dce3d0e577442443468b2ed
-ms.sourcegitcommit: c704d5d51c8f9bbab26465941ddcf267040a8459
+ms.openlocfilehash: 88cd24a46a6bdaca4e0dd18706af1f7e3fe3bce2
+ms.sourcegitcommit: c4106b58ad08f490e170e461009a4693578294ea
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/24/2018
-ms.locfileid: "39229423"
+ms.lasthandoff: 08/10/2018
+ms.locfileid: "43016025"
 ---
 # <a name="azure-governance-design-guide"></a>Guia de design da governança do Azure
 
@@ -24,7 +24,7 @@ No estágio básico de adoção, nossa meta é implantar uma carga de trabalho s
 Antes de começarmos a criação de nosso modelo de governança, é importante entender como o Azure é licenciado. Isso ocorre porque as contas administrativas associadas à sua licença do Azure têm o maior nível de acesso para todos os seus recursos do Azure. Essas contas administrativas formam a base do seu modelo de governança.  
 
 > [!NOTE]
-> Se sua organização tiver um [Microsoft Enterprise Agreement](https://www.microsoft.com/licensing/licensing-programs/enterprise.aspx) existente que não inclui o Azure, este pode ser adicionado mediante uma confirmação de pagamento adiantado. Consulte [licenciamento do Azure para a empresa](https://azure.microsoft.com/pricing/enterprise-agreement/) para obter mais informações. 
+> Se sua organização tiver um [Microsoft Enterprise Agreement](https://www.microsoft.com/en-us/licensing/licensing-programs/enterprise.aspx) existente que não inclui o Azure, este pode ser adicionado mediante uma confirmação de pagamento adiantado. Consulte [licenciamento do Azure para a empresa](https://azure.microsoft.com/pricing/enterprise-agreement/) para obter mais informações. 
 
 Quando o Azure é adicionado ao Enterprise Agreement de sua organização, ela deve criar uma **conta do Azure**. Durante o processo de criação da conta, um **proprietário da conta do Azure** foi criado, bem como um locatário do Azure Active Directory (Azure AD) com uma conta de **administrador global**. Um locatário do Azure AD é um constructo lógico que representa uma instância segura e dedicada do Azure AD.
 

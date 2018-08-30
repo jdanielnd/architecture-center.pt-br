@@ -2,12 +2,12 @@
 title: Arquitetura orientada a eventos
 description: Descreve os benefícios, os desafios e as práticas recomendadas para eventos e arquiteturas de IoT no Azure
 author: MikeWasson
-ms.openlocfilehash: 3289bf784b02d62e3d0c1a29b4839c9be3501134
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+ms.openlocfilehash: dbf6be5ed386d06f96c876993ad03e7cb0e3dded
+ms.sourcegitcommit: 8ec48a0e2c080c9e2e0abbfdbc463622b28de2f2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/23/2018
-ms.locfileid: "29478316"
+ms.lasthandoff: 08/18/2018
+ms.locfileid: "43016033"
 ---
 # <a name="event-driven-architecture-style"></a>Arquitetura orientada a eventos
 
@@ -55,42 +55,9 @@ No diagrama lógico acima, cada tipo de consumidor é mostrado como uma única c
 - Entrega garantida. Em alguns sistemas, especialmente em situações de IoT, é crucial garantir que os eventos sejam entregues.
 - Eventos processados em ordem ou exatamente uma vez. Normalmente, cada tipo de consumidor é executado em várias instâncias de resiliência e escalabilidade. Isso pode criar um desafio se os eventos devem ser processados em ordem (dentro de um tipo de consumidor), ou se a lógica de processamento não for idempotente.
 
-## <a name="iot-architecture"></a>Arquitetura do IoT
-
-Arquiteturas orientadas por eventos são essenciais para soluções de IoT. O diagrama a seguir mostra uma possível arquitetura lógica de IoT. O diagrama enfatiza os componentes da arquitetura do streaming de eventos.
-
-![](./images/iot.png)
-
-O **gateway de nuvem** consome eventos de dispositivo no limite da nuvem, usando um sistema de mensagens de latência baixa e confiável.
-
-Os dispositivos podem enviar eventos diretamente para o gateway de nuvem, ou por meio de um **gateway de campo**. Um gateway de campo é um software ou dispositivo especializado, geralmente colocado com dispositivos, que recebe eventos e os encaminha para o gateway de nuvem. O gateway de campo também pode pré-processar os eventos de dispositivo brutos executando funções, como filtragem, agregação ou transformação de protocolo.
-
-Após a ingestão, os eventos passam por um ou mais **processadores de fluxo** que podem encaminhar os dados (por exemplo, para armazenamento) ou executar análise e outros tipos de processamento.
-
-A seguir estão alguns tipos comuns de processamento. (Esta lista certamente não é exaustiva.)
-
-- Gravando os dados de evento para armazenamento menos acessado, para arquivamento ou análise de processo em lote.
-
-- Análise de caminho mais acessado, analisando o fluxo de eventos (quase) em tempo real, para detectar anomalias, reconhecer padrões em janelas de tempo ou disparar alertas quando ocorre uma condição específica no fluxo. 
-
-- Tratamento de tipos especiais de mensagens que não são de telemetria de dispositivos, como notificações e alarmes. 
-
-- Machine Learning.
-
-As caixas destacadas em cinza mostram os componentes de um sistema de IoT que não estão diretamente relacionadas ao streaming de evento, mas são incluídos aqui para fins de integridade.
-
-- O **registro do dispositivo** é um banco de dados dos dispositivos provisionados, incluindo os IDs de dispositivo e metadados do dispositivo, como localização.
-
-- A **API de provisionamento** é uma interface externa comum para provisionar e registrar dispositivos novos.
-
-- Algumas soluções IoT permitem que **mensagens de comando e controle** sejam enviadas aos dispositivos.
-
-> Esta seção apresentou uma exibição de altíssimo nível do IoT e há muitas sutilezas e desafios a serem considerados. Para obter mais detalhes e discussões sobre a arquitetura de referência, confira [Arquitetura de Referência do Microsoft Azure IoT][iot-ref-arch] (download do PDF).
-
  <!-- links -->
 
 [competing-consumers]: ../../patterns/competing-consumers.md
-[iot-ref-arch]: https://azure.microsoft.com/updates/microsoft-azure-iot-reference-architecture-available/
 [minimize-coordination]: ../design-principles/minimize-coordination.md
 
 
