@@ -3,12 +3,12 @@ title: Datacenter Virtual do Azure
 description: Recursos para o Datacenter Virtual do Microsoft Azure
 keywords: Azure
 layout: LandingPage
-ms.openlocfilehash: e37ac347247b2960b85832a20a2b57eec18f65a7
-ms.sourcegitcommit: 776b8c1efc662d42273a33de3b82ec69e3cd80c5
+ms.openlocfilehash: 9b82122358085c37f89fb258034a4c9a91ecb054
+ms.sourcegitcommit: 8ec48a0e2c080c9e2e0abbfdbc463622b28de2f2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/12/2018
-ms.locfileid: "38987505"
+ms.lasthandoff: 08/18/2018
+ms.locfileid: "43324806"
 ---
 # <a name="azure-virtual-datacenter-and-the-enterprise-control-plane"></a>Datacenter Virtual do Azure e o Plano de controle empresarial
 
@@ -26,7 +26,7 @@ O Datacenter Virtual do Azure é uma abordagem para aproveitar ao máximo os rec
 <tr>
     <td style="width: 64px; vertical-align: middle;"><a href="/azure/networking/networking-virtual-datacenter"><img src="./images/vdc-network.png" alt="Network Perspective" /></a></td>
     <td>
-        <h3><a href="/azure/networking/networking-virtual-datacenter">Datacenter Virtual do Azure: uma perspectiva de rede</a></h3>
+        <h3><a href="networking-virtual-datacenter.md">Datacenter Virtual do Azure: uma perspectiva de rede</a></h3>
         <p>Este artigo online apresenta uma visão geral de padrões e designs de rede que podem ser usados para resolver as preocupações de desempenho, escala e segurança da arquitetura que muitos clientes têm quando pensam em uma transição em massa para a nuvem.</p>
     </td>
 </tr>
