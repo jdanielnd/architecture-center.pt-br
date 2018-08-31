@@ -5,12 +5,12 @@ author: telmosampaio
 ms.date: 04/09/2018
 pnp.series.title: Implement a hub-spoke network topology in Azure
 pnp.series.prev: expressroute
-ms.openlocfilehash: 9105748f434e5d655b09b1fe0775417f33a912b0
-ms.sourcegitcommit: f7fa67e3bdbc57d368edb67bac0e1fdec63695d2
+ms.openlocfilehash: abe9d6a58f3deeab388c20471c5559d63ef2f245
+ms.sourcegitcommit: c4106b58ad08f490e170e461009a4693578294ea
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/05/2018
-ms.locfileid: "37843585"
+ms.lasthandoff: 08/10/2018
+ms.locfileid: "43016100"
 ---
 # <a name="implement-a-hub-spoke-network-topology-in-azure"></a>Implementar uma topologia de rede hub-spoke no Azure
 
@@ -123,7 +123,7 @@ A implantação cria os seguintes grupos de recursos em sua assinatura:
 
 Os arquivos de parâmetros de modelo se referem a esses nomes e, portanto, se você alterá-los, atualize os arquivos de parâmetros para que correspondam.
 
-### <a name="prerequisites"></a>pré-requisitos
+### <a name="prerequisites"></a>Pré-requisitos
 
 [!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 
@@ -289,7 +289,7 @@ Para testar a conectividade do ambiente simulado no local para a redes virtuais 
 
 ### <a name="add-connectivity-between-spokes"></a>Adicionar conectividade entre spokes
 
-Esta etapa é opcional. Se você quiser permitir que spokes se conectem uns aos outros, precisará usar uma NVA (solução de virtualização de rede) como um roteador na VNET do hub e forçar o tráfego de spokes para o roteador ao tentar conectar-se a outro spoke. Para implantar um NVA de amostra básico como uma única VM junto com as UDRs (rotas definidas pelo usuário) e permitir que as duas redes virtuais de spoke se conectem, execute as seguintes etapas:
+Esta etapa é opcional. Se você quiser permitir que spokes se conectem uns aos outros, precisará usar uma NVA (solução de virtualização de rede) como um roteador na VNET do hub e forçar o tráfego de spokes para o roteador ao tentar conectar outro spoke. Para implantar um NVA de amostra básico como uma única VM junto com as UDRs (rotas definidas pelo usuário) e permitir que as duas redes virtuais de spoke se conectem, execute as seguintes etapas:
 
 1. Abra o arquivo `hub-nva.json` . Substitua os valores de `adminUsername` e `adminPassword`.
 

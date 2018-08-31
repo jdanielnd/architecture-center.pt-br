@@ -2,12 +2,12 @@
 title: Estilo de arquitetura de Big Data
 description: Descreve os benefícios, os desafios e as melhores práticas para arquiteturas de Big Data no Azure
 author: MikeWasson
-ms.openlocfilehash: 4e8b58d5fa0f6a441d70e05ec7d6a0e668712563
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: d76192cf2fc680497ece0123ef412971c025f9dc
+ms.sourcegitcommit: 8ec48a0e2c080c9e2e0abbfdbc463622b28de2f2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24540882"
+ms.lasthandoff: 08/18/2018
+ms.locfileid: "43016048"
 ---
 # <a name="big-data-architecture-style"></a>Estilo de arquitetura de Big Data
 
@@ -91,3 +91,39 @@ Considere este estilo de arquitetura quando você precisar:
 - **Orquestrar a ingestão de dados**. Em alguns casos, aplicativos de negócios existentes podem gravar arquivos de dados para processamento em lote diretamente em contêineres do Azure Storage Blob, em que podem ser consumidos pelo HDInsight ou pelo Azure Data Lake Analytics. No entanto, você geralmente precisará orquestrar a ingestão de dados de fontes de dados externas ou locais para o data lake. Use um fluxo de trabalho de orquestração ou um pipeline, como aqueles compatíveis com Azure Data Factory ou Oozie, para fazer isso de maneira previsível e gerenciável centralmente.
 
 - **Limpar dados confidenciais cedo**. O fluxo de trabalho de ingestão de dados deve remover dados confidenciais no início do processo para evitar armazená-los no data lake.
+
+## <a name="iot-architecture"></a>Arquitetura do IoT
+
+O IoT (Internet das Coisas) é um subconjunto especializado de soluções de big data. O diagrama a seguir mostra uma possível arquitetura lógica de IoT. O diagrama enfatiza os componentes da arquitetura do streaming de eventos.
+
+![](./images/iot.png)
+
+O **gateway de nuvem** consome eventos de dispositivo no limite da nuvem, usando um sistema de mensagens de latência baixa e confiável.
+
+Os dispositivos podem enviar eventos diretamente para o gateway de nuvem, ou por meio de um **gateway de campo**. Um gateway de campo é um software ou dispositivo especializado, geralmente colocado com dispositivos, que recebe eventos e os encaminha para o gateway de nuvem. O gateway de campo também pode pré-processar os eventos de dispositivo brutos executando funções, como filtragem, agregação ou transformação de protocolo.
+
+Após a ingestão, os eventos passam por um ou mais **processadores de fluxo** que podem encaminhar os dados (por exemplo, para armazenamento) ou executar análise e outros tipos de processamento.
+
+A seguir estão alguns tipos comuns de processamento. (Esta lista certamente não é exaustiva.)
+
+- Gravando os dados de evento para armazenamento menos acessado, para arquivamento ou análise de processo em lote.
+
+- Análise de caminho mais acessado, analisando o fluxo de eventos (quase) em tempo real, para detectar anomalias, reconhecer padrões em janelas de tempo ou disparar alertas quando ocorre uma condição específica no fluxo. 
+
+- Tratamento de tipos especiais de mensagens que não são de telemetria de dispositivos, como notificações e alarmes. 
+
+- Machine Learning.
+
+As caixas destacadas em cinza mostram os componentes de um sistema de IoT que não estão diretamente relacionadas ao streaming de evento, mas são incluídos aqui para fins de integridade.
+
+- O **registro do dispositivo** é um banco de dados dos dispositivos provisionados, incluindo os IDs de dispositivo e metadados do dispositivo, como localização.
+
+- A **API de provisionamento** é uma interface externa comum para provisionar e registrar dispositivos novos.
+
+- Algumas soluções IoT permitem que **mensagens de comando e controle** sejam enviadas aos dispositivos.
+
+> Esta seção apresentou uma exibição de altíssimo nível do IoT e há muitas sutilezas e desafios a serem considerados. Para obter mais detalhes e discussões sobre a arquitetura de referência, confira [Arquitetura de Referência do Microsoft Azure IoT][iot-ref-arch] (download do PDF).
+
+ <!-- links -->
+
+[iot-ref-arch]: https://azure.microsoft.com/updates/microsoft-azure-iot-reference-architecture-available/

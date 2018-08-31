@@ -4,12 +4,12 @@ description: Orientação sobre como criar uma API da Web bem projetada.
 author: dragon119
 ms.date: 01/12/2018
 pnp.series.title: Best Practices
-ms.openlocfilehash: db9784f454e0b52b335d6dff3a054c2c59124c9f
-ms.sourcegitcommit: f7418f8bdabc8f5ec33ae3551e3fbb466782caa5
+ms.openlocfilehash: 68ed3f59e1fd63ae754ceabf27a182daa0de0e5d
+ms.sourcegitcommit: c4106b58ad08f490e170e461009a4693578294ea
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 06/19/2018
-ms.locfileid: "36209603"
+ms.lasthandoff: 08/10/2018
+ms.locfileid: "43016108"
 ---
 # <a name="api-design"></a>Design de API
 
@@ -25,7 +25,7 @@ Essas diretrizes descrevem questões que você deve considerar ao criar uma API 
 
 Em 2000, Roy Fielding propôs a Transferência de Estado Representacional (REST) como uma abordagem de arquitetura para criar serviços Web. REST é um estilo arquitetural para a criação de sistemas distribuídos com base em hipermídia. A REST é independente de qualquer protocolo subjacente e não está necessariamente ligada a HTTP. No entanto, as implementações mais comuns de REST usam HTTP como o protocolo de aplicativo, e este guia foca a criação de APIs REST para HTTP.
 
-Uma vantagem principal da REST sobre o HTTP é que ela usa padrões abertos e não vincula nenhuma implementação específica à implementação da API ou aos aplicativos cliente. Por exemplo, um serviço Web REST poderia ser escrito em ASP.NET, e aplicativos cliente podem usar qualquer linguagem ou o conjunto de ferramentas que possa gerar solicitações HTTP e analisar respostas HTTP.
+Uma vantagem principal do REST sobre HTTP é que ele usa padrões abertos e não vincula a implementação da API ou os aplicativos cliente a nenhuma implementação específica. Por exemplo, um serviço Web REST poderia ser escrito em ASP.NET, e aplicativos cliente podem usar qualquer linguagem ou o conjunto de ferramentas que possa gerar solicitações HTTP e analisar respostas HTTP.
 
 Aqui estão alguns dos princípios de design mais importante de APIs RESTful usando HTTP:
 
