@@ -2,12 +2,13 @@
 title: Antipadrão de E/S com ruídos
 description: Um grande número de solicitações de E/S pode prejudicar o desempenho e a capacidade de resposta.
 author: dragon119
-ms.openlocfilehash: 4f0e0e455ceb58317d3029d8ab4631d476802499
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+ms.date: 06/05/2017
+ms.openlocfilehash: daa0c581d31c9389e2853f84075dc44d1e5ba78b
+ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/23/2018
-ms.locfileid: "29477733"
+ms.lasthandoff: 08/31/2018
+ms.locfileid: "43325869"
 ---
 # <a name="chatty-io-antipattern"></a>Antipadrão de E/S com ruídos
 

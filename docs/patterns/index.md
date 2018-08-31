@@ -2,12 +2,13 @@
 title: Padrões de design na nuvem
 description: Padrões de design de nuvem para o Microsoft Azure
 keywords: Azure
-ms.openlocfilehash: 0b564931fe027e42b3a6db1a5d6a207e6441e536
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.date: 06/23/2017
+ms.openlocfilehash: 308e9bc784fc791d04adcecaae64bf258edeb20b
+ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30847236"
+ms.lasthandoff: 08/31/2018
+ms.locfileid: "43326190"
 ---
 # <a name="cloud-design-patterns"></a>Padrões de design na nuvem
 
