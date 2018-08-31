@@ -2,24 +2,25 @@
 title: Princípios de design para aplicativos do Azure
 description: Princípios de design para aplicativos do Azure
 author: MikeWasson
-ms.openlocfilehash: 462896098c668c0775464ca498925266cd73c6e1
-ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
+ms.date: 08/30/2018
+ms.openlocfilehash: 5dd5d02019723ce57ba377d99b3965d0d7ed4079
+ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 06/19/2018
-ms.locfileid: "36206790"
+ms.lasthandoff: 08/31/2018
+ms.locfileid: "43326067"
 ---
-# <a name="design-principles-for-azure-applications"></a>Princípios de design para aplicativos do Azure
+# <a name="ten-design-principles-for-azure-applications"></a>Dez princípios de design para aplicativos do Azure
 
 Siga esses princípios de design para tornar seu aplicativo mais escalonável, flexível e gerenciável. 
 
-**[Design de autorrecuperação](self-healing.md)**. Em um sistema distribuído, falhas acontecem. Projete seu aplicativo para ter autorrecuperação quando houver falhas.
+**[Design de autorrecuperação](self-healing.md)**. Em um sistema distribuído, falhas de acontecem. Projete seu aplicativo para ter autorrecuperação quando houver falhas.
 
 **[Tornar todas as coisas redundantes](redundancy.md)**. Crie redundância no seu aplicativo, evite ter pontos únicos de falha.
  
 **[Minimizar a coordenação](minimize-coordination.md)**. Minimize a coordenação entre os serviços de aplicativos para atingir a escalabilidade.
  
-**[Design de expansão](scale-out.md)**. Crie seu aplicativo para que ele possa ser dimensionado horizontalmente, adicionando ou removendo novas instâncias conforme a necessidade.
+**[Design de expansão](scale-out.md)**. Crie seu aplicativo para que ele possa ser dimensionado horizontalmente, adicionando ou removendo novas instâncias como exige.
 
 **[Partição de limites](partition.md)**. Use particionamento para contornar o banco de dados, rede e limites de computação.
 
