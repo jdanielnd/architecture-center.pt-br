@@ -2,12 +2,13 @@
 title: Pilares da qualidade de software
 description: Descreve os cinco pilares de qualidade de software, escalabilidade, disponibilidade, resiliência, gerenciamento e segurança.
 author: MikeWasson
-ms.openlocfilehash: 117706046ca1a9b7f3203a99737347809d0c323f
-ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
+ms.date: 08/30/2018
+ms.openlocfilehash: dce87aba849c61750416f277bcc5558c400c1f25
+ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 06/11/2018
-ms.locfileid: "35252780"
+ms.lasthandoff: 08/31/2018
+ms.locfileid: "43326149"
 ---
 # <a name="pillars-of-software-quality"></a>Pilares da qualidade de software 
 

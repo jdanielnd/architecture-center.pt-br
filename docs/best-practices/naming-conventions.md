@@ -4,12 +4,12 @@ description: Convenções de nomenclatura para recursos do Azure. Como nomear m�
 author: telmosampaio
 ms.date: 05/18/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: 6ad71a5ee39b8f1863c51dae0120dbdc7baf1f76
-ms.sourcegitcommit: c704d5d51c8f9bbab26465941ddcf267040a8459
+ms.openlocfilehash: 8aa0b46d9f43107cfa4ae4be3160900249365702
+ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/24/2018
-ms.locfileid: "39229143"
+ms.lasthandoff: 08/31/2018
+ms.locfileid: "43326313"
 ---
 # <a name="naming-conventions"></a>Convenções de nomenclatura
 
@@ -61,7 +61,7 @@ Os afixos podem se referir a diversos aspectos que descrevam os recursos em ques
 | Aspecto | Exemplo | Observações |
 | --- | --- | --- |
 | Ambiente |dev, prod, QA |Identifica o ambiente do recurso |
-| Localização |uw (Oeste dos EUA), ue (Leste dos EUA) |Identifica a região na qual o recurso foi implantado |
+| Local padrão |uw (Oeste dos EUA), ue (Leste dos EUA) |Identifica a região na qual o recurso foi implantado |
 | Instância |01, 02 |Para recursos com mais de uma instância nomeada (servidores Web etc.). |
 | Produto ou serviço |propriedade serviço |Identifica o produto, o aplicativo ou o serviço que recebe suporte do recurso |
 | Função |sql, web, messaging |Identifica a função do recurso associado |
@@ -111,10 +111,10 @@ Em geral, evite usar caracteres especiais (`-` ou `_`) como o primeiro ou últim
 | --- | --- | --- | --- | --- | --- | --- |
 |Rede virtual (VNet) |Grupo de recursos |2-64 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<service short name>-vnet` |`profx-vnet` |
 |Sub-rede |Rede virtual pai |2-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<descriptive context>` |`web` |
-|Interface de rede |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<vmname>-nic<num>` |`profx-sql1-nic1` |
+|Interface de rede |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<vmname>-nic<num>` |`profx-sql1-vm1-nic1` |
 |Grupo de Segurança de Rede |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<service short name>-<context>-nsg` |`profx-app-nsg` |
 |Regra de grupo de segurança de rede |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<descriptive context>` |`sql-allow` |
-|Endereço IP público |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<vm or service name>-pip` |`profx-sql1-pip` |
+|Endereço IP público |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<vm or service name>-pip` |`profx-sql1-vm1-pip` |
 |Load Balancer |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<service or role>-lb` |`profx-lb` |
 |Configuração de regras de balanceamento de carga |Load Balancer |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<descriptive context>` |`http` |
 |Gateway de Aplicativo do Azure |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, hífen, sublinhado e ponto |`<service or role>-agw` |`profx-agw` |
@@ -195,4 +195,4 @@ Não é possível modificar o nome de uma conta de armazenamento ou um contêine
 
 <!-- links -->
 
-[scaffold]: /azure/azure-resource-manager/resource-manager-subscription-governance
+[scaffold]: /azure/azure-resource-manager/resource-manager-azure-scaffold
