@@ -4,12 +4,12 @@ description: Como criar aplicativos resilientes no Azure, para alta disponibilid
 author: MikeWasson
 ms.date: 05/26/2017
 ms.custom: resiliency
-ms.openlocfilehash: c32f093da4c47ef655dfca89b0410f063e9fe212
-ms.sourcegitcommit: 2154e93a0a075e1f7425a6eb11fc3f03c1300c23
+ms.openlocfilehash: b92a26323b4329f3dbe4f941b98da0080e730d65
+ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/30/2018
-ms.locfileid: "39352579"
+ms.lasthandoff: 09/11/2018
+ms.locfileid: "44389427"
 ---
 # <a name="designing-resilient-applications-for-azure"></a>Desenvolvimento de aplicativos resilientes para o Azure
 
@@ -259,7 +259,7 @@ Meça o tempo de recuperação e verifique se os seus requisitos de negócios es
 
 Essa é outra razão pela qual é importante analisar possíveis pontos de falha durante a fase de design. Os resultados dessa análise devem funcionar como informações para o seu plano de teste.
 
-**Teste de carga**. Faça testes de carga no aplicativo usando uma ferramenta como o [Visual Studio Team Services][vsts] ou o [Apache JMeter][jmeter]. O teste de carga é crucial para identificar falhas que só ocorrem sob condições de carga, como um banco de dados de back-end sobrecarregado ou limitações de serviço. Teste a carga de pico usando dados de produção ou sintéticos, desde que estes se aproximem o máximo possível dos dados de produção. O objetivo é observar como o aplicativo se comporta sob condições do mundo real.   
+**Teste de carga**. O teste de carga é crucial para identificar falhas que só ocorrem sob condições de carga, como um banco de dados de back-end sobrecarregado ou limitações de serviço. Teste a carga de pico usando dados de produção ou sintéticos, desde que estes se aproximem o máximo possível dos dados de produção. O objetivo é observar como o aplicativo se comporta sob condições do mundo real.   
 
 ## <a name="deploy-using-reliable-processes"></a>Implantar usando processos confiáveis
 Quando um aplicativo é implantado para produção, as atualizações são uma possível fonte de erros. Na pior das hipóteses, uma atualização corrompida pode causar inatividade. Para evitar isso, o processo de implantação deve ser repetível e previsível. A implantação inclui etapas de provisionamento de recursos do Azure, implantação do código do aplicativo e aplicação de definições de configuração. Uma atualização pode envolver todas ou parte dessas três. 
@@ -355,4 +355,3 @@ Estes são os principais pontos a serem lembrados neste artigo:
 [tm]: https://azure.microsoft.com/services/traffic-manager/
 [tm-failover]: /azure/traffic-manager/traffic-manager-monitoring
 [tm-sla]: https://azure.microsoft.com/support/legal/sla/traffic-manager/v1_0/
-[vsts]: https://www.visualstudio.com/features/vso-cloud-load-testing-vs.aspx
