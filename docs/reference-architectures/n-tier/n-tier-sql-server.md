@@ -3,12 +3,12 @@ title: Aplicativo de n camadas com SQL Server
 description: Como implementar uma arquitetura multicamadas no Azure, para obter disponibilidade, segurança, escalabilidade e capacidade de gerenciamento.
 author: MikeWasson
 ms.date: 07/19/2018
-ms.openlocfilehash: 42ba18e9ffef32c6990fbb888cc41e980fb4abea
-ms.sourcegitcommit: c704d5d51c8f9bbab26465941ddcf267040a8459
+ms.openlocfilehash: fc761e940a25c4667146db9598d944bac2c32496
+ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/24/2018
-ms.locfileid: "39229126"
+ms.lasthandoff: 08/31/2018
+ms.locfileid: "43326049"
 ---
 # <a name="n-tier-application-with-sql-server"></a>Aplicativo de n camadas com SQL Server
 
@@ -220,7 +220,7 @@ Uma implantação para essa arquitetura de referência está disponível no [Git
     "witnessStorageAccountKey": "[replace-with-storagekey]"
     ```
 
-8. No arquivo `n-tier-windows.json`, procure todas as instâncias `testPassw0rd!23`, `test$!Passw0rd111` e `AweS0me@SQLServicePW`. Substitua-as por suas próprias senhas e salve o arquivo.
+8. No arquivo `n-tier-windows.json`, procure todas as instâncias de `[replace-with-password]` e substitua-as por uma senha mais forte. Salve o arquivo.
 
     > [!NOTE]
     > Se você alterar o nome de usuário do administrador, também terá que atualizar os blocos `extensions` no arquivo JSON. 

@@ -6,12 +6,12 @@ ms.date: 12/06/2016
 pnp.series.title: Network DMZ
 pnp.series.prev: secure-vnet-dmz
 cardTitle: Deploy highly available network virtual appliances
-ms.openlocfilehash: fe279eea3f9cb024d6c6c14943013b9b9a87bc9c
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: 556ec1e78960d64cce3bf803fc46c9146ce2584d
+ms.sourcegitcommit: f4069cf68456b5c74acb1b890dc4e45e11f12b59
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30847740"
+ms.lasthandoff: 09/04/2018
+ms.locfileid: "43675824"
 ---
 # <a name="deploy-highly-available-network-virtual-appliances"></a>Implantar soluções de virtualização de rede altamente disponíveis
 
@@ -92,6 +92,7 @@ A figura anterior mostra um exemplo de cluster [ZooKeeper][zookeeper] que fornec
 ## <a name="next-steps"></a>Próximas etapas
 * Saiba como [implementar uma DMZ entre o Azure e o datacenter local][dmz-on-prem] usando NVAs da camada 7.
 * Saiba como [implementar uma DMZ entre o Azure e a Internet][dmz-internet] usando NVAs da camada 7.
+* [Solução de problemas de virtualização de rede no Azure](/azure/virtual-network/virtual-network-troubleshoot-nva)
 
 <!-- links -->
 [cloud-security]: /azure/best-practices-network-security

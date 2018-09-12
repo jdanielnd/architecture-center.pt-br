@@ -3,12 +3,12 @@ title: Exploração interativa de dados
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 20740a8fe912a63526c847416b832941f4ac33ec
-ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
+ms.openlocfilehash: 2e3d61fa5e1903c7fee6ebc84db3fa7c28d515cb
+ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/03/2018
-ms.locfileid: "30297947"
+ms.lasthandoff: 08/31/2018
+ms.locfileid: "43325110"
 ---
 # <a name="interactive-data-exploration"></a>Exploração interativa de dados
 
@@ -82,6 +82,7 @@ Para obter mais informações, consulte [Armazenamentos de dados analíticos](..
 ### <a name="analytics-and-reporting"></a>Análise e relatórios
 
 - **Jupyter**. O Jupyter Notebooks fornece uma interface baseada em navegador para executar o código em linguagens como o R, Python ou Scala. Ao usar o R Server ou o Spark para processar dados em lotes ou ao usar o Spark SQL para definir um esquema de tabelas para consulta, o Jupyter pode ser uma boa opção para consultar os dados. Ao usar o Spark, você pode usar a API de dataframe padrão do Spark ou a API do Spark SQL, bem como instruções inseridas do SQL, para consultar os dados e gerar visualizações.
+- **Aprofundar-se**. Caso queira executar exploração de dados ad hoc, o [Apache Drill](https://drill.apache.org/) é um mecanismo de consulta SQL livre de esquema. Como ele não requer um esquema, é possível consultar dados de uma variedade de fontes de dados e o mecanismo automaticamente reconhecerá a estrutura dos dados.
 - **Clientes do Hive Interativo**. Caso você use um cluster do Hive Interativo para consultar os dados, use a exibição do Hive no painel do cluster Ambari, a ferramenta de linha de comando Beeline ou qualquer ferramenta baseada em ODBC (usando o driver ODBC do Hive), como o Microsoft Excel ou o Power BI.
 
 Para obter mais informações, consulte [Tecnologia de relatórios e análise de dados](../technology-choices/analysis-visualizations-reporting.md).

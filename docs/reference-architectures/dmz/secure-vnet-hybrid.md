@@ -7,12 +7,12 @@ pnp.series.title: Network DMZ
 pnp.series.prev: ./index
 pnp.series.next: secure-vnet-dmz
 cardTitle: DMZ between Azure and on-premises
-ms.openlocfilehash: 45583473ef297b2c7a5b0c4baff52485286dd051
-ms.sourcegitcommit: 9b459f75254d97617e16eddd0d411d1f80b7fe90
+ms.openlocfilehash: e397a8691a1b7b37cc0129d914dc85d92c876139
+ms.sourcegitcommit: f4069cf68456b5c74acb1b890dc4e45e11f12b59
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/03/2018
-ms.locfileid: "37403157"
+ms.lasthandoff: 09/04/2018
+ms.locfileid: "43675800"
 ---
 # <a name="dmz-between-azure-and-your-on-premises-datacenter"></a>DMZ entre o Azure e o datacenter local
 
@@ -163,7 +163,7 @@ Use o [RBAC][rbac] para restringir as operações que DevOps pode executar em ca
 
 Uma implantação para uma arquitetura de referência que implementa essas recomendações está disponível no [GitHub][github-folder]. 
 
-### <a name="prerequisites"></a>pré-requisitos
+### <a name="prerequisites"></a>Pré-requisitos
 
 [!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 
@@ -226,6 +226,7 @@ Nesta etapa, você conectará os dois gateways de rede locais.
 * Para obter mais informações de como gerenciar a segurança da rede com o Azure, consulte [Segurança de rede e serviços em nuvem da Microsoft][cloud-services-network-security].
 * Para obter informações detalhadas sobre como proteger recursos no Azure, consulte [Introdução à segurança do Microsoft Azure][getting-started-with-azure-security]. 
 * Para obter detalhes adicionais de como solucionar preocupações de segurança em uma conexão de gateway do Azure, consulte [Implementing a hybrid network architecture with Azure and on-premises VPN][guidance-vpn-gateway-security] (Implementando uma arquitetura de rede híbrida com o Azure e VPN local) e [Implementing a hybrid network architecture with Azure ExpressRoute][guidance-expressroute-security] (Implementando uma arquitetura de rede híbrida com o Azure ExpressRoute).
+* [Solução de problemas de virtualização de rede no Azure](/azure/virtual-network/virtual-network-troubleshoot-nva)
   > 
 
 <!-- links -->

@@ -7,12 +7,12 @@ pnp.series.title: Connect an on-premises network to Azure
 pnp.series.next: expressroute
 pnp.series.prev: ./index
 cardTitle: VPN
-ms.openlocfilehash: dafcee6607d9cc7c56c332f9ed5d9568ff70f0e7
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.openlocfilehash: ef89cdd3e2a175f82929b613159a99557560cc7a
+ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/30/2018
-ms.locfileid: "30270686"
+ms.lasthandoff: 08/31/2018
+ms.locfileid: "43325381"
 ---
 # <a name="connect-an-on-premises-network-to-azure-using-a-vpn-gateway"></a>Conectar uma rede local ao Azure usando um Gateway de VPN
 
@@ -80,13 +80,7 @@ Para obter uma lista de dispositivos de VPN com suporte, consulte [Sobre disposi
 > 
 > 
 
-Selecione a SKU do Gateway de VPN do Azure que melhor corresponde aos seus requisitos de produtividade. O Gateway de VPN do Azure está disponível em três SKUs mostradas na tabela a seguir. 
-
-| SKU | Produtividade da VPN | Máximo de túneis de IPsec |
-| --- | --- | --- |
-| Basic |100 Mbps |10 |
-| Standard |100 Mbps |10 |
-| Alto Desempenho |200 Mbps |30 |
+Selecione a SKU do Gateway de VPN do Azure que melhor corresponde aos seus requisitos de produtividade. Para obter mais informações, confira [SKUs do gateway][azure-gateway-skus]
 
 > [!NOTE]
 > A SKU básica não é compatível com o Azure ExpressRoute. Você poderá [alterar a SKU][changing-SKUs] depois que o gateway for criado.
@@ -467,6 +461,7 @@ Para implantar a solução, execute as etapas a seguir.
 [vpn-appliance]: /azure/vpn-gateway/vpn-gateway-about-vpn-devices
 [azure-vpn-gateway]: https://azure.microsoft.com/services/vpn-gateway/
 [azure-gateway-charges]: https://azure.microsoft.com/pricing/details/vpn-gateway/
+[azure-gateway-skus]: /azure/vpn-gateway/vpn-gateway-about-vpngateways#gwsku
 [connect-to-an-Azure-vnet]: https://technet.microsoft.com/library/dn786406.aspx
 [vpn-gateway-multi-site]: /azure/vpn-gateway/vpn-gateway-multi-site
 [policy-based-routing]: https://en.wikipedia.org/wiki/Policy-based_routing
@@ -494,9 +489,4 @@ Para implantar a solução, execute as etapas a seguir.
 <!--[solution-script]: https://github.com/mspnp/reference-architectures/tree/master/guidance-hybrid-network-vpn/Deploy-ReferenceArchitecture.ps1-->
 <!--[solution-script-bash]: https://github.com/mspnp/reference-architectures/tree/master/guidance-hybrid-network-vpn/deploy-reference-architecture.sh-->
 <!--[virtualNetworkGateway-parameters]: https://github.com/mspnp/reference-architectures/tree/master/guidance-hybrid-network-vpn/parameters/virtualNetworkGateway.parameters.json-->
-[azure-cli]: https://azure.microsoft.com/documentation/articles/xplat-cli-install/
-[CIDR]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
-[0]: ./images/vpn.png "Rede híbrida que abrange as infraestruturas locais e do Azure"
-[2]: ../_images/guidance-hybrid-network-vpn/audit-logs.png "Logs de auditoria no portal do Azure"
-[3]: ../_images/guidance-hybrid-network-vpn/RRAS-perf-counters.png "Contadores de desempenho para monitorar o tráfego de rede da VPN"
-[4]: ../_images/guidance-hybrid-network-vpn/RRAS-perf-graph.png "Gráfico de desempenho de rede da VPN de exemplo"
+[azure-cli]: https://azure.microsoft.com/documentation/articles/xplat-cli-install/ [CIDR]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing [0]: ./images/vpn.png "Hybrid network spanning on-premises and Azure infrastructures" [2]: ../_images/guidance-hybrid-network-vpn/audit-logs.png "Audit logs in the Azure portal" [3]: ../_images/guidance-hybrid-network-vpn/RRAS-perf-counters.png "Performance counters for monitoring VPN network traffic" [4]: ../_images/guidance-hybrid-network-vpn/RRAS-perf-graph.png "Example VPN network performance graph""
