@@ -5,10 +5,10 @@ author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
 ms.openlocfilehash: d1d9c1b3cf07f724eb010fc260d86ceb84b789ca
-ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242
+ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/09/2018
+ms.lasthandoff: 09/13/2018
 ms.locfileid: "29059965"
 ---
 # <a name="data-partitioning"></a>Particionamento de dados
@@ -27,7 +27,7 @@ O particionamento de dados pode oferecer uma série de benefícios. Por exemplo,
 * **Melhorar a disponibilidade**. Separar dados em vários servidores evita um ponto único de falha. Se um servidor falhar, ou estiver passando por uma manutenção planejada, somente os dados nessa partição não estarão disponíveis. As operações em outras partições podem continuar. Aumentar o número de partições reduz o impacto relativo de uma falha de servidor único ao reduzir o percentual dos dados que não estarão disponíveis. Replicar cada partição pode reduzir ainda mais a probabilidade de uma falha de partição única afetar as operações. Isso também possibilita a separação de dados críticos que devem estar contínua e altamente disponíveis dos dados de valor baixo que tenham requisitos de disponibilidade mais baixos (arquivos de log, por exemplo).
 * **Melhorar a segurança**. Dependendo da natureza dos dados e de como eles são particionados, é possível separar dados confidenciais e não confidenciais em partições diferentes e, portanto, em diferentes servidores ou repositórios de dados. Em seguida, a segurança pode ser especificamente otimizada para os dados confidenciais.
 * **Fornecer flexibilidade operacional**. O particionamento oferece várias oportunidades para o ajuste das operações, maximizando a eficiência administrativa e minimizando os custos. Por exemplo, você pode definir diferentes estratégias para gerenciamento, monitoramento, backup, restauração e outras tarefas administrativas baseadas na importância dos dados em cada partição.
-* **Fazer a correspondência do repositório de dados ao padrão de uso**. O particionamento permite que cada partição seja implantada em um tipo diferente de repositório de dados, com base no custo e nos recursos internos que o repositório de dados oferece. Por exemplo, dados binários grandes podem ser armazenados em um repositório de dados de blob, enquanto dados mais estruturados podem ser mantidos em um banco de dados de documentos. Para obter mais informações, consulte [Criando uma solução poliglota] no guia de padrões e práticas, e [Acesso a dados para soluções altamente escalonáveis: usando o SQL, o NoSQL e a persistência poliglota] no site da Microsoft.
+* **Fazer a correspondência do repositório de dados ao padrão de uso**. O particionamento permite que cada partição seja implantada em um tipo diferente de repositório de dados, com base no custo e nos recursos internos que o repositório de dados oferece. Por exemplo, dados binários grandes podem ser armazenados em um repositório de dados de blob, enquanto dados mais estruturados podem ser mantidos em um banco de dados de documentos. Para obter mais informações, consulte [Criando uma solução poliglota] no guia de padrões e práticas, e [Data Access for Highly-Scalable Solutions: Using SQL, NoSQL, and Polyglot Persistence] no site da Microsoft.
 
 Alguns sistemas não implementam o particionamento, pois ele é considerado um custo em vez de uma vantagem. Entre alguns dos motivos comuns para essa lógica estão:
 
@@ -73,7 +73,7 @@ Escolha uma chave de fragmentação que minimize os requisitos futuros de divis�
 
 Se os fragmentos forem replicados, será possível manter algumas das réplicas online enquanto as outras são divididas, mescladas ou reconfiguradas. No entanto, talvez o sistema precise limitar as operações que podem ser realizadas nos dados nesses fragmentos enquanto a reconfiguração estiver em andamento. Por exemplo, os dados nas réplicas podem ser marcados como somente leitura para limitar o escopo de inconsistências que podem ocorrer enquanto os fragmentos estiverem sendo reestruturados.
 
-> Para obter informações mais detalhadas e diretrizes sobre várias dessas considerações, além de técnicas de práticas recomendadas para a criação de repositórios de dados que implementam o particionamento horizontal, consulte [Sharding pattern] \(Padrão de fragmentação).
+> Para obter informações mais detalhadas e diretrizes sobre várias dessas considerações, além de técnicas de práticas recomendadas para a criação de repositórios de dados que implementam o particionamento horizontal, consulte [Sharding pattern](Padrão de fragmentação).
 >
 >
 
@@ -111,13 +111,13 @@ Essa estratégia de particionamento pode ajudar a reduzir a contenção do acess
 Siga estas etapas ao criar partições para escalabilidade:
 
 1. Analise o aplicativo para entender os padrões de acesso a dados, como o tamanho do conjunto de resultados retornado por cada consulta, a frequência de acesso, a latência inerente e os requisitos de processamento de computação do lado do servidor. Em muitos casos, algumas entidades principais exigirão a maior parte dos recursos de processamento.
-2. Use essa análise para determinar as metas de escalabilidade atuais e futuras, como o tamanho dos dados e carga de trabalho. Em seguida, distribua os dados nas partições para atender à meta de escalabilidade. Na estratégia de particionamento horizontal, é importante escolher a chave de fragmento adequada para garantir que a distribuição seja uniforme. Para obter mais informações, consulte [Sharding pattern] \(Padrão de fragmentação).
+2. Use essa análise para determinar as metas de escalabilidade atuais e futuras, como o tamanho dos dados e carga de trabalho. Em seguida, distribua os dados nas partições para atender à meta de escalabilidade. Na estratégia de particionamento horizontal, é importante escolher a chave de fragmento adequada para garantir que a distribuição seja uniforme. Para obter mais informações, consulte [Sharding pattern](Padrão de fragmentação).
 3. Verifique se os recursos disponíveis para cada partição são suficientes para lidar com os requisitos de escalabilidade em termos de tamanho de dados e taxa de transferência. Por exemplo, o nó que está hospedando uma partição pode impor um limite rígido na quantidade de espaço de armazenamento, na capacidade de processamento ou largura de banda da rede que ele fornece. Se os requisitos de armazenamento e processamento de dados tiverem a probabilidade de exceder esses limites, poderá ser necessário refinar sua estratégia de particionamento ou subdividir mais os dados. Por exemplo, uma abordagem de escalabilidade pode ser separar os dados de log dos principais recursos do aplicativo. Você pode fazer isso usando repositórios de dados separados para impedir que os requisitos de armazenamento total de dados exceda o limite de ajuste de escala do nó. Se o número total de repositórios de dados exceder o limite do nó, pode ser necessário usar nós de armazenamento separados.
 4. Monitore o sistema em uso para verificar se os dados são distribuídos conforme esperado e se as partições podem manipular a carga imposta sobre elas. É possível que o uso não coincida com o uso previsto pela análise. Nesse caso, pode ser possível redistribuir as partições. Se isso não funcionar, talvez seja preciso recriar algumas partes do sistema para ganhar o balanceamento necessário.
 
 Observe que alguns ambientes de nuvem alocam recursos em termos de limites de infraestrutura. Garanta que os limites de seu limite selecionado forneçam espaço suficiente para qualquer aumento previsto no volume de dados, em termos de armazenamento de dados, capacidade de processamento e largura de banda.
 
-Por exemplo, se você usar o armazenamento de tabelas do Azure, um fragmento ocupado pode exigir mais recursos do que estão disponíveis para uma única partição tratar solicitações. (Há um limite para o volume de solicitações que podem ser identificadas por uma única partição em um determinado período de tempo. Consulte a página [Metas de desempenho e escalabilidade do Armazenamento do Azure] no site da Microsoft para obter mais detalhes.)
+Por exemplo, se você usar o armazenamento de tabelas do Azure, um fragmento ocupado pode exigir mais recursos do que estão disponíveis para uma única partição tratar solicitações. (Há um limite para o volume de solicitações que podem ser identificadas por uma única partição em um determinado período de tempo. Consulte a página [Azure Storage Scalability and Performance Targets] no site da Microsoft para obter mais detalhes.)
 
  Nesse caso, o fragmento pode precisar ser reparticionado para distribuir a carga. Se o tamanho total ou a taxa de transferência dessas tabelas exceder a capacidade de uma conta de armazenamento, pode ser necessário criar mais contas de armazenamento e distribuir as tabelas entre essas contas. Se o número de contas de armazenamento exceder o número de contas disponíveis para uma assinatura, pode ser necessário usar várias assinaturas.
 
@@ -264,7 +264,7 @@ Basicamente, o armazenamento de tabelas e o armazenamento de blobs são reposit�
 * **Armazenamento com redundância de zona**, que mantém três cópias de dados distribuídas em diferentes datacenters na mesma região (ou em duas regiões geograficamente próximas). Essa forma de redundância pode fornecer proteção contra desastres que ocorrem em um único datacenter, mas não pode proteger contra desconexões de rede de grande escala que afetam uma região inteira. Observe que o armazenamento com redundância de zona está disponível apenas para blobs de blocos.
 * **Armazenamento com redundância geográfica**, que mantém seis cópias de dados: três cópias em uma região (sua região local) e as outras três cópias em uma região remota. Essa forma de redundância fornece o nível mais alto de proteção contra desastres.
 
-A Microsoft publicou alvos de escalabilidade para Armazenamento do Azure. Para obter mais informações, visite a página [Metas de desempenho e escalabilidade do Armazenamento do Azure] no site da Microsoft. Atualmente, a capacidade da conta de armazenamento total não pode exceder 500 TB. (Isso inclui o tamanho dos dados que são mantidos no armazenamento de tabelas, o armazenamento de arquivos e no armazenamento de blobs, bem como mensagens pendentes que são mantidas na fila de armazenamento).
+A Microsoft publicou alvos de escalabilidade para Armazenamento do Azure. Para obter mais informações, visite a página [Azure Storage Scalability and Performance Targets] no site da Microsoft. Atualmente, a capacidade da conta de armazenamento total não pode exceder 500 TB. (Isso inclui o tamanho dos dados que são mantidos no armazenamento de tabelas, o armazenamento de arquivos e no armazenamento de blobs, bem como mensagens pendentes que são mantidas na fila de armazenamento).
 
 A taxa de solicitação máxima para uma conta de armazenamento (supondo um tamanho de entidade, blob ou mensagem de 1 KB) é de 20.000 solicitações por segundo. Uma conta de armazenamento tem, no máximo, 1000 IOPS (8 KB de tamanho) por compartilhamento de arquivos. Se seu sistema provavelmente excede esses limites, considere o particionamento da carga entre várias contas de armazenamento. Uma única assinatura do Azure pode criar até 200 contas de armazenamento. No entanto, observe que esses limites podem ser alterados com o tempo.
 
@@ -274,7 +274,7 @@ O armazenamento de tabelas do Azure é um repositório de chave/valor que foi de
 * **A chave de partição**. Esse é um valor de cadeia de caracteres que determina em qual partição o armazenamento de tabelas do Azure colocará a entidade. Todas as entidades com a mesma chave de partição serão armazenadas na mesma partição.
 * **A chave de linha**. Este é outro valor de cadeia de caracteres que identifica a entidade na partição. Todas as entidades em uma partição são classificadas lexicalmente, em ordem crescente, por essa chave. A combinação de chave de linha/chave de partição deve ser exclusiva para cada entidade e não pode exceder 1 KB.
 
-O restante dos dados de uma entidade consiste em campos definidos pelo aplicativo. Nenhum esquema específico é imposto e cada linha pode conter um conjunto diferente de campos definidos pelo aplicativo. A única limitação é que o tamanho máximo de uma entidade (incluindo as chaves de partição e de linha) atualmente é de 1 MB. O tamanho máximo de uma tabela é de 200 TB, embora esses números possam ser alterados no futuro. (Verifique a página [Metas de desempenho e escalabilidade do Armazenamento do Azure] no site da Microsoft para obter as informações mais recentes sobre esses limites).
+O restante dos dados de uma entidade consiste em campos definidos pelo aplicativo. Nenhum esquema específico é imposto e cada linha pode conter um conjunto diferente de campos definidos pelo aplicativo. A única limitação é que o tamanho máximo de uma entidade (incluindo as chaves de partição e de linha) atualmente é de 1 MB. O tamanho máximo de uma tabela é de 200 TB, embora esses números possam ser alterados no futuro. (Verifique a página [Azure Storage Scalability and Performance Targets] no site da Microsoft para obter as informações mais recentes sobre esses limites).
 
 Se você estiver tentando armazenar entidades que excedem essa capacidade, considere dividi-las em várias tabelas. Use o particionamento vertical para dividir os campos nos grupos que têm mais probabilidade de serem acessados juntos.
 
@@ -303,7 +303,7 @@ Considere os seguintes pontos ao criar entidades para o armazenamento de tabelas
   > Se uma entidade tiver uma chave natural, use-a como a chave de partição e especifique uma cadeia de caracteres vazia como a chave de linha. Se uma entidade tiver uma chave composta que consiste em duas propriedades, selecione a propriedade com alteração mais lenta como a chave de partição e a outra como a chave de linha. Se uma entidade tiver mais de duas propriedades de chave, use uma concatenação de propriedades para fornecer as chaves de partição e de linha.
   >
   >
-* Se você executa regularmente consultas que pesquisam dados usando campos que não sejam as chaves de partição e de linha, considere a implementação do [padrão da tabela de índice].
+* Se você executa regularmente consultas que pesquisam dados usando campos que não sejam as chaves de partição e de linha, considere a implementação do [Index Table Pattern].
 * Se você gerar chaves de partição usando uma sequência monotônica crescente ou decrescente (como "0001", "0002", "0003" e assim por diante) e cada partição contiver apenas uma quantidade limitada de dados, o armazenamento de tabelas do Azure poderá agrupar fisicamente essas partições no mesmo servidor. Esse mecanismo pressupõe que o aplicativo tem mais probabilidade de executar consultas em um intervalo contíguo de partições (consultas do intervalo) e é otimizado para esse caso. No entanto, essa abordagem pode levar a pontos de acesso focados em um único servidor, pois todas as inserções das novas entidades provavelmente estão concentradas em uma ou na outra extremidade dos intervalos contíguos. Ela também pode reduzir a escalabilidade. Para distribuir a carga mais uniformemente entre os servidores, considere o hash da partição para tornar a sequência mais aleatória.
 * O armazenamento de tabela do Azure dá suporte a operações transacionais para entidades que pertencem à mesma partição. Isso significa que um aplicativo pode executar várias operações de inserção, atualização, exclusão, substituição ou mesclagem como uma unidade atômica (desde que a transação não inclua mais de 100 entidades e que a carga da solicitação não exceda 4 MB). As operações que abrangem várias partições não são transacionais e podem exigir que você implemente a consistência eventual, conforme descrito em [Data consistency primer](Prévia de consistência de dados). Para obter mais informações sobre o armazenamento de tabelas e transações, visite a página [Performing entity group transactions] (Executando transações do grupo de entidades) no site da Microsoft.
 * Dê atenção especial à granularidade da chave de partição pelos seguintes motivos:
@@ -311,10 +311,10 @@ Considere os seguintes pontos ao criar entidades para o armazenamento de tabelas
   * Usar uma chave de partição exclusiva para todas as entidades faz com que o serviço de armazenamento de tabelas crie uma partição separada para cada entidade, possivelmente, resultando em um grande número de partições pequenas (dependendo do tamanho das entidades). Essa abordagem é mais escalonável do que usar uma chave de partição única, mas as transações de grupo da entidade não são possíveis. Além disso, as consultas que buscam mais de uma entidade podem envolver a leitura em mais de um servidor. No entanto, se o aplicativo executar consultas do intervalo, o uso de uma sequência monotônica para gerar as chaves de partição pode ajudar a otimizar essas consultas.
   * Compartilhar a chave da partição entre um subconjunto de entidades torna possível o agrupamento de entidades relacionadas na mesma partição. As operações que envolvem entidades relacionadas podem ser executadas usando transações de grupo da entidade, e as consultas que buscam um conjunto de entidades relacionadas podem ser atendidas acessando um único servidor.
 
-Para saber mais sobre como particionar dados no armazenamento de tabelas do Azure, confira o artigo [Guia de design de tabela de armazenamento do Azure] no site da Microsoft.
+Para saber mais sobre como particionar dados no armazenamento de tabelas do Azure, confira o artigo [Azure Storage Table Design Guide] no site da Microsoft.
 
 ## <a name="partitioning-azure-blob-storage"></a>Particionamento do armazenamento de blobs do Azure
-O armazenamento de blobs do Azure possibilita manter objetos binários grandes; atualmente até 5 TB para blobs de blocos ou 1 TB para blobs de páginas. (Para obter as informações mais recentes, acesse a página [Metas de desempenho e escalabilidade do Armazenamento do Azure] no site da Microsoft.) Use blobs de blocos em cenários como streaming em que é necessário carregar ou baixar grandes volumes de dados rapidamente. Use blobs de páginas para aplicativos que exigem o acesso aleatório em vez do acesso serial a partes dos dados.
+O armazenamento de blobs do Azure possibilita manter objetos binários grandes; atualmente até 5 TB para blobs de blocos ou 1 TB para blobs de páginas. (Para obter as informações mais recentes, acesse a página [Azure Storage Scalability and Performance Targets] no site da Microsoft.) Use blobs de blocos em cenários como streaming em que é necessário carregar ou baixar grandes volumes de dados rapidamente. Use blobs de páginas para aplicativos que exigem o acesso aleatório em vez do acesso serial a partes dos dados.
 
 Cada blob (de blocos ou páginas) é mantido em um contêiner em uma conta de armazenamento do Azure. Você pode usar contêineres para agrupar blobs relacionados que tenham os mesmos requisitos de segurança. Esse agrupamento é lógico em vez de físico. Dentro de um contêiner, cada blob tem um nome exclusivo.
 
@@ -527,9 +527,9 @@ Ao considerar estratégias para implementar a consistência de dados, os seguint
 
 * A página [Data Consistency Primer] , no site da Microsoft, descreve estratégias para manter a consistência em um ambiente distribuído como a nuvem.
 * A página [Data partitioning guidance] , no site da Microsoft, fornece uma visão geral da criação de partições para atender a vários critérios em uma solução distribuída.
-* O [Sharding pattern] \(Padrão de fragmentação) , conforme descrito no site da Microsoft, resume algumas estratégias comuns para a fragmentação de dados.
-* O [padrão da tabela de índice] , conforme descrito no site da Microsoft, ilustra como criar índices secundários sobre os dados. Um aplicativo pode recuperar dados rapidamente com essa abordagem, usando consultas que não referenciam a chave primária de uma coleção.
-* O [padrão de exibição materializada] , conforme descrito no site da Microsoft, descreve como gerar exibições pré-populadas que resumem os dados para permitir operações de consulta rápidas. Essa abordagem poderá ser útil em um armazenamento de dados particionado se as partições que contêm os dados sendo resumidos forem distribuídas em vários locais.
+* O [Sharding pattern] , conforme descrito no site da Microsoft, resume algumas estratégias comuns para a fragmentação de dados.
+* O [Index Table Pattern] , conforme descrito no site da Microsoft, ilustra como criar índices secundários sobre os dados. Um aplicativo pode recuperar dados rapidamente com essa abordagem, usando consultas que não referenciam a chave primária de uma coleção.
+* O [Materialized View Pattern] , conforme descrito no site da Microsoft, descreve como gerar exibições pré-populadas que resumem os dados para permitir operações de consulta rápidas. Essa abordagem poderá ser útil em um armazenamento de dados particionado se as partições que contêm os dados sendo resumidos forem distribuídas em vários locais.
 * O artigo [Using Azure Content Delivery Network] , no site da Microsoft, fornece instruções adicionais sobre como configurar e usar a Rede de Distribuição de Conteúdo com o Azure.
 
 ## <a name="more-information"></a>Mais informações
@@ -538,7 +538,7 @@ Ao considerar estratégias para implementar a consistência de dados, os seguint
 * A página [Dimensionamento usando a ferramenta de divisão/mesclagem do Banco de Dados Elástico] , no site da Microsoft, contém informações sobre como usar o serviço de divisão/mesclagem para gerenciar fragmentos do Banco de Dados Elástico.
 * A página [Metas de desempenho e escalabilidade do Armazenamento do Azure](https://msdn.microsoft.com/library/azure/dn249410.aspx) , no site da Microsoft, documenta os limites atuais de tamanho e taxa de transferência do Armazenamento do Azure.
 * A página [Performing entity group transactions] , no site da Microsoft, fornece informações detalhadas sobre como implementar operações transacionais nas entidades que são armazenadas no armazenamento de tabelas do Azure.
-* O artigo [Guia de Design de tabela de armazenamento do Azure] , no site da Microsoft, contém informações detalhadas sobre como particionar dados no armazenamento de tabelas do Azure.
+* O artigo [Azure Storage Table Design Guide] , no site da Microsoft, contém informações detalhadas sobre como particionar dados no armazenamento de tabelas do Azure.
 * A página [Using Azure Content Delivery Network], no site da Microsoft, descreve como replicar os dados que são mantidos no armazenamento de blobs do Azure usando a Rede de Distribuição de Conteúdo do Azure.
 * A página [O que é o Azure Search?] , no site da Microsoft, fornece uma descrição completa dos recursos que estão disponíveis com o Azure Search.
 * A página [Limites de serviço no Azure Search] , no site da Microsoft, contém informações sobre a capacidade de cada instância do Azure Search.
@@ -552,11 +552,11 @@ Ao considerar estratégias para implementar a consistência de dados, os seguint
 [azure-limits]: /azure/azure-subscription-service-limits
 [Rede de Distribuição de Conteúdo do Azure]: /azure/cdn/cdn-overview
 [Cache Redis do Azure]: http://azure.microsoft.com/services/cache/
-[Metas de desempenho e escalabilidade do Armazenamento do Azure]: /azure/storage/storage-scalability-targets
-[Guia de Design de tabela de armazenamento do Azure]: /azure/storage/storage-table-design-guide
+[Azure Storage Scalability and Performance Targets]: /azure/storage/storage-scalability-targets
+[Azure Storage Table Design Guide]: /azure/storage/storage-table-design-guide
 [Criando uma solução Poliglota]: https://msdn.microsoft.com/library/dn313279.aspx
 [cosmos-db-ru]: /azure/cosmos-db/request-units
-[Acesso a dados para soluções altamente escalonáveis: usando o SQL, o NoSQL e a persistência poliglota]: https://msdn.microsoft.com/library/dn271399.aspx
+[Data Access for Highly-Scalable Solutions: Using SQL, NoSQL, and Polyglot Persistence]: https://msdn.microsoft.com/library/dn271399.aspx
 [Data consistency primer]: http://aka.ms/Data-Consistency-Primer
 [Data Partitioning Guidance]: https://msdn.microsoft.com/library/dn589795.aspx
 [Data Types]: http://redis.io/topics/data-types
@@ -565,8 +565,8 @@ Ao considerar estratégias para implementar a consistência de dados, os seguint
 [event-hubs]: /azure/event-hubs
 [Federations Migration Utility]: https://code.msdn.microsoft.com/vstudio/Federations-Migration-ce61e9c1
 [diretrizes e recomendações para Coleções Confiáveis no Azure Service Fabric]: /azure/service-fabric/service-fabric-reliable-services-reliable-collections-guidelines
-[padrão da tabela de índice]: http://aka.ms/Index-Table-Pattern
-[padrão de exibição materializada]: http://aka.ms/Materialized-View-Pattern
+[Index Table Pattern]: http://aka.ms/Index-Table-Pattern
+[Materialized View Pattern]: http://aka.ms/Materialized-View-Pattern
 [Consulta de vários fragmentos]: /azure/sql-database/sql-database-elastic-scale-multishard-querying
 [Visão geral do Azure Service Fabric]: /azure/service-fabric/service-fabric-overview
 [Particionar serviços confiáveis do Service Fabric]: /azure/service-fabric/service-fabric-concepts-partitioning
