@@ -3,12 +3,12 @@ title: Centro de Arquitetura do Azure
 description: O Centro de Arquitetura do Azure é o centro oficial de orientação, plantas, padrões e práticas recomendados para criar soluções com o Microsoft Azure. Ele é curadoria pela equipe de padrões e práticas da Microsoft.
 layout: LandingPage
 ms.topic: landing-page
-ms.openlocfilehash: 544196faa7156c5636b03d3f402bc48dcc63975f
-ms.sourcegitcommit: 776b8c1efc662d42273a33de3b82ec69e3cd80c5
+ms.openlocfilehash: ea3784a23c73c7f0eb103a0cb19e2c6b70ea9d7c
+ms.sourcegitcommit: 25bf02e89ab4609ae1b2eb4867767678a9480402
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/12/2018
-ms.locfileid: "38987583"
+ms.lasthandoff: 09/14/2018
+ms.locfileid: "45584639"
 ---
 # <a name="azure-architecture-center"></a>Centro de Arquitetura do Azure
 
@@ -46,16 +46,16 @@ ms.locfileid: "38987583"
             </div>
         </a>
     </li>
-    <!-- Cloud design patterns -->
+    <!-- Cloud Adoption -->
     <li>
-        <a href="/azure/architecture/patterns/">
+        <a href="/azure/architecture/cloud-adoption/">
             <div class="cardSize">
                 <div class="cardPadding">
                     <div class="card">
-                        <img src="_images/cloud-design-patterns.svg" alt="" />
+                        <img src="_images/cloud-adoption.svg" alt="" />
                         <div class="cardText">
-                            <h3>Padrões de design na nuvem</h3>
-                            <p>Padrões de design para desenvolvedores e arquitetos de solução. Cada padrão descreve um problema, um padrão que resolva o problema e um exemplo baseado no Azure.</p>
+                            <h3>Adoção de Nuvem do Enterprise</h3>
+                            <p>Este guia descreve um processo para criar uma estratégia de adoção da nuvem de toda a organização. Ele se concentra na preparação da organização, governança e infraestrutura.</p>
                         </div>
                     </div>
                 </div>
@@ -166,6 +166,26 @@ ms.locfileid: "38987583"
             </div>
         </a>
     </li>
+    <!-- design patterns -->
+    <li>
+        <a href="/azure/architecture/microservices">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card">
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="_images/cloud-design-patterns.svg" alt="" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h3>Padrões de design na nuvem</h3>
+                            <p>Padrões de design para desenvolvedores e arquitetos de solução. Cada padrão descreve um problema, um padrão que resolva o problema e um exemplo baseado no Azure.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li>
     <!-- Checklists -->
     <li>
         <a href="/azure/architecture/checklist/">
@@ -240,26 +260,6 @@ ms.locfileid: "38987583"
                         <div class="cardText">
                             <h3>Antipadrões de Desempenho</h3>
                             <p>Como detectar e corrigir alguns comuns causas de problemas de desempenho e escalabilidade em aplicativos de nuvem.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </li>
-    <!-- Multitenant identity -->
-    <li>
-        <a href="/azure/architecture/multitenant-identity">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                                <img src="_images/multitenant-identity.svg" alt="" />
-                            </div>
-                        </div>
-                        <div class="cardText">
-                            <h3>Gerenciamento de Identidades para Aplicativos Multilocatários</h3>
-                            <p>Entenda as práticas recomendadas para multilocação, ao usar o Azure AD para gerenciamento de identidades.</p>
                         </div>
                     </div>
                 </div>
