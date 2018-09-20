@@ -5,12 +5,12 @@ keywords: Especialistas em AWS, comparação com o Azure, comparação com o AWS
 author: lbrader
 ms.date: 03/24/2017
 pnp.series.title: Azure for AWS Professionals
-ms.openlocfilehash: 0af0890d383d22db0ed9d3b445cdd5b561b498ae
-ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
+ms.openlocfilehash: f90186ba36f035871ec918c65b05eebe44190ffa
+ms.sourcegitcommit: f1dcc388c8b4fc983549c36d7e6b009fa1f072ba
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/16/2018
-ms.locfileid: "31012613"
+ms.lasthandoff: 09/19/2018
+ms.locfileid: "46329888"
 ---
 # <a name="azure-for-aws-professionals"></a>Azure para profissionais do AWS
 
@@ -117,7 +117,7 @@ A tabela a seguir resume cada opção.
 | &nbsp; | Conjunto de disponibilidade | Zona de disponibilidade | Região emparelhada |
 |--------|------------------|-------------------|---------------|
 | Escopo da falha | Rack | Datacenter | Região |
-| Roteamento de solicitação | Balanceador de carga | Load Balancer entre zonas | Gerenciador de Tráfego |
+| Roteamento de solicitação | Load Balancer | Load Balancer entre zonas | Gerenciador de Tráfego |
 | Latência da rede | Muito baixa | Baixo | Média a alta |
 | Rede Virtual  | VNET | VNET | Emparelhamento VNET entre regiões |
 
@@ -156,7 +156,7 @@ O backup do [armazenamento com redundância geográfica](https://azure.microsoft
 
 ## <a name="services"></a>Serviços
 
-Confira a [matriz de comparação completa de serviços AWS e Azure](https://aka.ms/azure4aws-services) para obter uma lista completa de como todos os serviços são mapeados entre as plataformas.
+Para obter uma lista como os serviços são mapeados entre plataformas, confira [comparação dos serviços do AWS para o Azure](./services.md).
 
 Nem todos os produtos e serviços do Azure estão disponíveis em todas as regiões. Confira a página [Produtos por região](https://azure.microsoft.com/regions/services/) para obter detalhes. Você pode encontrar as garantias de tempo de atividade e políticas de crédito de tempo de inatividade para cada produto ou serviço do Azure na página [Contratos de nível de serviço](https://azure.microsoft.com/support/legal/sla/).
 
@@ -175,8 +175,6 @@ Embora os tipos de instâncias do AWS e os tamanhos de máquinas virtuais do Azu
 -   [Tamanhos das máquinas virtuais no Azure (Linux)](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/)
 
 Diferentemente da cobrança por segundo do AWS, as VMs sob demanda do Azure são cobradas por minuto.
-
-O Azure não tem equivalentes das instâncias especiais ou dos hosts dedicados do EC2.
 
 #### <a name="ebs-and-azure-storage-for-vm-disks"></a>EBS e Armazenamento do Azure para discos de VM
 
@@ -428,8 +426,6 @@ Os Hubs de Notificação não dão suporte ao envio de SMS ou mensagens de email
 
 ## <a name="next-steps"></a>Próximas etapas
 
--   [Matriz de comparação completa de serviços AWS e Azure](https://aka.ms/azure4aws-services)
-
 -   [Visão geral interativa da plataforma Azure](http://azureplatform.azurewebsites.net/)
 
 -   [Introdução ao Azure](https://azure.microsoft.com/get-started/)
@@ -437,8 +433,6 @@ Os Hubs de Notificação não dão suporte ao envio de SMS ou mensagens de email
 -   [Arquiteturas de solução do Azure](https://azure.microsoft.com/solutions/architecture/)
 
 -   [Arquiteturas de referência do Azure](https://azure.microsoft.com/documentation/articles/guidance-architecture/)
-
--   [Padrões e práticas: orientação sobre o Azure](https://azure.microsoft.com/documentation/articles/guidance/)
 
 -   [Curso online gratuito: Microsoft Azure para especialistas em AWS](http://aka.ms/azureforaws)
 
