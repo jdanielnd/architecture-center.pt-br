@@ -3,12 +3,12 @@ title: Executar uma VM do Linux no Azure
 description: Como executar uma VM Linux no Azure, prestando atenção na escalabilidade, na resiliência, na capacidade de gerenciamento e na segurança.
 author: telmosampaio
 ms.date: 04/03/2018
-ms.openlocfilehash: 3d0492d05280e8c296cdfc4157aa0387a70337bf
-ms.sourcegitcommit: 58d93e7ac9a6d44d5668a187a6827d7cd4f5a34d
+ms.openlocfilehash: b53db016a594bace880aaac4e16f0586fe3057b1
+ms.sourcegitcommit: 25bf02e89ab4609ae1b2eb4867767678a9480402
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/02/2018
-ms.locfileid: "37142311"
+ms.lasthandoff: 09/14/2018
+ms.locfileid: "45584724"
 ---
 # <a name="run-a-linux-vm-on-azure"></a>Executar uma VM do Linux no Azure
 
@@ -133,6 +133,8 @@ Use os [logs de auditoria][audit-logs] para ver as ações de provisionamento e 
 
 **Criptografia de dados.** Considere o uso do [Azure Disk Encryption][disk-encryption] se você precisar criptografar os discos do sistema operacional e de dados. 
 
+**Proteção contra DDoS**. É recomendável habilitar a [Proteção contra DDoS Standard](/azure/virtual-network/ddos-protection-overview), que fornece a mitigação de DDoS adicional para os recursos em uma VNet. Embora a proteção contra DDoS básica seja habilitada automaticamente como parte da plataforma Azure, a Proteção contra DDoS Standard fornece funcionalidades de mitigação ajustadas especificamente para os recursos da Rede Virtual do Azure.  
+
 ## <a name="deploy-the-solution"></a>Implantar a solução
 
 Uma implantação está disponível no [GitHub][github-folder]. Ela implanta o seguinte:
@@ -142,7 +144,7 @@ Uma implantação está disponível no [GitHub][github-folder]. Ela implanta o s
   * Uma VM que executa a versão mais recente do Ubuntu 16.04.3 LTS.
   * Uma extensão de script personalizado de exemplo que formata os dois discos de dados e implanta o Servidor HTTP do Apache para a VM do Ubuntu.
 
-### <a name="prerequisites"></a>pré-requisitos
+### <a name="prerequisites"></a>Pré-requisitos
 
 [!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 

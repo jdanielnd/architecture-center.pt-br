@@ -4,12 +4,12 @@ description: Convenções de nomenclatura para recursos do Azure. Como nomear m�
 author: telmosampaio
 ms.date: 05/18/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: 8aa0b46d9f43107cfa4ae4be3160900249365702
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.openlocfilehash: 625f672c80b0256e93932b72367768f37c1e72f4
+ms.sourcegitcommit: f1dcc388c8b4fc983549c36d7e6b009fa1f072ba
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43326313"
+ms.lasthandoff: 09/19/2018
+ms.locfileid: "46329871"
 ---
 # <a name="naming-conventions"></a>Convenções de nomenclatura
 
@@ -45,7 +45,7 @@ Este é um padrão recomendado para nomear assinaturas:
 | Contoso |IT |InternalApps |Produção |Contoso IT InternalApps Produção |
 | Contoso |IT |InternalApps |Desenvolvimento |Contoso IT InternalApps Desenvolvimento |
 
-Para obter mais informações sobre como organizar as assinaturas de grandes empresas, leia nossas [diretrizes de governança de assinatura prescritiva][scaffold].
+Para obter mais informações sobre como organizar as assinaturas de grandes empresas, consulte [Scaffold corporativo do Azure - governança de assinatura prescritiva][scaffold].
 
 ## <a name="use-affixes-to-avoid-ambiguity"></a>Use afixos para evitar ambiguidade
 
@@ -195,4 +195,4 @@ Não é possível modificar o nome de uma conta de armazenamento ou um contêine
 
 <!-- links -->
 
-[scaffold]: /azure/azure-resource-manager/resource-manager-azure-scaffold
+[scaffold]: /azure/architecture/cloud-adoption/appendix/azure-scaffold

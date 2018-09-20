@@ -3,12 +3,12 @@ title: Aplicativo de n camadas com SQL Server
 description: Como implementar uma arquitetura multicamadas no Azure, para obter disponibilidade, segurança, escalabilidade e capacidade de gerenciamento.
 author: MikeWasson
 ms.date: 07/19/2018
-ms.openlocfilehash: fc761e940a25c4667146db9598d944bac2c32496
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.openlocfilehash: 3a291b9492c94450a42de96bea2135190c163fe7
+ms.sourcegitcommit: 25bf02e89ab4609ae1b2eb4867767678a9480402
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43326049"
+ms.lasthandoff: 09/14/2018
+ms.locfileid: "45584741"
 ---
 # <a name="n-tier-application-with-sql-server"></a>Aplicativo de n camadas com SQL Server
 
@@ -154,6 +154,8 @@ Considere adicionar uma NVA (solução de virtualização de rede) para criar um
 
 Criptografe dados confidenciais em repouso e use o [Azure Key Vault][azure-key-vault] para gerenciar as chaves de criptografia de banco de dados. O Key Vault pode armazenar chaves de criptografia em HSMs (módulos de segurança de hardware). Para mais informações, consulte [Configurar a Integração do Azure Key Vault para o SQL nas VMs do Azure][sql-keyvault]. Também é recomendado para armazenar segredos do aplicativo, como cadeias de caracteres de conexão de banco de dados, no cofre de chaves.
 
+É recomendável habilitar a [Proteção contra DDoS Standard](/azure/virtual-network/ddos-protection-overview), que fornece a mitigação de DDoS adicional para os recursos em uma VNet. Embora a proteção contra DDoS básica seja habilitada automaticamente como parte da plataforma Azure, a Proteção contra DDoS Standard fornece funcionalidades de mitigação ajustadas especificamente para os recursos da Rede Virtual do Azure.  
+
 ## <a name="deploy-the-solution"></a>Implantar a solução
 
 Uma implantação para essa arquitetura de referência está disponível no [GitHub][github-folder]. Observe que a implantação inteira pode levar até duas horas, que inclui a execução de scripts para configurar o AD DS, o cluster de failover do Windows Server e o grupo de disponibilidade do SQL Server.
@@ -220,7 +222,7 @@ Uma implantação para essa arquitetura de referência está disponível no [Git
     "witnessStorageAccountKey": "[replace-with-storagekey]"
     ```
 
-8. No arquivo `n-tier-windows.json`, procure todas as instâncias de `[replace-with-password]` e substitua-as por uma senha mais forte. Salve o arquivo.
+8. No arquivo `n-tier-windows.json`, procure todas as instâncias de `[replace-with-password]` e `[replace-with-sql-password]` substitua-as por uma senha forte. Salve o arquivo.
 
     > [!NOTE]
     > Se você alterar o nome de usuário do administrador, também terá que atualizar os blocos `extensions` no arquivo JSON. 

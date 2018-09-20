@@ -2,13 +2,13 @@
 title: Recuperação de desastre para aplicativos do Azure
 description: Visão geral técnica e informações detalhadas sobre como projetar aplicativos para recuperação de desastre no Microsoft Azure.
 author: adamglick
-ms.date: 05/26/2017
-ms.openlocfilehash: 2d890e479e008e03dcfce9b7240f8bcbaf270372
-ms.sourcegitcommit: e8f4786b187697b1bea374e5f35f217c65d2dfe0
+ms.date: 09/12/2018
+ms.openlocfilehash: 4f879445154e37502bbeeeb90939737b6072e6ec
+ms.sourcegitcommit: 25bf02e89ab4609ae1b2eb4867767678a9480402
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/02/2018
-ms.locfileid: "37343372"
+ms.lasthandoff: 09/14/2018
+ms.locfileid: "45584792"
 ---
 # <a name="disaster-recovery-for-azure-applications"></a>Recuperação de desastre para aplicativos do Azure
 
@@ -118,6 +118,9 @@ Você também pode usar uma abordagem mais manual para o backup e restauração.
 
 A redundância interna do Armazenamento do Azure cria duas réplicas do arquivo de backup na mesma região. No entanto, a frequência de execução do processo de backup determina o RPO, que é a quantidade de dados que você pode perder em cenários de desastre. Por exemplo, imagine que você execute um backup no início de cada hora e um desastre ocorre dois minutos antes do início da hora. Você perde 58 minutos de dados gravados após o último backup ter sido executado. Além disso, para se proteger de uma interrupção do serviço de toda a região, você deve copiar os arquivos BACPAC para uma região alternativa. Depois, você tem a opção de restaurar esses backups na região alternativa. Para obter mais detalhes, confira [Visão geral: continuidade de negócios em nuvem e recuperação de desastre do banco de dados com o banco de dados SQL](/azure/sql-database/sql-database-business-continuity/).
 
+#### <a name="sql-data-warehouse"></a>SQL Data Warehouse
+Para o SQL Data Warehouse, use [backups geográficos](/azure/sql-data-warehouse/backup-and-restore#geo-backups) para restaurar uma região emparelhada para recuperação de desastre. Esses backups são realizados a cada 24 horas e podem ser restaurados em 20 minutos na região emparelhada. Esse recurso está ativado por padrão para todos os data warehouses do SQL. Para obter mais informações sobre como restaurar seu data warehouse, confira [Restaurar um banco de dados excluído usando o PowerShell](/azure/sql-data-warehouse/sql-data-warehouse-restore#restore-from-an-azure-geographical-region-using-powershell).
+
 #### <a name="azure-storage"></a>Armazenamento do Azure
 Para o Armazenamento do Azure, você pode desenvolver um processo de backup personalizado ou usar uma das diversas ferramentas de backup de terceiros. Observe que a maioria dos designs de aplicativo tem complexidades adicionais em que os recursos de armazenamento fazem referência um ao outro. Por exemplo, considere um banco de dados SQL que tem uma coluna com vínculo a um blob no Armazenamento do Azure. Se os backups não acontecerem simultaneamente, o banco de dados poderá ter um ponteiro voltado a um blob do qual não foi feito backup antes da falha. O plano de recuperação de desastre ou aplicativo deve implementar processos para tratar dessa inconsistência após uma recuperação.
 
@@ -127,7 +130,7 @@ Outras plataformas hospedadas em infraestrutura como serviço (IaaS), como Elast
 ### <a name="reference-data-pattern-for-disaster-recovery"></a>Padrão de dados de referência para a recuperação de desastre
 Os dados de referência são somente leitura e compatíveis com a funcionalidade do aplicativo. Normalmente, eles não mudam com muita frequência. Embora o backup e restauração seja um método para lidar com interrupções de serviço em toda uma região, o RTO é relativamente longo. Quando você implanta o aplicativo em uma região secundária, algumas estratégias podem melhorar o RTO para dados de referência.
 
-Como os dados de referência mudam com pouca frequência, você pode melhorar o RTO mantendo uma cópia permanente dos dados de referência na região secundária. Isso elimina o tempo necessário para restaurar backups no caso de um desastre. Para atender aos requisitos de recuperação de desastre em várias regiões, você deve implantar o aplicativo e os dados de referência juntos em várias regiões. Conforme mencionado no [Padrão de dados de referência para alta disponibilidade](high-availability-azure-applications.md#reference-data-pattern-for-high-availability), você pode implantar dados de referência na própria função, no armazenamento externo ou em uma combinação de ambos.
+Como os dados de referência mudam com pouca frequência, você pode melhorar o RTO mantendo uma cópia permanente dos dados de referência na região secundária. Isso elimina o tempo necessário para restaurar backups no caso de um desastre. Para atender aos requisitos de recuperação de desastre em várias regiões, você deve implantar o aplicativo e os dados de referência juntos em várias regiões. Você pode implantar os dados de referência na própria função, no armazenamento externo ou em uma combinação de ambos.
 
 O modelo de implantação de dados de referência em nós de computação atende implicitamente aos requisitos de recuperação de desastre. A implantação de dados de referência no Banco de Dados SQL requer que você implante uma cópia dos dados de referência em cada região. A mesma estratégia se aplica ao Armazenamento do Azure. Você deve implantar uma cópia de todos os dados de referência que são armazenados no Armazenamento do Azure nas regiões primária e secundária.
 
@@ -153,7 +156,7 @@ Uma implementação potencial pode fazer uso da fila intermediária no exemplo a
 
 > [!NOTE]
 > A maior parte deste documento se concentra na PaaS (plataforma como serviço). No entanto, opções adicionais de replicação e disponibilidade para aplicativos híbridos usam as Máquinas Virtuais do Azure. Esses aplicativos híbridos usam IaaS (infraestrutura como serviço) para hospedar o SQL Server em máquinas virtuais no Azure. Isso permite abordagens tradicionais de disponibilidade no SQL Server, como Grupos de Disponibilidade AlwaysOn ou Envio de Logs. Algumas técnicas, como o AlwaysOn, funcionam apenas entre instâncias locais do SQL Server e máquinas virtuais do Azure. Para saber mais, confira [Alta disponibilidade e recuperação de desastres para o SQL Server em Máquinas Virtuais do Azure](/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-high-availability-dr/).
-> 
+>
 > 
 
 #### <a name="reduced-application-functionality-for-transaction-capture"></a>Funcionalidade reduzida do aplicativo para a captura de transação
@@ -299,11 +302,13 @@ Os tópicos a seguir descrevem os serviços do Azure específicos de recuperaç�
 
 | Serviço | Tópico |
 |---------|-------|
+| Banco de Dados do Azure para MySQL | [Visão geral da continuidade dos negócios com o Banco de Dados do Azure para MySQL](/azure/mysql/concepts-business-continuity) |
+| Banco de Dados do Azure para PostgreSQL | [Visão geral da continuidade dos negócios com o Banco de Dados do Azure para PostgreSQL](/azure/postgresql/concepts-business-continuity)
 | Serviços de Nuvem | [O que fazer no caso de uma interrupção de serviço do Azure que afete os Serviços de Nuvem do Azure](/azure/cloud-services/cloud-services-disaster-recovery-guidance) |
+| Cosmos DB | [Failover regional automático para a continuidade dos negócios no Azure Cosmos DB](/azure/cosmos-db/regional-failover)
 | Key Vault | [Redundância e disponibilidade de Azure Key Vault](/azure/key-vault/key-vault-disaster-recovery-guidance) |
 |Armazenamento | [O que fazer se uma ocorrer interrupção no Armazenamento do Microsoft Azure](/azure/storage/storage-disaster-recovery-guidance) |
 | Banco de dados SQL | [Restaurar um Banco de Dados SQL ou fazer failover para um secundário](/azure/sql-database/sql-database-disaster-recovery) |
 | Máquinas virtuais | [O que fazer caso uma interrupção de serviço do Azure afete as máquinas virtuais do Azure](/azure/virtual-machines/virtual-machines-disaster-recovery-guidance) |
 | Redes virtuais | [Rede Virtual – Continuidade de Negócios](/azure/virtual-network/virtual-network-disaster-recovery-guidance) |
-
 

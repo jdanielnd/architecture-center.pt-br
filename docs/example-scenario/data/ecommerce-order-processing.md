@@ -3,12 +3,12 @@ title: Processamento de pedidos escalonável no Azure
 description: Cenário de exemplo para a criação de um pipeline de processamento de pedidos altamente escalonável usando o Azure Cosmos DB.
 author: alexbuckgit
 ms.date: 07/10/2018
-ms.openlocfilehash: 9fa0dc7c564270ee811b56169e05f7e743664838
-ms.sourcegitcommit: c4106b58ad08f490e170e461009a4693578294ea
+ms.openlocfilehash: aa7281263db7cc72781b740941f3b86dad025baa
+ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 08/10/2018
-ms.locfileid: "43016046"
+ms.lasthandoff: 09/11/2018
+ms.locfileid: "44389104"
 ---
 # <a name="scalable-order-processing-on-azure"></a>Processamento de pedidos escalonável no Azure
 
@@ -41,7 +41,7 @@ Essa arquitetura fornece detalhes sobre os principais componentes de um pipeline
 
 ### <a name="components"></a>Componentes
 
-* O [Cosmos DB][docs-cosmos-db] é um serviço de banco de dados multimodelo distribuído globalmente da Microsoft projetado para permitir que você dimensione suas soluções de forma elástica e independente a taxa de transferência e armazenamento em qualquer número de regiões geográficas. Ele oferece garantias de taxa de transferência, disponibilidade, latência e consistência com contratos de nível de serviço (SLAs) abrangentes. Esse cenário usa o Cosmos DB para os armazenamentos do fluxo de eventos e de instantâneos, e aproveita os [recursos do Feed de Alterações do Cosmos DB][docs-cosmos-db-change-feed] para fornecer consistência de dados e recuperação de falhas. 
+* O [Cosmos DB][docs-cosmos-db] é um serviço de banco de dados multimodelo distribuído globalmente da Microsoft projetado para permitir que você dimensione suas soluções de forma elástica e independente a taxa de transferência e armazenamento em qualquer número de regiões geográficas. Ele oferece garantias de taxa de transferência, disponibilidade, latência e consistência com contratos de nível de serviço (SLAs) abrangentes. Esse cenário usa o Cosmos DB para os armazenamentos do fluxo de eventos e de instantâneos, e aproveita os [recursos do Feed de Alterações do Cosmos DB][docs-cosmos-db-change-feed] para fornecer consistência de dados e recuperação de falhas.
 * [Apache Kafka no HDInsight] [ docs-kafka] é uma implementação de serviço gerenciado do Apache Kafka, uma plataforma de streaming distribuída de software livre para criar aplicativos e pipelines de dados de streaming em tempo real. O Kafka também fornece funcionalidade de agente de mensagem semelhante a uma fila de mensagens, para publicar e assinar os fluxos de dados nomeados. Esse cenário usa Kafka para processar a entrada, bem como eventos downstream no pipeline de processamento de pedidos. 
 
 ## <a name="considerations"></a>Considerações
@@ -83,13 +83,13 @@ A moeda do Azure Cosmos DB é a unidade de solicitação (RU). Com unidades de s
 
 Fornecemos três perfis de custo de exemplo com base na quantidade de tráfego esperado:
 
-* [Pequeno][small-pricing]: Corresponde a 5 RUs reservadas com um armazenamento de dados de 1 TB no Cosmos DB e um cluster Kafka pequeno (D3 v2).
-* [Médio][medium-pricing]: Corresponde a 50 RUs reservadas com um armazenamento de dados de 10 TB no Cosmos DB e um cluster Kafka médio (D4 v2).
-* [Grande][large-pricing]: Corresponde a 500 RUs reservadas com um armazenamento de dados de 30 TB no Cosmos DB e um cluster Kafka grande (D5 v2).
+* [Pequeno][small-pricing]: esse exemplo de preço refere-se a cinco RUs reservadas com um armazenamento de dados de 1 TB no Cosmos DB e um cluster Kafka pequeno (D3 v2).
+* [Médio][medium-pricing]: esse exemplo de preço refere-se a 50 RUs reservadas com um armazenamento de dados de 10 TB no Cosmos DB e um cluster Kafka médio (D4 v2).
+* [Grande][large-pricing]: esse exemplo de preço refere-se a 500 RUs reservadas com um armazenamento de dados de 30 TB no Cosmos DB e um cluster Kafka grande (D5 v2).
 
 ## <a name="related-resources"></a>Recursos relacionados
 
-Este cenário de exemplo se baseia em uma versão mais extensa dessa arquitetura criada no [Jet.com](https://jet.com) para seu pipeline de processamento de pedidos de ponta a ponta. Para obter mais informações, consulte o [perfil de cliente técnico jet.com][source-document] e [apresentação do jet.com no Build 2018][source-presentation]. 
+Este cenário de exemplo se baseia em uma versão mais extensa dessa arquitetura criada no [Jet.com](https://jet.com) para seu pipeline de processamento de pedidos de ponta a ponta. Para obter mais informações, consulte o [perfil de cliente técnico jet.com][source-document] e [apresentação do jet.com no Build 2018][source-presentation].
 
 Outros recursos relacionados incluem:
 * _[Designing Data-Intensive Applications](https://dataintensive.net/)_ por Martin Kleppmann (O'Reilly Media, 2017).
@@ -104,10 +104,9 @@ Outros recursos relacionados incluem:
 [small-pricing]: https://azure.com/e/3d43949ffbb945a88cc0a126dc3a0e6e
 [medium-pricing]: https://azure.com/e/1f1e7bf2a6ad4f7799581211f4369b9b
 [large-pricing]: https://azure.com/e/75207172ece94cf6b5fb354a2252b333
-[architecture-diagram]: ./images/architecture-diagram-cosmos-db.png
+[architecture-diagram]: ./media/architecture-diagram-cosmos-db.png
 [docs-cosmos-db]: /azure/cosmos-db
 [docs-cosmos-db-change-feed]: /azure/cosmos-db/change-feed
-[docs-cosmos-db-online-backup-and-restore]: /azure/cosmos-db/online-backup-and-restore
 [docs-cosmos-db-regional-failover]: /azure/cosmos-db/regional-failover
 [docs-cosmos-db-guarantees]: /azure/cosmos-db/distribute-data-globally#AvailabilityGuarantees
 [docs-cosmos-db-use-cases]: /azure/cosmos-db/use-cases

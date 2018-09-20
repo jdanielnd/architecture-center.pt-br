@@ -3,16 +3,16 @@ title: Renderização de vídeo em 3D no Azure
 description: Executar cargas de trabalho de HPC nativas no Azure usando o serviço de Lote do Azure
 author: adamboeglin
 ms.date: 07/13/2018
-ms.openlocfilehash: e629e2ba0b9490e534057fee33f7bededa9656af
-ms.sourcegitcommit: c704d5d51c8f9bbab26465941ddcf267040a8459
+ms.openlocfilehash: 723d437671c52dc9f717bef9641663d0e7a8fbc4
+ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/24/2018
-ms.locfileid: "39229177"
+ms.lasthandoff: 09/11/2018
+ms.locfileid: "44389342"
 ---
 # <a name="3d-video-rendering-on-azure"></a>Renderização de vídeo em 3D no Azure
 
-A renderização 3D é um processo demorado que exige uma quantidade significativa de tempo de CPU para ser concluída.  Em um único computador, o processo de geração de um arquivo de vídeo de ativos estáticos pode levar horas ou mesmo dias dependendo do tamanho e da complexidade do vídeo criado.  Muitas empresas compram computadores topo de linha para executar essas tarefas ou investem em grandes farms de renderização para os quais elas podem enviar trabalhos.  No entanto, ao tirar proveito do Lote do Azure, esse poder está disponível para você quando necessário e deixa de estar disponível quando você não precisa dele, tudo isso sem nenhum investimento de capital.
+Renderização 3D é um processo demorado que exige uma quantidade significativa de tempo de CPU para ser concluída.  Em um único computador, o processo de geração de um arquivo de vídeo de ativos estáticos pode levar horas ou mesmo dias dependendo do tamanho e da complexidade do vídeo criado.  Muitas empresas compram computadores topo de linha para executar essas tarefas ou investem em grandes farms de renderização para os quais elas podem enviar trabalhos.  No entanto, ao tirar proveito do Lote do Azure, esse poder está disponível para você quando necessário e deixa de estar disponível quando você não precisa dele, tudo isso sem nenhum investimento de capital.
 
 O Lote oferece uma experiência consistente de gerenciamento e agendamento de trabalhos, quer você opte por nós de computação do Windows Server ou do Linux. Com o Lote, você pode usar os seus aplicativos Windows ou Linux existentes, incluindo AutoDesk Maya e Blender, para executar em trabalhos de renderização de grande escala no Azure.
 
@@ -46,31 +46,33 @@ O Lote do Azure tem como base as tecnologias do Azure a seguir:
 
 * [Grupos de Recursos][resource-groups] são um contêiner lógico para recursos do Azure.
 * [Redes Virtuais][vnet] são usadas para o nó do cabeçalho e os recursos de computação
-* Contas de [Armazenamento][storage] são usadas para a retenção de dados e sincronização
-* [Conjuntos de Dimensionamento de Máquinas Virtuais][vmss] são usadas pelo CycleCloud para recursos de computação
+* Contas de [Armazenamento][storage] são usadas para a retenção de dados e a sincronização
+* [Conjuntos de Dimensionamento de Máquinas Virtuais][vmss] são usados pelo CycleCloud para recursos de computação
 
 ## <a name="considerations"></a>Considerações
 
 ### <a name="machine-sizes-available-for-azure-batch"></a>Tamanhos de máquina disponíveis para o Lote do Azure
-Embora a maioria dos clientes escolha recursos com alta potência de CPU, outras cargas de trabalho que usam conjuntos de dimensionamento de VM podem escolher as VM de forma diferente e dependerão de vários fatores:
-  - O aplicativo que está sendo executado possui um limite de memória?
-  - O aplicativo precisa usar GPU? 
-  - Os tipos de trabalho paralelo são paralelos ou precisam de conectividade do Infiniband para trabalhos firmemente acoplados?
-  - Exige E/S rápida para o armazenamento em nós de computação
 
-O Azure tem uma grande variedade de tamanhos de VM que podem atender a todos e cada um dos requisitos de aplicativo acima, alguns são específicos para HPC, mas até mesmo os tamanhos menores podem ser utilizados para fornecer uma implementação de grade efetiva:
+Embora a maioria dos clientes de renderização escolha recursos com alta potência de CPU, outras cargas de trabalho que usam conjuntos de dimensionamento de máquinas virtuais podem escolher as VMs de forma diferente e dependerão de vários fatores:
 
-  - [Tamanhos de VM do HPC][compute-hpc] devido à limitação natural de renderização da CPU, a Microsoft normalmente sugere VM’s da série H do Azure.  Elas são criados especificamente disponíveis para necessidades de computação de alto nível, possuem tamanhos de 8 e 16 núcleos de vCPU disponíveis, e memória DDR4, armazenamento temporário de SSD e tecnologia Haswell E5 da Intel.
-  - [Tamanhos de VM de GPU][compute-gpu] Os tamanhos de VM otimizados para GPU são máquinas virtuais especializadas disponíveis com um ou vários GPUs NVIDIA. Esses tamanhos são projetados para cargas de trabalho de visualização e com muita computação e muitos gráficos.
-    - Os tamanhos NC, NCv2, NCv3 e ND são otimizados para aplicativos de rede e computação intensiva e algoritmos, incluindo aplicativos baseados em CUDA e OpenCL e simulações, AI e Aprendizagem Profunda. Os tamanhos NV são otimizados e projetados para cenários de visualização remota, streaming, jogos, codificação e VDI usando estruturas como OpenGL e DirectX.
-  - [Tamanhos de VM otimizados para memória][compute-memory] Quando for necessária mais memória, os tamanhos de VM otimizados para memória oferecem uma maior taxa de memória para CPU.
-  - [Tamanhos de VM para uso geral][compute-general] Tamanhos de VM para uso geral também estão disponíveis e oferecem uma proporção balanceada de CPU e memória.
+* O aplicativo que está sendo executado tem um limite de memória?
+* O aplicativo precisa usar GPUs? 
+* Os tipos de trabalho são paralelos ou precisam de conectividade do Infiniband para trabalhos firmemente acoplados?
+* Exige E/S rápida para o armazenamento em nós de computação
+
+O Azure tem uma grande variedade de tamanhos de VM que podem atender todos os requisitos de aplicativo acima. Alguns são específicos para HPC, mas até mesmo os tamanhos menores podem ser utilizados para fornecer uma implementação de grade efetiva:
+
+* [Tamanhos de VM de HPC][compute-hpc] Devido à limitação natural de renderização da CPU, a Microsoft normalmente sugere VMs da série H do Azure.  Esse tipo de VM é criado especificamente para necessidades de computação de alto nível, está disponível em tamanhos de 8 e 16 núcleos de vCPU, memória DDR4, armazenamento temporário de SSD e tecnologia Haswell E5 da Intel.
+* [Tamanhos de VM de GPU][compute-gpu] Os tamanhos de VM otimizados para GPU são máquinas virtuais especializadas disponíveis com um ou vários GPUs NVIDIA. Esses tamanhos são projetados para cargas de trabalho de visualização e com muita computação e muitos gráficos.
+* Os tamanhos NC, NCv2, NCv3 e ND são otimizados para aplicativos de rede e computação intensiva e algoritmos, incluindo aplicativos baseados em CUDA e OpenCL e simulações, AI e Aprendizagem Profunda. Os tamanhos NV são otimizados e projetados para cenários de visualização remota, streaming, jogos, codificação e VDI usando estruturas como OpenGL e DirectX.
+* [Tamanhos de VM otimizados para memória][compute-memory] Quando for necessária mais memória, os tamanhos de VM otimizados para memória oferecem uma maior proporção de memória para CPU.
+* [Tamanhos de VM para uso geral][compute-general] Tamanhos de VM para uso geral também estão disponíveis e oferecem uma proporção balanceada de CPU e memória.
 
 ### <a name="alternatives"></a>Alternativas
 
 Se você precisar de mais controle sobre seu ambiente de renderização no Azure ou precisar de uma implementação híbrida, então a computação CycleCloud pode ajudar a coordenar uma grade de IaaS na nuvem. Usando as mesmas tecnologias subjacentes do Azure como Lote do Azure, ele torna a criação e manutenção de uma grade de IaaS um processo eficiente. Para obter mais informações e saber mais sobre os princípios de design, use o seguinte link:
 
-Para obter uma visão geral completa de todas as soluções HPC que estão disponíveis para você no Azure, consulte o artigo [Soluções de HPC, Lote e Big Compute usando VMs do Azure][hpc-alt-solutions]
+Para obter uma visão geral completa de todas as soluções de HPC que estão disponíveis para você no Azure, consulte o artigo [Soluções de HPC, Lote e Big Compute usando VMs do Azure][hpc-alt-solutions]
 
 ### <a name="availability"></a>Disponibilidade
 
@@ -78,7 +80,7 @@ O monitoramento dos componentes do Lote do Azure está disponível por meio de v
 
 ### <a name="scalability"></a>Escalabilidade
 
-Pools dentro de uma conta do Lote do Azure podem ser dimensionadas por meio de intervenção manual ou, usando uma fórmula com base em métricas do Lote do Azure, serem dimensionadas automaticamente. Para obter mais informações sobre isso, consulte o artigo [Criar uma fórmula de dimensionamento automático para dimensionar nós em um pool do Lote][batch-scaling].
+Pools dentro de uma conta do Lote do Azure podem ser dimensionados por meio de intervenção manual ou, usando uma fórmula com base em métricas do Lote do Azure, podem ser dimensionados automaticamente. Para obter mais informações sobre escalabilidade, consulte o artigo [Criar uma fórmula de dimensionamento automático para dimensionar nós em um pool do Lote][batch-scaling].
 
 ### <a name="security"></a>Segurança
 
@@ -89,7 +91,7 @@ Para obter orientação geral sobre como criar soluções seguras, confira a [Do
 Embora não exista atualmente nenhuma funcionalidade de failover no Lote do Azure, é recomendável usar as seguintes etapas para garantir a disponibilidade em caso de interrupção não planejada:
 
 * Criar uma conta do Lote do Azure em um local alternativo do Azure com uma conta de armazenamento alternativa
-* Criar os mesmos pools de nós com o mesmo nome, com 0 nós alocados
+* Criar os mesmos pools de nós com o mesmo nome, com nenhum nó alocado
 * Certificar-se de que os aplicativos são criados e atualizados para a conta de armazenamento alternativa
 * Carregar arquivos de entrada e enviar trabalhos para a conta do Lote do Azure alternativa
 
@@ -97,47 +99,47 @@ Embora não exista atualmente nenhuma funcionalidade de failover no Lote do Azur
 
 ### <a name="creating-an-azure-batch-account-and-pools-manually"></a>Criar uma conta do Lote do Azure e pools manualmente
 
-Este exemplo de cenário ajudará a aprender como o Lote do Azure funciona durante a apresentação de Laboratórios do Lote do Azure como um exemplo de solução de SaaS que pode ser desenvolvido para seus próprios clientes:
+Este cenário de exemplo ajudará a aprender como o Lote do Azure funciona durante a apresentação de Laboratórios do Lote do Azure como um exemplo de solução de SaaS que pode ser desenvolvida para seus próprios clientes:
 
 [Masterclass do Lote do Azure][batch-labs-masterclass]
 
-### <a name="deploying-the-sample-scenario-using-an-azure-resource-manager-arm-template"></a>Implantar o cenário de exemplo usando um modelo do Azure Resource Manager (ARM)
+### <a name="deploying-the-sample-scenario-using-an-azure-resource-manager-template"></a>Implantar o cenário de exemplo usando um modelo do Azure Resource Manager
 
 O modelo será implantado:
-  - Uma nova conta do Lote do Azure
-  - Uma conta de armazenamento
-  - Um pool de nós associado à conta do lote
-  - O pool de nós será configurado para usar VMs de A2 v2 com imagens do Ubuntu da Canonical
-  - O pool de nós conterá 0 VMs inicialmente e exigirá dimensionando manual para adicionar máquinas virtuais
+
+* Uma nova conta do Lote do Azure
+* Uma conta de armazenamento
+* Um pool de nós associado à conta do lote
+* O pool de nós será configurado para usar VMs de A2 v2 com imagens do Ubuntu da Canonical
+* O pool de nós conterá zero VMs inicialmente e exigirá dimensionando manual para adicionar máquinas virtuais
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Fsolution-architectures%2Fmaster%2Fhpc%2Fbatchcreatewithpools.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 
-[Saiba mais sobre modelos de ARM][azure-arm-templates]
+[Saiba mais sobre modelos do Resource Manager][azure-arm-templates]
 
 ## <a name="pricing"></a>Preços
 
-O custo de usar o Lote do Azure dependerá dos tamanhos de VM que são usados para os pools e quanto tempo eles ficam alocados e em execução, não há nenhum custo associado a uma criação de conta do Lote do Azure. A saída de dados e armazenamento também deve ser levada em conta já elas implicarão em custos adicionais.
+O custo de usar o Lote do Azure dependerá dos tamanhos de VM que são usados para os pools e quanto tempo essas VMs ficam alocadas e em execução, não há nenhum custo associado a uma criação de conta do Lote do Azure. A saída de dados e o armazenamento devem ser considerados já que implicarão em custos adicionais.
 
 A seguir estão exemplos de custos que poderiam ser cobrados para um trabalho que termina em 8 horas usando um número diferente de servidores:
 
+* 100 VMs de CPU de alto desempenho: [estimativa de custo][hpc-est-high]
 
-- 100 VMs de CPU de alto desempenho: [Estimativa de custo][hpc-est-high]
+  100 x H16m (16 núcleos, 225 GB de RAM, Armazenamento Premium de 512 GB), Armazenamento de Blobs de 2 TB, saída de 1 TB
 
-  100 x H16m (16 núcleos, 225 GB de RAM, armazenamento Premium de 512 GB), armazenamento de Blobs de 2 TB, saída de 1 TB
+* 50 VMs de CPU de alto desempenho: [estimativa de custo][hpc-est-med]
 
-- 50 VMs de CPU de alto desempenho: [Estimativa de custo][hpc-est-med]
+  50 x H16m (16 núcleos, 225 GB de RAM, Armazenamento Premium de 512 GB), Armazenamento de Blobs de 2 TB, saída de 1 TB
 
-  50 x H16m (16 núcleos, 225 GB de RAM, armazenamento Premium de 512 GB), armazenamento de Blobs de 2 TB, saída de 1 TB
-
-- 10 VMs de CPU de alto desempenho: [Estimativa de custo][hpc-est-low]
+* 10 VMs de CPU de alto desempenho: [estimativa de custo][hpc-est-low]
   
-  10 x H16m (16 núcleos, 225 GB de RAM, armazenamento Premium de 512 GB), armazenamento de Blobs de 2 TB, saída de 1 TB
+  10 x H16m (16 núcleos, 225 GB de RAM, Armazenamento Premium de 512 GB), Armazenamento de Blobs de 2 TB, saída de 1 TB
 
 ### <a name="low-priority-vm-pricing"></a>Preços de VM de baixa prioridade
 
-O Lote do Azure também oferece suporte ao uso de VMs de baixa prioridade* nos pools de nó, que potencialmente podem fornecer uma economia significativa de custos. Para obter uma comparação de preços entre as VMs padrão e as VMs de baixa prioridade e para obter mais informações sobre as VMs de baixa prioridade, consulte [Preços do Lote][batch-pricing].
+O Lote do Azure também dá suporte ao uso de VMs de baixa prioridade* nos pools de nó, que potencialmente podem fornecer uma economia significativa de custos. Para obter uma comparação de preços entre as VMs padrão e as VMs de baixa prioridade e para obter mais informações sobre as VMs de baixa prioridade, consulte [Preços do Lote][batch-pricing].
 
 \* Observe que somente determinados aplicativos e cargas de trabalho serão adequados para execução em VMs de baixa prioridade.
 

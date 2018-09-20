@@ -4,12 +4,12 @@ description: Lista de verificação que fornece orientação de resiliência par
 author: petertaylor9999
 ms.date: 03/02/2018
 ms.custom: resiliency, checklist
-ms.openlocfilehash: 25d961d6bb753b1f515fc073e51bbb912cc59db7
-ms.sourcegitcommit: 2123c25b1a0b5501ff1887f98030787191cf6994
+ms.openlocfilehash: 735d4466f53ff03b67063b49b86f4184bbf1af41
+ms.sourcegitcommit: 25bf02e89ab4609ae1b2eb4867767678a9480402
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/08/2018
-ms.locfileid: "29783505"
+ms.lasthandoff: 09/14/2018
+ms.locfileid: "45584758"
 ---
 # <a name="resiliency-checklist-for-specific-azure-services"></a>Lista de verificação de resiliência para serviços específicos do Azure
 
@@ -49,7 +49,7 @@ Resiliência é a capacidade de um sistema de se recuperar de falhas e continuar
 
 **Replique o banco de dados entre regiões.** O Cosmos DB permite associar qualquer número de regiões do Azure a uma conta de banco de dados do Cosmos DB. Um banco de dados do Azure Cosmos DB pode ter várias regiões de leitura e uma de gravação. Se houver uma falha na região de gravação, você poderá ler de outra réplica. O SDK do cliente lida com isso automaticamente. Você também pode fazer failover da região de gravação para outra região. Para obter mais informações, confira [Como distribuir os dados globalmente com o Azure Cosmos DB](/azure/cosmos-db/distribute-data-globally).
 
-## <a name="event-hubs"></a>Hubs de evento
+## <a name="event-hubs"></a>Hubs de Eventos
 
 **Usar pontos de verificação**.  Um consumidor de evento deve gravar sua posição atual no armazenamento persistente em um intervalo predefinido. Dessa forma, se o consumidor apresentar uma falha (por exemplo, falhas do consumidor ou do host), uma nova instância poderá retomar a leitura do fluxo da última posição gravada. Para obter mais informações, consulte [Consumidores de evento](/azure/event-hubs/event-hubs-features#event-consumers).
 
@@ -99,6 +99,10 @@ Caso esteja usando o Cache Redis como um cache de dados temporário e não como 
 **Use a Recuperação Pontual para se recuperar de erro humano.**  A Recuperação Pontual retorna seu banco de dados para um ponto anterior no tempo. Para obter mais informações, consulte [Recuperar um Banco de Dados SQL do Azure usando backups de banco de dados automatizados][sql-restore].
 
 **Use a restauração geográfica para recuperar-se de uma interrupção de serviço.** A restauração geográfica restaura um banco de dados de um backup com redundância geográfica.  Para obter mais informações, consulte [Recuperar um Banco de Dados SQL do Azure usando backups de banco de dados automatizados][sql-restore].
+
+## <a name="sql-data-warehouse"></a>SQL Data Warehouse
+
+**Não desabilite o backup geográfico.** Por padrão, o SQL Data Warehouse usa um backup completo de seus dados a cada 24 horas para a recuperação de desastres. Não é recomendável desativar esse recurso. Para obter mais informações, veja [Backups geográficos](/azure/sql-data-warehouse/backup-and-restore#geo-backups).
 
 ## <a name="sql-server-running-in-a-vm"></a>SQL Server em execução em uma VM
 

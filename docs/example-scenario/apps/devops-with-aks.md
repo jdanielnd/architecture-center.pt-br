@@ -3,12 +3,12 @@ title: Pipeline de CI/CD para cargas de trabalho baseados em contêiner
 description: Cenário comprovado para a criação de um pipeline DevOps para um aplicativo Web Node.js que usa Jenkins, Registro de Contêiner do Azure, Serviço de Kubernetes do Azure, Cosmos DB e Grafana.
 author: iainfoulds
 ms.date: 07/05/2018
-ms.openlocfilehash: dceb4ad3c34ec43a54d802772f5817cacdd3929c
-ms.sourcegitcommit: 8b5fc0d0d735793b87677610b747f54301dcb014
+ms.openlocfilehash: d659916e3af0caa2128db25faab441a2af8f3f6a
+ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/29/2018
-ms.locfileid: "39334208"
+ms.lasthandoff: 09/11/2018
+ms.locfileid: "44389376"
 ---
 # <a name="cicd-pipeline-for-container-based-workloads"></a>Pipeline de CI/CD para cargas de trabalho baseados em contêiner
 
@@ -44,7 +44,7 @@ Este cenário trata de um pipeline DevOps para um aplicativo Web do Node.js e um
 ### <a name="components"></a>Componentes
 
 * O [Jenkins] [ jenkins] é um servidor de automação de software livre que pode se integrar aos serviços do Azure para habilitar a CI (integração contínua) e a CD (implantação contínua). Neste cenário, o Jenkins orquestra a criação de novas imagens de contêiner com base nas confirmações no controle do código-fonte, envia por push essas imagens para o Registro de Contêiner do Azure e atualiza as instâncias do aplicativo no Serviço de Kubernetes do Azure.
-* As [Máquinas Virtuais Linux do Azure] [ azurevm-docs] são usadas para executar as instâncias do Jenkins e do Grafana.
+* As [Máquinas Virtuais do Linux do Azure][azurevm-docs] são a plataforma de IaaS usada para executar as instâncias do Jenkins e do Grafana.
 * O [Registro de Contêiner do Azure] [ azureacr-docs] armazena e gerencia imagens de contêiner que são usadas pelo cluster do Serviço de Kubernetes do Azure. As imagens são armazenadas com segurança e podem ser replicadas em outras regiões pela plataforma do Azure para acelerar os tempos de implantação.
 * O [Serviço de Kubernetes do Azure] [ azureaks-docs] é uma plataforma Kubernetes gerenciada que permite implantar e gerenciar aplicativos em contêineres sem conhecimento de orquestração de contêiner. Como um serviço Kubernetes hospedado, o Azure lida com as tarefas críticas para você, como o monitoramento da integridade e a manutenção.
 * O [Azure Cosmos DB] [ azurecosmosdb-docs] é um banco de dados multimodelo distribuído globalmente que permite que você escolha entre vários modelos de banco de dados e de consistência para atender às suas necessidades. Com o Cosmos DB, os dados podem ser replicados globalmente e não há a necessidade de implantação ou configuração de nenhum cluster de gerenciamento ou replicação.
@@ -53,7 +53,7 @@ Este cenário trata de um pipeline DevOps para um aplicativo Web do Node.js e um
 
 ### <a name="alternatives"></a>Alternativas
 
-* O [Visual Studio Team Services] [ vsts] e o Team Foundation Server ajudam a implementar um pipeline de CI (integração contínua), teste e implantação (CD) em qualquer aplicativo.
+* O [Azure Pipelines][azure-pipelines] ajuda a implementar um pipeline de CI (integração contínua), teste contínuo e CD (implantação contínua) em qualquer aplicativo.
 * O [Kubernetes] [ kubernetes] pode ser executado diretamente em VMs do Azure em vez de usar um serviço gerenciado, se você quiser mais controle sobre o cluster.
 * O [Service Fabric] [ service-fabric] é outro orquestrador de contêiner alternativo que pode substituir o AKS.
 
@@ -63,9 +63,9 @@ Este cenário trata de um pipeline DevOps para um aplicativo Web do Node.js e um
 
 Para monitorar o desempenho do aplicativo e relatar problemas, esse cenário combina o Azure Monitor com o Grafana para oferecer painéis visuais. Essas ferramentas permitem monitorar e solucionar problemas de desempenho que podem exigir atualizações de código, e podem todas ser implantadas com o pipeline de CI/CD.
 
-Como parte do cluster do Serviço de Kubernetes do Azure, um balanceador de carga distribui o tráfego do aplicativo para um ou mais contêineres (pods) que executam o aplicativo. Essa abordagem à execução de aplicativos em contêineres no Kubernetes oferece uma infraestrutura altamente disponível para seus clientes.
+Como parte do cluster do Serviço de Kubernetes do Azure, um balanceador de carga distribui o tráfego do aplicativo para um ou mais contêineres (pods) que executam o aplicativo. Essa abordagem para a execução de aplicativos em contêineres no Kubernetes oferece uma infraestrutura altamente disponível para seus clientes.
 
-Para outros tópicos de disponibilidade, confira a [lista de verificação de disponibilidade][availability] disponível no Architecture Center.
+Para ver outros tópicos sobre disponibilidade, consulte a [lista de verificação de disponibilidade][availability] no Centro de Arquitetura do Azure.
 
 ### <a name="scalability"></a>Escalabilidade
 
@@ -73,11 +73,11 @@ O Serviço de Kubernetes do Azure permite que você dimensione o número de nós
 
 Os dados do aplicativo são armazenados no Azure Cosmos DB, um banco de dados multimodelo distribuído globalmente que pode ser dimensionado globalmente. O cosmos DB abstrai a necessidade de dimensionar sua infraestrutura, como é feito com os componentes de banco de dados tradicional, e você pode optar por replicar o Cosmos DB globalmente para atender às demandas de seus clientes.
 
-Para outros tópicos de escalabilidade, confira a [lista de verificação de escalabilidade] [ scalability] disponível no Architecture Center.
+Para outros tópicos de escalabilidade, confira a [lista de verificação de escalabilidade][scalability] disponível no Centro de Arquitetura do Azure.
 
 ### <a name="security"></a>Segurança
 
-Para minimizar a superfície de ataque, esses cenários não expõem a instância da VM Jenkins em HTTP. Para as tarefas de gerenciamento que exigem a interação com o Jenkins, você deve criar uma conexão remota segura usando um túnel SSH em seu computador local. Somente a autenticação de chave pública SSH é permitida para as instâncias de VM Grafana e Jenkins. Os logons com base em senha são desabilitados. Para obter mais informações, confira [Executar um servidor Jenkins no Azure](../../reference-architectures/jenkins/index.md).
+Para minimizar o volume de ataque, esse cenário não expõe a instância da VM Jenkins em HTTP. Para as tarefas de gerenciamento que exigem a interação com o Jenkins, você deve criar uma conexão remota segura usando um túnel SSH em seu computador local. Somente a autenticação de chave pública SSH é permitida para as instâncias de VM Grafana e Jenkins. Os logons com base em senha são desabilitados. Para obter mais informações, confira [Executar um servidor Jenkins no Azure](../../reference-architectures/jenkins/index.md).
 
 Para separar credenciais e permissões, este cenário usa uma entidade de serviço dedicada do Azure AD (Active Directory). As credenciais para essa entidade de serviço são armazenadas como um objeto de credencial segura no Jenkins para não serem diretamente expostas e ficarem visíveis dentro de scripts ou no pipeline de compilação.
 
@@ -123,9 +123,9 @@ Para explorar o custo de executar esse cenário, todos os serviços são pré-co
 
 Nós fornecemos três perfis de custo de exemplo com base no número de imagens de contêiner a serem armazenados e nós de Kubernetes para executar seus aplicativos.
 
-* [Pequeno][small-pricing]: referente a mil compilações de contêiner por mês.
-* [Pequeno][medium-pricing]: referente a 100 mil compilações de contêiner por mês.
-* [Pequeno][large-pricing]: referente a um milhão de compilações de contêiner por mês.
+* [Pequeno][small-pricing]: esse exemplo de preço refere-se a mil builds de contêiner por mês.
+* [Médio][medium-pricing]: esse exemplo de preço refere-se a 100 mil builds de contêiner por mês.
+* [Grande][large-pricing]: esse exemplo de preço refere-se a 1 milhão de builds de contêiner por mês.
 
 ## <a name="related-resources"></a>Recursos relacionados
 
@@ -149,7 +149,7 @@ Este cenário usou o Registro de Contêiner do Azure e o Serviço de Kubernetes 
 [security]: /azure/security/
 [scalability]: ../../checklist/scalability.md
 [sshkeydocs]: /azure/virtual-machines/linux/mac-create-ssh-keys
-[vsts]: /vsts/?view=vsts
+[azure-pipelines]: /azure/devops/pipelines
 [kubernetes]: https://kubernetes.io/
 [service-fabric]: /azure/service-fabric/
 

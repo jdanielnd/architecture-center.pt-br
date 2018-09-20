@@ -3,14 +3,14 @@ title: Front-end de comércio eletrônico no Azure
 description: Cenário comprovado de hospedagem de um site de comércio eletrônico no Azure
 author: masonch
 ms.date: 7/13/18
-ms.openlocfilehash: 568821e97c6b90a36429dfa8ec0ef9ed38c7963c
-ms.sourcegitcommit: 71cbef121c40ef36e2d6e3a088cb85c4260599b9
+ms.openlocfilehash: 1af481476c74b365ce5145636426683c6896b00b
+ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/14/2018
-ms.locfileid: "39060967"
+ms.lasthandoff: 09/11/2018
+ms.locfileid: "44389189"
 ---
-# <a name="e-commerce-front-end-on-azure"></a>Front-end de comércio eletrônico no Azure
+# <a name="e-commerce-frontend-on-azure"></a>Front-end de comércio eletrônico no Azure
 
 Este exemplo de cenário orienta você para uma implementação de um front-end de comércio eletrônico usando ferramentas do Azure de plataforma como um serviço (PaaS). Muitos sites de comércio eletrônico enfrentam sazonalidade e variabilidade de tráfego ao longo do tempo. Quando a demanda dos seus produtos ou serviços aumenta, seja de forma previsível ou imprevisível, usar ferramentas PaaS permitirá lidar com mais cliente mais transações automaticamente. Além disso, este cenário aproveita a economia de nuvem pagando somente a capacidade que usar.
 
@@ -49,7 +49,7 @@ Este cenário aborda tíquetes de compras de um site de comércio eletrônico, o
 * O [Azure Active Directory - B2C][docs-b2c] é um serviço de gerenciamento de identidade que permite personalizar e controlar como os clientes se inscrevem, entram e gerenciam seus perfis em seus respectivos aplicativos.
 * As [Filas de Armazenamento][docs-storage-queues] armazenam um grande número de mensagens da fila que podem ser acessados por um aplicativo.
 * As [Funções][docs-functions] são opções de computação sem servidor que permitem que aplicativos sejam executados sob demanda sem a necessidade de gerenciar a infraestrutura.
-* Os [Serviços Cognitivos - Análise de Sentimento][docs-sentiment-analysis] utilizam APIs de aprendizado de máquina e permitem aos desenvolvedores adicionar facilmente recursos inteligentes – como emoção e detecção de vídeo; reconhecimento facial, de fala e de visão, além de compreensão de fala e de idioma – a seus aplicativos.
+* Os [Serviços Cognitivos – Análise de Sentimento][docs-sentiment-analysis] utilizam APIs de machine learning e permitem aos desenvolvedores adicionar facilmente recursos inteligentes – como emoção e detecção de vídeo; reconhecimento facial, de fala e de visão, além de compreensão de fala e de idioma – a seus aplicativos.
 * O [Azure Search][docs-search] é uma solução de pesquisa como serviço na nuvem que oferece uma experiência de pesquisa avançada para conteúdo privado e heterogêneo em aplicativos Web, móveis e empresariais.
 * Os [Blobs de Armazenamento][docs-storage-blobs] são otimizado para armazenar grandes quantidades de dados não estruturados, como texto ou dados binários.
 * O [Cache Redis][docs-redis-cache] melhora o desempenho e escalabilidade de sistemas que dependem de armazenamentos de dados de back-end, copiando temporariamente dados acessados com frequência para armazenamento rápido localizado perto do aplicativo.
@@ -63,13 +63,13 @@ Muitas outras tecnologias estão disponíveis para a criação de um aplicativo 
 Outras opções para a camada da Web e funções incluem:
 
 * [Service Fabric][docs-service-fabric] - Uma plataforma voltada à criação de componentes distribuídos que se beneficiam da implantação e execução em um cluster com um alto grau de controle. O Service Fabric também pode ser usado para hospedar contêineres.
-* [Azure Kubernetes Service][docs-kubernetes-service] - Uma plataforma para criar e implantar soluções baseadas em contêiner que podem ser usadas como uma implementação de uma arquitetura de microsserviços. Isso permite agilidade aos diferentes componentes do aplicativo para que eles sejam capazes de dimensionar de modo independente sob demanda.
-* [Instâncias de Contêiner do Azure][docs-container-instances] - Uma maneira de implantar e executar rapidamente contêineres com um ciclo de vida curto. Contêineres aqui são geralmente implantados para executar um trabalho de processamento rápido como processar uma mensagem ou executar um cálculo e depois são desprovisionados, assim que eles forem concluídos.
+* [Serviço de Kubernetes do Azure][docs-kubernetes-service] – Uma plataforma para criar e implantar soluções baseadas em contêiner que podem ser usadas como uma implementação de uma arquitetura de microsserviços. Isso permite agilidade aos diferentes componentes do aplicativo para que eles sejam capazes de dimensionar de modo independente sob demanda.
+* [Instâncias de Contêiner do Azure][docs-container-instances] - Uma maneira de implantar e executar rapidamente contêineres com um ciclo de vida curto. Os contêineres aqui são geralmente implantados para executar um trabalho de processamento rápido, como processar uma mensagem ou executar um cálculo, e, depois, são desprovisionados assim que forem concluídos.
 * [Barramento de Serviço] [service-bus] pode ser usado no lugar da Fila de Armazenamento.
 
 Outras opções para a camada de dados incluem:
 
-* [Cosmos DB][docs-cosmosdb] - Banco de dados multimodelo globalmente distribuído da Microsoft. Isso fornece uma plataforma para executar outros modelos de dados, como Mongo DB, Cassandra, dados do gráfico ou armazenamento de tabela simples.
+* [Cosmos DB][docs-cosmosdb] - Banco de dados multimodelo globalmente distribuído da Microsoft. Isso fornece uma plataforma para executar outros modelos de dados, como Mongo DB, Cassandra, dados do Graph ou armazenamento de tabela simples.
 
 ## <a name="considerations"></a>Considerações
 
@@ -77,13 +77,13 @@ Outras opções para a camada de dados incluem:
 
 * Considere a possibilidade de aproveitar os [padrões de design comuns para disponibilidade][design-patterns-availability] ao criar seu aplicativo de nuvem.
 * Analise as considerações de disponibilidade na [arquitetura de referência de aplicativo Web do Serviço de Aplicativo][app-service-reference-architecture] apropriada
-* Para outras considerações sobre disponibilidade, confira a [lista de verificação de disponibilidade][availability] no Architecture Center.
+* Para outras considerações sobre disponibilidade, confira a [lista de verificação de disponibilidade][availability] no Centro de Arquitetura do Azure.
 
 ### <a name="scalability"></a>Escalabilidade
 
 * Ao criar um aplicativo de nuvem esteja atento a [padrões de design comuns para escalabilidade][design-patterns-scalability].
 * Analise as considerações de escalabilidade na [arquitetura de referência de aplicativo Web do Serviço de Aplicativo][app-service-reference-architecture] apropriada
-* Para outros tópicos de escalabilidade, confira a [lista de verificação de escalabilidade][scalability] disponível no Architecture Center.
+* Para outros tópicos de escalabilidade, confira a [lista de verificação de escalabilidade][scalability] disponível no Centro de Arquitetura do Azure.
 
 ### <a name="security"></a>Segurança
 
@@ -96,13 +96,13 @@ Outras opções para a camada de dados incluem:
 
 * Considere a possibilidade de aproveitar o [padrão de disjuntor][ circuit-breaker] para fornecer um tratamento de erros normal caso uma parte do aplicativo não esteja disponível.
 * Analise os [padrões de design comuns para resiliência][design-patterns-resiliency] e considere a implementação deles quando apropriado.
-* Você pode encontrar várias [práticas recomendada de resiliência para o Serviço de Aplicativo][resiliency-app-service] no Architecture Center.
+* Você pode encontrar várias [práticas recomendadas para o Serviço de Aplicativo][resiliency-app-service] no Centro de Arquitetura do Azure.
 * Considere o uso [replicação geográfica][sql-geo-replication] ativa para a camada de dados e armazenamento com [redundância geográfica][storage-geo-redudancy] para imagens e filas.
-* Para uma discussão mais detalhada sobre [resiliência][resiliency], consulte o artigo relevante no Architecture Center.
+* Para uma discussão mais detalhada sobre [resiliência][resiliency], consulte o artigo relevante no Centro de Arquitetura do Azure.
 
 ## <a name="deploy-the-scenario"></a>Implantar o cenário
 
-Para implantar este cenário, você pode seguir este [tutorial passo a passo][end-to-end-walkthrough] que demonstra como implantar manualmente cada componente. Este tutorial também fornece um aplicativo de exemplo .NET que executa um aplicativo simples de compra de tíquetes. Além disso, há um modelo ARM para automatizar a implantação da maioria dos recursos do Azure.
+Para implantar este cenário, você pode seguir este [tutorial passo a passo][end-to-end-walkthrough] que demonstra como implantar manualmente cada componente. Este tutorial também fornece um aplicativo de exemplo .NET que executa um aplicativo simples de compra de tíquetes. Além disso, há um modelo do Resource Manager para automatizar a implantação da maioria dos recursos do Azure.
 
 ## <a name="pricing"></a>Preços
 
@@ -110,9 +110,9 @@ Explore o custo de executar esse cenário, todos os serviços são pré-configur
 
 Fornecemos três perfis de custo de exemplo com base na quantidade de tráfego que você espera receber:
 
-* [Pequeno][small-pricing]: Representa os componentes necessários para compilar a saída de uma instância de nível mínimo de produção. Aqui, estamos supondo uma pequena quantidade de usuários, com um total de apenas alguns milhares por mês. O aplicativo está usando uma única instância de um aplicativo Web padrão que será suficiente para habilitar o dimensionamento automático. Cada um dos outros componentes são dimensionados para uma camada básica, que permitem uma quantidade mínima de custo, mas ainda garantem que haja suporte para SLA e capacidade suficiente para lidar com uma carga de trabalho de nível de produção.
-* [Médio][medium-pricing]: Representa os componentes indicativos de uma implantação de tamanho moderado. Aqui, podemos estimar aproximadamente 100.000 usuários usando o sistema ao longo de um mês. O tráfego esperado é tratado em uma única instância de serviço de aplicativo com uma camada standard moderada. Além disso, camadas moderadas de serviços cognitivos e de pesquisa são adicionados à calculadora.
-* [Grande][large-pricing]: Representa um aplicativo de alta escala, na ordem de milhões de usuários por mês para mover terabytes de dados. Nesse nível de alto desempenho de uso, são necessários aplicativos Web da camada premium implantados em várias regiões administrados pelo gerenciador de tráfego. Os dados consistem no seguinte: armazenamento, bancos de dados e CDN, estão configurados para terabytes de dados.
+* [Pequeno][small-pricing]: esse exemplo de preço representa os componentes necessários para criar a saída de uma instância de nível mínimo de produção. Aqui, estamos supondo uma pequena quantidade de usuários, com um total de apenas alguns milhares por mês. O aplicativo está usando uma única instância de um aplicativo Web padrão que será suficiente para habilitar o dimensionamento automático. Cada um dos outros componentes são dimensionados para uma camada básica, que permite uma quantidade mínima de custo, mas ainda garante que haja suporte para SLA e capacidade suficiente para lidar com uma carga de trabalho de nível de produção.
+* [Médio][medium-pricing]: esse exemplo de preço representa os componentes indicativos de uma implantação de tamanho moderado. Aqui, podemos estimar aproximadamente 100.000 usuários usando o sistema ao longo de um mês. O tráfego esperado é tratado em uma única instância de serviço de aplicativo com uma camada standard moderada. Além disso, camadas moderadas de serviços cognitivos e de pesquisa são adicionados à calculadora.
+* [Grande][large-pricing]: esse exemplo de preço representa um aplicativo de alta escala, na ordem de milhões de usuários por mês para mover terabytes de dados. Nesse nível de alto desempenho de uso, são necessários aplicativos Web da camada premium implantados em várias regiões administrados pelo gerenciador de tráfego. Os dados consistem no seguinte: armazenamento, bancos de dados e CDN, estão configurados para terabytes de dados.
 
 ## <a name="related-resources"></a>Recursos relacionados
 

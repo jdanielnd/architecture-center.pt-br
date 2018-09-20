@@ -3,12 +3,12 @@ title: Proteger aplicativo Web do Windows para setores regulamentados
 description: Cenário comprovado para criar um aplicativo Web seguro e de várias camadas com o Windows Server no Azure que usa conjuntos de dimensionamento, o Gateway de Aplicativo e balanceadores de carga.
 author: iainfoulds
 ms.date: 07/11/2018
-ms.openlocfilehash: aba714fc1955341645d0faa400768bc09fb8e50b
-ms.sourcegitcommit: 71cbef121c40ef36e2d6e3a088cb85c4260599b9
+ms.openlocfilehash: 3572f215d9134a6650d76e1b14458226334c6f42
+ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/14/2018
-ms.locfileid: "39060987"
+ms.lasthandoff: 09/11/2018
+ms.locfileid: "44389258"
 ---
 # <a name="secure-windows-web-application-for-regulated-industries"></a>Proteger aplicativo Web do Windows para setores regulamentados
 
@@ -41,15 +41,15 @@ Este cenário aborda um aplicativo de setores regulamentados de várias camadas 
 * O [Gateway de Aplicativo do Azure][appgateway-docs] é um balanceador de carga de tráfego da Web do protocolo Layer 7 que reconhece aplicativos e pode distribuir o tráfego com base em regras de roteamento específicas. Gateway de aplicativo também pode lidar com o descarregamento de SSL para um desempenho de servidor Web aprimorado.
 * A [Rede Virtual do Azure][vnet-docs] permite vários tipos de recursos, como VMs do Azure, a fim de se comunicar de forma segura com a Internet, com as redes locais e com outras VMs. Redes virtuais fornecem isolamento e segmentação, filtram e roteiam o tráfego e permitem a conexão entre locais. Duas redes virtuais combinadas com os NSGs apropriados são usadas neste cenário para fornecer uma [zona desmilitarizada][dmz] (DMZ) e o isolamento dos componentes do aplicativo. O emparelhamento de rede virtual conecta as duas redes.
 * O [conjunto de dimensionamento de máquinas virtuais do Azure][scaleset-docs] permite criar e gerenciar um grupo de VMs idênticas e com balanceamento de carga. O número de instâncias de VM pode aumentar ou diminuir automaticamente em resposta à demanda ou a um agendamento definido. Dois conjuntos de dimensionamento de máquina virtual separados são usados nesse cenário: um para as instâncias de aplicativos ASP.NET de front-end e outro para as instâncias de VM do cluster de SQL Server de back-end. A configuração de estado desejado (DSC) do PowerShell ou a extensão de script personalizado do Azure pode ser usada para provisionar as instâncias de VM com o software e as definições de configuração necessárias.
-* [Grupos de segurança de rede][nsg-docs] contêm uma lista de regras de segurança que permitem ou negam o tráfego de rede de entrada ou saída com base no endereço IP de origem ou destino, na porta e no protocolo. As redes virtuais neste cenário são protegidas com regras de grupo de segurança de rede que restringem o fluxo de tráfego entre os componentes do aplicativo.
+* [Grupos de segurança de rede do Azure][nsg-docs] contêm uma lista de regras de segurança que permitem ou negam o tráfego de rede de entrada ou saída com base no endereço IP de origem ou destino, na porta e no protocolo. As redes virtuais neste cenário são protegidas com regras de grupo de segurança de rede que restringem o fluxo de tráfego entre os componentes do aplicativo.
 * O [balanceador de carga do Azure][loadbalancer-docs] distribui o tráfego de entrada de acordo com regras e investigações de integridade. O balanceador de carga fornece baixa latência e alta taxa de transferência e pode ser escalado verticalmente em milhões de fluxos para aplicativos TCP e UDP. Um balanceador de carga interno é usado neste cenário para distribuir o tráfego da camada de aplicativo de front-end para o cluster do SQL Server de back-end.
 * O [Armazenamento de Blobs][cloudwitness-docs] do Azure atua como uma testemunha de nuvem para o cluster do SQL Server. Este testemunha é usada para operações de cluster e as decisões que exigem um voto adicional para decidir o quorum. Usar testemunha de nuvem elimina a necessidade de uma VM adicional atuar como uma testemunha de compartilhamento de arquivos tradicional.
 
 ### <a name="alternatives"></a>Alternativas
 
-* *nix, Windows podem ser facilmente substituídos por vários outros sistemas operacionais como se nada na infraestrutura dependesse do sistema operacional.
+* *O Nix, no Windows, pode ser facilmente substituído por vários outros sistemas operacionais como se nada na infraestrutura dependesse do sistema operacional.
 
-* [SQL Server para Linux][sql-linux] pode substituir o armazenamento de dados de back-end.
+* O [SQL Server para Linux][sql-linux] pode substituir o armazenamento de dados de back-end.
 
 * O [Cosmos DB][cosmos] é outra alternativa para o armazenamento de dados.
 
@@ -61,13 +61,13 @@ Nesse cenário, as instâncias de VM são implantadas em Zonas de Disponibilidad
 
 A camada de banco de dados pode ser configurada para usar grupos de disponibilidade Always On. Com essa configuração do SQL Server, um banco de dados primário em um cluster é configurado com até oito bancos de dados secundários. Se ocorrer um problema com o banco de dados primário, o cluster faz o failover para um banco de dados secundários, permitindo que o aplicativo continue disponível. Para saber mais informações, confira [Visão geral dos grupos de disponibilidade Always On para SQL Server][sqlalwayson-docs].
 
-Para outros tópicos de escalabilidade, confira a [lista de verificação de disponibilidade][availability] no Azure Architecture Center.
+Para ver outros tópicos sobre disponibilidade, consulte a [lista de verificação de disponibilidade][availability] no Azure Architecture Center.
 
 ### <a name="scalability"></a>Escalabilidade
 
 Esse cenário usa conjuntos de dimensionamento de máquina virtual para os componentes de front-end e back-end. Com conjuntos de dimensionamento, o número de instâncias VM que executam a camada de aplicativo de front-end pode dimensionar automaticamente em resposta à demanda do cliente ou com base em um agendamento definido. Para saber mais, veja [Visão geral sobre dimensionamento automático com conjuntos de dimensionamento de máquinas virtuais][vmssautoscale-docs].
 
-Para outros tópicos de escalabilidade, confira a [lista de verificação de escalabilidade][scalability] no Azure Architecture Center.
+Para outros tópicos de escalabilidade, confira a [lista de verificação de escalabilidade] [ scalability] no Azure Architecture Center.
 
 ### <a name="security"></a>Segurança
 
@@ -86,7 +86,7 @@ Para obter diretrizes gerais sobre como criar cenários resilientes, confira [Pr
 **Pré-requisitos.**
 
 * Você deve ter uma conta do Azure já criada. Se você não tiver uma assinatura do Azure, crie uma [conta gratuita](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) antes de começar.
-* Para implantar um cluster do SQL Server no conjunto de dimensionamento de back-end, você precisaria de um domínio do Active Directory Directory Services.
+* Para implantar um cluster do SQL Server no conjunto de dimensionamento de back-end, você precisaria de um domínio nos Azure Active Directory Domain Services.
 
 Para implantar a infraestrutura básica para esse cenário com um modelo do Azure Resource Manager, execute as etapas a seguir.
 
@@ -106,13 +106,13 @@ Para explorar o custo de executar esse cenário, todos os serviços são pré-co
 
 Nós fornecemos três perfis de custo de exemplo com base no número de instâncias de VM do conjunto de dimensionamento que executam seus aplicativos.
 
-* [Pequeno][small-pricing]: Corresponde a duas instâncias de VM de front-end e duas de back-end.
-* [Médio][medium-pricing]: Corresponde a 20 instâncias de VM de front-end e 5 de back-end.
-* [Grande][large-pricing]: Corresponde a 100 instâncias de VM de front-end e 10 de back-end.
+* [Pequeno][small-pricing]: esse exemplo de preço refere-se a duas instâncias de VM de front-end e duas de back-end.
+* [Médio][medium-pricing]: esse exemplo de preço refere-se a 20 instâncias de VM de front-end e cinco de back-end.
+* [Grande][large-pricing]: esse exemplo de preço refere-se a 100 instâncias de VM de front-end e 10 de back-end.
 
 ## <a name="related-resources"></a>Recursos relacionados
 
-Esse cenário usou um conjunto de dimensionamento de máquina virtual de back-end que executa um cluster do Microsoft SQL Server. O Azure Cosmos DB também pode ser usado como uma camada de banco de dados escalonável e segura para os dados de aplicativo. Um [ponto de extremidade de serviço da rede virtual do Azure][vnetendpoint-docs] permite que você possa garantir os recursos essenciais do serviço do Azure somente para suas redes virtuais. Nesse cenário, os pontos de extremidade de rede virtual permitem proteger o tráfego entre a camada de aplicativo de front-end e o Cosmos DB. Para obter mais informações sobre o Cosmos DB, consulte [Visão geral do Azure Cosmos DB][azurecosmosdb-docs].
+Esse cenário usou um conjunto de dimensionamento de máquina virtual de back-end que executa um cluster do Microsoft SQL Server. O Azure Cosmos DB também pode ser usado como uma camada de banco de dados escalonável e segura para os dados de aplicativo. Um [ponto de extremidade de serviço da rede virtual do Azure][vnetendpoint-docs] permite que você possa proteger os recursos essenciais do serviço do Azure somente para suas redes virtuais. Nesse cenário, os pontos de extremidade de rede virtual permitem proteger o tráfego entre a camada de aplicativo de front-end e o Cosmos DB. Para obter mais informações sobre o Cosmos DB, consulte [Visão geral do Azure Cosmos DB][azurecosmosdb-docs].
 
 Você também ter uma visão detalhada de uma [arquitetura de referência para um aplicativo de N camadas genérico com o SQL Server][ntiersql-ra].
 

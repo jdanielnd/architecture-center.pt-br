@@ -3,12 +3,12 @@ title: Aplicativo de N camadas com Apache Cassandra
 description: Como executar VMs do Linux para uma arquitetura de N camadas no Microsoft Azure.
 author: MikeWasson
 ms.date: 05/03/2018
-ms.openlocfilehash: 7ee14088a2fae3cfc5c1119daf717236c75ecc6a
-ms.sourcegitcommit: 58d93e7ac9a6d44d5668a187a6827d7cd4f5a34d
+ms.openlocfilehash: fa5faeda4ef1dcae46181c0a3be8f4e139dc27d0
+ms.sourcegitcommit: 25bf02e89ab4609ae1b2eb4867767678a9480402
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/02/2018
-ms.locfileid: "37142226"
+ms.lasthandoff: 09/14/2018
+ms.locfileid: "45584707"
 ---
 # <a name="n-tier-application-with-apache-cassandra"></a>Aplicativo de N camadas com Apache Cassandra
 
@@ -138,11 +138,13 @@ Considere adicionar uma NVA (solução de virtualização de rede) para criar um
 
 Criptografe dados confidenciais em repouso e use o [Azure Key Vault][azure-key-vault] para gerenciar as chaves de criptografia de banco de dados. O Key Vault pode armazenar chaves de criptografia em HSMs (módulos de segurança de hardware). Também é recomendado para armazenar segredos do aplicativo, como cadeias de caracteres de conexão de banco de dados, no cofre de chaves.
 
+É recomendável habilitar a [Proteção contra DDoS Standard](/azure/virtual-network/ddos-protection-overview), que fornece a mitigação de DDoS adicional para os recursos em uma VNet. Embora a proteção contra DDoS básica seja habilitada automaticamente como parte da plataforma Azure, a Proteção contra DDoS Standard fornece funcionalidades de mitigação ajustadas especificamente para os recursos da Rede Virtual do Azure.  
+
 ## <a name="deploy-the-solution"></a>Implantar a solução
 
 Uma implantação para essa arquitetura de referência está disponível no [GitHub][github-folder]. 
 
-### <a name="prerequisites"></a>pré-requisitos
+### <a name="prerequisites"></a>Pré-requisitos
 
 [!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 

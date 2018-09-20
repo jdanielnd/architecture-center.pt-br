@@ -3,12 +3,12 @@ title: Detecção de fraude em tempo real no Azure
 description: Cenário comprovado para detectar atividades fraudulentas em tempo real usando o Hub de Eventos do Azure e o Stream Analytics.
 author: alexbuckgit
 ms.date: 07/05/2018
-ms.openlocfilehash: e22322133adf40d033ac5af98069cb00765d14ca
-ms.sourcegitcommit: 71cbef121c40ef36e2d6e3a088cb85c4260599b9
+ms.openlocfilehash: d80fab460938cceeb84f3ed2ecd97e9e149f8e2d
+ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/14/2018
-ms.locfileid: "39060805"
+ms.lasthandoff: 09/11/2018
+ms.locfileid: "44389121"
 ---
 # <a name="real-time-fraud-detection-on-azure"></a>Detecção de fraude em tempo real no Azure
 
@@ -99,7 +99,7 @@ Cenários de detecção de fraude mais complexos podem se beneficiar de um model
 [small-pricing]: https://azure.com/e/74149ec312c049ccba79bfb3cfa67606
 [medium-pricing]: https://azure.com/e/4fc94f7376de484d8ae67a6958cae60a
 [large-pricing]: https://azure.com/e/7da8804396f9428a984578700003ba42
-[architecture-diagram]: ./images/architecture-diagram-fraud-detection.png
+[architecture-diagram]: ./media/architecture-diagram-fraud-detection.png
 [docs-event-hubs]: /azure/event-hubs/event-hubs-what-is-event-hubs
 [docs-event-hubs-security-model]: /azure/event-hubs/event-hubs-authentication-and-security-model-overview
 [docs-stream-analytics]: /azure/stream-analytics/stream-analytics-introduction

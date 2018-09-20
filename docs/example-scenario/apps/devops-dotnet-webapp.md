@@ -3,20 +3,20 @@ title: Pipeline de CI/CD com VSTS
 description: Um exemplo de criação e lançamento de um aplicativo .NET para Aplicativos Web do Azure
 author: christianreddington
 ms.date: 07/11/18
-ms.openlocfilehash: ae4ac5fc02cc841fc39b3cbef46124fe9da75e9b
-ms.sourcegitcommit: 71cbef121c40ef36e2d6e3a088cb85c4260599b9
+ms.openlocfilehash: aea757087f4a505a8c52658abe1841c5455977cc
+ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/14/2018
-ms.locfileid: "39061007"
+ms.lasthandoff: 09/11/2018
+ms.locfileid: "44389257"
 ---
 # <a name="cicd-pipeline-with-vsts"></a>Pipeline de CI/CD com VSTS
 
-DevOps é a integração do desenvolvimento, garantia de qualidade e operações de TI. O DevOps requer uma cultura unificada e um conjunto robusto de processos para entrega de software.
+DevOps é a integração do desenvolvimento, da garantia de qualidade e das operações de TI. O DevOps requer uma cultura unificada e um conjunto robusto de processos para entrega de software.
 
-Este cenário de exemplo demonstra como as equipes de desenvolvimento podem usar o Visual Studio Team Services para implantar um aplicativo Web de duas camadas.NET no Serviço de Aplicativo do Azure. O aplicativo Web depende dos serviços de plataforma como um serviço (PaaS) do Azure downstream. Este documento também destaca algumas considerações que você deve fazer ao projetar um cenário como esse usando a plataforma como um serviço (PaaS) do Azure.
+Este cenário de exemplo demonstra como as equipes de desenvolvimento podem usar o Visual Studio Team Services para implantar um aplicativo Web de duas camadas.NET no Serviço de Aplicativo do Azure. O aplicativo Web depende dos serviços de PaaS (plataforma como serviço) do Azure downstream. Este documento também destaca algumas considerações que você deve fazer ao projetar um cenário como esse usando a plataforma como um serviço (PaaS) do Azure.
 
-Adotar uma abordagem moderna para o desenvolvimento de aplicativos usando integração contínua (CI) e implantação contínua (CD), ajuda a acelerar a entrega de valor para seus usuários por meio de um serviço de compilação, teste, implantação e monitoramento robusto. Usando uma plataforma como o Visual Studio Team Services, além dos serviços do Azure, como o Serviço de Aplicativo, as organizações podem garantir que elas permaneçam concentradas no desenvolvimento de seu cenário, em vez do gerenciamento da infraestrutura para habilitá-lo.
+Adotar uma abordagem moderna para o desenvolvimento de aplicativos usando CI (integração contínua) e CD (implantação contínua), ajuda a acelerar a entrega de valor para seus usuários por meio de um serviço de compilação, teste, implantação e monitoramento robusto. Usando uma plataforma como o Visual Studio Team Services, além dos serviços do Azure, como o Serviço de Aplicativo, as organizações podem garantir que elas permaneçam concentradas no desenvolvimento de seu cenário, em vez do gerenciamento da infraestrutura para habilitá-lo.
 
 ## <a name="related-use-cases"></a>Casos de uso relacionados
 
@@ -43,20 +43,20 @@ Este cenário aborda um pipeline de DevOps para um aplicativo Web .NET usando o 
 
 * [Grupos de recursos][resource-groups] são um contêiner lógico para recursos do Azure e também fornecem um limite de controle de acesso para o plano de gerenciamento - pense em um grupo de recursos como a representação de uma “unidade de implantação”.
 * [Visual Studio Team Services (VSTS)][vsts] é um serviço que permite que você gerencie o seu ciclo de vida de desenvolvimento de ponta a ponta; do planejamento e gerenciamento de projeto, ao gerenciamento de código, por meio de build e versão.
-* [Aplicativos Web do Azure][web-apps] é um serviço de plataforma como um serviço (Paas) para hospedar aplicativos Web, APIs REST e back-ends móveis. Embora este artigo se concentre em .NET, há várias opções de plataforma de desenvolvimento adicionais com suporte.
+* [Aplicativos Web do Azure][web-apps] é uma PaaS (plataforma como serviço) para hospedar aplicativos Web, APIs REST e back-ends móveis. Embora este artigo se concentre em .NET, há várias opções de plataforma de desenvolvimento adicionais com suporte.
 * O [Application Insights][application-insights] é um serviço de gerenciamento de desempenho de aplicativo (APM), “first-party” extensível para desenvolvedores da Web em várias plataformas.
 
 ### <a name="alternative-devops-tooling-options"></a>Opções alternativas de ferramentas do DevOps
 
 Embora este artigo se concentre no Visual Studio Team Services, o [Team Foundation Server][team-foundation-server] poderia ser usado como um substituto local. Como alternativa, você também pode encontrar uma coleção de tecnologias que estão sendo usadas em conjunto para um pipeline de desenvolvimento de software livre usando [Jenkins][jenkins-on-azure].
 
-De uma perspectiva de infra-estrutura como código [modelos do Azure Resource Manager (ARM)][arm-templates] são incluídos como parte do projeto de DevOps do Azure, mas você pode considerar [Terraform][terraform] ou [Chef][chef] se você tiver investimentos aqui. Se você prefere uma implantação baseada em infraestrutura como serviço (IaaS) e exige o gerenciamento de configuração, você poderia considerar [Azure Desired State Configuration][desired-state-configuration], [Ansible][ansible] ou [Chef][chef].
+De uma perspectiva de infraestrutura como código, [modelos do Azure Resource Manager][arm-templates] são incluídos como parte do projeto do Azure DevOps, mas você pode considerar [Terraform][terraform] ou [Chef][chef] se tiver investimentos aqui. Se você prefere uma implantação baseada em IaaS (infraestrutura como serviço) e exige o gerenciamento de configuração, você poderia considerar o [State Configuration da Automação do Azure][desired-state-configuration], o [Ansible][ansible] ou o [Chef][chef].
 
 ### <a name="alternatives-to-web-app-hosting"></a>Alternativas à hospedagem do aplicativo Web
 
 Alternativas à hospedagem nos Aplicativos Web do Azure:
 
-* [VM][compare-vm-hosting] - Para cargas de trabalho que exigem um alto grau de controle, ou dependem dos componentes do sistema operacional / serviços que não são possíveis com Aplicativos Web (por exemplo, o Windows GAC ou COM)
+* [VM][compare-vm-hosting] – Para cargas de trabalho que exigem um alto grau de controle, ou dependem dos componentes do sistema operacional/serviços que não são possíveis com Aplicativos Web (por exemplo, o Windows GAC ou COM)
 * [Hospedagem de contêiner][azure-containers] - Onde há dependências de sistema operacional e a portabilidade de hospedagem ou densidade de hospedagem, também são requisitos.
 * [Service Fabric][service-fabric] - Uma boa opção se a arquitetura da carga de trabalho for voltada para componentes distribuídos que se beneficiam da implantação e execução em um cluster com um alto grau de controle. O Service Fabric também pode ser usado para hospedar contêineres.
 * [Azure Functions sem servidor][azure-functions] - Uma boa opção se a arquitetura de carga de trabalho é centralizada em torno de componentes distribuídos refinados, exigindo dependências mínimas, onde componentes individuais são necessários somente para execução sob demanda (não continuamente) e a orquestração dos componentes não é necessária.
@@ -70,7 +70,7 @@ Como parte de seu pipeline de integração contínua, você deve;
 * Faça o teste de unidade dos componentes do seu aplicativo com cobertura de código suficiente (incluindo os caminhos de falha)
 * Garantindo que a compilação é executada em relação ao branch mestre (ou tronco) compartilhado. Essa ramificação deve ser estável e mantida como “pronta para implantação”. Alterações incompletas ou em andamento devem ser isoladas em um branch separado com mesclagens frequentes de “integração para uso futuro” para evitar conflitos mais tarde.
 
-**[Entrega contínua (CD)][continuous-delivery]** deve ter como objetivo demonstrar não apenas uma compilação estável, mas uma implementação estável. Isso torna a concretização da CD um pouco mais difícil, uma configuração específica para o ambiente é necessária e um mecanismo para definir esses valores corretamente.
+**[Entrega contínua (CD)][continuous-delivery]** deve ter como objetivo demonstrar não apenas uma compilação estável, mas uma implementação estável. Isso torna a concretização da CD um pouco mais difícil, uma configuração específica para o ambiente é necessária, bem como um mecanismo para definir esses valores corretamente.
 
 Além disso, uma cobertura suficiente de testes de integração é necessária para garantir que os vários componentes estejam configurados e funcionando corretamente de ponta a ponta.
 
@@ -79,7 +79,7 @@ Isso também pode exigir configuração e redefinição dos dados específicos d
 A entrega contínua também pode ser estendida para teste de carga e ambientes de teste de aceitação do usuário.
 
 A entrega contínua beneficia-se de monitoramento contínuo, idealmente em todos os ambientes.
-A consistência e confiabilidade de implantações e teste de integração entre ambientes são facilitadas com um script para criação e configuração ou para a infraestrutura de hospedagem (algo que é consideravelmente mais fácil para cargas de trabalho baseadas em nuvem, veja a infraestrutura como código do Azure) – isso também é conhecido como [“infraestrutura-como- código”][infra-as-code].
+A consistência e a confiabilidade de implantações e teste de integração entre ambientes são facilitadas com um script para criação e configuração ou para a infraestrutura de hospedagem (algo que é consideravelmente mais fácil para cargas de trabalho baseadas em nuvem, veja a infraestrutura como código do Azure) – isso também é conhecido como [“infraestrutura como código”][infra-as-code].
 
 * Inicie a entrega contínua o mais cedo possível no ciclo de vida do projeto. Quanto mais tarde você o inicia, mais difícil será.
 * Integração e testes de unidade devem receber a mesma prioridade que os recursos de projeto
@@ -96,7 +96,7 @@ Considere a possibilidade de aproveitar os [padrões de design comuns para dispo
 
 Analise as considerações de disponibilidade na [arquitetura de referência de aplicativo Web do Serviço de Aplicativo][app-service-reference-architecture] apropriada
 
-Para outros tópicos de escalabilidade, confira a [lista de verificação de disponibilidade][availability] no Azure Architecture Center.
+Para ver outros tópicos sobre disponibilidade, consulte a [lista de verificação de disponibilidade][availability] no Azure Architecture Center.
 
 ### <a name="scalability"></a>Escalabilidade
 
@@ -104,7 +104,7 @@ Ao criar um aplicativo de nuvem esteja atento a [padrões de design comuns para 
 
 Analise as considerações de escalabilidade na [arquitetura de referência de aplicativo Web do Serviço de Aplicativo][app-service-reference-architecture] apropriada
 
-Para outros tópicos de escalabilidade, confira a [lista de verificação de escalabilidade][scalability] no Azure Architecture Center.
+Para outros tópicos de escalabilidade, confira a [lista de verificação de escalabilidade] [ scalability] no Azure Architecture Center.
 
 ### <a name="security"></a>Segurança
 
@@ -118,7 +118,7 @@ Para obter orientação geral sobre como criar soluções seguras, confira a [Do
 
 Analise os [padrões de design comuns para resiliência][design-patterns-resiliency] e considere a implementação deles quando apropriado.
 
-Você pode encontrar várias [práticas recomendada de resiliência para o Serviço de Aplicativo][resiliency-app-service] no Architecture Center.
+Você pode encontrar várias [práticas recomendadas para o Serviço de Aplicativo][resiliency-app-service] no Centro de Arquitetura do Azure.
 
 Para obter diretrizes gerais sobre como criar soluções resilientes, confira [Projetando aplicativos resilientes para o Azure][resiliency].
 
@@ -131,11 +131,11 @@ Para obter diretrizes gerais sobre como criar soluções resilientes, confira [P
 
 ### <a name="walk-through"></a>Passo a passo
 
-Nesse cenário, você usará o projeto de DevOps do Azure para criar seu pipeline de CI/CD.
+Nesse cenário, você usará o projeto do Azure DevOps para criar seu pipeline de CI/CD.
 
 O projeto de DevOps implantará um Plano de Serviço de Aplicativo, Serviço de Aplicativo e um recurso do App Insights para você, assim como configurar o projeto do Visual Studio Team Services para você.
 
-Depois que você tiver o projeto de DevOps e o build for concluído, examine as alterações de código associadas, itens de trabalho e os resultados de teste. Você observará que nenhum resultado de teste é exibido, pois o código não contém nenhum teste a ser executado.
+Depois que a implantação do projeto de DevOps e do build for concluída, analise as alterações de código associadas, os itens de trabalho e os resultados de teste. Você observará que nenhum resultado de teste é exibido, pois o código não contém nenhum teste a ser executado.
 
 Analise as Definições de versão. Observe que um pipeline de lançamento foi configurado, liberando o nosso aplicativo para desenvolvimento. Observe que há um **gatilho de implantação contínua** definido no artefato de lançamento **Drop** com lançamentos automáticos em ambientes de desenvolvimento. Como parte de um processo de implantação contínua, você poderá ver as versões em vários ambientes. Uma versão pode abranger infraestrutura (usando técnicas como infraestrutura como código) e também implantar os pacotes de aplicativos necessários, bem como quaisquer tarefas de pós-configuração.
 
@@ -144,7 +144,7 @@ Analise as Definições de versão. Observe que um pipeline de lançamento foi c
 * Considere aproveitar as [tarefas de geração de tokens][vsts-tokenization] que estão disponíveis no marketplace do VSTS.
 * Considere usar a tarefa do VSTS [Implantar: Azure Key Vault] [ download-keyvault-secrets] para baixar segredos de um Azure Key Vault para sua versão. Você pode usar esses segredos como variáveis como parte de sua definição de versão e não deve armazená-los no controle do código-fonte.
 * Considere usar as [variáveis de versão][vsts-release-variables] em suas definições de versão para fazer alterações de configuração de seus ambientes. As variáveis de versão podem ser definidas para uma versão inteira ou um determinado ambiente. Se usar variáveis de informações secretas, certifique-se de selecionar o ícone de cadeado.
-* Considere o uso de [portões de implantação][vsts-deployment-gates] em seu pipeline de lançamento. Isso permite que você aproveite os dados de monitoramento junto com sistemas externos (gerenciamento de incidentes, por exemplo, ou outros sistemas personalizados) para determinar se uma versão deve ser promovida.
+* Considere o uso de [portões de implantação][vsts-deployment-gates] em seu pipeline de lançamento. Isso permite que você aproveite os dados de monitoramento junto com sistemas externos (por exemplo, gerenciamento de incidentes ou outros sistemas personalizados) para determinar se uma versão deve ser promovida.
 * Quando a intervenção manual em um pipeline de lançamento for necessário, considere usar a funcionalidade de [aprovações][vsts-approvals].
 * Considere usar o [Application Insights][application-insights] e outras ferramentas de monitoramento o mais cedo possível no seu pipeline de lançamento. A maioria das organizações inicia o monitoramento em seu ambiente de produção, embora você possa identificar possíveis bugs mais cedo no processo e impedir o impacto para os usuários em produção.
 
