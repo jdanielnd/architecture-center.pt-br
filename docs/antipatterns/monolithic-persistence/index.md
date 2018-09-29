@@ -3,12 +3,12 @@ title: Antipadrão de persistência monolítica
 description: Colocar todos os dados de um aplicativo em um único armazenamento de dados pode prejudicar o desempenho.
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: 7f04b9f0805c281068b6b2edaf040683773e6f6e
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 8cc67a41adf7ca4e3c5475eea86e38b75dd65d4d
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24538674"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429104"
 ---
 # <a name="monolithic-persistence-antipattern"></a>Antipadrão de persistência monolítica
 
@@ -23,7 +23,7 @@ Sistemas baseados em nuvem modernos geralmente possuem requisitos funcionais e n
 - Armazenar e recuperar grandes quantidades de dados não relacionados no mesmo armazenamento de dados pode causar contenção, que por sua vez, leva a tempos de resposta mais lentos e falhas de conexão.
 - Independentemente do armazenamento de dados escolhido, talvez ele não seja o mais adequado para todos os diferentes tipos de dados ou ele pode não ser otimizado para as operações o aplicativo executa. 
 
-O exemplo a seguir mostra um controlador API Web ASP.NET que adiciona um novo registro em um banco de dados e também registra o resultado em um log. O log é mantido no mesmo banco de dados que os dados de negócios. Você pode encontrar o exemplo completo [aqui][sample-app].
+O exemplo a seguir mostra um controlador ASP.NET Web API que adiciona um novo registro em um banco de dados e também registra o resultado em um log. O log é mantido no mesmo banco de dados que os dados de negócios. Você pode encontrar o exemplo completo [aqui][sample-app].
 
 ```csharp
 public class MonoController : ApiController
@@ -142,7 +142,7 @@ Da mesma forma, a utilização máxima de DTU do banco de dados de log atinge so
 - [Particionamento de dados][DataPartitioningGuidance]
 
 [sample-app]: https://github.com/mspnp/performance-optimization/tree/master/MonolithicPersistence
-[CosmosDB]: http://azure.microsoft.com/services/cosmos-db/
+[CosmosDB]: https://azure.microsoft.com/services/cosmos-db/
 [Azure-cache]: /azure/redis-cache/
 [Data-Access-Guide]: https://msdn.microsoft.com/library/dn271399.aspx
 [DataPartitioningGuidance]: ../../best-practices/data-partitioning.md

@@ -3,12 +3,12 @@ title: Executar um farm do SharePoint Server 2016 de alta disponibilidade no Azu
 description: Práticas comprovadas para configurar uma farm do SharePoint Server 2016 de alta disponibilidade no Azure.
 author: njray
 ms.date: 07/14/2018
-ms.openlocfilehash: 04c69309e9f96e3bf7cd7faabeedd9b6d9da1ebd
-ms.sourcegitcommit: 8b5fc0d0d735793b87677610b747f54301dcb014
+ms.openlocfilehash: 6141c73dc8e71f5546395c12421c470e2d16cf78
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/29/2018
-ms.locfileid: "39334123"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428985"
 ---
 # <a name="run-a-high-availability-sharepoint-server-2016-farm-in-azure"></a>Executar um farm do SharePoint Server 2016 de alta disponibilidade no Azure
 
@@ -307,7 +307,7 @@ Esse logon faz um túnel do domínio Fabrikam.com usado pela rede local até o d
 [sharepoint-reqs]: https://technet.microsoft.com/library/cc262485(v=office.16).aspx
 [sharepoint-search]: https://technet.microsoft.com/library/dn342836.aspx
 [sql-always-on]: /sql/database-engine/availability-groups/windows/always-on-availability-groups-sql-server
-[sql-performance]: /virtual-machines/windows/sql/virtual-machines-windows-sql-performance
+[sql-performance]: /azure/virtual-machines/windows/sql/virtual-machines-windows-sql-performance
 [sql-server-capacity-planning]: https://technet.microsoft.com/library/cc298801(v=office.16).aspx
 [sql-quorum]: https://technet.microsoft.com/library/cc731739(v=ws.11).aspx
 [sql-sharepoint-best-practices]: https://technet.microsoft.com/library/hh292622(v=office.16).aspx

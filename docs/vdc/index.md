@@ -3,12 +3,12 @@ title: Datacenter Virtual do Azure
 description: Recursos para o Datacenter Virtual do Microsoft Azure
 keywords: Azure
 layout: LandingPage
-ms.openlocfilehash: 9b82122358085c37f89fb258034a4c9a91ecb054
-ms.sourcegitcommit: 8ec48a0e2c080c9e2e0abbfdbc463622b28de2f2
+ms.openlocfilehash: 5b5b6f58911e39ae1296722194b58c601b9baea8
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 08/18/2018
-ms.locfileid: "43324806"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428084"
 ---
 # <a name="azure-virtual-datacenter-and-the-enterprise-control-plane"></a>Datacenter Virtual do Azure e o Plano de controle empresarial
 
@@ -17,9 +17,9 @@ O Datacenter Virtual do Azure é uma abordagem para aproveitar ao máximo os rec
 ## <a name="resources"></a>Recursos
 <table>
 <tr>
-    <td style="width: 64px; vertical-align: middle;"><a href="http://aka.ms/VDC/Concepts"><img src="../_images/virtual-datacenter.svg" alt="Virtual Datacenter eBook" /></a></td>
+    <td style="width: 64px; vertical-align: middle;"><a href="https://aka.ms/VDC/Concepts"><img src="../_images/virtual-datacenter.svg" alt="Virtual Datacenter eBook" /></a></td>
     <td>
-        <h3><a href="http://aka.ms/VDC/Concepts">Datacenter Virtual do Azure: conceitos</a></h3>
+        <h3><a href="https://aka.ms/VDC/Concepts">Datacenter Virtual do Azure: conceitos</a></h3>
         <p>Esse livro eletrônico mostra como implantar cargas de trabalho empresariais na plataforma de nuvem do Azure, respeitando simultaneamente suas políticas de segurança e de rede existentes.</p>
     </td>
 </tr>
@@ -31,16 +31,16 @@ O Datacenter Virtual do Azure é uma abordagem para aproveitar ao máximo os rec
     </td>
 </tr>
 <tr>
-    <td style="width: 64px; vertical-align: middle;"><a href="http://aka.ms/VDC/Lift"><img src="./images/vdc-lift-and-shift.png" alt="Lift and Shift Guide" /></a></td>
+    <td style="width: 64px; vertical-align: middle;"><a href="https://aka.ms/VDC/Lift"><img src="./images/vdc-lift-and-shift.png" alt="Lift and Shift Guide" /></a></td>
     <td>
-        <h3><a href="http://aka.ms/VDC/Lift">Datacenter Virtual do Azure: guia de deslocamento e comparação</a></h3>
+        <h3><a href="https://aka.ms/VDC/Lift">Datacenter Virtual do Azure: guia de deslocamento e comparação</a></h3>
         <p>Esse white paper descreve o processo que a equipe de TI empresarial e tomadores de decisão podem usar para identificar e planejar a migração de aplicativos e servidores para o Azure usando o método de deslocamento e comparação, minimizando custos de desenvolvimento adicionais enquanto otimiza as opções de hospedagem de nuvem.</p>
     </td>
 </tr>
 <tr>
-    <td style="width: 64px; vertical-align: middle;"><a href="http://aka.ms/VDC/Deck"><img src="./images/vdc-deck.png" alt="Presentation Deck" /></a></td>
+    <td style="width: 64px; vertical-align: middle;"><a href="https://aka.ms/VDC/Deck"><img src="./images/vdc-deck.png" alt="Presentation Deck" /></a></td>
     <td>
-        <h3><a href="http://aka.ms/VDC/Deck">Datacenter Virtual do Azure: baralho de apresentação</a></h3>
+        <h3><a href="https://aka.ms/VDC/Deck">Datacenter Virtual do Azure: baralho de apresentação</a></h3>
         <p>Esse baralho de apresentação explora as diretrizes e ferramentas do Datacenter Virtual do Azure. Ele aborda metas do Datacenter Virtual (VDC), drivers de cliente, regiões do Azure, elementos de uma automação do VDC, VDCs industrializados e confiáveis do Azure e termina com um plano de ação sobre a orientação de CIO. Também são fornecidas informações de suporte e treinamento.</p>
     </td>
 </tr>
@@ -57,4 +57,4 @@ Estes quatro componentes possibilitam o Datacenter Virtual do Azure: identidade,
 No modelo do Datacenter Virtual do Azure, é possível aplicar políticas de isolamento, tornar a nuvem mais parecida com os datacenters físicos que você conhece e alcançar os níveis de segurança e confiança de que você precisa. Quatro componentes que qualquer equipe de TI empresarial pensariam em tornar possíveis: rede definida pelo software, criptografia, gerenciamento de identidade e padrões de conformidade e certificações subjacentes à plataforma do Azure. Os quatro são fundamentais para transformar um datacenter virtual em uma extensão confiável de seu investimento de infraestrutura existente.
 
 
-Continue lendo o livro eletrônico <a href="http://aka.ms/VDC/eBook">Datacenter Virtual do Azure: conceitos</a>.
+Continue lendo o livro eletrônico <a href="https://aka.ms/VDC/eBook">Datacenter Virtual do Azure: conceitos</a>.

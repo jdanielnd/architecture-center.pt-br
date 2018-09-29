@@ -3,12 +3,12 @@ title: Antipadrão de E/S com ruídos
 description: Um grande número de solicitações de E/S pode prejudicar o desempenho e a capacidade de resposta.
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: daa0c581d31c9389e2853f84075dc44d1e5ba78b
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.openlocfilehash: 17193198918cc742b2e3f30e77dfc5c3f2726ebf
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43325869"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428560"
 ---
 # <a name="chatty-io-antipattern"></a>Antipadrão de E/S com ruídos
 
@@ -217,7 +217,7 @@ await SaveCustomerListToFileAsync(customers);
 
 - Ao gravar os dados, evite bloquear os recursos por mais tempo que o necessário para reduzir as chances de contenção durante uma operação demorada. Se uma operação de gravação se estender por vários armazenamentos de dados, arquivos ou serviços, adote uma abordagem consistente. Confira [Orientação para a Consistência de Dados][data-consistency-guidance].
 
-- Se você armazenar em buffer os dados na memória antes de gravá-los, eles ficarão vulneráveis se o processo falhar. Se a taxa de dados geralmente tem picos ou é relativamente esparsa, pode ser mais seguro colocar em buffer os dados em uma fila durável externa, como os [Hubs de Eventos](http://azure.microsoft.com/services/event-hubs/).
+- Se você armazenar em buffer os dados na memória antes de gravá-los, eles ficarão vulneráveis se o processo falhar. Se a taxa de dados geralmente tem picos ou é relativamente esparsa, pode ser mais seguro colocar em buffer os dados em uma fila durável externa, como os [Hubs de Eventos](https://azure.microsoft.com/services/event-hubs/).
 
 - Considere armazenar em cache os dados recuperados de um serviço ou banco de dados. Isso pode ajudar a reduzir o volume de E/S, evitando repetidas solicitações dos mesmos dados. Para obter mais informações, confira [Melhores Práticas do Cache][caching-guidance].
 
@@ -308,7 +308,7 @@ Rastrear a instrução SQL mostra que todos os dados são buscados em uma única
 [api-design]: ../../best-practices/api-design.md
 [caching-guidance]: ../../best-practices/caching.md
 [code-sample]:  https://github.com/mspnp/performance-optimization/tree/master/ChattyIO
-[data-consistency-guidance]: http://https://msdn.microsoft.com/library/dn589800.aspx
+[data-consistency-guidance]: https://msdn.microsoft.com/library/dn589800.aspx
 [ef]: /ef/
 [extraneous-fetching]: ../extraneous-fetching/index.md
 [new-relic]: https://newrelic.com/application-monitoring
