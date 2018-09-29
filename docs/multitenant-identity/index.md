@@ -5,20 +5,20 @@ author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.next: tailspin
-ms.openlocfilehash: c363ac01e798b522fa95f39586e28fe3af5fae4a
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 9c2efe9aea9da53177478161b90406d0c2021550
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24541666"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429427"
 ---
 # <a name="manage-identity-in-multitenant-applications"></a>Gerenciar a identidade em aplicativos multilocatários
 
 Esta série de artigos descreve as práticas recomendadas para multilocação, ao usar o Azure AD para autenticação e gerenciamento de identidades.
 
-[![GitHub](../_images/github.png) Código de exemplo][sample application]
+[Código de exemplo do ![GitHub](../_images/github.png)][sample application]
 
-Quando estiver compilando um aplicativo multilocatário, um dos primeiros desafios é gerenciar identidades de usuário, porque agora cada usuário pertence a um locatário. Por exemplo:
+Quando estiver compilando um aplicativo multilocatário, um dos primeiros desafios é gerenciar identidades de usuário, porque agora cada usuário pertence a um locatário. Por exemplo: 
 
 * Os usuários entram com suas credenciais organizacionais.
 * Eles devem ter acesso aos dados de sua organização, mas não aos dados que pertencem a outros locatários.
@@ -93,7 +93,7 @@ Este guia não considera outros aspectos da multilocação, como particionamento
 
 
 <!-- Links -->
-[ADConnect]: /azure/active-directory/active-directory-aadconnect
+[ADConnect]: /azure/active-directory/hybrid/whatis-hybrid-identity
 [AzureAD]: /azure/active-directory
 
 [Federar com o AD FS de um cliente]: adfs.md
