@@ -4,18 +4,43 @@ description: Arquiteturas de referência, plantas e diretrizes de implementaçã
 layout: LandingPage
 ms.topic: landing-page
 ms.date: 08/30/2018
-ms.openlocfilehash: bd04a866258fb2f6ff849a4f29492610d3545e1f
-ms.sourcegitcommit: 20953a7bed708713e4c972d390a2910505e80f08
+ms.openlocfilehash: c96fc08aca97beb886fa96807d6f9cc5c09d0555
+ms.sourcegitcommit: 9eecff565392273d11b8702f1fcecb4d75e27a15
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/06/2018
-ms.locfileid: "44040444"
+ms.lasthandoff: 10/03/2018
+ms.locfileid: "48243624"
 ---
 # <a name="azure-reference-architectures"></a>Arquiteturas de referência do Azure
 
 Nossas arquiteturas de referência são organizadas por cenário, com arquiteturas relacionadas agrupadas juntos. Cada arquitetura inclui as práticas recomendadas, junto com as considerações sobre escalabilidade, disponibilidade, capacidade de gerenciamento e segurança. Mais também incluem uma solução implantável.
 
-Vá para: [Big data](#big-data-solutions) | [Aplicativos Web](#web-applications) | [Aplicativos de N camadas](#n-tier-applications) | [Redes virtuais](#virtual-networks) | [Active Directory](#extending-on-premises-active-directory-to-azure) | [Cargas de trabalho da VM](#vm-workloads)
+Vá para: [IA](#ai-and-machine-learning) | [Big data](#big-data-solutions) | [Aplicativos de N camadas](#n-tier-applications) | [Redes virtuais](#virtual-networks) | [Active Directory](#extending-on-premises-active-directory-to-azure) | [Cargas de trabalho da VM](#vm-workloads) | [Aplicativos Web](#web-applications)
+
+## <a name="ai-and-machine-learning"></a>IA e machine learning
+
+<ul  class="panelContent cardsF">
+<!-- SQL Data Warehouse -->
+<li style="display: flex; flex-direction: column;">
+    <a href="./ai/batch-scoring-deep-learning.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
+            <div class="cardPadding" style="display: flex;">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="../_images/icons/batch-ai.svg" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>Pontuação em lote para modelos de aprendizado profundo</h3>
+                        <p>Automatize os trabalhos em lotes executados que aplicam a transferência neural em um vídeo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</li>
+</ul>
 
 ## <a name="big-data-solutions"></a>Soluções de Big Data
 
@@ -73,68 +98,6 @@ Vá para: [Big data](#big-data-solutions) | [Aplicativos Web](#web-applications)
                     <div class="cardText">
                         <h3>Processamento de fluxo com o Azure Stream Analytics</h3>
                         <p>Pipeline de processamento do fluxo de ponta a ponta que correlaciona os registros de dois fluxos de dados para calcular uma média móvel.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-</ul>
-
-## <a name="web-applications"></a>Aplicativos Web
-
-<ul  class="panelContent cardsF">
-<li style="display: flex; flex-direction: column;">
-    <a href="./app-service-web-app/basic-web-app.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardImageOuter">
-                        <div class="cardImage">
-                            <img src="../_images/icons/app-service.svg" height="140px" />
-                        </div>
-                    </div>
-                    <div class="cardText">
-                        <h3>Aplicativo Web básico</h3>
-                        <p>Um aplicativo Web com o Serviço de Aplicativo do Azure e o Banco de Dados SQL do Azure.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-<li style="display: flex; flex-direction: column;">
-    <a href="./app-service-web-app/scalable-web-app.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardImageOuter">
-                        <div class="cardImage">
-                            <img src="../_images/icons/app-service.svg" height="140px" />
-                        </div>
-                    </div>
-                    <div class="cardText">
-                        <h3>Aplicativo Web altamente escalonável</h3>
-                        <p>Práticas comprovadas para melhora da escalabilidade em um aplicativo Web.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-<li style="display: flex; flex-direction: column;">
-    <a href="./app-service-web-app/multi-region.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardImageOuter">
-                        <div class="cardImage">
-                            <img src="../_images/icons/app-service.svg" height="140px" />
-                        </div>
-                    </div>
-                    <div class="cardText">
-                        <h3>Aplicativo Web altamente disponível</h3>
-                        <p>Execute um aplicativo Web nos Serviço de Aplicativo para alcançar a alta disponibilidade.</p>
                     </div>
                 </div>
             </div>
@@ -541,3 +504,65 @@ Vá para: [Big data](#big-data-solutions) | [Aplicativos Web](#web-applications)
 </li>
 </ul>
 
+
+## <a name="web-applications"></a>Aplicativos Web
+
+<ul  class="panelContent cardsF">
+<li style="display: flex; flex-direction: column;">
+    <a href="./app-service-web-app/basic-web-app.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
+            <div class="cardPadding" style="display: flex;">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="../_images/icons/app-service.svg" height="140px" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>Aplicativo Web básico</h3>
+                        <p>Um aplicativo Web com o Serviço de Aplicativo do Azure e o Banco de Dados SQL do Azure.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</li>
+<li style="display: flex; flex-direction: column;">
+    <a href="./app-service-web-app/scalable-web-app.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
+            <div class="cardPadding" style="display: flex;">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="../_images/icons/app-service.svg" height="140px" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>Aplicativo Web altamente escalonável</h3>
+                        <p>Práticas comprovadas para melhora da escalabilidade em um aplicativo Web.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</li>
+<li style="display: flex; flex-direction: column;">
+    <a href="./app-service-web-app/multi-region.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
+            <div class="cardPadding" style="display: flex;">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="../_images/icons/app-service.svg" height="140px" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>Aplicativo Web altamente disponível</h3>
+                        <p>Execute um aplicativo Web nos Serviço de Aplicativo para alcançar a alta disponibilidade.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</li>
+</ul>
