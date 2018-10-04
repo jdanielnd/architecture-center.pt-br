@@ -4,12 +4,12 @@ description: Orientações sobre repetição no tratamento de falhas transitóri
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 9562e3447b2219fe2f3df96cfca24b845efa39b0
-ms.sourcegitcommit: c53adf50d3a787956fc4ebc951b163a10eeb5d20
+ms.openlocfilehash: 85264faa89e827821a71544f1bf8dc8e0619ef24
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/23/2017
-ms.locfileid: "25545971"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429240"
 ---
 # <a name="transient-fault-handling"></a>Tratamento de falhas transitórias
 
@@ -62,16 +62,16 @@ As diretrizes a seguir ajudarão você a projetar um mecanismo adequado para tra
   * Use o tipo da exceção e quaisquer dados que ele contenha, ou os códigos e mensagens de erro retornados do serviço, para otimizar o intervalo e o número de repetições. Por exemplo, alguns códigos de erro ou exceções (como o código HTTP 503 Serviço Indisponível com um cabeçalho Repetir Após na resposta) podem indicar quanto tempo o erro pode durar ou que o serviço falhou e não responderá a nenhuma tentativa subsequente.
 * **Evite antipadrões**:
   * Na grande maioria dos casos, você deve evitar implementações que incluam camadas duplicadas de código de repetição. Evite designs que incluam mecanismos de repetição em cascata ou que implementam a repetição em cada fase de uma operação que envolva uma hierarquia de solicitações, a menos que tenha requisitos específicos que a exijam. Nessas circunstâncias excepcionais, use políticas que evitem números de repetições e períodos de intervalo excessivos, e assegure-se de entender as consequências. Por exemplo, se um componente fizer uma solicitação para outro, que então acessa o serviço de destino, e você implementar a repetição com uma contagem de três em ambas as chamadas, no total, haverá nove tentativas de repetição no serviço. Muitos serviços e recursos implementam um mecanismo interno de repetição e você deve investigar como pode desabilitá-lo ou modificá-lo, caso precise implementar repetições em um nível mais alto.
-  * Nunca implemente um mecanismo de repetição infinita. Isso provavelmente impedirá o recurso ou serviço de se recuperar de situações de sobrecarga e fará com que conexões recusadas e a limitação continuem por um período ainda mais longo. Use um número finito ou repetições, ou implemente um padrão como [Disjuntor](http://msdn.microsoft.com/library/dn589784.aspx) para permitir que o serviço se recupere.
+  * Nunca implemente um mecanismo de repetição infinita. Isso provavelmente impedirá o recurso ou serviço de se recuperar de situações de sobrecarga e fará com que conexões recusadas e a limitação continuem por um período ainda mais longo. Use um número finito ou repetições, ou implemente um padrão como [Disjuntor](../patterns/circuit-breaker.md) para permitir que o serviço se recupere.
   * Nunca execute uma repetição imediata mais de uma vez.
   * Evite usar um intervalo de repetição regular, especialmente quando você tem um grande número de tentativas de repetição, ao acessar serviços e recursos no Azure. A abordagem ideal nesse cenário é uma estratégia de retirada exponencial com um recurso de interrupção do circuito.
   * Impeça que várias instâncias do mesmo cliente, ou várias instâncias de diferentes clientes, enviem repetições ao mesmo tempo. Se houver probabilidade de isso acontecer, introduza uma aleatoriedade nos intervalos de repetição.
 * **Teste sua estratégia de repetição e implementação:**
   * Assegure-se de testar completamente a implementação da estratégia de repetição sob o maior número de circunstâncias possível, especialmente quando o aplicativo e os recursos ou serviços de destino que ele usa estiverem sob carga extrema. Para verificar o comportamento durante o teste, você pode:
-    * Injetar falhas transitórias e não transitórias no serviço. Por exemplo, envie solicitações inválidas ou adicione código que detecte solicitações de teste e responda com diferentes tipos de erro. Para obter um exemplo usando o TestApi, consulte [Teste de injeção de falha com o TestApi](http://msdn.microsoft.com/magazine/ff898404.aspx) e [Introdução ao TestApi – parte 5: APIs de injeção de falhas por código gerenciado](http://blogs.msdn.com/b/ivo_manolov/archive/2009/11/25/9928447.aspx).
+    * Injetar falhas transitórias e não transitórias no serviço. Por exemplo, envie solicitações inválidas ou adicione código que detecte solicitações de teste e responda com diferentes tipos de erro. Para obter um exemplo usando o TestApi, consulte [Teste de injeção de falha com o TestApi](https://msdn.microsoft.com/magazine/ff898404.aspx) e [Introdução ao TestApi – parte 5: APIs de injeção de falhas por código gerenciado](https://blogs.msdn.microsoft.com/ivo_manolov/2009/11/25/introduction-to-testapi-part-5-managed-code-fault-injection-apis/).
     * Criar uma simulação do recurso ou serviço que retorne uma gama de erros que o serviço real pode retornar. Certifique-se de incluir todos os tipos de erro que sua estratégia de repetição foi projetada para detectar.
     * Forçar a ocorrência de erros transitórios desabilitando ou sobrecarregando temporariamente o serviço se for um serviço personalizado que você criou e implantou (você não deve, é claro, tentar sobrecarregar nenhum recurso ou serviço compartilhado no Azure).
-    * Para APIs baseadas em HTTP, pensar em usar a biblioteca FiddlerCore em seus testes automatizados para alterar a saída das solicitações HTTP, seja adicionando tempos extras de viagem de ida e volta, seja alterando a resposta (como código de status HTTP, cabeçalhos, corpo ou outros fatores). Isso permite o teste determinista de um subconjunto das condições de falha, sejam falhas transitórias ou outros tipos de falha. Para saber mais, consulte [FiddlerCore](http://www.telerik.com/fiddler/fiddlercore). Para obter exemplos de como usar a biblioteca, especificamente a classe **HttpMangler** , examine o [código-fonte do SDK do Armazenamento do Azure](https://github.com/Azure/azure-storage-net/tree/master/Test).
+    * Para APIs baseadas em HTTP, pensar em usar a biblioteca FiddlerCore em seus testes automatizados para alterar a saída das solicitações HTTP, seja adicionando tempos extras de viagem de ida e volta, seja alterando a resposta (como código de status HTTP, cabeçalhos, corpo ou outros fatores). Isso permite o teste determinista de um subconjunto das condições de falha, sejam falhas transitórias ou outros tipos de falha. Para saber mais, consulte [FiddlerCore](https://www.telerik.com/fiddler/fiddlercore). Para obter exemplos de como usar a biblioteca, especificamente a classe **HttpMangler** , examine o [código-fonte do SDK do Armazenamento do Azure](https://github.com/Azure/azure-storage-net/tree/master/Test).
     * Execute o fator de carga alta e testes simultâneos para garantir que o mecanismo e a estratégia de repetição funcionem corretamente sob essas condições, e não tenham um efeito negativo na operação do cliente nem causem contaminação cruzada entre solicitações.
 * **Gerencie as configurações de política de repetição:**
   * Uma *política de repetição* é uma combinação de todos os elementos de sua estratégia de repetição. Ela define o mecanismo de detecção que determina se uma falha tem probabilidade de ser transitória, o tipo de intervalo a ser usado (como regular, retirada exponencial e aleatoriedade), os valores reais de intervalo e o número de vezes da repetição.
@@ -88,7 +88,7 @@ As diretrizes a seguir ajudarão você a projetar um mecanismo adequado para tra
   
   * Haverá circunstâncias em que a operação continuará falhando a cada tentativa, e é essencial considerar como você tratará essa situação:
     * Embora uma estratégia de repetição defina o número máximo de vezes que uma operação deve ser repetida, ela não impede que o aplicativo repita a operação novamente, com o mesmo número de repetições. Por exemplo, se um serviço de processamento de pedido falhar com um erro fatal que o faça parar de funcionar permanentemente, a estratégia de repetição poderá detectar um tempo limite de conexão e considerá-la uma falha transitória. O código repetirá a operação um número especificado de vezes e só então desistirá. No entanto, quando outro cliente fizer um pedido, a operação será tentada novamente, mesmo com a certeza de que falhará todas as vezes.
-    * Para impedir as repetições constantes de operações que falham continuamente, pense na implementação do padrão de [Disjuntor](http://msdn.microsoft.com/library/dn589784.aspx). Nesse padrão, se o número de falhas em uma janela de tempo especificada exceder o limite, as solicitações serão retornadas ao originador imediatamente como erros, sem tentar acessar o recurso ou serviço com falha.
+    * Para impedir as repetições constantes de operações que falham continuamente, pense na implementação do padrão de [Disjuntor](../patterns/circuit-breaker.md). Nesse padrão, se o número de falhas em uma janela de tempo especificada exceder o limite, as solicitações serão retornadas ao originador imediatamente como erros, sem tentar acessar o recurso ou serviço com falha.
     * O aplicativo pode testar o serviço periodicamente, de forma intermitente e com intervalos bastante longos entre as solicitações a fim de detectar quando ele se torna disponível. Um intervalo apropriado dependerá do cenário, como a importância da operação e a natureza do serviço, e pode ser entre alguns minutos e várias horas. No ponto em que o teste for bem-sucedido, o aplicativo pode retomar as operações normais e passar solicitações ao serviço recém-recuperado.
     * Enquanto isso, é possível fazer fallback para outra instância do serviço (talvez em outro datacenter ou aplicativo), usar um serviço semelhante que ofereça funcionalidade compatível (talvez mais simples) ou executar algumas operações alternativas na esperança de que o serviço logo estará disponível. Por exemplo, talvez seja apropriado armazenar solicitações para o serviço em uma fila ou um repositório de dados e repeti-las mais tarde. Caso contrário, talvez você possa redirecionar o usuário para uma instância alternativa do aplicativo, reduzir o desempenho do aplicativo, mas ainda oferecer funcionalidade aceitável, ou apenas retornar uma mensagem ao usuário indicando que o aplicativo não está disponível no momento.
 * **Outras considerações**
@@ -101,10 +101,9 @@ As diretrizes a seguir ajudarão você a projetar um mecanismo adequado para tra
 
 ## <a name="more-information"></a>Mais informações
 * [Diretrizes para repetição específicas do serviço do Azure](./retry-service-specific.md)
-* [Bloco de aplicativos de tratamento de falhas transitórias](http://msdn.microsoft.com/library/hh680934.aspx)
-* [Padrão de Disjuntor](http://msdn.microsoft.com/library/dn589784.aspx)
-* [Padrão de transação de compensação](http://msdn.microsoft.com/library/dn589804.aspx)
+* [Padrão de Disjuntor](../patterns/circuit-breaker.md)
+* [Padrão de transação de compensação](../patterns/compensating-transaction.md)
 * [Padrões de idempotência][idempotency-patterns]
 
-[idempotency-patterns]: http://blog.jonathanoliver.com/idempotency-patterns/
+[idempotency-patterns]: https://blog.jonathanoliver.com/idempotency-patterns/
 

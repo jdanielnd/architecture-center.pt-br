@@ -8,12 +8,12 @@ pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - data-management
 - performance-scalability
-ms.openlocfilehash: 9a0bf170c9b54c3b2ee9cc91d6dcb5c55a13b96a
-ms.sourcegitcommit: ea7108f71dab09175ff69322874d1bcba800a37a
+ms.openlocfilehash: 1cb63b61f5eb97726e266f797dfe13011907c95f
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/17/2018
-ms.locfileid: "29963203"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429325"
 ---
 # <a name="event-sourcing-pattern"></a>Padrão de fornecimento do evento
 
@@ -82,7 +82,7 @@ Aplicativos com multithread e várias instâncias de aplicativos podem estar arm
 
 Não há nenhuma abordagem padrão, tampouco mecanismos existentes como consultas SQL, para ler os eventos a fim de obter informações. Os únicos dados que podem ser extraídos são um fluxo de eventos usando um identificador de evento como o critério. Normalmente, a ID do evento é mapeada para entidades individuais. O estado atual de uma entidade pode ser determinado somente reproduzindo-se todos os eventos relacionados a ela mediante o estado original da entidade.
 
-O tamanho de cada fluxo de eventos afeta o gerenciamento e a atualização do sistema. Se os fluxos forem grandes, considere a criação de instantâneos em intervalos específicos como um número de eventos especificado. O estado atual da entidade pode ser obtido do instantâneo e repetindo-se todos os eventos que ocorreram depois desse ponto no tempo. Para obter mais informações sobre a criação de instantâneos de dados, consulte [Instantâneo no site de arquitetura de aplicativo empresarial de Martin Fowler](http://martinfowler.com/eaaDev/Snapshot.html) e [Replicação de instantâneo mestre-subordinado](https://msdn.microsoft.com/library/ff650012.aspx).
+O tamanho de cada fluxo de eventos afeta o gerenciamento e a atualização do sistema. Se os fluxos forem grandes, considere a criação de instantâneos em intervalos específicos como um número de eventos especificado. O estado atual da entidade pode ser obtido do instantâneo e repetindo-se todos os eventos que ocorreram depois desse ponto no tempo. Para obter mais informações sobre a criação de instantâneos de dados, consulte [Instantâneo no site de arquitetura de aplicativo empresarial de Martin Fowler](https://martinfowler.com/eaaDev/Snapshot.html) e [Replicação de instantâneo mestre-subordinado](https://msdn.microsoft.com/library/ff650012.aspx).
 
 Embora o fornecimento do evento minimize a oportunidade de atualizações conflitantes para os dados, o aplicativo ainda deve ser capaz de lidar com inconsistências que resultam de consistência eventual e da falta de transações. Por exemplo, um evento que indica uma redução no inventário de estoque pode chegar no armazenamento de dados enquanto uma ordem para esse item está sendo efetuada, resultando em um requisito para reconciliar as duas operações, seja informando o cliente ou criando uma ordem pendente.
 
@@ -162,5 +162,3 @@ Os padrões e diretrizes a seguir também podem ser relevantes ao implementar es
 - [Primer de Consistência de Dados](https://msdn.microsoft.com/library/dn589800.aspx). Ao usar fornecimento do evento com um repositório de leitura separado ou exibições materializadas, os dados de leitura não serão imediatamente consistentes, mas em vez disso serão apenas eventualmente consistentes. Resume os problemas que envolvem a manutenção da consistência em dados distribuídos.
 
 - [Diretrizes de particionamento de dados](https://msdn.microsoft.com/library/dn589795.aspx). Dados muitas vezes são particionados ao usar o fornecimento do evento para melhorar a escalabilidade, reduzir a contenção e otimizar o desempenho. Descreve como dividir dados em partições discretas e os problemas que podem surgir.
-
-- Post de Greg Young, [Por que usar o fornecimento do evento?](http://codebetter.com/gregyoung/2010/02/20/why-use-event-sourcing/).

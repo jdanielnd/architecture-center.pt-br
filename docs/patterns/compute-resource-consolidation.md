@@ -7,12 +7,12 @@ ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - design-implementation
-ms.openlocfilehash: 6e05a30245fbf5183a4e50a54650505f5a5f2aa8
-ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
+ms.openlocfilehash: bd212b8b4406a08058f811db030843f732e08cdc
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 06/11/2018
-ms.locfileid: "35252917"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428832"
 ---
 # <a name="compute-resource-consolidation-pattern"></a>Padrão de consolidação de recursos de computação
 
@@ -85,7 +85,7 @@ Esse padrão pode não ser adequado para tarefas que realizam operações críti
 
 Ao compilar um serviço de nuvem no Azure, é possível consolidar o processamento realizado por várias tarefas em uma única função. Normalmente, essa é uma função de trabalho que executa tarefas de processamento assíncrono ou em segundo plano.
 
-> Em alguns casos, é possível incluir tarefas de processamento assíncrono ou em seguindo plano na função web. Essa técnica ajuda a reduzir custos e simplificar a implantação, embora possa impactar a capacidade de resposta e escalabilidade da interface voltada ao público fornecida pela função web. O artigo [Combinando várias funções de trabalho do Azure em uma função web do Microsoft Azure ](http://www.31a2ba2a-b718-11dc-8314-0800200c9a66.com/2012/02/combining-multiple-azure-worker-roles.html) contém uma descrição detalhada da implementação de tarefas de processamento assíncrono ou em segundo plano em uma função web.
+> Em alguns casos, é possível incluir tarefas de processamento assíncrono ou em seguindo plano na função web. Essa técnica ajuda a reduzir custos e simplificar a implantação, embora possa impactar a capacidade de resposta e escalabilidade da interface voltada ao público fornecida pela função web. 
 
 A função responsável por iniciar e interromper as tarefas. Quando o controlador de malha do Azure carrega uma função, isso eleva o evento `Start` para a função. Você pode substituir o `OnStart` método da classe`WebRole` ou `WorkerRole` para lidar com esse evento, talvez para inicializar os dados e outros recursos que as tarefas desse método dependem.
 

@@ -4,12 +4,12 @@ description: Práticas recomendadas para monitoramento de aplicativos distribuí
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 8dd3979233b03db800bd9514263d9c6fedefa074
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 4de9ce80a17a0ad429166ac2aa7f7f7f66c26db1
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24539010"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429665"
 ---
 # <a name="monitoring-and-diagnostics"></a>Monitoramento e diagnóstico
 [!INCLUDE [header](../_includes/header.md)]
@@ -162,7 +162,7 @@ Grande parte do trabalho de análise consiste em agregar dados de desempenho por
 
 Outro requisito comum é resumir os dados de desempenho em percentis selecionados. Por exemplo, um operador pode determinar os tempos de resposta para 99% das solicitações, 95% das solicitações e 70% das solicitações. Pode haver metas de SLA ou outras metas definidas para cada percentil. Os resultados em andamento devem ser relatados quase em tempo real para ajudar a detectar problemas imediatos. Os resultados também devem ser agregados durante o tempo mais longo para fins estatísticos.
 
-No caso de problemas de latência com impacto sobre o desempenho, o operador deve ser capaz de identificar rapidamente a causa do afunilamento examinando a latência de cada etapa que cada solicitação executa. Os dados de desempenho devem, portanto, fornecer um meio de correlacionar as medidas de desempenho de cada etapa associá-las a uma solicitação específica.
+No caso de problemas de latência com impacto sobre o desempenho, o operador deve ser capaz de identificar rapidamente a causa do gargalo examinando a latência de cada etapa que cada solicitação executa. Os dados de desempenho devem, portanto, fornecer um meio de correlacionar as medidas de desempenho de cada etapa associá-las a uma solicitação específica.
 
 Dependendo dos requisitos de visualização, pode ser útil gerar e armazenar um cubo de dados que contenha exibições dos dados brutos. Esse cubo de dados pode permitir a análise das informações de desempenho e consultas ad hoc complexas.
 
@@ -305,7 +305,7 @@ Para examinar o uso do sistema, um operador normalmente precisa consultar inform
 * O volume de armazenamento de dados que cada usuário ocupa.
 * Os recursos que cada usuário está acessando.
 
-Um operador também deve ser capaz de gerar gráficos. Por exemplo, um gráfico pode exibir os usuários que consomem mais recursos ou os recursos do sistema ou não que são acessados com mais frequência.
+Um operador também deve ser capaz de gerar grafos. Por exemplo, um grafo pode exibir os usuários que consomem mais recursos ou os recursos do sistema ou não que são acessados com mais frequência.
 
 ### <a name="data-sources-instrumentation-and-data-collection-requirements"></a>Requisitos para coleta de dados, fontes de dados e instrumentação
 O rastreamento de uso pode ser executado em um nível relativamente alto. Ele pode observar os horários de início e término de cada solicitação e da natureza da solicitação (ler, gravar e assim por diante, dependendo do recurso em questão). Você pode obter essas informações:
@@ -365,7 +365,7 @@ Você pode enxergar o processo de diagnóstico e monitoramento inteiro como um p
 
 *Figura 1. Os estágios do pipeline de monitoramento e diagnóstico*
 
-A Figura 1 destaca como os dados para monitoramento e diagnóstico podem vir de uma variedade de fontes. Os estágios de instrumentação e coleção tratam da identificação de origens de onde os dados precisam ser capturados, determinando quais dados capturar, como capturá-los e como formatar esses dados para que eles possam ser examinados facilmente. A fase de análise/diagnóstico usa os dados brutos para gerar informações significativas que um operador pode usar para determinar o estado do sistema. O operador pode usar essas informações para tomar decisões sobre possíveis ações a realizar e passar os resultados para os estágios de instrumentação e coleção. A fase do estágio de visualização/alerta apresenta uma exibição de consumo do estado do sistema. Ela pode exibir informações quase em tempo real por meio de uma série de painéis. E ela pode gerar relatórios e gráficos para fornecer uma visão histórica dos dados que podem ajudar a identificar tendências a longo prazo. Se as informações indicarem a probabilidade de que um KPI ultrapasse os limites aceitáveis, esse estágio também pode disparar um alerta para um operador. Em alguns casos, um alerta também pode ser usado para disparar um processo automatizado que tenta realizar ações corretivas, como o dimensionamento automático.
+A Figura 1 destaca como os dados para monitoramento e diagnóstico podem vir de uma variedade de fontes. Os estágios de instrumentação e coleção tratam da identificação de origens de onde os dados precisam ser capturados, determinando quais dados capturar, como capturá-los e como formatar esses dados para que eles possam ser examinados facilmente. A fase de análise/diagnóstico usa os dados brutos para gerar informações significativas que um operador pode usar para determinar o estado do sistema. O operador pode usar essas informações para tomar decisões sobre possíveis ações a realizar e passar os resultados para os estágios de instrumentação e coleção. A fase do estágio de visualização/alerta apresenta uma exibição de consumo do estado do sistema. Ela pode exibir informações quase em tempo real por meio de uma série de painéis. E ela pode gerar relatórios e grafos para fornecer uma visão histórica dos dados que podem ajudar a identificar tendências a longo prazo. Se as informações indicarem a probabilidade de que um KPI ultrapasse os limites aceitáveis, esse estágio também pode disparar um alerta para um operador. Em alguns casos, um alerta também pode ser usado para disparar um processo automatizado que tenta realizar ações corretivas, como o dimensionamento automático.
 
 Observe que estas etapas constituem um processo de fluxo contínuo em que os estágios acontecem em paralelo. Idealmente, todas as fases devem ser configuradas dinamicamente. Em alguns pontos, especialmente quando um sistema tiver sido implantado recentemente ou estiver com problemas, pode ser necessário reunir dados estendidos com maior frequência. Em outras ocasiões, deve ser possível voltar à captura de um nível básico de informações essenciais para verificar se o sistema está funcionando corretamente.
 
@@ -398,7 +398,7 @@ A seção [instrumentando um aplicativo](#instrumenting-an-application) contém 
 * **Monitoramento de aplicativo/sistema**. Essa estratégia usa fontes internas ao aplicativo, estruturas do aplicativo, sistema operacional e infra-estrutura. O código do aplicativo pode gerar seus próprios dados de monitoramento em pontos importantes durante o ciclo de vida de uma solicitação de cliente. O aplicativo pode incluir instruções de rastreamento que podem ser habilitadas ou desabilitadas seletivamente conforme as circunstâncias ditarem. Também é possível inserir diagnóstico dinamicamente usando uma estrutura de diagnóstico. Normalmente, essas estruturas fornecem plug-ins que podem se conectar a vários pontos de instrumentação em seu código e capturar dados de rastreamento nesses pontos.
   
     Além disso, seu código e/ou a infra-estrutura subjacente pode gerar eventos em pontos críticos. Agentes de monitoramento configurados para ouvir esses eventos podem registrar as informações do evento.
-* **Monitoramento do usuário real**. Essa abordagem registra as interações entre um usuário e o aplicativo e observa o fluxo de cada solicitação e resposta. Essas informações podem ter um propósito duplo: podem ser usadas para medir o uso por cada usuário e para determinar se os usuários estão recebendo uma qualidade de serviço adequada (por exemplo, tempos de resposta rápidos, baixa latência e pequenos erros). Você pode usar os dados capturados para identificar áreas de preocupação em que as falhas ocorrem com mais frequência. Você também pode usar os dados para identificar elementos onde o sistema fica mais lento, possivelmente devido a pontos de acesso no aplicativo ou a alguma outra forma de afunilamento. Se você implementar essa abordagem com cuidado, será possível reconstruir os fluxos dos usuários pelo aplicativo para fins de teste e depuração.
+* **Monitoramento do usuário real**. Essa abordagem registra as interações entre um usuário e o aplicativo e observa o fluxo de cada solicitação e resposta. Essas informações podem ter um propósito duplo: podem ser usadas para medir o uso por cada usuário e para determinar se os usuários estão recebendo uma qualidade de serviço adequada (por exemplo, tempos de resposta rápidos, baixa latência e pequenos erros). Você pode usar os dados capturados para identificar áreas de preocupação em que as falhas ocorrem com mais frequência. Você também pode usar os dados para identificar elementos onde o sistema fica mais lento, possivelmente devido a pontos de acesso no aplicativo ou a alguma outra forma de gargalo. Se você implementar essa abordagem com cuidado, será possível reconstruir os fluxos dos usuários pelo aplicativo para fins de teste e depuração.
   
   > [!IMPORTANT]
   > Você deve considerar os dados capturados no monitoramento de usuários reais como altamente confidenciais porque podem incluir material confidencial. Se você salvar os dados capturados, armazene-os de forma segura. Se você quiser usar os dados para depuração ou monitoramento de desempenho, primeiro retire todas as informações de identificação pessoal.
@@ -496,14 +496,14 @@ Para serviços e aplicativos do Azure, o Diagnóstico do Azure fornece uma poss�
 * Logs IIS
 * Logs de solicitação com falha IIS
 * Logs de eventos do Windows
-* Contadores de desempenho
+* contadores de desempenho
 * Despejos de falhas
 * Logs de infraestrutura do Diagnóstico do Azure  
 * Logs de erros personalizados
 * .NET EventSource
 * ETW baseado em manifesto
 
-Para saber mais, confira o artigo [Azure: noções básicas de telemetria e solução de problemas](http://social.technet.microsoft.com/wiki/contents/articles/18146.windows-azure-telemetry-basics-and-troubleshooting.aspx)
+Para saber mais, confira o artigo [Azure: noções básicas de telemetria e solução de problemas](https://social.technet.microsoft.com/wiki/contents/articles/18146.windows-azure-telemetry-basics-and-troubleshooting.aspx)
 
 ### <a name="strategies-for-collecting-instrumentation-data"></a>Estratégias para coletar dados de instrumentação
 Devido à natureza elástica da nuvem e para evitar a necessidade de recuperar dados de telemetria manualmente de cada nó no sistema, você deve fazer com que os dados sejam transferidos para um local central e consolidados. Em um sistema que se estende por vários datacenters, pode ser útil primeiro coletar, consolidar e armazenar dados região por região e depois agregar os dados regionais em um único sistema central.
@@ -548,7 +548,7 @@ Os dados de instrumentação recuperados pelo serviço de coleta de dados de uma
 ### <a name="storing-instrumentation-data"></a>Armazenando dados de instrumentação
 As discussões anteriores deram uma visão bastante simplista da forma como dados de instrumentação são armazenados. Na verdade, pode fazer sentido armazenar diferentes tipos de informações usando tecnologias mais apropriadas para a maneira como cada tipo de informação provavelmente será usada.
 
-Por exemplo, os armazenamentos de blobs e de tabelas do Azure têm algumas semelhanças na maneira como são acessados. Mas eles têm limitações nas operações que você pode executar ao usá-los, e a granularidade dos dados que eles contêm é bastante diferente. Se você precisar executar operações mais analíticas ou precisar de recursos de pesquisa de texto completo dos dados, pode ser mais adequado usar o armazenamento de dados que fornece recursos otimizados para tipos específicos de consultas e acesso de dados. Por exemplo:
+Por exemplo, os armazenamentos de blobs e de tabelas do Azure têm algumas semelhanças na maneira como são acessados. Mas eles têm limitações nas operações que você pode executar ao usá-los, e a granularidade dos dados que eles contêm é bastante diferente. Se você precisar executar operações mais analíticas ou precisar de recursos de pesquisa de texto completo dos dados, pode ser mais adequado usar o armazenamento de dados que fornece recursos otimizados para tipos específicos de consultas e acesso de dados. Por exemplo: 
 
 * Os dados do contador de desempenho podem ser armazenados em um banco de dados SQL para habilitar uma análise ad hoc.
 * Os logs de rastreamento podem ser armazenados mais adequadamente no Azure Cosmos DB.
@@ -602,7 +602,7 @@ Alguns tipos de monitoramento geram dados mais de longo prazo. Essa análise pod
 A análise cold também pode ser usada a fim de fornecer dados para análise de previsão de integridade. O operador pode coletar informações de histórico durante um período especificado e usá-las em conjunto com os dados atuais de integridade (recuperados do afunilamento) para identificar tendências que em breve poderão causar problemas de integridade. Nesses casos, pode ser necessário emitir um alerta para que a ação corretiva possa ser executada.
 
 ### <a name="correlating-data"></a>Correlacionando dados
-Os dados capturados pela instrumentação podem fornecer um instantâneo do estado do sistema, mas o objetivo da análise é tornar esses dados acionáveis. Por exemplo:
+Os dados capturados pela instrumentação podem fornecer um instantâneo do estado do sistema, mas o objetivo da análise é tornar esses dados acionáveis. Por exemplo: 
 
 * O que causou uma intensa carga de E/S no nível do sistema em um momento específico?
 * Trata-se do resultado de um grande número de operações de banco de dados?
@@ -630,7 +630,7 @@ Um aspecto importante de qualquer sistema de monitoramento é a capacidade de ap
 A apresentação de dados pode ter diversos formatos, incluindo a visualização usando painéis, alertas e relatórios.
 
 ### <a name="visualization-by-using-dashboards"></a>Visualização usando painéis
-A maneira mais comum para visualizar dados é usar painéis que podem exibir informações como uma série de tabelas, gráficos ou de alguma outra maneira ilustrada. Esses itens podem ser parametrizados e um analista deve ser capaz de selecionar os parâmetros importantes (como o período de tempo) para qualquer situação específica.
+A maneira mais comum para visualizar dados é usar painéis que podem exibir informações como uma série de tabelas, grafos ou de alguma outra maneira ilustrada. Esses itens podem ser parametrizados e um analista deve ser capaz de selecionar os parâmetros importantes (como o período de tempo) para qualquer situação específica.
 
 Os painéis podem ser organizados hierarquicamente. Os painéis de nível superior podem dar uma visão geral de cada aspecto do sistema, mas permitem ao operador fazer drill down. Por exemplo, um painel que mostra a E/S de disco geral para o sistema deve permitir que um analista veja as taxas de E/S para cada disco individual para determinar se um ou mais dispositivos específicos são responsáveis por um volume desproporcional de tráfego. O ideal é que o painel também exiba informações relacionadas, como a origem de cada solicitação (o usuário ou atividade) que está gerando a E/S. Essas informações podem ser usadas para determinar se (e como) é necessário distribuir a carga de forma mais uniforme entre os dispositivos e se o sistema teria um desempenho melhor se mais dispositivos fossem adicionados.
 
@@ -688,7 +688,7 @@ Em muitos casos, os processos em lotes podem gerar relatórios de acordo com um 
 
 ## <a name="more-information"></a>Mais informações
 * [Monitoramento, diagnóstico e solução de problemas de Armazenamento do Microsoft Azure](/azure/storage/storage-monitoring-diagnosing-troubleshooting)
-* [Azure: noções básicas de telemetria e solução de problemas](http://social.technet.microsoft.com/wiki/contents/articles/18146.windows-azure-telemetry-basics-and-troubleshooting.aspx)
+* [Azure: noções básicas de telemetria e solução de problemas](https://social.technet.microsoft.com/wiki/contents/articles/18146.windows-azure-telemetry-basics-and-troubleshooting.aspx)
 * [Habilitando o Diagnostics nos Serviços de nuvem do Azure e Máquinas virtuais](/azure/cloud-services/cloud-services-dotnet-diagnostics)
 * [Cache Redis do Azure](https://azure.microsoft.com/services/cache/), [Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db/) e [HDInsight](https://azure.microsoft.com/services/hdinsight/)
 * [Como usar filas do Barramento de Serviço](/azure/service-bus-messaging/service-bus-dotnet-get-started-with-queues)

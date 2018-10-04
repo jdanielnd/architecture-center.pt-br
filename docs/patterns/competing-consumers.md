@@ -7,12 +7,12 @@ ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - messaging
-ms.openlocfilehash: d72a09ef7613bebe3701634e4eac0716400e471d
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: aea172dcdb33c0d8513fb69715f1549b4a20f5e6
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24542402"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428357"
 ---
 # <a name="competing-consumers-pattern"></a>Padrão de consumidores concorrentes
 
@@ -48,7 +48,7 @@ Essa solução oferece as seguintes vantagens:
 
 Considere os seguintes pontos ao decidir como implementar esse padrão:
 
-- **Ordenação de mensagem**. A ordem na qual as instâncias de serviço de consumidor recebem as mensagens não é garantida e não reflete necessariamente a ordem na qual as mensagens foram criadas. Projete o sistema para garantir que o processamento de mensagens seja idempotente, pois isso ajudará a eliminar qualquer dependência em relação à ordem na qual as mensagens são manipuladas. Para obter mais informações, consulte [Padrões de idempotência](http://blog.jonathanoliver.com/idempotency-patterns/) no blog de Jonathon Oliver.
+- **Ordenação de mensagem**. A ordem na qual as instâncias de serviço de consumidor recebem as mensagens não é garantida e não reflete necessariamente a ordem na qual as mensagens foram criadas. Projete o sistema para garantir que o processamento de mensagens seja idempotente, pois isso ajudará a eliminar qualquer dependência em relação à ordem na qual as mensagens são manipuladas. Para obter mais informações, consulte [Padrões de idempotência](https://blog.jonathanoliver.com/idempotency-patterns/) no blog de Jonathon Oliver.
 
     > As Filas do Barramento de Serviço do Microsoft Azure podem implementar ordenação primeiro a entrar, primeiro a sair garantida de mensagens usando sessões de mensagens. Para obter mais informações, consulte [Padrões de mensagens usando sessões](https://msdn.microsoft.com/magazine/jj863132.aspx).
 
@@ -118,7 +118,7 @@ public async Task Start()
 }
 ```
 
-O seguinte trecho de código mostra como um aplicativo pode criar e enviar um lote de mensagens para a fila.
+O seguinte snippet de código mostra como um aplicativo pode criar e enviar um lote de mensagens para a fila.
 
 ```csharp
 public async Task SendMessagesAsync()

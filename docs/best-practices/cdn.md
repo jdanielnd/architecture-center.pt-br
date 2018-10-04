@@ -4,12 +4,12 @@ description: Diretriz na Rede de Distribuição de Conteúdo (CDN) para fornecer
 author: dragon119
 ms.date: 02/02/2018
 pnp.series.title: Best Practices
-ms.openlocfilehash: 42b73db08ecef858f5279ea292cf8c0df77b847c
-ms.sourcegitcommit: 29fbcb1eec44802d2c01b6d3bcf7d7bd0bae65fc
+ms.openlocfilehash: 9805b1b6df8cedd7668eb9e85f741ee81c3dfa58
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/27/2018
-ms.locfileid: "29563550"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428883"
 ---
 # <a name="best-practices-for-using-content-delivery-networks-cdns"></a>Melhores práticas para uso das CDNs (redes de distribuição de conteúdo)
 
@@ -91,7 +91,7 @@ A CDN pode entregar conteúdo pelo HTTPS (SSL) usando o certificado fornecido pe
 Se você entregar ativos estáticos (como arquivos de fonte) usando a CDN, talvez encontre problemas de política de mesma origem se usar uma chamada *XMLHttpRequest* para solicitar esses recursos de um domínio diferente. Muitos navegadores da web impedem o compartilhamento de recursos de origens cruzadas (CORS), a menos que o servidor Web esteja configurado para definir os cabeçalhos de resposta apropriada. É possível configurar a CDN para dar suporte ao CORS usando um dos seguintes métodos:
 
 * Configure a CDN para adicionar cabeçalhos CORS às respostas. Para obter mais informações, confira [Usando a CDN do Azure com o CORS](/azure/cdn/cdn-cors). 
-* Se a origem é o armazenamento de blobs do Azure, adicione regras do CORS ao ponto de extremidade de armazenamento. Para obter mais informações, consulte [Suporte de Compartilhamento de Recursos de Origens Cruzadas (CORS) para os serviços de armazenamento do Azure](http://msdn.microsoft.com/library/azure/dn535601.aspx).
+* Se a origem é o armazenamento de blobs do Azure, adicione regras do CORS ao ponto de extremidade de armazenamento. Para obter mais informações, consulte [Suporte de Compartilhamento de Recursos de Origens Cruzadas (CORS) para os serviços de armazenamento do Azure](/rest/api/storageservices/Cross-Origin-Resource-Sharing--CORS--Support-for-the-Azure-Storage-Services).
 * Configure o aplicativo para definir os cabeçalhos CORS. Por exemplo, confira [Habilitando as Solicitações Entre Origens (CORS)](/aspnet/core/security/cors) na documentação do ASP.NET Core.
 
 ### <a name="cdn-fallback"></a>Fallback de CDN

@@ -5,12 +5,12 @@ author: MikeWasson
 ms.date: 03/24/2017
 ms.custom: resiliency
 pnp.series.title: Design for Resiliency
-ms.openlocfilehash: 95068bf8b1f5b559255e27819aaddb454d3427bc
-ms.sourcegitcommit: d08f6ee27e1e8a623aeee32d298e616bc9bb87ff
+ms.openlocfilehash: 6598644828dffb68f01c2d0a2ce9fbdda932168a
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 05/07/2018
-ms.locfileid: "33810492"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429529"
 ---
 # <a name="failure-mode-analysis"></a>Análise do modo de falha
 [!INCLUDE [header](../_includes/header.md)]
@@ -109,7 +109,7 @@ A política de novas tentativas padrão usa retirada exponencial. Para usar uma 
 
 ## <a name="cassandra"></a>Cassandra
 ### <a name="reading-or-writing-to-a-node-fails"></a>Falha de leitura ou de gravação em um nó.
-**Detecção**. Detecte a exceção. Para clientes .NET, normalmente será `System.Web.HttpException`. Outro cliente pode ter outros tipos de exceção.  Para obter mais informações, veja [Cassandra error handling done right](http://www.datastax.com/dev/blog/cassandra-error-handling-done-right) (Tratamento de erro do Cassandra feito da maneira correta).
+**Detecção**. Detecte a exceção. Para clientes .NET, normalmente será `System.Web.HttpException`. Outro cliente pode ter outros tipos de exceção.  Para obter mais informações, veja [Cassandra error handling done right](https://www.datastax.com/dev/blog/cassandra-error-handling-done-right) (Tratamento de erro do Cassandra feito da maneira correta).
 
 **Recuperação**
 
@@ -452,7 +452,7 @@ Para obter mais informações sobre o processo FMA, veja [Resilience by design f
 [azure-alerts]: /azure/monitoring-and-diagnostics/insights-alerts-portal/
 [azure-log-analytics]: /azure/log-analytics/log-analytics-overview/
 [BrokeredMessage.TimeToLive]: https://msdn.microsoft.com/library/microsoft.servicebus.messaging.brokeredmessage.timetolive.aspx
-[cassandra-error-handling]: http://www.datastax.com/dev/blog/cassandra-error-handling-done-right
+[cassandra-error-handling]: https://www.datastax.com/dev/blog/cassandra-error-handling-done-right
 [circuit-breaker]: https://msdn.microsoft.com/library/dn589784.aspx
 [cosmosdb-multi-region]: /azure/cosmos-db/tutorial-global-distribution-sql-api
 [elasticsearch-azure]: ../elasticsearch/index.md
@@ -468,7 +468,7 @@ Para obter mais informações sobre o processo FMA, veja [Resilience by design f
 [ra-web-apps-basic]: ../reference-architectures/app-service-web-app/basic-web-app.md
 [redis-monitor]: /azure/redis-cache/cache-how-to-monitor/
 [redis-retry]: ../best-practices/retry-service-specific.md#azure-redis-cache
-[resilience-by-design-pdf]: http://download.microsoft.com/download/D/8/C/D8C599A4-4E8A-49BF-80EE-FE35F49B914D/Resilience_by_Design_for_Cloud_Services_White_Paper.pdf
+[resilience-by-design-pdf]: https://download.microsoft.com/download/D/8/C/D8C599A4-4E8A-49BF-80EE-FE35F49B914D/Resilience_by_Design_for_Cloud_Services_White_Paper.pdf
 [RoleEntryPoint.OnStop]: https://msdn.microsoft.com/library/azure/microsoft.windowsazure.serviceruntime.roleentrypoint.onstop.aspx
 [RoleEnvironment.Stopping]: https://msdn.microsoft.com/library/azure/microsoft.windowsazure.serviceruntime.roleenvironment.stopping.aspx
 [rm-locks]: /azure/azure-resource-manager/resource-group-lock-resources/

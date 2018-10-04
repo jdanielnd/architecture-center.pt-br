@@ -8,12 +8,12 @@ pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - design-implementation
 - resiliency
-ms.openlocfilehash: 8c8efa0846550557bb53ea81f85ac0e303a77b19
-ms.sourcegitcommit: f19314f18cd794ebe380fa722ca92066b8735b56
+ms.openlocfilehash: 6cc4b19e889cc9fc692e388498cc16ea56b1c981
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/03/2018
-ms.locfileid: "37348262"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429189"
 ---
 # <a name="leader-election-pattern"></a>Padrão de eleição de líder
 
@@ -43,7 +43,7 @@ O sistema deve fornecer um mecanismo robusto para selecionar o líder. Esse mét
 Há várias estratégias para eleger o líder entre um conjunto de tarefas em um ambiente distribuído, incluindo:
 - Selecionar a instância da tarefa com a ID de processo ou instância mais baixa.
 - Corrida para adquirir um mutex compartilhado e distribuído. A primeira instância de tarefa que adquirir o mutex é o líder. No entanto, o sistema deve garantir que, se o líder for encerrado ou desconectado do restante do sistema, o mutex será liberado para permitir que outra instância de tarefa torne-se o líder.
-- Implementação de um dos algoritmos comuns de eleição de líder, como o [Algoritmo Bully](http://www.cs.colostate.edu/~cs551/CourseNotes/Synchronization/BullyExample.html) ou [Algoritmo Ring](http://www.cs.colostate.edu/~cs551/CourseNotes/Synchronization/RingElectExample.html). Esses algoritmos presumem que cada candidato na eleição tem uma ID exclusiva e que ele pode se comunicar com os outros candidatos de maneira confiável.
+- Implementação de um dos algoritmos comuns de eleição de líder, como o [Algoritmo Bully](https://www.cs.colostate.edu/~cs551/CourseNotes/Synchronization/BullyExample.html) ou [Algoritmo Ring](https://www.cs.colostate.edu/~cs551/CourseNotes/Synchronization/RingElectExample.html). Esses algoritmos presumem que cada candidato na eleição tem uma ID exclusiva e que ele pode se comunicar com os outros candidatos de maneira confiável.
 
 ## <a name="issues-and-considerations"></a>Problemas e considerações
 
@@ -198,7 +198,7 @@ As diretrizes a seguir também podem ser relevantes ao implementar esse padrão:
 - [Diretrizes de dimensionamento automático](https://msdn.microsoft.com/library/dn589774.aspx). É possível iniciar e parar instâncias dos hosts de tarefa à medida que a carga do aplicativo varia. O dimensionamento automático pode ajudar a manter a taxa de transferência e o desempenho durante horários de pico de processamento.
 - [Diretrizes de particionamento de computação](https://msdn.microsoft.com/library/dn589773.aspx). Este guia descreve como alocar tarefas para hosts em um serviço de nuvem de maneira a ajudar a minimizar os custos de execução e manter a escalabilidade, desempenho, disponibilidade e segurança do serviço.
 - O [Padrão assíncrono baseado em tarefa](https://msdn.microsoft.com/library/hh873175.aspx).
-- Um exemplo que ilustra o [Algoritmo Bully](http://www.cs.colostate.edu/~cs551/CourseNotes/Synchronization/BullyExample.html).
-- Um exemplo que ilustra o [Algoritmo Ring](http://www.cs.colostate.edu/~cs551/CourseNotes/Synchronization/RingElectExample.html).
-- O [Apache Curator](http://curator.apache.org/) é uma biblioteca de cliente para o Apache ZooKeeper.
+- Um exemplo que ilustra o [Algoritmo Bully](https://www.cs.colostate.edu/~cs551/CourseNotes/Synchronization/BullyExample.html).
+- Um exemplo que ilustra o [Algoritmo Ring](https://www.cs.colostate.edu/~cs551/CourseNotes/Synchronization/RingElectExample.html).
+- O [Apache Curator](https://curator.apache.org/) é uma biblioteca de cliente para o Apache ZooKeeper.
 - O artigo [Blob de Concessão (API REST)](https://msdn.microsoft.com/library/azure/ee691972.aspx) no MSDN.

@@ -3,13 +3,13 @@ title: Cenários e exemplos para governança de assinatura
 description: Fornece exemplos de como implementar a governança de assinatura do Azure para cenários comuns.
 author: rdendtler
 ms.date: 01/03/2017
-ms.author: rodend;karlku;tomfitz
-ms.openlocfilehash: 2c10b9a61be0cd7dadff6bfb327d938cc498c935
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.author: rodend
+ms.openlocfilehash: 51be0e1cdbcb3258102c9e4a4790764cada98d1e
+ms.sourcegitcommit: 9eecff565392273d11b8702f1fcecb4d75e27a15
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43327730"
+ms.lasthandoff: 10/03/2018
+ms.locfileid: "48243658"
 ---
 # <a name="examples-of-implementing-azure-enterprise-scaffold"></a>Exemplos de implementação de scaffold do Azure Enterprise
 Este artigo fornece exemplos de como uma empresa pode implementar as recomendações para um [scaffold do Azure Enterprise](azure-scaffold.md). Ele usa uma empresa fictícia chamada Contoso para ilustrar as melhores práticas para cenários comuns.

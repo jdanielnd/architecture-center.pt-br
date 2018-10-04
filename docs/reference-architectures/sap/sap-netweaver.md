@@ -3,12 +3,12 @@ title: Implantar o SAP NetWeaver (Windows) para AnyDB em Máquinas Virtuais do A
 description: Práticas comprovadas para executar o SAP S/4HANA em um ambiente Linux no Azure com alta disponibilidade.
 author: lbrader
 ms.date: 05/11/2018
-ms.openlocfilehash: f4a33e7a3f30bdd6d8bdd41599a5e3b47501b874
-ms.sourcegitcommit: c4106b58ad08f490e170e461009a4693578294ea
+ms.openlocfilehash: b4a254980dd9aac2847bb194f22f99f3f05376de
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 08/10/2018
-ms.locfileid: "43016093"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428798"
 ---
 # <a name="deploy-sap-netweaver-windows-for-anydb-on-azure-virtual-machines"></a>Implantar o SAP NetWeaver (Windows) para AnyDB em Máquinas Virtuais do Azure
 
@@ -145,7 +145,7 @@ Para DR (recuperação de desastres), você deve ser capaz de fazer failover par
 
 - **Camada de servidores de aplicativos**. Os servidores de aplicativos SAP não contêm dados corporativos. No Azure, uma estratégia simples de DR é criar servidores de aplicativos SAP na região secundária, depois tirá-los do ar. Após quaisquer alterações de configuração ou atualizações de kernel no servidor de aplicativo primário, as mesmas alterações devem ser copiadas para as máquinas virtuais na região secundária. Por exemplo, os executáveis de kernel copiados para as máquinas virtuais de DR. Para a replicação automática dos servidores de aplicativos para uma região secundária, o [Azure Site Recovery](/azure/site-recovery/site-recovery-overview) é a solução recomendada.
 
-- **Central Services**. Esse componente da pilha do aplicativo SAP também não persiste dados corporativos. Você pode criar uma VM na região de recuperação de desastres para executar a função do Central Services. O único conteúdo do nó do Central Services primário a ser sincronizado é o conteúdo compartilhado /sapmnt. Além disso, se as configurações mudarem ou ocorrerem atualizações de kernel em servidores primários do Central Services, elas devem ser repetidas na VM na região de recuperação de desastres sendo executada no Central Services. Para sincronizar os dois servidores, você pode usar o Azure Site Recovery para replicar os nós de cluster ou simplesmente usar um trabalho de cópia agendado regularmente para copiar /sapmnt à região de recuperação de desastres. Para obter detalhes sobre essa compilação, cópia e o processo do método de replicação de failover de teste, baixe [SAP NetWeaver: Criando uma solução de recuperação de desastres baseada em Hyper-V e no Microsoft Azure](http://download.microsoft.com/download/9/5/6/956FEDC3-702D-4EFB-A7D3-2DB7505566B6/SAP%20NetWeaver%20-%20Building%20an%20Azure%20based%20Disaster%20Recovery%20Solution%20V1_5%20.docx) e consulte “4.3. Camada SAP SPOF (ASCS)."
+- **Central Services**. Esse componente da pilha do aplicativo SAP também não persiste dados corporativos. Você pode criar uma VM na região de recuperação de desastres para executar a função do Central Services. O único conteúdo do nó do Central Services primário a ser sincronizado é o conteúdo compartilhado /sapmnt. Além disso, se as configurações mudarem ou ocorrerem atualizações de kernel em servidores primários do Central Services, elas devem ser repetidas na VM na região de recuperação de desastres sendo executada no Central Services. Para sincronizar os dois servidores, você pode usar o Azure Site Recovery para replicar os nós de cluster ou simplesmente usar um trabalho de cópia agendado regularmente para copiar /sapmnt à região de recuperação de desastres. Para obter detalhes sobre essa compilação, cópia e o processo do método de replicação de failover de teste, baixe [SAP NetWeaver: Criando uma solução de recuperação de desastres baseada em Hyper-V e no Microsoft Azure](https://download.microsoft.com/download/9/5/6/956FEDC3-702D-4EFB-A7D3-2DB7505566B6/SAP%20NetWeaver%20-%20Building%20an%20Azure%20based%20Disaster%20Recovery%20Solution%20V1_5%20.docx) e consulte “4.3. Camada SAP SPOF (ASCS)."
 
 - **Camada de banco de dados**. A melhor implementação da DR é com a tecnologia de replicação integrada própria do banco de dados. No caso do SQL Server, por exemplo, é recomendável usar o Grupo de Disponibilidade do AlwaysOn para estabelecer uma réplica em uma região remota, replicando as transações de maneira assíncrona com failover manual. A replicação assíncrona evita um impacto no desempenho de cargas de trabalho interativas no site primário. O failover manual oferece a oportunidade de uma pessoa avaliar o impacto da DR e decidir se a operação do site da DR é justificada.
 

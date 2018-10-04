@@ -9,12 +9,12 @@ pnp.pattern.categories:
 - data-management
 - design-implementation
 - performance-scalability
-ms.openlocfilehash: deb15001bea2598d56a2793be78bbc3e7473bdf3
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 450d0c4c08098c1ba48e4c0dac3d058a46e3709b
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24541682"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428203"
 ---
 # <a name="static-content-hosting-pattern"></a>Padrão de Hospedagem de Conteúdo Estático
 
@@ -74,7 +74,7 @@ Esse padrão pode não ser útil nas seguintes situações:
 
 O conteúdo estático localizado no armazenamento de Blobs do Azure pode ser acessado diretamente por um navegador da Web. O Azure fornece uma interface baseada em HTTP para o armazenamento que pode ser exposto publicamente para os clientes. Por exemplo, o conteúdo em um contêiner de armazenamento de Blobs do Azure é exposto usando uma URL com o seguinte formato:
 
-`http://[ storage-account-name ].blob.core.windows.net/[ container-name ]/[ file-name ]`
+`https://[ storage-account-name ].blob.core.windows.net/[ container-name ]/[ file-name ]`
 
 
 Ao carregar o conteúdo, é necessário criar um ou mais contêineres de blob para conter os arquivos e documentos. Observe que a permissão padrão para um novo contêiner é Privado e você deve alterar isso para Público para permitir que os clientes acessem o conteúdo. Se for necessário proteger o conteúdo do acesso anônimo, você poderá implementar o [padrão de Chave de Manobrista](valet-key.md) para que os usuários precisem apresentar um token válido para baixar os recursos.
@@ -89,7 +89,7 @@ Os links em cada página especificam a URL do recurso e o cliente irá acessá-l
 Os links nas páginas distribuídas para o cliente devem especificar a URL completa do contêiner e recursos de blobs. Por exemplo, uma página que contém um link para uma imagem em um contêiner público pode conter o seguinte HTML.
 
 ```html
-<img src="http://mystorageaccount.blob.core.windows.net/myresources/image1.png"
+<img src="https://mystorageaccount.blob.core.windows.net/myresources/image1.png"
      alt="My image" />
 ```
 
@@ -169,5 +169,4 @@ O arquivo Index.cshtml na pasta Views\Home contém um elemento de imagem que usa
 
 - Um exemplo que demonstra esse padrão está disponível em [GitHub](https://github.com/mspnp/cloud-design-patterns/tree/master/static-content-hosting).
 - [Padrão de Chave de Manobrista](valet-key.md). Se os recursos de destino não devem estar disponíveis para usuários anônimos, é necessário implementar segurança no repositório que contém o conteúdo estático. Descreve como usar um token ou chave que fornece aos clientes acesso direto e restrito a determinado recurso ou serviço, tal como o serviço de armazenamento hospedado na nuvem.
-- [Uma maneira eficiente de implantar um site da Web estático no Azure](http://www.infosysblogs.com/microsoft/2010/06/an_efficient_way_of_deploying.html) no blog da Infosys.
 - [Conceitos do Serviço Blob](https://msdn.microsoft.com/library/azure/dd179376.aspx)

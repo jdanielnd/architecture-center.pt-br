@@ -3,12 +3,12 @@ title: Escolhendo uma tecnologia de armazenamento de dados
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: b14611a2dc34bcb145cf420441795d4124e7baeb
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: 496df68024aef0dcf030bb7e0138639610aa8a79
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30847202"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429342"
 ---
 # <a name="choosing-a-big-data-storage-technology-in-azure"></a>Escolhendo uma tecnologia de armazenamento de Big Data no Azure
 
@@ -26,7 +26,7 @@ Há várias opções para a ingestão de dados no Azure, dependendo de suas nece
 **Bancos de dados NoSQL**
 
 - [Azure Cosmos DB](/azure/cosmos-db/)
-- [HBase no HDInsight](http://hbase.apache.org/)
+- [HBase no HDInsight](https://hbase.apache.org/)
 
 ## <a name="azure-storage-blobs"></a>Blobs do Armazenamento do Azure
 
@@ -69,7 +69,7 @@ Recursos do Azure Cosmos DB:
 
 ## <a name="hbase-on-hdinsight"></a>HBase no HDInsight
 
-O [Apache HBase](http://hbase.apache.org/) é um banco de dados NoSQL de software livre, que se baseia no Hadoop e é modelado com base no Google BigTable. O HBase fornece acesso aleatório e coerência forte para grandes quantidades de dados não estruturados e semiestruturados em um banco de dados sem esquema, organizado por famílias de colunas.
+O [Apache HBase](https://hbase.apache.org/) é um banco de dados NoSQL de software livre, que se baseia no Hadoop e é modelado com base no Google BigTable. O HBase fornece acesso aleatório e coerência forte para grandes quantidades de dados não estruturados e semiestruturados em um banco de dados sem esquema, organizado por famílias de colunas.
 
 Os dados são armazenados nas linhas de uma tabela e os dados contidos nas linhas são agrupados por famílias de colunas. O HBase é sem esquema, pois as colunas nem o tipo de dados armazenados nelas precisam ser definidos antes de serem utilizados. O código-fonte aberto é dimensionado linearmente para lidar com petabytes de dados em milhares de nós. Ele pode fazer uso da redundância de dados, do processamento em lote e de outros recursos que são fornecidos por aplicativos distribuídos no ecossistema do Hadoop.
 
@@ -113,8 +113,8 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 |                                    |                                           Azure Cosmos DB                                           |                                                             HBase no HDInsight                                                             |
 |------------------------------------|-----------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 |       Modelo de banco de dados primário       |                      Repositório de documentos, gráfico, repositório de chave-valor, repositório de coluna grande                      |                                                             Repositório de coluna grande                                                              |
-|         Índices secundários          |                                                 sim                                                 |                                                                     Não                                                                      |
-|        Suporte à linguagem SQL        |                                                 sim                                                 |                                     Sim (usando o driver JDBC [Phoenix](http://phoenix.apache.org/))                                      |
+|         Índices secundários          |                                                 SIM                                                 |                                                                     Não                                                                      |
+|        Suporte à linguagem SQL        |                                                 SIM                                                 |                                     Sim (usando o driver JDBC [Phoenix](https://phoenix.apache.org/))                                      |
 |            Consistência             |                   Forte, desatualização limitada, sessão, prefixo consistente, eventual                   |                                                                   Strong                                                                   |
 | Integração nativa com o Azure Functions |                        [Sim](/azure/cosmos-db/serverless-computing-database)                        |                                                                     Não                                                                      |
 |   Distribuição global automática    |                          [Sim](/azure/cosmos-db/distribute-data-globally)                           | Não [A replicação de cluster HBase pode ser configurada](/azure/hdinsight/hbase/apache-hbase-replication) em regiões com consistência eventual |

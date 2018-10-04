@@ -8,12 +8,12 @@ pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - data-management
 - performance-scalability
-ms.openlocfilehash: a4e35a19851f4742b5c154197c22bb1fe13de108
-ms.sourcegitcommit: e9d9e214529edd0dc78df5bda29615b8fafd0e56
+ms.openlocfilehash: bc2b6aeb6966d14327a21849adbbfe635eae59df
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 06/28/2018
-ms.locfileid: "37091097"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428849"
 ---
 # <a name="sharding-pattern"></a>Padrão de fragmentação
 
@@ -219,6 +219,3 @@ Os padrões e diretrizes a seguir também podem ser relevantes ao implementar es
 - [Diretrizes de Particionamento de Dados](https://msdn.microsoft.com/library/dn589795.aspx). A fragmentação de um repositório de dados pode apresentar uma variedade de outros problemas. Descreve esses problemas em relação ao particionamento de repositórios de dados na nuvem para melhorar a escalabilidade, reduzir a contenção e otimizar o desempenho.
 - [Padrão de Tabela de Índice](index-table.md). Às vezes, não é possível oferecem suporte total a consultas apenas por meio do design da chave de fragmentação. Permite que um aplicativo recupere rapidamente os dados de um repositório de dados grande especificando uma chave que não seja a chave de fragmentação.
 - [Padrão de Exibição Materializada](materialized-view.md). Para manter o desempenho de algumas operações de consulta, é útil criar exibições materializadas que agreguem e resumam dados, especialmente se esses dados de resumo se basearem em informações distribuídas entre fragmentos. Descreve como gerar e preencher esses modos de exibição.
-- [Lições de fragmento](http://www.addsimplicity.com/adding_simplicity_an_engi/2008/08/shard-lessons.html) no blog Adding Simplicity.
-- [Fragmentação de banco de dados](http://dbshards.com/database-sharding/) no site CodeFutures.
-- [Criação de bancos de dados dimensionáveis: prós e contras de esquemas de fragmentação de banco de dados diversos](http://www.25hoursaday.com/weblog/2009/01/16/BuildingScalableDatabasesProsAndConsOfVariousDatabaseShardingSchemes.aspx) no blog de Dare Obasanjo.

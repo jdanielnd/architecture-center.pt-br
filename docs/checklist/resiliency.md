@@ -4,12 +4,12 @@ description: Lista de verificação que fornece orientação para questões de r
 author: petertaylor9999
 ms.date: 01/10/2018
 ms.custom: resiliency, checklist
-ms.openlocfilehash: 883424d5d3535f822cdba61ecb9520ce05f75ec7
-ms.sourcegitcommit: 2154e93a0a075e1f7425a6eb11fc3f03c1300c23
+ms.openlocfilehash: 17612ee08e2329ea648fd21d6764e7bae1ca20e2
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/30/2018
-ms.locfileid: "39352637"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429087"
 ---
 # <a name="resiliency-checklist"></a>Lista de verificação de resiliência
 
@@ -81,7 +81,7 @@ Resiliência é a capacidade de um sistema de se recuperar de falhas e continuar
 
 ## <a name="security"></a>Segurança
 
-**Implemente a proteção em nível de aplicativo contra ataques DDoS (ataques de negação de serviço distribuídos).** Os serviços do Azure são protegidos contra ataques de DDoS na camada de rede. No entanto, o Azure não pode proteger contra ataques na camada de aplicativo, porque é difícil distinguir entre solicitações de usuários verdadeiros e solicitações de usuários mal-intencionados. Para obter mais informações sobre como se proteger contra ataques de DDoS da camada de aplicativo, consulte a seção "Proteção contra DDoS" da [Segurança de Rede do Microsoft Azure](http://download.microsoft.com/download/C/A/3/CA3FC5C0-ECE0-4F87-BF4B-D74064A00846/AzureNetworkSecurity_v3_Feb2015.pdf) (download do PDF).
+**Implemente a proteção em nível de aplicativo contra ataques DDoS (ataques de negação de serviço distribuídos).** Os serviços do Azure são protegidos contra ataques de DDoS na camada de rede. No entanto, o Azure não pode proteger contra ataques na camada de aplicativo, porque é difícil distinguir entre solicitações de usuários verdadeiros e solicitações de usuários mal-intencionados. Para obter mais informações sobre como se proteger contra ataques de DDoS da camada de aplicativo, consulte a seção "Proteção contra DDoS" da [Segurança de Rede do Microsoft Azure](https://download.microsoft.com/download/C/A/3/CA3FC5C0-ECE0-4F87-BF4B-D74064A00846/AzureNetworkSecurity_v3_Feb2015.pdf) (download do PDF).
 
 **Implemente o princípio de privilégios mínimos para acesso aos recursos do aplicativo.** O padrão para acesso aos recursos do aplicativo deve ser tão restritivo quanto possível. Conceda permissões de nível superior em uma base de aprovação. Conceder acesso excessivamente permissivo a recursos do aplicativo por padrão pode resultar em exclusão intencional ou acidental de recursos por alguém. O Azure fornece [controle de acesso baseado em função](/azure/active-directory/role-based-access-built-in-roles/) gerenciar os privilégios de usuário, mas é importante verificar permissões com privilégios mínimos para outros recursos que têm seus próprios sistemas de permissões, tais como o SQL Server.
 
@@ -99,7 +99,7 @@ Resiliência é a capacidade de um sistema de se recuperar de falhas e continuar
 
 **Automatize o processo de implantação do aplicativo.** Se é necessário que sua equipe de operações implante manualmente o seu aplicativo, erros humanos podem causar falha na implantação. 
 
-**Projete seu processo de lançamento para maximizar a disponibilidade do aplicativo.** Se o processo de lançamento exigir que os serviços fiquem offline durante a implantação, o aplicativo ficará não disponível até que eles fiquem online novamente. Use a técnica de implantação de [lançamento canário](http://martinfowler.com/bliki/CanaryRelease.html) ou [azul/verde](http://martinfowler.com/bliki/BlueGreenDeployment.html) para implantar seu aplicativo para produção. Ambas as técnicas envolvem implantar seu código de lançamento junto com o código de produção para que os usuários do código de liberação possam ser redirecionados para o código de produção em caso de falha.
+**Projete seu processo de lançamento para maximizar a disponibilidade do aplicativo.** Se o processo de lançamento exigir que os serviços fiquem offline durante a implantação, o aplicativo ficará não disponível até que eles fiquem online novamente. Use a técnica de implantação de [lançamento canário](https://martinfowler.com/bliki/CanaryRelease.html) ou [azul/verde](https://martinfowler.com/bliki/BlueGreenDeployment.html) para implantar seu aplicativo para produção. Ambas as técnicas envolvem implantar seu código de lançamento junto com o código de produção para que os usuários do código de liberação possam ser redirecionados para o código de produção em caso de falha.
 
 **Registre as implantações do aplicativo em log e faça auditoria delas.** Se você usar técnicas de implantação de teste como lançamento canário ou azul/verde, haverá mais de uma versão do aplicativo em execução na produção. Se ocorre um problema, é essencial determinar por qual versão do aplicativo ele é causado. Implemente uma estratégia de registro em log robusta para capturar o máximo possível de informações específicas da versão.
 

@@ -4,12 +4,12 @@ description: Orientação sobre como criar uma API da Web bem projetada.
 author: dragon119
 ms.date: 01/12/2018
 pnp.series.title: Best Practices
-ms.openlocfilehash: 68ed3f59e1fd63ae754ceabf27a182daa0de0e5d
-ms.sourcegitcommit: c4106b58ad08f490e170e461009a4693578294ea
+ms.openlocfilehash: 1bd53a7ccc54d086978891f1df5fdc2e25a5d638
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 08/10/2018
-ms.locfileid: "43016108"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429360"
 ---
 # <a name="api-design"></a>Design de API
 
@@ -34,7 +34,7 @@ Aqui estão alguns dos princípios de design mais importante de APIs RESTful usa
 - Um recurso tem um *identificador*, o qual se trata de um URI que identifica exclusivamente esse recurso. Por exemplo, o URI para um pedido determinada do cliente pode ser: 
  
     ```http
-    http://adventure-works.com/orders/1
+    https://adventure-works.com/orders/1
     ```
  
 - Os clientes interagem com um serviço por meio da troca de *representações* de recursos. Muitas APIs da Web usam JSON como o formato de troca. Por exemplo, uma solicitação GET para o URI listado acima poderia retornar este corpo de resposta:
@@ -56,8 +56,8 @@ Aqui estão alguns dos princípios de design mais importante de APIs RESTful usa
         "quantity":4,
         "orderValue":16.60,
         "links": [
-            {"rel":"product","href":"http://adventure-works.com/customers/3", "action":"GET" },
-            {"rel":"product","href":"http://adventure-works.com/customers/3", "action":"PUT" } 
+            {"rel":"product","href":"https://adventure-works.com/customers/3", "action":"GET" },
+            {"rel":"product","href":"https://adventure-works.com/customers/3", "action":"PUT" } 
         ]
     } 
     ```
@@ -77,9 +77,9 @@ O Nível 3 corresponde a uma API RESTful de verdade de acordo com a definição 
 Concentre-se nas entidades comerciais que a API da Web expõe. Por exemplo, em um sistema de comércio eletrônico, as entidades primárias podem ser clientes e pedidos. É possível criar um pedido por meio do envio de uma solicitação HTTP POST que contenha as informações do pedido. A resposta HTTP indica se o pedido foi feito com êxito ou não. Quando possível, os URIs de recursos devem ser baseados em substantivos (o recurso) e não em verbos (as operações no recurso). 
 
 ```HTTP
-http://adventure-works.com/orders // Good
+https://adventure-works.com/orders // Good
 
-http://adventure-works.com/create-order // Avoid
+https://adventure-works.com/create-order // Avoid
 ```
 
 Um recurso não precisa se basear em um único item de dados físico. Por exemplo, um recurso de pedido pode ser implementado internamente como várias tabelas em um banco de dados relacional, mas apresentado ao cliente como uma única entidade. Evite criar APIs que simplesmente espelhem a estrutura interna de um banco de dados. A finalidade da REST é modelar entidades e as operações que um aplicativo pode executar nessas entidades. Um cliente não deve ser exposto à implementação interna.
@@ -87,7 +87,7 @@ Um recurso não precisa se basear em um único item de dados físico. Por exempl
 Entidades geralmente são agrupadas em coleções (pedidos, clientes). Uma coleção é um recurso separado do item na coleção e deve ter seu próprio URI. Por exemplo, o seguinte URI pode representar a coleção de pedidos: 
 
 ```HTTP
-http://adventure-works.com/orders
+https://adventure-works.com/orders
 ```
 
 O envio de uma solicitação HTTP GET para o URI da coleção recupera uma lista de itens na coleção. Cada item na coleção também tem seu próprio URI exclusivo. Uma solicitação HTTP GET para o URI do item retorna os detalhes desse item. 
@@ -148,7 +148,7 @@ No protocolo HTTP, formatos são especificados por meio do uso de *tipos de míd
 O cabeçalho Content-Type em uma solicitação ou resposta especifica o formato da representação. Aqui está um exemplo de uma solicitação POST que inclui dados JSON:
 
 ```HTTP
-POST http://adventure-works.com/orders HTTP/1.1
+POST https://adventure-works.com/orders HTTP/1.1
 Content-Type: application/json; charset=utf-8
 Content-Length: 57
 
@@ -160,7 +160,7 @@ Se o servidor não oferece suporte para o tipo de mídia, ele deverá retornar u
 Uma solicitação cliente pode incluir um cabeçalho Accept contendo uma lista de tipos de mídia que o cliente aceitará do servidor na mensagem de resposta. Por exemplo: 
 
 ```HTTP
-GET http://adventure-works.com/orders/2 HTTP/1.1
+GET https://adventure-works.com/orders/2 HTTP/1.1
 Accept: application/json
 ```
 
@@ -273,7 +273,7 @@ Solicitações GET sobre os recursos de coleção têm potencial de retornar um 
 /orders?limit=25&offset=50
 ```
 
-Também considere a possibilidade de impor um limite superior na quantidade de itens retornados para ajudar a evitar ataques de negação de serviço. Para ajudar aplicativos cliente, solicitações GET que retornam dados paginados também devem incluir algum tipo de metadados que indiquem o número total de recursos disponíveis na coleção. Você também pode considerar outras estratégias de paginação inteligente; para obter mais informações, consulte [Observações Sobre Design de API: Paginação Inteligente](http://bizcoder.com/api-design-notes-smart-paging)
+Também considere a possibilidade de impor um limite superior na quantidade de itens retornados para ajudar a evitar ataques de negação de serviço. Para ajudar aplicativos cliente, solicitações GET que retornam dados paginados também devem incluir algum tipo de metadados que indiquem o número total de recursos disponíveis na coleção. 
 
 Você pode usar uma estratégia semelhante para classificar os dados conforme eles são encontrados por meio do fornecimento de um parâmetro de classificação que use um nome de campo como o valor, tal como */orders?sort=ProductID*. No entanto, essa abordagem pode ter um efeito negativo no cache, pois parâmetros de cadeia de consulta fazem parte do identificador de recurso usado por muitas implementações de cache como a chave para dados armazenados em cache.
 
@@ -288,7 +288,7 @@ Um recurso pode conter campos binários grandes, como arquivos ou imagens. Para 
 Além disso, considere a possibilidade de implementar solicitações HTTP HEAD para esses recursos. Uma solicitação HEAD é semelhante a uma solicitação GET, porém retorna apenas cabeçalhos HTTP que descrevem o recurso com um corpo de mensagem vazio. Um aplicativo cliente pode emitir uma solicitação HEAD para determinar se deve ou não buscar um recurso pelo uso de solicitações GET parciais. Por exemplo: 
 
 ```HTTP
-HEAD http://adventure-works.com/products/10?fields=productImage HTTP/1.1
+HEAD https://adventure-works.com/products/10?fields=productImage HTTP/1.1
 ```
 
 Eis um exemplo de corpo da resposta: 
@@ -304,7 +304,7 @@ Content-Length: 4580
 O cabeçalho Content-Length dá o tamanho total do recurso, e o cabeçalho Accept-Ranges indica que a operação GET correspondente oferece suporte a resultados parciais. O aplicativo cliente pode usar essas informações para recuperar a imagem em partes menores. A primeira solicitação busca os primeiros 2.500 bytes usando o cabeçalho Range:
 
 ```HTTP
-GET http://adventure-works.com/products/10?fields=productImage HTTP/1.1
+GET https://adventure-works.com/products/10?fields=productImage HTTP/1.1
 Range: bytes=0-2499
 ```
 
@@ -343,44 +343,44 @@ Por exemplo, para tratar da relação entre um pedido e um cliente, a representa
   "links":[
     {
       "rel":"customer",
-      "href":"http://adventure-works.com/customers/3", 
+      "href":"https://adventure-works.com/customers/3", 
       "action":"GET",
       "types":["text/xml","application/json"] 
     },
     {
       "rel":"customer",
-      "href":"http://adventure-works.com/customers/3", 
+      "href":"https://adventure-works.com/customers/3", 
       "action":"PUT",
       "types":["application/x-www-form-urlencoded"]
     },
     {
       "rel":"customer",
-      "href":"http://adventure-works.com/customers/3",
+      "href":"https://adventure-works.com/customers/3",
       "action":"DELETE",
       "types":[]
     },
     {
       "rel":"self",
-      "href":"http://adventure-works.com/orders/3", 
+      "href":"https://adventure-works.com/orders/3", 
       "action":"GET",
       "types":["text/xml","application/json"]
     },
     {
       "rel":"self",
-      "href":"http://adventure-works.com/orders/3", 
+      "href":"https://adventure-works.com/orders/3", 
       "action":"PUT",
       "types":["application/x-www-form-urlencoded"]
     },
     {
       "rel":"self",
-      "href":"http://adventure-works.com/orders/3", 
+      "href":"https://adventure-works.com/orders/3", 
       "action":"DELETE",
       "types":[]
     }]
 }
 ```
 
-Nesse exemplo, a matriz `links` tem um conjunto de links. Cada link representa uma operação em uma entidade relacionada. Os dados para cada link incluem a relação (“cliente”), o URI (`http://adventure-works.com/customers/3`), o método HTTP e os tipos MIME com suporte. Essas são todas as informações de que um aplicativo cliente precisa para ser capaz de invocar a operação. 
+Nesse exemplo, a matriz `links` tem um conjunto de links. Cada link representa uma operação em uma entidade relacionada. Os dados para cada link incluem a relação (“cliente”), o URI (`https://adventure-works.com/customers/3`), o método HTTP e os tipos MIME com suporte. Essas são todas as informações de que um aplicativo cliente precisa para ser capaz de invocar a operação. 
 
 A matriz `links` também inclui informações referentes a si sobre o próprio recurso que foram recuperadas. Elas apresentam a relação *self*.
 
@@ -395,7 +395,7 @@ O controle de versão permite que uma API da Web indique os recursos e as funç�
 ### <a name="no-versioning"></a>Sem controle de versão
 Essa é a abordagem mais simples e pode ser aceitável para algumas APIs internas. Grandes alterações poderiam ser representadas como novos recursos ou novos links.  Adicionar conteúdo aos recursos existentes não deve representar uma alteração significativa, já que aplicativos cliente que não esperavam ver esse conteúdo vão simplesmente ignorá-lo.
 
-Por exemplo, uma solicitação para o URI *http://adventure-works.com/customers/3* deve retornar os detalhes de um único cliente contendo os campos `id`, `name` e `address` esperados pelo aplicativo cliente:
+Por exemplo, uma solicitação para o URI *https://adventure-works.com/customers/3* deve retornar os detalhes de um único cliente contendo os campos `id`, `name` e `address` esperados pelo aplicativo cliente:
 
 ```HTTP
 HTTP/1.1 200 OK
@@ -423,7 +423,7 @@ Aplicativos cliente existentes podem continuar funcionando corretamente se forem
 ### <a name="uri-versioning"></a>Controle de versão de URI
 Cada vez que você modifica a API da Web ou altera o esquema de recursos, você adiciona um número de versão ao URI para cada recurso. Os URIs previamente existentes devem continuar a funcionar como antes, recuperando recursos que estão em conformidade com seu esquema original.
 
-Estendendo o exemplo anterior, se o campo `address` for reestruturado em subcampos contendo cada parte constituinte do endereço (como `streetAddress`, `city`, `state` e `zipCode`), esta versão do recurso pode ser exposta por meio de um URI contendo um número de versão, como http://adventure-works.com/v2/customers/3:
+Estendendo o exemplo anterior, se o campo `address` for reestruturado em subcampos contendo cada parte constituinte do endereço (como `streetAddress`, `city`, `state` e `zipCode`), esta versão do recurso pode ser exposta por meio de um URI contendo um número de versão, como https://adventure-works.com/v2/customers/3:
 
 ```HTTP
 HTTP/1.1 200 OK
@@ -435,7 +435,7 @@ Content-Type: application/json; charset=utf-8
 Esse mecanismo de controle de versão é muito simples, mas depende do servidor realizar o roteamento da solicitação para o ponto de extremidade apropriado. No entanto, ele pode se tornar inviável conforme a API da Web amadurece ao passar por várias iterações e o servidor tem que oferecer suporte a um número de versões diferentes. Além disso, de um ponto de vista purista, em todos os casos os aplicativos cliente estão buscando os mesmos dados (cliente 3), portanto o URI não deve ser diferente, independentemente de qual for a versão. Esse esquema também complica a implementação de HATEOAS, já que todos os links precisarão incluir o número da versão em seus URIs.
 
 ### <a name="query-string-versioning"></a>Controle de versão de cadeia de consulta
-Em vez de fornecer vários URIs, você pode especificar a versão do recurso usando um parâmetro dentro da cadeia de consulta acrescentada à solicitação HTTP, como *http://adventure-works.com/customers/3?version=2*. O parâmetro de versão, caso seja omitido por aplicativos cliente mais antigos, deve passar a usar um valor padrão significativo, como 1.
+Em vez de fornecer vários URIs, você pode especificar a versão do recurso usando um parâmetro dentro da cadeia de consulta acrescentada à solicitação HTTP, como *https://adventure-works.com/customers/3?version=2*. O parâmetro de versão, caso seja omitido por aplicativos cliente mais antigos, deve passar a usar um valor padrão significativo, como 1.
 
 Essa abordagem tem a vantagem de semântica que o mesmo recurso é sempre recuperado do mesmo URI, mas para isso, é necessário que o código que processa a solicitação analise a cadeia de consulta e envie de volta a resposta HTTP apropriada. Essa abordagem também tem as mesmas complicações para implementar HATEOAS como o mecanismo de controle de versão do URI.
 
@@ -450,7 +450,7 @@ Em vez de acrescentar o número de versão como um parâmetro de cadeia de consu
 Versão 1:
 
 ```HTTP
-GET http://adventure-works.com/customers/3 HTTP/1.1
+GET https://adventure-works.com/customers/3 HTTP/1.1
 Custom-Header: api-version=1
 ```
 
@@ -464,7 +464,7 @@ Content-Type: application/json; charset=utf-8
 Versão 2:
 
 ```HTTP
-GET http://adventure-works.com/customers/3 HTTP/1.1
+GET https://adventure-works.com/customers/3 HTTP/1.1
 Custom-Header: api-version=2
 ```
 
@@ -481,7 +481,7 @@ Observe que assim como nas duas abordagens anteriores, implementar HATEOAS reque
 Quando um aplicativo cliente envia uma solicitação HTTP GET para um servidor Web, ele deve estipular o formato do conteúdo que pode manipular usando um cabeçalho Accept, conforme descrito anteriormente nestas diretrizes. Frequentemente, a finalidade do cabeçalho *Accept* é permitir que o aplicativo cliente especifique se o corpo da resposta deve ser XML, JSON ou algum outro formato comum que o cliente possa analisar. No entanto, é possível definir tipos de mídia personalizados que incluem informações, permitindo que o aplicativo cliente indique qual versão de um recurso esse aplicativo está esperando. O exemplo a seguir mostra uma solicitação que especifica um cabeçalho *Accept* com o valor *application/vnd.adventure-works.v1+json*. O elemento *vnd.adventure-works.v1* indica ao servidor Web que ele deve retornar a versão 1 do recurso, enquanto o elemento *json* especifica que o formato do corpo da resposta deve ser JSON:
 
 ```HTTP
-GET http://adventure-works.com/customers/3 HTTP/1.1
+GET https://adventure-works.com/customers/3 HTTP/1.1
 Accept: application/vnd.adventure-works.v1+json
 ```
 
@@ -512,10 +512,9 @@ Talvez você queira adotar a OpenAPI para suas APIs Web. Considere o seguinte:
 
 - A OpenAPI Specification vem com um conjunto de diretrizes insistentes sobre como uma API REST deve ser criada. Isso apresenta vantagens para a interoperabilidade, mas requer mais cuidado durante o design de sua API para ficar de acordo com a especificação.
 - A OpenAPI promove uma abordagem de primeiro contrato, em vez de uma primeira abordagem de implementação. Primeiro contato significa que você projeta o contrato da API (a interface) primeiro e então escreve o código que implementa o contrato. 
-- Ferramentas como o Swagger podem gerar bibliotecas de cliente ou a documentação de contratos de API. Por exemplo, veja [Páginas da Ajuda da API Web ASP.NET usando o Swagger](/aspnet/core/tutorials/web-api-help-pages-using-swagger).
+- Ferramentas como o Swagger podem gerar bibliotecas de cliente ou a documentação de contratos de API. Por exemplo, veja [Páginas da Ajuda da ASP.NET Web API usando o Swagger](/aspnet/core/tutorials/web-api-help-pages-using-swagger).
 
 ## <a name="more-information"></a>Mais informações
 * [Diretrizes da API REST da Microsoft](https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md). Recomendações detalhadas para a criação de APIs REST públicas.
-* [O guia da REST](http://restcookbook.com/). Introdução sobre como criar APIs RESTful.
 * [Lista de verificação da API da Web](https://mathieu.fenniak.net/the-api-checklist/). Uma lista útil de itens a serem considerados ao projetar e implementar uma API da Web.
 * [Open API Initiative](https://www.openapis.org/). Documentação e detalhes de implementação sobre a Open API.

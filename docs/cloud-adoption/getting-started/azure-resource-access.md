@@ -3,12 +3,12 @@ title: 'Adoção do Enterprise Cloud: gerenciamento de acesso a recursos no Azur
 description: 'Explicação dos constructos de gerenciamento de acesso a recursos no Azure: Azure Resource Manager, assinaturas, grupos de recursos e recursos'
 author: petertaylor9999
 ms.date: 09/10/2018
-ms.openlocfilehash: 2e64d8828574ebe216da1e76b19ec3ce5aeda993
-ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
+ms.openlocfilehash: c26b01d207bc4eb100653a826a053b394d03d1e6
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/11/2018
-ms.locfileid: "44389070"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428696"
 ---
 # <a name="enterprise-cloud-adoption-resource-access-management-in-azure"></a>Adoção do Enterprise Cloud: gerenciamento de acesso a recursos no Azure
 
@@ -84,7 +84,7 @@ O próximo controle é uma verificação de que o usuário tem permissão sufici
 
 Uma função RBAC especifica um conjunto de permissões que um usuário pode executar em um recurso específico. Quando a função é atribuída ao usuário, essas permissões são aplicadas. Por exemplo, a [função de **proprietário** interna](/azure/role-based-access-control/built-in-roles#owner) permite que um usuário realize qualquer ação em um recurso.
 
-O próximo controle é uma verificação de que a solicitação será permitida sob as configurações especificadas da [política de recursos do Azure](/azure/azure-policy/). As políticas de recursos do Azure especificam as operações permitidas para um recurso específico. Por exemplo, uma política de recursos do Azure pode especificar que os usuários só têm permissão para implantar um tipo específico de máquina virtual.
+O próximo controle é uma verificação de que a solicitação será permitida sob as configurações especificadas da [política de recursos do Azure](/azure/governance/policy/). As políticas de recursos do Azure especificam as operações permitidas para um recurso específico. Por exemplo, uma política de recursos do Azure pode especificar que os usuários só têm permissão para implantar um tipo específico de máquina virtual.
 
 ![](../_images/governance-1-19.png)   
 *Figura 11. Políticas de recursos do Azure.*

@@ -8,12 +8,12 @@ pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - messaging
 - resiliency
-ms.openlocfilehash: 03bfe2fe96b3b81d547cfedb075bcf855846b668
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 7914708413d68689e2326df28ced00e5fc3a5dd8
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24542418"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428662"
 ---
 # <a name="scheduler-agent-supervisor-pattern"></a>Padrão de supervisor de agente do Agendador
 
@@ -35,7 +35,7 @@ O padrão de Supervisor de Agente do Agendador define os atores a seguir. Esses 
 
 - O **Agendador** providencia as etapas que compõem a tarefa a ser executada e coordena a operação. Essas etapas podem ser combinadas em um pipeline ou fluxo de trabalho. O Agendador é responsável por garantir que as etapas nesse fluxo de trabalho sejam executadas na ordem correta. À medida que cada etapa é executada, o Agendador registra o estado do fluxo de trabalho, como "etapa ainda não iniciada", "etapa em execução" ou "etapa concluída". As informações de estado também devem incluir um limite máximo de tempo permitido para a conclusão da etapa, chamado de tempo de conclusão. Se uma etapa requer acesso a um serviço ou recurso remoto, o Agendador invocar o agente apropriado, passando os detalhes do trabalho a ser executado. O Agendador normalmente se comunica com um Agente usando mensagens de solicitação/resposta assíncronas. Isso pode ser implementado usando filas, embora outras tecnologias de mensagens distribuídas possam ser usadas em vez disso.
 
-    > O Agendador executa uma função semelhante para o Gerenciador de Processo no [padrão de Gerenciador de Processo](http://www.enterpriseintegrationpatterns.com/patterns/messaging/ProcessManager.html). O fluxo de trabalho real normalmente é definido e implementado por um mecanismo de fluxo de trabalho que é controlado pelo Agendador. Essa abordagem separa a lógica de negócios no fluxo de trabalho do Agendador.
+    > O Agendador executa uma função semelhante para o Gerenciador de Processo no [padrão de Gerenciador de Processo](https://www.enterpriseintegrationpatterns.com/patterns/messaging/ProcessManager.html). O fluxo de trabalho real normalmente é definido e implementado por um mecanismo de fluxo de trabalho que é controlado pelo Agendador. Essa abordagem separa a lógica de negócios no fluxo de trabalho do Agendador.
 
 - O **Agente** contém a lógica que encapsula uma chamada para um serviço remoto ou o acesso a um recurso remoto referenciado por uma etapa em uma tarefa. Cada Agente normalmente encapsula chamadas para um único serviço ou recurso, implementando a lógica de lidar com erros e tentar novamente (sujeito a uma restrição de tempo limite, descrita posteriormente). Se as etapas no fluxo de trabalho sendo executadas pelo Agendador usam vários serviços e recursos entre etapas diferentes, cada etapa pode fazer referência a um Agente diferente (esse é um detalhe de implementação do padrão).
 
@@ -70,7 +70,7 @@ A principal vantagem desse padrão é que o sistema é resiliente em caso de fal
 
 ## <a name="issues-and-considerations"></a>Problemas e considerações
 
-Você deve considerar os seguintes pontos ao decidir como implementar esse padrão:
+Os seguintes pontos devem ser considerados ao decidir como implementar esse padrão:
 
 - Esse padrão pode ser difícil de implementar e requer um teste completo de cada modo de falha possíveis do sistema.
 
@@ -142,7 +142,7 @@ Os padrões e diretrizes a seguir também podem ser relevantes ao implementar es
 - [Prévia de mensagens assíncronas](https://msdn.microsoft.com/library/dn589781.aspx). Os componentes no padrão de Supervisor de Agente do Agendador normalmente são executados separados uns dos outros e se comunicam de forma assíncrona. Descreve algumas das abordagens que podem ser usadas para implementar a comunicação assíncrona com base em filas de mensagens.
 - [Padrão de eleição de líder](leader-election.md). Talvez seja necessário coordenar as ações de várias instâncias de um Supervisor para impedir que tentem recuperar o mesmo processo com falha. O padrão de eleição de líder descreve como fazer isso.
 - [Arquitetura de nuvem: o padrão de Agendador-Agente-Supervisor](https://blogs.msdn.microsoft.com/clemensv/2010/09/27/cloud-architecture-the-scheduler-agent-supervisor-pattern/) no blog de Clemens Vasters
-- [Padrão de gerenciador de processo](http://www.enterpriseintegrationpatterns.com/patterns/messaging/ProcessManager.html)
+- [Padrão de gerenciador de processo](https://www.enterpriseintegrationpatterns.com/patterns/messaging/ProcessManager.html)
 - [Referência 6: uma saga em Sagas](https://msdn.microsoft.com/library/jj591569.aspx). Um exemplo que mostra como o padrão CQRS usa um gerenciador de processo (parte do guia Recurso CQRS).
 - [Agendador do Microsoft Azure](https://azure.microsoft.com/services/scheduler/)
 

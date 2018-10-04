@@ -3,12 +3,12 @@ title: Registro em log e monitoramento em microsserviços
 description: Registro em log e monitoramento em microsserviços
 author: MikeWasson
 ms.date: 12/08/2017
-ms.openlocfilehash: 1da67047daa9ae87cda5dd7dd581d6081183c428
-ms.sourcegitcommit: 786bafefc731245414c3c1510fc21027afe303dc
+ms.openlocfilehash: b7206e2f35b9f227ff298f077ddafef1c6015b15
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/12/2017
-ms.locfileid: "26652987"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428764"
 ---
 # <a name="designing-microservices-logging-and-monitoring"></a>Projetando microsserviços: registro em log e monitoramento
 
@@ -64,7 +64,7 @@ O artigo [Monitoramento e diagnóstico](../best-practices/monitoring.md) descrev
 
 ## <a name="distributed-tracing"></a>Rastreamento distribuído
 
-Conforme mencionado, um desafio em microsserviços é entender o fluxo de eventos entre os serviços. Uma única operação ou transação pode envolver a chamadas para vários serviços. Para reconstruir a toda sequência de etapas, cada serviço deve propagar uma *ID de correlação* que atua como um identificador exclusivo para essa operação. A ID de correlação habilita o [rastreamento distribuído](http://microservices.io/patterns/observability/distributed-tracing.html) entre serviços.
+Conforme mencionado, um desafio em microsserviços é entender o fluxo de eventos entre os serviços. Uma única operação ou transação pode envolver a chamadas para vários serviços. Para reconstruir a toda sequência de etapas, cada serviço deve propagar uma *ID de correlação* que atua como um identificador exclusivo para essa operação. A ID de correlação habilita o [rastreamento distribuído](https://microservices.io/patterns/observability/distributed-tracing.html) entre serviços.
 
 O primeiro serviço que recebe uma solicitação de cliente deve gerar a ID de correlação. Se o serviço faz uma chamada HTTP para outro serviço, ele coloca a ID de correlação em um cabeçalho de solicitação. Da mesma forma, se o serviço envia uma mensagem assíncrona, ele coloca a ID de correlação nessa mensagem. Serviços de downstream continuam a propagar a ID de correlação, de modo que ela flui através de todo o sistema. Além disso, todo o código que grava eventos de log ou métricas do aplicativo deve incluir a ID de correlação.
 
@@ -114,7 +114,7 @@ Outra opção é enviar logs para o Log Analytics do OMS (Operations Management 
 
 ## <a name="example-logging-with-correlation-ids"></a>Exemplo: registro em log com IDs de correlação
 
-Para ilustrar alguns dos pontos abordados neste capítulo, aqui está um exemplo estendido de como o serviço Package implementa o registro em log. O serviço Package foi escrito em TypeScript e usa a estrutura [Koa](http://koajs.com/) da Web para Node.js. Há várias bibliotecas de registro em log do Node.js à sua escolha. Escolhemos [Winston](https://github.com/winstonjs/winston), uma biblioteca de log popular que atendeu a nossos requisitos de desempenho quando testada.
+Para ilustrar alguns dos pontos abordados neste capítulo, aqui está um exemplo estendido de como o serviço Package implementa o registro em log. O serviço Package foi escrito em TypeScript e usa a estrutura [Koa](https://koajs.com/) da Web para Node.js. Há várias bibliotecas de registro em log do Node.js à sua escolha. Escolhemos [Winston](https://github.com/winstonjs/winston), uma biblioteca de log popular que atendeu a nossos requisitos de desempenho quando testada.
 
 Para encapsular os detalhes de implementação, definimos uma interface `ILogger` abstrata:
 

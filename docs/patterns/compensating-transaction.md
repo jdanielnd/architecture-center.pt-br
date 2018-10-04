@@ -7,12 +7,12 @@ ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - resiliency
-ms.openlocfilehash: a822de990d6ce933024207073b110e98f8da40bf
-ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
+ms.openlocfilehash: 3d58537d9c77b97332bcabf762b9af7ed2f20421
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/08/2017
-ms.locfileid: "26359394"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428135"
 ---
 # <a name="compensating-transaction-pattern"></a>Padrão de Transação de Compensação
 
@@ -38,9 +38,9 @@ A solução é implementar uma transação de compensação. As etapas em uma tr
 
 Uma abordagem comum é usar um fluxo de trabalho para implementar uma operação eventualmente consistente que exige compensação. À medida que a operação original prossegue, o sistema registra informações sobre cada etapa e como o trabalho executado pela etapa pode ser desfeito. Se a operação falhar em qualquer ponto, o fluxo de trabalho retrocede as etapas concluídas e executa o trabalho que reverte cada etapa. Observe que uma transação de compensação pode não precisar desfazer o trabalho na ordem inversa exata da operação original e pode ser possível realizar algumas das etapas de reversão em paralelo.
 
-> Essa abordagem é semelhante à estratégia do Sagas discutida no [blog de Clemens Vasters](http://vasters.com/clemensv/2012/09/01/Sagas.aspx).
+> Essa abordagem é semelhante à estratégia do Sagas discutida no [blog de Clemens Vasters](https://vasters.com/clemensv/2012/09/01/Sagas.aspx).
 
-Uma transação de compensação também é uma operação eventualmente consistente e ela também poderia falhar. O sistema deve ser capaz de retomar a transação de compensação no ponto de falha e continuar. Pode ser necessário repetir uma etapa que falhou, portanto as etapas em uma transação de compensação devem ser definidas como comandos idempotentes. Para obter mais informações, consulte [Padrões de idempotência](http://blog.jonathanoliver.com/idempotency-patterns/) no blog de Jonathan Oliver.
+Uma transação de compensação também é uma operação eventualmente consistente e ela também poderia falhar. O sistema deve ser capaz de retomar a transação de compensação no ponto de falha e continuar. Pode ser necessário repetir uma etapa que falhou, portanto as etapas em uma transação de compensação devem ser definidas como comandos idempotentes. Para obter mais informações, consulte [Padrões de idempotência](https://blog.jonathanoliver.com/idempotency-patterns/) no blog de Jonathan Oliver.
 
 Em alguns casos, pode não ser possível recuperar de uma etapa com falha, exceto por meio de intervenção manual. Nessas situações, o sistema deve acionar um alerta e fornecer o máximo possível de informações sobre o motivo da falha.
 

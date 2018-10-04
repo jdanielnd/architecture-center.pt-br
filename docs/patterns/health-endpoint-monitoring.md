@@ -9,12 +9,12 @@ pnp.pattern.categories:
 - availability
 - management-monitoring
 - resiliency
-ms.openlocfilehash: 3b3bce46b460148af17bfe6064cd052a5f9a6458
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: 22a4e47c4dd8dd3dd11a4238e859acbea49f9d1b
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30847842"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428968"
 ---
 # <a name="health-endpoint-monitoring-pattern"></a>Padrão de monitoramento do ponto de extremidade de integridade
 
@@ -89,7 +89,7 @@ Como configurar a segurança para os pontos de extremidade de monitoramento para
 
      >  Os ataques de negação de serviço provavelmente terão menos impacto em um ponto de extremidade separado que executa testes funcionais básicos sem comprometer a operação do aplicativo. O ideal é evitar usar um teste que possa expor informações confidenciais. Se for necessário retornar informações que possam ser úteis a um invasor, considere como irá proteger o ponto de extremidade e os dados contra acesso não autorizado. Neste caso, apenas confiar na obscuridade não é suficiente. Também será necessário considerar usar uma conexão HTTPS e criptografar quaisquer dados confidenciais, embora isso aumente a carga no servidor.
 
-- Como acessar um ponto de extremidade protegido utilizando a autenticação. Nem todas as ferramentas e estruturas podem ser configuradas para incluir credenciais com a solicitação de verificação de integridade. Por exemplo, os recursos de verificação de integridade internos do Microsoft Azure não podem fornecer credenciais de autenticação. Algumas alternativas de terceiros são [Pingdom](https://www.pingdom.com/), [Panopta](http://www.panopta.com/), [NewRelic](https://newrelic.com/) e [Statuscake](https://www.statuscake.com/).
+- Como acessar um ponto de extremidade protegido utilizando a autenticação. Nem todas as ferramentas e estruturas podem ser configuradas para incluir credenciais com a solicitação de verificação de integridade. Por exemplo, os recursos de verificação de integridade internos do Microsoft Azure não podem fornecer credenciais de autenticação. Algumas alternativas de terceiros são [Pingdom](https://www.pingdom.com/), [Panopta](https://www.panopta.com/), [NewRelic](https://newrelic.com/) e [Statuscake](https://www.statuscake.com/).
 
 - Como garantir que o agente de monitoramento esteja sendo executado corretamente. Uma abordagem é expor um ponto de extremidade que simplesmente retorne um valor a partir da configuração do aplicativo ou um valor aleatório que pode ser utilizado para testar o agente.
 

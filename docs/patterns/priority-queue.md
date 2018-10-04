@@ -8,12 +8,12 @@ pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - messaging
 - performance-scalability
-ms.openlocfilehash: ecfbb38304bb95587e9ca15523ad9594898d9b32
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 400bfbc03cf5640ff32a551636b01d60e6c0ec50
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24543138"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428492"
 ---
 # <a name="priority-queue-pattern"></a>Padrão de fila de prioridade
 
@@ -176,5 +176,5 @@ Os padrões e diretrizes a seguir também podem ser relevantes ao implementar es
 
 - [Diretrizes de dimensionamento automático](https://msdn.microsoft.com/library/dn589774.aspx). É possível dimensionar o tamanho do pool de processos do consumidor manipulando uma fila dependendo do tamanho dela. Essa estratégia pode ajudar a melhorar o desempenho, especialmente para pools que lidam com mensagens de alta prioridade.
 
-- [Padrões de integração empresarial com o Barramento de Serviço](http://abhishekrlal.com/2013/01/11/enterprise-integration-patterns-with-service-bus-part-2/) no blog de Abhishek Lal.
+- [Padrões de integração empresarial com o Barramento de Serviço](https://abhishekrlal.com/2013/01/11/enterprise-integration-patterns-with-service-bus-part-2/) no blog de Abhishek Lal.
 

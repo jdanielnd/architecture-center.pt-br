@@ -9,12 +9,12 @@ pnp.pattern.categories:
 - data-management
 - design-implementation
 - performance-scalability
-ms.openlocfilehash: c2832aa806909c6f0aab8b6345ffb8162eb59903
-ms.sourcegitcommit: d08f6ee27e1e8a623aeee32d298e616bc9bb87ff
+ms.openlocfilehash: 9a2eecdff7494fb627ea5c4655e6edc789bd5bdf
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 05/07/2018
-ms.locfileid: "33811042"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429682"
 ---
 # <a name="command-and-query-responsibility-segregation-cqrs-pattern"></a>Padrão CQRS (Segregação de Responsabilidade de Consulta e Comando)
 
@@ -248,8 +248,6 @@ Os seguintes padrões e diretrizes serão úteis ao implementar esse padrão:
 
 - [Padrão de Exibição Materializada](materialized-view.md). O modelo de leitura de uma implementação CQRS pode conter exibições materializadas dos dados do modelo de gravação, ou o modelo de leitura pode ser utilizado para gerar exibições materializadas.
 
-- Guia de padrões e práticas [Recurso CQRS](http://aka.ms/cqrs). Em particular, a [Introdução ao Padrão de Segregação de Responsabilidade de Consulta de Comando](https://msdn.microsoft.com/library/jj591573.aspx) explora o padrão e quando isso é útil e o [Epílogo: Lições Aprendidas](https://msdn.microsoft.com/library/jj591568.aspx) ajuda-o a entender alguns dos problemas que surgiram ao usar este padrão.
+- Guia de padrões e práticas [Recurso CQRS](https://aka.ms/cqrs). Em particular, a [Introdução ao Padrão de Segregação de Responsabilidade de Consulta de Comando](https://msdn.microsoft.com/library/jj591573.aspx) explora o padrão e quando isso é útil e o [Epílogo: Lições Aprendidas](https://msdn.microsoft.com/library/jj591568.aspx) ajuda-o a entender alguns dos problemas que surgiram ao usar este padrão.
 
-- A postagem [CQRS por Martin Fowler](http://martinfowler.com/bliki/CQRS.html), que explica os conceitos básicos do padrão e links para outros recursos úteis.
-
-- [Postagens de Greg Young](http://codebetter.com/gregyoung/), que exploram muitos aspectos do padrão CQRS.
+- A postagem [CQRS por Martin Fowler](https://martinfowler.com/bliki/CQRS.html), que explica os conceitos básicos do padrão e links para outros recursos úteis.

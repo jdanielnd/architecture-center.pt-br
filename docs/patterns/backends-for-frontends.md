@@ -3,12 +3,12 @@ title: Padrão de back-ends para front-ends
 description: Crie serviços de back-end separados a serem consumidos por aplicativos de front-end específico ou interfaces.
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: 2991d7a3e05b3ce6cd5148a552bae6d4ba8f7c4c
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.openlocfilehash: a0dbc9ab58aa218f6faf40b70dad1bdc22d71458
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/30/2018
-ms.locfileid: "30270012"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428781"
 ---
 # <a name="backends-for-frontends-pattern"></a>Padrão de back-ends para front-ends
 
@@ -34,7 +34,7 @@ Crie um back-end por interface do usuário. Ajuste o comportamento e o desempenh
 
 Como cada back-end é específico para uma interface, ele pode ser otimizado para essa interface. Como resultado, ele será menor, menos complexo e provavelmente mais rápido do que um back-end genérico que tenta satisfazer os requisitos de todas as interfaces. Cada equipe da interface tem autonomia para controlar seu próprio back-end e não depende de uma equipe centralizada de desenvolvimento de back-end. Isso dá flexibilidade à equipe da interface quanto à seleção da linguagem, cadência da versão, priorização de carga de trabalho e integração de recursos no back-end.
 
-Para obter mais informações, consulte [Padrão: back-ends para front-ends](http://samnewman.io/patterns/architectural/bff/).
+Para obter mais informações, consulte [Padrão: back-ends para front-ends](https://samnewman.io/patterns/architectural/bff/).
 
 ## <a name="issues-and-considerations"></a>Problemas e considerações
 
