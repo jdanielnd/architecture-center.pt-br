@@ -283,18 +283,18 @@ items:
     href: example-scenario/index.md
   - name: AI
     items:
+    - name: Chatbot de reserva de hotel
+      href: example-scenario/ai/commerce-chatbot.md
     - name: Classificação de imagens
       href: example-scenario/ai/intelligent-apps-image-processing.md
   - name: Aplicativos
     items:
-    - name: SaaS de engenharia auxiliada por computador
+    - name: Engenharia auxiliada por computador
       href: example-scenario/apps/hpc-saas.md
     - name: Relação de confiança descentralizada entre bancos
       href: example-scenario/apps/decentralized-trust.md
     - name: Monitoramento de aplicativo Web
       href: example-scenario/apps/app-monitoring.md
-    - name: Chatbot de reserva de hotel
-      href: example-scenario/apps/commerce-chatbot.md
     - name: DevOps com contêineres
       href: example-scenario/apps/devops-with-aks.md
     - name: DevOps com Azure DevOps
@@ -315,7 +315,7 @@ items:
       href: example-scenario/data/big-data-with-iot.md
     - name: Data warehouse e análise
       href: example-scenario/data/data-warehouse.md
-    - name: Dados IOT automotivos
+    - name: Dados de IoT automotivos
       href: example-scenario/data/realtime-analytics-vehicle-iot.md
     - name: Detecção de fraude em tempo real
       href: example-scenario/data/fraud-detection.md
@@ -328,7 +328,7 @@ items:
     - name: Áreas de trabalho virtual do Linux
       href: example-scenario/infrastructure/linux-vdi-citrix.md
     - name: Decompor aplicativos monolíticos
-      href: example-scenario/infrastructure/ServiceFabricMicroservices.md
+      href: example-scenario/infrastructure/service-fabric-microservices.md
     - name: WordPress altamente escalonáveis
       href: example-scenario/infrastructure/wordpress.md
     - name: Windows de várias camadas
@@ -531,9 +531,9 @@ items:
       href: cloud-adoption/appendix/azure-scaffold.md
     - name: Implementando o scaffold do Azure Enterprise
       href: cloud-adoption/appendix/azure-scaffold-examples.md
-ms.openlocfilehash: 2b5c74f9ce94b238c8787e0c684248ecae0467af
-ms.sourcegitcommit: 9eecff565392273d11b8702f1fcecb4d75e27a15
+ms.openlocfilehash: 9f2dcd31b5d3a36badf9db6ce5f64fae6085ff96
+ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/03/2018
-ms.locfileid: "48243675"
+ms.lasthandoff: 10/05/2018
+ms.locfileid: "48819101"
