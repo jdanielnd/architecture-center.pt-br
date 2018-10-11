@@ -4,12 +4,12 @@ description: Lista de verificação que fornece orientação para questões de r
 author: petertaylor9999
 ms.date: 01/10/2018
 ms.custom: resiliency, checklist
-ms.openlocfilehash: 17612ee08e2329ea648fd21d6764e7bae1ca20e2
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: 15ad749c12dc8a45c9e7e08376452685d8ad7c9b
+ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429087"
+ms.lasthandoff: 10/05/2018
+ms.locfileid: "48819016"
 ---
 # <a name="resiliency-checklist"></a>Lista de verificação de resiliência
 
@@ -39,7 +39,7 @@ Resiliência é a capacidade de um sistema de se recuperar de falhas e continuar
 
 **Use o balanceamento de carga para distribuir solicitações.** O balanceamento de carga distribui as solicitações do aplicativo para instâncias de serviço íntegras removendo instâncias não íntegras da rotação. Se o seu serviço usa o Serviço de Aplicativo do Azure ou os Serviços de Nuvem do Azure, o balanceamento de carga dele já foi realizado para você. No entanto, se seu aplicativo usar as VMs do Azure, você precisará provisionar um balanceador de carga. Para obter mais detalhes, veja [Visão geral do Azure Load Balancer](/azure/load-balancer/load-balancer-overview/).
 
-**Configure os Gateways de Aplicativo do Azure para usar várias instâncias.** Dependendo dos requisitos do seu aplicativo, um [Gateway de Aplicativo do Azure](/azure/application-gateway/application-gateway-introduction/) pode ser mais conveniente para distribuir solicitações para os serviços do aplicativo. No entanto, instâncias únicas do serviço de Gateway de Aplicativo não garantidas por um SLA, então é possível que seu aplicativo falhe se a instância do Gateway de Aplicativo falhar. Provisione mais de uma instância média ou maior do Gateway de Aplicativo para garantir a disponibilidade do serviço sob os termos do [SLA](https://azure.microsoft.com/support/legal/sla/application-gateway/v1_0/).
+**Configure os Gateways de Aplicativo do Azure para usar várias instâncias.** Dependendo dos requisitos do seu aplicativo, um [Gateway de Aplicativo do Azure](/azure/application-gateway/application-gateway-introduction/) pode ser mais conveniente para distribuir solicitações para os serviços do aplicativo. No entanto, instâncias únicas do serviço de Gateway de Aplicativo não garantidas por um SLA, então é possível que seu aplicativo falhe se a instância do Gateway de Aplicativo falhar. Provisione mais de uma instância média ou maior do Gateway de Aplicativo para garantir a disponibilidade do serviço sob os termos do [SLA](https://azure.microsoft.com/support/legal/sla/application-gateway/).
 
 **Use Conjuntos de Disponibilidade do Azure para cada camada de aplicativo.** Colocar suas instâncias em um [conjunto de disponibilidade][availability-sets] proporciona um [SLA](https://azure.microsoft.com/support/legal/sla/virtual-machines/) de nível mais elevado. 
 
