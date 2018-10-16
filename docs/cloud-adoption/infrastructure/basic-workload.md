@@ -3,14 +3,14 @@ title: 'Adoção do Enterprise Cloud: implantar uma carga de trabalho básica'
 description: Descreve como implantar uma carga de trabalho básica para o Azure
 author: petertaylor9999
 ms.date: 09/10/2018
-ms.openlocfilehash: e615ba33fb713278a3695057e61d99c92b72b3f2
-ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
+ms.openlocfilehash: 363e7e6f394389fb6c1577e2cbaeffeddcf2de1a
+ms.sourcegitcommit: b38ba378c9d6110da2dfd50b4233fadd94604bb0
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/11/2018
-ms.locfileid: "44389271"
+ms.lasthandoff: 09/25/2018
+ms.locfileid: "47167346"
 ---
-# <a name="enterprise-cloud-adoption-deploy-a-basic-workload"></a>Adoção do Enterprise Cloud: implantar uma carga de trabalho básica
+# <a name="enterprise-cloud-adoption-deploy-a-basic-workload"></a>Adoção da Nuvem na Empresa: implantar uma carga de trabalho básica
 
 O termo **carga de trabalho** é normalmente entendido como a definição de uma unidade arbitrária de recursos, como um aplicativo ou serviço. Pensamos em uma carga de trabalho em termos de artefatos de código que são implantados em um servidor, mas também em termos de quaisquer outros serviços que sejam necessários. Esta é uma definição útil para um aplicativo ou serviço local, mas na nuvem precisamos expandi-lo.
 
