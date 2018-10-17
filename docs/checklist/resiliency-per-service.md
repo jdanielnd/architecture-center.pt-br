@@ -4,12 +4,12 @@ description: Lista de verificação que fornece orientação de resiliência par
 author: petertaylor9999
 ms.date: 03/02/2018
 ms.custom: resiliency, checklist
-ms.openlocfilehash: 735d4466f53ff03b67063b49b86f4184bbf1af41
-ms.sourcegitcommit: 25bf02e89ab4609ae1b2eb4867767678a9480402
+ms.openlocfilehash: 50808a837132e905cc89c3c43d40852a04f4885c
+ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/14/2018
-ms.locfileid: "45584758"
+ms.lasthandoff: 10/05/2018
+ms.locfileid: "48819186"
 ---
 # <a name="resiliency-checklist-for-specific-azure-services"></a>Lista de verificação de resiliência para serviços específicos do Azure
 
@@ -39,11 +39,11 @@ Resiliência é a capacidade de um sistema de se recuperar de falhas e continuar
 
 **Criar uma conta de armazenamento separada para logs.** Não use a mesma conta de armazenamento para logs e dados de aplicativo. Isso ajuda a impedir o registro em log de reduzir o desempenho do aplicativo.
 
-**Monitore o desempenho.** Use um serviço de monitoramento de desempenho como o [New Relic](http://newrelic.com/) ou o [Application Insights](/azure/application-insights/app-insights-overview/) para monitorar o desempenho e o comportamento do aplicativo sob carga.  O monitoramento de desempenho fornece informações sobre o aplicativo em tempo real. Ele permite a você diagnosticar problemas e executar a análise de causa raiz de falhas.
+**Monitore o desempenho.** Use um serviço de monitoramento de desempenho como o [New Relic](https://newrelic.com/) ou o [Application Insights](/azure/application-insights/app-insights-overview/) para monitorar o desempenho e o comportamento do aplicativo sob carga.  O monitoramento de desempenho fornece informações sobre o aplicativo em tempo real. Ele permite a você diagnosticar problemas e executar a análise de causa raiz de falhas.
 
 ## <a name="application-gateway"></a>Gateway de Aplicativo
 
-**Provisione pelo menos duas instâncias.** Implante um Gateway de Aplicativo com pelo menos duas instâncias. Uma única instância é um ponto único de falha. Use duas ou mais instâncias para redundância e escalabilidade. Para se qualificar para o [SLA](https://azure.microsoft.com/support/legal/sla/application-gateway/v1_0/), você deverá provisionar duas ou mais instâncias médias ou maiores.
+**Provisione pelo menos duas instâncias.** Implante um Gateway de Aplicativo com pelo menos duas instâncias. Uma única instância é um ponto único de falha. Use duas ou mais instâncias para redundância e escalabilidade. Para se qualificar para o [SLA](https://azure.microsoft.com/support/legal/sla/application-gateway), você deverá provisionar duas ou mais instâncias médias ou maiores.
 
 ## <a name="cosmos-db"></a>Cosmos DB
 
@@ -77,6 +77,21 @@ Caso esteja usando o Cache Redis como um cache de dados temporário e não como 
 
   * Se a fonte de dados é com replicação geográfica, você geralmente deve apontar cada indexador de cada serviço do Azure Search regional para a respectiva réplica de fonte de dados local. No entanto, essa abordagem não é recomendada para grandes conjuntos de dados armazenados no Banco de Dados SQL do Azure. O motivo é que o Azure Search não pode executar a indexação incremental de réplicas de Banco de Dados SQL secundárias, somente de réplicas primárias. Em vez disso, aponte todos os indexadores para a réplica primária. Após um failover, aponte os indexadores do Azure Search para a nova réplica primária.  
   * Se a fonte de dados não é com replicação geográfica, aponte vários indexadores na fonte de dados, de forma que os serviços do Azure Search façam a indexação da fonte de dados de modo contínuo e independente. Para obter mais informações, consulte [Considerações de desempenho e otimização do Azure Search][search-optimization].
+
+## <a name="service-bus"></a>Barramento de Serviço
+
+**Use a camada Premium para cargas de trabalho de produção**. [Mensagens Premium do Barramento de Serviço](/azure/service-bus-messaging/service-bus-premium-messaging) fornecem recursos de processamento dedicado e reservado e a capacidade de memória para dar suporte a desempenho e taxa de transferência previsíveis. A camada de Mensagens Premium também oferece acesso a novos recursos que estão disponíveis somente para clientes Premium no início. Você pode decidir o número de unidades do sistema de mensagens com base em cargas de trabalho esperadas.
+
+**Tratar mensagens duplicadas**. Se um editor falha imediatamente após enviar uma mensagem ou enfrenta problemas de rede ou do sistema, pode deixar de registrar erroneamente que a mensagem foi entregue e pode enviar a mesma mensagem ao sistema duas vezes. O Barramento de Serviço pode lidar com esse problema habilitando a detecção de duplicatas. Para saber mais, confira [Detecção de duplicatas](/azure/service-bus-messaging/duplicate-detection).
+
+**Tratar exceções**. As APIs de mensagens geram exceções quando ocorre um erro de usuário, um erro de configuração ou outro erro. O código do cliente (remetentes e receptores) deve tratar essas exceções em seu código. Isso é especialmente importante no processamento em lotes, em que o tratamento de exceção pode ser usado para evitar a perda de um lote inteiro de mensagens. Para saber mais, veja [Exceções de mensagens do Barramento de Serviço](/azure/service-bus-messaging/service-bus-messaging-exceptions).
+
+**Política de repetição**. O Barramento de Serviço permite que você escolha a melhor política de repetição para os aplicativos. A política padrão é permitir no máximo nove tentativas de repetição e aguardar 30 segundos, mas isso pode ser ajustado. Para saber mais, confira [Política de repetição – Barramento de Serviço](/azure/architecture/best-practices/retry-service-specific#service-bus).
+
+**Use uma fila de mensagens mortas**. Se uma mensagem não pode ser processada ou entregue a nenhum receptor após várias tentativas, é movida para uma fila de mensagens mortas. Implemente um processo para ler mensagens da fila de mensagens mortas, inspecioná-las e corrigir o problema. Dependendo do cenário, você pode repetir a mensagem como está, fazer alterações e tentar novamente ou descartar a mensagem. Para saber mais, confira [Visão geral das filas de mensagens mortas do Barramento de Serviço](/azure/service-bus-messaging/service-bus-dead-letter-queues).
+
+**Usar a recuperação de desastre em área geográfica**. A recuperação de desastre em área geográfica garante que o processamento de dados continue a operar em uma região ou datacenter diferente, se uma região inteira do Azure ou o datacenter se tornar indisponível devido a um desastre. Para mais informações consulte [Recuperação de desastre em área geográfica do Barramento de Serviço do Azure](/azure/service-bus-messaging/service-bus-geo-dr).
+
 
 ## <a name="storage"></a>Armazenamento
 

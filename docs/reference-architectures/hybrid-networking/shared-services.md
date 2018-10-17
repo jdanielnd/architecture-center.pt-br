@@ -5,12 +5,12 @@ author: telmosampaio
 ms.date: 06/19/2018
 pnp.series.title: Implement a hub-spoke network topology with shared services in Azure
 pnp.series.prev: hub-spoke
-ms.openlocfilehash: 283251d5b11f76985405410c5c237e5a64ee98fe
-ms.sourcegitcommit: 71cbef121c40ef36e2d6e3a088cb85c4260599b9
+ms.openlocfilehash: 0238c5d6f28bacbc32268d4586b30395de36384b
+ms.sourcegitcommit: 62945777e519d650159f0f963a2489b6bb6ce094
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/14/2018
-ms.locfileid: "39060788"
+ms.lasthandoff: 10/09/2018
+ms.locfileid: "48876861"
 ---
 # <a name="implement-a-hub-spoke-network-topology-with-shared-services-in-azure"></a>Implementar uma topologia de rede hub-spoke com serviços compartilhados no Azure
 
@@ -116,7 +116,7 @@ Esta etapa implanta o datacenter local simulado como uma rede virtual do Azure.
 
 2. Abra o arquivo `onprem.json` . 
 
-3. Pesquise todas as instâncias de `Password` e `adminPassword`. Insira valores para o nome de usuário e a senha nos parâmetros e salve o arquivo. 
+3. Pesquise todas as instâncias de `UserName`, `adminUserName`, `Password` e `adminPassword`. Insira valores para o nome de usuário e a senha nos parâmetros e salve o arquivo. 
 
 4. Execute o comando a seguir:
 

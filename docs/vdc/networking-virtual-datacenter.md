@@ -5,14 +5,14 @@ author: tracsman
 manager: rossort
 tags: azure-resource-manager
 ms.service: virtual-network
-ms.date: 04/3/2018
+ms.date: 09/24/2018
 ms.author: jonor
-ms.openlocfilehash: 2dbbad3dd8d1a45b94bb4e265d306815d1f5242c
-ms.sourcegitcommit: f1dcc388c8b4fc983549c36d7e6b009fa1f072ba
+ms.openlocfilehash: 61b8e8347fb54e95dcf1bff959e01ef00ecee189
+ms.sourcegitcommit: 5d1ee2acb5beb2afea19bcc0cef34655dc70e372
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/19/2018
-ms.locfileid: "46329905"
+ms.lasthandoff: 10/05/2018
+ms.locfileid: "48812518"
 ---
 # <a name="azure-virtual-datacenter-a-network-perspective"></a>Datacenter Virtual do Azure: uma perspectiva de rede
 
@@ -44,7 +44,7 @@ O VDC pode ajudar as empresas a colocarem as cargas de trabalho e os aplicativos
 -   Implementação de segurança compartilhada ou centralizada e requisitos de acesso entre cargas de trabalho
 -   Como combinar TI centralizada e DevOps apropriadamente para uma grande empresa
 
-A chave para aproveitar as vantagens do VDC é uma topologia centralizada (hub e spokes) com uma combinação de recursos do Azure: [VNet do Azure][VNet], [NSGs][NSG], [Emparelhamento VNet][VNetPeering], [UDR (Rotas Definidas pelo Usuário)][UDR] e Identidade do Azure com [RBAC (Controle de Acesso Baseado em Função)][RBAC].
+A chave para aproveitar as vantagens do VDC é uma topologia centralizada (hub e spokes) com uma combinação de recursos do Azure: [VNet do Azure][VNet], [NSGs][NSG], [Emparelhamento VNet][VNetPeering], [UDR (Rotas Definidas pelo Usuário)][UDR] e Identidade do Azure com [RBAC (Controle de Acesso Baseado em Função)][RBAC] e opcionalmente o [Firewall do Azure][AzFW], [DNS do Azure][DNS], [Azure Front Door][AFD] e [WAN Virtual do Azure][vWAN].
 
 ## <a name="who-needs-a-virtual-data-center"></a>Quem precisa de um Data Center Virtual?
 Qualquer cliente do Azure que precise ser movido mais do que algumas cargas de trabalho no Azure pode se beneficiar de pensar sobre como usar recursos comuns. Dependendo da magnitude, até mesmo aplicativos únicos podem aproveitar o uso de padrões e componentes empregados para criar um VDC.
@@ -66,11 +66,11 @@ Serviços de identidade e diretório são um aspecto fundamental de todos os dat
 
 Qualquer grande empresa precisa definir um processo de gerenciamento de identidades que descreva o gerenciamento de identidades individuais, autenticação, autorização, funções e privilégios dentro ou no VDC. Os objetivos deste processo devem ser aumentar a segurança e a produtividade e diminuir o custo, o tempo de inatividade e as tarefas manuais repetitivas.
 
-Empresas/organizações podem exigir uma combinação exigente de serviços para diferentes LOBs (linha de negócios) e os funcionários geralmente têm diferentes funções quando estão envolvido em projetos diferentes. Um VDC requer uma boa cooperação entre diferentes equipes, cada uma com definições de função específicas, para que os sistemas sejam executados com boa governança. A matriz de responsabilidades, acesso e direitos pode ser extremamente complexa. O gerenciamento de identidades no VDC é implementado por meio do [*AAD* (Azure Active Directory)][AAD] e do RBAC (Controle de Acesso Baseado em Função).
+Empresas/organizações podem exigir uma combinação exigente de serviços para diferentes LOBs (linha de negócios) e os funcionários geralmente têm diferentes funções quando estão envolvido em projetos diferentes. Um VDC requer uma boa cooperação entre diferentes equipes, cada uma com definições de função específicas, para que os sistemas sejam executados com boa governança. A matriz de responsabilidades, acesso e direitos pode ser extremamente complexa. O gerenciamento de identidades no VDC é implementado por meio do [*Azure Active Directory* (Azure AD)][AAD] e do RBAC (Controle de Acesso Baseado em Função).
 
 Um Serviço de Diretório é uma infraestrutura de informações compartilhadas para localizar, gerenciar, administrar e organizar itens cotidianos e recursos de rede. Esses recursos podem incluir volumes, pastas, arquivos, impressoras, usuários, grupos, dispositivos e outros objetos. Cada recurso na rede é considerado um objeto pelo servidor de diretório. Informações sobre um recurso são armazenadas como uma coleção de atributos associados a tal recurso ou objeto.
 
-Todos os serviços comerciais online da Microsoft dependem do Azure AD (Azure Active Directory) para conexão e outras necessidades de identidade. O Azure Active Directory é uma solução de nuvem de gerenciamento de acesso e identidade abrangente e altamente disponível que combina os serviços principais de diretório, governança avançada de identidades e gerenciamento do acesso de aplicativos. O AAD pode ser integrado ao Active Directory local para habilitar logon único para todos os aplicativos hospedados localmente e baseados em nuvem (local). Os atributos do usuário do Active Directory local podem ser sincronizados automaticamente com o AAD.
+Todos os serviços comerciais do Microsoft Online dependem do Azure Active Directory (Azure AD) para entrada e outras necessidades de identidade. O Azure Active Directory é uma solução de nuvem de gerenciamento de acesso e identidade abrangente e altamente disponível que combina os serviços principais de diretório, governança avançada de identidades e gerenciamento do acesso de aplicativos. O Azure AD pode ser integrado ao Active Directory local para habilitar logon único para todos os aplicativos hospedados localmente e baseados em nuvem (local). Os atributos do usuário do Active Directory local podem ser sincronizados automaticamente com o Azure AD.
 
 Um único administrador global não é necessário para atribuir todas as permissões em um VDC. Em vez disso, cada departamento específico (grupo de usuários ou serviços no Serviço de Diretório) pode ter as permissões necessárias para gerenciar seus próprios recursos em um VDC. Estruturar permissões requer balanceamento. Um número excessivo de permissões pode prejudicar a eficiência de desempenho, enquanto permissões de menos ou não exigentes podem aumentar os riscos de segurança. O RBAC (Controle de Acesso Baseado em Função) do Azure ajuda a resolver esse problema oferecendo um gerenciamento de acesso refinado para recursos VDC.
 
@@ -82,15 +82,17 @@ A malha do Azure aloca recursos de infraestrutura a cargas de trabalho de locat�
 #### <a name="connectivity-to-the-cloud"></a>Conectividade com a nuvem
 O VDC precisa de conectividade com redes externas para oferecer serviços a clientes, parceiros e/ou usuários internos. Isso geralmente significa conectividade não apenas com a Internet, mas também com data centers e redes locais.
 
-Os clientes podem criar suas políticas de segurança para controlar o que e como os serviços hospedados do VDC específicos são acessíveis para/na Internet usando a Solução de Virtualização da Rede (com filtragem e inspeção do tráfego), políticas personalizadas de roteamento e filtragem de rede (Roteamento Definido pelo Usuário e Grupos de Segurança de Rede).
+Os clientes podem criar suas políticas de segurança para controlar o que e como os serviços hospedados do VDC específicos são acessíveis para/na Internet usando o [Firewall do Azure][AzFW] ou as Soluções de Virtualização de Rede, políticas personalizadas de roteamento e filtragem de rede ([Roteamento Definido pelo Usuário][UDR] e [Grupos de Segurança de Rede][NSG]). É recomendável que todos os recursos voltados para Internet sejam protegidos de forma adicional pela [**Proteção contra DDOS do Azure Standard**][DDOS].
 
 As empresas geralmente precisam conectar os VDCs a data centers locais ou outros recursos. A conectividade entre o Azure e redes locais é, portanto, um aspecto essencial ao projetar uma arquitetura eficaz. As empresas têm duas maneiras diferentes de criar uma interconexão entre o VDC e o local no Azure: trânsito pela Internet e/ou por conexões diretas privadas.
 
 Um [**VPN Site a Site do Azure**][VPN] é um serviço de interconexão pela Internet entre redes locais e o VDC, estabelecido por meio de conexões criptografadas seguras (túneis IPsec/IKE). A conexão Site a Site do Azure é flexível e rápida de criar e não requer nenhuma compra adicional, uma vez que todas as conexões são feitas pela Internet.
 
-[**ExpressRoute**][ExR] é um serviço de conectividade do Azure que permite criar conexões privadas entre o VDC e as redes locais. Conexões do ExpressRoute não passam pela Internet pública e oferecem maior segurança, confiabilidade e velocidades mais altas (até 10 Gbps), além de latência consistente. O ExpressRoute é muito útil para os VDCs, uma vez que os clientes do ExpressRoute podem aproveitar os benefícios das regras de conformidade associadas às conexões privadas.
+Para um grande número de conexões VPN, a [**WAN Virtual do Azure**][vWAN] é um serviço de rede que fornece conectividade otimizada e automatizada entre branches por meio do Azure. A WAN Virtual permite que você conecte e configure dispositivos de branch para se comunicar com o Azure. Isso pode ser feito manualmente ou usando dispositivos de provedor preferencial por meio de um parceiro de WAN Virtual. O uso de dispositivos de provedor preferencial facilitam o uso, simplificam a conectividade e permitem o gerenciamento da configuração. O painel interno de WAN do Azure fornece informações instantâneas de solução de problemas que podem ajudar você a economizar tempo e proporcionam uma maneira fácil de exibir conectividade site a site em larga escala.
 
-Implantar conexões do ExpressRoute envolve a interação com um provedor de serviços do ExpressRoute. Para os clientes que precisam iniciar rapidamente, é comum usar inicialmente o VPN Site a Site para estabelecer uma conectividade entre o VDC e os recursos locais, então migrar para a conexão do ExpressRoute.
+[**ExpressRoute**][ExR] é um serviço de conectividade do Azure que permite criar conexões privadas entre o VDC e as redes locais. Conexões do ExpressRoute não passam pela Internet pública e oferecem maior segurança, confiabilidade e velocidades mais altas (até 10 Gbps), além de latência consistente. O ExpressRoute é muito útil para os VDCs, uma vez que os clientes do ExpressRoute podem aproveitar os benefícios das regras de conformidade associadas às conexões privadas. Com o [ExpressRoute Direct][ExRD] é possível se conectar diretamente aos roteadores da Microsoft em 100Gbps para os clientes com maiores necessidades de largura de banda.
+
+Implantar conexões do ExpressRoute envolve normalmente a interação com um provedor de serviços do ExpressRoute. Para os clientes que precisam iniciar rapidamente, é comum usar inicialmente o VPN Site a Site para estabelecer a conectividade entre o VDC e os recursos locais, então migrar para a conexão do ExpressRoute quando a interconexão física com o provedor de serviços estiver concluída.
 
 #### <a name="connectivity-within-the-cloud"></a>*Conectividade na nuvem*
 [VNets][VNet] e [Emparelhamento VNet][VNetPeering] são serviços de conectividade de rede básicos em um VDC. Uma VNet garante um limite natural de isolamento para recursos de VDC e o emparelhamento VNet permite a intercomunicação entre diferentes VNets dentro da mesma região do Azure ou até mesmo entre regiões. Controle de tráfego em uma VNet e entre VNets precisa corresponder a um conjunto de regras de segurança especificado por meio de Listas de Controle de Acesso ([Grupo de Segurança de Rede][NSG]), [Soluções de Virtualização de Rede][NVA] e as tabelas de roteamento personalizadas ([UDR][UDR]).
@@ -107,7 +109,7 @@ O hub é a zona central que controla e inspeciona o tráfego de entrada e/ou sa�
 O hub contém os componentes de serviço comuns consumidos pelos spokes. Aqui estão alguns exemplos típicos de serviços centrais comuns:
 
 -   A infraestrutura do Microsoft Active Directory (com o serviço ADFS relacionado) necessária para a autenticação de usuário de terceiros acessando de redes não confiáveis antes de obterem acesso às cargas de trabalho no spoke
--   Um serviço DNS para resolver nomes para a carga de trabalho nos spokes, para acessar recursos locais e na Internet
+-   Um serviço DNS para resolver nomes para a carga de trabalho nos spokes, para acessar recursos locais e na Internet se o [DNS do Azure][DNS] não for usado
 -   Uma infraestrutura PKI para implementar logon único em cargas de trabalho
 -   Controle de fluxo (TCP/UDP) entre os spokes e a Internet
 -   Controle de fluxo entre o spoke e o local
@@ -120,7 +122,7 @@ A função de cada spoke pode ser hospedar diferentes tipos de cargas de trabalh
 #### <a name="subscription-limits-and-multiple-hubs"></a>Limites de assinatura e vários hubs
 No Azure, cada componente, seja qual for o tipo, é implantado em uma Assinatura do Azure. O isolamento dos componentes do Azure em diferentes assinaturas do Azure pode atender aos requisitos de diferentes LOBs, como configurar níveis diferenciados de acesso e autorização.
 
-Um único VDC pode ser dimensionado em muitos spokes, embora haja limites de plataformas, como acontece com todos os sistemas de TI. A implantação do hub está associada a uma assinatura específica do Azure, que tem restrições e limites (por exemplo, um número máximo de emparelhamentos de VNet – consulte [Assinatura do Azure e limites de serviço, cotas e restrições][Limits] para obter detalhes). Em casos em que os limites possam ser um problema, a arquitetura pode ser escalada verticalmente ainda mais estendendo o modelo de um único hub-spokes para um cluster de hub e spokes. Vários hubs em uma ou mais regiões do Azure podem ser interconectados usando Emparelhamento VNET, ExpressRoute ou VPN site a site.
+Um único VDC pode ser dimensionado em muitos spokes, embora haja limites de plataformas, como acontece com todos os sistemas de TI. A implantação do hub está associada a uma assinatura específica do Azure, que tem restrições e limites (por exemplo, um número máximo de emparelhamentos de VNet – consulte [Assinatura do Azure e limites de serviço, cotas e restrições][Limits] para obter detalhes). Em casos em que os limites possam ser um problema, a arquitetura pode ser escalada verticalmente ainda mais estendendo o modelo de um único hub-spokes para um cluster de hub e spokes. Vários hubs em uma ou mais regiões do Azure podem ser interconectados usando Emparelhamento VNET, ExpressRoute, WAN Virtual ou VPN site a site.
 
 [![2]][2]
 
@@ -187,7 +189,7 @@ Componentes da infraestrutura contêm a seguinte funcionalidade:
 -   [**Rede Virtual**][VPN]. As Redes Virtuais são um dos principais componentes de um VDC e permitem criar um limite de isolamento do tráfego na plataforma do Azure. Uma Rede Virtual é composta por um ou vários segmentos de rede virtual, cada um com um prefixo de rede IP específico (uma sub-rede). A rede Virtual define uma área de perímetro interna em que máquinas virtuais de IaaS e serviços de PaaS podem estabelecer uma comunicação privada. VMs (e serviços de PaaS) em uma rede virtual não podem se comunicar diretamente com VMs (e serviços de PaaS) em uma rede virtual diferente, mesmo se as duas redes virtuais forem criadas pelo mesmo cliente, na mesma assinatura. Isolamento é uma propriedade vital que garante que as VMs e as comunicações do cliente permaneçam privadas em uma rede virtual.
 -   [**UDR**][UDR]. O tráfego em uma Rede Virtual é roteado por padrão com base na tabela de roteamento do sistema. Uma Rota de Definição de Usuário é uma tabela de roteamento personalizada que administradores de rede podem associar a uma ou mais sub-redes para substituir o comportamento da tabela de roteamento do sistema e definir um caminho de comunicação em uma rede virtual. A presença de UDRs garante que o tráfego de saída spoke transite por VMs personalizadas específicas e/ou Dispositivos de Rede Virtual e balanceadores de carga presentes no hub e nos spokes.
 -   [**NSG**][NSG]. Um Grupo de Segurança de Rede é uma lista de regras de segurança que atuam como filtragem de tráfego em Fontes IP, Destino IP, Protocolos, portas de Origem IP e portas de Destino IP. O NSG pode ser aplicado a uma sub-rede, um cartão de NIC Virtual associado a uma VM do Azure ou ambos. Os NSGs são essenciais para implementar um controle de fluxo correto no hub e nos spokes. O nível de segurança proporcionada pelo NSG é uma função de quais portas você abre e para qual finalidade. Os clientes devem aplicar filtros adicionais por VM com os firewalls baseados em host, como IPtables ou o Firewall do Windows.
--   [**DNS**][DNS]. A resolução de nomes dos recursos nas VNets de um VDC é fornecida por meio do DNS. O Azure fornece serviços de DNS para [DNS][Público] e resolução de nomes[Privado][PrivateDNS]. As zonas privadas fornecem resolução de nomes em uma rede virtual e em redes virtuais. É possível ter zonas privadas que abrangem não apenas redes virtuais na mesma região, mas também regiões e assinaturas. Para resolução pública, o DNS do Azure fornece um serviço de hospedagem para domínios DNS, fornecendo resolução de nomes usando a infraestrutura do Microsoft Azure. Ao hospedar seus domínios no Azure, você pode gerenciar seus registros DNS usando as mesmas credenciais, APIs, ferramentas e cobrança que seus outros serviços do Azure.
+-   [**DNS**][DNS]. A resolução de nomes dos recursos nas VNets de um VDC é fornecida por meio do DNS. O Azure fornece serviços de DNS para resolução de nomes [Públicos][DNS] e [Privados][PrivateDNS]. As zonas privadas fornecem resolução de nomes em uma rede virtual e em redes virtuais. É possível ter zonas privadas que abrangem não apenas redes virtuais na mesma região, mas também regiões e assinaturas. Para resolução pública, o DNS do Azure fornece um serviço de hospedagem para domínios DNS, fornecendo resolução de nomes usando a infraestrutura do Microsoft Azure. Ao hospedar seus domínios no Azure, você pode gerenciar seus registros DNS usando as mesmas credenciais, APIs, ferramentas e cobrança que seus outros serviços do Azure.
 -   [**Assinatura**][SubMgmt] e [**Gerenciamento de Grupo de Recursos**][RGMgmt]. Uma assinatura define um limite natural para criar vários grupos de recursos no Azure. Recursos em uma assinatura são montados em conjunto em contêineres lógicos denominados Grupos de Recursos. O Grupo de Recursos representa um grupo lógico para organizar os recursos de um VDC.
 -   [**RBAC**][RBAC]. Por meio de RBAC, é possível mapear a função organizacional junto com direitos de acesso a recursos específicos do Azure, permitindo que você restrinja os usuários a somente um certo subconjunto de ações. Com RBAC, você pode conceder acesso ao atribuir a função apropriada a usuários, grupos e aplicativos no escopo relevante. O escopo de uma atribuição de função pode ser uma assinatura do Azure, um grupo de recursos ou um único recurso. RBAC permite a herança de permissões. Uma função atribuída a um escopo pai também concede acesso aos filhos contidos nele. Usando RBAC, você pode separar as tarefas e conceder aos usuários apenas o nível de acesso de que eles precisam para trabalhar. Por exemplo, use RBAC para permitir que um funcionário gerencie máquinas virtuais em uma assinatura, enquanto outro pode gerenciar bancos de dados SQL na mesma assinatura.
 -   [**Emparelhamento VNet**][VNetPeering]. O recurso fundamental usado para criar a infraestrutura de um VDC é o Emparelhamento VNet um mecanismo que conecta duas VNets (redes virtuais) na mesma região por meio da rede do data center do Azure ou usa o backbone internacional do Azure entre as regiões.
@@ -204,36 +206,42 @@ Os componentes de rede de perímetro fornecem os seguintes recursos:
 -   [Load Balancer][ALB]
 -   [Gateway de Aplicativo][AppGW] / [WAF][WAF]
 -   [IPs Públicos][PIP]
+-   [Azure Front Door][AFD]
+-   [Firewall do Azure][AzFW]
 
 Normalmente, as equipes de segurança e TI centrais têm a responsabilidade de definir requisitos e operações das redes de perímetro.
 
 [![7]][7]
 
-O diagrama anterior mostra a imposição de dois perímetros com acesso à Internet e uma rede local, ambos residentes no hub. Em um único hub, a rede de perímetro para a Internet pode ser escalada verticalmente para dar suporte a grandes números de LOBs, usando vários farms de WAFs (Firewalls de Aplicativo Web) e/ou firewalls.
+O diagrama anterior mostra a imposição de dois perímetros com acesso à Internet e uma rede local, ambos residentes nos hubs DMZ e vWAN. Em um hub DMZ, a rede de perímetro para a Internet pode ser escalada verticalmente para dar suporte a grandes números de LOBs, usando vários farms de WAFs (Firewalls de Aplicativo Web) e/ou Firewall do Azure. No hub vWAN, a conectividade altamente escalonável entre branches e do branch para o Azure é realizada por meio de VPN ou ExpressRoute, conforme necessário.
 
 [**Redes Virtuais**][VNet] O hub geralmente é criado em uma VNet com várias sub-redes para hospedar os diferentes tipos de serviços que filtram e inspecionam o tráfego de ou para a Internet por meio de NVAs, WAFs e Gateways de Aplicativo do Azure.
 
 [**UDR**][UDR] Usando UDR, os clientes podem implantar firewall, IDS/IPS e outras soluções de virtualização, além de rotear o tráfego de rede por meio dessas soluções de segurança para imposição de política, auditoria e inspeção de limite de segurança. Os UDRs podem ser criados no hub e nos spokes para assegurar que o tráfego passe por VMs personalizadas específicas, Soluções de Virtualização da Rede e balanceadores de carga usados pelo VDC. Para assegurar que o tráfego gerado de VMs residentes no spoke transite para as soluções de virtualização corretas, um UDR precisa ser definido nas sub-redes do spoke configurando o endereço IP de front-end do balanceador de carga interno como o próximo salto. O balanceador de carga interno distribui o tráfego interno para as soluções de virtualização (pool de back-end do balanceador de carga).
 
-[![8]][8]
+[**Firewall do Azure**][AzFW] é um serviço de segurança de rede gerenciado e baseado em nuvem que protege seus recursos de Rede Virtual do Azure. É um firewall totalmente com estado como serviço, com alta disponibilidade interna e escalabilidade de nuvem sem restrições. É possível criar, impor e registrar centralmente políticas de conectividade de rede e de aplicativo em assinaturas e redes virtuais. O Firewall do Azure usa um endereço IP público estático para seus recursos de rede virtual, permitindo que firewalls externos identifiquem o tráfego originário de sua rede virtual. O serviço é totalmente integrado ao Azure Monitor para registro em log e análise.
 
-[**Soluções de Virtualização de Rede**][NVA] No hub, a rede de perímetro com acesso à Internet normalmente é gerenciado por meio de um farm de firewalls e/ou WAFs (Firewalls de Aplicativo Web).
+[**Soluções de Virtualização de Rede**][NVA] No hub, a rede de perímetro com acesso à Internet normalmente é gerenciado por meio do Firewall do Azure ou de um farm de firewalls e/ou WAFs (Firewalls de Aplicativo Web).
 
 LOBs diferentes geralmente usam muitos aplicativos Web e esses aplicativos tendem a sofrer de diversas vulnerabilidades e explorações em potencial. Os Firewalls de Aplicativos Web são uma categoria especial de produto usada para detectar ataques contra aplicativos Web (HTTP/HTTPS) em mais profundidade que um firewall genérico. Em comparação à tecnologia de firewall tradicional, WAFs têm um conjunto de recursos específicos para proteger os servidores Web internos contra ameaças.
 
-Um farm de firewall é o grupo de firewalls que trabalha em conjunto sob a mesma administração comum, com um conjunto de regras de segurança para proteger as cargas de trabalho hospedadas em spokes e controlar o acesso a redes locais. Um farm de firewall tem software menos especializado comparado a um WAF, mas tem um escopo de aplicação mais amplo para filtrar e inspecionar qualquer tipo de tráfego de entrada e saída. Farms de firewall normalmente são implementados no Azure por meio de NVAs (Soluções de Virtualização de Rede), que estão disponíveis no Azure marketplace.
+Um Firewall do Azure ou farm de firewall do NVA usam um plano de administração comum, com um conjunto de regras de segurança para proteger as cargas de trabalho hospedadas em spokes e controlar o acesso a redes locais. O Firewall do Azure tem escalabilidade integrada, enquanto os firewalls do NVA podem ser dimensionados manualmente por um balanceador de carga. Normalmente, um farm de firewall tem software menos especializado comparado a um WAF, mas tem um escopo de aplicação mais amplo para filtrar e inspecionar qualquer tipo de tráfego de entrada e saída. Se for usada uma abordagem de NVA, ela pode ser localizada e implantada no Azure Marketplace.
 
-É recomendável usar um conjunto de NVAs para tráfego originado na Internet e outro para o tráfego originado localmente. Usar apenas um conjunto de NVAs para ambos é um risco à segurança, uma vez que ele não oferece nenhuma segurança de perímetro entre os dois conjuntos de tráfego de rede. Usar NVAs separadas reduz a complexidade de verificar as regras de segurança e deixa claro quais regras correspondem a quais solicitações de rede de entrada.
+É recomendável usar um conjunto de Firewall do Azure (ou NVAs) para tráfego originado na Internet e outro para o tráfego originado localmente. Usar apenas um conjunto de firewalls para ambos é um risco à segurança, uma vez que ele não oferece nenhuma segurança de perímetro entre os dois conjuntos de tráfego de rede. Usar camadas de firewall separadas reduz a complexidade de verificar as regras de segurança e deixa claro quais regras correspondem a quais solicitações de rede de entrada.
 
-A maioria das grandes empresas gerencia vários domínios. Um DNS do Azure pode ser usado para hospedar os registros DNS para um domínio específico. Como exemplo, o VIP (endereço IP virtual) do balanceador externo de carga do Azure (ou WAFs) pode ser registrado no registro A de um registro de DNS do Azure.
+A maioria das grandes empresas gerencia vários domínios. Um [**DNS do Azure**][DNS] pode ser usado para hospedar os registros DNS para um domínio específico. Como exemplo, o VIP (endereço IP virtual) do balanceador externo de carga do Azure (ou WAFs) pode ser registrado no registro A de um registro de DNS do Azure. O [**DNS privado**][PrivateDNS] também está disponível para gerenciar os espaços de endereço privado dentro de VNets.
 
 [**Azure Load Balancer**][ALB] O Azure Load Balancer oferece um serviço de Camada 4 (TCP, UDP) alta disponibilidade, que pode distribuir o tráfego de entrada entre instâncias de serviço definidas em um conjunto com balanceamento de carga. O tráfego enviado ao balanceador de carga de pontos de extremidade de front-end (pontos de extremidade IP públicos ou pontos de extremidade IP privados) pode ser redistribuído com ou sem conversão de endereços para um pool de endereços IP de back-end (exemplos são Soluções de Virtualização de Rede ou VMs).
 
 O Azure Load Balancer também pode investigar a integridade de várias instâncias de servidor e quando uma investigação falha em responder, o balanceador de carga para de enviar tráfego para a instância não íntegra. Em um VDC, temos a presença de um balanceador de carga externo no hub (por exemplo, balancear o tráfego para NVAs) e nos spokes (para realizar tarefas como o balanceamento do tráfego entre diferentes VMs de um aplicativo com várias camadas).
 
+O [**Azure Front Door**][AFD] (AFD) é a Plataforma de Aceleração de Aplicativos da Web altamente disponível e escalonável da Microsoft, o Balanceador de Carga HTTP Global, a Proteção de Aplicativos e a Rede de Distribuição de Conteúdo. Em execução em mais de 100 locais com a Rede Global Edge da Microsoft, o AFD permite compilar, operar e escalar horizontalmente seu aplicativo da web dinâmico e o conteúdo estático. O AFD fornece seu aplicativo com o desempenho do usuário final de alto nível, automação de manutenção regional/carimbo unificada, automação de BCDR, informações unificadas de cliente/usuário, insights de serviço e caching. A plataforma oferece SLAs de desempenho, confiabilidade e suporte, certificações de conformidade e práticas de segurança auditáveis desenvolvidas, operadas e com suporte nativo pelo Azure.
+
 [**Gateway de Aplicativo**][AppGW] O Gateway de Aplicativo do Microsoft Azure é uma solução de virtualização dedicada que fornece o ADC (controlador de entrega de aplicativos) como um serviço, oferecendo vários recursos de balanceamento de carga de camada 7 para o seu aplicativo. Ele permite que você otimize a produtividade do Web farm descarregando a terminação SSL com uso intensivo de CPU para o Gateway de Aplicativo. Ele também fornece outros recursos de roteamento de camada 7, incluindo distribuição round robin do tráfego de entrada, afinidade de sessão, roteamento com base no caminho de URL e a capacidade de hospedar vários sites por trás de um único Gateway de Aplicativo baseado em cookie. Um WAF (firewall do aplicativo Web) também é fornecido como parte da SKU do WAF do gateway de aplicativo. Essa SKU oferece proteção para aplicativos Web contra explorações e vulnerabilidades comuns da Web. O Gateway de Aplicativo pode ser configurado como um gateway voltado para a Internet, um gateway apenas interno ou uma combinação de ambos. 
 
 [**IPs públicos**][PIP] Alguns recursos do Azure permitem associar pontos de extremidade de serviço a um endereço IP público que permite que seu recurso seja acessado pela Internet. Esse ponto de extremidade usa NAT (Conversão de Endereços de Rede) para rotear o tráfego para a porta e endereço internos na rede virtual do Azure. Esse caminho é a principal rota para que o tráfego externo passe para dentro da rede virtual. Os endereços IP Públicos podem ser configurados pelo usuário para determinar qual tráfego é passado para dentro e como e onde ele é convertido para a rede virtual.
+
+[**Proteção contra DDoS do Azure Standard**][DDOS] fornece funcionalidades de mitigação adicionais à camada de [serviço Básica][DDOS] ajustadas especificamente para os recursos de Rede Virtual do Azure. A Proteção contra DDoS Standard é simples de habilitar e não exige nenhuma alteração no aplicativo. Políticas de proteção são ajustadas por meio do monitoramento de tráfego dedicado e algoritmos de aprendizado de máquina. As políticas aplicadas a Endereços IP Públicos associados aos recursos implantados em redes virtuais, como instâncias do Azure Load Balancer, Gateway de Aplicativo do Azure e Azure Service Fabric. A telemetria em tempo real está disponível por meio de exibições do Azure Monitor durante um ataque e para fins de histórico. Proteções de camada de aplicativo podem ser adicionadas por meio do Firewall do Aplicativo Web do Gateway de Aplicativo do Azure. A proteção é fornecida para endereços IP públicos IPv4 do Azure.
 
 #### <a name="component-type-monitoring"></a>Tipo de componente: monitoramento
 Componentes de monitoramento oferecem visibilidade e alertas de todos os outros tipos de componentes. Todas as equipes devem ter acesso ao monitoramento para os componentes e serviços aos quais elas têm acesso. Se você tiver um equipes de operações ou suporte técnico centralizada, ela precisará ter acesso integrado aos dados fornecidos por esses componentes.
@@ -260,6 +268,20 @@ Todos os logs podem ser armazenados nas Contas de Armazenamento do Azure para fi
 Grandes empresas já devem ter adquirido uma estrutura padrão para monitorar sistemas locais e podem estender essa estrutura para integrar logs gerados por implantações de nuvem. Para organizações que desejam manter todo o registro na nuvem, o[Log Analytics][../log-analytics/log-analytics-overview .md] é uma ótima escolha. Como o Log Analytics é implementado como um serviço baseado em nuvem, é possível colocá-lo em funcionamento com investimentos mínimos em serviços de infraestrutura. O Log Analytics também pode integrar-se a componentes do System Center, como System Center Operations Manager, para estender seus investimentos atuais em gerenciamento para a nuvem.
 
 O Log Analytics é um serviço no Azure que ajuda a coletar, correlacionar, pesquisar e agir quanto a dados de desempenho e log gerados por sistemas operacionais, aplicativos e componentes de infraestrutura de nuvem. Ele dá aos clientes informações operacionais em tempo real usando uma pesquisa integrada e painéis personalizados para analisar todos os registros em todas as cargas de trabalho em um VDC.
+
+[Observador de Rede do Azure][NetWatch] fornece ferramentas para monitorar, diagnosticar, exibir métricas e ativar ou desativar os registros de recursos em uma rede virtual do Azure. É um serviço multifacetado que permite as seguintes funcionalidades e muito mais:
+-    Monitorar a comunicação entre uma máquina virtual e um ponto de extremidade
+-    Exibir recursos em uma rede virtual e suas relações
+-    Diagnosticar problemas de filtragem de tráfego de erro para ou de uma VM
+-    Diagnosticar problemas de roteamento de rede de uma VM
+-    Diagnosticar de conexão de saída de uma máquina virtual
+-    Capturar pacotes para e de uma máquina virtual
+-    Diagnosticar problemas com conexões e gateway de rede Virtual do Azure
+-    Determinar as latências relativas entre regiões do Microsoft Azure e provedores de serviços de internet
+-    Exibir regras de segurança para um adaptador de rede
+-    Exibir métricas de rede
+-    Analisar o tráfego de ou para um grupo de segurança de rede
+-    Exibir logs de diagnóstico para recursos de rede
 
 A solução [NPM (Monitor de Desempenho de Rede)][NPM] dentro do OMS pode fornecer informações de rede detalhadas de ponta a ponta, incluindo uma exibição única das redes do Azure e das redes locais. Com monitores específicos para ExpressRoute e serviços públicos.
 
@@ -328,17 +350,15 @@ Os seguintes recursos foram discutidos neste documento. Clique nos links para sa
 | | | |
 |-|-|-|
 |Recursos de rede|Balanceamento de Carga|Conectividade|
-|[Redes Virtuais do Azure][VNet]</br>[Grupos de segurança de rede][NSG]</br>[Logs do NSG][NSGLog]</br>[Roteamento Definido pelo Usuário][UDR]</br>[Soluções de Virtualização de Rede][NVA]</br>[Endereços IP Públicos][PIP]</br>[DNS]|[Azure Load Balancer (L3) ][ALB]</br>[Gateway de Aplicativo (L7) ][AppGW]</br>[Firewall do Aplicativo Web][WAF]</br>[Gerenciador de Tráfego do Azure][TM] |[Emparelhamento VNet][VNetPeering]</br>[Rede Privada Virtual][VPN]</br>[ExpressRoute][ExR]
+|[Redes Virtuais do Azure][VNet]</br>[Grupos de segurança de rede][NSG]</br>[Logs do NSG][NSGLog]</br>[Roteamento Definido pelo Usuário][UDR]</br>[Soluções de Virtualização de Rede][NVA]</br>[Endereços IP Públicos][PIP]</br>[Azure DDOS][DDOS]</br>[Firewall do Azure][AzFW]</br>[DNS do Azure][DNS]|[Azure Front Door][AFD]</br>[Azure Load Balancer (L3) ][ALB]</br>[Gateway de Aplicativo (L7) ][AppGW]</br>[Firewall do Aplicativo Web][WAF]</br>[Gerenciador de Tráfego do Azure][TM]</br></br></br></br></br> |[Emparelhamento VNet][VNetPeering]</br>[Rede Privada Virtual][VPN]</br>[WAN Virtual][vWAN]</br>[ExpressRoute][ExR]</br>[ExpressRoute Direct][ExRD]</br></br></br></br></br>
 |Identidade</br>|Monitoramento</br>|Práticas Recomendadas</br>|
-|[Azure Active Directory][AAD]</br>[Autenticação Multifator][MFA]</br>[Controles de Acesso Baseados em Função][RBAC]</br>[Funções Padrão do AAD][Roles] |[Azure Monitor][Monitor]</br>[Logs de Atividade][ActLog]</br>[Logs de Diagnóstico][DiagLog]</br>[Microsoft Operations Management Suite][OMS]</br>[Monitor de Desempenho de Rede][NPM]|[Práticas Recomendadas de Redes de Perímetro][DMZ]</br>[Gerenciamento de Assinaturas][SubMgmt]</br>[Gerenciamento de Grupo de Recursos][RGMgmt]</br>[Limites de Assinatura do Azure][Limits] |
+|[Azure Active Directory][AAD]</br>[Autenticação Multifator][MFA]</br>[Controles de Acesso Baseados em Função][RBAC]</br>[Funções padrão do Azure AD][Roles]</br></br></br> |[Observador de Rede][NetWatch]</br>[Azure Monitor][Monitor]</br>[Logs de Atividade][ActLog]</br>[Logs de Diagnóstico][DiagLog]</br>[Microsoft Operations Management Suite][OMS]</br>[Monitor de Desempenho de Rede][NPM]|[Práticas Recomendadas de Redes de Perímetro][DMZ]</br>[Gerenciamento de Assinaturas][SubMgmt]</br>[Gerenciamento de Grupo de Recursos][RGMgmt]</br>[Limites de Assinatura do Azure][Limits] </br></br></br>|
 |Outros serviços do Azure|
 |[Aplicativos Web do Azure][WebApps]</br>[HDInsights (Hadoop) ][HDI]</br>[Hubs de Eventos][EventHubs]</br>[Barramento de Serviço][ServiceBus]|
 
-
-
 ## <a name="next-steps"></a>Próximas etapas
  - Explore o [Emparelhamento de VNet][VNetPeering], a tecnologia de base para os designs de hub e spoke do VDC
- - Implemente o [AAD][AAD] para começar a usar a exploração de [RBAC][RBAC]
+ - Implemente o [Azure AD][AAD] para começar a usar a exploração de [RBAC][RBAC]
  - Desenvolva um modelo de gerenciamento de Assinatura e Recurso e um modelo de RBAC para atender à estrutura, aos requisitos e às políticas da sua organização. A atividade mais importante é o planejamento. Tanto quanto possível, planeje reorganizações, fusões, novas linhas de produto etc.
 
 <!--Image References-->
@@ -367,13 +387,18 @@ Os seguintes recursos foram discutidos neste documento. Clique nos links para sa
 [MFA]: /azure/multi-factor-authentication/multi-factor-authentication
 [AAD]: /azure/active-directory/active-directory-whatis
 [VPN]: /azure/vpn-gateway/vpn-gateway-about-vpngateways 
-[ExR]: /azure/expressroute/expressroute-introduction 
+[ExR]: /azure/expressroute/expressroute-introduction
+[ExRD]: https://docs.microsoft.com/en-us/azure/expressroute/expressroute-erdirect-about
+[vWAN]: /azure/virtual-wan/virtual-wan-about
 [NVA]: /azure/architecture/reference-architectures/dmz/nva-ha
+[AzFW]: /azure/firewall/overview
 [SubMgmt]: /azure/architecture/cloud-adoption/appendix/azure-scaffold 
 [RGMgmt]: /azure/azure-resource-manager/resource-group-overview
 [DMZ]: /azure/best-practices-network-security
 [ALB]: /azure/load-balancer/load-balancer-overview
+[DDOS]: /azure/virtual-network/ddos-protection-overview
 [PIP]: /azure/virtual-network/resource-groups-networking#public-ip-address
+[AFD]: https://docs.microsoft.com/en-us/azure/frontdoor/front-door-overview
 [AppGW]: /azure/application-gateway/application-gateway-introduction
 [WAF]: /azure/application-gateway/application-gateway-web-application-firewall-overview
 [Monitor]: /azure/monitoring-and-diagnostics/
@@ -382,8 +407,10 @@ Os seguintes recursos foram discutidos neste documento. Clique nos links para sa
 [NSGLog]: /azure/virtual-network/virtual-network-nsg-manage-log
 [OMS]: /azure/operations-management-suite/operations-management-suite-overview
 [NPM]: /azure/log-analytics/log-analytics-network-performance-monitor
+[NetWatch]: /azure/network-watcher/network-watcher-monitoring-overview
 [WebApps]: /azure/app-service/
 [HDI]: /azure/hdinsight/hdinsight-hadoop-introduction
 [EventHubs]: /azure/event-hubs/event-hubs-what-is-event-hubs 
 [ServiceBus]: /azure/service-bus-messaging/service-bus-messaging-overview
 [TM]: /azure/traffic-manager/traffic-manager-overview
+

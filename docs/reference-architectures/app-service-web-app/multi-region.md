@@ -4,12 +4,12 @@ description: Arquitetura recomendada para aplicativo Web com alta disponibilidad
 author: MikeWasson
 ms.date: 11/23/2016
 cardTitle: Run in multiple regions
-ms.openlocfilehash: 2efcc591695e1c592053ea32832fe15e624df2e1
-ms.sourcegitcommit: c4106b58ad08f490e170e461009a4693578294ea
+ms.openlocfilehash: 5493deea871f25fb6ea3531a22d92d83916930b1
+ms.sourcegitcommit: 62945777e519d650159f0f963a2489b6bb6ce094
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 08/10/2018
-ms.locfileid: "43016072"
+ms.lasthandoff: 10/09/2018
+ms.locfileid: "48876791"
 ---
 # <a name="run-a-web-application-in-multiple-regions"></a>Execute um aplicativo Web em várias regiões
 [!INCLUDE [header](../../_includes/header.md)]
@@ -96,7 +96,7 @@ O Gerenciador de Tráfego fará failover automaticamente se a região principal 
 
 Para saber mais, consulte [Sobre o monitoramento do Gerenciador de Tráfego][tm-monitoring].
 
-O Gerenciador de Tráfego é um possível ponto de falha no sistema. Se o serviço falhar, os clientes não poderão acessar seu aplicativo durante o tempo de inatividade. Examine o [SLA (Contrato de Nível de Serviço) do Gerenciador de Tráfego][tm-sla] e determine se usar apenas o Gerenciador de Tráfego atende aos seus requisitos de negócios para alta disponibilidade. Caso contrário, considere adicionar outra solução de gerenciamento de tráfego como um failback. Se o serviço do Gerenciador de Tráfego do Azure falhar, altere os registros CNAME (nome canônico) no DNS para apontar para outro serviço de gerenciamento de tráfego. Esta etapa deve ser executada manualmente e seu aplicativo estará indisponível até que as alterações de DNS sejam propagadas.
+O Gerenciador de Tráfego é um possível ponto de falha no sistema. Se o serviço falhar, os clientes não poderão acessar seu aplicativo durante o tempo de inatividade. Examine o [SLA (Contrato de Nível de Serviço) do Gerenciador de Tráfego][tm-sla] e determine se usar apenas o Gerenciador de Tráfego atende aos seus requisitos de negócios para alta disponibilidade. Caso contrário, considere adicionar outra solução de gerenciamento de tráfego como um fallback. Se o serviço do Gerenciador de Tráfego do Azure falhar, altere os registros CNAME (nome canônico) no DNS para apontar para outro serviço de gerenciamento de tráfego. Esta etapa deve ser executada manualmente e seu aplicativo estará indisponível até que as alterações de DNS sejam propagadas.
 
 ### <a name="sql-database"></a>Banco de dados SQL
 O RPO (objetivo de ponto de recuperação) e o ERT (tempo de recuperação estimado) para o Banco de Dados SQL estão documentados na [Visão geral de continuidade de negócios com o Banco de Dados SQL do Microsoft Azure][sql-rpo]. 
@@ -165,6 +165,6 @@ Se o banco de dados primário falhar, realize um failover manual para o banco de
 [tm-monitoring]: /azure/traffic-manager/traffic-manager-monitoring
 [tm-ps]: /powershell/module/azurerm.trafficmanager
 [tm-routing]: /azure/traffic-manager/traffic-manager-routing-methods
-[tm-sla]: https://azure.microsoft.com/support/legal/sla/traffic-manager/v1_0/
-[traffic-manager]: https://azure.microsoft.com/services/traffic-manager/
+[tm-sla]: https://azure.microsoft.com/support/legal/sla/traffic-manager
+[traffic-manager]: https://azure.microsoft.com/services/traffic-manager
 [visio-download]: https://archcenter.blob.core.windows.net/cdn/app-service-reference-architectures.vsdx

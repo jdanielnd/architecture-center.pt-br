@@ -1,14 +1,14 @@
 ---
 title: Processamento de pedidos escalonável no Azure
-description: Cenário de exemplo para a criação de um pipeline de processamento de pedidos altamente escalonável usando o Azure Cosmos DB.
+description: Crie um pipeline de processamento de pedidos altamente escalonável usando o Azure Cosmos DB.
 author: alexbuckgit
 ms.date: 07/10/2018
-ms.openlocfilehash: aa7281263db7cc72781b740941f3b86dad025baa
-ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
+ms.openlocfilehash: fe642ffde733914389c36c5be50f35d242a22edf
+ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/11/2018
-ms.locfileid: "44389104"
+ms.lasthandoff: 10/05/2018
+ms.locfileid: "48818506"
 ---
 # <a name="scalable-order-processing-on-azure"></a>Processamento de pedidos escalonável no Azure
 
@@ -18,7 +18,7 @@ Esse cenário possui uma abordagem de fornecimento de eventos, usando um modelo 
 
 Usar serviços gerenciados do Azure, como o Cosmos DB e o HDInsight pode ajudar a reduzir os custos ao aproveitar a experiência da Microsoft em armazenamento e recuperação de dados distribuído globalmente na nuvem. Esse cenário trata especificamente de um cenário de varejo ou de comércio eletrônico; se você tiver outras necessidades de serviços de dados, você deve analisar a lista de [serviços de banco de dados inteligente totalmente gerenciados no Azure][product-category] disponíveis.
 
-## <a name="related-use-cases"></a>Casos de uso relacionados
+## <a name="relevant-use-cases"></a>Casos de uso relevantes
 
 Considere este cenário para os casos de uso a seguir:
 
@@ -29,7 +29,7 @@ Considere este cenário para os casos de uso a seguir:
 
 ## <a name="architecture"></a>Arquitetura
 
-![Exemplo de arquitetura para um pipeline de processamento de pedidos escalonável][architecture-diagram]
+![Exemplo de arquitetura para um pipeline de processamento de pedidos escalonável][architecture]
 
 Essa arquitetura fornece detalhes sobre os principais componentes de um pipeline de processamento de pedidos. O fluxo de dados neste cenário ocorre da seguinte forma:
 
@@ -37,18 +37,18 @@ Essa arquitetura fornece detalhes sobre os principais componentes de um pipeline
 2. Cada mensagem de evento é ingerida e mapeada para um comando específico de um conjunto definido de comandos por um microsserviço do processador de comandos. O processador de comandos recupera qualquer estado atual relevante para executar o comando de um banco de dados de instantâneo de fluxo de eventos. O comando é então executado e a saída do comando é emitida como um novo evento.
 3. Cada evento emitido como a saída de um comando está confirmado em um banco de dados de fluxo de eventos usando o Cosmos DB.
 4. Para cada inserção de banco de dados ou atualização confirmada no banco de dados de fluxo de eventos, um evento é gerado pelo feed de alterações do Cosmos DB. Os sistemas downstream podem assinar qualquer tópico de evento que seja relevantes para esse sistema.
-5. Todos os eventos do feed de alterações do Cosmos DB também são enviados a um microsserviço de fluxo de evento de instantâneo, que calcula as alterações de estado causadas por eventos que ocorreram. O novo estado é então confirmado no banco de dados de instantâneo de fluxo de eventos armazenado no Cosmos DB.  O banco de dados de instantâneo fornece uma fonte de dados distribuída globalmente e com baixa latência para o estado atual de todos os elementos de dados. O banco de dados de fluxo de eventos fornece um registro completo de todas as mensagens de evento que passaram por meio da arquitetura, que permite cenários de recuperação de desastre, solução de problemas e testes robustos.  
+5. Todos os eventos do feed de alterações do Cosmos DB também são enviados a um microsserviço de fluxo de evento de instantâneo, que calcula as alterações de estado causadas por eventos que ocorreram. O novo estado é então confirmado no banco de dados de instantâneo de fluxo de eventos armazenado no Cosmos DB. O banco de dados de instantâneo fornece uma fonte de dados distribuída globalmente e com baixa latência para o estado atual de todos os elementos de dados. O banco de dados de fluxo de eventos fornece um registro completo de todas as mensagens de evento que passaram por meio da arquitetura, que permite cenários de recuperação de desastre, solução de problemas e testes robustos.
 
 ### <a name="components"></a>Componentes
 
-* O [Cosmos DB][docs-cosmos-db] é um serviço de banco de dados multimodelo distribuído globalmente da Microsoft projetado para permitir que você dimensione suas soluções de forma elástica e independente a taxa de transferência e armazenamento em qualquer número de regiões geográficas. Ele oferece garantias de taxa de transferência, disponibilidade, latência e consistência com contratos de nível de serviço (SLAs) abrangentes. Esse cenário usa o Cosmos DB para os armazenamentos do fluxo de eventos e de instantâneos, e aproveita os [recursos do Feed de Alterações do Cosmos DB][docs-cosmos-db-change-feed] para fornecer consistência de dados e recuperação de falhas.
-* [Apache Kafka no HDInsight] [ docs-kafka] é uma implementação de serviço gerenciado do Apache Kafka, uma plataforma de streaming distribuída de software livre para criar aplicativos e pipelines de dados de streaming em tempo real. O Kafka também fornece funcionalidade de agente de mensagem semelhante a uma fila de mensagens, para publicar e assinar os fluxos de dados nomeados. Esse cenário usa Kafka para processar a entrada, bem como eventos downstream no pipeline de processamento de pedidos. 
+* O [Cosmos DB](/azure/cosmos-db/introduction) é um serviço de banco de dados de vários modelos distribuído globalmente da Microsoft, que permite dimensionar soluções de forma elástica e independente a taxa de transferência e armazenamento em qualquer número de regiões geográficas. Ele oferece garantias de taxa de transferência, disponibilidade, latência e consistência com contratos de nível de serviço (SLAs) abrangentes. Esse cenário usa o Cosmos DB para os armazenamentos do fluxo de eventos e de instantâneos, e aproveita os [recursos do Feed de Alterações do Cosmos DB][docs-cosmos-db-change-feed] para fornecer consistência de dados e recuperação de falhas.
+* [Apache Kafka no HDInsight](/azure/hdinsight/kafka/apache-kafka-introduction) é uma implementação de serviço gerenciado do Apache Kafka, uma plataforma de streaming distribuída de software livre para criar aplicativos e pipelines de dados de streaming em tempo real. O Kafka também fornece funcionalidade de agente de mensagem semelhante a uma fila de mensagens, para publicar e assinar os fluxos de dados nomeados. Esse cenário usa Kafka para processar a entrada, bem como eventos downstream no pipeline de processamento de pedidos. 
 
 ## <a name="considerations"></a>Considerações
 
-Muitas opções de tecnologia estão disponíveis para ingestão de mensagens em tempo real, armazenamento de dados, processamento de fluxo, armazenamento de dados analíticos, análise e relatórios. Para obter uma visão geral dessas opções, seus recursos e os principais critérios de seleção, confira [Arquiteturas de Big Data: processamento em tempo real](/azure/architecture/data-guide/technology-choices/real-time-ingestion) no [Guia de Arquitetura de Dados do Azure](/azure/architecture/data-guide/).
+Muitas opções de tecnologia estão disponíveis para ingestão de mensagens em tempo real, armazenamento de dados, processamento de fluxo, armazenamento de dados analíticos, análise e relatórios. Para obter uma visão geral dessas opções, seus recursos e os principais critérios de seleção, confira [Arquiteturas de Big Data: processamento em tempo real](/azure/architecture/data-guide/technology-choices/real-time-ingestion) no [Guia de Arquitetura de Dados do Azure](/azure/architecture/data-guide).
 
-Microsserviços se tornaram um estilo popular de arquitetura para criar aplicativos de nuvem resilientes, altamente escalonáveis, implantáveis independentemente e capazes de evoluir rapidamente. Os microsserviços exigem uma abordagem diferente para o design e criação de aplicativos. Ferramentas como o Docker, Kubernetes, Azure Service Fabric e Nomad permitem o desenvolvimento de arquiteturas baseadas em microsserviços. Para obter orientação sobre a criação e execução de uma arquitetura baseada em microsserviços, consulte [Criando microsserviços no Azure](/azure/architecture/microservices/) no Azure Architecture Center.
+Microsserviços se tornaram um estilo popular de arquitetura para criar aplicativos de nuvem resilientes, altamente escalonáveis, implantáveis independentemente e capazes de evoluir rapidamente. Os microsserviços exigem uma abordagem diferente para o design e criação de aplicativos. Ferramentas como o Docker, Kubernetes, Azure Service Fabric e Nomad permitem o desenvolvimento de arquiteturas baseadas em microsserviços. Para obter orientações sobre como criar e executar uma arquitetura baseada em microsserviços, confira [Criando microsserviços no Azure] (/azure/architecture/microservices), no Centro de Arquitetura do Azure.
 
 ### <a name="availability"></a>Disponibilidade
 
@@ -67,7 +67,7 @@ Para outros considerações sobre escalabilidade, confira a [lista de verificaç
 
 ### <a name="security"></a>Segurança
 
-O [modelo de segurança do Cosmos DB](/azure/cosmos-db/secure-access-to-data) autentica os usuários e fornece acesso a dados e recursos. Para obter mais informações, consulte a [segurança de banco de dados do Cosmos DB](/en-us/azure/cosmos-db/database-security).
+O [modelo de segurança do Cosmos DB](/azure/cosmos-db/secure-access-to-data) autentica os usuários e fornece acesso a dados e recursos. Para obter mais informações, consulte a [segurança de banco de dados do Cosmos DB](/azure/cosmos-db/database-security).
 
 Para obter orientação geral sobre como criar soluções seguras, confira a [Documentação de segurança do Azure][security].
 
@@ -77,7 +77,7 @@ A arquitetura de fornecimento de eventos e as tecnologias associadas no cenário
 
 ## <a name="pricing"></a>Preços
 
-Para explorar o custo da execução dessa cenário, todos os serviços são pré-configurados na calculadora de custos.  Para ver como o preço seria alterado em seu cenário específico, altere as variáveis apropriadas de acordo com o volume de dados esperado. Para este cenário, o preço de exemplo inclui apenas o Cosmos DB e um cluster do Kafka para o processamento de eventos gerados a partir do feed de alterações do Cosmos DB. Processadores de evento e microsserviços para outros sistemas de downstream e sistemas de origem não são incluídos e seu custo é altamente dependente da quantidade e da escala desses serviços, bem como das tecnologias escolhidas para implementá-los.
+Para explorar o custo da execução dessa cenário, todos os serviços são pré-configurados na calculadora de custos. Para ver como o preço seria alterado em seu cenário específico, altere as variáveis apropriadas de acordo com o volume de dados esperado. Para este cenário, o preço de exemplo inclui apenas o Cosmos DB e um cluster do Kafka para o processamento de eventos gerados a partir do feed de alterações do Cosmos DB. Processadores de evento e microsserviços para outros sistemas de downstream e sistemas de origem não são incluídos e seu custo é altamente dependente da quantidade e da escala desses serviços, bem como das tecnologias escolhidas para implementá-los.
 
 A moeda do Azure Cosmos DB é a unidade de solicitação (RU). Com unidades de solicitação, você não precisa reservar capacidade de leitura/gravação ou provisão da CPU, memória e IOPS. Banco de dados do Azure Cosmos dá suporte a várias APIs que têm diferentes operações, desde simples lê e grava a consultas complexas de gráfico. Porque nem todas as solicitações forem iguais, as solicitações são atribuídas a uma quantidade normalizada de unidades de solicitação com base na quantidade de computação necessária para atender à solicitação. O número de unidades de solicitação necessários para sua solução depende do tamanho do elemento de dados e do número de banco de dados das operações de leitura e gravação por segundo. Para obter mais informações, confira [Unidades de solicitação no Azure Cosmos DB](/azure/cosmos-db/request-units). Esses preços estimados se baseiam no Cosmos DB em execução em duas regiões do Azure.
 
@@ -92,29 +92,26 @@ Fornecemos três perfis de custo de exemplo com base na quantidade de tráfego e
 Este cenário de exemplo se baseia em uma versão mais extensa dessa arquitetura criada no [Jet.com](https://jet.com) para seu pipeline de processamento de pedidos de ponta a ponta. Para obter mais informações, consulte o [perfil de cliente técnico jet.com][source-document] e [apresentação do jet.com no Build 2018][source-presentation].
 
 Outros recursos relacionados incluem:
-* _[Designing Data-Intensive Applications](https://dataintensive.net/)_ por Martin Kleppmann (O'Reilly Media, 2017).
+* _[Designing Data-Intensive Applications](https://dataintensive.net)_ por Martin Kleppmann (O'Reilly Media, 2017).
 * _[Domain Modeling Made Functional: Tackle Software Complexity with Domain-Driven Design and F#](https://pragprog.com/book/swdddf/domain-modeling-made-functional)_ por Scott Wlaschin (Pragmatic Programmers LLC, 2018).
 * Outros [casos de uso do Cosmos DB][docs-cosmos-db-use-cases]
-* [Arquitetura de processamento em tempo real](/azure/architecture/data-guide/big-data/real-time-processing) no [Guia de arquitetura de dados do Azure](/azure/architecture/data-guide/)
+* [Arquitetura de processamento em tempo real](/azure/architecture/data-guide/big-data/real-time-processing), no [Guia de arquitetura de dados do Azure](/azure/architecture/data-guide).
 
 <!-- links -->
+[architecture]: ./media/architecture-ecommerce-order-processing.png
 [product-category]: https://azure.microsoft.com/product-categories/databases/
-[source-document]: https://customers.microsoft.com/en-us/story/jet-com-powers-innovative-e-commerce-engine-on-azure-in-less-than-12-months
+[source-document]: https://customers.microsoft.com/story/jet-com-powers-innovative-e-commerce-engine-on-azure-in-less-than-12-months
 [source-presentation]: https://channel9.msdn.com/events/Build/2018/BRK3602
 [small-pricing]: https://azure.com/e/3d43949ffbb945a88cc0a126dc3a0e6e
 [medium-pricing]: https://azure.com/e/1f1e7bf2a6ad4f7799581211f4369b9b
 [large-pricing]: https://azure.com/e/75207172ece94cf6b5fb354a2252b333
-[architecture-diagram]: ./media/architecture-diagram-cosmos-db.png
-[docs-cosmos-db]: /azure/cosmos-db
 [docs-cosmos-db-change-feed]: /azure/cosmos-db/change-feed
 [docs-cosmos-db-regional-failover]: /azure/cosmos-db/regional-failover
 [docs-cosmos-db-guarantees]: /azure/cosmos-db/distribute-data-globally#AvailabilityGuarantees
 [docs-cosmos-db-use-cases]: /azure/cosmos-db/use-cases
-[docs-kafka]: /azure/hdinsight/kafka/apache-kafka-introduction
 [docs-kafka-high-availability]: /azure/hdinsight/kafka/apache-kafka-high-availability
 [docs-event-hubs]: /azure/event-hubs/event-hubs-what-is-event-hubs
 [docs-stream-analytics]: /azure/stream-analytics/stream-analytics-introduction
-[docs-blob-storage]: /azure/storage/blobs/storage-blobs-introduction
 [availability]: /azure/architecture/checklist/availability
 [scalability]: /azure/architecture/checklist/scalability
 [resiliency]: /azure/architecture/patterns/category/resiliency/

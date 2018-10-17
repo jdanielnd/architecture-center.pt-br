@@ -1,22 +1,22 @@
 ---
 title: Front-end de comércio eletrônico no Azure
-description: Cenário comprovado de hospedagem de um site de comércio eletrônico no Azure
+description: Hospede um site de comércio eletrônico no Azure.
 author: masonch
 ms.date: 7/13/18
-ms.openlocfilehash: 340f60628bf932489a9fbd11ac3ff1be723a685c
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: 6ca85665a5bf63bf71f5badc16406db5df2a34c2
+ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428067"
+ms.lasthandoff: 10/05/2018
+ms.locfileid: "48819084"
 ---
-# <a name="e-commerce-frontend-on-azure"></a>Front-end de comércio eletrônico no Azure
+# <a name="an-e-commerce-front-end-on-azure"></a>Um front-end de comércio eletrônico no Azure
 
 Este exemplo de cenário orienta você para uma implementação de um front-end de comércio eletrônico usando ferramentas do Azure de plataforma como um serviço (PaaS). Muitos sites de comércio eletrônico enfrentam sazonalidade e variabilidade de tráfego ao longo do tempo. Quando a demanda dos seus produtos ou serviços aumenta, seja de forma previsível ou imprevisível, usar ferramentas PaaS permitirá lidar com mais cliente mais transações automaticamente. Além disso, este cenário aproveita a economia de nuvem pagando somente a capacidade que usar.
 
 Este documento ajudará você a aprender sobre os vários componentes de PaaS do Azure e as considerações usadas para implantar um aplicativo de comércio eletrônico de exemplo, *Relecloud Concerts*, uma plataforma de emissão de tíquetes para shows.
 
-## <a name="potential-use-cases"></a>Possíveis casos de uso
+## <a name="relevant-use-cases"></a>Casos de uso relevantes
 
 Considere este cenário para os casos de uso a seguir:
 
@@ -25,7 +25,7 @@ Considere este cenário para os casos de uso a seguir:
 
 ## <a name="architecture"></a>Arquitetura
 
-![Arquitetura do cenário de exemplo para um aplicativo de comércio eletrônico][architecture-diagram]
+![Arquitetura do cenário de exemplo para um aplicativo de comércio eletrônico][architecture]
 
 Este cenário aborda tíquetes de compras de um site de comércio eletrônico, o fluxo de dados neste ocorre da seguinte maneira:
 
@@ -69,7 +69,7 @@ Outras opções para a camada da Web e funções incluem:
 
 Outras opções para a camada de dados incluem:
 
-* [Cosmos DB][docs-cosmosdb] - Banco de dados multimodelo globalmente distribuído da Microsoft. Isso fornece uma plataforma para executar outros modelos de dados, como Mongo DB, Cassandra, dados do Graph ou armazenamento de tabela simples.
+* [Cosmos DB](/azure/cosmos-db/introduction): banco de dados multimodelo globalmente distribuído da Microsoft. Isso fornece uma plataforma para executar outros modelos de dados, como Mongo DB, Cassandra, dados do Graph ou armazenamento de tabela simples.
 
 ## <a name="considerations"></a>Considerações
 
@@ -120,11 +120,11 @@ Fornecemos três perfis de custo de exemplo com base na quantidade de tráfego q
 * [eShop no exemplo de referência de contêineres][microservices-ecommerce]
 
 <!-- links -->
+[architecture]: ./media/architecture-ecommerce-scenario.png
 [small-pricing]: https://azure.com/e/90fbb6a661a04888a57322985f9b34ac
 [medium-pricing]: https://azure.com/e/38d5d387e3234537b6859660db1c9973
 [large-pricing]: https://azure.com/e/f07f99b6c3134803a14c9b43fcba3e2f
 [app-service-reference-architecture]: ../../reference-architectures/app-service-web-app/basic-web-app.md
-[architecture-diagram]: ./media/architecture-diagram-ecommerce-solution.png
 [availability]: /azure/architecture/checklist/availability
 [circuit-breaker]: /azure/architecture/patterns/circuit-breaker
 [design-patterns-availability]: /azure/architecture/patterns/category/availability
@@ -136,7 +136,6 @@ Fornecemos três perfis de custo de exemplo com base na quantidade de tráfego q
 [docs-cdn]: /azure/cdn/cdn-overview
 [docs-container-instances]: /azure/container-instances/
 [docs-kubernetes-service]: /azure/aks/
-[docs-cosmosdb]: /azure/cosmos-db/
 [docs-functions]: /azure/azure-functions/functions-overview
 [docs-redis-cache]: /azure/redis-cache/cache-overview
 [docs-search]: /azure/search/search-what-is-azure-search
@@ -154,6 +153,6 @@ Fornecemos três perfis de custo de exemplo com base na quantidade de tráfego q
 [resiliency-app-service]: /azure/architecture/checklist/resiliency-per-service#app-service
 [resiliency]: /azure/architecture/checklist/resiliency
 [scalability]: /azure/architecture/checklist/scalability
-[secure-development]: https://www.microsoft.com/en-us/SDL/process/design.aspx
+[secure-development]: https://www.microsoft.com/SDL/process/design.aspx
 [sql-geo-replication]: /azure/sql-database/sql-database-geo-replication-overview
 [storage-geo-redudancy]: /azure/storage/common/storage-redundancy-grs

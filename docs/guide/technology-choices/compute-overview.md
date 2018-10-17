@@ -3,12 +3,12 @@ title: Visão geral das opções de computação do Azure
 description: Visão geral das opções de computação do Azure
 author: MikeWasson
 ms.date: 06/13/2018
-ms.openlocfilehash: ceb70f8eeff42e6cadb8a63c2f36986f26322201
-ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
+ms.openlocfilehash: cb59c4472b183d9a14031497f0b6db673938c9a9
+ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 06/19/2018
-ms.locfileid: "36206492"
+ms.lasthandoff: 10/05/2018
+ms.locfileid: "48818812"
 ---
 # <a name="overview-of-azure-compute-options"></a>Visão geral das opções de computação do Azure
 
@@ -18,7 +18,7 @@ O termo *computação* refere-se ao modelo de hospedagem para os recursos de com
 
 Em uma extremidade do espectro está a **Infraestrutura como serviço (IaaS)**. Com o IaaS, você provisiona as VMs de que precisa, juntamente com componentes associados de rede e armazenamento. Depois implante os software e aplicativos que desejar nas VMs. Esse modelo é o mais próximo a um ambiente local tradicional, com a exceção de que a Microsoft gerencia a infraestrutura. Você ainda gerencia as VMs individuais.  
 
-A **Plataforma como serviço** (PaaS) fornece um ambiente de hospedagem gerenciado, no qual você pode implantar seu aplicativo sem a necessidade de gerenciar VMs ou recursos de rede. Por exemplo, em vez de criar VMs individuais, você especifica uma contagem de instâncias, e o serviço vai provisionar, configurar e gerenciar os recursos necessários. O Serviço de Aplicativo do Azure é um exemplo de um serviço de PaaS.
+A **Plataforma como serviço (PaaS)** fornece um ambiente de hospedagem gerenciado, no qual você pode implantar seu aplicativo sem a necessidade de gerenciar VMs ou recursos de rede. Por exemplo, em vez de criar VMs individuais, você especifica uma contagem de instâncias, e o serviço vai provisionar, configurar e gerenciar os recursos necessários. O Serviço de Aplicativo do Azure é um exemplo de um serviço de PaaS.
 
 Há uma variedade de IaaS para PaaS puro. Por exemplo, VMs do Azure podem dimensionar automaticamente usando Conjuntos de Dimensionamento de VMs. Esse recurso de dimensionamento automático não é estritamente de PaaS, mas é do tipo de recurso de gerenciamento que pode ser encontrado em um serviço de PaaS.
 

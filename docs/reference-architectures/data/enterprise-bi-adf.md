@@ -3,12 +3,12 @@ title: Enterprise BI automatizada com o SQL Data Warehouse e Azure Data Factory
 description: Automatizar um fluxo de trabalho ELT no Azure usando o Azure Data Factory
 author: MikeWasson
 ms.date: 07/01/2018
-ms.openlocfilehash: ffd75ba8c57a9afbc6abad61f21f738c644c9bc8
-ms.sourcegitcommit: 58d93e7ac9a6d44d5668a187a6827d7cd4f5a34d
+ms.openlocfilehash: f004c02da93335e74b07b9720236832ad7f744db
+ms.sourcegitcommit: 62945777e519d650159f0f963a2489b6bb6ce094
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/02/2018
-ms.locfileid: "37142261"
+ms.lasthandoff: 10/09/2018
+ms.locfileid: "48876895"
 ---
 # <a name="automated-enterprise-bi-with-sql-data-warehouse-and-azure-data-factory"></a>Enterprise BI automatizada com o SQL Data Warehouse e Azure Data Factory
 
@@ -37,7 +37,7 @@ A arquitetura consiste nos componentes a seguir.
 
 **Armazenamento de Blobs**. O armazenamento de blobs é usado como uma área de preparo dos dados de origem antes de carregá-los no SQL Data Warehouse.
 
-**SQL Data Warehouse do Azure**. O [SQL Data Warehouse](/azure/sql-data-warehouse/) é um sistema distribuído projetado para executar uma análise em grandes quantidades de dados. Ele dá suporte a MPP (processamento altamente paralelo), que o torna adequado para executar análise de alto desempenho. 
+**SQL Data Warehouse do Azure**. O [SQL Data Warehouse](/azure/sql-data-warehouse/) é um sistema distribuído projetado para executar uma análise em grandes quantidades de dados. O uso que ele faz do MPP (processamento altamente paralelo) o torna adequado para a execução de análises de alto desempenho. 
 
 **Azure Data Factory**. O [Data Factory][adf] é um serviço gerenciado que orquestra e automatiza a movimentação e a transformação de dados. Nessa arquitetura, ele coordena os diversos estágios do processo de ELT.
 
@@ -70,7 +70,7 @@ Começando com o SQL Server 2016, você pode usar [tabelas temporais](/sql/relat
 > [!NOTE]
 > Para versões anteriores do SQL Server, você pode usar a CDC ([Captura de Dados de Alterações](/sql/relational-databases/track-changes/about-change-data-capture-sql-server)). Essa abordagem é menos conveniente do que as tabelas temporais porque você tem de consultar uma tabela separada, e as alterações são controladas por um número de sequência de log em vez de um carimbo de data/hora. 
 
-Tabelas temporais são úteis para dados de dimensão, os quais podem ser alterados ao longo do tempo. Tabelas de fatos geralmente representam uma transação imutável, como uma venda, caso em que não faz sentido manter o histórico de versão do sistema. Em vez disso, as transações normalmente contam com uma coluna que representa a data da transação, que pode ser usada como o valor de marca d'água. Por exemplo, no banco de dados de OLTP de Wide World Importers, as tabelas Sales.Invoices e Sales.InvoiceLines têm um campo `LastEditedWhen` que é padrão para `sysdatetime()`. 
+Tabelas temporais são úteis para dados de dimensão, os quais podem ser alterados ao longo do tempo. Tabelas de fatos geralmente representam uma transação imutável, como uma venda, caso em que não faz sentido manter o histórico de versão do sistema. Em vez disso, as transações normalmente contam com uma coluna que representa a data da transação, que pode ser usada como o valor de marca d'água. Por exemplo, no banco de dados OLTP da Wide World Importers, as tabelas Sales.Invoices e Sales.InvoiceLines têm um campo `LastEditedWhen` que é padrão para `sysdatetime()`. 
 
 Aqui está o fluxo geral para o pipeline ELT:
 
@@ -194,7 +194,7 @@ Uma implantação para essa arquitetura de referência está disponível em [Git
   * Uma instância do Azure Analysis Services.
   * O Azure Data Factory e o pipeline do Data Factory para o trabalho ELT.
 
-### <a name="prerequisites"></a>pré-requisitos
+### <a name="prerequisites"></a>Pré-requisitos
 
 [!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 

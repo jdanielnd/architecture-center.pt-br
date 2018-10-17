@@ -3,12 +3,12 @@ title: Aplicativo de N camadas com Apache Cassandra
 description: Como executar VMs do Linux para uma arquitetura de N camadas no Microsoft Azure.
 author: MikeWasson
 ms.date: 05/03/2018
-ms.openlocfilehash: 9c186527a7f7980a5232186a52f9b0089612226f
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: 2c5a80309e5d4d180cc83422de0b462c8dffcd90
+ms.sourcegitcommit: 62945777e519d650159f0f963a2489b6bb6ce094
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429020"
+ms.lasthandoff: 10/09/2018
+ms.locfileid: "48876912"
 ---
 # <a name="n-tier-application-with-apache-cassandra"></a>Aplicativo de N camadas com Apache Cassandra
 

@@ -1,50 +1,50 @@
 ---
-title: SAP para cargas de trabalho de desenvolvimento/teste
-description: Cenário SAP para um ambiente de desenvolvimento/teste
+title: Ambientes de desenvolvimento/teste para cargas de trabalho do SAP no Azure
+description: Crie um ambiente de desenvolvimento/teste para cargas de trabalho do SAP.
 author: AndrewDibbins
 ms.date: 7/11/18
-ms.openlocfilehash: d0f266e40969cf4782e69041889a686387499722
-ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
+ms.openlocfilehash: b47e4cb527d3e4ecd74bee7bcf08f2794da56d6c
+ms.sourcegitcommit: 62945777e519d650159f0f963a2489b6bb6ce094
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/11/2018
-ms.locfileid: "44389172"
+ms.lasthandoff: 10/09/2018
+ms.locfileid: "48876778"
 ---
-# <a name="sap-for-devtest-workloads"></a>SAP para cargas de trabalho de desenvolvimento/teste
+# <a name="devtest-environments-for-sap-workloads-on-azure"></a>Ambientes de desenvolvimento/teste para cargas de trabalho do SAP no Azure
 
-Este exemplo fornece orientações sobre como executar uma implementação de desenvolvimento/teste do SAP NetWeaver em um ambiente Windows ou Linux no Azure. O banco de dados usado é o AnyDB, o termo SAP para qualquer DBMS compatível (que não seja SAP HANA). Como essa arquitetura foi projetada para ambientes que não são de produção, ele é implantado com somente uma máquina virtual (VM) e o seu tamanho pode ser alterado para acomodar as necessidades da sua organização.
+Este exemplo mostra como estabelecer um ambiente de desenvolvimento/teste do SAP NetWeaver em um ambiente Windows ou Linux no Azure. O banco de dados usado é o AnyDB, o termo SAP para qualquer DBMS compatível (que não seja SAP HANA). Como essa arquitetura foi projetada para ambientes que não são de produção, ele é implantado com somente uma máquina virtual (VM) e o seu tamanho pode ser alterado para acomodar as necessidades da sua organização.
 
 Para casos de uso de produção veja as arquiteturas SAP de referência disponíveis abaixo:
 
-* [SAP Netweaver para AnyDB][sap-netweaver]
-* [SAP S/4Hana][sap-hana]
+* [SAP NetWeaver para AnyDB][sap-netweaver]
+* [SAP S/4HANA][sap-hana]
 * [SAP em instâncias grandes do Azure][sap-large]
 
-## <a name="related-use-cases"></a>Casos de uso relacionados
+## <a name="relevant-use-cases"></a>Casos de uso relevantes
 
 Considere este cenário para os casos de uso a seguir:
 
 * Cargas de trabalho do SAP não críticas e que não são de produção (área restrita, desenvolvimento, teste, garantia de qualidade)
-* Cargas de trabalho não críticas do SAP Business One
+* Cargas de trabalho de negócios não críticas do SAP
 
 ## <a name="architecture"></a>Arquitetura
 
-![Diagrama](media/sap-2tier/SAP-Infra-2Tier_finalversion.png)
+![Diagrama de arquitetura para ambientes de desenvolvimento/teste para cargas de trabalho do SAP](media/architecture-sap-dev-test.png)
 
-Este cenário cobre o provisionamento de um banco de dados do sistema SAP individual e um Servidor de Aplicativos do SAP em uma única máquina virtual, o fluxo de dados ocorre da seguinte forma neste cenário:
+Este cenário demonstra o provisionamento de um único banco de dados do sistema do SAP e o servidor de aplicativos SAP em uma única máquina virtual. O fluxo de dados neste cenário ocorre da seguinte forma:
 
-1. Os clientes da camada de apresentação utilizam a GUI do SAP ou outras interfaces de usuário (Internet Explorer, Excel ou outro aplicativo Web) locais para acessar o sistema SAP baseado no Azure.
-2. A conectividade é fornecida por meio do uso do Express Route estabelecido. A conexão do Express Route é terminada no Azure no gateway do Express Route. O tráfego de rede é roteado através do gateway do Express Route para a sub-rede do gateway e desta para a sub-rede spoke da camada de aplicativo (consulte o padrão [hub-spoke][hub-spoke] pattern) e através de um gateway de segurança de rede até a máquina virtual do aplicativo SAP.
+1. Os clientes usam a interface do usuário do SAP ou outras ferramentas de cliente (Excel, um navegador da Web ou outro aplicativo Web) para acessar o sistema SAP com base no Azure.
+2. A conectividade é fornecida por meio do uso do ExpressRoute estabelecido. A conexão do ExpressRoute é terminada no Azure no gateway do ExpressRoute. O tráfego de rede é roteado pelo gateway do ExpressRoute para a sub-rede do gateway e desta para a sub-rede spoke da camada de aplicativo (confira o padrão [hub-spoke][hub-spoke]) e por um gateway de segurança de rede até a máquina virtual do aplicativo SAP.
 3. Os servidores de gerenciamento de identidade oferecem serviços de autenticação.
 4. A caixa de atalhos oferece recursos de gerenciamento local.
 
 ### <a name="components"></a>Componentes
 
-* [Grupos de recursos](/azure/azure-resource-manager/resource-group-overview#resource-groups) são contêineres lógicos para recursos do Azure.
-* [Redes virtuais](/azure/virtual-network/virtual-networks-overview) são a base das comunicações de rede no Azure
-* [Máquinas virtuais](/azure/virtual-machines/windows/overview) no Azure oferecem uma infraestrutura sob demanda, de alta capacidade de dimensionamento, virtualizada que usa um servidor Windows ou Linux
-* [Express Route](/azure/expressroute/expressroute-introduction) permite estender as redes locais na nuvem da Microsoft para uma conexão privada facilitada por um provedor de conectividade.
+* As [Redes Virtuais](/azure/virtual-network/virtual-networks-overview) são a base das comunicações de rede no Azure.
+* As [Máquinas Virtuais](/azure/virtual-machines/windows/overview) do Azure oferecem uma infraestrutura sob demanda, de alta capacidade de dimensionamento, virtualizada que usa um servidor Windows ou Linux.
+* O [ExpressRoute](/azure/expressroute/expressroute-introduction) permite que você estenda suas redes locais até a nuvem da Microsoft por meio de conexão privada facilitada por um provedor de conectividade.
 * [Grupo de segurança de rede](/azure/virtual-network/security-overview) permite limitar o tráfego de rede para recursos em uma rede virtual. Um grupo de segurança de rede contém uma lista de regras de segurança que permitem ou negam o tráfego de rede de entrada ou saída com base no endereço IP de origem ou destino, na porta e no protocolo. 
+* Os [Grupos de Recursos](/azure/azure-resource-manager/resource-group-overview#resource-groups) atuam como contêineres lógicos para recursos do Azure.
 
 ## <a name="considerations"></a>Considerações
 
@@ -66,9 +66,9 @@ Para obter diretrizes gerais sobre como criar soluções resilientes, confira [P
 
 ## <a name="pricing"></a>Preços
 
-Explore o custo de executar esse cenário, todos os serviços são pré-configurados na calculadora de custos.  Para ver como o preço seria alterado para o seu uso específico altere as variáveis apropriadas para que eles sejam correspondentes ao tráfego esperada.
+Para ajudá-lo a explorar o custo da execução nesse cenário, todos os serviços são pré-configurados nos exemplos de calculadora de custos abaixo. Para ver como o preço seria alterado em seu caso de uso específico, altere as variáveis apropriadas de acordo com o tráfego esperado.
 
-Fornecemos quatro exemplos de perfis de custo com base na quantidade de tráfego que você espera obter:
+Fornecemos quatro exemplos de perfis de custo com base na quantidade de tráfego que você espera receber:
 
 |Tamanho|SAPs|Tipo de VM|Armazenamento|Calculadora de Preços do Azure|
 |----|----|-------|-------|---------------|
@@ -77,7 +77,8 @@ Fornecemos quatro exemplos de perfis de custo com base na quantidade de tráfego
 grande|32000|E32s_v3|3xP20, 1xP10|[Grande](https://azure.com/e/ada2e849d68b41c3839cc976000c6931)|
 Extra grande|64000|M64s|4xP20, 1xP10|[Extra grande](https://azure.com/e/975fb58a965c4fbbb54c5c9179c61cef)|
 
-Observação: o preço é um guia e indica apenas os custos de armazenamento e VMs (exclui cobranças de rede, armazenamento de backup e entrada/saída de dados).
+> [!NOTE]
+> Esse preço é um guia que indica somente as VMs e os custos de armazenamento. Isso exclui rede, armazenamento de backup e encargos de entrada/saída de dados.
 
 * [Pequeno](https://azure.com/e/9d26b9612da9466bb7a800eab56e71d1): um sistema pequeno é composto por uma VM do tipo D8s_v3 com 8x vCPUs, 32 GB de RAM e 200 GB de armazenamento temporário, além de dois discos de armazenamento premium de 512 GB e um de 128 GB.
 * [Médio](https://azure.com/e/465bd07047d148baab032b2f461550cd): um sistema médio é composto por uma VM do tipo D16s_v3 com 16x vCPUs, 64 GB de RAM e 400 GB de armazenamento temporário, além de três discos de armazenamento premium de 512 GB e um de 128 GB.
@@ -86,16 +87,16 @@ Observação: o preço é um guia e indica apenas os custos de armazenamento e V
 
 ## <a name="deployment"></a>Implantação
 
-Para implantar a infraestrutura subjacente semelhante ao cenário acima, use o botão de implantação
+Clique aqui para implantar a infraestrutura subjacente para esse cenário.
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Fsolution-architectures%2Fmaster%2Fapps%2Fsap-2tier%2Fazuredeploy.json" target="_blank">
-    <img src="http://azuredeploy.net/deploybutton.png"/>
+    <img src="https://azuredeploy.net/deploybutton.png"/>
 </a>
 
-\*O SAP não será automaticamente instalado, instale-o manualmente após a infraestrutura ser compilada.
+> [!NOTE]
+> SAP e Oracle não são instalados durante essa implantação. Você deve implantar esses componentes separadamente.
 
 <!-- links -->
-[reference architecture]:  /azure/architecture/reference-architectures/sap
 [resiliency]: /azure/architecture/resiliency/
 [security]: /azure/security/
 [scalability]: /azure/architecture/checklist/scalability
