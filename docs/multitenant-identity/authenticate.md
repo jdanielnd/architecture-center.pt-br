@@ -6,12 +6,12 @@ ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: tailspin
 pnp.series.next: claims
-ms.openlocfilehash: e85817626675cec4d126921c19a31a0983ecd62d
-ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
+ms.openlocfilehash: 70f4a96369c207740400b9dfe72e1e964507f729
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/08/2017
-ms.locfileid: "26359248"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428118"
 ---
 # <a name="authenticate-using-azure-ad-and-openid-connect"></a>Autentique usando o Azure AD e o OpenID Connect
 
@@ -61,7 +61,7 @@ app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions {
 Observe que algumas das configurações são obtidas de opções de configuração no tempo de execução. Estes são os significados das opções de middleware:
 
 * **ClientId**. ID do cliente do aplicativo, que você obteve ao registrar o aplicativo no Azure AD.
-* **Autoridade**. No caso do aplicativo de multilocatário, defina como `https://login.microsoftonline.com/common/`. Essa é a URL do ponto de extremidade comum do Azure AD e ela permite que usuários de qualquer locatário do Azure AD entrem. Para saber mais sobre o ponto de extremidade comum, confira [esta postagem do blog](http://www.cloudidentity.com/blog/2014/08/26/the-common-endpoint-walks-like-a-tenant-talks-like-a-tenant-but-is-not-a-tenant/).
+* **Autoridade**. No caso do aplicativo de multilocatário, defina como `https://login.microsoftonline.com/common/`. Essa é a URL do ponto de extremidade comum do Azure AD e ela permite que usuários de qualquer locatário do Azure AD entrem. Para saber mais sobre o ponto de extremidade comum, confira [esta postagem do blog](https://www.cloudidentity.com/blog/2014/08/26/the-common-endpoint-walks-like-a-tenant-talks-like-a-tenant-but-is-not-a-tenant/).
 * Em **TokenValidationParameters**, defina **ValidateIssuer** como false. Isso significa que o aplicativo será responsável pela validação do valor do emissor no token de ID. (O middleware ainda valida o token em si.) Para obter mais informações sobre a validação do emissor, consulte [Validação do emissor](claims.md#issuer-validation).
 * **PostLogoutRedirectUri**. Especifique uma URL para redirecionar os usuários após a saída. Essa deve ser uma página que permite que solicitações anônimas &mdash; normalmente a página inicial.
 * **SignInScheme**. Defina isso como `CookieAuthenticationDefaults.AuthenticationScheme`. Essa configuração significa que, após a autenticação do usuário, as declarações de usuário são armazenadas localmente em um cookie. Esse cookie diz como o usuário permanece conectado durante a sessão do navegador.

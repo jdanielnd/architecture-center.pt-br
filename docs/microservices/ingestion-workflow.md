@@ -3,12 +3,12 @@ title: Ingestão e fluxo de trabalho em microsserviços
 description: Ingestão e fluxo de trabalho em microsserviços
 author: MikeWasson
 ms.date: 12/08/2017
-ms.openlocfilehash: 6477c3f2b0cc6d37dcd4637dc0dde4f7a6e3cc74
-ms.sourcegitcommit: 94c769abc3d37d4922135ec348b5da1f4bbcaa0a
+ms.openlocfilehash: 1851d979ed23b35046474f299128064d1abb375e
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/13/2017
-ms.locfileid: "26678723"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429478"
 ---
 # <a name="designing-microservices-ingestion-and-workflow"></a>Criando microsserviços: ingestão e fluxo de trabalho
 
@@ -58,7 +58,7 @@ Com uma fila, um consumidor individual poderá remover uma mensagem da fila e o 
 
 Os Hubs de Eventos, por outro lado, usam a semântica de streaming. Os consumidores leem o fluxo de forma independente em seu próprio ritmo. Cada consumidor é responsável por manter o controle da sua posição atual no fluxo. Um consumidor deve gravar sua posição atual no armazenamento persistente em um intervalo predefinido. Dessa forma, se o consumidor apresentar uma falha (por exemplo, falhas do consumidor ou do host), uma nova instância poderá retomar a leitura do fluxo da última posição gravada. Esse processo é chamado *ponto de verificação*. 
 
-Por motivos de desempenho, um consumidor normalmente não realiza o ponto de verificação depois de cada mensagem. Em vez disso, ele realiza o ponto de verificação em um intervalo fixo, por exemplo, depois de processar *n* mensagens ou a cada *n* segundos. Como consequência, se um consumidor falhar, alguns eventos poderão ser processados duas vezes, porque uma nova instância sempre continuará do último ponto de verificação. Há dois lados da mesma moeda: pontos de verificação frequentes podem prejudicar o desempenho, mas pontos de verificação esparsos significam que você reproduzirá mais eventos após uma falha.  
+Por motivos de desempenho, um consumidor normalmente não realiza o ponto de verificação depois de cada mensagem. Em vez disso, realiza o ponto de verificação em um intervalo fixo, por exemplo, depois de processar *n* mensagens ou a cada *n* segundos. Como consequência, se um consumidor falhar, alguns eventos poderão ser processados duas vezes, porque uma nova instância sempre continuará do último ponto de verificação. Há dois lados da mesma moeda: pontos de verificação frequentes podem prejudicar o desempenho, mas pontos de verificação esparsos significam que você reproduzirá mais eventos após uma falha.  
 
 ![](./images/stream-semantics.png)
  
@@ -83,7 +83,7 @@ No aplicativo de entrega por drone, um lote de mensagens pode ser processado em 
 
 ### <a name="iothub-react"></a>IoTHub React 
 
-O [IoTHub React](https://github.com/Azure/toketi-iothubreact) é uma biblioteca do Akka Streams para a leitura de eventos do Hub de Eventos. O Akka Streams é uma estrutura de programação baseada em fluxo que implementa a especificação [Reactive Streams](http://www.reactive-streams.org/). Ele fornece uma maneira de criar pipelines de streaming eficientes, em que todas as operações de streaming são executadas de maneira assíncrona e o pipeline manipula normalmente a pressão de retorno. A pressão de retorno ocorre quando uma origem do evento gera eventos mais rapidamente que os consumidores downstream podem recebê-los, o que ocorre exatamente quando o sistema de entrega por drone tem um pico de tráfego. Se os serviços de back-end ficarem mais lentos, o IoTHub React também ficará lento. Se a capacidade for aumentada, o IoTHub React enviará por push mais mensagens pelo pipeline.
+O [IoTHub React](https://github.com/Azure/toketi-iothubreact) é uma biblioteca do Akka Streams para a leitura de eventos do Hub de Eventos. O Akka Streams é uma estrutura de programação baseada em fluxo que implementa a especificação [Reactive Streams](https://www.reactive-streams.org/). Ele fornece uma maneira de criar pipelines de streaming eficientes, em que todas as operações de streaming são executadas de maneira assíncrona e o pipeline manipula normalmente a pressão de retorno. A pressão de retorno ocorre quando uma origem do evento gera eventos mais rapidamente que os consumidores downstream podem recebê-los, o que ocorre exatamente quando o sistema de entrega por drone tem um pico de tráfego. Se os serviços de back-end ficarem mais lentos, o IoTHub React também ficará lento. Se a capacidade for aumentada, o IoTHub React enviará por push mais mensagens pelo pipeline.
 
 O Akka Streams também é um modelo de programação muito natural para o streaming de eventos dos Hubs de Eventos. Em vez de fazer um loop por meio de um lote de eventos, você definirá um conjunto de operações que serão aplicadas a cada evento e deixara que o Akka Streams manipule o streaming. O Akka Streams define um pipeline de streaming em termos de *Origens*, de *Fluxos* e de *Coletores*. Uma origem gera um fluxo de saída, um fluxo processa um fluxo de entrada e produz um fluxo de saída e um coletor consome um fluxo sem produzir nenhuma saída.
 

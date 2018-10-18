@@ -4,12 +4,12 @@ description: Diretriz específica de serviço para configurar o mecanismo de rep
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 790c933458717f2cb4cde0741b1d22f6ae89cc39
-ms.sourcegitcommit: 8ec48a0e2c080c9e2e0abbfdbc463622b28de2f2
+ms.openlocfilehash: c5a9bc99c4693f35c38dabcf07b3465add6a8cb1
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 08/18/2018
-ms.locfileid: "43016085"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429530"
 ---
 # <a name="retry-guidance-for-specific-services"></a>Repetir as diretrizes para serviços específicos
 
@@ -149,7 +149,7 @@ A configuração de política varia segundo o idioma. Para obter mais detalhes, 
 ## <a name="azure-redis-cache"></a>Cache Redis do Azure
 O Cache Redis do Azure é um serviço de cache de baixa latência e acesso a dados rápido com base no Cache Redis de software livre popular. Ele é seguro, gerenciado pela Microsoft e pode ser acessado de qualquer aplicativo no Azure.
 
-A diretriz nesta seção se baseia em como usar o cliente StackExchange.Redis para acessar o cache. Uma lista de outros clientes adequados pode ser encontrada no [site do Redis](http://redis.io/clients), e eles podem ter mecanismos de repetição diferentes.
+A diretriz nesta seção se baseia em como usar o cliente StackExchange.Redis para acessar o cache. Uma lista de outros clientes adequados pode ser encontrada no [site do Redis](https://redis.io/clients), e eles podem ter mecanismos de repetição diferentes.
 
 Observe que o cliente StackExchange.Redis usa multiplexação por meio de uma única conexão. O uso recomendado é criar uma instância do cliente na inicialização do aplicativo e usar essa instância para todas as operações no cache. Por esse motivo, a conexão com o cache é feita apenas uma vez, e toda a orientação desta seção está relacionada à política de repetição para esta conexão inicial, e não para cada operação que acessa o cache.
 
@@ -202,7 +202,7 @@ A tabela a seguir mostra as configurações padrão da política de repetição 
 | ConfigurationOptions |ConnectRetry<br /><br />ConnectTimeout<br /><br />SyncTimeout<br /><br />ReconnectRetryPolicy |3<br /><br />Máximo de 5000 ms mais SyncTimeout<br />1000<br /><br />LinearRetry 5.000 ms |O número de vezes para repetir tentativas de conexão durante a operação de conexão inicial.<br />Tempo limite (ms) para operações de conexão. Não é um intervalo entre tentativas de repetição.<br />Tempo (ms) para permitir operações síncronas.<br /><br />Repita a cada 5.000 ms.|
 
 > [!NOTE]
-> Em operações síncronas, `SyncTimeout` pode adicionar à latência de ponta a ponta, porém definir o valor muito baixo pode causar tempos limite excessivos. Confira [Como solucionar problemas do Cache Redis do Azure][redis-cache-troubleshoot]. Em geral, evite usar operações síncronas e use operações assíncronas. Para saber mais, consulte [Pipelines e multiplexadores](http://github.com/StackExchange/StackExchange.Redis/blob/master/Docs/PipelinesMultiplexers.md).
+> Em operações síncronas, `SyncTimeout` pode adicionar à latência de ponta a ponta, porém definir o valor muito baixo pode causar tempos limite excessivos. Confira [Como solucionar problemas do Cache Redis do Azure][redis-cache-troubleshoot]. Em geral, evite usar operações síncronas e use operações assíncronas. Para saber mais, consulte [Pipelines e multiplexadores](https://github.com/StackExchange/StackExchange.Redis/blob/master/docs/PipelinesMultiplexers.md).
 >
 >
 
@@ -323,10 +323,10 @@ namespace RetryCodeSamples
 }
 ```
 
-Para obter mais exemplos, consulte [Configuração](http://github.com/StackExchange/StackExchange.Redis/blob/master/Docs/Configuration.md#configuration) no site do projeto.
+Para obter mais exemplos, consulte [Configuração](https://github.com/StackExchange/StackExchange.Redis/blob/master/docs/Configuration.md) no site do projeto.
 
 ### <a name="more-information"></a>Mais informações
-* [Site do Redis](http://redis.io/)
+* [Site do Redis](https://redis.io/)
 
 ## <a name="azure-search"></a>Azure Search
 O Azure Search pode ser usada para adicionar recursos potentes e sofisticados a um site ou aplicativo, ajustar os resultados da pesquisa de maneira rápida e fácil, bem como construir modelos de classificação avançados e ajustados.
@@ -341,10 +341,10 @@ Rastreamento com o ETW ou por meio de registro de um provedor de rastreamento pe
 O Barramento de Serviço é uma plataforma de mensagens na nuvem que fornece troca de mensagens flexivelmente acoplada com escala e resiliência melhoradas para componentes de um aplicativo, se hospedado na nuvem ou no local.
 
 ### <a name="retry-mechanism"></a>Mecanismo de repetição
-O Barramento de Serviço implementa repetições usando implementações da classe base [RetryPolicy](http://msdn.microsoft.com/library/microsoft.servicebus.retrypolicy.aspx) . Todos os clientes do Barramento de Serviço expõem uma propriedade **RetryPolicy** que pode ser definida como uma das implementações da classe base **RetryPolicy**. As implementações internas são:
+O Barramento de Serviço implementa repetições usando implementações da classe base [RetryPolicy](/dotnet/api/microsoft.servicebus.retrypolicy) . Todos os clientes do Barramento de Serviço expõem uma propriedade **RetryPolicy** que pode ser definida como uma das implementações da classe base **RetryPolicy**. As implementações internas são:
 
-* A [classe RetryExponential](http://msdn.microsoft.com/library/microsoft.servicebus.retryexponential.aspx). Ela expõe propriedades que controlam o intervalo de retirada, a contagem de repetições e a propriedade **TerminationTimeBuffer** que é usada para limitar o tempo total para a operação ser concluída.
-* A [classe NoRetry](http://msdn.microsoft.com/library/microsoft.servicebus.noretry.aspx). É usada quando as repetições no nível de API do Barramento de Serviço não são exigidas, como quando são gerenciadas por outro processo como parte de uma operação em lote ou de várias etapas.
+* A [classe RetryExponential](/dotnet/api/microsoft.servicebus.retryexponential). Ela expõe propriedades que controlam o intervalo de retirada, a contagem de repetições e a propriedade **TerminationTimeBuffer** que é usada para limitar o tempo total para a operação ser concluída.
+* A [classe NoRetry](/dotnet/api/microsoft.servicebus.noretry). É usada quando as repetições no nível de API do Barramento de Serviço não são exigidas, como quando são gerenciadas por outro processo como parte de uma operação em lote ou de várias etapas.
 
 As ações do Barramento de Serviço podem retornar várias exceções, conforme listado em [Exceções de mensagem do Barramento de Serviço](/azure/service-bus-messaging/service-bus-messaging-exceptions). A lista fornece informações que indicam se repetir a operação é adequado. Por exemplo, um **ServerBusyException** indica que o cliente deve esperar um período de tempo, depois repetir a operação. A ocorrência de um **ServerBusyException** também faz com que o Barramento de Serviço alterne para um modo diferente, no qual um intervalo extra de 10 segundos é adicionado aos intervalos de repetição computados. Esse modo é redefinido após um curto período.
 
@@ -392,7 +392,7 @@ A tabela a seguir mostra as configurações padrão da política de repetição 
 Considere as seguintes diretrizes ao usar o Barramento de Serviço:
 
 * Ao usar a implementação **RetryExponential** interna, não implemente uma operação de fallback, pois a política reage às exceções de Servidor Ocupado e alterna automaticamente para um modo de repetição apropriado.
-* O Barramento de Serviço oferece suporte a um recurso chamado Namespaces Emparelhados, que implementa failover automático para uma fila de backup em um namespace separado, caso a fila no namespace primário falhe. As mensagens da fila secundária podem ser enviadas de volta para a fila primária quando esta se recuperar. Esse recurso ajuda a corrigir falhas transitórias. Para saber mais, consulte [Padrões de mensagens assíncronas e alta disponibilidade](http://msdn.microsoft.com/library/azure/dn292562.aspx).
+* O Barramento de Serviço oferece suporte a um recurso chamado Namespaces Emparelhados, que implementa failover automático para uma fila de backup em um namespace separado, caso a fila no namespace primário falhe. As mensagens da fila secundária podem ser enviadas de volta para a fila primária quando esta se recuperar. Esse recurso ajuda a corrigir falhas transitórias. Para saber mais, consulte [Padrões de mensagens assíncronas e alta disponibilidade](/azure/service-bus-messaging/service-bus-async-messaging).
 
 Considere começar com as seguintes configurações para operações de repetição. Essas são configurações de uso geral, por isso, você deve monitorar as operações e ajustar os valores para que atendam ao seu cenário.
 
@@ -510,7 +510,7 @@ namespace RetryCodeSamples
 ```
 
 ### <a name="more-information"></a>Mais informações
-* [Padrões de mensagens assíncronas e alta disponibilidade](http://msdn.microsoft.com/library/azure/dn292562.aspx)
+* [Padrões de mensagens assíncronas e alta disponibilidade](/azure/service-bus-messaging/service-bus-async-messaging)
 
 ## <a name="service-fabric"></a>Service Fabric
 
@@ -551,10 +551,10 @@ Você pode usar a biblioteca Polly para implementar tentativas para o banco de d
 Considere as seguintes diretrizes ao acessar o Banco de Dados SQL usando o ADO.NET:
 
 * Escolha a opção de serviço apropriada (compartilhada ou premium). Uma instância compartilhada pode sofrer atrasos e limitação de conexão mais longos que o normal devido ao uso por outros locatários do servidor compartilhado. Se forem necessárias mais operações confiáveis de baixa latência e desempenho previsível, considere a escolha da opção premium.
-* Garanta a execução de repetições no nível ou escopo apropriado para evitar operações não idempotentes que causem inconsistência nos dados. De modo ideal, todas as operações devem ser idempotentes para que possam ser repetidas sem causar inconsistência. Quando não for esse o caso, a repetição deverá ser realizada em um nível ou escopo que permita que todas as alterações relacionadas sejam desfeitas, caso uma operação falhe; por exemplo, em um escopo transacional. Para saber mais, consulte [Camada de acesso a dados dos conceitos básicos do serviço de nuvem — tratamento de falhas transitórias](http://social.technet.microsoft.com/wiki/contents/articles/18665.cloud-service-fundamentals-data-access-layer-transient-fault-handling.aspx#Idempotent_Guarantee).
+* Garanta a execução de repetições no nível ou escopo apropriado para evitar operações não idempotentes que causem inconsistência nos dados. De modo ideal, todas as operações devem ser idempotentes para que possam ser repetidas sem causar inconsistência. Quando não for esse o caso, a repetição deverá ser realizada em um nível ou escopo que permita que todas as alterações relacionadas sejam desfeitas, caso uma operação falhe; por exemplo, em um escopo transacional. Para saber mais, consulte [Camada de acesso a dados dos conceitos básicos do serviço de nuvem — tratamento de falhas transitórias](https://social.technet.microsoft.com/wiki/contents/articles/18665.cloud-service-fundamentals-data-access-layer-transient-fault-handling.aspx#Idempotent_Guarantee).
 * Uma estratégia de intervalo fixo não é recomendada para uso com o Banco de Dados SQL do Azure, exceto em cenários interativos em que há apenas algumas repetições em intervalos muito curtos. Em vez disso, considere usar uma estratégia de retirada exponencial para a maioria dos cenários.
 * Escolha um valor adequado para os tempos limite de conexão e comando ao definir conexões. Um tempo limite muito curto pode resultar em falhas prematuras de conexões quando o banco de dados estiver ocupado. Um tempo limite muito longo pode impedir que a lógica de repetição funcione corretamente, aguardando tempo demais para detectar uma conexão com falha. O valor do tempo limite é um componente da latência de ponta a ponta; ele é efetivamente adicionado ao intervalo de repetição especificado na política de repetição para cada tentativa de repetição.
-* Feche a conexão após um determinado número de repetições, mesmo ao usar uma lógica de repetição de retirada exponencial, e repita a operação em uma nova conexão. Repetir a mesma operação várias vezes na mesma conexão pode ser um fator que contribui para problemas de conexão. Para obter um exemplo dessa técnica, consulte [Camada de acesso a dados dos conceitos básicos do serviço de nuvem — tratamento de falhas transitórias](http://social.technet.microsoft.com/wiki/contents/articles/18665.cloud-service-fundamentals-data-access-layer-transient-fault-handling.aspx).
+* Feche a conexão após um determinado número de repetições, mesmo ao usar uma lógica de repetição de retirada exponencial, e repita a operação em uma nova conexão. Repetir a mesma operação várias vezes na mesma conexão pode ser um fator que contribui para problemas de conexão. Para obter um exemplo dessa técnica, consulte [Camada de acesso a dados dos conceitos básicos do serviço de nuvem — tratamento de falhas transitórias](https://social.technet.microsoft.com/wiki/contents/articles/18665.cloud-service-fundamentals-data-access-layer-transient-fault-handling.aspx).
 * Quando o pool de conexões está em uso (o padrão), é provável que a mesma conexão seja escolhida no pool, mesmo depois de fechar e reabrir uma conexão. Se for esse o caso, uma técnica para resolver isso é chamar o método **ClearPool** da classe **SqlConnection** para marcar a conexão como não reutilizável. No entanto, isso deve ser feito somente depois que várias tentativas de conexão tiverem falhado, e somente ao encontrar a classe específica de falhas transitórias, como tempos limite de SQL (código de erro -2), relacionada às conexões com falha.
 * Se o código de acesso a dados usar transações iniciadas como instâncias **TransactionScope** , a lógica de repetição deverá reabrir a conexão e iniciar um novo escopo de transação. Por esse motivo, o bloco de código com nova tentativa deve englobar o escopo inteiro da transação.
 
@@ -614,15 +614,15 @@ using (var reader = await sqlCommand.ExecuteReaderWithRetryAsync())
 ```
 
 ### <a name="more-information"></a>Mais informações
-* [Camada de acesso a dados dos conceitos básicos do serviço de nuvem — tratamento de falhas transitórias](http://social.technet.microsoft.com/wiki/contents/articles/18665.cloud-service-fundamentals-data-access-layer-transient-fault-handling.aspx)
+* [Camada de acesso a dados dos conceitos básicos do serviço de nuvem — tratamento de falhas transitórias](https://social.technet.microsoft.com/wiki/contents/articles/18665.cloud-service-fundamentals-data-access-layer-transient-fault-handling.aspx)
 
-Para orientação geral sobre como obter o máximo do banco de dados SQL, confira [Desempenho de banco de dados SQL do Azure e guia de elasticidade](http://social.technet.microsoft.com/wiki/contents/articles/3507.windows-azure-sql-database-performance-and-elasticity-guide.aspx).
+Para orientação geral sobre como obter o máximo do banco de dados SQL, confira [Desempenho de banco de dados SQL do Azure e guia de elasticidade](https://social.technet.microsoft.com/wiki/contents/articles/3507.windows-azure-sql-database-performance-and-elasticity-guide.aspx).
 
 ## <a name="sql-database-using-entity-framework-6"></a>Banco de Dados SQL usando o Entity Framework 6
 O Banco de Dados SQL é um banco de dados SQL disponível em vários tamanhos e como um serviço padrão (compartilhado) e premium (não compartilhado). O Entity Framework é um mapeador relacional de objeto que permite aos desenvolvedores do .NET trabalhar com dados relacionais usando objetos específicos de domínio. Com ele, não há a necessidade da maioria dos códigos de acesso a dados que os desenvolvedores geralmente precisam para escrever.
 
 ### <a name="retry-mechanism"></a>Mecanismo de repetição
-O suporte à repetição é fornecido durante o acesso ao Banco de Dados SQL usando o Entity Framework 6.0 e versões posteriores por meio de um mecanismo chamado [Lógica de Repetição/Resiliência de Conexão](http://msdn.microsoft.com/data/dn456835.aspx). Os principais recursos do mecanismo de repetição são:
+O suporte à repetição é fornecido durante o acesso ao Banco de Dados SQL usando o Entity Framework 6.0 e versões posteriores por meio de um mecanismo chamado [Lógica de Repetição/Resiliência de Conexão](/ef/ef6/fundamentals/connection-resiliency/retry-logic). Os principais recursos do mecanismo de repetição são:
 
 * A abstração primária é a interface **IDbExecutionStrategy** . Essa interface:
   * Define métodos **Execute*** síncronos e assíncronos.
@@ -666,7 +666,7 @@ Você pode especificar a classe de configuração de repetição para um context
 public class BloggingContext : DbContext
 ```
 
-Se precisar usar estratégias de repetição diferentes para operações específicas ou desabilitar repetições para operações específicas, você poderá criar uma classe de configuração que permita suspender ou trocar estratégias, definindo um sinalizador no **CallContext**. A classe de configuração pode usar esse sinalizador para alternar estratégias ou desabilitar a estratégia fornecida por você e usar uma estratégia padrão. Para saber mais, consulte [Suspender estratégia de execução](http://msdn.microsoft.com/dn307226#transactions_workarounds) na página Limitações com estratégias de execução de repetição (EF6 em diante).
+Se precisar usar estratégias de repetição diferentes para operações específicas ou desabilitar repetições para operações específicas, você poderá criar uma classe de configuração que permita suspender ou trocar estratégias, definindo um sinalizador no **CallContext**. A classe de configuração pode usar esse sinalizador para alternar estratégias ou desabilitar a estratégia fornecida por você e usar uma estratégia padrão. Para saber mais, confira [Suspender a estratégia de execução](/ef/ef6/fundamentals/connection-resiliency/retry-logic#workaround-suspend-execution-strategy) (EF6 em diante).
 
 Outra técnica para usar estratégias de repetição específicas para operações individuais é criar uma instância da classe de estratégia necessária e fornecer as configurações desejadas por meio de parâmetros. Você então chama o método **ExecuteAsync** .
 
@@ -686,7 +686,7 @@ var blogs = await executionStrategy.ExecuteAsync(
 
 A maneira mais simples de usar uma classe **DbConfiguration** é colocá-la no mesmo assembly da classe **DbContext**. No entanto, isso não é apropriado quando o mesmo contexto é necessário em cenários diferentes, como diferentes estratégias de repetição interativas e em segundo plano. Se os diferentes contextos forem executados em AppDomains separados, você poderá usar o suporte interno para especificar classes de configuração no arquivo de configuração ou defini-las explicitamente usando código. Se os diferentes contextos devem ser executados no mesmo AppDomain, será necessária uma solução personalizada.
 
-Para saber mais, consulte [Configuração baseada em código (EF6 em diante)](http://msdn.microsoft.com/data/jj680699.aspx).
+Para saber mais, confira [Configuração baseada em código](/ef/ef6/fundamentals/configuring/code-based) (EF6 em diante).
 
 A tabela a seguir mostra as configurações padrão para a política de repetição interna ao usar o EF6.
 
@@ -765,10 +765,10 @@ namespace RetryCodeSamples
 }
 ```
 
-Mais exemplos de como usar o mecanismo de repetição do Entity Framework podem ser encontrados em [Lógica de Repetição/Resiliência de Conexão](http://msdn.microsoft.com/data/dn456835.aspx).
+Mais exemplos de como usar o mecanismo de repetição do Entity Framework podem ser encontrados em [Lógica de Repetição/Resiliência de Conexão](/ef/ef6/fundamentals/connection-resiliency/retry-logic).
 
 ### <a name="more-information"></a>Mais informações
-* [Guia de desempenho e elasticidade do Banco de Dados SQL do Azure](http://social.technet.microsoft.com/wiki/contents/articles/3507.windows-azure-sql-database-performance-and-elasticity-guide.aspx)
+* [Guia de desempenho e elasticidade do Banco de Dados SQL do Azure](https://social.technet.microsoft.com/wiki/contents/articles/3507.windows-azure-sql-database-performance-and-elasticity-guide.aspx)
 
 ## <a name="sql-database-using-entity-framework-core"></a>Banco de Dados SQL usando o Entity Framework Core
 [O Entity Framework Core](/ef/core/) é um mapeador relacional de objeto que permite aos desenvolvedores do .NET Core trabalhar com dados usando objetos específicos de domínio. Com ele, não há a necessidade da maioria dos códigos de acesso a dados que os desenvolvedores geralmente precisam para escrever. Esta versão do Entity Framework foi criada a partir do zero e não herda todos os recursos do EF6.x automaticamente.
@@ -803,10 +803,10 @@ using (var db = new BloggingContext())
     {
         using (var transaction = db.Database.BeginTransaction())
         {
-            db.Blogs.Add(new Blog { Url = "http://blogs.msdn.com/dotnet" });
+            db.Blogs.Add(new Blog { Url = "https://blogs.msdn.com/dotnet" });
             db.SaveChanges();
 
-            db.Blogs.Add(new Blog { Url = "http://blogs.msdn.com/visualstudio" });
+            db.Blogs.Add(new Blog { Url = "https://blogs.msdn.com/visualstudio" });
             db.SaveChanges();
 
             transaction.Commit();
@@ -819,13 +819,13 @@ using (var db = new BloggingContext())
 Os serviços de armazenamento do Azure incluem armazenamento de tabela e blob, arquivos e filas de armazenamento.
 
 ### <a name="retry-mechanism"></a>Mecanismo de repetição
-As repetições ocorrem no nível de operação REST individuais e são uma parte integrante da implementação da API do cliente. O SDK do armazenamento do cliente usa classes que implementam a [Interface IExtendedRetryPolicy](http://msdn.microsoft.com/library/microsoft.windowsazure.storage.retrypolicies.iextendedretrypolicy.aspx).
+As repetições ocorrem no nível de operação REST individuais e são uma parte integrante da implementação da API do cliente. O SDK do armazenamento do cliente usa classes que implementam a [Interface IExtendedRetryPolicy](/dotnet/api/microsoft.windowsazure.storage.retrypolicies.iextendedretrypolicy).
 
 Há diferentes implementações da interface. Os clientes de armazenamento podem escolher dentre políticas especificamente desenvolvidas para acesso a tabelas, blobs e filas. Cada implementação usa uma estratégia de repetição diferente que, basicamente, define o intervalo da repetição e outros detalhes.
 
 As classes internas fornecem suporte a intervalos lineares (constantes) e exponenciais com intervalos de repetição de aleatoriedade. Também não há uma política de repetição a ser usada quando outro processo está tratando repetições em um nível mais alto. No entanto, você pode implementar suas próprias classes de repetição caso haja requisitos não fornecidos pelas classes internas.
 
-As repetições alternativas serão alternadas entre o local do serviço de armazenamento primário e secundário se você estiver usando o RA-GRS (armazenamento com redundância geográfica com acesso de leitura) e o resultado da solicitação for um erro que pode ser repetido. Consulte [Opções de redundância de armazenamento do Azure](http://msdn.microsoft.com/library/azure/dn727290.aspx) para saber mais.
+As repetições alternativas serão alternadas entre o local do serviço de armazenamento primário e secundário se você estiver usando o RA-GRS (armazenamento com redundância geográfica com acesso de leitura) e o resultado da solicitação for um erro que pode ser repetido. Consulte [Opções de redundância de armazenamento do Azure](/azure/storage/common/storage-redundancy) para saber mais.
 
 ### <a name="policy-configuration"></a>Configuração de política
 As políticas de repetição são configuradas de modo programático. Um procedimento comum é criar e popular uma instância **TableRequestOptions**, **BlobRequestOptions**, **FileRequestOptions** ou **QueueRequestOptions**.
@@ -872,7 +872,7 @@ context.RequestCompleted += (sender, args) =>
 var stats = await client.GetServiceStatsAsync(null, context);
 ```
 
-Além de indicar se uma falha é adequada para repetição, as políticas estendidas de repetição retornam um objeto **RetryContext** que indica o número de repetições, os resultados da última solicitação e se a próxima repetição acontecerá no local primário ou secundário (consulte a tabela abaixo para obter detalhes). As propriedades do objeto **RetryContext** podem ser usadas para decidir se e quando tentar uma repetição. Para obter mais detalhes, consulte [Método IExtendedRetryPolicy.Evaluate](http://msdn.microsoft.com/library/microsoft.windowsazure.storage.retrypolicies.iextendedretrypolicy.evaluate.aspx).
+Além de indicar se uma falha é adequada para repetição, as políticas estendidas de repetição retornam um objeto **RetryContext** que indica o número de repetições, os resultados da última solicitação e se a próxima repetição acontecerá no local primário ou secundário (consulte a tabela abaixo para obter detalhes). As propriedades do objeto **RetryContext** podem ser usadas para decidir se e quando tentar uma repetição. Para obter mais detalhes, consulte [Método IExtendedRetryPolicy.Evaluate](/dotnet/api/microsoft.windowsazure.storage.retrypolicies.iextendedretrypolicy.evaluate).
 
 As tabelas a seguir mostram as configurações padrão para as políticas de repetição internas.
 
@@ -918,9 +918,9 @@ Considere começar com as seguintes configurações para operações de repetiç
 | Segundo plano<br />ou lote |30 segundos |Exponencial |maxAttempt<br />deltaBackoff |5<br />4 segundos |1ª tentativa — intervalo de ~3 s<br />2ª tentativa — intervalo de ~7 s<br />3ª tentativa — intervalo de ~15 s |
 
 ### <a name="telemetry"></a>Telemetria
-As tentativas de repetição são registradas em um **TraceSource**. Você deve configurar um **TraceListener** para capturar os eventos e gravá-los em um log de destino apropriado. É possível usar o **TextWriterTraceListener** ou **XmlWriterTraceListener** para gravar os dados em um arquivo de log, o **EventLogTraceListener** para gravar no Log de Eventos do Windows ou o **EventProviderTraceListener** para gravar dados de rastreamento no subsistema ETW. Você também pode configurar a liberação automática do buffer e o detalhamento dos eventos que serão registrados (por exemplo, Erro, Aviso, Informativo e Detalhado). Para saber mais, consulte [Registro em log no lado do cliente com a biblioteca do cliente de armazenamento para .NET](http://msdn.microsoft.com/library/azure/dn782839.aspx).
+As tentativas de repetição são registradas em um **TraceSource**. Você deve configurar um **TraceListener** para capturar os eventos e gravá-los em um log de destino apropriado. É possível usar o **TextWriterTraceListener** ou **XmlWriterTraceListener** para gravar os dados em um arquivo de log, o **EventLogTraceListener** para gravar no Log de Eventos do Windows ou o **EventProviderTraceListener** para gravar dados de rastreamento no subsistema ETW. Você também pode configurar a liberação automática do buffer e o detalhamento dos eventos que serão registrados (por exemplo, Erro, Aviso, Informativo e Detalhado). Para saber mais, consulte [Registro em log no lado do cliente com a biblioteca do cliente de armazenamento para .NET](/rest/api/storageservices/Client-side-Logging-with-the-.NET-Storage-Client-Library).
 
-As operações podem receber uma instância **OperationContext**, que expõe um evento **Retrying** que pode ser usado para anexar a lógica personalizada de telemetria. Para saber mais, consulte [Evento OperationContext.Retrying](http://msdn.microsoft.com/library/microsoft.windowsazure.storage.operationcontext.retrying.aspx).
+As operações podem receber uma instância **OperationContext**, que expõe um evento **Retrying** que pode ser usado para anexar a lógica personalizada de telemetria. Para saber mais, consulte [Evento OperationContext.Retrying](/dotnet/api/microsoft.windowsazure.storage.operationcontext.retrying).
 
 ### <a name="examples"></a>Exemplos
 O exemplo de código a seguir mostra como criar duas instâncias **TableRequestOptions** com diferentes configurações de repetição; uma para solicitações interativas e outra para solicitações em segundo plano. O exemplo define essas duas políticas de repetição no cliente para que elas sejam aplicadas a todas as solicitações, assim como define a estratégia interativa em uma solicitação específica de modo que ela substitua as configurações padrão aplicadas ao cliente.
@@ -1000,7 +1000,7 @@ namespace RetryCodeSamples
 
 ### <a name="more-information"></a>Mais informações
 * [Recomendações de política de repetição da biblioteca do cliente de armazenamento do Azure](https://azure.microsoft.com/blog/2014/05/22/azure-storage-client-library-retry-policy-recommendations/)
-* [Biblioteca do cliente de armazenamento 2.0 – implementando políticas de repetição](http://gauravmantri.com/2012/12/30/storage-client-library-2-0-implementing-retry-policies/)
+* [Biblioteca do cliente de armazenamento 2.0 – implementando políticas de repetição](https://gauravmantri.com/2012/12/30/storage-client-library-2-0-implementing-retry-policies/)
 
 ## <a name="general-rest-and-retry-guidelines"></a>Diretrizes gerais de repetição e REST
 Considere o seguinte ao acessar os serviços do Azure ou de terceiros:

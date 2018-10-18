@@ -6,12 +6,12 @@ ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: authenticate
 pnp.series.next: signup
-ms.openlocfilehash: 61788d9759715b21ef1bdda59c5b54d923fd8f62
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 46c43c9bfa4514f206b5e7eabd9223ad4c61628b
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24541906"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429359"
 ---
 # <a name="work-with-claims-based-identities"></a>Trabalhar com identidades baseadas em declarações
 
@@ -31,12 +31,12 @@ No OpenID Connect, o conjunto de declarações que você obtém é controlado pe
 
 Eis algumas declarações do AAD que normalmente são relevantes para um aplicativo:
 
-| Tipo de declaração no token de ID | Descrição |
+| Tipo de declaração no token de ID | DESCRIÇÃO |
 | --- | --- |
 | aud |A pessoa para quem o token foi emitido. Essa será a ID de cliente do aplicativo. Em geral, você não deve se preocupar com essa declaração, pois o middleware a valida automaticamente. Exemplo: `"91464657-d17a-4327-91f3-2ed99386406f"` |
 | groups |Uma lista de grupos do AAD dos quais o usuário é membro. Exemplo: `["93e8f556-8661-4955-87b6-890bc043c30f", "fc781505-18ef-4a31-a7d5-7d931d7b857e"]` |
 | iss |O [emissor] do token OIDC. Exemplo: `https://sts.windows.net/b9bd2162-77ac-4fb2-8254-5c36e9c0a9c4/` |
-| name |O nome de exibição do usuário. Exemplo: `"Alice A."` |
+| Nome |O nome de exibição do usuário. Exemplo: `"Alice A."` |
 | oid |O identificador do objeto para o usuário no AAD. Esse valor é o identificador imutável e não reutilizável do usuário. Use esse valor e não o email, como um identificador exclusivo para os usuários, pois endereços de email podem mudar. Se você usar a API do Graph do Microsoft Azure AD no seu aplicativo, a ID de objeto é o valor usado para consultar informações do perfil. Exemplo: `"59f9d2dc-995a-4ddf-915e-b3bb314a7fa4"` |
 | roles |Uma lista de funções de aplicativo para o usuário.    Exemplo: `["SurveyCreator"]` |
 | tid |ID do locatário. Esse valor é um identificador exclusivo do locatário no Azure AD. Exemplo: `"b9bd2162-77ac-4fb2-8254-5c36e9c0a9c4"` |
@@ -117,9 +117,9 @@ Para obter mais informações, consulte [Autorização baseada em recursos e em 
 
 <!-- Links -->
 
-[parâmetro de escopo]: http://nat.sakimura.org/2012/01/26/scopes-and-claims-in-openid-connect/
+[parâmetro de escopo]: https://nat.sakimura.org/2012/01/26/scopes-and-claims-in-openid-connect/
 [Tipos de declaração e token com suporte]: /azure/active-directory/active-directory-token-and-claims/
-[emissor]: http://openid.net/specs/openid-connect-core-1_0.html#IDToken
+[emissor]: https://openid.net/specs/openid-connect-core-1_0.html#IDToken
 [Eventos de autenticação]: authenticate.md#authentication-events
 [signup]: signup.md
 [Claims-Based Authorization]: /aspnet/core/security/authorization/claims
