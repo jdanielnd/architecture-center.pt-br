@@ -321,7 +321,7 @@ Nesta etapa, você criará um modelo tabular que importa dados do data warehouse
 
 4. Nomeie o projeto e clique em **OK**.
 
-5. No diálogo **Designer de modelo tabular**, selecione **Espaço de trabalho integrado** e defina o **Nível de compatibilidade** como `SQL Server 2017 / Azure Analysis Services (1400)`. Clique em **OK**.
+5. No diálogo **Designer de modelo tabular**, selecione **Workspace integrado** e defina o **Nível de compatibilidade** como `SQL Server 2017 / Azure Analysis Services (1400)`. Clique em **OK**.
 
 6. Na janela **Gerenciador de Modelos Tabulares** janela, clique com o botão direito do mouse e selecione **Importar da Fonte de Dados**.
 
