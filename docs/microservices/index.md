@@ -2,13 +2,13 @@
 title: Projetar, criar e operar microsserviços no Azure com Kubernetes
 description: Projetar, criar e operar microsserviços no Azure
 author: MikeWasson
-ms.date: 12/08/2017
-ms.openlocfilehash: 857e91a8eeefec18b459f2e66fde9a4f8bbe7b21
-ms.sourcegitcommit: 744ad1381e01bbda6a1a7eff4b25e1a337385553
+ms.date: 10/23/2018
+ms.openlocfilehash: cac16c9212432c72aeaecac1a578828a00838431
+ms.sourcegitcommit: fdcacbfdc77370532a4dde776c5d9b82227dff2d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2018
-ms.locfileid: "27701095"
+ms.lasthandoff: 10/24/2018
+ms.locfileid: "49962765"
 ---
 # <a name="designing-building-and-operating-microservices-on-azure"></a>Projetar, criar e operar microsserviços no Azure
 
@@ -85,7 +85,7 @@ Este cenário envolve um domínio bastante complicado. Algumas das preocupaçõe
 > [!NOTE]
 > Para obter ajuda na escolha entre uma arquitetura de microsserviços e outros estilos de arquitetura, consulte o [Guia de arquitetura de aplicativo do Azure](../guide/index.md).
 
-Nossa implementação de referência usa Kubernetes com o [ACS (Serviço de Contêiner do Azure)](/azure/container-service/kubernetes/). No entanto, muitas das decisões de arquitetura de alto nível e desafios se aplicarão a qualquer orquestrador de contêineres, incluindo o [Azure Service Fabric](/azure/service-fabric/). 
+Nossa implementação de referência usa Kubernetes com o [AKS (Serviço de Kubernetes do Azure)](/azure/aks/). No entanto, muitas das decisões de arquitetura de alto nível e desafios se aplicarão a qualquer orquestrador de contêineres, incluindo o [Azure Service Fabric](/azure/service-fabric/). 
 
 > [!div class="nextstepaction"]
 > [Análise de domínio](./domain-analysis.md)
