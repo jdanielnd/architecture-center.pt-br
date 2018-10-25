@@ -3,12 +3,12 @@ title: Escolhendo uma tecnologia de processamento de fluxo
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: fd93418c62b584e79f229e9f42703d148aeb0eca
-ms.sourcegitcommit: e9d9e214529edd0dc78df5bda29615b8fafd0e56
+ms.openlocfilehash: b78ebe253e927eece38930ba7f6186f485a956f7
+ms.sourcegitcommit: fdcacbfdc77370532a4dde776c5d9b82227dff2d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 06/28/2018
-ms.locfileid: "37091056"
+ms.lasthandoff: 10/24/2018
+ms.locfileid: "49962902"
 ---
 # <a name="choosing-a-stream-processing-technology-in-azure"></a>Escolhendo uma tecnologia de processamento de fluxo no Azure
 
@@ -60,13 +60,12 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 
 | | Stream Analytics do Azure | HDInsight com Spark Streaming | Apache Spark no Azure Databricks | HDInsight com Storm | Funções do Azure | WebJobs no Serviço de Aplicativo do Azure |
 | --- | --- | --- | --- | --- | --- | --- | 
-| Suporte a janelas internas/temporal | sim | sim | sim | sim | Não | Não  |
+| Suporte a janelas internas/temporal | SIM | sim | sim | sim | Não | Não  |
 | Formatos de dados de entrada | Avro, JSON ou CSV, codificados em UTF-8 | Qualquer formato que usa um código personalizado | Qualquer formato que usa um código personalizado | Qualquer formato que usa um código personalizado | Qualquer formato que usa um código personalizado | Qualquer formato que usa um código personalizado |
 | Escalabilidade | [Partições de consulta](/azure/stream-analytics/stream-analytics-parallelization) | Limitado pelo tamanho do cluster | Limitado pela configuração de escala de cluster do Databricks | Limitado pelo tamanho do cluster | Até 200 instâncias de aplicativo de funções processadas em paralelo | Limitado pela capacidade do plano de serviço de aplicativo | 
-| Suporte à chegada tardia e manipulação de eventos fora de ordem | sim | sim | sim | sim | Não | Não  |
+| Suporte à chegada tardia e manipulação de eventos fora de ordem | SIM | sim | sim | sim | Não | Não  |
 
 Consulte também:
 
 - [Escolhendo uma tecnologia de ingestão de mensagens em tempo real](./real-time-ingestion.md)
-- [Comparando o Apache Storm com o Azure Stream Analytics](/azure/stream-analytics/stream-analytics-comparison-storm)
 - [Processamento em tempo real](../big-data/real-time-processing.md)

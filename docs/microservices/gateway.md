@@ -2,17 +2,17 @@
 title: Gateways de API
 description: Gateway de API em microsserviços
 author: MikeWasson
-ms.date: 12/08/2017
-ms.openlocfilehash: 6483d416363e24f4084d6b856847a740bf4054d9
-ms.sourcegitcommit: a8453c4bc7c870fa1a12bb3c02e3b310db87530c
+ms.date: 10/23/2018
+ms.openlocfilehash: 41554e6abf4db61d1fa6e501419425d331495afc
+ms.sourcegitcommit: fdcacbfdc77370532a4dde776c5d9b82227dff2d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/29/2017
-ms.locfileid: "27549171"
+ms.lasthandoff: 10/24/2018
+ms.locfileid: "49962816"
 ---
 # <a name="designing-microservices-api-gateways"></a>Criando microsserviços: gateways de API
 
-Em uma arquitetura de microsserviços, um cliente pode interagir com mais de um serviço front-end. Em razão disso, como um cliente sabe quais pontos de extremidade a serem chamados? O que acontece quando são introduzidos novos serviços ou serviços existentes são refatorados? Como os serviços processam terminação SSL, autenticação e outras questões? Um *gateway API* pode ajudar a enfrentar esses desafios. 
+Em uma arquitetura de microsserviços, um cliente pode interagir com mais de um serviço front-end. Em razão disso, como um cliente sabe quais pontos de extremidade a serem chamados? O que acontece quando são introduzidos novos serviços ou serviços existentes são refatorados? Como os serviços processam terminação SSL, autenticação e outras questões? Um *gateway de API* pode ajudá-lo a enfrentar esses desafios. 
 
 ![](./images/gateway.png)
 
@@ -57,7 +57,7 @@ Aqui estão algumas opções para a implementação de um gateway de API em seu 
 
 - [Gateway de Aplicativo do Azure](/azure/application-gateway/). O Gateway de Aplicativo é um serviço de balanceamento de carga gerenciado que pode executar roteamento de 7 camadas e terminação SSL. Ele também fornece um WAF (Firewall de Aplicativo Web).
 
-- [Gerenciamento de API do Azure](/azure/api-management/). Gerenciamento de API é uma solução completa para publicar APIs para clientes externos e internos. Ela oferece recursos que são úteis para gerenciar uma API voltado ao público, incluindo limitação de taxa, permissão de IP e autenticação usando o Azure Active Directory ou outros provedores de identidade. Gerenciamento de API não executa balanceamento de carga, portanto deve ser usado em conjunto com um balanceador de carga, como um proxy reverso ou Gateway de Aplicativo.
+- [Gerenciamento de API do Azure](/azure/api-management/). Gerenciamento de API é uma solução completa para publicar APIs para clientes externos e internos. Ela oferece recursos que são úteis para gerenciar uma API voltado ao público, incluindo limitação de taxa, permissão de IP e autenticação usando o Azure Active Directory ou outros provedores de identidade. Gerenciamento de API não executa balanceamento de carga, portanto deve ser usado em conjunto com um balanceador de carga, como um proxy reverso ou Gateway de Aplicativo. Para obter informações sobre como usar o Gerenciamento de API com o Gateway de Aplicativo, consulte [Integrar o Gerenciamento de API em uma VNET interna com o Gateway de Aplicativo](/azure/api-management/api-management-howto-integrate-internal-vnet-appgateway).
 
 Ao escolher uma tecnologia de gateway, considere o seguinte:
 
@@ -67,15 +67,11 @@ Ao escolher uma tecnologia de gateway, considere o seguinte:
 
 **Gerenciamento**. Talvez seja necessário atualizar as regras de roteamento de gateway quando novos serviços são atualizados ou adicionados. Considere como esse processo será gerenciado. Considerações semelhantes aplicam-se ao gerenciamento de certificados SSL, listas de permissões IP e outros aspectos da configuração.
 
-## <a name="deployment-considerations"></a>Considerações de implantação
-
-### <a name="deploying-nginx-or-haproxy-to-kubernetes"></a>Implantando o Nginx ou HAProxy no Kubernetes
+## <a name="deploying-nginx-or-haproxy-to-kubernetes"></a>Implantando o Nginx ou HAProxy no Kubernetes
 
 Você pode implantar Nginx ou HAProxy no Kubernetes como um [ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) ou [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) que especifica a imagem de contêiner Nginx ou HAProxy. Use um ConfigMap para armazenar o arquivo de configuração no proxy e monte o ConfigMap como um volume. Crie um serviço do tipo LoadBalancer para expor o gateway por meio do Azure Load Balancer. 
 
-<!-- - Configure a readiness probe that serves a static file from the gateway (rather than routing to another service). -->
-
-Uma alternativa é criar um controlador de entrada. Um controlador de entrada é um recurso Kubernetes que implanta um servidor proxy reverso ou um balanceador de carga. Existem várias implementações, incluindo Nginx e HAProxy. Um recurso separado chamado uma entrada define as configurações para o controlador de entrada, como regras de roteamento e certificados TLS. Dessa forma, você não precisa gerenciar arquivos de configuração complexos, específicos de uma tecnologia de servidor proxy. Controladores de entrada ainda são um recurso beta do Kubernetes no momento deste artigo, e o recurso continuará a evoluir.
+Uma alternativa é criar um controlador de entrada. Um controlador de entrada é um recurso Kubernetes que implanta um servidor proxy reverso ou um balanceador de carga. Existem várias implementações, incluindo Nginx e HAProxy. Um recurso separado chamado uma entrada define as configurações para o controlador de entrada, como regras de roteamento e certificados TLS. Dessa forma, você não precisa gerenciar arquivos de configuração complexos, específicos de uma tecnologia de servidor proxy.
 
 O gateway é um gargalo potencial ou um ponto único de falha no sistema, portanto, sempre implante pelo menos duas réplicas para alta disponibilidade. Talvez seja necessário expandir as réplicas ainda mais, dependendo da carga. 
 
@@ -86,35 +82,6 @@ Além disso, considere a execução do gateway em um conjunto dedicado de nós n
 - Configuração estável. Se o gateway estiver mal configurado, todo o aplicativo poderá se tornar indisponível. 
 
 - Desempenho. Use uma configuração de VM específica ao gateway por motivos de desempenho.
-
-<!-- - Load balancing. You can configure the external load balancer so that requests always go to a gateway node. That can save a network hop, which would otherwise happen whenever a request lands on a node that isn't running a gateway pod. This consideration applies mainly to large clusters, where the gateway runs on a relatively small fraction of the total nodes. In Azure Container Service (ACS), this approach currently requires [ACS Engine](https://github.com/Azure/acs-engine)) which allows you to create multiple agent pools. Then you can deploy the gateway as a DaemonSet to the front-end pool. -->
-
-### <a name="azure-application-gateway"></a>Gateway de Aplicativo do Azure
-
-Para conectar o Gateway de Aplicativo a um cluster Kubernetes no Azure:
-
-1. Crie uma sub-rede vazia na rede virtual do cluster.
-2. Implante o Gateway de Aplicativo.
-3. Crie um serviço Kubernetes com tipo =[NodePort](https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport). Isso expõe o serviço em cada nó para que possa ser acessado de fora do cluster. Ele não cria um balanceador de carga.
-5. Obtém o número da porta atribuída ao serviço.
-6. Adicione uma regra de Gateway de Aplicativo, em que:
-    - O pool de back-end contenha as VMs do agente.
-    - A configuração HTTP especifica o número da porta de serviço.
-    - O ouvinte de gateway escuta nas portas 80/443
-    
-Defina a contagem de instância como 2 ou mais para alta disponibilidade.
-
-### <a name="azure-api-management"></a>Gerenciamento de API do Azure 
-
-Para conectar Gerenciamento de API a um cluster Kubernetes no Azure:
-
-1. Crie uma sub-rede vazia na rede virtual do cluster.
-2. Implante o Gerenciamento de API nessa sub-rede.
-3. Crie um serviço Kubernetes do tipo LoadBalancer. Use a anotação do [balanceador de carga interno](https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer) para criar um balanceador de carga interno, em vez de um balanceador de carga para a Internet, que é o padrão.
-4. Localize IP privado de balanceador de carga interno, usando kubectl ou a CLI do Azure.
-5. Use o Gerenciamento de API para criar uma API que encaminha para o endereço IP particular do balanceador de carga.
-
-Considere a combinação de Gerenciamento de API com um proxy reverso, seja Nginx, HAProxy ou Gateway de Aplicativo do Azure. Para obter informações sobre como usar o Gerenciamento de API com o Gateway de Aplicativo, consulte [Integrar o Gerenciamento de API em uma VNET interna com o Gateway de Aplicativo](/azure/api-management/api-management-howto-integrate-internal-vnet-appgateway).
 
 > [!div class="nextstepaction"]
 > [Monitoramento e registro em log](./logging-monitoring.md)

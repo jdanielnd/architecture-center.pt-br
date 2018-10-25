@@ -2,13 +2,13 @@
 title: Considerações de dados para microsserviços
 description: Considerações de dados para microsserviços
 author: MikeWasson
-ms.date: 12/08/2017
-ms.openlocfilehash: 9bd7a8424309b5753b42cfb70559836288a3ce9d
-ms.sourcegitcommit: c7f46b14ad7d55cf553b2d0b01045c9c25aefcdb
+ms.date: 10/23/2018
+ms.openlocfilehash: 5ef2578820c3e02ac2293a5fcb5581bdccf96966
+ms.sourcegitcommit: fdcacbfdc77370532a4dde776c5d9b82227dff2d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/09/2017
-ms.locfileid: "26587749"
+ms.lasthandoff: 10/24/2018
+ms.locfileid: "49962833"
 ---
 # <a name="designing-microservices-data-considerations"></a>Criando microsserviços: considerações de dados
 
@@ -36,7 +36,7 @@ A modelagem de dados tradicional usa a regra "um fato em um único local". Cada 
 
 ## <a name="approaches-to-managing-data"></a>Abordagens ao gerenciamento de dados
 
-Não há nenhuma abordagem única que seja correta em todos os casos, mas aqui estão algumas diretrizes gerais para gerenciar os dados em uma arquitetura de microsserviços.
+Não há uma abordagem adequada para todos os casos, mas, a seguir, temos algumas diretrizes gerais que podem ajudá-lo no gerenciamento de dados em uma arquitetura de microsserviços.
 
 - Adote consistência eventual quando possível. Entenda os lugares no sistema onde uma consistência forte ou as transações ACID são necessárias e os locais onde a consistência eventual é aceitável.
 

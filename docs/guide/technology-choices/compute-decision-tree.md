@@ -2,13 +2,13 @@
 title: Árvore de decisão para serviços de computação do Azure
 description: Um fluxograma para selecionar um serviço de computação
 author: MikeWasson
-ms.date: 06/13/2018
-ms.openlocfilehash: 689ec3f265e563273a75ad98268d03624a7b4536
-ms.sourcegitcommit: ce2fa8ac2d310f7078317cade12f1b89db1ffe06
+ms.date: 10/23/2018
+ms.openlocfilehash: 35002b4840b80bcc35b5baf36ec8e414ed8f20be
+ms.sourcegitcommit: 2ae794de13c45cf24ad60d4f4dbb193c25944eff
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 06/23/2018
-ms.locfileid: "36338176"
+ms.lasthandoff: 10/25/2018
+ms.locfileid: "50001891"
 ---
 # <a name="decision-tree-for-azure-compute-services"></a>Árvore de decisão para serviços de computação do Azure
 
@@ -33,10 +33,6 @@ Para obter mais informações sobre as opções de hospedagem de contêineres no
 ![](../images/compute-decision-tree.svg)
 
 ## <a name="definitions"></a>Definições
-
-- **Greenfield** descreve um projeto de software que é completamente novo e criado do zero. Ele não inclui códigos herdados. 
-
-- **Brownfield** descreve um projeto de software que se baseia em um aplicativo existente. Ele pode herdar um código herdado ou estruturas.
 
 - **Lift and shift** é uma estratégia de migração de uma carga de trabalho para a nuvem sem recriar o aplicativo ou fazer alterações de código. Também chamado de *nova hospedagem*. Para obter mais informações, consulte a [Central de migrações do Azure](https://azure.microsoft.com/migration/).
 

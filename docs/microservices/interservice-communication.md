@@ -2,13 +2,13 @@
 title: Comunicação entre serviços nos microsserviços
 description: Comunicação entre serviços nos microsserviços
 author: MikeWasson
-ms.date: 12/08/2017
-ms.openlocfilehash: aff2fb7b2be25ca32d6224cee15363880cfb1488
-ms.sourcegitcommit: a8453c4bc7c870fa1a12bb3c02e3b310db87530c
+ms.date: 10/23/2018
+ms.openlocfilehash: 19a54ffc362a1fc88c3255c9346bd697a319b143
+ms.sourcegitcommit: fdcacbfdc77370532a4dde776c5d9b82227dff2d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/29/2017
-ms.locfileid: "27549120"
+ms.lasthandoff: 10/24/2018
+ms.locfileid: "49962952"
 ---
 # <a name="designing-microservices-interservice-communication"></a>Criando microsserviços: comunicação entre serviços
 
@@ -99,7 +99,7 @@ Uma *malha do serviço* é uma camada de software que gerencia a comunicação d
 > [!NOTE]
 > A malha de serviço é um exemplo do [Padrão embaixador](../patterns/ambassador.md) &mdash;, um serviço auxiliar que envia as solicitações de rede em nome do aplicativo. 
 
-No momento, as principais opções para uma malha de serviço no Kubernetes são [linkerd](https://linkerd.io/) e [Istio](https://istio.io/). Ambas as tecnologias estão evoluindo rapidamente. No momento em que escrevemos este guia, a versão mais recente do Istio é a 0,2, portanto, ele ainda é muito novo. No entanto, alguns recursos que o linkerd e o Istio têm em comum incluem: 
+No momento, as principais opções para uma malha de serviço no Kubernetes são [linkerd](https://linkerd.io/) e [Istio](https://istio.io/). Ambas as tecnologias estão evoluindo rapidamente. No entanto, alguns recursos que o linkerd e o Istio têm em comum incluem: 
 
 - O balanceamento de carga no nível da sessão, com base nas latências observadas ou no número de solicitações pendentes. Isso pode melhorar o desempenho em relação ao balanceamento de carga da camada 4 fornecido pelo Kubernetes. 
 
