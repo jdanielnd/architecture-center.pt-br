@@ -3,4 +3,4 @@
 ## [Atualizar um recurso](./update-resource.md)
 ## [Implantar condicionalmente um recurso](./conditional-deploy.md)
 ## [Usar um objeto como um parâmetro](./objects-as-parameters.md)
-## [Coletor e o transformador de propriedade](./collector.md)
+## [Coletor e transformador de propriedade](./collector.md)
