@@ -2,13 +2,13 @@
 title: Registro em log e monitoramento em microsserviços
 description: Registro em log e monitoramento em microsserviços
 author: MikeWasson
-ms.date: 12/08/2017
-ms.openlocfilehash: b7206e2f35b9f227ff298f077ddafef1c6015b15
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.date: 10/23/2018
+ms.openlocfilehash: c2a935f51c57936977fb4402de2113938351069c
+ms.sourcegitcommit: fdcacbfdc77370532a4dde776c5d9b82227dff2d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428764"
+ms.lasthandoff: 10/24/2018
+ms.locfileid: "49962867"
 ---
 # <a name="designing-microservices-logging-and-monitoring"></a>Projetando microsserviços: registro em log e monitoramento
 
@@ -18,19 +18,19 @@ Em qualquer aplicativo complexo, em algum momento, algo dará errado. Em um apli
 
 Em uma arquitetura de microsserviços, descobrir a causa exata de erros ou gargalos de desempenho pode ser algo especialmente desafiador. Uma única operação de usuário pode abranger vários serviços. Serviços podem atingir os limites de E/S de rede dentro do cluster. Uma cadeia de chamadas entre serviços pode causar pressão de retorno no sistema, resultando em latência alta ou em falhas em cascata. Além disso, geralmente você não sabe em qual nó um contêiner específico será executado. Contêineres colocados no mesmo nó podem estar competindo por CPU ou memória limitada. 
 
-Para entender o que está acontecendo, o aplicativo deve emitir eventos de telemetria. Você pode categorizar essas métricas e logs baseados em texto. 
+Para entender o que está acontecendo, colete a telemetria do aplicativo.  A telemetria pode ser dividida em *logs* e *métricas*. O [Azure Monitor](/azure/monitoring-and-diagnostics/monitoring-overview) coleta logs e métricas em toda a plataforma do Azure.
 
-*Métricas* são valores numéricos que podem ser analisados. Você pode usá-los para observar o sistema em tempo real (ou quase em tempo real) ou então para analisar as tendências de desempenho ao longo do tempo. As métricas incluem:
+Os **Logs** são registros de eventos baseados em texto que ocorrem durante a execução do aplicativo. Eles incluem itens como logs de aplicativos (instruções de rastreamento) ou logs do servidor Web. Os logs são úteis principalmente para análise da causa raiz e análise forense. 
 
-- Métricas do sistema no nível de nó, incluindo CPU, memória, rede, disco e uso do sistema de arquivos. As métricas do sistema ajudam a compreender a alocação de recurso para cada nó no cluster e exceções de solução de problemas.
- 
-- Métricas de Kubernetes. Já que os serviços são executados em contêineres, você precisa coletar métricas no nível do contêiner, não apenas no nível de VM. No Kubernetes, o cAdvisor (Assistente de Contêiner) é o agente que coleta estatísticas sobre a CPU, memória, sistema de arquivos e recursos de rede usados por cada contêiner. O daemon kubelet coleta estatísticas de recursos do cAdvisor e as expõe por meio de uma API REST.
-   
-- Métricas de aplicativo. Isso inclui as métricas que são relevantes para entender o comportamento de um serviço. Exemplos incluem o número de solicitações HTTP de entrada na fila, latência de solicitação, comprimento da fila de mensagens ou número de transações processadas por segundo.
+**Métricas** são valores numéricos que podem ser analisados. Você pode usá-los para observar o sistema em tempo real (ou quase em tempo real) ou então para analisar as tendências de desempenho ao longo do tempo. As métricas podem ser subcategorizadas ainda mais da seguinte maneira:
 
-- Métricas de serviço dependentes. Serviços de cluster podem chamar serviços externos que estão fora do cluster, tais como serviços de PaaS gerenciados. Você pode monitorar os Serviços do Azure usando o [Azure Monitor](/azure/monitoring-and-diagnostics/monitoring-overview). Os serviços de terceiros podem ou não fornecer alguma métrica. Se não fornecerem, você dependerá de suas próprias métricas de aplicativo para acompanhar as estatísticas de latência e taxa de erros.
+- Métricas **no nível do nó**, incluindo CPU, memória, rede, disco e uso do sistema de arquivos. As métricas do sistema ajudam a compreender a alocação de recurso para cada nó no cluster e exceções de solução de problemas.
 
-*Logs* são registros de eventos que ocorrem durante a execução do aplicativo. Eles incluem itens como logs de aplicativos (instruções de rastreamento) ou logs do servidor Web. Os logs são úteis principalmente para análise da causa raiz e análise forense. 
+- Métricas do **contêiner**. Se os serviços forem executados em contêineres, você precisará coletar métricas no nível do contêiner, não apenas no nível da VM. Você pode configurar o Azure Monitor para monitorar cargas de trabalho de contêiner no AKS (Serviço de Kubernetes do Azure). Para saber mais, confira [Visão geral do Azure Monitor para contêineres](/azure/monitoring/monitoring-container-insights-overview). Para outros orquestradores de contêiner, use a [solução de Monitoramento de Contêiner no Log Analytics](/azure/log-analytics/log-analytics-containers).
+
+- Métricas de **aplicativo**. Isso inclui as métricas que são relevantes para entender o comportamento de um serviço. Exemplos incluem o número de solicitações HTTP de entrada na fila, latência de solicitação, comprimento da fila de mensagens. Os aplicativos também podem criar métricas personalizadas específicas ao domínio, como o número de transações de negócios processadas por minuto. Use o [Application Insights](/azure/application-insights/app-insights-overview) para habilitar as métricas de aplicativo. 
+
+- Métricas de **serviço dependentes**. Os serviços podem chamar serviços externos ou pontos de extremidade, como serviços de PaaS gerenciados ou serviços SaaS. Os serviços de terceiros podem ou não fornecer alguma métrica. Se não fornecerem, você dependerá de suas próprias métricas de aplicativo para acompanhar as estatísticas de latência e taxa de erros.
 
 ## <a name="considerations"></a>Considerações
 
