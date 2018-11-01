@@ -3,12 +3,12 @@ title: Escolhendo uma tecnologia de processamento de idioma natural
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: dacf7bf9cf3e9efed212f34da93c1470954965cf
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: bac0318a587a944c104360eb31223cc8755c1860
+ms.sourcegitcommit: e9eb2b895037da0633ef3ccebdea2fcce047620f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/14/2018
-ms.locfileid: "29288848"
+ms.lasthandoff: 10/30/2018
+ms.locfileid: "50251763"
 ---
 # <a name="choosing-a-natural-language-processing-technology-in-azure"></a>Escolhendo uma tecnologia de processamento de idioma natural no Azure
 
@@ -19,7 +19,8 @@ O processamento de texto de forma livre é feito em documentos que contêm pará
 No Azure, os seguintes serviços fornecem funcionalidades de NLP (processamento de idioma natural):
 
 - [Azure HDInsight com Spark e Spark MLlib](/azure/hdinsight/spark/apache-spark-overview)
-- [Serviços Cognitivos da Microsoft](/azure/#pivot=products&panel=cognitive)
+- [Azure Databricks](/azure/azure-databricks/what-is-azure-databricks)
+- [Serviços Cognitivos da Microsoft](/azure/cognitive-services/welcome)
 
 ## <a name="key-selection-criteria"></a>Principais critérios de seleção
 
@@ -41,10 +42,10 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 
 | | Azure HDInsight | Serviços Cognitivos da Microsoft |
 | --- | --- | --- |
-| Fornece modelos pré-treinados como serviço | Não  | sim |
-| API REST | sim | sim |
+| Fornece modelos pré-treinados como serviço | Não  | SIM |
+| API REST | SIM | SIM |
 | Programação | Python, Scala, Java | C#, Java, Node.js, Python, PHP, Ruby |
-| Dá suporte ao processamento de conjuntos de Big Data e documentos grandes | sim | Não  |
+| Dá suporte ao processamento de conjuntos de Big Data e documentos grandes | SIM | Não  |
 
 ### <a name="low-level-natural-language-processing-capabilities"></a>Funcionalidades de processamento de idioma natural de baixo nível
 

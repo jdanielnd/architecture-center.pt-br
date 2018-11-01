@@ -4,12 +4,12 @@ description: Diretrizes sobre caching para melhorar o desempenho e a escalabilid
 author: dragon119
 ms.date: 05/24/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: 4db85df7331c805af6acbe0673dbcb993a895e03
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: e1c47c735bd618fc46fef3f1ee234f83d3b15bdf
+ms.sourcegitcommit: e9eb2b895037da0633ef3ccebdea2fcce047620f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429461"
+ms.lasthandoff: 10/30/2018
+ms.locfileid: "50251984"
 ---
 # <a name="caching"></a>Cache
 
@@ -288,7 +288,7 @@ Para saber mais, veja [Provedor de estado de sessão do ASP.NET para Cache Redis
 De modo similar, o Provedor de Cache de Saída para Cache Redis do Azure permite que você salve as respostas HTTP geradas por um aplicativo Web ASP .NET. O uso do provedor de cache de saída com o Cache Redis do Azure pode melhorar os tempos de resposta dos aplicativos que processam saídas HTML complexas. As instâncias de aplicativo que geram respostas semelhantes podem usar os fragmentos de saída compartilhados no cache, em vez de gerar essa saída HTML novamente. Para saber mais, veja [Provedor de cache de saída do ASP.NET para Cache Redis do Azure](/azure/redis-cache/cache-aspnet-output-cache-provider/).
 
 ## <a name="building-a-custom-redis-cache"></a>Criando um cache Redis personalizado
-O Cache Redis do Azure atua como uma fachada para os servidores Redis subjacentes. Atualmente ele oferece suporte a um conjunto fixo de configurações, mas não oferece suporte ao clustering do Redis. Se você precisa de uma configuração avançada não contemplada pelo Cache Redis do Azure (como um cache maior que 53 GB), você pode criar e hospedar seus próprios servidores Redis usando máquinas virtuais do Azure.
+O Cache Redis do Azure atua como uma fachada para os servidores Redis subjacentes. Se você precisa de uma configuração avançada não contemplada pelo Cache Redis do Azure (como um cache maior que 53 GB), você pode criar e hospedar seus próprios servidores Redis usando máquinas virtuais do Azure.
 
 Esse é um processo possivelmente complexo, pois pode ser necessário criar várias VMs para atuarem como nós mestres e subordinados, caso você queira implementar a replicação. Além disso, se você quiser criar um cluster, precisará de vários servidores mestres e subordinados. Uma topologia de replicação mínima clusterizada, que oferece um alto grau de disponibilidade e escalabilidade, é composta de pelo menos seis VMs organizadas como três pares de servidores mestre/subordinado (um cluster deve conter pelo menos três nós mestres).
 
