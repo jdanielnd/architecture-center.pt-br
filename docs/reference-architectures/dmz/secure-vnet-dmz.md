@@ -2,17 +2,17 @@
 title: Implementação de uma DMZ entre o Azure e a Internet
 description: Como implementar uma arquitetura de rede híbrida segura com acesso à Internet no Azure.
 author: telmosampaio
-ms.date: 07/02/2018
+ms.date: 10/22/2018
 pnp.series.title: Network DMZ
 pnp.series.next: nva-ha
 pnp.series.prev: secure-vnet-hybrid
 cardTitle: DMZ between Azure and the Internet
-ms.openlocfilehash: 7a062d2394ae8b3bd1b17c19cbdf512327f9a766
-ms.sourcegitcommit: 9b459f75254d97617e16eddd0d411d1f80b7fe90
+ms.openlocfilehash: d12c76a08f028d54784de330c62311f294802cb9
+ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/03/2018
-ms.locfileid: "37403140"
+ms.lasthandoff: 11/02/2018
+ms.locfileid: "50916321"
 ---
 # <a name="dmz-between-azure-and-the-internet"></a>DMZ entre o Azure e a Internet
 
@@ -84,7 +84,7 @@ Você deve registrar todas as solicitações de entrada em todas as portas. Audi
 
 Uma implantação para uma arquitetura de referência que implementa essas recomendações está disponível no [GitHub][github-folder]. 
 
-### <a name="prerequisites"></a>pré-requisitos
+### <a name="prerequisites"></a>Pré-requisitos
 
 [!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 

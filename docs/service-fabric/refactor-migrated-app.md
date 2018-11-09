@@ -2,13 +2,13 @@
 title: Refatorar um Aplicativo Azure Service Fabric migrado a partir dos Serviços de Nuvem do Azure
 description: Como refatorar um Aplicativo do Azure Service Fabric existente migrado a partir dos Serviços de Nuvem do Azure
 author: petertay
-ms.date: 01/30/2018
-ms.openlocfilehash: 7b5c115acdbfca0c105e2b861af9a8049b890dca
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.date: 02/02/2018
+ms.openlocfilehash: 14ecaf81a07c72296e8db300df371e9a0c990434
+ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48819067"
+ms.lasthandoff: 11/02/2018
+ms.locfileid: "50916457"
 ---
 # <a name="refactor-an-azure-service-fabric-application-migrated-from-azure-cloud-services"></a>Refatorar um Aplicativo Azure Service Fabric migrado a partir dos Serviços de Nuvem do Azure
 

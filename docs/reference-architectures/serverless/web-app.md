@@ -3,12 +3,12 @@ title: Aplicativo web sem servidor
 description: Arquitetura de referência que mostra um aplicativo Web sem servidor e a API da Web
 author: MikeWasson
 ms.date: 10/16/2018
-ms.openlocfilehash: c2b46a60a57381ac3fd3f77cffe53b2dab2dacd6
-ms.sourcegitcommit: 113a7248b9793c670b0f2d4278d30ad8616abe6c
+ms.openlocfilehash: d1af03811bda6267fd40ee17823ac8357829f988
+ms.sourcegitcommit: 949b9d3e5a9cdee1051e6be700ed169113e914ae
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/16/2018
-ms.locfileid: "49349948"
+ms.lasthandoff: 11/05/2018
+ms.locfileid: "50983389"
 ---
 # <a name="serverless-web-application"></a>Aplicativo web sem servidor 
 
@@ -148,20 +148,13 @@ Para configurar a autenticação:
 
 - Habilite a autenticação do Azure AD dentro do Aplicativo de Funções. Para saber mais, confira [Autenticação e autorização no Serviço de Aplicativo do Azure][app-service-auth].
 
-- Adicione uma política ao Gerenciamento de API para pré-autorizar a solicitação validando o token de acesso:
-
-    ```xml
-    <validate-jwt header-name="Authorization" failed-validation-httpcode="401" failed-validation-error-message="Unauthorized. Access token is missing or invalid.">
-        <openid-config url="https://login.microsoftonline.com/[Azure AD tenant ID]/.well-known/openid-configuration" />
-        <required-claims>
-            <claim name="aud">
-                <value>[Application ID]</value>
-            </claim>
-        </required-claims>
-    </validate-jwt>
-    ```
+- Adicione [validate-jwt policy][apim-validate-jwt] ao Gerenciamento de API para pré-autorizar a solicitação validando o token de acesso.
 
 Para saber mais, confira o [Leiame do GitHub][readme].
+
+É recomendável criar registros de aplicativo separados no Azure AD para o aplicativo cliente e a API de back-end. Conceda permissão ao aplicativo cliente para chamar a API. Essa abordagem lhe dá a flexibilidade para definir várias APIs e clientes e controlar as permissões de cada um. 
+
+Na API, use [escopos][scopes] para fornecer aos aplicativos um controle refinado sobre quais permissões eles solicitam de um usuário. Por exemplo, uma API pode ter os escopos `Read` e `Write`, e um aplicativo cliente específico pode solicitar que o usuário autorize apenas as permissões `Read`.
 
 ### <a name="authorization"></a>Autorização
 
@@ -275,11 +268,21 @@ Como alternativa, armazene segredos do aplicativo no Key Vault. Isso permite que
 
 ## <a name="devops-considerations"></a>Considerações de DevOps
 
+### <a name="deployment"></a>Implantação
+
+Para implantar o aplicativo de funções, é recomendável usar [arquivos de pacote][functions-run-from-package] (“Execução a partir do pacote”). Usando essa abordagem, você carrega um arquivo zip em um contêiner de Armazenamento de Blobs e o tempo de execução das Funções monta o arquivo zip como um sistema de arquivos somente leitura. Essa é uma operação atômica, o que reduz a chance de uma implantação com falhas deixar o aplicativo em um estado inconsistente. Também é possível melhorar os tempos de inicialização a frio, especialmente para aplicativos Node.js, já que todos os arquivos são trocados ao mesmo tempo.
+
 ### <a name="api-versioning"></a>Controle de versão de API
 
-Uma API é um contrato entre um serviço e os clientes ou os consumidores do serviço. Suporte para o controle de versão em seu contrato de API. Se você fizer uma alteração de API de interrupção, apresente uma nova versão de API. Implante a nova versão lado a lado da versão original em um Aplicativo de funções separado. Isso permite que você migre clientes existentes para a nova API sem invalidar os aplicativos cliente. Por fim, substitua a versão anterior. Para saber mais sobre o controle de versão de API, confira [Controle da versão de uma API da Web RESTful][api-versioning].
+Uma API é um contrato entre um serviço e os clientes. Nessa arquitetura, o contrato de API é definido na camada de Gerenciamento de API. O Gerenciamento de API oferece suporte a dois [conceitos de controle de versão][apim-versioning] distintos, mas complementares:
 
-Para atualizações que não são alterações da falha na API, implante a nova versão em um slot de preparo no mesmo Aplicativo de funções. Verifique se a implantação foi bem-sucedida e, em seguida, troque a versão de preparo pela versão de produção.
+- As *versões* permitem que os consumidores escolham uma versão de API com base nas necessidades, como v1 vs. v2. 
+
+- *Revisões* permitem que os administradores de API façam alterações sem interrupções em uma API e implantem essas alterações, juntamente com um log de alterações para informar aos consumidores da API sobre as alterações.
+
+Se você fizer uma alteração significativa em uma API, publique uma nova versão no Gerenciamento de API. Implante a nova versão lado a lado da versão original em um Aplicativo de funções separado. Isso permite que você migre clientes existentes para a nova API sem invalidar os aplicativos cliente. Por fim, substitua a versão anterior. O Gerenciamento de API dá suporte a vários [esquemas de controle de versão][apim-versioning-schemes]: caminho de URL, cabeçalho HTTP ou a cadeia de consulta. Para obter mais informações sobre o controle de versão de API, confira [Controle de versão de uma API da Web RESTful][api-versioning].
+
+Para atualizações que não são alterações da falha na API, implante a nova versão em um slot de preparo no mesmo Aplicativo de funções. Verifique se a implantação foi bem-sucedida e, em seguida, troque a versão de preparo pela versão de produção. Publique uma revisão no Gerenciamento de API.
 
 ## <a name="deploy-the-solution"></a>Implantar a solução
 
@@ -292,6 +295,9 @@ Para implantar essa arquitetura de referência, confira o [Leiame do GitHub][rea
 [apim-ip]: /azure/api-management/api-management-faq#is-the-api-management-gateway-ip-address-constant-can-i-use-it-in-firewall-rules
 [api-geo]: /azure/api-management/api-management-howto-deploy-multi-region
 [apim-scale]: /azure/api-management/api-management-howto-autoscale
+[apim-validate-jwt]: /azure/api-management/api-management-access-restriction-policies#ValidateJWT
+[apim-versioning]: /azure/api-management/api-management-get-started-publish-versions
+[apim-versioning-schemes]: /azure/api-management/api-management-get-started-publish-versions#choose-a-versioning-scheme
 [app-service-auth]: /azure/app-service/app-service-authentication-overview
 [app-service-ip-restrictions]: /azure/app-service/app-service-ip-restrictions
 [app-service-security]: /azure/app-service/app-service-security
@@ -310,9 +316,11 @@ Para implantar essa arquitetura de referência, confira o [Leiame do GitHub][rea
 [functions-bindings]: /azure/azure-functions/functions-triggers-bindings
 [functions-cold-start]: https://blogs.msdn.microsoft.com/appserviceteam/2018/02/07/understanding-serverless-cold-start/
 [functions-https]: /azure/app-service/app-service-web-tutorial-custom-ssl#enforce-https
-[functions-proxy]: /azure-functions/functions-proxies
+[functions-proxy]: /azure/azure-functions/functions-proxies
+[functions-run-from-package]: /azure/azure-functions/run-functions-from-deployment-package
 [functions-scale]: /azure/azure-functions/functions-scale
 [functions-timeout]: /azure/azure-functions/functions-scale#consumption-plan
+[functions-zip-deploy]: /azure/azure-functions/deployment-zip-push
 [graph]: https://developer.microsoft.com/graph/docs/concepts/overview
 [key-vault-web-app]: /azure/key-vault/tutorial-web-application-keyvault
 [microservices-domain-analysis]: ../../microservices/domain-analysis.md
@@ -321,6 +329,7 @@ Para implantar essa arquitetura de referência, confira o [Leiame do GitHub][rea
 [partition-key]: /azure/cosmos-db/partition-data
 [pipelines]: /azure/devops/pipelines/index
 [ru]: /azure/cosmos-db/request-units
+[scopes]: /azure/active-directory/develop/v2-permissions-and-consent
 [static-hosting]: /azure/storage/blobs/storage-blob-static-website
 [static-hosting-preview]: https://azure.microsoft.com/blog/azure-storage-static-web-hosting-public-preview/
 [storage-https]: /azure/storage/common/storage-require-secure-transfer

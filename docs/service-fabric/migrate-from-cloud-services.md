@@ -2,13 +2,13 @@
 title: Migrar um aplicativo dos Serviços de Nuvem do Azure para o Azure Service Fabric
 description: Como migrar um aplicativo dos Serviços de Nuvem do Azure para o Azure Service Fabric.
 author: MikeWasson
-ms.date: 04/27/2017
-ms.openlocfilehash: b9ecbc88ae74da99a0ff3bb8814a9cb3422f79d5
-ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
+ms.date: 04/11/2018
+ms.openlocfilehash: a1b4e005b2dab67d8107f4002468e1d7622ae342
+ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/16/2018
-ms.locfileid: "31012681"
+ms.lasthandoff: 11/02/2018
+ms.locfileid: "50916440"
 ---
 # <a name="migrate-an-azure-cloud-services-application-to-azure-service-fabric"></a>Migrar um aplicativo dos Serviços de Nuvem do Azure para o Azure Service Fabric 
 
@@ -87,7 +87,7 @@ A tabela a seguir resume algumas das diferenças importantes entre os Serviços 
 
 \*Os serviços com estado usam [coleções confiáveis][sf-reliable-collections] para armazenar o estado entre réplicas, para que todas as leituras sejam locais aos nós no cluster. As gravações são replicadas em nós para confiabilidade. Os serviços sem estado podem ter estado externo, usando um banco de dados ou outro armazenamento externo.
 
-** Funções de trabalho também podem hospedar automaticamente a API Web ASP.NET usando o OWIN.
+** Funções de trabalho também podem hospedar automaticamente a ASP.NET Web API usando o OWIN.
 
 ## <a name="the-surveys-application-on-cloud-services"></a>O aplicativo Surveys nos Serviços de Nuvem
 
@@ -135,13 +135,13 @@ No Service Fabric, um serviço é executado dentro de um processo criado pelo te
 O requisito para hospedar internamente significa que um serviço do Service Fabric não pode usar o ASP.NET MVC ou Web Forms do ASP.NET, porque essas estruturas requerem o IIS e não são compatíveis com hospedagem interna. As opções para hospedagem interna incluem:
 
 - [ASP.NET Core][aspnet-core], hospedado internamente usando o servidor web [Kestrel][kestrel]. 
-- [API Web ASP.NET][aspnet-webapi], hospedada internamente usando [OWIN][owin].
+- [ASP.NET Web API][aspnet-webapi], hospedada internamente usando [OWIN][owin].
 - Estruturas de terceiros, como [Nancy](http://nancyfx.org/).
 
 O aplicativo Surveys original usa ASP.NET MVC. Como o ASP.NET MVC não pode ser hospedado internamente no Service Fabric, consideramos as seguintes opções de migração:
 
 - As funções da web do ASP.NET Core, que podem ser hospedadas internamente.
-- Converter o site da web em um aplicativo de página única (SPA) que chama uma API web implementada usando a API Web ASP.NET. Isso exigiria remodelar completamente o front-end da web.
+- Converter o site da web em um aplicativo de página única (SPA) que chama uma API web implementada usando a ASP.NET Web API. Isso exigiria remodelar completamente o front-end da web.
 - Manter o código existente do ASP.NET MVC e implantar o IIS em um contêiner do Windows Server para Service Fabric. Essa abordagem requer pouca ou nenhuma alteração de código. 
 
 A primeira opção, portabilidade para o ASP.NET Core, nos permitiu aproveitar os recursos mais recentes no ASP.NET Core. Para fazer a conversão, seguimos as etapas descritas em [Migrando do ASP.NET MVC para o ASP.NET Core MVC][aspnet-migration]. 
