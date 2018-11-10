@@ -2,13 +2,13 @@
 title: Implementar um transformador de propriedade e um coletor em um modelo do Azure Resource Manager
 description: Descreve como implementar um transformador de propriedade e um coletor em um modelo do Azure Resource Manager
 author: petertay
-ms.date: 06/09/2017
-ms.openlocfilehash: 2c2fd93c977b82bed05ebe0ae68233a700df0f4f
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.date: 10/30/2018
+ms.openlocfilehash: ad5b3a71f516ec12fee311e25c43f434f9f306ed
+ms.sourcegitcommit: e9eb2b895037da0633ef3ccebdea2fcce047620f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428577"
+ms.lasthandoff: 10/30/2018
+ms.locfileid: "50251780"
 ---
 # <a name="implement-a-property-transformer-and-collector-in-an-azure-resource-manager-template"></a>Implementar um transformador de propriedade e um coletor em um modelo do Azure Resource Manager
 
@@ -126,7 +126,8 @@ Nosso modelo também define uma variável denominada `instance`. Ele executa a t
 Por fim, o `output` de nosso modelo concatena as transformações coletadas de nosso parâmetro `state` com a transformação atual executada pelo nossa variável `instance`:
 
 ```json
-  "outputs": {
+    "resources": [],
+    "outputs": {
     "collection": {
       "type": "array",
       "value": "[concat(parameters('state'), variables('instance'))]"
@@ -264,7 +265,7 @@ Como se esperaria, esse é o URI para o **modelo de coletor** que será usado pe
     "properties": {
         "mode": "Incremental",
         "templateLink": {
-            "uri": "[variables('linkedTemplateUri')]",
+            "uri": "[variables('collectorTemplateUri')]",
             "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -288,25 +289,36 @@ Por fim, nosso recurso `Microsoft.Network/networkSecurityGroups` atribui diretam
       "name": "networkSecurityGroup1",
       "location": "[resourceGroup().location]",
       "properties": {
-        "securityRules": "[reference('firstResource').outputs.result.value]"
+        "securityRules": "[reference('collector').outputs.result.value]"
       }
     }
   ],
   "outputs": {
       "instance":{
           "type": "array",
-          "value": "[reference('firstResource').outputs.result.value]"
+          "value": "[reference('collector').outputs.result.value]"
       }
 
   }
 ```
 
-## <a name="next-steps"></a>Próximas etapas
+## <a name="try-the-template"></a>Experimentar o modelo
 
-* Essa técnica também é implementada no [projeto de blocos de construção do modelo](https://github.com/mspnp/template-building-blocks) e nas [arquiteturas de referência do Azure](/azure/architecture/reference-architectures/). Você pode usá-los para criar sua própria arquitetura ou implantar uma de nossas arquiteturas de referência.
+Um modelo de exemplo está disponível no [GitHub][github]. Para implantar o modelo, clone o repositório e execute os seguintes comandos da [CLI do Azure][cli]:
+
+```bash
+git clone https://github.com/mspnp/template-examples.git
+cd template-examples/example4-collector
+az group create --location <location> --name <resource-group-name>
+az group deployment create -g <resource-group-name> \
+    --template-uri https://raw.githubusercontent.com/mspnp/template-examples/master/example4-collector/deploy.json \
+    --parameters deploy.parameters.json
+```
 
 <!-- links -->
 [objects-as-parameters]: ./objects-as-parameters.md
 [resource-manager-linked-template]: /azure/azure-resource-manager/resource-group-linked-templates
 [resource-manager-variables]: /azure/azure-resource-manager/resource-group-template-functions-deployment
 [nsg]: /azure/virtual-network/virtual-networks-nsg
+[cli]: /cli/azure/?view=azure-cli-latest
+[github]: https://github.com/mspnp/template-examples

@@ -2,13 +2,13 @@
 title: Usar um objeto como um parâmetro em um modelo do Azure Resource Manager
 description: Descreve como estender a funcionalidade dos modelos do Azure Resource Manager para usar objetos como parâmetros
 author: petertay
-ms.date: 06/09/2017
-ms.openlocfilehash: dd53c55a26b2452c375d8d1e1a98886b15febaeb
-ms.sourcegitcommit: 62945777e519d650159f0f963a2489b6bb6ce094
+ms.date: 10/30/2018
+ms.openlocfilehash: c1955823b3474efa0abea1d9634add5f13d02eda
+ms.sourcegitcommit: e9eb2b895037da0633ef3ccebdea2fcce047620f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/09/2018
-ms.locfileid: "48876743"
+ms.lasthandoff: 10/30/2018
+ms.locfileid: "50251882"
 ---
 # <a name="use-an-object-as-a-parameter-in-an-azure-resource-manager-template"></a>Usar um objeto como um parâmetro em um modelo do Azure Resource Manager
 
@@ -301,25 +301,21 @@ Vamos examinar mais detalhadamente como podemos especificar os valores de propri
 
 ## <a name="try-the-template"></a>Experimentar o modelo
 
-Para experimentar esse modelo, siga estas etapas: 
+Um modelo de exemplo está disponível no [GitHub][github]. Para implantar o modelo, clone o repositório e execute os seguintes comandos da [CLI do Azure][cli]:
 
-1.  Visite o portal do Azure, selecione o ícone **+** e pesquise pelo tipo de recurso **implantação de modelo** e selecione-o.
-2.  Quando chegar à página **Implantação de modelo**, selecione o botão **criar**. Esse botão abre a folha **implantação personalizada**.
-3.  Selecione o botão **Editar modelo**.
-4.  Exclua o modelo vazio. 
-5.  Copie e cole o modelo de exemplo no painel direito.
-6.  Selecione o botão **Salvar**.
-7.  Quando retornar ao painel de **implantação personalizada**, selecione o botão **Editar parâmetros**.
-8.  Na folha **editar parâmetros**, exclua o modelo existente.
-9.  Copie e cole o modelo de parâmetro de exemplo acima.
-10. Selecione o botão **Salvar**, que fará com que você retorne à folha **implantação personalizada**.
-11. Na folha **Implantação personalizada**, selecione sua assinatura, crie um novo grupo de recursos ou use um existente e selecione uma localização. Examine os termos e condições e selecione a caixa de seleção **Eu concordo**.
-12. Selecione o botão **Comprar**.
+```bash
+git clone https://github.com/mspnp/template-examples.git
+cd template-examples/example3-object-param
+az group create --location <location> --name <resource-group-name>
+az group deployment create -g <resource-group-name> \
+    --template-uri https://raw.githubusercontent.com/mspnp/template-examples/master/example3-object-param/deploy.json \
+    --parameters deploy.parameters.json
+```
 
 ## <a name="next-steps"></a>Próximas etapas
 
-* Você pode expandir essas técnicas para implementar um [transformador de objeto de propriedade e um coletor](./collector.md). As técnicas de transformador e coletor são mais gerais e podem ser vinculadas de seus modelos.
-* Esse padrão também é implementado no [projeto de blocos de construção do modelo](https://github.com/mspnp/template-building-blocks) e nas [arquiteturas de referência do Azure](/azure/architecture/reference-architectures/). Você pode examinar os nossos modelos para ver como implementamos essa técnica.
+- Saiba como criar um modelo que itera por meio de uma matriz de objetos e os transforma em um esquema JSON. Confira [Implementar um transformador de propriedade e um coletor em um modelo do Azure Resource Manager](./collector.md)
+
 
 <!-- links -->
 [azure-resource-manager-authoring-templates]: /azure/azure-resource-manager/resource-group-authoring-templates
@@ -327,3 +323,5 @@ Para experimentar esse modelo, siga estas etapas:
 [azure-resource-manager-create-multiple-instances]: /azure/azure-resource-manager/resource-group-create-multiple
 [azure-resource-manager-functions]: /azure/azure-resource-manager/resource-group-template-functions-resource
 [nsg]: /azure/virtual-network/virtual-networks-nsg
+[cli]: /cli/azure/?view=azure-cli-latest
+[github]: https://github.com/mspnp/template-examples

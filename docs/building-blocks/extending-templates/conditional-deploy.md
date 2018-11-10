@@ -2,23 +2,23 @@
 title: Implantar condicionalmente um recurso em um modelo do Azure Resource Manager
 description: Descreve como estender a funcionalidade de modelos do Azure Resource Manager para implantar condicionalmente um recurso dependendo do valor de um parâmetro
 author: petertay
-ms.date: 06/09/2017
-ms.openlocfilehash: e911e7dc41b4f71ebfaf13a00f8cdbb5b4e2578b
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.date: 10/30/2018
+ms.openlocfilehash: 2c74e17a5f38f9225b696640a23b55b1285276bb
+ms.sourcegitcommit: e9eb2b895037da0633ef3ccebdea2fcce047620f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24538386"
+ms.lasthandoff: 10/30/2018
+ms.locfileid: "50251831"
 ---
 # <a name="conditionally-deploy-a-resource-in-an-azure-resource-manager-template"></a>Implantar condicionalmente um recurso em um modelo do Azure Resource Manager
 
 Existem alguns cenários em que você precisa projetar seu modelo para implantar um recurso baseado em uma condição, como um valor de parâmetro estar ou não presente. Por exemplo, seu modelo pode implantar uma rede virtual e incluir parâmetros para especificar outras redes virtuais para emparelhamento. Se não tiver especificado nenhum valor de parâmetro para o emparelhamento, você não deseja que o Gerenciador de Recursos implante o recurso de emparelhamento.
 
-Para isso, use o [`condition` elemento][azure-resource-manager-condition] no recurso para testar o tamanho da sua matriz de parâmetro. Se o comprimento for zero, retorne `false` para impedir a implantação, mas para todos os valores maiores que zero, retornar `true` para permitir a implantação.
+Para isso, use o [elemento condição][azure-resource-manager-condition] no recurso para testar o tamanho da sua matriz de parâmetro. Se o comprimento for zero, retorne `false` para impedir a implantação, mas para todos os valores maiores que zero, retornar `true` para permitir a implantação.
 
 ## <a name="example-template"></a>Modelo de exemplo
 
-Vamos examinar um modelo de exemplo que demonstra isso. Nosso modelo usa o [`condition` elemento][azure-resource-manager-condition] para controlar a implantação do recurso `Microsoft.Network/virtualNetworks/virtualNetworkPeerings`. Esse recurso cria um emparelhamento entre duas Redes Virtuais do Azure na mesma região.
+Vamos examinar um modelo de exemplo que demonstra isso. Nosso modelo usa o [elemento condição][azure-resource-manager-condition] para controlar a implantação do recurso `Microsoft.Network/virtualNetworks/virtualNetworkPeerings`. Esse recurso cria um emparelhamento entre duas Redes Virtuais do Azure na mesma região.
 
 Vamos observar cada seção do modelo.
 
@@ -40,12 +40,15 @@ Nosso parâmetro `virtualNetworkPeerings` é uma `array` e tem o seguinte esquem
 ```json
 "virtualNetworkPeerings": [
     {
-        "remoteVirtualNetwork": {
-            "name": "my-other-virtual-network"
-        },
-        "allowForwardedTraffic": true,
-        "allowGatewayTransit": true,
-        "useRemoteGateways": false
+      "name": "firstVNet/peering1",
+      "properties": {
+          "remoteVirtualNetwork": {
+              "id": "[resourceId('Microsoft.Network/virtualNetworks','secondVNet')]"
+          },
+          "allowForwardedTraffic": true,
+          "allowGatewayTransit": true,
+          "useRemoteGateways": false
+      }
     }
 ]
 ```
@@ -60,7 +63,7 @@ As propriedades no nosso parâmetro especificam as [configurações relacionadas
       "name": "[concat('vnp-', copyIndex())]",
       "condition": "[greater(length(parameters('virtualNetworkPeerings')), 0)]",
       "dependsOn": [
-        "virtualNetworks"
+        "firstVNet", "secondVNet"
       ],
       "copy": {
           "name": "iterator",
@@ -113,17 +116,29 @@ Em seguida, especificamos nosso loop de `copy`. Trata-se de um loop `serial` que
   },
 ```
 
-Nossa variável `workaround` inclui duas propriedades, uma nomeada como `true` e outra nomeada como `false`. A propriedade `true` é avaliada como o valor da matriz de parâmetros `virtualNetworkPeerings`. A propriedade `false` é avaliada como um objeto vazio, incluindo as propriedades nomeadas que o Gerenciador de Recursos espera ver &mdash; observe que `false` é, na verdade, uma matriz, assim como nosso parâmetro `virtualNetworkPeerings`, o que satisfaz a validação. 
+Nossa variável `workaround` inclui duas propriedades, uma nomeada como `true` e outra nomeada como `false`. A propriedade `true` é avaliada como o valor da matriz de parâmetros `virtualNetworkPeerings`. A propriedade `false` é avaliada como um objeto vazio, incluindo as propriedades nomeadas que o Gerenciador de Recursos espera ver &mdash;. Observe que `false` é, na verdade, uma matriz, assim como nosso parâmetro `virtualNetworkPeerings`, o que satisfaz a validação. 
 
-A variável `peerings` usa nossa variável `workaround` mais uma vez testando se o comprimento da matriz de parâmetros `virtualNetworkPeerings` é maior que zero. Em caso positivo, `string` é avaliada como `true` e a variável `workaround` é avaliada como a matriz de parâmetros `virtualNetworkPeerings`. Caso contrário, será avaliada como `false`, e a variável `workaround` é avaliada como nosso objeto vazio no primeiro elemento da matriz.
+A variável `peerings` usa nossa variável `workaround` mais uma vez testando se o comprimento da matriz de parâmetros `virtualNetworkPeerings` é maior que zero. Em caso positivo, a `string` é avaliada como `true` e a variável `workaround` é avaliada como a matriz do parâmetro `virtualNetworkPeerings`. Caso contrário, será avaliada como `false`, e a variável `workaround` é avaliada como nosso objeto vazio no primeiro elemento da matriz.
 
 Agora que contornamos o problema de validação, podemos simplesmente especificar a implantação do recursos `Microsoft.Network/virtualNetworks/virtualNetworkPeerings` no modelo aninhado, passando o `name` e as `properties` da nossa matriz de parâmetros `virtualNetworkPeerings`. Você pode ver isso no elemento `template` aninhado no elemento `properties` do nosso recurso.
 
+## <a name="try-the-template"></a>Experimentar o modelo
+
+Um modelo de exemplo está disponível no [GitHub][github]. Para implantar o modelo, execute os seguintes comandos da [CLI do Azure][cli]:
+
+```bash
+az group create --location <location> --name <resource-group-name>
+az group deployment create -g <resource-group-name> \
+    --template-uri https://raw.githubusercontent.com/mspnp/template-examples/master/example2-conditional/deploy.json
+```
+
 ## <a name="next-steps"></a>Próximas etapas
 
-* Essa técnica também é implementada no [projeto de blocos de construção do modelo](https://github.com/mspnp/template-building-blocks) e nas [arquiteturas de referência do Azure](/azure/architecture/reference-architectures/). Você pode usá-los para criar sua própria arquitetura ou implantar uma de nossas arquiteturas de referência.
+* Como parâmetros de modelo, use objetos em vez de valores escalares. Confira [Usar um objeto como um parâmetro em um modelo do Azure Resource Manager](./objects-as-parameters.md)
 
 <!-- links -->
 [azure-resource-manager-condition]: /azure/azure-resource-manager/resource-group-authoring-templates#resources
 [azure-resource-manager-variable]: /azure/azure-resource-manager/resource-group-authoring-templates#variables
 [vnet-peering-resource-schema]: /azure/templates/microsoft.network/virtualnetworks/virtualnetworkpeerings
+[cli]: /cli/azure/?view=azure-cli-latest
+[github]: https://github.com/mspnp/template-examples

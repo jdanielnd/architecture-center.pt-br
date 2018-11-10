@@ -2,13 +2,13 @@
 title: Atualizar um recurso em um modelo do Azure Resource Manager
 description: Descreve como estender a funcionalidade dos modelos do Azure Resource Manager para atualizar um recurso
 author: petertay
-ms.date: 06/09/2017
-ms.openlocfilehash: f235f0b4d54d65ccc2fa67876916e922d75f6d07
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.date: 10/31/2018
+ms.openlocfilehash: dc97534e658c9728ac617b4e52031e2553600458
+ms.sourcegitcommit: e9eb2b895037da0633ef3ccebdea2fcce047620f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429019"
+ms.lasthandoff: 10/30/2018
+ms.locfileid: "50251814"
 ---
 # <a name="update-a-resource-in-an-azure-resource-manager-template"></a>Atualizar um recurso em um modelo do Azure Resource Manager
 
@@ -122,16 +122,13 @@ Vamos dar uma olhada no objeto de recurso de nosso recurso `firstVNet` primeiro.
 
 ## <a name="try-the-template"></a>Experimentar o modelo
 
-Para experimentar esse modelo, siga estas etapas:
+Um modelo de exemplo está disponível no [GitHub][github]. Para implantar o modelo, execute os seguintes comandos da [CLI do Azure][cli]:
 
-1.  Visite o portal do Azure, selecione o ícone **+** e pesquise pelo tipo de recurso **implantação de modelo** e selecione-o.
-2.  Quando chegar à página **Implantação de modelo**, selecione o botão **criar**. Esse botão abre a folha **implantação personalizada**.
-3.  Selecione o ícone **Editar**.
-4.  Exclua o modelo vazio.
-5.  Copie e cole o modelo de exemplo no painel direito.
-6.  Selecione o botão **Salvar**.
-7.  Você retorna ao painel **Implantação personalizada**, mas desta vez há algumas caixas de listagem. Selecione sua assinatura, crie um novo grupo de recursos ou use o existente e selecione um local. Examine os termos e condições e, em seguida, selecione o botão **Eu concordo**.
-8.  Selecione o botão **Comprar**.
+```bash
+az group create --location <location> --name <resource-group-name>
+az group deployment create -g <resource-group-name> \
+    --template-uri https://raw.githubusercontent.com/mspnp/template-examples/master/example1-update/deploy.json
+```
 
 Depois que a implantação for concluída, abra o grupo de recursos que você especificou no portal. Você vê uma rede virtual denominada `firstVNet` e uma NIC denominada `nic1`. Clique em `firstVNet` e, depois, em `subnets`. Você verá a `firstSubnet` que foi originalmente criada e a `secondSubnet` que foi adicionada ao recurso `updateVNet`. 
 
@@ -145,4 +142,7 @@ A `firstVNet` original foi atualizada em vez de recriada. Se `firstVNet` tivesse
 
 ## <a name="next-steps"></a>Próximas etapas
 
-* Essa técnica também é implementada no [projeto de blocos de construção do modelo](https://github.com/mspnp/template-building-blocks) e nas [arquiteturas de referência do Azure](/azure/architecture/reference-architectures/). Você pode usá-los para criar sua própria arquitetura ou implantar uma de nossas arquiteturas de referência.
+* Saiba como implantar um recurso com base em uma condição, como se um valor de parâmetro estivesse presente. Confira [Implantar condicionalmente um recurso em um modelo do Azure Resource Manager](./conditional-deploy.md).
+
+[cli]: /cli/azure/?view=azure-cli-latest
+[github]: https://github.com/mspnp/template-examples

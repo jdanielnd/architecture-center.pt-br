@@ -2,14 +2,14 @@
 title: Aplicativo Web de várias regiões
 description: Arquitetura recomendada para aplicativo Web com alta disponibilidade em execução no Microsoft Azure.
 author: MikeWasson
-ms.date: 11/23/2016
+ms.date: 10/25/2018
 cardTitle: Run in multiple regions
-ms.openlocfilehash: 5493deea871f25fb6ea3531a22d92d83916930b1
-ms.sourcegitcommit: 62945777e519d650159f0f963a2489b6bb6ce094
+ms.openlocfilehash: 1ed69f4f7e79fe2025e2a10d50e851ac4c02f1a6
+ms.sourcegitcommit: 065fa8ecb37c8be1827da861243ad6a33c75c99d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/09/2018
-ms.locfileid: "48876791"
+ms.lasthandoff: 10/26/2018
+ms.locfileid: "50136651"
 ---
 # <a name="run-a-web-application-in-multiple-regions"></a>Execute um aplicativo Web em várias regiões
 [!INCLUDE [header](../../_includes/header.md)]
@@ -70,9 +70,7 @@ Por outro lado, não use a investigação de integridade para verificar os servi
 Use a [Replicação Geográfica Ativa][sql-replication] para criar uma réplica secundária legível em uma região diferente. Você pode ter até quatro réplicas secundárias legíveis. Faça failover para um banco de dados secundário se o banco de dados primário falhar ou precisar ser deixado offline. A replicação geográfica ativa pode ser configurada para qualquer banco de dados em qualquer pool de banco de dados elástico.
 
 ### <a name="cosmos-db"></a>Cosmos DB
-O Cosmos DB dá suporte à replicação geográfica entre regiões. Uma região é designada como gravável e outras como réplicas somente leitura.
-
-Se houver uma interrupção regional, será possível fazer failover selecionando outra região para ser a região de gravação. O SDK do cliente envia automaticamente solicitações de gravação para a região de gravação atual, portanto você não precisa atualizar a configuração do cliente após um failover. Para obter mais informações, confira [Como distribuir os dados globalmente com o Azure Cosmos DB][cosmosdb-geo].
+O Cosmos DB dá suporte à replicação geográfica entre regiões com vários mestres (várias regiões de gravação). Como alternativa, você pode designar uma região como a região gravável e outras como réplicas somente leitura. Se houver uma interrupção regional, será possível fazer failover selecionando outra região para ser a região de gravação. O SDK do cliente envia automaticamente solicitações de gravação para a região de gravação atual, portanto você não precisa atualizar a configuração do cliente após um failover. Para obter mais informações, confira [Distribuição de dados global com o Azure Cosmos DB][cosmosdb-geo].
 
 > [!NOTE]
 > Todas as réplicas de pertencem ao mesmo grupo de recursos.
@@ -136,10 +134,11 @@ Set-AzureRmTrafficManagerEndpoint -TrafficManagerEndpoint $endpoint
 
 Para obter mais informações, consulte [Cmdlets do Gerenciador de Tráfego do Microsoft Azure][tm-ps].
 
-**CLI (Interface de Linha de Comando) do Azure**
+**CLI do Azure**
 
 ```bat
-azure network traffic-manager endpoint set --name <endpoint> --profile-name <profile> --resource-group <resource-group> --type AzureEndpoints --priority 3
+az network traffic-manager endpoint update --resource-group <resource-group> --profile-name <profile> \
+    --name <endpoint-name> --type azureEndpoints --priority 3
 ```    
 
 ### <a name="sql-database"></a>Banco de dados SQL

@@ -3,12 +3,12 @@ title: Processando arquivos CSV e JSON
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 02e684d562cfe555f9e3596ad0a2f1a00d05c7a7
-ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
+ms.openlocfilehash: b9a0deae5499a4df4e43e15914490b89e0e3a50c
+ms.sourcegitcommit: e9eb2b895037da0633ef3ccebdea2fcce047620f
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/03/2018
-ms.locfileid: "30298604"
+ms.lasthandoff: 10/30/2018
+ms.locfileid: "50251797"
 ---
 # <a name="working-with-csv-and-json-files-for-data-solutions"></a>Trabalhando com arquivos CSV e JSON para soluções de dados
 
@@ -44,6 +44,8 @@ Os formatos de arquivo CSV e JSON facilitam a troca de dados entre sistemas ou d
 ## <a name="working-with-csv-and-json-data-in-azure"></a>Trabalhando com os dados CSV e JSON no Azure
 
 O Azure fornece várias soluções para trabalhar com arquivos CSV e JSON, dependendo de suas necessidades. O local principal de aterrissagem desses arquivos é o Armazenamento do Azure ou o Azure Data Lake Store. A maioria dos serviços do Azure que trabalha com esses e outros arquivos baseados em texto é integrada a um desses serviços de armazenamento de objetos. No entanto, em algumas situações, você pode optar por importar os dados diretamente para o SQL do Azure ou outro armazenamento de dados. O SQL Server tem suporte nativo para armazenar e trabalhar com documentos JSON, o que facilita [a importação e o processo desses tipos de arquivos](/sql/relational-databases/json/import-json-documents-into-sql-server). Você pode usar um utilitário como a Importação em Massa do SQL para [importar arquivos CSV](/sql/relational-databases/json/import-json-documents-into-sql-server) com facilidade.
+
+Você também pode consultar os arquivos JSON diretamente do Armazenamento de Blobs do Azure sem importá-los para o SQL do Azure. Para obter um exemplo completo dessa abordagem, confira [Trabalhar com arquivos JSON com o SQL do Azure](https://medium.com/@mauridb/work-with-json-files-with-azure-sql-8946f066ddd4). No momento, essa opção não está disponível para arquivos CSV.
 
 Dependendo do cenário, você pode executar o [processamento em lotes](../big-data/batch-processing.md) ou o [processamento em tempo real](../big-data/real-time-processing.md) dos dados.
 
