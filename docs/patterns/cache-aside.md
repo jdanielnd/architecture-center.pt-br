@@ -3,17 +3,17 @@ title: Cache-Aside
 description: Carregar dados sob demanda em um cache de um armazenamento de dados
 keywords: padrão de design
 author: dragon119
-ms.date: 06/23/2017
+ms.date: 11/01/2018
 pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - data-management
 - performance-scalability
-ms.openlocfilehash: d4d7c9dcd612c780e3e494509a57b6b4a0144423
-ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
+ms.openlocfilehash: 4c93ed02ff28e79cedc26f83364592baba96821d
+ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/16/2018
-ms.locfileid: "31012453"
+ms.lasthandoff: 11/02/2018
+ms.locfileid: "50916355"
 ---
 # <a name="cache-aside-pattern"></a>Padrão Cache-Aside
 
@@ -70,7 +70,7 @@ Esse padrão pode não ser adequado:
 
 No Microsoft Azure você pode usar o Cache Redis do Azure para criar um cache distribuído que pode ser compartilhado por várias instâncias de um aplicativo. 
 
-Para se conectar a uma instância do Cache Redis do Azure, chame o método estático `Connect`e passe a cadeia de conexão. O método retorna um `ConnectionMultiplexer` que representa a conexão. Uma abordagem para compartilhar uma instância do `ConnectionMultiplexer` em seu aplicativo deve ter uma propriedade estática que retorna uma instância conectada, semelhante ao exemplo a seguir. Essa abordagem oferece uma maneira thread-safe de inicializar somente uma única instância conectada.
+Esses exemplos de código a seguir usam o cliente [StackExchange.Redis], que é uma biblioteca de cliente Redis gravada para o .NET. Para se conectar a uma instância do Cache Redis do Azure, chame o método estático `ConnectionMultiplexer.Connect`e passe a cadeia de conexão. O método retorna um `ConnectionMultiplexer` que representa a conexão. Uma abordagem para compartilhar uma instância do `ConnectionMultiplexer` em seu aplicativo deve ter uma propriedade estática que retorna uma instância conectada, semelhante ao exemplo a seguir. Essa abordagem oferece uma maneira thread-safe de inicializar somente uma única instância conectada.
 
 ```csharp
 private static ConnectionMultiplexer Connection;
@@ -85,7 +85,7 @@ private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionM
 public static ConnectionMultiplexer Connection => lazyConnection.Value;
 ```
 
-O método `GetMyEntityAsync` no exemplo de código a seguir mostra uma implementação do padrão Cache-Aside com base no Cache Redis do Azure. Esse método recupera um objeto do cache usando a abordagem read-through.
+O método `GetMyEntityAsync` no exemplo de código a seguir mostra uma implementação do padrão Cache-Aside. Esse método recupera um objeto do cache usando a abordagem read-through.
 
 Um objeto é identificado usando uma ID inteira como chave. O método `GetMyEntityAsync` tenta recuperar um item com essa chave do cache. Se um item correspondente for encontrado, ele é retornado. Se não houver nenhuma correspondência no cache, o método `GetMyEntityAsync` recupera o objeto de um armazenamento de dados, adiciona-o ao cache e, em seguida, retorna-o. O código que realmente lê os dados do armazenamento de dados não é mostrado aqui, pois ele depende do armazenamento de dados. Observe que o item de cache é configurado para expirar, a fim de impedir que ele se torne obsoleto, caso tenha se atualizado em outro lugar.
 
@@ -126,7 +126,7 @@ public async Task<MyEntity> GetMyEntityAsync(int id)
 }
 ```
 
->  Os exemplos usam a API de Cache Redis do Azure para acessar o armazenamento e recuperar as informações do cache. Para obter mais informações, confira [Como usar o Cache Redis do Microsoft Azure](https://docs.microsoft.com/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache) e [Como criar um aplicativo Web com o Cache Redis](https://docs.microsoft.com/azure/redis-cache/cache-web-app-howto)
+>  Os exemplos usam o Cache Redis para acessar o armazenamento e recuperar as informações do cache. Para obter mais informações, confira [Como usar o Cache Redis do Microsoft Azure](https://docs.microsoft.com/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache) e [Como criar um aplicativo Web com o Cache Redis](https://docs.microsoft.com/azure/redis-cache/cache-web-app-howto)
 
 O método `UpdateEntityAsync` mostrado a seguir demonstra como invalidar um objeto no cache quando o valor é alterado pelo aplicativo. O código atualiza o armazenamento de dados original e, em seguida, remove o item do cache.
 
@@ -155,3 +155,6 @@ As informações a seguir também podem ser relevantes ao implementar esse padr�
 - [Diretrizes de cache](https://docs.microsoft.com/azure/architecture/best-practices/caching). Fornece informações adicionais sobre como você pode armazenar dados em cache em uma solução de nuvem, e os problemas que você deve considerar ao implementar um cache.
 
 - [Primer de Consistência de Dados](https://msdn.microsoft.com/library/dn589800.aspx). Os aplicativos de nuvem geralmente usam dados distribuídos entre armazenamentos de dados. Gerenciar e manter a consistência dos dados nesse ambiente são um aspecto crítico do sistema, especialmente a simultaneidade e os problemas de disponibilidade que podem surgir. Este primer descreve problemas sobre a consistência entre dados distribuídos e resume como um aplicativo pode implementar a consistência eventual para manter a disponibilidade dos dados.
+
+
+[StackExchange.Redis]: https://github.com/StackExchange/StackExchange.Redis

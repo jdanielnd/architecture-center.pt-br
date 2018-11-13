@@ -1,24 +1,26 @@
 ---
 title: Enterprise BI com o SQL Data Warehouse
-description: Use o Azure para obter insights de negócios de dados relacionais armazenados localmente
+description: Use o Azure para obter insights comerciais dos dados relacionais armazenados localmente
 author: MikeWasson
-ms.date: 07/01/2018
-ms.openlocfilehash: e3542e40b4b6d1f604f93bb21528f34ba7f22fc6
-ms.sourcegitcommit: 58d93e7ac9a6d44d5668a187a6827d7cd4f5a34d
+ms.date: 11/06/2018
+ms.openlocfilehash: d5b680346267a17b5016b8897dc03ddcf18a7fe9
+ms.sourcegitcommit: 02ecd259a6e780d529c853bc1db320f4fcf919da
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/02/2018
-ms.locfileid: "37142328"
+ms.lasthandoff: 11/07/2018
+ms.locfileid: "51263806"
 ---
 # <a name="enterprise-bi-with-sql-data-warehouse"></a>Enterprise BI com o SQL Data Warehouse
 
-Essa arquitetura de referência implementa um pipeline [ELT](../../data-guide/relational-data/etl.md#extract-load-and-transform-elt) (extrair-carregar-transformar) que move os dados de um banco de dados SQL Server local para o SQL Data Warehouse e os transforma para análise. [**Implante essa solução**.](#deploy-the-solution)
+Essa arquitetura de referência implementa um pipeline [ELT](../../data-guide/relational-data/etl.md#extract-load-and-transform-elt) (extrair-carregar-transformar) que move os dados de um banco de dados SQL Server local para o SQL Data Warehouse e os transforma para análise. 
+
+Há uma implantação de referência para essa arquitetura disponível no [GitHub][github-folder]
 
 ![](./images/enterprise-bi-sqldw.png)
 
 **Cenário**: uma organização tem um grande conjunto de dados OLTP armazenado em um banco de dados SQL Server local. A organização deseja usar o SQL Data Warehouse para fazer análise usando o Power BI. 
 
-Essa arquitetura de referência serve para trabalhos únicos ou sob demanda. Se você precisa mover os dados de forma contínua (por hora ou diariamente), recomendamos usar o Azure Data Factory para definir um fluxo de trabalho automatizado. Para uma arquitetura de referência que usa o Data Factory, consulte [Enterprise BI automatizada com o SQL Data Warehouse e o Azure Data Factory](./enterprise-bi-adf.md).
+Essa arquitetura de referência serve para trabalhos avulsos ou sob demanda. Se você precisa mover os dados de forma contínua (por hora ou diariamente), recomendamos usar o Azure Data Factory para definir um fluxo de trabalho automatizado. Para uma arquitetura de referência que usa o Data Factory, confira [Enterprise BI automatizada com o SQL Data Warehouse e o Azure Data Factory][adf-ra].
 
 ## <a name="architecture"></a>Arquitetura
 
@@ -36,7 +38,7 @@ A arquitetura consiste nos componentes a seguir.
 
 ### <a name="analysis-and-reporting"></a>Análise e relatórios
 
-**Azure Analysis Services**. O [Analysis Services](/azure/analysis-services/) é um serviço totalmente gerenciado que fornece recursos de modelagem de dados. Use o Analysis Services para criar um modelo semântico de que os usuários podem consultar. O Analysis Services é especialmente útil em um cenário de painel de BI. Nessa arquitetura, o Analysis Services lê dados do data warehouse para processar o modelo semântico e atende a consultas ao painel de maneira eficiente. Ele também dá suporte à simultaneidade elástica, expandindo réplicas para acelerar o processamento das consultas.
+**Azure Analysis Services**. O [Analysis Services](/azure/analysis-services/) é um serviço totalmente gerenciado que fornece recursos de modelagem de dados. Use o Analysis Services para criar um modelo semântico que os usuários podem consultar. O Analysis Services é especialmente útil em um cenário de painel de BI. Nessa arquitetura, o Analysis Services lê dados do data warehouse para processar o modelo semântico e atende a consultas ao painel de maneira eficiente. Ele também dá suporte à simultaneidade elástica, expandindo réplicas para acelerar o processamento das consultas.
 
 Atualmente, o Azure Analysis Services dá suporte a modelos tabulares, mas não a modelos multidimensionais. Os modelos tabulares usam constructos de modelagem relacional (tabelas e colunas), ao passo que os modelos multidimensionais utilizam constructos de modelagem OLAP (cubos, dimensões e medidas). Se você precisar de modelos multidimensionais, use o SSAS (SQL Server Analysis Services). Para saber mais, confira [Comparando soluções tabulares e multidimensionais](/sql/analysis-services/comparing-tabular-and-multidimensional-solutions-ssas).
 
@@ -65,19 +67,19 @@ As seções a seguir descrevem esses estágios mais detalhadamente.
 
 ### <a name="export-data-from-sql-server"></a>Exportar dados do SQL Server
 
-O utilitário [bcp](/sql/tools/bcp-utility) (programa de cópia em massa) é uma maneira rápida de criar arquivos de texto simples de tabelas SQL. Nesta etapa, você seleciona as colunas que você deseja exportar, mas não transforma os dados. As transformações de dados devem ocorrer no SQL Data Warehouse.
+O utilitário [bcp](/sql/tools/bcp-utility) (programa de cópia em massa) é uma maneira rápida de criar arquivos de texto simples de tabelas SQL. Nesta etapa, você seleciona as colunas que deseja exportar, mas não transforma os dados. As transformações de dados devem ocorrer no SQL Data Warehouse.
 
 **Recomendações**
 
 Se possível, agende a extração de dados fora do horário de pico para minimizar a contenção de recursos no ambiente de produção. 
 
-Evite executar bcp no servidor de banco de dados. Em vez disso, execute-o em outro computador. Grave os arquivos em uma unidade local. Verifique se você te, recursos de E/S suficientes para lidar com as gravações simultâneas. Para um melhor desempenho, exporte os arquivos para unidades de armazenamento rápido dedicadas.
+Evite executar bcp no servidor de banco de dados. Em vez disso, execute-o em outro computador. Grave os arquivos em uma unidade local. Verifique se você tem recursos de E/S suficientes para lidar com as gravações simultâneas. Para um melhor desempenho, exporte os arquivos para unidades de armazenamento rápido dedicadas.
 
-Você pode acelerar a transferência de rede salvando os dados exportados no formato compactado Gzip. No entanto, o carregamento de arquivos compactados no warehouse é mais lento do que o carregamento de arquivos descompactados e, portanto, há uma compensação entre a transferência de rede mais rápida em comparação com o carregamento mais rápido. Se você decidir usar compactação Gzip, não crie um arquivo Gzip único. Em vez disso, divida os dados em vários arquivos compactados.
+Você pode acelerar a transferência de rede salvando os dados exportados no formato compactado Gzip. No entanto, o carregamento de arquivos compactados no warehouse é mais lento do que o de arquivos descompactados, o que é compensado pela maior rapidez das transferências na rede. Se você decidir usar compactação Gzip, não crie um arquivo Gzip único. Em vez disso, divida os dados em vários arquivos compactados.
 
 ### <a name="copy-flat-files-into-blob-storage"></a>Copiar arquivos simples no armazenamento de blobs
 
-O utilitário [AzCopy](/azure/storage/common/storage-use-azcopy) foi projetado para cópia de alto desempenho dos dados no armazenamento de blobs do Azure.
+O utilitário [AzCopy](/azure/storage/common/storage-use-azcopy) foi projetado para a cópia de dados de alto desempenho no armazenamento de blobs do Azure.
 
 **Recomendações**
 
@@ -89,7 +91,7 @@ Teste o carregamento primeiro para ver como está a velocidade de upload. Você 
 
 O AzCopy move os dados para o armazenamento pela Internet pública. Se isso não for rápido o suficiente, considere configurar um circuito [ExpressRoute](/azure/expressroute/). O ExpressRoute é um serviço que encaminha os dados por uma conexão privada dedicada para o Azure. Outra opção, se sua conexão de rede estiver lenta, é enviar os dados em disco fisicamente para um datacenter do Azure. Para saber mais, confira [Transferindo dados bidirecionalmente no Azure](/azure/architecture/data-guide/scenarios/data-transfer).
 
-Durante uma operação de cópia, o AzCopy cria um arquivo de diário temporário, que permite a ele reiniciar a operação se for interrompido (por exemplo, devido a um erro de rede). Verifique se há espaço em disco suficiente para armazenar os arquivos de diário. Você pode usar a opção /Z para especificar onde os arquivos de diário serão gravados.
+Durante uma operação de cópia, o AzCopy cria um arquivo de diário temporário, que permite reiniciar a operação, caso ela seja interrompida (por exemplo, devido a um erro de rede). Verifique se há espaço em disco suficiente para armazenar os arquivos de diário. Você pode usar a opção /Z para especificar onde os arquivos de diário serão gravados.
 
 ### <a name="load-data-into-sql-data-warehouse"></a>Carregar dados no SQL Data Warehouse
 
@@ -102,21 +104,21 @@ O carregamento de dados é um processo de duas etapas:
 
 **Recomendações**
 
-Quando você tiver grandes quantidades de dados (mais de 1 TB) e estiver executando uma carga de trabalho de análise que se beneficiam de paralelismo, considere o SQL Data Warehouse. O SQL Data Warehouse não é uma boa opção para cargas de trabalho OLTP ou conjuntos de dados menores (< 250GB). Para conjuntos de dados menores que 250GB, considere o Banco de Dados SQL ou o SQL Server. Para saber mais, confira [Armazenagem de Dados](../../data-guide/relational-data/data-warehousing.md).
+Quando você tiver grandes quantidades de dados (mais de 1 TB) e estiver executando uma carga de trabalho de análise que será beneficiada pelo paralelismo, considere o SQL Data Warehouse. O SQL Data Warehouse não é uma boa opção para cargas de trabalho OLTP ou conjuntos de dados menores (< 250GB). Para conjuntos de dados menores que 250GB, considere o Banco de Dados SQL ou o SQL Server. Para saber mais, confira [Armazenagem de Dados](../../data-guide/relational-data/data-warehousing.md).
 
 Crie as tabelas de preparo como tabelas de heap, que não são indexadas. As consultas que criam as tabelas de produção resultarão em uma verificação completa e, portanto, não há motivo para indexar as tabelas de preparo.
 
-O PolyBase se beneficia do paralelismo no warehouse automaticamente. O desempenho de carga é dimensionado conforme você aumenta as DWUs. Para um melhor desempenho, use uma única operação de carregamento. Não há nenhum benefício de desempenho em dividir os dados de entrada em partes e executar vários carregamentos simultâneos.
+O PolyBase aproveita automaticamente as vantagens do paralelismo no warehouse.  O desempenho de carga é dimensionado conforme você aumenta as DWUs. Para um melhor desempenho, use uma única operação de carregamento. Não há nenhum benefício de desempenho em dividir os dados de entrada em partes e executar vários carregamentos simultâneos.
 
 O PolyBase pode ler arquivos compactados em Gzip. No entanto, somente um único leitor é usado por arquivo compactado, já que a descompactação do arquivo é uma operação de thread único. Portanto, evite o carregamento de um único arquivo compactado grande. Em vez disso, divida os dados em vários arquivos compactados, para se beneficiar do paralelismo. 
 
 Esteja ciente das seguintes limitações:
 
-- O PolyBase dá suporte a um tamanho máximo de coluna de `varchar(8000)`, `nvarchar(4000)` ou `varbinary(8000)`. Se você tiver dados que excedem esses limites, uma opção é dividir os dados em partes quando exportá-los e remontar os fragmentos após a importação. 
+- O tamanho máximo de colunas com suporte no PolyBase é `varchar(8000)`, `nvarchar(4000)` ou `varbinary(8000)`. Se seus dados excederem esses limites, uma opção é dividir os dados em partes quando exportá-los e remontá-los após a importação. 
 
 - O PolyBase usa um terminador de linha fixo de \n ou newline. Isso poderá causar problemas se houver caracteres de newline na fonte de dados.
 
-- A esquema da fonte de dados pode conter tipos de dados que não têm suporte no SQL Data Warehouse.
+- O esquema da fonte de dados pode conter tipos de dados que não têm suporte no SQL Data Warehouse.
 
 Para contornar essas limitações, você pode criar um procedimento armazenado que realiza as conversões necessárias. Faça referência a esse procedimento armazenado ao executar o bcp. Como alternativa, o [Data Platform Studio da Redgate](/azure/sql-data-warehouse/sql-data-warehouse-load-with-redgate) converte automaticamente os tipos de dados que não têm suporte no SQL Data Warehouse.
 
@@ -162,7 +164,7 @@ O Azure Analysis Services foi projetado para lidar com os requisitos de consulta
 
 Com o SQL Data warehouse, você pode expandir seus recursos de computação sob demanda. O mecanismo de consulta otimiza as consultas para processamento paralelo com base no número de nós de computação e move dados entre os nós conforme a necessidade. Para saber mais, confira [Gerenciar computação no SQL Data Warehouse do Azure](/azure/sql-data-warehouse/sql-data-warehouse-manage-compute-overview).
 
-### <a name="analysis-services"></a>Analysis Services
+### <a name="analysis-services"></a>Serviços de análise
 
 Para cargas de trabalho de produção, recomendamos a camada Standard do Azure Analysis Services, pois ele dá suporte a particionamento e DirectQuery. Dentro de uma camada, o tamanho da instância determina a memória e a potência de processamento. A capacidade de processamento é medida em QPUs (unidades de processamento de consulta). Monitore o uso de QPUs para selecionar o tamanho apropriado. Para saber mais, confira [Monitorar métricas do servidor](/azure/analysis-services/analysis-services-monitor).
 
@@ -174,7 +176,7 @@ Para reduzir a quantidade de processamento desnecessária, considere usar parti�
 
 ### <a name="ip-whitelisting-of-analysis-services-clients"></a>Lista de permissões de IPs de clientes do Analysis Services
 
-Considere usar o recurso de firewall do Analysis Services para colocar endereços IP do cliente na lista de permissões. Se habilitada, o firewall bloqueará todas as conexões de cliente que não sejam as especificadas nas regras de firewall. As regras padrão colocam o serviço Power BI na lista de permissões, mas você poderá desabilitar essa regra se desejar. Para saber mais, confira [Aumentar a proteção do Azure Analysis Services com o novo recurso de firewall](https://azure.microsoft.com/blog/hardening-azure-analysis-services-with-the-new-firewall-capability/).
+Considere usar o recurso de firewall do Analysis Services para colocar endereços IP do cliente na lista de permissões. Se habilitado, o firewall bloqueará todas as conexões de cliente que não sejam as especificadas nas regras de firewall. As regras padrão colocam o serviço Power BI na lista de permissões, mas você poderá desabilitar essa regra se desejar. Para saber mais, confira [Aumentar a proteção do Azure Analysis Services com o novo recurso de firewall](https://azure.microsoft.com/blog/hardening-azure-analysis-services-with-the-new-firewall-capability/).
 
 ### <a name="authorization"></a>Autorização
 
@@ -187,232 +189,21 @@ Para saber mais, confira [Gerenciar usuários e funções de banco de dados](/az
 
 ## <a name="deploy-the-solution"></a>Implantar a solução
 
-Uma implantação para essa arquitetura de referência está disponível no [GitHub][ref-arch-repo-folder]. Ela implanta o seguinte:
+Para a implantação e execução da implementação de referência, siga as etapas em [Leia-me do GitHub][github-folder]. Ela implanta o seguinte:
 
   * Uma VM Windows para simular um servidor de banco de dados local. Ela inclui o SQL Server 2017 e ferramentas relacionadas, juntamente com o Power BI Desktop.
   * Uma conta de armazenamento do Azure que fornece armazenamento de blobs para armazenar os dados exportados do banco de dados SQL Server.
   * Uma instância do SQL Data Warehouse do Azure.
   * Uma instância do Azure Analysis Services.
 
-### <a name="prerequisites"></a>pré-requisitos
-
-[!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
-
-### <a name="deploy-the-simulated-on-premises-server"></a>Implantar o servidor local simulado
-
-Primeiro, você implantará uma VM como um servidor local simulado, que inclui o SQL Server 2017 e as ferramentas relacionadas. Essa etapa também carrega o [banco de dados OLTP da Wide World Importers][wwi] no SQL Server.
-
-1. Navegue até a pasta `data\enterprise_bi_sqldw\onprem\templates` do repositório.
-
-2. No arquivo `onprem.parameters.json`, substitua os valores de `adminUsername` e `adminPassword`. Altere também os valores da seção `SqlUserCredentials` para corresponder ao nome de usuário e à senha. Observe o prefixo `.\\` na propriedade userName.
-    
-    ```bash
-    "SqlUserCredentials": {
-      "userName": ".\\username",
-      "password": "password"
-    }
-    ```
-
-3. Execute `azbb` conforme mostrado a seguir para implantar o servidor local.
-
-    ```bash
-    azbb -s <subscription_id> -g <resource_group_name> -l <region> -p onprem.parameters.json --deploy
-    ```
-
-    Especifique uma região que dê suporte ao SQL Data Warehouse e ao Azure Analysis Services. Consulte [Produtos do Azure por região](https://azure.microsoft.com/global-infrastructure/services/)
-
-4. A implantação pode levar 20 a 30 minutos para ser concluída, o que inclui a execução do script [DSC](/powershell/dsc/overview) para instalar as ferramentas e restaurar o banco de dados. Verifique a implantação no portal do Azure revendo os recursos no grupo de recursos. Você deve ver a máquina virtual `sql-vm1` e seus recursos associados.
-
-### <a name="deploy-the-azure-resources"></a>Implantar os recursos do Azure
-
-Esta etapa provisiona o SQL Data Warehouse e o Azure Analysis Services, junto com uma conta de armazenamento. Se desejar, você pode executar esta etapa em paralelo com a etapa anterior.
-
-1. Navegue até a pasta `data\enterprise_bi_sqldw\azure\templates` do repositório.
-
-2. Execute o seguinte comando da CLI do Azure para criar um grupo de recursos. Você pode implantar em um grupo de recursos diferente da etapa anterior, mas escolha a mesma região. 
-
-    ```bash
-    az group create --name <resource_group_name> --location <region>  
-    ```
-
-3. Execute o seguinte comando da CLI do Azure para implantar os recursos do Azure. Substitua os valores de parâmetro mostrados entre colchetes angulares. 
-
-    ```bash
-    az group deployment create --resource-group <resource_group_name> \
-     --template-file azure-resources-deploy.json \
-     --parameters "dwServerName"="<server_name>" \
-     "dwAdminLogin"="<admin_username>" "dwAdminPassword"="<password>" \ 
-     "storageAccountName"="<storage_account_name>" \
-     "analysisServerName"="<analysis_server_name>" \
-     "analysisServerAdmin"="user@contoso.com"
-    ```
-
-    - O parâmetro `storageAccountName` deve seguir as [regras de nomenclatura](../../best-practices/naming-conventions.md#naming-rules-and-restrictions) de contas de armazenamento.
-    - Para o parâmetro `analysisServerAdmin`, use seu nome UPN do Azure Active Directory.
-
-4. Verifique a implantação no portal do Azure revendo os recursos no grupo de recursos. Você verá uma conta de armazenamento, a instância do SQL Data Warehouse do Azure e a instância do Analysis Services.
-
-5. Use o portal do Azure para obter a chave de acesso da conta de armazenamento. Selecione a conta de armazenamento para abrir. Em **Configurações**, selecione **Chaves de acesso**. Copie o valor da chave primária. Você o usará na próxima seção.
-
-### <a name="export-the-source-data-to-azure-blob-storage"></a>Exportar os dados de origem para o Armazenamento de Blobs do Azure 
-
-Nesta etapa, você executará um script do PowerShell que usa o bcp para exportar o banco de dados SQL para arquivos simples na máquina virtual e, em seguida, usará o AzCopy para copiar os arquivos no Armazenamento de Blobs do Azure.
-
-1. Use a Área de Trabalho Remota para se conectar à VM local simulada.
-
-2. Enquanto estiver conectado à VM, execute os comandos a seguir em uma janela do PowerShell.  
-
-    ```powershell
-    cd 'C:\SampleDataFiles\reference-architectures\data\enterprise_bi_sqldw\onprem'
-
-    .\Load_SourceData_To_Blob.ps1 -File .\sql_scripts\db_objects.txt -Destination 'https://<storage_account_name>.blob.core.windows.net/wwi' -StorageAccountKey '<storage_account_key>'
-    ```
-
-    Para o parâmetro `Destination`, substitua `<storage_account_name>` pelo nome da conta de armazenamento criada anteriormente. Para o parâmetro `StorageAccountKey`, use a chave de acesso para essa conta de armazenamento.
-
-3. No portal do Azure, verifique se a fonte de dados foi copiada para o armazenamento de blobs navegando para a conta de armazenamento, selecionando o serviço Blob e abrindo o contêiner `wwi`. Você deve ver uma lista de tabelas precedida de `WorldWideImporters_Application_*`.
-
-### <a name="run-the-data-warehouse-scripts"></a>Executar os scripts de data warehouse
-
-1. Inicie o SSMS (SQL Server Management Studio) da sua sessão da Área de Trabalho Remota. 
-
-2. Conectar ao SQL Data Warehouse
-
-    - Tipo de servidor: mecanismo de banco de dados
-    
-    - Nome do servidor: `<dwServerName>.database.windows.net`, em que `<dwServerName>` é o nome que você especificou quando implantou os recursos do Azure. Você pode obter esse nome no Portal do Azure.
-    
-    - Autenticação: autenticação do SQL Server. Use as credenciais que você especificou quando implantou os recursos do Azure nos parâmetros `dwAdminLogin` e `dwAdminPassword`.
-
-2. Navegue até a pasta `C:\SampleDataFiles\reference-architectures\data\enterprise_bi_sqldw\azure\sqldw_scripts` na VM. Execute os scripts nesta pasta em ordem numérica, da `STEP_1` à `STEP_7`.
-
-3. Selecione o banco de dados `master` no SSMS e abra o script `STEP_1`. Altere o valor da senha na linha a seguir e execute o script.
-
-    ```sql
-    CREATE LOGIN LoaderRC20 WITH PASSWORD = '<change this value>';
-    ```
-
-4. Selecione o banco de dados `wwi` no SSMS. Abra o script `STEP_2` e execute-o. Se você receber um erro, verifique se está executando o script em relação ao banco de dados `wwi` e não ao `master`.
-
-5. Abra uma nova conexão com o SQL Data Warehouse usando o usuário e a senha `LoaderRC20` indicados no script `STEP_1`.
-
-6. Usando essa conexão, abra o script `STEP_3`. Defina os seguintes valores no script:
-
-    - SECRET: use a chave de acesso da sua conta de armazenamento.
-    - LOCATION: use o nome da conta de armazenamento da seguinte maneira: `wasbs://wwi@<storage_account_name>.blob.core.windows.net`.
-
-7. Usando a mesma conexão, execute os scripts `STEP_4` a `STEP_7` sequencialmente. Verifique se cada script foi concluído com êxito antes de executar o seguinte.
-
-No SMSS, você deve ver um conjunto de tabelas `prd.*` no banco de dados `wwi`. Para verificar se os dados foram gerados, execute a seguinte consulta: 
-
-```sql
-SELECT TOP 10 * FROM prd.CityDimensions
-```
-
-## <a name="build-the-analysis-services-model"></a>Compilar o modelo do Azure Analysis Services
-
-Nesta etapa, você criará um modelo tabular que importa dados do data warehouse. Em seguida, você implantará o modelo no Azure Analysis Services.
-
-1. Inicie o SQL Server Data Tools 2015 na sua sessão da Área de Trabalho Remota.
-
-2. Selecione **Arquivo** > **Novo** > **Projeto**.
-
-3. No diálogo **Novo Projeto**, em **Modelos**, selecione **Business Intelligence** > **Analysis Services**  >  **Projeto Tabular do Analysis Services**. 
-
-4. Nomeie o projeto e clique em **OK**.
-
-5. No diálogo **Designer de modelo tabular**, selecione **Workspace integrado** e defina o **Nível de compatibilidade** como `SQL Server 2017 / Azure Analysis Services (1400)`. Clique em **OK**.
-
-6. Na janela **Gerenciador de Modelos Tabulares** janela, clique com o botão direito do mouse e selecione **Importar da Fonte de Dados**.
-
-7. Selecione **SQL Data Warehouse do Azure** e clique em **Conectar**.
-
-8. Para **Servidor**, digite o nome totalmente qualificado do seu servidor do SQL Data Warehouse do Azure. Para **Banco de Dados**, digite `wwi`. Clique em **OK**.
-
-9. No próximo diálogo, escolha a autenticação de **Banco de Dados**, insira seu nome de usuário e senha do SQL Data Warehouse do Azure e clique em **OK**.
-
-10. No diálogo **Navegador**, marque as caixas de seleção **prd. CityDimensions**, **prd. DateDimensions** e **prd. SalesFact**. 
-
-    ![](./images/analysis-services-import.png)
-
-11. Clique em **Carregar**. Quando o processamento for concluído, clique em **Fechar**. Agora você deve ver uma exibição tabular dos dados.
-
-12. Na janela **Gerenciador de Modelos Tabulares**, clique com o botão direito do mouse e selecione **Exibição do Modelo** > **Exibição de Diagrama**.
-
-13. Arraste o campo **[prd.SalesFact].[WWI City ID]**  para o campo **[prd.CityDimensions].[WWI City ID]**  a fim de criar uma relação.  
-
-14. Arraste o campo **[prd.SalesFact].[Invoice Date Key]** para o campo **[prd.DateDimensions].[Date]** .  
-    ![](./images/analysis-services-relations.png)
-
-15. No menu **Arquivo**, escolha **Salvar Tudo**.  
-
-16. No **Gerenciador de Soluções**, clique com o botão direito do mouse no projeto e selecione **Propriedades**. 
-
-17. Em **Server**, insira a URL da sua instância do Azure Analysis Services. Você pode obter esse valor no Portal do Azure. No portal, selecione o recurso Analysis Services, clique no painel Visão geral e procure a propriedade **Nome do Servidor**. Ele será semelhante a `asazure://westus.asazure.windows.net/contoso`. Clique em **OK**.
-
-    ![](./images/analysis-services-properties.png)
-
-18. No **Gerenciador de Soluções**, clique com o botão direito do mouse no nome do projeto e selecione **Implantar**. Entre no Azure, se solicitado. Quando o processamento for concluído, clique em **Fechar**.
-
-19. No portal do Azure, exiba os detalhes da sua instância do Azure Analysis Services. Verifique se seu modelo aparece na lista de modelos.
-
-    ![](./images/analysis-services-models.png)
-
-## <a name="analyze-the-data-in-power-bi-desktop"></a>Analisar os dados no Power BI Desktop
-
-Nesta etapa, você usará o Power BI para criar um relatório com os dados no Analysis Services.
-
-1. Inicie o Power BI Desktop na sua sessão de Área de Trabalho Remota.
-
-2. Na tela de boas-vindas, clique em **Obter Dados**.
-
-3. Selecione **Azure** > **Banco de dados do Azure Analysis Services**. Clique em **Conectar**
-
-    ![](./images/power-bi-get-data.png)
-
-4. Insira a URL da instância do Analysis Services e clique em **OK**. Entre no Azure, se solicitado.
-
-5. No diálogo **Navegador**, expanda o projeto tabular implantado, selecione o modelo que você criou e clique em **OK**.
-
-2. No painel **Visualizações**, selecione o ícone **Gráfico de Barras Empilhadas**. No modo de exibição Relatório, redimensione a visualização para aumentá-la.
-
-6. No painel **Campos**, expanda **prd.CityDimensions**.
-
-7. Arraste **prd.CityDimensions** > **WWI City ID** para o poço **Eixo**.
-
-8. Arraste **prd.CityDimensions** > **City** para o poço **Legenda**.
-
-9. No painel **Campos**, expanda **prd.SalesFact**.
-
-10. Arraste **prd.SalesFact** > **Total com Dedução de Imposto** para o poço **Valor**.
-
-    ![](./images/power-bi-visualization.png)
-
-11. Em **Filtros no Nível Visual**, selecione **WWI City ID**.
-
-12. Defina o **Tipo de Filtro** como `Top N`e defina **Mostrar Itens** como `Top 10`.
-
-13. Arraste **prd.SalesFact** > **Total com Dedução de Imposto** para o poço **Por Valor**
-
-    ![](./images/power-bi-visualization2.png)
-
-14. Clique em **Aplicar Filtro**. A visualização mostra os dez principais totais de vendas por cidade.
-
-    ![](./images/power-bi-report.png)
-
-Para saber mais sobre como usar o Power BI Desktop, confira [Introdução ao Power BI Desktop](/power-bi/desktop-getting-started).
 
 ## <a name="next-steps"></a>Próximas etapas
 
-- Para saber mais sobre como implantar essa arquitetura de referência, visite nosso [Repositório GitHub][ref-arch-repo-folder].
-- Saiba mais sobre os [Blocos de Construção do Azure][azbb-repo].
+- Use o Azure Data Factory para automatizar o pipeline ELT. Consulte [Enterprise BI automatizada com o SQL Data Warehouse e Azure Data Factory][adf=ra].
 
 <!-- links -->
 
-[azure-cli-2]: /azure/install-azure-cli
-[azbb-repo]: https://github.com/mspnp/template-building-blocks
-[azbb-wiki]: https://github.com/mspnp/template-building-blocks/wiki/Install-Azure-Building-Blocks
+[adf-ra]: ./enterprise-bi-adf.md
 [github-folder]: https://github.com/mspnp/reference-architectures/tree/master/data/enterprise_bi_sqldw
-[ref-arch-repo]: https://github.com/mspnp/reference-architectures
-[ref-arch-repo-folder]: https://github.com/mspnp/reference-architectures/tree/master/data/enterprise_bi_sqldw
 [wwi]: /sql/sample/world-wide-importers/wide-world-importers-oltp-database
+

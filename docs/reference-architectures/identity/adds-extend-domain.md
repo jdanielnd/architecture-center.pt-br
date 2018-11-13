@@ -6,12 +6,12 @@ ms.date: 05/02/2018
 pnp.series.title: Identity management
 pnp.series.prev: azure-ad
 pnp.series.next: adds-forest
-ms.openlocfilehash: 1e19d03998a18d997c2840f573e7bc79b24efbbc
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: a96f13f8c7f3e79c6e5d50f17e662176257fdab3
+ms.sourcegitcommit: 02ecd259a6e780d529c853bc1db320f4fcf919da
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47427965"
+ms.lasthandoff: 11/07/2018
+ms.locfileid: "51263705"
 ---
 # <a name="extend-active-directory-domain-services-ad-ds-to-azure"></a>Estender o AD DS (Active Directory Domain Services) para o Azure
 
@@ -46,7 +46,7 @@ As seguintes recomendações aplicam-se à maioria dos cenários. Siga estas rec
 
 Determine seus requisitos de [tamanho da VM][vm-windows-sizes] com base no volume esperado de solicitações de autenticação. Use as especificações de computadores que hospedam o AD DS local como um ponto de partida e corresponda-as aos tamanhos de VM do Azure. Uma vez implantada, monitore a utilização e a escala ou redução vertical com base na carga real das VMs. Para obter mais informações sobre o dimensionamento de controladores de domínio do AD DS, consulte [Planejamento de capacidade para Active Directory Domain Services][capacity-planning-for-adds].
 
-Crie um disco de dados virtual separado para armazenar o banco de dados, logs e SYSVOL do Active Directory. Não armazene esses itens no mesmo disco do sistema operacional. Observe que, por padrão, os disco de dados que estão anexados a uma VM usam cache write-through. No entanto, essa forma de armazenamento em cache pode entrar em conflito com os requisitos do AD DS. Por esse motivo, defina a configuração de *Preferência de Cache do Host* no disco de dados para *Nenhum*. Para obter mais informações, consulte [Posicionamento do SYSVOL e do banco de dados do AD DS do Windows Server][adds-data-disks].
+Crie um disco de dados virtual separado para armazenar o banco de dados, logs e SYSVOL do Active Directory. Não armazene esses itens no mesmo disco do sistema operacional. Observe que, por padrão, os disco de dados que estão anexados a uma VM usam cache write-through. No entanto, essa forma de armazenamento em cache pode entrar em conflito com os requisitos do AD DS. Por esse motivo, defina a configuração de *Preferência de Cache do Host* no disco de dados para *Nenhum*. Para obter mais informações, confira [Diretrizes para implantar o Active Directory do Windows Server em máquinas virtuais do Azure][adds-data-disks].
 
 Implante pelo menos duas VMs que executam o AD DS como controladores de domínio e adicione-as a um [conjunto de disponibilidade][availability-set].
 
@@ -169,7 +169,7 @@ Após a conclusão da implantação, você pode testar a conexão do ambiente si
 [implementing-a-secure-hybrid-network-architecture]: ../dmz/secure-vnet-hybrid.md
 [implementing-a-secure-hybrid-network-architecture-with-internet-access]: ../dmz/secure-vnet-dmz.md
 
-[adds-data-disks]: https://msdn.microsoft.com/library/azure/jj156090.aspx#BKMK_PlaceDB
+[adds-data-disks]: https://msdn.microsoft.com/en-us/library/mt674703.aspx
 [ad-ds-operations-masters]: https://technet.microsoft.com/library/cc779716(v=ws.10).aspx
 [ad-ds-ports]: https://technet.microsoft.com/library/dd772723(v=ws.11).aspx
 [availability-set]: /azure/virtual-machines/virtual-machines-windows-create-availability-set
