@@ -2,15 +2,15 @@
 title: Aplicativo de N camadas com Apache Cassandra
 description: Como executar VMs do Linux para uma arquitetura de N camadas no Microsoft Azure.
 author: MikeWasson
-ms.date: 09/13/2018
-ms.openlocfilehash: 2eceb0b5d939c0aa2cc9fc3209d0f86449fdd72b
-ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
+ms.date: 11/12/2018
+ms.openlocfilehash: ec2d6f8310e5b7ae5b135aa0e16f14f572149f7f
+ms.sourcegitcommit: 9293350ab66fb5ed042ff363f7a76603bf68f568
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/02/2018
-ms.locfileid: "50916551"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51577167"
 ---
-# <a name="n-tier-application-with-apache-cassandra"></a>Aplicativo de N camadas com Apache Cassandra
+# <a name="linux-n-tier-application-in-azure-with-apache-cassandra"></a>Aplicativo Linux de N camadas no Azure com Apache Cassandra
 
 Essa arquitetura de referência mostra como implantar VMs e uma rede virtual configurada para um aplicativo de N camadas usando o Apache Cassandra no Linux para a camada de dados. [**Implante essa solução**.](#deploy-the-solution) 
 
@@ -24,15 +24,15 @@ A arquitetura tem os seguintes componentes:
 
 * **Grupo de recursos.** [Grupos de recursos][resource-manager-overview] são utilizados para agrupar os recursos para que eles possam ser gerenciados pelo tempo de vida, o proprietário ou outros critérios.
 
-* **Rede Virtual (VNet) e sub-redes.** Cada VM do Azure é implantada em uma VNet que pode ser segmentada em várias sub-redes. Sempre crie uma sub-rede separada para cada camada. 
+* **Rede Virtual (VNet) e sub-redes.** Cada VM do Azure é implantada em uma VNet que pode ser segmentada em sub-redes. Sempre crie uma sub-rede separada para cada camada. 
 
-* **NSGs.** Use os NSGs [grupos de segurança de rede][nsg] para restringir o tráfego de rede na VNet. Por exemplo, na arquitetura de três camadas mostrada aqui, a camada de banco de dados não aceita o tráfego de front-end da Web, somente da camada comercial e da sub-rede de gerenciamento.
+* **NSGs.** Use os NSGs [grupos de segurança de rede][nsg] para restringir o tráfego de rede na VNet. Por exemplo, na arquitetura de três camadas mostrada aqui, a camada de banco de dados aceita o tráfego da camada comercial e da sub-rede de gerenciamento, mas não do front-end da Web.
+
+* **Proteção contra DDoS**. Embora a plataforma do Azure forneça proteção básica em relação a ataques de negação de serviço distribuído (DDoS), é recomendável usar [Proteção contra DDoS Standard][ddos], que melhorou os recursos de mitigação de DDoS. Confira [Considerações de segurança](#security-considerations).
 
 * **Máquinas virtuais**. Para obter recomendações sobre como configurar máquinas virtuais, consulte [Executar uma VM do Windows no Azure](./windows-vm.md) e [Executar uma VM do Linux no Azure](./linux-vm.md).
 
-* **Conjuntos de disponibilidade.** Crie um [conjunto de disponibilidade][azure-availability-sets] para cada camada e provisione pelo menos duas VMs em cada camada. Isso torna as VMs qualificadas para um [SLA (Contrato de Nível de Serviço)][vm-sla] mais elevado. 
-
-* **Conjunto de dimensionamento de VM** (não mostrado). Um [Conjunto de dimensionamento de VM] [ vmss] é uma alternativa ao uso de um conjunto de disponibilidade. Um conjunto de dimensionamento facilita o escalonamento horizontal de VMs em uma camada, seja manual ou automaticamente, com base em regras predefinidas.
+* **Conjuntos de disponibilidade.** Crie um [conjunto de disponibilidade][azure-availability-sets] para cada camada e provisione pelo menos duas VMs em cada camada, o que torna as VMs qualificadas para um [contrato de nível de serviço (SLA)][vm-sla] maior.
 
 * **Balanceadores de carga do Azure.** Os [balanceadores de carga] [ load-balancer] distribuem solicitações de entrada da Internet para as instâncias de VM. Use um [balanceador de carga público][load-balancer-external] para distribuir o tráfego de entrada da Internet para a camada da Web e um [balanceador de carga interno][load-balancer-internal] para distribuir o tráfego de rede da camada da Web para a camada comercial.
 
@@ -42,7 +42,7 @@ A arquitetura tem os seguintes componentes:
 
 * **Banco de dados Apache Cassandra**. Fornece alta disponibilidade na camada de dados, habilitando replicação e failover.
 
-* **DNS do Azure**. [DNS do Azure][azure-dns] é um serviço de hospedagem para domínios DNS, que fornece resolução de nomes usando a infraestrutura do Microsoft Azure. Ao hospedar seus domínios no Azure, você pode gerenciar seus registros DNS usando as mesmas credenciais, APIs, ferramentas e cobrança que seus outros serviços do Azure.
+* **DNS do Azure**. O [DNS do Azure][azure-dns] é um serviço de hospedagem para domínios DNS. Ele fornece resolução de nomes usando a infraestrutura do Microsoft Azure. Ao hospedar seus domínios no Azure, você pode gerenciar seus registros DNS usando as mesmas credenciais, APIs, ferramentas e cobrança que seus outros serviços do Azure.
 
 ## <a name="recommendations"></a>Recomendações
 
@@ -52,19 +52,19 @@ Seus requisitos podem ser diferentes dos requisitos da arquitetura descrita aqui
 
 Quando você cria a VNet, determine quantos endereços IP seus recursos em cada sub-rede exigem. Especifique uma máscara de sub-rede e um intervalo de endereços de VNet grande o suficiente para os endereços IP necessários, usando a notação [CIDR]. Use um espaço de endereço que esteja dentro dos [blocos de endereço IP privados][private-ip-space] padrão, que são 10.0.0.0/8, 172.16.0.0/12 e 192.168.0.0/16.
 
-Escolha um intervalo de endereços que não se sobreponha ao da rede local para caso seja necessário configurar um gateway entre a VNet e a rede local mais tarde. Depois de criar a VNet, não será possível alterar o intervalo de endereços.
+Escolha um intervalo de endereços que não se sobreponha ao da rede local, caso seja necessário configurar um gateway entre a VNet e a rede local mais tarde. Depois de criar a VNet, não será possível alterar o intervalo de endereços.
 
 Crie as sub-redes levando em conta os requisitos de funcionalidade e de segurança. Todas as VMs na mesma camada ou função devem ir para a mesma sub-rede, que pode ser um limite de segurança. Para obter mais informações sobre como criar VNets e sub-redes, consulte [Planejar e criar redes virtuais do Azure][plan-network].
 
 ### <a name="load-balancers"></a>Balanceadores de carga
 
-Não exponha as VMs diretamente à Internet, concedendo, em vez disso, um endereço IP privado a cada VM. Os clientes se conectam usando o endereço IP do balanceador de carga público.
+Não exponha as VMs diretamente à Internet. Em vez disso, dê um endereço IP privado a cada VM. Os clientes se conectam usando o endereço IP do balanceador de carga público.
 
-Defina as regras do balanceador de carga para direcionar tráfego de rede para as VMs. Por exemplo, para permitir tráfego HTTP, crie uma regra que mapeie a porta 80 da configuração de front-end para a porta 80 no pool de endereços de back-end. Quando um cliente envia uma solicitação HTTP para a porta 80, o balanceador de carga seleciona um endereço IP de back-end usando um [algoritmo de hash][load-balancer-hashing] que inclui o endereço IP de origem. Dessa forma, as solicitações de cliente são distribuídas por todas as VMs.
+Defina as regras do balanceador de carga para direcionar tráfego de rede para as VMs. Por exemplo, para permitir tráfego HTTP, crie uma regra que mapeie a porta 80 da configuração de front-end para a porta 80 no pool de endereços de back-end. Quando um cliente envia uma solicitação HTTP para a porta 80, o balanceador de carga seleciona um endereço IP de back-end usando um [algoritmo de hash][load-balancer-hashing] que inclui o endereço IP de origem. As solicitações de cliente são distribuídas por todas as VMs.
 
 ### <a name="network-security-groups"></a>Grupos de segurança de rede
 
-Use as regras de NSG para restringir o tráfego entre as camadas. Por exemplo, a arquitetura de três camadas mostrada acima, a camada da Web não se comunica diretamente com a camada de banco de dados. Para impor isso, a camada de banco de dados deve bloquear o tráfego de entrada da sub-rede da camada da Web.  
+Use as regras de NSG para restringir o tráfego entre as camadas. Por exemplo, na arquitetura de três camadas mostrada acima, a camada da Web não se comunica diretamente com a camada de banco de dados. Para impor isso, a camada de banco de dados deve bloquear o tráfego de entrada da sub-rede da camada da Web.  
 
 1. Negue todo o tráfego de entrada do VNet. (Use a marca `VIRTUAL_NETWORK` na regra.) 
 2. Permita o tráfego de entrada da sub-rede de camada de negócios.  
@@ -85,7 +85,7 @@ Configure os nós no modo de reconhecimento de rack. Mapear domínios de falha p
 
 Não é necessário um balanceador de carga na frente do cluster. O cliente se conecta diretamente a um nó no cluster.
 
-Para alta disponibilidade, implante o Cassandra em mais de uma região do Azure. Dentro de cada região, os nós são configurados no modo de reconhecimento de rack com domínios de falha e de atualização para garantir a resiliência dentro da região.
+Para alta disponibilidade, implante o Cassandra em mais de uma região do Azure. Os nós de cada região são configurados no modo de reconhecimento de rack com domínios de falha e de atualização para garantir a resiliência dentro da região.
 
 
 ### <a name="jumpbox"></a>Jumpbox
@@ -98,15 +98,15 @@ Para proteger o jumpbox, adicione uma regra NSG que permite conexões SSH soment
 
 ## <a name="scalability-considerations"></a>Considerações sobre escalabilidade
 
-[Conjuntos de dimensionamento de VM] [ vmss] ajudam a implantar e gerenciar um conjunto de VMs idênticas. Conjuntos de dimensionamento dão suporte ao dimensionamento automático com base nas métricas de desempenho. À medida que a carga nas VMs aumenta, VMs adicionais são acrescentadas automaticamente ao balanceador de carga. Considere usar os conjuntos de dimensionamento se você precisar aumentar as VMs rapidamente ou se precisar de dimensionamento automático.
+Para as camadas Web e business, considere o uso de [conjuntos de dimensionamento de máquinas virtuais][vmss], em vez de implantar VMs separadas em um conjunto de disponibilidade. Um conjunto de dimensionamento facilita a implantação e gerenciamento de um conjunto de VMs idênticas e o dimensionamento automático de VMs com base em métricas de desempenho. À medida que a carga nas VMs aumenta, VMs adicionais são acrescentadas automaticamente ao balanceador de carga. Considere usar os conjuntos de dimensionamento se você precisar aumentar as VMs rapidamente ou se precisar de dimensionamento automático.
 
 Há duas maneiras básicas de configurar as VMs implantadas em um conjunto de dimensionamento:
 
-- Use as extensões para configurar a VM depois que ela é provisionada. Com essa abordagem, novas instâncias de VM podem levar mais tempo para ser iniciadas do que uma VM sem extensões.
+- Use as extensões para configurar a VM depois que ela é implantada. Com essa abordagem, novas instâncias de VM podem levar mais tempo para ser iniciadas do que uma VM sem extensões.
 
 - Implante um [disco gerenciado](/azure/storage/storage-managed-disks-overview) com uma imagem de disco personalizada. Essa opção pode ser mais rápida de implantar. Porém, isso requer que você mantenha a imagem atualizada.
 
-Para ver considerações adicionais, consulte [Considerações de design para conjuntos de dimensionamento][vmss-design].
+Para obter mais informações, confira [Considerações de design para conjuntos de dimensionamento][vmss-design].
 
 > [!TIP]
 > Ao usar qualquer solução de dimensionamento automático, teste-a com cargas de trabalho no nível de produção com bastante antecedência.
@@ -115,18 +115,18 @@ Cada assinatura do Azure tem limites padrão em vigor, incluindo um número máx
 
 ## <a name="availability-considerations"></a>Considerações sobre disponibilidade
 
-Se você não estiver usando conjuntos de dimensionamento de VM, coloque as VMs na mesma camada em um conjunto de disponibilidade. Crie pelo menos duas VMs no conjunto de disponibilidade para dar suporte ao [SLA de disponibilidade para VMs do Azure][vm-sla]. Para obter mais informações, consulte [Gerenciar a disponibilidade de máquinas virtuais][availability-set]. 
+Se você não usar conjuntos de dimensionamento de máquinas virtuais, coloque as VMs para a mesma camada em um conjunto de disponibilidade. Crie pelo menos duas VMs no conjunto de disponibilidade para dar suporte ao [SLA de disponibilidade para VMs do Azure][vm-sla]. Para obter mais informações, consulte [Gerenciar a disponibilidade de máquinas virtuais][availability-set]. Os conjuntos de dimensionamento automaticamente usam *grupos de posicionamento*, que funcionam como um conjunto de disponibilidade implícito.
 
-O balanceador de carga utiliza [investigações de integridade][health-probes] para monitorar a disponibilidade de instâncias de VM. Se uma investigação não puder acessar uma instância dentro de um período de tempo limite, o balanceador de carga parará de enviar tráfego para essa VM. Contudo, o balanceador de carga continuará a investigar e, se a VM ficar disponível novamente, o balanceador de carga reiniciará o envio de tráfego para ela.
+O balanceador de carga utiliza [investigações de integridade][health-probes] para monitorar a disponibilidade de instâncias de VM. Se uma investigação não puder acessar uma instância dentro de um período de tempo limite, o balanceador de carga parará de enviar tráfego para essa VM. O balanceador de carga continuará a investigar e, se a VM ficar disponível novamente, o balanceador de carga reiniciará o envio de tráfego para ela.
 
 Aqui estão algumas recomendações sobre as investigações de integridade do balanceador de carga:
 
 * As investigações podem testar HTTP ou TCP. Se suas VMs são executadas em um servidor HTTP, crie uma investigação HTTP. Caso contrário, crie uma investigação TCP.
 * Para uma investigação HTTP, especifique o caminho para um ponto de extremidade HTTP. A investigação verifica uma resposta HTTP 200 para esse caminho. Ele pode ser o caminho raiz (“/”) ou um ponto de extremidade de monitoramento de integridade que implementa lógica personalizada para verificar a integridade do aplicativo. O ponto de extremidade deve permitir solicitações HTTP anônimas.
-* A investigação é enviada de um endereço IP [conhecido][health-probe-ip], 168.63.129.16. Verifique se o tráfego de ou para esse endereço IP não é bloqueado por quaisquer políticas de firewall ou regras de NSG (Grupo de Segurança de Rede).
-* Use os [logs de investigação de integridade][health-probe-log] para exibir o status das investigações de integridade. Habilite o registro em log no Portal do Azure para cada balanceador de carga. Os logs são gravados no Armazenamento de Blobs do Azure. Os logs de mostram como muitas VMs no back-end não estão recebendo o tráfego de rede devido a respostas de investigação com falha.
+* A investigação é enviada de um endereço IP [conhecido][health-probe-ip], 168.63.129.16. Verifique se o tráfego de ou para esse endereço IP não é bloqueado por quaisquer políticas de firewall ou regras de NSG.
+* Use os [logs de investigação de integridade][health-probe-log] para exibir o status das investigações de integridade. Habilite o registro em log no Portal do Azure para cada balanceador de carga. Os logs são gravados no Armazenamento de Blobs do Azure. Os logs mostram quantas VMs não estão recebendo o tráfego de rede devido a respostas de investigação com falha.
 
-Para o cluster Cassandra, os cenários de failover a considerar dependem dos níveis de consistência usados pelo aplicativo, bem como o número de réplicas usadas. Para níveis de consistência e uso no Cassandra, consulte [Configurando a consistência dos dados][cassandra-consistency] e [Cassandra: quantos nós se comunicam com o Quorum?][cassandra-consistency-usage] A disponibilidade de dados do Cassandra é determinada pelo nível de consistência usado pelo aplicativo e pelo mecanismo de replicação. Para replicação no Cassandra, consulte [Explicação de replicação de dados em Bancos de Dados NoSQL][cassandra-replication].
+Para o cluster Cassandra, os cenários de failover dependem dos níveis de consistência usados pelo aplicativo e do número de réplicas. Para níveis de consistência e uso no Cassandra, consulte [Configurando a consistência dos dados][cassandra-consistency] e [Cassandra: quantos nós se comunicam com o Quorum?][cassandra-consistency-usage] A disponibilidade de dados do Cassandra é determinada pelo nível de consistência usado pelo aplicativo e pelo mecanismo de replicação. Para replicação no Cassandra, consulte [Explicação de replicação de dados em Bancos de Dados NoSQL][cassandra-replication].
 
 ## <a name="security-considerations"></a>Considerações de segurança
 
@@ -134,11 +134,11 @@ Redes virtuais são um limite de isolamento de tráfego no Azure. As VMs em uma 
 
 Para tráfego de entrada da Internet, as regras do balanceador de carga definem qual tráfego pode alcançar o back-end. No entanto, as regras do balanceador de carga não dão suporte a listas de IP de confiança, por isso se você desejar adicionar determinados endereços IP públicos a uma lista de confiança, acrescente um NSG à sub-rede.
 
-Considere adicionar uma NVA (solução de virtualização de rede) para criar uma DMZ entre a Internet e a rede virtual do Azure. NVA é um termo genérico para uma solução de virtualização que pode executar tarefas relacionadas à rede, como firewall, inspeção de pacotes, auditoria e roteamento personalizado. Para obter mais informações, consulte [Implementação de uma DMZ entre o Azure e a Internet][dmz].
+**Rede de Perímetro**. Considere adicionar uma NVA (solução de virtualização de rede) para criar uma DMZ entre a Internet e a rede virtual do Azure. NVA é um termo genérico para uma solução de virtualização que pode executar tarefas relacionadas à rede, como firewall, inspeção de pacotes, auditoria e roteamento personalizado. Para obter mais informações, consulte [Implementação de uma DMZ entre o Azure e a Internet][dmz].
 
-Criptografe dados confidenciais em repouso e use o [Azure Key Vault][azure-key-vault] para gerenciar as chaves de criptografia de banco de dados. O Key Vault pode armazenar chaves de criptografia em HSMs (módulos de segurança de hardware). Também é recomendado para armazenar segredos do aplicativo, como cadeias de caracteres de conexão de banco de dados, no cofre de chaves.
+**Criptografia**. Criptografe dados confidenciais em repouso e use o [Azure Key Vault][azure-key-vault] para gerenciar as chaves de criptografia de banco de dados. O Key Vault pode armazenar chaves de criptografia em HSMs (módulos de segurança de hardware). Também é recomendado para armazenar segredos do aplicativo, como cadeias de caracteres de conexão de banco de dados, no cofre de chaves.
 
-É recomendável habilitar a [Proteção contra DDoS Standard](/azure/virtual-network/ddos-protection-overview), que fornece a mitigação de DDoS adicional para os recursos em uma VNet. Embora a proteção contra DDoS básica seja habilitada automaticamente como parte da plataforma Azure, a Proteção contra DDoS Standard fornece funcionalidades de mitigação ajustadas especificamente para os recursos da Rede Virtual do Azure.  
+**Proteção contra DDoS**. A plataforma do Azure fornece a proteção contra DDoS básica por padrão. Essa proteção básica se destina a proteger a infraestrutura do Azure como um todo. Embora a proteção contra DDoS básica esteja habilitada automaticamente, é recomendável usar a [Proteção contra DDoS Standard][ddos]. A proteção Standard utiliza ajuste adaptável, com base nos padrões de tráfego de rede do seu aplicativo, para detectar ameaças. Isso permite aplicar mitigações de risco contra ataques de DDoS que podem não ser detectadas pelas políticas de DDoS de toda a infraestrutura. A proteção Standard também fornece alertas, telemetria e análise por meio do Azure Monitor. Para obter mais informações, confira [Proteção contra DDoS do Azure: práticas recomendadas e arquiteturas de referência][ddos-best-practices].
 
 ## <a name="deploy-the-solution"></a>Implantar a solução
 
@@ -154,9 +154,9 @@ Para implantar as VMs do Linux para uma arquitetura de referência de aplicativo
 
 1. Navegue até a pasta `virtual-machines\n-tier-linux` para o repositório que você clonou na etapa 1 dos pré-requisitos acima.
 
-2. O arquivo de parâmetro especifica um nome de usuário e senha de administrador padrão para cada VM na implantação. Você deverá alterá-los antes de implantar a arquitetura de referência. Abra o arquivo `n-tier-linux.json` e substitua cada campo **adminUsername** e **adminPassword** com suas novas configurações.   Salve o arquivo.
+2. O arquivo de parâmetro especifica um nome de usuário e senha de administrador padrão para cada VM na implantação. Altere-os antes de implantar a arquitetura de referência. Abra o arquivo `n-tier-linux.json` e substitua cada campo **adminUsername** e **adminPassword** com suas novas configurações.   Salve o arquivo.
 
-3. Implante a arquitetura de referência usando a ferramenta de linha de comando **azbb** conforme mostrado abaixo.
+3. Implante a arquitetura de referência usando a ferramenta **azbb** conforme mostrado abaixo.
 
    ```bash
    azbb -s <your subscription_id> -g <your resource_group_name> -l <azure region> -p n-tier-linux.json --deploy
@@ -168,10 +168,7 @@ Para obter mais informações sobre a implantação dessa arquitetura de referê
 [dmz]: ../dmz/secure-vnet-dmz.md
 [multi-vm]: ./multi-vm.md
 [naming conventions]: /azure/guidance/guidance-naming-conventions
-[azbb]: https://github.com/mspnp/template-building-blocks/wiki/Install-Azure-Building-Blocks
-[azure-administration]: /azure/automation/automation-intro
 [azure-availability-sets]: /azure/virtual-machines/virtual-machines-linux-manage-availability
-[azure-cli-2]: https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest
 [azure-dns]: /azure/dns/dns-overview
 [azure-key-vault]: https://azure.microsoft.com/services/key-vault
 
@@ -182,28 +179,20 @@ Para obter mais informações sobre a implantação dessa arquitetura de referê
 [cassandra-consistency-usage]: https://medium.com/@foundev/cassandra-how-many-nodes-are-talked-to-with-quorum-also-should-i-use-it-98074e75d7d5#.b4pb4alb2
 
 [cidr]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
-[chef]: https://www.chef.io/solutions/azure/
 [datastax]: https://www.datastax.com/products/datastax-enterprise
+[ddos]: /azure/virtual-network/ddos-protection-overview
+[ddos-best-practices]: /azure/security/azure-ddos-best-practices
 [git]: https://github.com/mspnp/template-building-blocks
 [github-folder]: https://github.com/mspnp/reference-architectures/tree/master/virtual-machines/n-tier-linux
-[lb-external-create]: /azure/load-balancer/load-balancer-get-started-internet-portal
-[lb-internal-create]: /azure/load-balancer/load-balancer-get-started-ilb-arm-portal
 [load-balancer-external]: /azure/load-balancer/load-balancer-internet-overview
 [load-balancer-internal]: /azure/load-balancer/load-balancer-internal-overview
 [nsg]: /azure/virtual-network/virtual-networks-nsg
 [nsg-rules]: /azure/azure-resource-manager/best-practices-resource-manager-security#network-security-groups
-[operations-management-suite]: https://www.microsoft.com/server-cloud/operations-management-suite/overview.aspx
 [plan-network]: /azure/virtual-network/virtual-network-vnet-plan-design-arm
 [private-ip-space]: https://en.wikipedia.org/wiki/Private_network#Private_IPv4_address_spaces
 [endereço IP público]: /azure/virtual-network/virtual-network-ip-addresses-overview-arm
-[puppet]: https://puppetlabs.com/blog/managing-azure-virtual-machines-puppet
-[ref-arch-repo]: https://github.com/mspnp/reference-architectures
 [vm-sla]: https://azure.microsoft.com/support/legal/sla/virtual-machines
-[vnet faq]: /azure/virtual-network/virtual-networks-faq
 [visio-download]: https://archcenter.blob.core.windows.net/cdn/vm-reference-architectures.vsdx
-[Nagios]: https://www.nagios.org/
-[Zabbix]: https://www.zabbix.com/
-[Icinga]: https://www.icinga.org/
 [0]: ./images/n-tier-cassandra.png "Arquitetura de N camadas usando o Microsoft Azure"
 
 [resource-manager-overview]: /azure/azure-resource-manager/resource-group-overview 

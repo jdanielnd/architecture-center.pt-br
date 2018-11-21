@@ -3,12 +3,12 @@ title: Pipeline de CI/CD para cargas de trabalho baseados em contêiner
 description: Crie um pipeline DevOps para um aplicativo Web Node.js que usa Jenkins, Registro de Contêiner do Azure, Serviço de Kubernetes do Azure, Cosmos DB e Grafana.
 author: iainfoulds
 ms.date: 07/05/2018
-ms.openlocfilehash: 3212fae2c68eef3a5ed4963d28c0d97ac8f332e0
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: db8de674ee2789c5b41cebebee5745ecc8544122
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818727"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610831"
 ---
 # <a name="cicd-pipeline-for-container-based-workloads"></a>Pipeline de CI/CD para cargas de trabalho baseados em contêiner
 
@@ -20,7 +20,7 @@ Usando serviços do Azure, como o Serviço de Kubernetes do Azure, o Registro de
 
 ## <a name="relevant-use-cases"></a>Casos de uso relevantes
 
-Considere este cenário para os casos de uso a seguir:
+Outros casos de uso relevantes incluem:
 
 * Modernizar práticas de desenvolvimento de aplicativos para uma abordagem de microsserviços baseada em contêiner.
 * Acelerar o desenvolvimento de aplicativos e ciclos de vida de implantação.

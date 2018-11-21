@@ -3,12 +3,12 @@ title: Data warehouse e análise de vendas e marketing
 description: Consolide dados de várias fontes e otimize a análise de dados.
 author: alexbuckgit
 ms.date: 09/15/2018
-ms.openlocfilehash: f9ca9785b65f18098a91aedc1f3157f49456a6e1
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: e4c0a37f61f3edfb1f29d26df546f02d31fd40f7
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818642"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610695"
 ---
 # <a name="data-warehousing-and-analytics-for-sales-and-marketing"></a>Data warehouse e análise de vendas e marketing
 
@@ -24,7 +24,7 @@ A empresa precisa de uma abordagem moderna dos dados de análise para que as dec
 
 ## <a name="relevant-use-cases"></a>Casos de uso relevantes
 
-Você também pode usar essa abordagem para realizar o seguinte:
+Essa abordagem também pode ser usada para:
 
 * Estabeleça um data warehouse para ser a única fonte de verdade para seus dados.
 * Integre as fontes de dados relacionais com outros conjuntos de dados não estruturados.

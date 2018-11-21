@@ -3,12 +3,12 @@ title: Sites altamente escalonáveis e seguros do WordPress no Azure
 description: Crie um site do WordPress altamente escalonável e seguro para eventos de mídia.
 author: david-stanford
 ms.date: 09/18/2018
-ms.openlocfilehash: f7dd73524b2b63cd7d38e8e03bfd4b8edac251a9
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: 6ff39d09fa301c8c68ce2a644cc489c0e87a22fa
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818472"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610593"
 ---
 # <a name="highly-scalable-and-secure-wordpress-website"></a>Site altamente escalonável e seguro do WordPress
 
@@ -16,7 +16,7 @@ Este cenário de exemplo se aplica a empresas que precisam de instalações do W
 
 ## <a name="relevant-use-cases"></a>Casos de uso relevantes
 
-Considere este cenário para os casos de uso a seguir:
+Outros casos de uso relevantes incluem:
 
 * Eventos de mídia que causam aumento no tráfego.
 * Blogs que usam o WordPress como sistema de gestão de conteúdo.
@@ -48,7 +48,7 @@ O segundo fluxo de trabalho diz respeito a como os autores contribuem com novos 
 ### <a name="components"></a>Componentes
 
 * A [Rede de Distribuição de Conteúdo (CDN)](/azure/cdn/cdn-overview) é uma rede distribuída de servidores que fornece conteúdo com eficiência da Web para os usuários. As CDNs minimizam a latência armazenando conteúdos em cache nos servidores de borda em localizações de ponto de presença próximas aos usuários finais.
-* As [redes virtuais](/azure/virtual-network/virtual-networks-overview) permitem que recursos como as VMs se comuniquem de forma segura com a Internet, com as redes locais e com outras VMs. As redes virtuais fornecem isolamento e segmentação, filtram e roteiam o tráfego e permitem a conexão entre locais. As duas redes são conectadas por meio do emparelhamento VNet.
+* As [redes virtuais](/azure/virtual-network/virtual-networks-overview) permitem que recursos como as VMs se comuniquem de forma segura com a Internet, com as redes locais e com outras VMs. Redes virtuais fornecem isolamento e segmentação, filtram e roteiam o tráfego e permitem a conexão entre locais. As duas redes são conectadas por meio do emparelhamento VNet.
 * Os [grupos de segurança de rede](/azure/virtual-network/security-overview) contêm uma lista de regras de segurança que permitem ou rejeitam o tráfego de rede de entrada ou de saída com base no endereço IP de origem ou destino, na porta e no protocolo. As redes virtuais neste cenário são protegidas com regras de grupo de segurança de rede que restringem o fluxo de tráfego entre os componentes do aplicativo.
 * Os [balanceadores de carga](/azure/load-balancer/load-balancer-overview) distribuem o tráfego de entrada de acordo com regras e investigações de integridade. O balanceador de carga fornece baixa latência e alta taxa de transferência e pode ser escalado verticalmente em milhões de fluxos para aplicativos TCP e UDP. Um balanceador de carga é usado neste cenário para difundir o tráfego da rede de distribuição de conteúdo para os servidores Web front-end.
 * Os [conjuntos de dimensionamento de máquinas virtuais][docs-vmss] possibilitam a criação e o gerenciamento de um grupo idêntico de VMs com balanceamento de carga. O número de instâncias de VM pode aumentar ou diminuir automaticamente em resposta à demanda ou a um agendamento definido. Dois conjuntos separados de dimensionamento de máquinas virtuais são usados neste cenário: um para os servidores Web front-end que distribuem conteúdos e um para os servidores Web front-end usados para criar novos conteúdos.
@@ -71,23 +71,23 @@ Para ver outros tópicos sobre disponibilidade, consulte a [lista de verificaç�
 
 ### <a name="scalability"></a>Escalabilidade
 
-Este cenário usa os conjuntos de dimensionamento de máquinas virtuais para os dois clusters de servidor Web front-end em cada região. Com conjuntos de dimensionamento, o número de instâncias VM que executam a camada de aplicativo front-end pode dimensionar automaticamente em resposta à demanda do cliente ou com base em um agendamento definido. Saiba mais na [Visão geral sobre dimensionamento automático com conjuntos de dimensionamento de máquinas virtuais][docs-vmss-autoscale].
+Este cenário usa os conjuntos de dimensionamento de máquinas virtuais para os dois clusters de servidor Web front-end em cada região. Com conjuntos de dimensionamento, o número de instâncias VM que executam a camada de aplicativo front-end pode dimensionar automaticamente em resposta à demanda do cliente ou com base em um agendamento definido. Para saber mais, veja [Visão geral sobre dimensionamento automático com conjuntos de dimensionamento de máquinas virtuais][docs-vmss-autoscale].
 
 O back-end é um cluster MariaDB no conjunto de disponibilidade. Consulte mais informações no [tutorial de cluster MariaDB][mariadb-tutorial].
 
-Confira outros tópicos de escalabilidade na [lista de verificação de escalabilidade][scalability] no Azure Architecture Center.
+Para outros tópicos de escalabilidade, confira a [lista de verificação de escalabilidade] [ scalability] no Azure Architecture Center.
 
 ### <a name="security"></a>Segurança
 
-Todo o tráfego de rede virtual para a camada de aplicativo front-end é protegido por grupos de segurança de rede. As regras limitam o fluxo de tráfego para que somente as instâncias de VM da camada de aplicativo front-end possam acessar a camada de banco de dados de back-end. Nenhum tráfego de Internet de saída é permitido da camada de banco de dados. Para reduzir a superfície de ataque, nenhuma porta de gerenciamento remoto direto fica aberta. Saiba mais em [Grupos de segurança de rede do Azure][docs-nsg].
+Todo o tráfego de rede virtual para a camada de aplicativo front-end é protegido por grupos de segurança de rede. As regras limitam o fluxo de tráfego para que somente as instâncias de VM da camada de aplicativo front-end possam acessar a camada de banco de dados de back-end. Nenhum tráfego de Internet de saída é permitido da camada de banco de dados. Para reduzir a superfície de ataque, nenhuma porta de gerenciamento remoto direto fica aberta. Para saber mais, confira [Grupos de segurança de rede do Azure][docs-nsg].
 
-Confira uma orientação geral sobre como criar soluções seguras na [Documentação de segurança do Azure][security].
+Para obter orientação geral sobre como criar soluções seguras, confira a [Documentação de segurança do Azure][security].
 
 ### <a name="resiliency"></a>Resiliência
 
 Em combinação com o uso de várias regiões, replicação de dados e conjuntos de dimensionamento de máquinas virtuais, este cenário usa balanceadores de carga do Azure. Esses componentes de rede distribuem o tráfego para as instâncias de VM conectadas e incluem as investigações de integridade que garantem que o tráfego seja distribuído apenas para VMs íntegras. Todos esses componentes de rede são administrados por meio de uma CDN. Isso torna o aplicativo e os recursos de rede resilientes a problemas que, de outra forma, interromperiam o tráfego e impactariam o acesso do usuário final.
 
-Confira diretrizes gerais sobre como criar cenários resilientes em [Projetando aplicativos resilientes para o Azure][resiliency].
+Para obter diretrizes gerais sobre como criar cenários resilientes, confira [Projetando aplicativos resilientes para o Azure][resiliency].
 
 ## <a name="pricing"></a>Preços
 

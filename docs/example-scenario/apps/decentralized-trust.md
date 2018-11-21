@@ -3,12 +3,12 @@ title: Relação de confiança descentralizada entre bancos no Azure
 description: Estabeleça um ambiente confiável para comunicação e compartilhamento de informações sem recorrer a um banco de dados centralizado.
 author: vitoc
 ms.date: 09/09/2018
-ms.openlocfilehash: fe27f885635ce5ae4ce368992affa1a85d7af416
-ms.sourcegitcommit: 62945777e519d650159f0f963a2489b6bb6ce094
+ms.openlocfilehash: bc472bc5bafc3eb20e583f41d71ed783725a039e
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/09/2018
-ms.locfileid: "48876742"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610559"
 ---
 # <a name="decentralized-trust-between-banks-on-azure"></a>Relação de confiança descentralizada entre bancos no Azure
 
@@ -18,17 +18,17 @@ Tradicionalmente, os bancos em um sistema financeiro contam com fontes centraliz
 
 Com DLTs (tecnologia de razão distribuído), um consórcio de bancos pode estabelecer um sistema descentralizado que pode ser mais eficiente e menos suscetível a ataques e servir como uma nova plataforma, em que estruturas inovadoras podem ser implementadas para resolver desafios tradicionais referentes a privacidade, velocidade e custo.
 
-Este exemplo mostrará como serviços do Azure, como conjunto de dimensionamento de máquina virtual, Rede Virtual, Cofre de chaves, Armazenamento, Balanceador de Carga e Monitor, podem ser rapidamente provisionados para a implantação de um blockchain de Ethereum PoA privado e eficiente em que os bancos membros possam estabelecer seus próprios nós.
+Este exemplo mostrará como serviços do Azure, como conjuntos de dimensionamento de máquina virtual, Rede Virtual, Key Vault, Armazenamento, Balanceador de Carga e Monitor, podem ser rapidamente provisionados para a implantação de um blockchain de Ethereum PoA privado e eficiente em que os bancos membros possam estabelecer seus próprios nós.
 
 ## <a name="relevant-use-cases"></a>Casos de uso relevantes
 
-Estes outros casos de uso têm padrões de design semelhante:
+Outros casos de uso relevantes incluem:
 
 * Movimentação de orçamentos alocados entre diferentes unidades de negócios de uma empresa multinacional
 * Pagamentos internacionais
 * Cenários de finanças de comércio
 * Sistemas de fidelidade que envolvem diferentes empresas
-* Ecossistemas de cadeia de suprimentos e muito mais
+* Ecossistemas de cadeia de suprimentos
 
 ## <a name="architecture"></a>Arquitetura
 
@@ -44,7 +44,7 @@ Esse cenário aborda os componentes back-end que são necessários para criar um
 
 ### <a name="components"></a>Componentes
 
-* As Máquinas Virtuais em Conjuntos de Dimensionamento de Máquinas Virtuais fornecem o recurso de computação sob demanda para hospedar os processos de validador para o blockchain
+* As máquinas virtuais em conjuntos de dimensionamento de máquinas virtuais fornecem o recurso de computação sob demanda para hospedar os processos de validador para o blockchain
 * O Cofre de Chaves é usado como o recurso de armazenamento seguro para as chaves privadas de cada validador
 * O Load Balancer distribui as solicitações de RPC, emparelhamento e Governança DApp
 * Armazenamento que hospeda informações de rede persistentes e leasing de coordenação
@@ -70,9 +70,9 @@ Para ver outros tópicos sobre disponibilidade, consulte a [lista de verificaç�
 
 ### <a name="scalability"></a>Escalabilidade
 
-Uma preocupação popular referente ao blockchain é o número de transações que ele pode incluir em um período de tempo predefinido. Esse cenário usa uma Prova de Autoridade em que tal escalabilidade pode ser gerenciada melhor do que a Prova de Trabalho. Em redes com base em Prova de Autoridade, os participantes de consenso são conhecidos e gerenciados, tornando-as mais adequadas para o blockchain privada para um consórcio de organizações que conhecem umas às outras. Os parâmetros como tempo médio de bloco, transações por minuto e consumo de recursos de computação podem ser facilmente monitorados por meio do painel personalizado. Os recursos podem ser ajustados adequadamente com base nos requisitos de dimensionamento.
+Uma preocupação popular referente ao blockchain é o número de transações que ele pode incluir em um período de tempo predefinido. Esse cenário usa uma Prova de Autoridade em que tal escalabilidade pode ser gerenciada melhor do que a Prova de Trabalho. Em redes com base em Prova de Autoridade, os participantes de consenso são conhecidos e gerenciados, tornando-as mais adequadas para o blockchain privado para um consórcio de organizações que conhecem umas às outras. Os parâmetros como tempo médio de bloco, transações por minuto e consumo de recursos de computação podem ser facilmente monitorados por meio do painel personalizado. Os recursos podem ser ajustados adequadamente com base nos requisitos de dimensionamento.
 
-Para saber diretrizes sobre como criar cenários escalonáveis, consulte [lista de verificação de escalabilidade][scalability] no Azure Architecture Center.
+Para obter diretrizes gerais sobre como criar soluções escalonáveis, confira a [lista de verificação de escalabilidade] [ scalability] no Azure Architecture Center.
 
 ### <a name="security"></a>Segurança
 

@@ -3,12 +3,12 @@ title: Análise de dados e de IoT no setor da construção
 description: Use dispositivos de IoT e de análise de dados para fornecer gerenciamento e operação abrangentes de projetos de construção.
 author: alexbuckgit
 ms.date: 08/29/2018
-ms.openlocfilehash: 7ab0de50b0eba1ab420e450f3408fe5dc45f04ac
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: 74868191687e63a54a69fdacb7276983d98faf74
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818489"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610916"
 ---
 # <a name="iot-and-data-analytics-in-the-construction-industry"></a>Análise de dados e de IoT no setor da construção
 
@@ -29,7 +29,7 @@ O uso de serviços gerenciados do Azure, como o Hub IoT e o HDInsight, permitir�
 
 ## <a name="relevant-use-cases"></a>Casos de uso relevantes
 
-Considere usar a solução nos casos de uso abaixo:
+Outros casos de uso relevantes incluem:
 
 * Cenários de construção, mineração ou produção de equipamento
 * Coleta em grande escala de dados de dispositivos para armazenamento e análise
@@ -47,7 +47,7 @@ Os dados fluem pela solução da seguinte maneira:
 4. Os dados brutos coletados são enviados diretamente do Hub IoT para o Armazenamento de Blobs do Azure e são disponibilizados imediatamente para exibição e análise.
 5. Os dados coletados por meio do Hub IoT são processados em tempo real por um trabalho do Azure Stream Analytics e armazenados em um banco de dados SQL do Azure.
 6. O aplicativo Web Smart Construction Cloud está disponível para que analistas e usuários finais exibam e analisem dados de sensores e imagens. 
-7. Trabalhos em lote são iniciados sob demanda por usuários do aplicativo Web. O trabalho em lote é executado no Apache Spark no HDInsight e analisa novos dados armazenados no cluster Cassandra. 
+7. Trabalhos em lote são iniciados sob demanda por usuários do aplicativo Web. O trabalho em lote é executado no Apache Spark no HDInsight e analisa novos dados armazenados no cluster Cassandra. 
 
 ### <a name="components"></a>Componentes
 

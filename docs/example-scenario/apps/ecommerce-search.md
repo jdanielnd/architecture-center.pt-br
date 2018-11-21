@@ -3,24 +3,24 @@ title: Mecanismo de pesquisa de produto inteligente para comércio eletrônico
 description: Fornece uma experiência de pesquisa de nível internacional em um aplicativo de comércio eletrônico.
 author: jelledruyts
 ms.date: 09/14/2018
-ms.openlocfilehash: f18e9fd3705c24da71da747c46ab42f263fd06af
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: a57477c26665b4560671550f6fdd81c2d9505e71
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818734"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610661"
 ---
 # <a name="intelligent-product-search-engine-for-e-commerce"></a>Mecanismo de pesquisa de produto inteligente para comércio eletrônico
 
 Esse cenário de exemplo mostra como o uso de um serviço de pesquisa dedicado pode aumentar drasticamente a relevância dos resultados da pesquisa para seus clientes de comércio eletrônico.
 
-A pesquisa é o mecanismo principal por meio do qual os clientes encontram e, em última análise, compram produtos. Portanto, é essencial que os resultados da pesquisa sejam relevantes para a _intenção_ de consulta de pesquisa e que a experiência de pesquisa de ponta a ponta corresponda à dos gigantes de pesquisa, fornecendo resultados quase instantâneos, análise linguística, correspondência de localização geográfica, filtragem, facetas, preenchimento automático, realce de ocorrências etc.
+A pesquisa é o mecanismo principal por meio do qual os clientes encontram e, em última análise, compram produtos. Portanto, é essencial que os resultados da pesquisa sejam relevantes para a _intenção_ de consulta de pesquisa e que a experiência de pesquisa de ponta a ponta corresponda à dos gigantes de pesquisa, fornecendo resultados quase instantâneos, análise linguística, correspondência de localização geográfica, filtragem, facetas, preenchimento automático, realce de ocorrências, etc.
 
 Imagine um aplicativo Web de comércio eletrônico típico, com dados de produtos armazenados em um banco de dados relacional como o SQL Server ou o Banco de Dados SQL. As consultas de pesquisa normalmente são tratadas no banco de dados usando consultas do `LIKE` ou recursos de [Pesquisa de Texto Completo][docs-sql-fts]. Usando o [Azure Search][docs-search] em vez disso, você libera seu banco de dados operacional do processamento de consultas e pode facilmente começar a tirar proveito de recursos de implementação difícil que fornecem aos clientes a melhor experiência de pesquisa possível. Além disso, como o Azure Search é um componente de PaaS (plataforma como serviço), você não precisa se preocupar em gerenciar a infraestrutura ou se tornar um especialista em pesquisa.
 
 ## <a name="relevant-use-cases"></a>Casos de uso relevantes
 
-Estes outros casos de uso têm padrões de design semelhante:
+Outros casos de uso relevantes incluem:
 
 * Localizar listagens de imóveis ou lojas perto da localização física do usuário.
 * Pesquisar artigos em um site de notícias ou procurar resultados esportivos, com preferência mais elevada para obter informações mais _recentes_.
@@ -42,7 +42,7 @@ Este cenário aborda uma solução de comércio eletrônico em que os clientes p
 
 ### <a name="components"></a>Componentes
 
-* Os [Serviços de Aplicativo - Aplicativos Web][docs-webapps] hospedam os aplicativos Web, permitindo o dimensionamento automático e alta disponibilidade sem a necessidade de gerenciar a infraestrutura.
+* Os [Serviços de Aplicativos - Aplicativos Web][docs-webapps] hospedam os aplicativos Web, permitindo o dimensionamento automático e alta disponibilidade sem a necessidade de gerenciar a infraestrutura.
 * O [Banco de Dados SQL][docs-sql-database] é um serviço gerenciado de banco de dados relacional de uso geral no Microsoft Azure que dá suporte a estruturas como XML, JSON, espacial e dados relacionais.
 * O [Azure Search][docs-search] é uma solução de pesquisa como serviço na nuvem que oferece uma experiência de pesquisa avançada para conteúdo privado e heterogêneo em aplicativos Web, móveis e empresariais.
 * O [Serviço de Bot][docs-botservice] fornece ferramentas para compilar, testar, implantar e gerenciar bots inteligentes.

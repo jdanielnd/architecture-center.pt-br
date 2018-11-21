@@ -3,22 +3,22 @@ title: Monitoramento de aplicativo Web no Azure
 description: Monitore um aplicativo Web hospedado no Serviço de Aplicativo do Azure.
 author: adamboeglin
 ms.date: 09/12/2018
-ms.openlocfilehash: ea57ba50f4e9390d5527587752c3bebad01b6139
-ms.sourcegitcommit: 42797fffb82bbbf86f6deb1da52c61d456be631e
+ms.openlocfilehash: ba008035c37d1d4e2d2f823463344e4941c0b4c4
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/13/2018
-ms.locfileid: "49313209"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610746"
 ---
 # <a name="web-application-monitoring-on-azure"></a>Monitoramento de aplicativo Web no Azure
 
-Ofertas de PaaS (Plataforma como Serviço) no Azure para gerenciar recursos de computação para você e, de certa forma, alterar a forma como você monitora implantações. O Azure inclui vários serviços de monitoramento, e cada um realiza uma função específica. Juntos, esses serviços oferecem uma solução abrangente para coletar, analisar e agir na telemetria do seu aplicativo e os recursos do Azure que eles usam.
+Ofertas de plataforma como serviço (PaaS) no Azure gerenciam recursos de computação para você e afetam como você monitora implantações. O Azure inclui vários serviços de monitoramento, e cada um realiza uma função específica. Juntos, esses serviços oferecem uma solução abrangente para coletar, analisar e agir na telemetria do seu aplicativo e os recursos do Azure que eles consomem.
 
 Esse cenário aborda os serviços de monitoramento que você pode usar e descreve um modelo de fluxo de dados para uso com várias fontes de dados. Quando se trata de monitoramento, várias ferramentas e serviços funcionam com implantações do Azure. Nesse cenário, escolhemos serviços prontamente disponíveis, pois eles são fáceis de usar. Outras opções de monitoramento serão discutidas mais adiante neste artigo.
 
 ## <a name="relevant-use-cases"></a>Casos de uso relevantes
 
-Considere este cenário para os casos de uso a seguir:
+Outros casos de uso relevantes incluem:
 
 - Instrumentação de um aplicativo Web para monitoramento de telemetria.
 - Coleta de telemetria de front-end e back-end para um aplicativo implantado no Azure.
@@ -48,7 +48,7 @@ Esse cenário usa um ambiente do Azure gerenciado para hospedar um aplicativo e 
 
 ## <a name="considerations"></a>Considerações
 
-Uma prática recomendada é adicionar o Application Insights ao código em desenvolvimento usando [SDKs do Application Insights][Application Insights SDKs] e personalizar por aplicativo. Esses SDKs de software livre estão disponíveis para a maioria das estruturas de aplicativo. Para enriquecer e controlar os dados coletados, incorpore o uso de ambos os SDKs para implantações de produção e teste em seu processo de desenvolvimento. O principal requisito é que o aplicativo tenha uma linha de visão direta ou indireta para o ponto de extremidade de ingestão do Applications Insights hospedado com um endereço voltado para a Internet. Você pode então adicionar telemetria ou enriquecer uma coleção de telemetria existente.
+Uma prática recomendada é adicionar o Application Insights ao código durante o desenvolvimento usando [SDKs do Application Insights][Application Insights SDKs] e personalizar por aplicativo. Esses SDKs de software livre estão disponíveis para a maioria das estruturas de aplicativo. Para enriquecer e controlar os dados coletados, incorpore o uso de ambos os SDKs para implantações de produção e teste em seu processo de desenvolvimento. O principal requisito é que o aplicativo tenha uma linha de visão direta ou indireta para o ponto de extremidade de ingestão do Applications Insights hospedado com um endereço voltado para a Internet. Você pode então adicionar telemetria ou enriquecer uma coleção de telemetria existente.
 
 O monitoramento de tempo de execução é outra maneira fácil de começar. A telemetria coletada deve ser controlada por meio de arquivos de configuração. Por exemplo, você pode incluir métodos de tempo de execução que habilitam ferramentas como o [Application Insights Status Monitor][Application Insights Status Monitor] para implantar os SDKs na pasta correta e adicionar as configurações corretas para começar o monitoramento.
 
@@ -72,7 +72,7 @@ Este artigo descreve opções de monitoramento convenientemente disponíveis com
 
 Esse cenário se concentra em soluções de PaaS para o monitoramento, em grande parte porque elas lidam de forma conveniente com a disponibilidade e a escalabilidade para você e contam com SLAs (contratos de nível de serviço). Por exemplo, os Serviços de Aplicativos fornecem um [SLA][SLA] com garantia de disponibilidade.
 
-O Application Insights tem [limites][app-insights-limits] para o número de solicitações que podem ser processadas por segundo. Se exceder o limite de solicitação, você poderá enfrentar a limitação de mensagens. Para evitar isso, implemente [filtragem][message-filtering] ou [amostragem][message-sampling] para reduzir a taxa de dados
+O Application Insights tem [limites][app-insights-limits] para o número de solicitações que podem ser processadas por segundo. Se exceder o limite de solicitação, você poderá enfrentar a limitação de mensagens. Para evitar limitação, implemente [filtragem][message-filtering] ou [amostragem][message-sampling] para reduzir a taxa de dados
 
 No entanto, considerações de alta disponibilidade para o aplicativo que você executa são responsabilidade do desenvolvedor. Para saber mais sobre a escala, por exemplo, confira a seção [Considerações sobre escalabilidade](#scalability-considerations) na arquitetura de referência do aplicativo Web básico. Depois que um aplicativo for implantado, você poderá configurar testes para [monitorar sua disponibilidade][monitor its availability] usando o Application Insights.
 
@@ -97,7 +97,7 @@ Para ajudá-lo a começar, use a [calculadora de preços][pricing] para estimar 
 
 A telemetria do Application Insights é enviada ao portal do Azure durante a depuração e depois que você publica o aplicativo. Para fins de teste e para evitar cobranças, um volume limitado de telemetria é instrumentado. Para adicionar indicadores, você pode aumentar o limite de telemetria. Para obter um controle mais granular, confira [Amostragem no Application Insights][Sampling in Application Insights].
 
-Após a implantação, você poderá assistir a um [Live Metrics Stream][Live Metrics Stream] dos indicadores de desempenho. Esses dados não são armazenados (você está exibindo métricas em tempo real), mas a telemetria pode ser coletada e analisada posteriormente. Não há custo para dados do Live Stream.
+Após a implantação, você poderá assistir a um [Live Metrics Stream][Live Metrics Stream] dos indicadores de desempenho. Esses dados não são armazenados &mdash; (você está exibindo métricas em tempo real) &mdash;, mas a telemetria pode ser coletada e analisada posteriormente. Não há custo para dados do Live Stream.
 
 O Log Analytics é cobrado por GB (gigabyte) de dados ingeridos no serviço. Os primeiros 5 GB de dados ingeridos para o serviço Azure Log Analytics a cada mês são oferecidos gratuitamente, e os dados são retidos sem custo pelos primeiros 31 dias no espaço de trabalho do Log Analytics. 
 

@@ -3,12 +3,12 @@ title: Executar cargas de trabalho de produção do SAP usando um banco de dados
 description: Execute uma implantação de produção do SAP no Azure usando um banco de dados Oracle.
 author: DharmeshBhagat
 ms.date: 9/12/2018
-ms.openlocfilehash: 4c0e054a9024cd50581acd5b472a09d6e98d2bed
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: 75942b4d9b18b7bbe7a162826bcf4fe9ece22dce
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818557"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610899"
 ---
 # <a name="running-sap-production-workloads-using-an-oracle-database-on-azure"></a>Executar cargas de trabalho de produção do SAP usando um Oracle Database no Microsoft Azure
 
@@ -20,7 +20,7 @@ Este cenário de exemplo demonstra uma implantação do SAP em VMs (máquinas vi
 
 ## <a name="relevant-use-cases"></a>Casos de uso relevantes
 
-Considere este exemplo para os seguintes cenários:
+Outros casos de uso relevantes incluem:
 
 * Cargas de trabalho críticas em execução no SAP.
 * Cargas de trabalho não críticas do SAP.

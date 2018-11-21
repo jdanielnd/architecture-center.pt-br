@@ -3,12 +3,12 @@ title: Escolhendo uma tecnologia de aprendizado de máquina
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 995349c795066ec3067b20ad2615e40b0fb152db
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: 50167bafa49f8e6016f6ec12680db016830e2b81
+ms.sourcegitcommit: 9293350ab66fb5ed042ff363f7a76603bf68f568
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/14/2018
-ms.locfileid: "29288928"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51577150"
 ---
 # <a name="choosing-a-machine-learning-technology-in-azure"></a>Escolhendo uma tecnologia de aprendizado de máquina no Azure
 
@@ -19,7 +19,7 @@ As soluções de aprendizado de máquina são criadas de forma iterativa e apres
 * Implantação e consumo de serviços preditivos.
 
 ## <a name="tools-and-services-for-data-preparation-and-modeling"></a>Ferramentas e serviços para preparação de dados e modelagem
-Em geral, os cientistas de dados preferem trabalhar com os dados usando um código personalizado escrito em Python ou R. Geralmente, esse código é executado de maneira interativa, com os cientistas de dados usando-o para consultar e explorar os dados, além de gerar visualizações e estatísticas para ajudar a determinar as relações existentes entre eles. Há muitos ambientes interativos do R e Python que podem ser usados por cientistas de dados. Um favorito específico é o **Jupyter Notebooks** que fornece um shell baseado em navegador que permite aos cientistas de dados criar arquivos de *bloco de anotações* que contêm um texto de markdown ou código do R ou Python. Essa é uma maneira eficiente de colaborar por meio de compartilhamento e documentação do código e dos resultados em um único documento.
+Em geral, os cientistas de dados preferem trabalhar com os dados usando um código personalizado escrito em Python ou R. Geralmente, esse código é executado de maneira interativa, com os cientistas de dados usando-o para consultar e explorar os dados, além de gerar visualizações e estatísticas para ajudar a determinar as relações existentes entre eles. Diferentes ambientes interativos do R e Python podem ser usados pelos cientistas de dados. Um dos favoritos é o **Jupyter Notebooks** que fornece um shell baseado em navegador que permite aos cientistas de dados criar arquivos de *bloco de anotações* contendo um texto de markdown ou código do R ou Python. Essa é uma maneira eficiente de colaborar por meio de compartilhamento e documentação do código e dos resultados em um único documento.
 
 Outras ferramentas usadas incluem:
 * **Spyder**: o IDE (ambiente de desenvolvimento interativo) para o Python fornecido com a distribuição do Anaconda Python.
@@ -57,7 +57,7 @@ Considerações:
 
 ### <a name="azure-machine-learning"></a>Azure Machine Learning
 
-O Azure Machine Learning é um serviço baseado em nuvem usado para gerenciar modelos e experimentos de aprendizado de máquina. Ele inclui um serviço de experimentação que acompanha os scripts de preparação de dados e treinamento de modelagem, mantendo um histórico de todas as execuções, de modo que você possa comparar o desempenho do modelo em várias iterações. Uma ferramenta de cliente de multiplaforma chamada Azure Machine Learning Workbench fornece uma interface central de gerenciamento de script e histórico, enquanto ainda permite aos cientistas de dados criar scripts em sua ferramenta escolhida, como o Jupyter Notebooks ou o Visual Studio Code.
+O Azure Machine Learning é um serviço baseado em nuvem usado para gerenciar modelos e experimentos de aprendizado de máquina. Ele inclui um serviço de experimentação que acompanha os scripts de preparação de dados e treinamento de modelagem, mantendo um histórico de todas as execuções, de modo que você possa comparar o desempenho do modelo em várias iterações. Uma ferramenta de cliente multiplaforma chamada Azure Machine Learning Workbench fornece uma interface central para histórico e gerenciamento de scripts, permitindo ainda que os cientistas de dados criem scripts em sua ferramenta escolhida, como o Jupyter Notebooks ou o Visual Studio Code.
 
 No Azure Machine Learning Workbench, você pode usar as ferramentas interativas de preparação de dados para simplificar tarefas comuns de transformação de dados e pode configurar o ambiente de execução de script para executar os scripts de treinamento do modelo localmente, em um contêiner escalonável do Docker ou no Spark.
 
@@ -108,7 +108,11 @@ Principais benefícios:
 
 Considerações:
 
-* O Spark é executado em um cluster HDInsight que incorre em encargos durante o tempo em que ele está em execução. Se o serviço de aprendizado de máquina for destinado a ser usado apenas ocasionalmente, isso poderá resultar em custos desnecessários.
+* O Spark é executado em um cluster HDInsight que resulta em encargos durante todo o tempo em que estiver em execução. Se o serviço de aprendizado de máquina for destinado a ser usado apenas ocasionalmente, isso poderá resultar em custos desnecessários.
+
+### <a name="azure-databricks"></a>Azure Databricks
+
+O [Azure Databricks](/azure/azure-databricks/) é uma plataforma de análise baseada no Apache Spark. Você pode imaginá-la como o “Spark como um serviço”. É a maneira mais fácil de usar o Spark na plataforma do Azure. Para aprendizado de máquina, você pode usar [MLFlow](https://www.mlflow.org/), [ML do Databricks Runtime](https://docs.azuredatabricks.net/user-guide/clusters/mlruntime.html), MLlib do Apache Spark e outros. Para obter mais informações, confira [Azure Databricks: Machine Learning](https://docs.azuredatabricks.net/spark/latest/mllib/index.html). 
 
 ### <a name="web-service-in-a-container"></a>Serviço Web em um contêiner
 

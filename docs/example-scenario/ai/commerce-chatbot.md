@@ -3,12 +3,12 @@ title: Chatbot de conversação para reservas de hotel no Azure
 description: Crie um chatbot de conversação para aplicativos de comércio com o Serviço de Bot do Azure.
 author: iainfoulds
 ms.date: 07/05/2018
-ms.openlocfilehash: 826aa36da5f30a871abd90fd8ab2b202ffdf93f0
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: a922a75d621672fcac95296b1d99112d68c91107
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48819614"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610756"
 ---
 # <a name="conversational-chatbot-for-hotel-reservations-on-azure"></a>Chatbot de conversação para reservas de hotel no Azure
 
@@ -20,7 +20,7 @@ Usando os serviços do Azure, como o Serviço de Bot e Reconhecimento vocal ou s
 
 ## <a name="relevant-use-cases"></a>Casos de uso relevantes
 
-Considere este cenário para os casos de uso a seguir:
+Outros casos de uso relevantes incluem:
 
 * Exibir menu de entrega do restaurante e pedir comida
 * Verificar a disponibilidade do hotel e reservar um quarto
@@ -96,7 +96,7 @@ Este cenário é dividido em três componentes para você explorar as áreas nas
 
 ### <a name="deploy-infrastructure-components"></a>Implantar componentes de infraestrutura
 
-Para implantar os componentes de infraestrutura com um modelo do Azure Resource Manager, execute as etapas a seguir.
+Para implantar os componentes de infraestrutura com um modelo do Resource Manager, execute as etapas a seguir.
 
 1. Clique no botão **Implantar no Azure**:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Fsolution-architectures%2Fmaster%2Fapps%2Fcommerce-chatbot.json" target="_blank"><img src="https://azuredeploy.net/deploybutton.png"/></a>
 2. Aguarde até que a implantação de modelo seja aberta no portal do Azure e conclua as seguintes etapas:
@@ -149,7 +149,8 @@ Fornecemos três perfis de custos de exemplo com base na quantidade de mensagens
 
 ## <a name="related-resources"></a>Recursos relacionados
 
-Para um conjunto de tutoriais guiados sobre como aproveitar o Serviço de Bot do Azure, confira o [nó de tutorial] [ botservice-docs] da documentação.
+Para um conjunto de tutoriais guiados sobre o Serviço de Bot do Azure, confira a [seção de tutorial][botservice-docs] da documentação.
+
 
 <!-- links -->
 [aadb2c-docs]: /azure/active-directory-b2c/active-directory-b2c-overview

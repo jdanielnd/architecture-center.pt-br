@@ -3,12 +3,12 @@ title: Migrando um aplicativo Web herdado para uma arquitetura baseada em API no
 description: Use o Gerenciamento de API do Azure para modernizar um aplicativo Web herdado.
 author: begim
 ms.date: 09/13/2018
-ms.openlocfilehash: 1aa7ea6dc895146e13677dd9867fb2530f0a8f04
-ms.sourcegitcommit: 62945777e519d650159f0f963a2489b6bb6ce094
+ms.openlocfilehash: f468b3c6dc1c58e03555613b152882316ae2a017
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/09/2018
-ms.locfileid: "48876776"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610576"
 ---
 # <a name="migrating-a-legacy-web-application-to-an-api-based-architecture-on-azure"></a>Migrando um aplicativo Web herdado para uma arquitetura baseada em API no Azure
 
@@ -20,7 +20,7 @@ As metas do projeto incluem endereçar a dívida técnica, melhorar a manutenç�
 * A equipe de desenvolvimento interno criará a nova funcionalidade do negócio, que será exposta por novas APIs de HTTP.
 * Uma equipe de desenvolvimento de contrato criará uma nova interface do usuário com base em navegador, que será hospedada no Azure.
 
-Os novos recursos do aplicativo serão entregues em estágios. Eles *substituirão gradualmente* a funcionalidade existente da interface do usuário cliente-servidor baseada em navegador (hospedado no local) que capacita o negócio de comércio eletrônico atualmente.
+Os novos recursos do aplicativo serão entregues em estágios. Estes recursos substituirão gradualmente a funcionalidade existente da interface do usuário cliente-servidor baseada em navegador (hospedado no local) que capacita o negócio de comércio eletrônico atualmente.
 
 A equipe de gerenciamento não deseja modernizar desnecessariamente. Ela também quer manter o controle de escopo e custos. Para isso, a equipe decidiu preservar os serviços HTTP de SOAP existentes. Ela também pretende minimizar as alterações na interface do usuário existente. O [Gerenciamento de API do Azure (APIM)][apim] pode ser utilizado para atender muitos dos requisitos e restrições do projeto.
 
@@ -85,7 +85,8 @@ Para exibir os custos projetados e personalizar as suas necessidades de implanta
 
 ## <a name="related-resources"></a>Recursos relacionados
 
-Confira tudo sobre Gerenciamento de API do Azure na [documentação e nos artigos de referência.][apim]
+Revise a extensa [documentação e os artigos de referência][apim] sobre Gerenciamento de API do Azure.
+
 
 <!-- links -->
 [architecture]: ./media/architecture-apim-api-scenario.png

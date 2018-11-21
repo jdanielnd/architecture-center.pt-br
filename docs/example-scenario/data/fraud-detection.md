@@ -3,12 +3,12 @@ title: Detecção de fraude em tempo real no Azure
 description: Detecte atividades fraudulentas em tempo real usando os Hubs de Eventos do Azure e o Stream Analytics.
 author: alexbuckgit
 ms.date: 07/05/2018
-ms.openlocfilehash: 4de988731aa1c5b0e4c0ba06fa5aed59e2bb7d81
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: bd9eb4d572651c4e57a0043226860623cd8d17e1
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818659"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610598"
 ---
 # <a name="real-time-fraud-detection-on-azure"></a>Detecção de fraude em tempo real no Azure
 
@@ -22,7 +22,7 @@ Este exemplo representa parte de uma estratégia e uma arquitetura de processame
 
 ## <a name="relevant-use-cases"></a>Casos de uso relevantes
 
-Considere este cenário para os casos de uso a seguir:
+Outros casos de uso relevantes incluem:
 
 * Detectar chamadas fraudulentas em cenários de telecomunicações.
 * Identificar transações fraudulentas de cartão de crédito para instituições bancárias.
@@ -63,7 +63,7 @@ Para outras considerações sobre disponibilidade, confira a [lista de verifica�
 
 Os componentes deste cenários foram concebidos para ingestão de grande escala e análise em tempo real paralela em massa. Os Hubs de Eventos do Azure são altamente escalonáveis, capazes de receber e processar milhões de eventos por segundo com baixa latência. Os Hubs de Eventos [escalam verticalmente](/azure/event-hubs/event-hubs-auto-inflate) o número de unidades de taxa de transferência automaticamente para atender às necessidades de uso. O Azure Stream Analytics é capaz de analisar grandes volumes de dados de streaming de várias fontes. Você pode escalar verticalmente o Stream Analytics, aumentando o número de [unidades de streaming](/azure/stream-analytics/stream-analytics-streaming-unit-consumption) alocado para executar o trabalho de streaming.
 
-Para saber diretrizes sobre como criar cenários escalonáveis, consulte [lista de verificação de escalabilidade][scalability] no Azure Architecture Center.
+Para obter diretrizes gerais sobre como criar soluções escalonáveis, confira a [lista de verificação de escalabilidade] [ scalability] no Azure Architecture Center.
 
 ### <a name="security"></a>Segurança
 

@@ -3,12 +3,12 @@ title: Renderização de vídeo em 3D no Azure
 description: Execute cargas de trabalho de HPC nativas no Azure usando o serviço de Lote do Azure.
 author: adamboeglin
 ms.date: 07/13/2018
-ms.openlocfilehash: 1206fa7d931fca635118929d433abe232ec5ca9a
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: 1ffdaa5467fec73a01b8caa18b71c2bc4e49abbe
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818609"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610678"
 ---
 # <a name="3d-video-rendering-on-azure"></a>Renderização de vídeo em 3D no Azure
 
@@ -18,7 +18,7 @@ O Lote oferece uma experiência consistente de gerenciamento e agendamento de tr
 
 ## <a name="relevant-use-cases"></a>Casos de uso relevantes
 
-Considere este cenário para esses casos de uso semelhantes:
+Outros casos de uso relevantes incluem:
 
 * Modelagem 3D
 * Renderização visual FX (VFX)

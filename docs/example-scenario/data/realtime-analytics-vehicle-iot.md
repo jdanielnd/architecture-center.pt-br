@@ -1,14 +1,14 @@
 ---
 title: Ingestão e processamento de dados de IoT automotivos em tempo real
-description: Faça a ingestão e o processamento de dados do veículo em tempo real usando IoT.
-author: meeral
+description: Ingira e processe dados do veículo em tempo real usando IoT.
+author: msdpalam
 ms.date: 09/12/2018
-ms.openlocfilehash: 663332185f64987215384a1d4af4b7ed9b50847c
-ms.sourcegitcommit: 62945777e519d650159f0f963a2489b6bb6ce094
+ms.openlocfilehash: 6562e3277e6b6eb38993132284ad43542ef4c0d3
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/09/2018
-ms.locfileid: "48876878"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610729"
 ---
 # <a name="ingestion-and-processing-of-real-time-automotive-iot-data"></a>Ingestão e processamento de dados de IoT automotivos em tempo real
 
@@ -23,7 +23,7 @@ Para esta demonstração de exemplo, imagine uma montadora de carros que deseja 
 
 ## <a name="relevant-use-cases"></a>Casos de uso relevantes
 
-Considere este cenário, juntamente com os objetivos acima, para os seguintes casos de uso durante a criação de sistemas de processamento e ingestão de telemática:
+Outros casos de uso relevantes incluem:
 
 * Alertas e lembretes de manutenção do veículo.
 * Serviços baseados na localização para os passageiros do veículo (ou seja, o SOS).
@@ -46,7 +46,7 @@ Os eventos gerados por dispositivos IoT (dados ou mensagens) são ingeridos, pro
 * O [Azure Databricks](/services/databricks) está localizado na camada de transformação e análise. Os blocos de anotações do Databricks implementam uma API de consumidor Kafka para ler os dados do tópico Kafka.
 * O [Azure Cosmos DB](/services/cosmos-db), o [Banco de Dados SQL do Azure](/azure/sql-database/sql-database-technical-overview) e o SQL Data Warehouse do Azure estão na camada de armazenamento do serviço, em que o Azure Databricks pode gravar os dados por meio de conectores de dados.
 * O [SQL Data Warehouse do Azure](/azure/sql-data-warehouse/sql-data-warehouse-overview-what-is) é um sistema distribuído para armazenamento e análise de grandes conjuntos de dados. O uso que ele faz do MPP (processamento altamente paralelo) o torna adequado para a execução de análises de alto desempenho.
-* O [Power BI](https://docs.microsoft.com/power-bi) é um conjunto de ferramentas de análise de negócios para análise de dados e compartilhamento de informações. O Power BI pode consultar um modelo semântico armazenado no Analysis Services ou pode consultar diretamente o SQL Data Warehouse.
+* [Power BI](https://docs.microsoft.com/power-bi) é um conjunto de ferramentas de análise de negócios para analisar dados e compartilhar informações. O Power BI pode consultar um modelo semântico armazenado no Analysis Services ou pode consultar diretamente o SQL Data Warehouse.
 * O [Azure Active Directory (Azure AD)](/azure/active-directory) autentica os usuários, ao se conectar ao [Azure Databricks](https://azure.microsoft.com/services/databricks). Se criássemos um cubo no [Analysis Services](/azure/analysis-services) com base no modelo dos dados do SQL Data Warehouse do Azure, poderíamos usar o AAD para conexão ao servidor do Analysis Services por meio do Power BI. O Data Factory também pode usar o Azure AD para autenticação no SQL Data Warehouse por meio de uma entidade de serviço ou uma Identidade de Serviço Gerenciada (MSI).
 * Os [Serviços de Aplicativos do Azure](/azure/app-service/app-service-web-overview), em especial o [Aplicativo API](/services/app-service/api), podem ser usados para expor dados a terceiros, com base nos dados armazenados na camada de serviço.
 
@@ -67,7 +67,7 @@ As tecnologias nesta arquitetura foram escolhidas com base na escala necessária
 * O Azure Databricks se integra totalmente aos bancos de dados do Azure e armazena: o [SQL Data Warehouse do Azure](/azure/sql-data-warehouse), o [Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db), o [Azure Data Lake Storage](https://azure.microsoft.com/services/storage/data-lake-storage) e o [Armazenamento de Blobs do Azure](https://azure.microsoft.com/services/storage/blobs)
     * Dimensionamento e término automáticos para clusters do Spark para minimização automática de custos.
     * Otimizações de desempenho, incluindo o armazenamento em cache, a indexação e a otimização de consulta avançada, que pode melhorar o desempenho entre dez a 100 vezes em comparação a implantações tradicionais do Apache Spark em ambientes locais ou na nuvem.
-    * A integração com o Azure Active Directory permite a execução de soluções completas baseadas no Azure usando o Azure Databricks.
+    * A integração com o Azure Active Directory permite que você execute soluções completas baseadas no Azure usando o Azure Databricks.
     * O acesso baseado em funções no Azure Databricks possibilita permissões refinadas de usuário para blocos de notas, clusters, trabalhos e dados.
     * Vem com SLAs de nível corporativo.
 * O Azure Cosmos DB é o banco de dados multimodelo da Microsoft distribuído globalmente. Ele foi criado do zero com distribuição global e escala horizontal em sua essência. Oferece distribuição global pronta para uso em qualquer quantidade de regiões do Azure, dimensionando e replicando seus dados de forma transparente onde quer que os usuários estejam. Você pode dimensionar a taxa de transferência e o armazenamento de maneira elástica em todo o mundo e pagar apenas pela taxa de transferência e pelo armazenamento de que precisar.

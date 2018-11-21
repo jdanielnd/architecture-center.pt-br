@@ -3,12 +3,12 @@ title: Classificação de imagens para acionamento de seguro no Azure
 description: Crie o processamento de imagens em seus aplicativos do Azure.
 author: david-stanford
 ms.date: 07/05/2018
-ms.openlocfilehash: 31d328f8e5e27ea255024b7f461f2bfaeffc3ca7
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: 9640f8b5454891ed00f669bada9f7c9c69b89734
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818523"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610525"
 ---
 # <a name="image-classification-for-insurance-claims-on-azure"></a>Classificação de imagens para acionamento de seguro no Azure
 
@@ -20,7 +20,7 @@ Usando serviços do Azure como a API da Pesquisa Visual Computacional e o Azure 
 
 ## <a name="relevant-use-cases"></a>Casos de uso relevantes
 
-Considere este cenário para os casos de uso a seguir:
+Outros casos de uso relevantes incluem:
 
 * Classificar imagens em um site de moda.
 * Classificar dados de telemetria de capturas de tela de jogos.
@@ -56,9 +56,9 @@ Esse cenário aborda os componentes de back-end de um aplicativo Web ou móvel. 
 
 A maioria dos componentes usados neste cenário de exemplo são serviços gerenciados que serão dimensionados automaticamente. Duas exceções notáveis: o Azure Functions tem um limite de um máximo de 200 instâncias. Se você precisar dimensionar além desse limite, considere usar várias regiões ou planos do aplicativo.
 
-O Cosmos DB não faz o dimensionamento automático em termos de RUs (unidades de solicitação) provisionadas. Para obter orientação sobre como estimar seus requisitos, confira as [unidades de solicitação](/azure/cosmos-db/request-units) em nossa documentação. Para aproveitar integralmente a escala no Cosmos DB, entenda como as [chaves de partição](/azure/cosmos-db/partition-data) funcionam no Cosmos DB.
+O Cosmos DB não faz o dimensionamento automático em termos de unidades de solicitação (RUs) provisionadas. Para obter orientação sobre como estimar seus requisitos, confira as [unidades de solicitação](/azure/cosmos-db/request-units) em nossa documentação. Para aproveitar integralmente a escala no Cosmos DB, entenda como as [chaves de partição](/azure/cosmos-db/partition-data) funcionam no Cosmos DB.
 
-Os bancos de dados NoSQL costumam trocar consistência (no sentido do Teorema CAP) por disponibilidade, escalabilidade e particionamento. Neste cenário de exemplo, um modelo de dados de chave-valor é usado e a consistência de transação raramente é necessária, pois a maioria das operações é atômica por definição. Outras orientações em relação a [Escolher o armazenamento de dados correto](../../guide/technology-choices/data-store-overview.md) estão disponíveis no Centro de Arquitetura do Azure.  Se sua implementação exige alta consistência, você pode [escolher seu nível de consistência](/azure/cosmos-db/consistency-levels) no Cosmos DB.
+Os bancos de dados NoSQL costumam trocar consistência (no sentido do Teorema CAP) por disponibilidade, escalabilidade e particionamento. Neste cenário de exemplo, um modelo de dados de chave-valor é usado e a consistência de transação raramente é necessária, pois a maioria das operações é atômica por definição. Outras orientações em relação a [Escolher o armazenamento de dados correto](../../guide/technology-choices/data-store-overview.md) estão disponíveis no Centro de Arquitetura do Azure. Se sua implementação exige alta consistência, você pode [escolher seu nível de consistência](/azure/cosmos-db/consistency-levels) no Cosmos DB.
 
 Para obter diretrizes gerais sobre como criar soluções escalonáveis, confira a [lista de verificação de escalabilidade] [ scalability] no Azure Architecture Center.
 
@@ -86,9 +86,9 @@ Fornecemos três perfis de custo de exemplo com base na quantidade de tráfego (
 
 ## <a name="related-resources"></a>Recursos relacionados
 
-Para um roteiro de aprendizagem guiado deste cenário, consulte [Compilar um aplicativo Web sem servidor no Azure][serverless].
+Para ver um roteiro de aprendizagem guiado, confira [Compilar um aplicativo Web sem servidor no Azure][serverless].
 
-Antes implantar esse cenário de exemplo em um ambiente de produção, revise as [melhores práticas][functions-best-practices] do Azure Functions.
+Antes de implantar este cenário de exemplo em um ambiente de produção, examine as práticas recomendadas para [otimizar o desempenho e a confiabilidade do Azure Functions][functions-best-practices].
 
 <!-- links -->
 [architecture]: ./media/architecture-intelligent-apps-image-processing.png

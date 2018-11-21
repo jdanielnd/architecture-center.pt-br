@@ -3,12 +3,12 @@ title: Áreas de trabalho virtuais do Linux com o Citrix
 description: Crie um ambiente de VDI para áreas de trabalho do Linux usando o Citrix no Azure.
 author: miguelangelopereira
 ms.date: 09/12/2018
-ms.openlocfilehash: 374d59f7a528bd89870baa601a49a30ea00a08f1
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: 383642b05926c5a09abf0b2f95fef10539d95aec
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48819135"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610644"
 ---
 # <a name="linux-virtual-desktops-with-citrix"></a>Áreas de trabalho virtuais do Linux com o Citrix
 
@@ -96,7 +96,7 @@ Para saber mais sobre implantação, veja a [documentação oficial do Citrix](h
 
 ## <a name="pricing"></a>Preços
 
-- As licenças do Citrix XenDestop não estão incluídas nas tarifas de serviço do Azure.
+- As licenças do Citrix XenDesktop não estão incluídas nas tarifas de serviço do Azure.
 - A licença do Citrix NetScaler está incluída em um modelo de pagamento conforme o uso.
 - Usar as instâncias reservadas reduzirá significativamente o custo de computação para a solução.
 - O custo de ExpressRoute não está incluído.

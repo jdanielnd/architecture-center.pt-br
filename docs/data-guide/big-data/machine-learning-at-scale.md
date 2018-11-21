@@ -3,12 +3,12 @@ title: Aprendizado de máquina em escala
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 4e584da18893ac7405fa00863fe034e45b2e3903
-ms.sourcegitcommit: 7ced70ebc11aa0df0dc0104092d3cc6ad5c28bd6
+ms.openlocfilehash: a44785b61faec8a45160fa2895fbc03e2c580a77
+ms.sourcegitcommit: 9293350ab66fb5ed042ff363f7a76603bf68f568
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 05/11/2018
-ms.locfileid: "34062809"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51577133"
 ---
 # <a name="machine-learning-at-scale"></a>Aprendizado de máquina em escala
 
@@ -59,7 +59,7 @@ Antes de decidir quais serviços de ML serão usados em treinamento e operaciona
 - Usar os modelos de rede neural pré-treinados fornecidos pelo Cognitive Toolkit.
 - Inserir os modelos serializados fornecidos pelo Core ML para aplicativos iOS. 
 
-Se um modelo predefinido não se ajusta aos seus dados ou ao seu cenário, outras opções no Azure incluem o Azure Machine Learning, HDInsight com Spark MLlib e MMLSpark, Cognitive Toolkit e SQL Machine Learning Services. Se você decidir usar um modelo personalizado, precisará criar um pipeline que inclui o treinamento e a operacionalização do modelo. 
+Se um modelo predefinido não se ajusta aos seus dados ou ao seu cenário, outras opções no Azure incluem o Azure Machine Learning, HDInsight com Spark MLlib e MMLSpark, Azure Databricks, Cognitive Toolkit e SQL Machine Learning Services. Se você decidir usar um modelo personalizado, precisará criar um pipeline que inclui o treinamento e a operacionalização do modelo. 
 
 ![Opções de modelo no Azure](./images/machine-learning-model-training-and-deployment.png)
 

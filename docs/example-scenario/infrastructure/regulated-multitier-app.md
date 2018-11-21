@@ -3,12 +3,12 @@ title: Proteger aplicativo Web do Windows para setores regulamentados
 description: Crie um aplicativo Web seguro e de várias camadas com o Windows Server no Azure usando conjuntos de dimensionamento, o Gateway de Aplicativo e balanceadores de carga.
 author: iainfoulds
 ms.date: 07/11/2018
-ms.openlocfilehash: 584b5891f9b3d8e174c3eb29835a525ae4a4f156
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: c7137988bd9b5e26718b4fe0955a3dca3dc638b8
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818999"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610712"
 ---
 # <a name="secure-windows-web-application-for-regulated-industries"></a>Proteger aplicativo Web do Windows para setores regulamentados
 
@@ -18,7 +18,7 @@ Os cenários de aplicativo de exemplo incluem a execução de aplicativos de sal
 
 ## <a name="relevant-use-cases"></a>Casos de uso relevantes
 
-Considere este cenário para os casos de uso a seguir:
+Outros casos de uso relevantes incluem:
 
 * Modernizar as implantações de aplicativo em um ambiente de nuvem seguro.
 * Reduzir o gerenciamento de serviços e aplicativos locais herdados.

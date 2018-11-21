@@ -3,12 +3,12 @@ title: Front-end de comércio eletrônico no Azure
 description: Hospede um site de comércio eletrônico no Azure.
 author: masonch
 ms.date: 7/13/18
-ms.openlocfilehash: 6ca85665a5bf63bf71f5badc16406db5df2a34c2
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: 7baaf4d2986a00ab72b60a540bcd9d864893b109
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48819084"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610814"
 ---
 # <a name="an-e-commerce-front-end-on-azure"></a>Um front-end de comércio eletrônico no Azure
 
@@ -18,7 +18,7 @@ Este documento ajudará você a aprender sobre os vários componentes de PaaS do
 
 ## <a name="relevant-use-cases"></a>Casos de uso relevantes
 
-Considere este cenário para os casos de uso a seguir:
+Outros casos de uso relevantes incluem:
 
 * Criar um aplicativo que precisa de uma escala elástica para lidar com picos de usuários em momentos diferentes.
 * Criar um aplicativo que foi projetado para operar com alta disponibilidade em diferentes regiões do Azure em todo o mundo.
@@ -45,7 +45,7 @@ Este cenário aborda tíquetes de compras de um site de comércio eletrônico, o
 
 * A [CDN do Azure][docs-cdn] entrega o conteúdo estático, armazenado em cache de locais próximos aos usuários para reduzir a latência.
 * O [Gerenciador de Tráfego do Azure][docs-traffic-manager] controla a distribuição de tráfego do usuário para pontos de extremidade de serviço em diferentes regiões do Azure.
-* Os [Serviços de Aplicativo - Aplicativos Web][docs-webapps] hospedam os aplicativos Web, permitindo o dimensionamento automático e alta disponibilidade sem a necessidade de gerenciar a infraestrutura.
+* Os [Serviços de Aplicativos - Aplicativos Web][docs-webapps] hospedam os aplicativos Web, permitindo o dimensionamento automático e alta disponibilidade sem a necessidade de gerenciar a infraestrutura.
 * O [Azure Active Directory - B2C][docs-b2c] é um serviço de gerenciamento de identidade que permite personalizar e controlar como os clientes se inscrevem, entram e gerenciam seus perfis em seus respectivos aplicativos.
 * As [Filas de Armazenamento][docs-storage-queues] armazenam um grande número de mensagens da fila que podem ser acessados por um aplicativo.
 * As [Funções][docs-functions] são opções de computação sem servidor que permitem que aplicativos sejam executados sob demanda sem a necessidade de gerenciar a infraestrutura.

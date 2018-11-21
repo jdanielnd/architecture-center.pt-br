@@ -1,14 +1,14 @@
 ---
 title: Um serviço de engenharia auxiliada por computador no Azure
-description: Fornece uma plataforma de software como serviço (SaaS) para a engenharia auxiliada por computador (CAE) no Azure.
+description: Fornece uma plataforma de software como um serviço (SaaS) para a engenharia auxiliada por computador (CAE) no Azure.
 author: alexbuckgit
 ms.date: 08/22/2018
-ms.openlocfilehash: d17ac218052c5b98e8790f1386be035618a2d957
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: 8bdf7198223f7194d0cd717949699bb3a508674e
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818676"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610542"
 ---
 # <a name="a-computer-aided-engineering-service-on-azure"></a>Um serviço de engenharia auxiliada por computador no Azure
 
@@ -26,7 +26,7 @@ As metas da empresa incluem:
 
 ## <a name="relevant-use-cases"></a>Casos de uso relevantes
 
-Outros cenários que usam essa arquitetura podem incluir:
+Outros casos de uso relevantes incluem:
 
 * Pesquisas de genoma
 * Simulação de clima
@@ -37,7 +37,7 @@ Outros cenários que usam essa arquitetura podem incluir:
 ![Arquitetura de uma solução de SaaS que possibilita funcionalidades de HPC][architecture]
 
 * Os usuários podem acessar máquinas virtuais (VMs) da série NV através de um navegador com uma conexão de RDP com base em HTML5 usando o [serviço Apache Guacamole](https://guacamole.apache.org/). Essas instâncias de VM oferecem GPUs poderosas para tarefas de renderização e colaboração. Os usuários podem editar os designs e visualizar os resultados sem precisar acessar laptops ou dispositivos de computação móvel de ponta. O agendador gira as VMs adicionais com base na heurística definida pelo usuário.
-* Em uma sessão de CAD da área de trabalho, os usuários podem enviar cargas de trabalho para execução em nós de cluster de HPC disponíveis. Essas cargas de trabalho executam tarefas como análise de estresse ou cálculos de dinâmica de fluido computacional, eliminando a necessidade de clusters de cálculo locais dedicados. Esses nós de cluster podem ser configurados para dimensionamento automático com base no comprimento da fila ou da carga com base na demanda do usuário ativo para recursos computacionais.
+* Em uma sessão de CAD da área de trabalho, os usuários podem enviar cargas de trabalho para execução em nós de cluster de HPC disponíveis. Essas cargas de trabalho executam tarefas como análise de estresse ou cálculos de dinâmica de fluido computacional, eliminando a necessidade de clusters de cálculo locais dedicados. Esses nós de cluster podem ser configurados para dimensionamento automático com base na profundidade da fila ou da carga com base na demanda do usuário ativo para recursos computacionais.
 * O Serviço de Kubernetes do Azure (AKS) é usado para hospedar os recursos da Web disponíveis para usuários finais.
 
 ### <a name="components"></a>Componentes

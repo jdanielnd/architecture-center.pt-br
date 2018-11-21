@@ -3,14 +3,14 @@ title: Enterprise BI com o SQL Data Warehouse
 description: Use o Azure para obter insights comerciais dos dados relacionais armazenados localmente
 author: MikeWasson
 ms.date: 11/06/2018
-ms.openlocfilehash: d5b680346267a17b5016b8897dc03ddcf18a7fe9
-ms.sourcegitcommit: 02ecd259a6e780d529c853bc1db320f4fcf919da
+ms.openlocfilehash: 2822cf6d2a75d521f182c267f4bf2bac462d2b7f
+ms.sourcegitcommit: 877777094b554559dc9cb1f0d9214d6d38197439
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/07/2018
-ms.locfileid: "51263806"
+ms.lasthandoff: 11/11/2018
+ms.locfileid: "51527704"
 ---
-# <a name="enterprise-bi-with-sql-data-warehouse"></a>Enterprise BI com o SQL Data Warehouse
+# <a name="enterprise-bi-in-azure-with-sql-data-warehouse"></a>Enterprise BI no Azure com o SQL Data Warehouse
 
 Essa arquitetura de referência implementa um pipeline [ELT](../../data-guide/relational-data/etl.md#extract-load-and-transform-elt) (extrair-carregar-transformar) que move os dados de um banco de dados SQL Server local para o SQL Data Warehouse e os transforma para análise. 
 
@@ -199,7 +199,7 @@ Para a implantação e execução da implementação de referência, siga as eta
 
 ## <a name="next-steps"></a>Próximas etapas
 
-- Use o Azure Data Factory para automatizar o pipeline ELT. Consulte [Enterprise BI automatizada com o SQL Data Warehouse e Azure Data Factory][adf=ra].
+- Use o Azure Data Factory para automatizar o pipeline ELT. Confira [Enterprise BI automatizada com o SQL Data Warehouse e Azure Data Factory][adf-ra].
 
 <!-- links -->
 

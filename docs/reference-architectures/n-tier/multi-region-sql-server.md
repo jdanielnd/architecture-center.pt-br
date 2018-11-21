@@ -3,16 +3,14 @@ title: Aplicativo de N camadas de várias regiões para alta disponibilidade
 description: Como implantar VMs em várias regiões no Azure para alta disponibilidade e resiliência.
 author: MikeWasson
 ms.date: 07/19/2018
-pnp.series.title: Windows VM workloads
-pnp.series.prev: n-tier
-ms.openlocfilehash: 34dd47175e7fd0002cba577ad6c1034968ed4098
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: 3b1c419182322b2fa0b555230465f41562e8e6c1
+ms.sourcegitcommit: 877777094b554559dc9cb1f0d9214d6d38197439
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48819118"
+ms.lasthandoff: 11/11/2018
+ms.locfileid: "51527619"
 ---
-# <a name="multi-region-n-tier-application-for-high-availability"></a>Aplicativo de N camadas de várias regiões para alta disponibilidade
+# <a name="n-tier-application-in-multiple-azure-regions-for-high-availability"></a>Aplicativo de N camadas em várias regiões do Azure para ter alta disponibilidade
 
 Essa arquitetura de referência mostra um conjunto de práticas comprovadas para executar um aplicativo de N camadas em várias regiões do Azure, a fim de alcançar a disponibilidade e uma infraestrutura de recuperação de desastres robusta. 
 
