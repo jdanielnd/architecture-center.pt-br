@@ -43,19 +43,19 @@ Este cenário trata de um pipeline DevOps para um aplicativo Web do Node.js e um
 
 ### <a name="components"></a>Componentes
 
-* O [Jenkins] [ jenkins] é um servidor de automação de software livre que pode se integrar aos serviços do Azure para habilitar a CI (integração contínua) e a CD (implantação contínua). Neste cenário, o Jenkins orquestra a criação de novas imagens de contêiner com base nas confirmações no controle do código-fonte, envia por push essas imagens para o Registro de Contêiner do Azure e atualiza as instâncias do aplicativo no Serviço de Kubernetes do Azure.
+* O [Jenkins][jenkins] é um servidor de automação de software livre que pode se integrar aos serviços do Azure para habilitar a CI (integração contínua) e a CD (implantação contínua). Neste cenário, o Jenkins orquestra a criação de novas imagens de contêiner com base nas confirmações no controle do código-fonte, envia por push essas imagens para o Registro de Contêiner do Azure e atualiza as instâncias do aplicativo no Serviço de Kubernetes do Azure.
 * As [Máquinas Virtuais do Linux do Azure][docs-virtual-machines] são a plataforma de IaaS usada para executar as instâncias do Jenkins e do Grafana.
-* O [Registro de Contêiner do Azure] [ docs-acr] armazena e gerencia imagens de contêiner que são usadas pelo cluster do Serviço de Kubernetes do Azure. As imagens são armazenadas com segurança e podem ser replicadas em outras regiões pela plataforma do Azure para acelerar os tempos de implantação.
-* O [Serviço de Kubernetes do Azure] [ docs-aks] é uma plataforma Kubernetes gerenciada que permite implantar e gerenciar aplicativos em contêineres sem conhecimento de orquestração de contêiner. Como um serviço Kubernetes hospedado, o Azure lida com as tarefas críticas para você, como o monitoramento da integridade e a manutenção.
-* O [Azure Cosmos DB] [ docs-cosmos-db] é um banco de dados multimodelo distribuído globalmente que permite que você escolha entre vários modelos de banco de dados e de consistência para atender às suas necessidades. Com o Cosmos DB, os dados podem ser replicados globalmente e não há a necessidade de implantação ou configuração de nenhum cluster de gerenciamento ou replicação.
+* O [Registro de Contêiner do Azure][docs-acr] armazena e gerencia imagens de contêiner que são usadas pelo cluster do Serviço de Kubernetes do Azure. As imagens são armazenadas com segurança e podem ser replicadas em outras regiões pela plataforma do Azure para acelerar os tempos de implantação.
+* O [Serviço de Kubernetes do Azure][docs-aks] é uma plataforma Kubernetes gerenciada que permite implantar e gerenciar aplicativos em contêineres sem conhecimento de orquestração de contêiner. Como um serviço Kubernetes hospedado, o Azure lida com as tarefas críticas para você, como o monitoramento da integridade e a manutenção.
+* O [Azure Cosmos DB][docs-cosmos-db] é um banco de dados multimodelo distribuído globalmente que permite que você escolha entre vários modelos de banco de dados e de consistência para atender às suas necessidades. Com o Cosmos DB, os dados podem ser replicados globalmente e não há a necessidade de implantação ou configuração de nenhum cluster de gerenciamento ou replicação.
 * O [Azure Monitor][docs-azure-monitor] ajuda-o a rastrear o desempenho, manter a segurança e identificar tendências. As métricas obtidas pelo Monitor podem ser usadas por outros recursos e ferramentas, como o Grafana.
-* O [Grafana] [ grafana] é uma solução de software livre para consultar, visualizar, alertar e entender métricas. Um plug-in da fonte de dados para o Azure Monitor permite que o Grafana crie painéis visuais para monitorar o desempenho de seus aplicativos em execução no Serviço de Kubernetes do Azure que usam o Cosmos DB.
+* O [Grafana][grafana] é uma solução de software livre para consultar, visualizar, alertar e entender métricas. Um plug-in da fonte de dados para o Azure Monitor permite que o Grafana crie painéis visuais para monitorar o desempenho de seus aplicativos em execução no Serviço de Kubernetes do Azure que usam o Cosmos DB.
 
 ### <a name="alternatives"></a>Alternativas
 
 * O [Azure Pipelines][azure-pipelines] ajuda a implementar um pipeline de CI (integração contínua), teste contínuo e CD (implantação contínua) em qualquer aplicativo.
-* O [Kubernetes] [ kubernetes] pode ser executado diretamente em VMs do Azure em vez de usar um serviço gerenciado, se você quiser mais controle sobre o cluster.
-* O [Service Fabric] [ service-fabric] é outro orquestrador de contêiner alternativo que pode substituir o AKS.
+* O [Kubernetes][kubernetes] pode ser executado diretamente em VMs do Azure em vez de usar um serviço gerenciado, se você quiser mais controle sobre o cluster.
+* O [Service Fabric][service-fabric] é outro orquestrador de contêiner alternativo que pode substituir o AKS.
 
 ## <a name="considerations"></a>Considerações
 
