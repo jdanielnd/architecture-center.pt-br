@@ -3,12 +3,12 @@ title: Nenhum antipadrão de cache
 description: Buscar repetidamente os mesmos dados pode reduzir o desempenho e a escalabilidade.
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: f94a9f3f9166e87949a0e60af818cd89796dc3e2
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: ec19cde567fb63248c121328322e834d99c841e8
+ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428934"
+ms.lasthandoff: 11/26/2018
+ms.locfileid: "52295575"
 ---
 # <a name="no-caching-antipattern"></a>Nenhum antipadrão de cache
 
@@ -59,7 +59,7 @@ A estratégia de cache mais popular é a estratégia *sob demanda* ou *cache-asi
 - Na leitura, o aplicativo tenta ler os dados do cache. Se os dados não estiverem no cache, o aplicativo recupera-o da fonte de dados e o adiciona ao cache.
 - Na gravação, o aplicativo grava a alteração diretamente na fonte de dados e remove o valor antigo do cache. Ele será recuperado e adicionado ao cache da próxima vez que for necessário.
 
-Essa abordagem é adequada para dados que são alterados com frequência. Aqui está o exemplo anterior atualizado para usar o padrão [Cache-Aside] [cache-aside].  
+Essa abordagem é adequada para dados que são alterados com frequência. Aqui está o exemplo anterior atualizado para usar o padrão [Cache-Aside][cache-aside-pattern].  
 
 ```csharp
 public class CachedPersonRepository : IPersonRepository

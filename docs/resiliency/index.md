@@ -4,12 +4,12 @@ description: Como criar aplicativos resilientes no Azure, para alta disponibilid
 author: MikeWasson
 ms.date: 07/29/2018
 ms.custom: resiliency
-ms.openlocfilehash: b925748e1d3d4a8d490bbd5d7cb76f3961ffcfb2
-ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
+ms.openlocfilehash: 73600650dc96fe85ad59e286079a3523ef25d055
+ms.sourcegitcommit: 1b5411f07d74f0a0680b33c266227d24014ba4d1
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/02/2018
-ms.locfileid: "50916593"
+ms.lasthandoff: 11/26/2018
+ms.locfileid: "52305954"
 ---
 # <a name="designing-resilient-applications-for-azure"></a>Desenvolvimento de aplicativos resilientes para o Azure
 
@@ -174,7 +174,9 @@ O Azure tem um número de recursos para tornar um aplicativo redundante em cada 
 
 **Conjuntos de disponibilidade**. Para se proteger contra falhas de hardware localizadas, como falha em um comutador de rede ou de disco, implante duas ou mais VMs em um conjunto de disponibilidade. Um conjunto de disponibilidade consiste em dois ou mais *domínios de falha* que compartilham um comutador de rede e uma fonte de energia comuns. Máquinas virtuais em um conjunto de disponibilidade são distribuídas entre os domínios de falha, portanto, se uma falha de hardware afeta um domínio de falha, o tráfego de rede ainda poderá ser roteado para as VMs nos outros domínios de falha. Para obter mais informações sobre conjuntos de disponibilidade, consulte [Gerenciar a disponibilidade das máquinas virtuais do Windows no Azure](/azure/virtual-machines/windows/manage-availability).
 
-**Zonas de disponibilidades**.  Uma Zona de Disponibilidade é uma zona fisicamente separada em uma região do Azure. Cada zona de disponibilidade tem uma rede, resfriamento e fonte de energia distintos. A implantação de VMs em zonas de disponibilidade ajuda a proteger um aplicativo contra falhas em todo o datacenter. 
+**Zonas de disponibilidades**.  Uma Zona de Disponibilidade é uma zona fisicamente separada em uma região do Azure. Cada zona de disponibilidade tem uma rede, resfriamento e fonte de energia distintos. A implantação de VMs em zonas de disponibilidade ajuda a proteger um aplicativo contra falhas em todo o datacenter.
+
+**Azure Site Recovery**.  Replica as máquinas virtuais do Azure para outra região do Azure para necessidades de continuidade dos negócios e de recuperação de desastres. Você pode realizar análises periódicas de recuperação de desastres para garantir que atende às necessidades de conformidade. A máquina virtual será replicada com as configurações especificadas para a região selecionada para que você possa recuperar seus aplicativos em caso de interrupções na região de origem. Para obter mais informações, confira [Replicar VMs do Azure usando o ASR][site-recovery].
 
 **Regiões emparelhadas**. Para proteger um aplicativo contra uma interrupção regional, você pode implantar o aplicativo em várias regiões, usando o Gerenciador de Tráfego do Azure para distribuir o tráfego de Internet para as diferentes regiões. Cada região do Azure é emparelhada com outra. Juntas, elas formam um [par regional](/azure/best-practices-availability-paired-regions). Com a exceção do Sul do Brasil, pares regionais estão localizados na mesma região geográfica para atender aos requisitos de residência de dados para fins de jurisdição de imposição fiscal e legal.
 
@@ -202,9 +204,11 @@ Cada tentativa de repetição é adicionada à latência total. Além disso, um 
 * Escale um aplicativo do Serviço de Aplicativo do Azure horizontalmente para várias instâncias. O Serviço de Aplicativo equilibra automaticamente a carga entre as instâncias. Consulte [Aplicativo Web básico][ra-basic-web].
 * Use o [Gerenciador de Tráfego do Azure][tm] para distribuir o tráfego em um conjunto de pontos de extremidade.
 
-**Replique os dados**. A replicação de dados é uma estratégia geral para manipular falhas não transitórias em um armazenamento de dados. Muitas tecnologias de armazenamento fornecem replicação interna, inclusive o Banco de Dados SQL do Azure, Cosmos DB e Apache Cassandra. É importante considerar os caminhos de leitura e gravação. Dependendo da tecnologia de armazenamento, você pode ter várias réplicas graváveis, ou uma só réplica gravável e várias somente leitura. 
+**Replique os dados**. A replicação de dados é uma estratégia geral para manipular falhas não transitórias em um armazenamento de dados. Muitas tecnologias de armazenamento fornecem replicação interna, inclusive o Banco de Dados SQL do Azure, Cosmos DB e Apache Cassandra. É importante considerar os caminhos de leitura e gravação. Dependendo da tecnologia de armazenamento, você pode ter várias réplicas graváveis, ou uma só réplica gravável e várias somente leitura.
 
-Para maximizar a disponibilidade, as réplicas podem ser colocadas em várias regiões. No entanto, isso aumenta a latência na replicação de dados. Normalmente, a replicação entre regiões é feita de forma assíncrona, o que implica um modelo de consistência eventual e a possível perda de dados, se uma réplica falhar. 
+Para maximizar a disponibilidade, as réplicas podem ser colocadas em várias regiões. No entanto, isso aumenta a latência na replicação de dados. Normalmente, a replicação entre regiões é feita de forma assíncrona, o que implica um modelo de consistência eventual e a possível perda de dados, se uma réplica falhar.
+
+Você pode suar o [Azure Site Recovery][site-recovery] para replicar as máquinas virtuais do Azure de uma região para outra. O Site Recovery replica os dados continuamente para a região de destino. Quando ocorre uma interrupção no seu site primário, você faz failover para o local secundário
 
 **Degradar normalmente**. Se um serviço falhar e não houver caminho de failover, o aplicativo pode conseguir degradar o serviço normalmente e continuar fornecendo uma experiência de usuário aceitável. Por exemplo: 
 
@@ -355,3 +359,4 @@ Estes são os principais pontos a serem lembrados neste artigo:
 [tm]: https://azure.microsoft.com/services/traffic-manager/
 [tm-failover]: /azure/traffic-manager/traffic-manager-monitoring
 [tm-sla]: https://azure.microsoft.com/support/legal/sla/traffic-manager
+[site-recovery]:/azure/site-recovery/azure-to-azure-quickstart/
