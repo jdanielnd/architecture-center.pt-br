@@ -313,6 +313,8 @@ items:
       href: example-scenario/apps/ecommerce-search.md
   - name: Dados e análises
     items:
+    - name: ETL Híbrido com Data Factory
+      href: example-scenario/data/hybrid-etl-with-adf.md
     - name: IoT para construção
       href: example-scenario/data/big-data-with-iot.md
     - name: Data warehouse e análise
@@ -333,6 +335,8 @@ items:
       href: example-scenario/infrastructure/service-fabric-microservices.md
     - name: WordPress altamente escalonáveis
       href: example-scenario/infrastructure/wordpress.md
+    - name: Aplicativo Web Altamente Disponível
+      href: example-scenario/infrastructure/multi-tier-app-disaster-recovery.md
     - name: Windows de várias camadas
       href: example-scenario/infrastructure/regulated-multitier-app.md
     - name: Renderização de vídeo do HPC
@@ -545,9 +549,9 @@ items:
       href: cloud-adoption/appendix/azure-scaffold.md
     - name: Implementando o scaffold do Azure Enterprise
       href: cloud-adoption/appendix/azure-scaffold-examples.md
-ms.openlocfilehash: e364c4df492186eb0ed75e2d3a0d4a5a2342b678
-ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
+ms.openlocfilehash: c8893c9769bff3a9fbb0b7bcaffdf2746b58abf2
+ms.sourcegitcommit: 16bc6a91b6b9565ca3bcc72d6eb27c2c4ae935e4
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/26/2018
-ms.locfileid: "51527670"
+ms.lasthandoff: 11/28/2018
+ms.locfileid: "52550488"
