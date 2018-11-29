@@ -2,17 +2,17 @@
 title: Estilo de arquitetura de microsserviços
 description: Descreve benefícios, desafios e melhores práticas para arquiteturas de N camadas no Azure
 author: MikeWasson
-ms.date: 08/30/2018
-ms.openlocfilehash: fb23ac3e408f3a202d925a1bf684bc30d423f218
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.date: 11/13/2018
+ms.openlocfilehash: 4e5d50f829323829c953977257e690354566ebf6
+ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43325436"
+ms.lasthandoff: 11/26/2018
+ms.locfileid: "52295524"
 ---
 # <a name="microservices-architecture-style"></a>Estilo de arquitetura de microsserviços
 
-Uma arquitetura de microsserviços consiste em uma coleção de pequenos serviços autônomos. Cada serviço é independente e deve implementar uma única funcionalidade comercial. Para obter orientações detalhadas sobre como criar uma arquitetura de microsserviços no Azure, consulte [Projetar, criar e operar microsserviços no Azure](../../microservices/index.md).
+Uma arquitetura de microsserviços consiste em uma coleção de pequenos serviços autônomos. Cada serviço é independente e deve implementar uma única funcionalidade comercial. 
 
 ![](./images/microservices-logical.svg)
  
@@ -111,39 +111,9 @@ Considere esse estilo de arquitetura para:
 
 - Isole falhas. Use estratégias de resiliência para impedir que falhas em um serviço distribuam-se em cascata. Consulte [Padrões de resiliência][resiliency-patterns] e [Design de aplicativos resilientes][resiliency-overview].
 
-## <a name="microservices-using-azure-container-service"></a>Microsserviços usando o Serviço de Contêiner do Azure 
+## <a name="next-steps"></a>Próximas etapas
 
-Você pode usar o [Serviço de Contêiner do Azure](/azure/container-service/) para configurar e provisionar um cluster do Docker. Os Serviços de Contêiner do Azure dão suporte a vários orquestradores de contêiner populares, incluindo Kubernetes, DC/SO e Docker Swarm.
-
-![](./images/microservices-acs.png)
- 
-**Nós públicos**. Esses nós estão acessíveis por meio de um balanceador de carga voltado para o público. O gateway de API é hospedado nesses nós.
-
-**Nós de back-end**. Esses nós executam serviços que os clientes acessam por meio do gateway de API. Esses nós não recebem o tráfego de Internet diretamente. Os nós de back-end podem incluir mais de um pool de VMs, cada um com um perfil de hardware diferente. Por exemplo, você pode criar grupos separados para cargas de trabalho de computação geral, cargas de trabalho com consumo elevado de CPU e cargas de trabalho com consumo elevado de memória. 
-
-**VMs de gerenciamento**. Essas VMs executam os nós mestres para o orquestrador de contêiner. 
-
-**Rede**. Os nós públicos, os nós de back-end e as VMs de gerenciamento são colocados em sub-redes separadas na mesma VNet (rede virtual). 
-
-**Balanceadores de carga**.  Um balanceador de carga voltado para fora se encontra na frente de nós do públicos. Ela distribui solicitações da Internet para os nós públicos. Outro balanceador de carga é colocado na frente das VMs de gerenciamento para garantir tráfego SSH (Secure Shell) para as VMs de gerenciamento usando as regras NAT.
-
-Para escalabilidade e confiabilidade, cada serviço é replicado entre várias VMs. No entanto, como serviços também são relativamente leves (em comparação a um aplicativo monolítico), vários serviços normalmente são incluídos em uma única VM. Maior densidade permite melhor utilização de recursos. Se um serviço específico não usar muitos recursos, você não precisará dedicar toda uma VM para executar esse serviço.
-
-O diagrama a seguir mostra três nós executando quatro serviços diferentes (indicados por diferentes formas). Observe que cada serviço tem pelo menos duas instâncias. 
- 
-![](./images/microservices-node-density.png)
-
-## <a name="microservices-using-azure-service-fabric"></a>Microsserviços usando o Azure Service Fabric
-
-O diagrama a seguir mostra uma arquitetura de microsserviços usando o [Azure Service Fabric](/azure/service-fabric/).
-
-![](./images/service-fabric.png)
-
-O cluster do Service Fabric é implantado em um ou mais conjuntos de dimensionamento de VMs. Você pode ter mais de um conjunto de dimensionamento de VM definido no cluster para ter uma combinação de tipos de VM. Um Gateway de API é colocado na frente do cluster do Service Fabric, com um balanceador externo de carga para receber solicitações do cliente.
-
-O tempo de execução do Service Fabric realiza o gerenciamento de cluster, incluindo posicionamento do serviço, failover de nó e monitoramento de integridade. O tempo de execução é implantado nos próprios nós de cluster. Não há um conjunto separado de VMs de gerenciamento de cluster.
-
-Os serviços comunicam-se entre si usando o proxy inverso interno do Service Fabric. O Service Fabric fornece um serviço de descoberta que pode resolver o ponto de extremidade para um serviço nomeado.
+Para obter orientações detalhadas sobre como criar uma arquitetura de microsserviços no Azure, consulte [Projetar, criar e operar microsserviços no Azure](../../microservices/index.md).
 
 
 <!-- links -->
