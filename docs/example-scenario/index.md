@@ -5,12 +5,12 @@ author: david-stanford
 ms:date: 11/01/2018
 layout: LandingPage
 ms.topic: landing-page
-ms.openlocfilehash: 01b2db150c66eaa7f8911361dd39786f53c39c07
-ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
+ms.openlocfilehash: 5fcfc1566256a54d9907c66dbb550616f0155a3f
+ms.sourcegitcommit: 16bc6a91b6b9565ca3bcc72d6eb27c2c4ae935e4
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "51610491"
+ms.lasthandoff: 11/28/2018
+ms.locfileid: "52550505"
 ---
 # <a name="azure-example-scenarios"></a>Cenários de Exemplo do Azure
 
@@ -27,9 +27,9 @@ Direciona o usuário para: [cenários de IA](#ai-scenarios) | [Cenários de apli
                 <div class="card">
                     <div class="cardText">
                         <h3>Novos cenários</h3>
+                        <a class="barLink" href="/azure/architecture/example-scenario/infrastructure/multi-tier-app-disaster-recovery" data-linktype="absolute-path">Aplicativo Web de várias camadas criado para Alta Disponibilidade e Recuperação de Desastres</a>
+                        <a class="barLink" href="/azure/architecture/example-scenario/data/hybrid-etl-with-adf" data-linktype="absolute-path">ETL híbrido com SSIS local e Data Factory</a>
                         <a class="barLink" href="/azure/architecture/example-scenario/apps/decentralized-trust" data-linktype="absolute-path">Relação de confiança descentralizada entre bancos no Azure</a>
-                        <a class="barLink" href="/azure/architecture/example-scenario/infrastructure/wordpress" data-linktype="absolute-path">Site do WordPress altamente escalonável e seguro</a>
-                        <a class="barLink" href="/azure/architecture/example-scenario/data/data-warehouse" data-linktype="absolute-path">Data warehouse e análise de vendas e marketing</a>
                     </div>
                 </div>
             </div>
@@ -41,9 +41,9 @@ Direciona o usuário para: [cenários de IA](#ai-scenarios) | [Cenários de apli
                 <div class="card">
                     <div class="cardText">
                         <h3>Principais cenários</h3>
-                        <a class="barLink" href="/azure/architecture/example-scenario/ai/intelligent-apps-image-processing" data-linktype="absolute-path">Classificação de imagem para apólices de seguro</a>
-                        <a class="barLink" href="/azure/architecture/example-scenario/apps/commerce-chatbot" data-linktype="absolute-path">Chatbot de conversação para reservas de hotel</a>
-                        <a class="barLink" href="/azure/architecture/example-scenario/infrastructure/regulated-multitier-app" data-linktype="absolute-path">Aplicativo Web seguro do Windows para setores regulamentados</a>
+                        <a class="barLink" href="/azure/architecture/example-scenario/infrastructure/regulated-multitier-app" data-linktype="absolute-path">Proteger aplicativo Web do Windows para setores regulamentados</a>
+                        <a class="barLink" href="/azure/architecture/example-scenario/apps/devops-dotnet-webapp" data-linktype="absolute-path">Pipeline de CI/CD com Azure DevOps</a>
+                        <a class="barLink" href="/azure/architecture/example-scenario/data/fraud-detection" data-linktype="absolute-path">Detecção de fraudes em tempo real no Azure</a>
                     </div>
                 </div>
             </div>
@@ -80,4 +80,4 @@ Direciona o usuário para: [cenários de IA](#ai-scenarios) | [Cenários de apli
     </li>
 </ul>
 
-[!INCLUDE [notes](./articles.md)]
+[!INCLUDE [articles](../../includes/scenario_articles.md)]
