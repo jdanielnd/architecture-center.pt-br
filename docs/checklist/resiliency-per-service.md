@@ -4,12 +4,12 @@ description: Lista de verificação que fornece orientação de resiliência par
 author: petertaylor9999
 ms.date: 03/02/2018
 ms.custom: resiliency, checklist
-ms.openlocfilehash: 50808a837132e905cc89c3c43d40852a04f4885c
-ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
+ms.openlocfilehash: 53a37595bd6e70fa3a43e9a72b2ae47d2225009f
+ms.sourcegitcommit: 1b5411f07d74f0a0680b33c266227d24014ba4d1
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/02/2018
-ms.locfileid: "50916695"
+ms.lasthandoff: 11/26/2018
+ms.locfileid: "52305920"
 ---
 # <a name="resiliency-checklist-for-specific-azure-services"></a>Lista de verificação de resiliência para serviços específicos do Azure
 
@@ -139,6 +139,8 @@ Caso esteja usando o Cache Redis como um cache de dados temporário e não como 
 
 **Coloque cada camada de aplicativo em um conjunto de disponibilidade separado.** Em um aplicativo de N camadas, não coloque as VMs de camadas diferentes no mesmo conjunto de disponibilidade. VMs em um conjunto de disponibilidade são colocadas em FDs (domínios de falha) e UDs (domínios de atualização). No entanto, para obter o benefício de redundância de FDs e UDs, todas as VMs no conjunto de disponibilidade devem ser capazes de lidar com as mesmas solicitações de cliente.
 
+**Replique VMs usando o Azure Site Recovery.** Quando você replicar VMs do Azure usando a [Recuperação de Site][site-recovery], todos os discos de VM serão replicados continuamente para a região de destino assincronamente. Os pontos de replicação são criados a cada poucos minutos. Isso fornece um RPO (Objetivo de Ponto de Recuperação) na ordem de minutos. Realize a recuperação de desastre quantas vezes quiser sem afetar o aplicativo de produção ou a replicação contínua. Para saber mais, confira [Realizar uma análise detalhada da recuperação de desastre para o Azure][site-recovery-test].
+
 **Escolha o tamanho de VM correto com base nos requisitos de desempenho.** Ao mover uma carga de trabalho existente para o Azure, comece com o tamanho da VM que mais se aproxima de seus servidores locais. Em seguida, meça o desempenho da carga de trabalho real com relação à CPU, memória e IOPS e ajuste o tamanho, se necessário. Isso ajuda a garantir que o aplicativo se comporte como esperado em um ambiente de nuvem. Além disso, se você precisar de várias NICs, esteja ciente do limite de NIC para cada tamanho.
 
 **Use Managed Disks para VHDs.** Os [Managed Disks][managed-disks] fornecem melhor confiabilidade para as VMs em um conjunto de disponibilidade porque os discos ficam suficientemente isolados entre si para evitar pontos únicos de falha. Além disso, os Managed Disks não estão sujeitos a limites de IOPS de VHDs criados em uma conta de armazenamento. Para saber mais, consulte [Gerenciar a disponibilidade de máquinas virtuais Windows no Azure][vm-manage-availability].
@@ -166,6 +168,8 @@ Caso esteja usando o Cache Redis como um cache de dados temporário e não como 
 [diagnostics-logs]: /azure/monitoring-and-diagnostics/monitoring-overview-of-diagnostic-logs/
 [managed-disks]: /azure/storage/storage-managed-disks-overview
 [search-optimization]: /azure/search/search-performance-optimization/
+[site-recovery]: /azure/site-recovery/
+[site-recovery-test]: /azure/site-recovery/site-recovery-test-failover-to-azure
 [sql-backup]: /azure/sql-database/sql-database-automated-backups/
 [sql-restore]: /azure/sql-database/sql-database-recovery-using-backups/
 [vm-manage-availability]: /azure/virtual-machines/windows/manage-availability#use-managed-disks-for-vms-in-an-availability-set

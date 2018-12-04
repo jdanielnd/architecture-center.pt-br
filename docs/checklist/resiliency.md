@@ -4,12 +4,12 @@ description: Lista de verificação que fornece orientação para questões de r
 author: petertaylor9999
 ms.date: 01/10/2018
 ms.custom: resiliency, checklist
-ms.openlocfilehash: 15ad749c12dc8a45c9e7e08376452685d8ad7c9b
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: ce538a0b234a5b120415980e983096f567f9cf86
+ms.sourcegitcommit: 1b5411f07d74f0a0680b33c266227d24014ba4d1
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48819016"
+ms.lasthandoff: 11/26/2018
+ms.locfileid: "52305937"
 ---
 # <a name="resiliency-checklist"></a>Lista de verificação de resiliência
 
@@ -43,6 +43,8 @@ Resiliência é a capacidade de um sistema de se recuperar de falhas e continuar
 
 **Use Conjuntos de Disponibilidade do Azure para cada camada de aplicativo.** Colocar suas instâncias em um [conjunto de disponibilidade][availability-sets] proporciona um [SLA](https://azure.microsoft.com/support/legal/sla/virtual-machines/) de nível mais elevado. 
 
+**Replique VMs usando o Azure Site Recovery.** Quando você replicar VMs do Azure usando a [Recuperação de Site][site-recovery], todos os discos de VM serão replicados continuamente para a região de destino assincronamente. Os pontos de replicação são criados a cada poucos minutos. Isso fornece um RPO (Objetivo de Ponto de Recuperação) na ordem de minutos.
+
 **Considere implantar o aplicativo entre várias regiões.** Se seu aplicativo é implantado em uma única região, no caso raro de toda a região ficar não disponível, o aplicativo também fica não disponível. Isso pode ser inaceitável segundo os termos do SLA do aplicativo. Nesse caso, considere implantar o aplicativo e os respectivos serviços entre várias regiões. Uma implantação de várias regiões pode usar um padrão ativo-ativo (distribuindo solicitações entre várias instâncias ativas) ou um padrão ativo-passivo (mantendo uma instância "passiva" em reserva, no caso de falha da instância primária). É recomendável que você implante várias instâncias dos serviços do aplicativo entre pares regionais. Para obter mais informações, consulte [Continuidade dos negócios e recuperação de desastres (BCDR): Regiões Emparelhadas do Azure](/azure/best-practices-availability-paired-regions).
 
 **Use o Gerenciador de Tráfego do Azure para rotear o tráfego do seu aplicativo para regiões diferentes.**  [O Gerenciador de Tráfego do Azure][traffic-manager] executa balanceamento de carga no nível de DNS e roteará o tráfego para regiões diferentes com base no método de [roteamento de tráfego][traffic-manager-routing] especificado por você e na integridade dos pontos de extremidade do aplicativo. Sem o Gerenciador de Tráfego, você está limitado a implantar uma única região, o que limita a escala, aumenta a latência para alguns usuários e resulta em tempo de inatividade do aplicativo no caso de uma interrupção do serviço em toda a região.
@@ -64,7 +66,7 @@ Resiliência é a capacidade de um sistema de se recuperar de falhas e continuar
 
 ## <a name="data-management"></a>Gerenciamento de dados
 
-**Entenda os métodos de replicação para as fontes de dados do aplicativo.** Os dados do aplicativo são armazenados em diferentes fontes de dados e têm requisitos de disponibilidade diferentes. Avalie os métodos de replicação para cada tipo de armazenamento de dados no Azure, incluindo [Replicação do Armazenamento do Azure](/azure/storage/storage-redundancy/) e [Replicação Geográfica Ativa do Banco de Dados SQL](/azure/sql-database/sql-database-geo-replication-overview/), para garantir que os requisitos de dados do aplicativo sejam atendidos.
+**Entenda os métodos de replicação para as fontes de dados do aplicativo.** Os dados do aplicativo são armazenados em diferentes fontes de dados e têm requisitos de disponibilidade diferentes. Avalie os métodos de replicação para cada tipo de armazenamento de dados no Azure, incluindo [Replicação do Armazenamento do Azure](/azure/storage/storage-redundancy/) e [Replicação Geográfica Ativa do Banco de Dados SQL](/azure/sql-database/sql-database-geo-replication-overview/), para garantir que os requisitos de dados do aplicativo sejam atendidos. Se você replicar VMs do Azure usando a [Recuperação de Site][site-recovery], todos os discos de VM serão replicados continuamente para a região de destino assincronamente. Os pontos de replicação são criados a cada poucos minutos. 
 
 **Assegure que nenhuma conta de usuário individual tenha acesso aos dados de backup e de produção.** Os backups de dados são comprometidos se uma única conta de usuário tem permissão para gravar tanto para origens de gravação quanto de backup. Um usuário mal-intencionado pode excluir propositadamente todos os seus dados, enquanto um usuário normal pode excluí-los acidentalmente. Projete seu aplicativo para limitar as permissões de cada conta de usuário para que apenas os usuários que necessitam de acesso de gravação tenham esse acesso e que seja apenas para produção ou para backup, mas não ambos.
 
@@ -87,7 +89,7 @@ Resiliência é a capacidade de um sistema de se recuperar de falhas e continuar
 
 ## <a name="testing"></a>Testando
 
-**Execute o teste de failover e de failback para o aplicativo.** Se você ainda não testou totalmente o failover e o failback, você não pode ter certeza de que os serviços dependentes em seu aplicativo voltam ao funcionamento de forma sincronizada durante uma recuperação de desastre. Verifique se os serviços que dependem do seu aplicativo fazem failover e failback na ordem correta.
+**Execute o teste de failover e de failback para o aplicativo.** Se você ainda não testou totalmente o failover e o failback, você não pode ter certeza de que os serviços dependentes em seu aplicativo voltam ao funcionamento de forma sincronizada durante uma recuperação de desastre. Verifique se os serviços que dependem do seu aplicativo fazem failover e failback na ordem correta. Se você estiver usando o [Azure Site Recovery][site-recovery] para replicar máquinas virtuais, execute as análises de recuperação de desastres periodicamente ao fazer um failover de teste. Para saber mais, confira [Realizar uma análise detalhada da recuperação de desastre para o Azure][site-recovery-test].
 
 **Execute testes de injeção de falha em seu aplicativo.** Seu aplicativo pode falhar por vários motivos diferentes, como a expiração do certificado, o esgotamento de recursos do sistema em uma VM ou falhas de armazenamento. Teste seu aplicativo em um ambiente que se assemelhe o máximo possível à produção, simulando ou disparando falhas reais. Por exemplo, exclua certificados, consuma artificialmente recursos do sistema ou exclua uma origem de armazenamento. Verifique a capacidade do aplicativo de se recuperar de todos os tipos de falhas, isoladamente e em conjunto. Verifique se as falhas não estão se propagando ou ocorrendo em cascata pelo sistema.
 
@@ -176,6 +178,8 @@ Resiliência é a capacidade de um sistema de se recuperar de falhas e continuar
 [resource-manager]: /azure/azure-resource-manager/resource-group-overview/
 [retry-pattern]: ../patterns/retry.md
 [retry-service-guidance]: ../best-practices/retry-service-specific.md
+[site-recovery]: /azure/site-recovery/
+[site-recovery-test]: /azure/site-recovery/site-recovery-test-failover-to-azure
 [traffic-manager]: /azure/traffic-manager/traffic-manager-overview/
 [traffic-manager-routing]: /azure/traffic-manager/traffic-manager-routing-methods/
 [vmss-autoscale]: /azure/virtual-machine-scale-sets/virtual-machine-scale-sets-autoscale-overview/

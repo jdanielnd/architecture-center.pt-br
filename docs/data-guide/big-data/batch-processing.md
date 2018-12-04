@@ -3,12 +3,12 @@ title: Processamento em lotes
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: d6843bf4e20c3eb26e61cfa09300ad533e969c2e
-ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
+ms.openlocfilehash: eecee13e9b22b0382a0128e1c6ab8b960cbd4fea
+ms.sourcegitcommit: 16bc6a91b6b9565ca3bcc72d6eb27c2c4ae935e4
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/03/2018
-ms.locfileid: "30298654"
+ms.lasthandoff: 11/28/2018
+ms.locfileid: "52550471"
 ---
 # <a name="batch-processing"></a>Processamento em lotes
 
@@ -75,7 +75,7 @@ Para obter mais informações, consulte [Armazenamentos de dados analíticos](..
 
 ### <a name="analytics-and-reporting"></a>Análise e relatórios
 
-- **Azure Analysis Services**. Muitas soluções de Big Data emulam arquiteturas tradicionais de business intelligence empresarial, incluindo um modelo de dados OLAP (processamento analítico online) centralizado (também conhecido como um cubo) nos quais relatórios, painéis e uma análise interativa "segmentar e analisar" podem ser baseados. O Azure Analysis Services dá suporte à criação de modelos multidimensionais e de tabela para atender a essa necessidade.
+- **Azure Analysis Services**. Muitas soluções de Big Data emulam arquiteturas tradicionais de business intelligence empresarial, incluindo um modelo de dados OLAP (processamento analítico online) centralizado (também conhecido como um cubo) nos quais relatórios, painéis e uma análise interativa "segmentar e analisar" podem ser baseados. O Azure Analysis Services dá suporte à criação de modelos de tabela para atender a essa necessidade.
 - **Power BI**. O Power BI permite aos analistas de dados criar visualizações interativas de dados com base em modelos de dados em um modelo OLAP ou diretamente em um armazenamento de dados analíticos.
 - **Microsoft Excel**. O Microsoft Excel é um dos aplicativos de software mais amplamente usados no mundo e oferece uma variedade de funcionalidades de análise e visualização de dados. Os analistas de dados podem usar o Excel para criar modelos de dados de documentos com base em armazenamentos de dados analíticos ou recuperar dados de modelos de dados OLAP em Tabelas Dinâmicas e gráficos interativos.
 

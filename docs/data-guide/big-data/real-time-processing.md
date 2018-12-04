@@ -3,12 +3,12 @@ title: Processamento em tempo real
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 4abb159924f902b5babe0673cc021e80b00c8529
-ms.sourcegitcommit: e9d9e214529edd0dc78df5bda29615b8fafd0e56
+ms.openlocfilehash: 1499fecc20dcbf51472b92bb588b91db0fb58a7f
+ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 06/28/2018
-ms.locfileid: "37090978"
+ms.lasthandoff: 11/26/2018
+ms.locfileid: "52295592"
 ---
 # <a name="real-time-processing"></a>Processamento em tempo real
 
@@ -76,3 +76,8 @@ Para obter mais informações, consulte [Análise e relatórios](../technology-c
 
 Em uma solução totalmente em tempo real, a maioria da orquestração de processamento é gerenciada pelos componentes de ingestão de mensagens e processamento de fluxo. No entanto, em uma arquitetura lambda que combina o processamento em lotes e o processamento em tempo real, talvez você precise usar uma estrutura de orquestração como o Azure Data Factory ou o Apache Oozie e Sqoop para gerenciar fluxos de trabalho em lotes para os dados capturados em tempo real.
 
+## <a name="next-steps"></a>Próximas etapas
+
+A arquitetura de referência a seguir mostra um pipeline de processamento de fluxo de ponta a ponta:
+
+- [Processamento de fluxo com o Azure Stream Analytics](../../reference-architectures/data/stream-processing-stream-analytics.md)
