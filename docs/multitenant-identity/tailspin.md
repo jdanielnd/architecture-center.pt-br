@@ -2,16 +2,16 @@
 title: Sobre o aplicativo Tailspin Surveys
 description: Visão geral do aplicativo Tailspin Surveys
 author: MikeWasson
-ms:date: 07/21/2017
+ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: index
 pnp.series.next: authenticate
-ms.openlocfilehash: 028f7940d2e3cd7e8e629554f8af290ec5fdd184
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: a1c357bd1b5306d1255c66aaea96d86be55e7b77
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24540050"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902061"
 ---
 # <a name="the-tailspin-scenario"></a>O cenário da Tailspin
 

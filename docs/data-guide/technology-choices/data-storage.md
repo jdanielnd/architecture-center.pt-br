@@ -2,13 +2,13 @@
 title: Escolhendo uma tecnologia de armazenamento de dados
 description: ''
 author: zoinerTejada
-ms:date: 02/12/2018
-ms.openlocfilehash: 496df68024aef0dcf030bb7e0138639610aa8a79
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.date: 02/12/2018
+ms.openlocfilehash: c97249228ca45a7a17822b6dd55acad6360c6f6b
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429342"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902639"
 ---
 # <a name="choosing-a-big-data-storage-technology-in-azure"></a>Escolhendo uma tecnologia de armazenamento de Big Data no Azure
 

@@ -2,19 +2,19 @@
 title: Dados de série temporal
 description: ''
 author: zoinerTejada
-ms:date: 02/12/2018
-ms.openlocfilehash: 80ff6c45988062afcb0eb92cc79e640d39dbb21f
-ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
+ms.date: 02/12/2018
+ms.openlocfilehash: 9664940729430b08d7be52564e4971ec5e2b94d8
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/03/2018
-ms.locfileid: "30298100"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52901959"
 ---
 # <a name="time-series-solutions"></a>Soluções de série temporal
 
 Os dados de série temporal são um conjunto de valores organizados por tempo. Exemplos comuns de dados de série temporal incluem dados de sensor, preços de compra de ações, dados de fluxo de cliques e telemetria do aplicativo. Os dados de série temporal podem ser analisados quanto a tendências históricas, alertas em tempo real ou modelagem preditiva.
 
-![Análises de Séries Temporais](./images/time-series-insights.png) 
+![Time Series Insights](./images/time-series-insights.png) 
 
 Dados de série temporal representam como um processo ou um ativo é alterado ao longo do tempo. Os dados têm um carimbo de data/hora, porém, o mais importante, o tempo é o eixo mais significativo para exibir ou analisar os dados. Os dados de série temporal normalmente são recebidos na ordem de tempo e geralmente são tratados como uma inserção, em vez de uma atualização do banco de dados. Por isso, a alteração é medida ao longo do tempo, permitindo que você olhe para trás e preveja uma alteração futura. Dessa forma, os dados de série temporal são mais bem visualizados com gráficos de dispersão ou de linhas.
 

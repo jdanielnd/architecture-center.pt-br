@@ -2,13 +2,13 @@
 title: Escolhendo uma tecnologia de ingestão de mensagens em tempo real
 description: ''
 author: zoinerTejada
-ms:date: 02/12/2018
-ms.openlocfilehash: 5eaac023e28fc502e5a4e6ebc17e32832f7557c0
-ms.sourcegitcommit: bb348bd3a8a4e27ef61e8eee74b54b07b65dbf98
+ms.date: 02/12/2018
+ms.openlocfilehash: 64d6fca0a8ffac45f605e90a11cd2b3e53db287f
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 05/21/2018
-ms.locfileid: "34422976"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52901605"
 ---
 # <a name="choosing-a-real-time-message-ingestion-technology-in-azure"></a>Escolhendo uma tecnologia de ingestão de mensagens em tempo real no Azure
 
@@ -63,8 +63,8 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 
 | | Hub IoT | Hubs de Eventos | Kafka no HDInsight |
 | --- | --- | --- | --- |
-| Comunicações da nuvem para o dispositivo | sim | Não | Não  |
-| Upload de arquivo iniciado pelo dispositivo | sim | Não | Não  |
+| Comunicações da nuvem para o dispositivo | SIM | Não | Não  |
+| Upload de arquivo iniciado pelo dispositivo | SIM | Não | Não  |
 | Informações de estado do dispositivo | [Dispositivos gêmeos](/azure/iot-hub/iot-hub-devguide-device-twins) | Não  | Não  |
 | Suporte a protocolo | MQTT, AMQP, HTTPS <sup>1</sup> | AMQP, HTTPS | [Protocolo do Kafka](https://cwiki.apache.org/confluence/display/KAFKA/A+Guide+To+The+Kafka+Protocol) |
 | Segurança | Identidade por dispositivo; controle de acesso revogável. | Políticas de acesso compartilhado; revogação limitada por meio de políticas do publicador. | Autenticação com SASL; autorização conectável; integração com serviços de autenticação externa compatíveis. |

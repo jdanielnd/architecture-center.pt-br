@@ -2,13 +2,13 @@
 title: Arquiteturas de Big Data
 description: ''
 author: zoinerTejada
-ms:date: 02/12/2018
-ms.openlocfilehash: 2a1336faea81470b082d4eef8e2cc53a082c63c7
-ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
+ms.date: 02/12/2018
+ms.openlocfilehash: f0c90d88c1350d12b03531ae009f952ea823bc30
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/03/2018
-ms.locfileid: "30298848"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902353"
 ---
 # <a name="big-data-architectures"></a>Arquiteturas de Big Data
 
@@ -128,7 +128,7 @@ As caixas destacadas em cinza mostram os componentes de um sistema de IoT que n�
 Serviços do Azure relevantes:
 
 - [Hub IoT do Azure](https://azure.microsoft.com/services/iot-hub/)
-- [Hubs de eventos do Azure](https://azure.microsoft.com/services/event-hubs/)
+- [Hubs de Eventos do Azure](https://azure.microsoft.com/services/event-hubs/)
 - [Stream Analytics do Azure](https://azure.microsoft.com/services/stream-analytics/)  
 
 Saiba mais sobre o IoT no Azure lendo a [arquitetura de referência do IoT do Azure](https://azure.microsoft.com/updates/microsoft-azure-iot-reference-architecture-available/).

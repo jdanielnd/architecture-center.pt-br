@@ -2,13 +2,13 @@
 title: Dados relacionais
 description: ''
 author: zoinerTejada
-ms:date: 02/12/2018
-ms.openlocfilehash: fa2fef27f47acadf00cbfc821c7432c07a3947be
-ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
+ms.date: 02/12/2018
+ms.openlocfilehash: 0ed15bfe93c0cebffb377543eda9dd84e65d7c02
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/03/2018
-ms.locfileid: "30298814"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52901398"
 ---
 # <a name="traditional-relational-database-solutions"></a>Soluções tradicionais de banco de dados relacional
 

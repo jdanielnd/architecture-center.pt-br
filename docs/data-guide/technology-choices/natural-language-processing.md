@@ -2,13 +2,13 @@
 title: Escolhendo uma tecnologia de processamento de idioma natural
 description: ''
 author: zoinerTejada
-ms:date: 02/12/2018
-ms.openlocfilehash: bac0318a587a944c104360eb31223cc8755c1860
-ms.sourcegitcommit: e9eb2b895037da0633ef3ccebdea2fcce047620f
+ms.date: 02/12/2018
+ms.openlocfilehash: b1cb019164285d16b6e9d34eae220801785adab9
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/30/2018
-ms.locfileid: "50251763"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902299"
 ---
 # <a name="choosing-a-natural-language-processing-technology-in-azure"></a>Escolhendo uma tecnologia de processamento de idioma natural no Azure
 

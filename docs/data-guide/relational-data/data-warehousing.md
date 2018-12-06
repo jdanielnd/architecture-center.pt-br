@@ -2,13 +2,13 @@
 title: Data warehouse e data marts
 description: ''
 author: zoinerTejada
-ms:date: 02/12/2018
-ms.openlocfilehash: 9b90d77ce1a81cd4a7532f5d4230ada8b4991d13
-ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
+ms.date: 02/12/2018
+ms.openlocfilehash: 92f8ab8d828dd4b30c43a07e15959e5670852195
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 06/11/2018
-ms.locfileid: "35252798"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902775"
 ---
 # <a name="data-warehousing-and-data-marts"></a>Data warehouse e data marts
 
@@ -120,13 +120,13 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 
 | | Banco de Dados SQL do Azure | SQL Server (VM) | SQL Data Warehouse | Apache Hive no HDInsight | Hive LLAP no HDInsight |
 | --- | --- | --- | --- | --- | --- | -- |
-| É um serviço gerenciado | sim | Não  | sim | Sim <sup>1</sup> | Sim <sup>1</sup> |
-| Exige a orquestração de dados (armazena uma cópia dos dados/dados históricos) | Não  | Não  | sim | sim | sim |
-| É integrado com facilidade a várias fontes de dados | Não  | Não  | sim | sim | sim |
-| Dá suporte à pausa de computação | Não  | Não  | sim | Não <sup>2</sup> | Não <sup>2</sup> |
-| Armazenamento de dados relacionais | sim | sim |  sim | Não | Não  |
-| Relatórios em tempo real | sim | sim | Não | Não  | sim |
-| Pontos de restauração de backup flexíveis | sim | sim | Não <sup>3</sup> | Sim <sup>4</sup> | Sim <sup>4</sup> |
+| É um serviço gerenciado | SIM | Não  | SIM | Sim <sup>1</sup> | Sim <sup>1</sup> |
+| Exige a orquestração de dados (armazena uma cópia dos dados/dados históricos) | Não  | Não  | sim | sim | SIM |
+| É integrado com facilidade a várias fontes de dados | Não  | Não  | sim | sim | SIM |
+| Dá suporte à pausa de computação | Não  | Não  | SIM | Não <sup>2</sup> | Não <sup>2</sup> |
+| Armazenamento de dados relacionais | SIM | sim |  sim | Não | Não  |
+| Relatórios em tempo real | SIM | sim | Não | Não  | SIM |
+| Pontos de restauração de backup flexíveis | SIM | SIM | Não <sup>3</sup> | Sim <sup>4</sup> | Sim <sup>4</sup> |
 | SMP/MPP | SMP | SMP | MPP | MPP | MPP |
 
 [1] Configuração manual e dimensionamento.
@@ -141,10 +141,10 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 
 | | Banco de Dados SQL do Azure | SQL Server (VM) |  SQL Data Warehouse | Apache Hive no HDInsight | Hive LLAP no HDInsight |
 | --- | --- | --- | --- | --- | --- | -- |
-| Servidores regionais redundantes para alta disponibilidade  | sim | sim | sim | Não | Não  |
-| Dá suporte à expansão da consulta (consultas distribuídas)  | Não  | Não  | sim | sim | sim |
-| Dimensionamento dinâmico | sim | Não  | Sim <sup>1</sup> | Não  | Não  |
-| Dá suporte ao cache em memória de dados | sim |  sim | Não  | sim | sim |
+| Servidores regionais redundantes para alta disponibilidade  | SIM | sim | sim | Não | Não  |
+| Dá suporte à expansão da consulta (consultas distribuídas)  | Não  | Não  | sim | sim | SIM |
+| Dimensionamento dinâmico | SIM | Não  | Sim <sup>1</sup> | Não  | Não  |
+| Dá suporte ao cache em memória de dados | SIM |  sim | Não  | sim | SIM |
 
 [1] O SQL Data Warehouse permite escalar ou reduzir verticalmente ajustando o número de DWUs (unidades de data warehouse). Consulte [Gerenciar o poder de computação no SQL Data Warehouse do Azure](/azure/sql-data-warehouse/sql-data-warehouse-manage-compute-overview).
 
@@ -153,12 +153,12 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 |                         |           Banco de Dados SQL do Azure            |  SQL Server em uma máquina virtual  | SQL Data Warehouse |   Apache Hive no HDInsight    |    Hive LLAP no HDInsight     |
 |-------------------------|-----------------------------------------|-----------------------------------|--------------------|-------------------------------|-------------------------------|
 |     Autenticação      | SQL/Azure AD (Azure Active Directory) | SQL/Azure AD/Active Directory |   SQL/Azure AD   | local/Azure AD <sup>1</sup> | local/Azure AD <sup>1</sup> |
-|      Autorização      |                   sim                   |                sim                |        sim         |              sim              |       Sim <sup>1</sup>        |
-|        Auditoria         |                   sim                   |                sim                |        sim         |              sim              |       Sim <sup>1</sup>        |
+|      Autorização      |                   SIM                   |                sim                |        sim         |              SIM              |       Sim <sup>1</sup>        |
+|        Auditoria         |                   SIM                   |                sim                |        sim         |              SIM              |       Sim <sup>1</sup>        |
 | Criptografia de dados em repouso |            Sim <sup>2</sup>             |         Sim <sup>2</sup>          |  Sim <sup>2</sup>  |       Sim <sup>2</sup>        |       Sim <sup>1</sup>        |
-|   Segurança em nível de linha    |                   sim                   |                sim                |        sim         |              Não                |       Sim <sup>1</sup>        |
-|   Dá suporte a firewalls    |                   sim                   |                sim                |        sim         |              sim              |       Sim <sup>3</sup>        |
-|  Mascaramento de dados dinâmicos   |                   sim                   |                sim                |        sim         |              Não                |       Sim <sup>1</sup>        |
+|   Segurança em nível de linha    |                   SIM                   |                sim                |        sim         |              Não                |       Sim <sup>1</sup>        |
+|   Dá suporte a firewalls    |                   SIM                   |                sim                |        sim         |              SIM              |       Sim <sup>3</sup>        |
+|  Mascaramento de dados dinâmicos   |                   SIM                   |                sim                |        sim         |              Não                |       Sim <sup>1</sup>        |
 
 [1] Exige o uso de um [cluster HDInsight ingressado no domínio](/azure/hdinsight/domain-joined/apache-domain-joined-introduction).
 

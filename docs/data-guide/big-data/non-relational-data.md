@@ -2,13 +2,13 @@
 title: Dados não relacionais e NoSQL
 description: ''
 author: zoinerTejada
-ms:date: 02/12/2018
-ms.openlocfilehash: 2c284099bd7e8bbb85f1252a24d699d9fca09eae
-ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
+ms.date: 02/12/2018
+ms.openlocfilehash: f5655f7245b7150941969b1bc7917d540ab84343
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/03/2018
-ms.locfileid: "30298664"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902741"
 ---
 # <a name="non-relational-data-and-nosql"></a>Dados não relacionais e NoSQL
 
@@ -147,8 +147,8 @@ Veja a seguir uma comparação dos requisitos de cada um dos armazenamentos de d
 | Padrão de acesso | Acesso aleatório | Agregações em dados altos/largos | Acesso aleatório | Acesso aleatório |
 | Indexação | Índices primários e secundários | Índices primários e secundários | Somente índice primário | Índices primários e secundários | 
 | Forma dos dados | Documento | Tabela com famílias de colunas que contém colunas | Chave e valor | Gráfico que contém bordas e vértices | 
-| Esparsos | sim | sim | sim | Não  | 
-| Largo (grande quantidade de colunas/atributos) | sim | sim | Não | Não  |  
+| Esparsos | SIM | sim | sim | Não  | 
+| Largo (grande quantidade de colunas/atributos) | SIM | sim | Não | Não  |  
 | Tamanho do dado | Pequeno (KBs) a médio (alguns MBs) | Médio (MBs) a grande (alguns GBs) | Pequeno (KBs) | Pequeno (KBs) | 
 | Escala máxima geral | Muito grande (PBs) | Muito grande (PBs) | Muito grande (PBs) | Grande (TB) | 
 
@@ -163,7 +163,7 @@ Veja a seguir uma comparação dos requisitos de cada um dos armazenamentos de d
 | Indexação | Índices primários e secundários | Somente índice primário | N/D |
 | Forma dos dados | Tabular | Blob e metadados | Documento |
 | Esparsos | Não  | N/D | Não  | 
-| Largo (grande quantidade de colunas/atributos) |  Não  | sim | sim |  
+| Largo (grande quantidade de colunas/atributos) |  Não  | sim | SIM |  
 | Tamanho do dado | Pequeno (KBs) | Grande (GBs) a muito grandes (TBs) | Pequeno (KBs) |
 | Escala máxima geral | Grande (alguns TBs)  | Muito grande (PBs) | Grande (alguns TBs) | 
 

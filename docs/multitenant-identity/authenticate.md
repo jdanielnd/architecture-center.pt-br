@@ -2,16 +2,16 @@
 title: Autenticação em aplicativos multilocatários
 description: Como um aplicativo multilocatário pode autenticar usuários do Azure AD
 author: MikeWasson
-ms:date: 07/21/2017
+ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: tailspin
 pnp.series.next: claims
-ms.openlocfilehash: 70f4a96369c207740400b9dfe72e1e964507f729
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: 58ccf75cd34f8efec17898c85295587da282cf45
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428118"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902707"
 ---
 # <a name="authenticate-using-azure-ad-and-openid-connect"></a>Autentique usando o Azure AD e o OpenID Connect
 
@@ -161,8 +161,8 @@ Por padrão, o middleware OIDC sabe como buscar esses metadados. Defina a opçã
 ### <a name="openid-connect-flows"></a>Fluxos do OpenId Connect
 Por padrão, o middleware OIDC usa um fluxo híbrido com o modo de resposta de postagem de formulário.
 
-* *Fluxo híbrido* significa que o cliente pode obter um token de ID e um código de autorização na mesma viagem de ida e volta ao servidor de autorização.
-* *Modo de resposta de postagem de formulário* significa que o servidor de autorização usa uma solicitação HTTP POST para enviar o código de autorização e o token de ID ao aplicativo. Os valores são form-urlencoded (tipo de conteúdo = "application/x-www-form-urlencoded").
+* *Fluxo híbrido* significa que o cliente pode obter um token de ID e um código de autorização na mesma viagem ao servidor de autorização.
+* *Modo de resposta de postagem de formulário* significa que o servidor de autorização usa uma solicitação HTTP POST para enviar o código de autorização e o token de ID para o aplicativo. Os valores são form-urlencoded (tipo de conteúdo = "application/x-www-form-urlencoded").
 
 Quando o middleware OIDC redireciona para o ponto de extremidade de autorização, a URL de redirecionamento inclui todos os parâmetros da cadeia de caracteres de consulta necessários para o OIDC. Para o fluxo híbrido:
 

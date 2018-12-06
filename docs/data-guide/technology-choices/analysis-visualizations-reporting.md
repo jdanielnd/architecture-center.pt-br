@@ -2,13 +2,13 @@
 title: Escolhendo uma tecnologia de análise de dados e relatórios
 description: ''
 author: zoinerTejada
-ms:date: 02/12/2018
-ms.openlocfilehash: 05e33a3da0933036a604d2bc4cc5a20ae70fe772
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.date: 02/12/2018
+ms.openlocfilehash: a5e793c9caf50daca4ef7e40c49e54f25f04e856
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428305"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902409"
 ---
 # <a name="choosing-a-data-analytics-technology-in-azure"></a>Escolhendo uma tecnologia de análise de dados no Azure
 
