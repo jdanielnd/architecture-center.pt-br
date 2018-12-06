@@ -2,16 +2,16 @@
 title: Federar com o AD FS de um cliente
 description: Como federar com o AD FS de um cliente em um aplicativo multilocatário
 author: MikeWasson
-ms:date: 07/21/2017
+ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: token-cache
 pnp.series.next: client-assertion
-ms.openlocfilehash: 4b54f031d13449e4d87075af5606967da8b5d3df
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: fec10ca0e067b3b51bf9dba70d66ceb12423787d
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428917"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902690"
 ---
 # <a name="federate-with-a-customers-ad-fs"></a>Federar com o AD FS de um cliente
 
@@ -59,7 +59,7 @@ Por padrão, o aplicativo de terceira parte recebe apenas um conjunto fixo de de
 | Declaração | DESCRIÇÃO |
 | --- | --- |
 | aud |Público-alvo. O aplicativo para o qual as declarações foram emitidas. |
-| authenticationinstant |[Instante de autenticação]. A hora em que a autenticação ocorreu. |
+| authenticationinstant |[Instante da autenticação]. A hora em que a autenticação ocorreu. |
 | c_hash |Valor hash do código. Este é um hash do conteúdo do token. |
 | exp |[Hora de expiração]. O tempo após o qual o token não será mais aceito. |
 | iat |Emitido em. A hora em que o token foi emitido. |
@@ -184,7 +184,7 @@ Os cliente deve fazer o seguinte:
 [confiança de federação]: https://technet.microsoft.com/library/cc770993(v=ws.11).aspx
 [parceiro de conta]: https://technet.microsoft.com/library/cc731141(v=ws.11).aspx
 [parceiro de recurso]: https://technet.microsoft.com/library/cc731141(v=ws.11).aspx
-[Instante de autenticação]: https://msdn.microsoft.com/library/system.security.claims.claimtypes.authenticationinstant%28v=vs.110%29.aspx
+[Instante da autenticação]: https://msdn.microsoft.com/library/system.security.claims.claimtypes.authenticationinstant%28v=vs.110%29.aspx
 [Hora de expiração]: https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-25#section-4.1.
 [Identificador de nome]: https://msdn.microsoft.com/library/system.security.claims.claimtypes.nameidentifier(v=vs.110).aspx
 [active-directory-on-azure]: https://msdn.microsoft.com/library/azure/jj156090.aspx

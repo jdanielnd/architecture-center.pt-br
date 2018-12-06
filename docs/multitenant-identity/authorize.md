@@ -2,16 +2,16 @@
 title: Autorização em aplicativos multilocatário
 description: Como executar a autorização em um aplicativo multilocatário
 author: MikeWasson
-ms:date: 07/21/2017
+ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: app-roles
 pnp.series.next: web-api
-ms.openlocfilehash: 321dc52a3e6f803a032288c2341e490cdba8c20a
-ms.sourcegitcommit: 9a2d56ac7927f0a2bbfee07198d43d9c5cb85755
+ms.openlocfilehash: bbf702fe6651625a1aeceff7e4e321dd08c38544
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 06/22/2018
-ms.locfileid: "36327646"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902486"
 ---
 # <a name="role-based-and-resource-based-authorization"></a>Autorização baseada em funções e recursos
 
@@ -22,7 +22,7 @@ Nossa [implementação de referência] é um aplicativo ASP.NET Core. Neste arti
 * **Autorização baseada em função**. Autorização de uma ação baseada nas funções atribuídas a um usuário. Por exemplo, algumas ações requerem uma função de administrador.
 * **Autorização baseada em recursos**. Autorização de uma ação baseada em determinado recurso. Por exemplo, cada recurso tem um proprietário. O proprietário pode excluir o recurso, mas os outros usuários não.
 
-Um aplicativo típico utiliza uma mistura das duas abordagens. Por exemplo, para excluir um recurso, o usuário deve ser o proprietário *ou* um administrador do recurso.
+Um aplicativo típico utiliza uma mistura das duas abordagens. Por exemplo, para excluir um recurso, o usuário deve ser o proprietário do recurso *ou* um administrador.
 
 ## <a name="role-based-authorization"></a>Autorização baseada em função
 Por exemplo, o aplicativo [Tailspin Surveys][Tailspin] define as seguintes funções:
@@ -33,7 +33,7 @@ Por exemplo, o aplicativo [Tailspin Surveys][Tailspin] define as seguintes funç
 
 As funções se aplicam a *usuários* do aplicativo. No aplicativo Surveys, o usuário pode ser um administrador, um criador ou um leitor.
 
-Para uma discussão sobre como definir e gerenciar funções, confira [Funções do aplicativo].
+Para uma discussão sobre como definir e gerenciar funções, confira [Funções de aplicativo].
 
 Independentemente de como você gerenciar as funções, seu código de autorização terá uma aparência semelhante. O ASP.NET Core tem uma abstração chamada [políticas de autorização][policies]. Com esse recurso, você define políticas de autorização no código e depois aplica-as às ações do controlador. A política é dissociada do controlador.
 
@@ -84,7 +84,7 @@ services.AddAuthorization(options =>
 });
 ```
 
-Esse código também define o esquema de autenticação, que diz ao ASP.NET qual middleware de autenticação deverá ser executado se a autorização falhar. Nesse caso, especificamos o middleware de autenticação de cookie, porque o middleware de autenticação de cookie pode redirecionar o usuário para uma página "Proibida". O local da página Proibida é definido na opção `AccessDeniedPath` para o middleware de cookie; consulte [Configuração do middleware de autenticação].
+Esse código também define o esquema de autenticação, que diz ao ASP.NET qual middleware de autenticação deverá ser executado se a autorização falhar. Nesse caso, especificamos o middleware de autenticação de cookie, porque o middleware de autenticação de cookie pode redirecionar o usuário para uma página "Proibida". O local da página Proibida é definido na opção `AccessDeniedPath` para o middleware de cookie; consulte [Configurando o middleware de autenticação].
 
 ### <a name="authorize-controller-actions"></a>Autorizar ações do controlador
 Por fim, para autorizar uma ação em um controlador MVC, defina a política no atributo `Authorize` :
@@ -112,7 +112,7 @@ Ainda existe suporte para isso no ASP.NET Core, mas existem algumas desvantagens
 * As políticas permitem decisões de autorização mais complexas (por exemplo, idade maior ou igual a 21), que não podem ser expressas pela associação de função simples.
 
 ## <a name="resource-based-authorization"></a>Autorização baseada em recursos
-A *autorização baseada em recursos* ocorre sempre que a autorização depende de um recurso específico que será afetado por uma operação. No aplicativo Tailspin Surveys, cada pesquisa tem um proprietário e de zero a muitos colaboradores.
+*Autorização baseada em recursos* ocorre sempre que a autorização depender de um recurso específico que será afetado por uma operação. No aplicativo Tailspin Surveys, cada pesquisa tem um proprietário e de zero a muitos colaboradores.
 
 * O proprietário pode ler, atualizar, excluir, publicar e cancelar a publicação da pesquisa.
 * O proprietário pode atribuir colaboradores à pesquisa.
@@ -250,9 +250,9 @@ static readonly Dictionary<OperationAuthorizationRequirement, Func<List<UserPerm
 <!-- Links -->
 [Tailspin]: tailspin.md
 
-[Funções do aplicativo]: app-roles.md
+[Funções de aplicativo]: app-roles.md
 [policies]: /aspnet/core/security/authorization/policies
 [implementação de referência]: tailspin.md
-[Configuração do middleware de autenticação]: authenticate.md#configure-the-auth-middleware
+[Configurando o middleware de autenticação]: authenticate.md#configure-the-auth-middleware
 [sample application]: https://github.com/mspnp/multitenant-saas-guidance
 [web-api]: web-api.md

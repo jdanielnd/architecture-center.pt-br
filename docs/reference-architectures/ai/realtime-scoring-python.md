@@ -3,13 +3,12 @@ title: Pontuação em tempo real de Python Scikit-Learn e modelos de aprendizado
 description: Essa arquitetura de referência mostra como implantar modelos de Python como serviços Web no Azure para fazer previsões em tempo real.
 author: njray
 ms.date: 11/09/2018
-ms.author: njray
-ms.openlocfilehash: 860eb83f248c2a9f2a96065c6c4cdd02715e7ce1
-ms.sourcegitcommit: cc234a522b7fc35af3bcacdc044c2e2b529e54ed
+ms.openlocfilehash: ff385e232c69e46b0afc6b15e73983bd856b9b2b
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/09/2018
-ms.locfileid: "51347741"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902571"
 ---
 # <a name="real-time-scoring-of-python-scikit-learn-and-deep-learning-models-on-azure"></a>Pontuação em tempo real de Python Scikit-Learn e modelos de aprendizado profundo (deep learning) no Azure
 

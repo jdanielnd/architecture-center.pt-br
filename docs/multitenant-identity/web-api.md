@@ -2,16 +2,16 @@
 title: Proteger uma API Web de back-end em um aplicativo multilocatário
 description: Como proteger uma API Web de back-end
 author: MikeWasson
-ms:date: 07/21/2017
+ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: authorize
 pnp.series.next: token-cache
-ms.openlocfilehash: 2d02ff7be04c6ebec888039453fe1ac7e957b301
-ms.sourcegitcommit: f7fa67e3bdbc57d368edb67bac0e1fdec63695d2
+ms.openlocfilehash: e738eb94b5978efa4e7a4bebcc72daa7968ac904
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 07/05/2018
-ms.locfileid: "37843667"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52901585"
 ---
 # <a name="secure-a-backend-web-api"></a>Proteger uma API Web de back-end
 
@@ -115,7 +115,7 @@ Estes são os vários parâmetros necessários:
 * `clientSecret`. O segredo do cliente do aplicativo Web.
 * `redirectUri`. O URI de redirecionamento que você definiu para a conexão do OpenID. Esse é o local onde o IDP retorna a chamada com o token.
 * `resourceID`. O URI da ID de aplicativo da API Web que você criou quando registrou a API Web no Azure AD
-* `tokenCache`. Um objeto que armazena os tokens de acesso em cache. Confira [Armazenamento de token em cache].
+* `tokenCache`. Um objeto que armazena os tokens de acesso em cache. Confira [Colocação de tokens em cache].
 
 Se `AcquireTokenByAuthorizationCodeAsync` for bem-sucedido, a ADAL armazenará o token em cache. Posteriormente, você pode obter o token do cache chamando AcquireTokenSilentAsync:
 
@@ -273,7 +273,7 @@ public void ConfigureServices(IServiceCollection services)
 [Tailspin Surveys]: tailspin.md
 [IdentityServer4]: https://github.com/IdentityServer/IdentityServer4
 [Atualizar os manifestos do aplicativo]: ./run-the-app.md#update-the-application-manifests
-[Armazenamento de token em cache]: token-cache.md
+[Colocação de tokens em cache]: token-cache.md
 [inscrição de locatários]: signup.md
 [claims-transformation]: claims.md#claims-transformations
 [Authorization]: authorize.md

@@ -2,13 +2,13 @@
 title: Escolhendo uma tecnologia de transferência de dados
 description: ''
 author: zoinerTejada
-ms:date: 02/12/2018
-ms.openlocfilehash: 53dcf8a69ad8ae100dbdbb230a9280efd419342a
-ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
+ms.date: 02/12/2018
+ms.openlocfilehash: d5fbdc3a49ab16be2626b772ffd1af782963a2f0
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 06/11/2018
-ms.locfileid: "35252746"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902657"
 ---
 # <a name="transferring-data-to-and-from-azure"></a>Transferindo dados bidirecionalmente no Azure
 
@@ -95,8 +95,8 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 | | Distcp | Sqoop | CLI do Hadoop |
 | --- | --- | --- | --- |
 | Otimizado para Big Data | sim | sim |  sim |
-| Copiar para o banco de dados relacional |  Não  | sim | Não  |
-| Copiar do banco de dados relacional |  Não  | sim | Não  |
+| Copiar para o banco de dados relacional |  Não  | Sim | Não  |
+| Copiar do banco de dados relacional |  Não  | Sim | Não  |
 | Copiar para o armazenamento de Blobs |  sim | sim | sim |
 | Copiar do armazenamento de Blobs | sim |  sim | Não  |
 | Copiar para o Data Lake Store | sim | sim | sim |
@@ -107,9 +107,9 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 | | CLI do Azure | AzCopy | PowerShell | AdlCopy | PolyBase |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Plataformas compatíveis | Linux, OS X, Windows | Linux, Windows | Windows | Linux, OS X, Windows | SQL Server, SQL Data Warehouse do Azure | 
-| Otimizado para Big Data | Não  | Não  | Não  | Sim <sup>1</sup> | Sim <sup>2</sup> |
-| Copiar para o banco de dados relacional | Não  | Não  | Não  | Não  | sim | 
-| Copiar do banco de dados relacional | Não  | Não  | Não  | Não  | sim | 
+| Otimizado para Big Data | Não  | Não | Não  | Sim <sup>1</sup> | Sim <sup>2</sup> |
+| Copiar para o banco de dados relacional | Não  | Não | Não | Não  | sim | 
+| Copiar do banco de dados relacional | Não  | Não | Não | Não  | sim | 
 | Copiar para o armazenamento de Blobs | sim | sim | sim | Não  | sim | 
 | Copiar do armazenamento de Blobs | sim | sim | sim | sim | sim |
 | Copiar para o Data Lake Store | Não  | Não  | sim | sim |  sim | 

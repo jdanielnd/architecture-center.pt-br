@@ -2,15 +2,15 @@
 title: Gerenciamento de Identidades para Aplicativos Multilocatários
 description: Práticas recomendadas para autenticação, autorização e gerenciamento de identidades em aplicativos multilocatários.
 author: MikeWasson
-ms:date: 07/21/2017
+ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.next: tailspin
-ms.openlocfilehash: 9c2efe9aea9da53177478161b90406d0c2021550
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: 24e09720d3257cbfae350995fa5238663da1d26e
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429427"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902044"
 ---
 # <a name="manage-identity-in-multitenant-applications"></a>Gerenciar a identidade em aplicativos multilocatários
 
