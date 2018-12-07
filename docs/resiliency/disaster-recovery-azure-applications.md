@@ -3,12 +3,12 @@ title: Recuperação de desastre para aplicativos do Azure
 description: Visão geral técnica e informações detalhadas sobre como projetar aplicativos para recuperação de desastre no Microsoft Azure.
 author: adamglick
 ms.date: 09/12/2018
-ms.openlocfilehash: 4f879445154e37502bbeeeb90939737b6072e6ec
-ms.sourcegitcommit: 25bf02e89ab4609ae1b2eb4867767678a9480402
+ms.openlocfilehash: ff5da8a3d2612d7c122ec8ed87979eddf778dbf0
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/14/2018
-ms.locfileid: "45584792"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902843"
 ---
 # <a name="disaster-recovery-for-azure-applications"></a>Recuperação de desastre para aplicativos do Azure
 
@@ -16,7 +16,7 @@ A recuperação de desastres (DR) tem como foco a recuperação após uma perda 
 
 Proprietários de negócios e tecnologia devem determinar quanta funcionalidade é necessária durante um desastre. Esse nível de funcionalidade apresenta-se destas formas: totalmente indisponível, parcialmente disponível, por funcionalidade reduzida ou processamento com atraso, ou totalmente disponível.
 
-Estratégias de resiliência e alta disponibilidade tem como objetivo lidar com condições de falha temporária.  A execução desse plano envolve pessoas, processos e aplicativos de suporte que permitem que o sistema continue funcionando. Seu plano deve incluir ensaio de falhas e testes de recuperação de bancos de dados para garantir que o plano é sólido. 
+Estratégias de resiliência e alta disponibilidade têm como objetivo lidar com condições de falha temporária.  A execução desse plano envolve pessoas, processos e aplicativos de suporte que permitem que o sistema continue funcionando. Seu plano deve incluir ensaio de falhas e testes de recuperação de bancos de dados para garantir que o plano é sólido. 
 
 ## <a name="azure-disaster-recovery-features"></a>Recursos de recuperação de desastre do Azure
 
