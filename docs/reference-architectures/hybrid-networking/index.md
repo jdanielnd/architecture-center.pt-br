@@ -1,16 +1,17 @@
 ---
-title: Escolha uma solução para conectar uma rede local ao Azure
-description: Compara arquiteturas de referência para conectar uma rede local ao Azure.
+title: Conectar uma rede local ao Azure
+titleSuffix: Azure Reference Architectures
+description: Comparar arquiteturas de referência para conectar uma rede local ao Azure.
 author: telmosampaio
 ms.date: 07/02/2018
-ms.openlocfilehash: a9e2a212d65530e714635bbfae3a57766e77c3a6
-ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
+ms.openlocfilehash: de509b6d95805f4fc871f6dbd76a87d2c0bec6f1
+ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/26/2018
-ms.locfileid: "52295473"
+ms.lasthandoff: 12/08/2018
+ms.locfileid: "53119907"
 ---
-# <a name="connect-an-on-premises-network-to-azure"></a>Conectar uma rede local ao Azure
+# <a name="choose-a-solution-for-connecting-an-on-premises-network-to-azure"></a>Escolha uma solução para conectar uma rede local ao Azure
 
 Este artigo compara opções para conectar uma rede local a uma VNet (rede Virtual) do Azure. Para cada opção, existe uma arquitetura de referência mais detalhada disponível.
 
@@ -75,11 +76,9 @@ Essa arquitetura é adequada para aplicativos híbridos que precisam de maior la
 
 - [Rede híbrida com o ExpressRoute e failover de VPN](./expressroute-vpn-failover.md)
 
-
 ## <a name="hub-spoke-network-topology"></a>Topologia de rede hub-spoke
 
 Uma topologia de rede hub-spoke é uma maneira de isolar as cargas de trabalho enquanto compartilha os serviços, como a identidade e a segurança. O hub é uma VNet (rede virtual) no Azure que atua como ponto central de conectividade para sua rede local. Os spokes são VNets que se emparelham com o hub. Os serviços compartilhados são implantados no hub, enquanto as cargas de trabalho individuais são implantadas como spokes.
-
 
 **Arquiteturas de referência**
 

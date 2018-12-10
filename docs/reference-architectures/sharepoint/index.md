@@ -1,20 +1,22 @@
 ---
 title: Executar um farm do SharePoint Server 2016 de alta disponibilidade no Azure
-description: Práticas comprovadas para configurar uma farm do SharePoint Server 2016 de alta disponibilidade no Azure.
+titleSuffix: Azure Reference Architectures
+description: Arquitetura recomendada para implantar um farm do SharePoint Server 2016 de alta disponibilidade no Azure.
 author: njray
 ms.date: 07/26/2018
-ms.openlocfilehash: 5db146956134f9b297b520d666d8dabbc8793caf
-ms.sourcegitcommit: 77d62f966d910cd5a3d11ade7ae5a73234e093f2
+ms.custom: seodec18
+ms.openlocfilehash: 6cc8255f95cb4944ff3ef138ad5edf2e5bbea4b4
+ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/09/2018
-ms.locfileid: "51293251"
+ms.lasthandoff: 12/08/2018
+ms.locfileid: "53120094"
 ---
-# <a name="run-a-high-availability-sharepoint-server-2016-farm-in-azure"></a>Executar um farm do SharePoint Server 2016 de alta disponibilidade no Azure
+# <a name="run-a-highly-available-sharepoint-server-2016-farm-in-azure"></a>Executar um farm do SharePoint Server 2016 de alta disponibilidade no Azure
 
-Essa arquitetura de referência mostra um conjunto de práticas comprovadas para configurar um farm do SharePoint Server 2016 de alta disponibilidade no Azure, usando a topologia de MinRole e grupos de disponibilidade Always On do SQL Server. O farm do SharePoint é implantado em uma rede virtual protegida sem nenhuma presença ou ponto de extremidade para a Internet. [**Implante essa solução**.](#deploy-the-solution) 
+Essa arquitetura de referência mostra práticas comprovadas para implantar um farm do SharePoint Server 2016 de alta disponibilidade no Azure, usando a topologia de MinRole e grupos de disponibilidade Always On do SQL Server. O farm do SharePoint é implantado em uma rede virtual protegida sem nenhuma presença ou ponto de extremidade para a Internet. [**Implantar esta solução**](#deploy-the-solution).
 
-![](./images/sharepoint-ha.png)
+![Arquitetura de referência para um farm do SharePoint Server 2016 de alta disponibilidade no Azure](./images/sharepoint-ha.png)
 
 *Baixe um [Arquivo Visio][visio-download] dessa arquitetura.*
 
@@ -26,15 +28,15 @@ Essa arquitetura consiste nos seguintes componentes:
 
 - **Grupos de recursos**. Um [grupo de recursos][resource-group] é um contêiner que armazena os recursos relacionados ao Azure. Um grupo de recursos é usado para os servidores do SharePoint e outro grupo de recursos é usado para os componentes de infraestrutura que são independentes das VMs, como a rede virtual e os balanceadores de carga.
 
-- **Rede virtual (VNet)**. As VMs são implantadas em uma rede virtual com um espaço de endereço da intranet exclusivo. A rede virtual é, posteriormente, subdividida em sub-redes. 
+- **Rede virtual (VNet)**. As VMs são implantadas em uma rede virtual com um espaço de endereço da intranet exclusivo. A rede virtual é, posteriormente, subdividida em sub-redes.
 
 - **Máquinas Virtuais (VMs)**. As VMs são implantadas na rede virtual e os endereços IP estáticos são atribuídos a todas as VMs. Os endereços IP estáticos são recomendados para as máquinas virtuais que executam o SQL Server e o SharePoint Server 2016, para evitar problemas com armazenamento em cache de endereço IP e alterações de endereços após uma reinicialização.
 
-- **Conjuntos de disponibilidade**. Coloque as VMs para cada função do SharePoint em [conjuntos de disponibilidade][availability-set] separados e forneça pelo menos duas máquinas virtuais (VMs) para cada função. Isso torna as VMs qualificadas para um contrato de nível de serviço (SLA) mais alto. 
+- **Conjuntos de disponibilidade**. Coloque as VMs para cada função do SharePoint em [conjuntos de disponibilidade][availability-set] separados e forneça pelo menos duas máquinas virtuais (VMs) para cada função. Isso torna as VMs qualificadas para um contrato de nível de serviço (SLA) mais alto.
 
-- **Balanceador Interno de carga**. O [balanceador de carga][load-balancer] distribui o tráfego de solicitação do SharePoint da rede local para os servidores Web de front-end do farm do SharePoint. 
+- **Balanceador Interno de carga**. O [balanceador de carga][load-balancer] distribui o tráfego de solicitação do SharePoint da rede local para os servidores Web de front-end do farm do SharePoint.
 
-- **Grupos de segurança de rede (NSG)**. Para cada sub-rede que contém máquinas virtuais, um [grupo de segurança de rede][nsg] é criado. Use os NSGs para restringir o tráfego de rede na VNet, para isolar as sub-redes. 
+- **Grupos de segurança de rede (NSG)**. Para cada sub-rede que contém máquinas virtuais, um [grupo de segurança de rede][nsg] é criado. Use os NSGs para restringir o tráfego de rede na VNet, para isolar as sub-redes.
 
 - **Gateway**. O gateway fornece uma conexão entre a sua rede local e a rede virtual do Azure. A conexão pode usar ExpressRoute ou VPN site a site. Para obter mais informações, consulte [Conectar uma rede local ao Azure][hybrid-ra].
 
@@ -42,11 +44,11 @@ Essa arquitetura consiste nos seguintes componentes:
 
   O SharePoint Server 2016 também suporta o uso do [Azure Active Directory Domain Services](/azure/active-directory-domain-services/). O Azure Active Directory Domain Services fornece serviços de domínio gerenciado para que você não precise implantar e gerenciar controladores de domínio no Azure.
 
-- **Grupo de Disponibilidade Always On do SQL Server**. Para obter alta disponibilidade do banco de dados do SQL Server, recomendamos os [Grupos de Disponibilidade AlwaysOn do SQL Server][sql-always-on]. Duas máquinas virtuais são usadas para o SQL Server. Uma contém a réplica do banco de dados primário e a outra contém a réplica secundária. 
+- **Grupo de Disponibilidade Always On do SQL Server**. Para obter alta disponibilidade do banco de dados do SQL Server, recomendamos os [Grupos de Disponibilidade AlwaysOn do SQL Server][sql-always-on]. Duas máquinas virtuais são usadas para o SQL Server. Uma contém a réplica do banco de dados primário e a outra contém a réplica secundária.
 
 - **Nó principal da VM**. Essa VM permite que o cluster de failover estabeleça um quorum. Para saber mais, consulte [Noções básicas sobre configurações de quorum em um cluster de failover][sql-quorum].
 
-- **Servidores do SharePoint**. Os servidores do SharePoint executam funções de front-end da Web, armazenamento em cache, aplicativo e pesquisa. 
+- **Servidores do SharePoint**. Os servidores do SharePoint executam funções de front-end da Web, armazenamento em cache, aplicativo e pesquisa.
 
 - **Jumpbox**. Também chamado de um [host bastião][bastion-host]. Esta é uma VM segura na rede que os administradores usam para se conectar às outras VMs. O jumpbox tem um NSG que permite o tráfego remoto apenas de endereços IP públicos em uma lista segura. O NSG deve permitir o tráfego de RDP (área de trabalho remota).
 
@@ -60,7 +62,7 @@ Seus requisitos podem ser diferentes dos requisitos da arquitetura descrita aqui
 
 ### <a name="virtual-network-and-subnet-recommendations"></a>Recomendações para a rede virtual e a sub-rede
 
-Use uma sub-rede para cada função do SharePoint, além de uma sub-rede para o gateway e uma para o jumpbox. 
+Use uma sub-rede para cada função do SharePoint, além de uma sub-rede para o gateway e uma para o jumpbox.
 
 A sub-rede de gateway deve ser nomeada *GatewaySubnet*. Atribua o espaço de endereço de sub-rede de gateway da última parte do espaço de endereço de rede virtual. Para obter mais informações, consulte [Conectar uma rede local ao Azure usando um gateway de VPN][hybrid-vpn-ra].
 
@@ -74,28 +76,28 @@ Essa arquitetura exige um mínimo de 44 núcleos:
 - 1 nó principal em Standard_DS1_v2 = 1 núcleo
 - 1 servidor de gerenciamento em Standard_DS1_v2 = 1 núcleo
 
-Certifique-se de que sua assinatura do Azure tem suficiente cota de núcleo da VM para a implantação ou a implantação falhará. Consulte [Assinatura do Azure e limites de serviço, cotas e restrições][quotas]. 
+Certifique-se de que sua assinatura do Azure tem suficiente cota de núcleo da VM para a implantação ou a implantação falhará. Consulte [Assinatura do Azure e limites de serviço, cotas e restrições][quotas].
 
-Para todas as funções do SharePoint, exceto o Indexador da Pesquisa, é recomendável usar o tamanho de VM [Standard_DS3_v2][vm-sizes-general]. O indexador da pesquisa deve ser pelo menos do tamanho [Standard_DS13_v2][vm-sizes-memory]. Para teste, os arquivos de parâmetro para essa arquitetura de referência especificam o tamanho de DS3_v2 menor para a função do Indexador de Pesquisa. Para uma implantação de produção, atualize os arquivos de parâmetro para usar o tamanho DS13 ou maior. Para obter mais informações, confira [Requisitos de hardware e software para o SharePoint Server 2016][sharepoint-reqs]. 
+Para todas as funções do SharePoint, exceto o Indexador da Pesquisa, é recomendável usar o tamanho de VM [Standard_DS3_v2][vm-sizes-general]. O indexador da pesquisa deve ser pelo menos do tamanho [Standard_DS13_v2][vm-sizes-memory]. Para teste, os arquivos de parâmetro para essa arquitetura de referência especificam o tamanho de DS3_v2 menor para a função do Indexador de Pesquisa. Para uma implantação de produção, atualize os arquivos de parâmetro para usar o tamanho DS13 ou maior. Para obter mais informações, confira [Requisitos de hardware e software para o SharePoint Server 2016][sharepoint-reqs].
 
-Para VMs do SQL Server, é recomendável um mínimo de 4 núcleos e 8 GB de RAM. Os arquivos de parâmetro para essa arquitetura de referência especificam o tamanho de DS3_v2. Para uma implantação de produção, talvez seja necessário especificar um tamanho maior de VM. Para obter mais informações, confira [Configuração e planejamento de capacidade de armazenamento e do SQL Server (SharePoint Server)](/sharepoint/administration/storage-and-sql-server-capacity-planning-and-configuration#estimate-memory-requirements). 
- 
+Para VMs do SQL Server, é recomendável um mínimo de 4 núcleos e 8 GB de RAM. Os arquivos de parâmetro para essa arquitetura de referência especificam o tamanho de DS3_v2. Para uma implantação de produção, talvez seja necessário especificar um tamanho maior de VM. Para obter mais informações, confira [Configuração e planejamento de capacidade de armazenamento e do SQL Server (SharePoint Server)](/sharepoint/administration/storage-and-sql-server-capacity-planning-and-configuration#estimate-memory-requirements).
+
 ### <a name="nsg-recommendations"></a>Recomendações de NSG
 
-É recomendável ter um NSG para cada sub-rede que contém máquinas virtuais, para permitir o isolamento de sub-rede. Se você quiser configurar o isolamento de sub-rede, adicione regras NSG que definem o tráfego de entrada ou saída permitido ou negado para cada sub-rede. Para obter mais informações, consulte [Filtrar o tráfego de rede com grupos de segurança de rede][virtual-networks-nsg]. 
+É recomendável ter um NSG para cada sub-rede que contém máquinas virtuais, para permitir o isolamento de sub-rede. Se você quiser configurar o isolamento de sub-rede, adicione regras NSG que definem o tráfego de entrada ou saída permitido ou negado para cada sub-rede. Para obter mais informações, consulte [Filtrar o tráfego de rede com grupos de segurança de rede][virtual-networks-nsg].
 
-Não atribua um NSG à sub-rede de gateway ou o gateway irá parar de funcionar. 
+Não atribua um NSG à sub-rede de gateway ou o gateway irá parar de funcionar.
 
 ### <a name="storage-recommendations"></a>Recomendações de armazenamento
 
 A configuração de armazenamento das VMs no farm devem corresponder às melhores práticas apropriadas usadas para implantações locais. Servidores do SharePoint devem ter um disco separado de logs. Os servidores do SharePoint que hospedam funções de índice de pesquisa requerem espaço em disco adicional para o índice de pesquisa a ser armazenado. Para o SQL Server, a prática padrão é separar os dados dos logs. Adicione mais discos para armazenamento de backup do banco de dados e use um disco separado para [tempdb][tempdb].
 
-Para melhor confiabilidade, é recomendável usar o [Azure Managed Disks][managed-disks]. Os discos gerenciados garantem que os discos para VMs dentro de um conjunto de disponibilidade são isolados para evitar pontos únicos de falha. 
+Para melhor confiabilidade, é recomendável usar o [Azure Managed Disks][managed-disks]. Os discos gerenciados garantem que os discos para VMs dentro de um conjunto de disponibilidade são isolados para evitar pontos únicos de falha.
 
 > [!NOTE]
 > Atualmente o modelo do Resource Manager para esta arquitetura de referência não utiliza discos gerenciados. Estamos planejando atualizar o modelo para usar discos gerenciados.
 
-Use discos gerenciados Premium para todas as VMs do SQL Server e do SharePoint. Você pode usar o Standard Managed Disks para o servidor de nós principal, os controladores de domínio e o servidor de gerenciamento. 
+Use discos gerenciados Premium para todas as VMs do SQL Server e do SharePoint. Você pode usar o Standard Managed Disks para o servidor de nós principal, os controladores de domínio e o servidor de gerenciamento.
 
 ### <a name="sharepoint-server-recommendations"></a>Recomendações do SharePoint Server
 
@@ -113,10 +115,9 @@ Antes de configurar o farm do SharePoint, verifique se você tem uma conta de se
 
 Para atender ao requisito de suporte para a taxa de transferência de disco de 200 MB por segundo mínimo, certifique-se de planejar a arquitetura de pesquisa. Consulte [Planejar a arquitetura de pesquisa no SharePoint Server 2013][sharepoint-search]. Siga também as diretrizes em [Melhores práticas para rastreamento no SharePoint Server 2016][sharepoint-crawling].
 
-Além disso, armazene os dados do componente de pesquisa em um volume de armazenamento separado ou partição com alto desempenho. Para reduzir a carga e melhorar a taxa de transferência, configure as contas de usuário de cache do objeto, que são necessárias nesta arquitetura. Dividir os arquivos do sistema operacional Windows Server, arquivos de programa do SharePoint Server 2016 e logs de diagnóstico em três partições ou volumes de armazenamento separados com desempenho normal. 
+Além disso, armazene os dados do componente de pesquisa em um volume de armazenamento separado ou partição com alto desempenho. Para reduzir a carga e melhorar a taxa de transferência, configure as contas de usuário de cache do objeto, que são necessárias nesta arquitetura. Dividir os arquivos do sistema operacional Windows Server, arquivos de programa do SharePoint Server 2016 e logs de diagnóstico em três partições ou volumes de armazenamento separados com desempenho normal.
 
 Para obter mais informações sobre essas recomendações, consulte [Contas de serviço e administrativa da implantação inicial no SharePoint Server 2016][sharepoint-accounts].
-
 
 ### <a name="hybrid-workloads"></a>Cargas de trabalho híbridas
 
@@ -132,11 +133,11 @@ Também é recomendável adicionar um endereço IP de ouvinte ao cluster, que é
 
 Para saber os tamanhos de VM recomendados e outras recomendações de desempenho para o SQL Server em execução no Azure, consulte [Práticas recomendadas de desempenho para o SQL Server em máquinas virtuais do Azure][sql-performance]. Além disso, siga as recomendações em [Melhores práticas para o SQL Server em um farm do SharePoint Server 2016][sql-sharepoint-best-practices].
 
-É recomendável que o servidor de nós principais resida em um computador separado dos parceiros de replicação. O servidor permite que o servidor parceiro de replicação secundária em uma sessão de modo de alta segurança reconheça se deve iniciar um failover automático. Ao contrário dos dois parceiros, o servidor de nós principais não atende o banco de dados, mas em vez disso, oferece suporte a failover automático. 
+É recomendável que o servidor de nós principais resida em um computador separado dos parceiros de replicação. O servidor permite que o servidor parceiro de replicação secundária em uma sessão de modo de alta segurança reconheça se deve iniciar um failover automático. Ao contrário dos dois parceiros, o servidor de nós principais não atende o banco de dados, mas em vez disso, oferece suporte a failover automático.
 
 ## <a name="scalability-considerations"></a>Considerações sobre escalabilidade
 
-Para dimensionar os servidores existentes, basta alterar o tamanho da VM. 
+Para dimensionar os servidores existentes, basta alterar o tamanho da VM.
 
 Com o recurso [MinRoles][minroles] no SharePoint Server 2016, você pode expandir servidores com base na função do servidor e também remover servidores de uma função. Quando você adiciona servidores a uma função, você pode especificar qualquer uma das funções individuais ou uma das funções combinadas. Se você adicionar servidores para a função de pesquisa, no entanto, você deverá também reconfigurar a topologia de pesquisa usando o PowerShell. Você também pode converter funções usando MinRoles. Para obter mais informações, consulte [Gerenciamento de um farm de servidores MinRole no SharePoint Server 2016][sharepoint-minrole].
 
@@ -152,7 +153,7 @@ Para proteger-se contra uma falha regional, crie um farm de recuperação de des
 
 Para operar e manter servidores, farms de servidores e sites, siga as práticas recomendadas para operações do SharePoint. Para obter mais informações, consulte [Operações para o Sharepoint Server 2016][sharepoint-ops].
 
-As tarefas a serem considerados no gerenciamento do SQL Server em um ambiente do SharePoint podem ser diferentes daquelas que normalmente são consideradas para um aplicativo de banco de dados. Uma prática recomendada é fazer backup total de todos os bancos de dados SQL semanalmente com backups incrementais todas as noites. Faça um backup de logs de transações a cada 15 minutos. Outra prática é implementar as tarefas de manutenção do SQL Server nos bancos de dados ao mesmo tempo em que aquelas que são internas do SharePoint são desativadas. Para obter mais informações, consulte [Configuração e planejamento de capacidade de armazenamento e do SQL Server][sql-server-capacity-planning]. 
+As tarefas a serem considerados no gerenciamento do SQL Server em um ambiente do SharePoint podem ser diferentes daquelas que normalmente são consideradas para um aplicativo de banco de dados. Uma prática recomendada é fazer backup total de todos os bancos de dados SQL semanalmente com backups incrementais todas as noites. Faça um backup de logs de transações a cada 15 minutos. Outra prática é implementar as tarefas de manutenção do SQL Server nos bancos de dados ao mesmo tempo em que aquelas que são internas do SharePoint são desativadas. Para obter mais informações, consulte [Configuração e planejamento de capacidade de armazenamento e do SQL Server][sql-server-capacity-planning].
 
 ## <a name="security-considerations"></a>Considerações de segurança
 
@@ -175,7 +176,7 @@ A implantação cria os seguintes grupos de recursos em sua assinatura:
 - ra-onprem-sp2016-rg
 - ra-sp2016-network-rg
 
-Os arquivos de parâmetros de modelo se referem a esses nomes e, portanto, se você alterá-los, atualize os arquivos de parâmetros para que correspondam. 
+Os arquivos de parâmetros de modelo se referem a esses nomes e, portanto, se você alterá-los, atualize os arquivos de parâmetros para que correspondam.
 
 Os arquivos de parâmetro incluem uma senha embutida em código em vários locais. Altere esses valores antes de fazer a implantação.
 
@@ -183,7 +184,7 @@ Os arquivos de parâmetro incluem uma senha embutida em código em vários locai
 
 [!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 
-### <a name="deploy-the-solution"></a>Implantar a solução 
+### <a name="deployment-steps"></a>Etapas de implantação.
 
 1. Execute o comando a seguir para implantar uma rede local simulada.
 
@@ -203,12 +204,13 @@ Os arquivos de parâmetro incluem uma senha embutida em código em vários locai
     azbb -s <subscription_id> -g ra-onprem-sp2016-rg -l <location> -p azure1.json --deploy
     ```
 
-4. Execute o comando a seguir para criar o cluster de failover e o grupo de disponibilidade. 
+4. Execute o comando a seguir para criar o cluster de failover e o grupo de disponibilidade.
 
     ```bash
     azbb -s <subscription_id> -g ra-onprem-sp2016-rg -l <location> -p azure2-cluster.json --deploy
+    ```
 
-5. Run the following command to deploy the remaining VMs.
+5. Execute o seguinte comando para implantar as VMs restantes.
 
     ```bash
     azbb -s <subscription_id> -g ra-onprem-sp2016-rg -l <location> -p azure3.json --deploy
@@ -230,7 +232,7 @@ Neste ponto, verifique se você pode fazer uma conexão de TCP de front-end da W
 
 O resultado deve ser semelhante ao seguinte:
 
-```powershell
+```console
 ComputerName     : 10.0.3.100
 RemoteAddress    : 10.0.3.100
 RemotePort       : 1433
@@ -239,7 +241,7 @@ SourceAddress    : 10.0.0.132
 TcpTestSucceeded : True
 ```
 
-Se ele falhar, use o Portal do Azure para reiniciar a VM denominada `ra-sp-sql-vm2`. Após a reinicialização da VM, execute o comando `Test-NetConnection` novamente. Você precisará aguardar cerca de um minuto após a VM ser reiniciada para que a conexão seja bem-sucedida. 
+Se ele falhar, use o Portal do Azure para reiniciar a VM denominada `ra-sp-sql-vm2`. Após a reinicialização da VM, execute o comando `Test-NetConnection` novamente. Você precisará aguardar cerca de um minuto após a VM ser reiniciada para que a conexão seja bem-sucedida.
 
 Agora conclua a implantação da seguinte maneira.
 
@@ -265,13 +267,13 @@ Agora conclua a implantação da seguinte maneira.
 
 1. No [portal do Azure][azure-portal], navegue até o grupo de recursos `ra-onprem-sp2016-rg`.
 
-2. Na lista de recursos, selecione o recurso de VM chamado `ra-onpr-u-vm1`. 
+2. Na lista de recursos, selecione o recurso de VM chamado `ra-onpr-u-vm1`.
 
 3. Conecte-se à VM, conforme descrito em [Conectar-se à máquina virtual][connect-to-vm]. O nome de usuário é `\onpremuser`.
 
-5.  Quando a conexão remota com a máquina virtual for estabelecida, abra um navegador na VM e navegue até `http://portal.contoso.local`.
+4. Quando a conexão remota com a máquina virtual for estabelecida, abra um navegador na VM e navegue até `http://portal.contoso.local`.
 
-6.  Na caixa **Segurança do Windows**, faça logon no portal do SharePoint usando `contoso.local\testuser` para o nome de usuário.
+5. Na caixa **Segurança do Windows**, faça logon no portal do SharePoint usando `contoso.local\testuser` para o nome de usuário.
 
 Esse logon faz um túnel do domínio Fabrikam.com usado pela rede local até o domínio contoso.local usado pelo portal do SharePoint. Quando o site do SharePoint abre, você verá o site de demonstração de raiz.
 
