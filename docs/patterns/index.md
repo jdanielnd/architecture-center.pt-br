@@ -2,19 +2,19 @@
 title: Padrões de design na nuvem
 description: Padrões de design de nuvem para o Microsoft Azure
 keywords: Azure
-ms.date: 06/23/2017
-ms.openlocfilehash: 308e9bc784fc791d04adcecaae64bf258edeb20b
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.date: 12/10/2018
+ms.openlocfilehash: 26ee59ef15fc63bb5e823cd85f610cd9ad01177a
+ms.sourcegitcommit: 9a15af3a25f25b8730968d32cbb006434b183e18
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43326190"
+ms.lasthandoff: 12/11/2018
+ms.locfileid: "53234043"
 ---
 # <a name="cloud-design-patterns"></a>Padrões de design na nuvem
 
 Esses padrões de design são úteis para a criação de aplicativos confiáveis, dimensionáveis e seguros na nuvem.
 
-Cada padrão descreve o problema ao qual o padrão se destina, as considerações para a aplicação do padrão e um exemplo com base no Microsoft Azure. A maioria dos padrões inclui exemplos de código ou trechos de código que mostram como implementar o padrão no Azure. No entanto, a maioria dos padrões é relevante para qualquer sistema distribuído, se hospedados no Azure ou em outras plataformas de nuvem.
+Cada padrão descreve o problema ao qual o padrão se destina, as considerações para a aplicação do padrão e um exemplo com base no Microsoft Azure. A maioria dos padrões inclui exemplos de código ou snippets de código que mostram como implementar o padrão no Azure. No entanto, a maioria dos padrões é relevante para qualquer sistema distribuído, se hospedados no Azure ou em outras plataformas de nuvem.
 
 ## <a name="challenges-in-cloud-development"></a>Desafios de desenvolvimento em nuvem
 
@@ -104,6 +104,7 @@ Cada padrão descreve o problema ao qual o padrão se destina, as consideraçõe
 |              [Exibição Materializada](./materialized-view.md)              |                                        Gere exibições pré-preenchidas nos dados em um ou mais armazenamentos de dados quando os dados não estiverem formatados como o ideal para as operações de consulta necessárias.                                        |
 |              [Pipes e Filtros](./pipes-and-filters.md)              |                                                        Dividir uma tarefa que executa processamento complexo em uma série de elementos separados que podem ser reutilizados.                                                        |
 |                 [Fila de Prioridade](./priority-queue.md)                 |                                 Priorize as solicitações enviadas a serviços para que as solicitações com uma prioridade mais alta sejam recebidas e processadas mais rapidamente do que aquelas com uma prioridade mais baixa.                                  |
+| [Publicador/Assinante](./publisher-subscriber.md) | Permite a um aplicativo anunciar eventos para vários consumidores de seu interesse assincronamente, sem acoplar os remetentes aos destinatários. |
 |      [Nivelamento de Carga Baseado em Fila](./queue-based-load-leveling.md)      |                                               Use uma fila que funcione como um buffer entre uma tarefa e um serviço que ela invoca para simplificar cargas pesadas intermitentes.                                               |
 |                          [Tentar Novamente](./retry.md)                          |               Permita que um aplicativo trate falhas previstas e temporárias quando tentar se conectar a um serviço ou recurso de rede ao repetir de forma transparente uma operação que falhou anteriormente.                |
 |     [Supervisor de Agente do Agendador](./scheduler-agent-supervisor.md)     |                                                              Coordene um conjunto de ações em um conjunto distribuído de serviços e outros recursos remotos.                                                               |
