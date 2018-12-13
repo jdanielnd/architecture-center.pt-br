@@ -4,21 +4,22 @@ description: Arquiteturas de referência, plantas e diretrizes de implementaçã
 layout: LandingPage
 ms.topic: landing-page
 ms.date: 08/30/2018
-ms.openlocfilehash: 5b117ce308fcc47cae68bb83166ada71b75f6ce7
-ms.sourcegitcommit: 7d21aec9d9de0004ac777c1d1e364f53aac2350d
+ms.openlocfilehash: efac05ff95431f9551c6fb76939dbb91cfa01d1d
+ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/09/2018
-ms.locfileid: "53120762"
+ms.lasthandoff: 12/12/2018
+ms.locfileid: "53307003"
 ---
 # <a name="azure-reference-architectures"></a>Arquiteturas de referência do Azure
 
 Nossas arquiteturas de referência são organizadas por cenário, com arquiteturas relacionadas agrupadas juntos. Cada arquitetura inclui as práticas recomendadas, junto com as considerações sobre escalabilidade, disponibilidade, capacidade de gerenciamento e segurança. Mais também incluem uma solução implantável.
 
-Direcionar para: [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | [Sem servidor](#serverless-applications) | [Redes virtuais](#virtual-networks)  |  [Cargas de trabalho de VM](#vm-workloads) | [SAP](#sap) | [Aplicativos Web](#web-applications) | [Active Directory](#extend-on-premises-active-directory-to-azure)
+Ir para: [IA](#ai-and-machine-learning) | [Big data](#big-data-solutions) | [Sem servidor](#serverless-applications) | [Redes virtuais](#virtual-networks) | [Cargas de trabalho de VM](#vm-workloads) | [SAP](#sap) | [Aplicativos Web](#web-applications) | [Active Directory](#extend-on-premises-active-directory-to-azure)
 
 ## <a name="ai-and-machine-learning"></a>IA e machine learning
 
+<!-- markdownlint-disable MD033 -->
 <ul  class="panelContent cardsF">
 <!-- Batch scoring for deep learning models -->
 <li style="display: flex; flex-direction: column;">
@@ -54,6 +55,26 @@ Direcionar para: [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions
                     <div class="cardText">
                         <h3>Pontuação em tempo real dos modelos do Python</h3>
                         <p>Implante os modelos em Python como serviços da web para fazer previsões em tempo real, usando os modelos regulares do Python ou os modelos de aprendizado profundo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</li>
+<!-- Batch scoring for R models -->
+<li style="display: flex; flex-direction: column;">
+    <a href="./ai/realtime-scoring-r.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
+            <div class="cardPadding" style="display: flex;">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="../_images/icons/logo-r.svg" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>Pontuação em tempo real dos modelos do Machine Learning em R</h3>
+                        <p>Implemente um serviço de previsão em tempo real em R usando o Microsoft Machine Learning Server em execução no Serviço de Kubernetes do Azure (AKS).</p>
                     </div>
                 </div>
             </div>

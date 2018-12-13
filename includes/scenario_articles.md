@@ -110,11 +110,11 @@
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="./apps/media/architecture-devops-dotnet-webapp.png" height="140px" />
+                            <img src="./apps/media/architecture-devops-dotnet-webapp.svg" height="140px" />
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Pipeline de CI/CD com o Azure DevOps</h3>
+                        <h3>Como criar um pipeline de CI/CD usando o Azure DevOps</h3>
                         <p>Crie e libere um aplicativo .NET para aplicativos Web do Azure usando o Azure DevOps.</p>
                     </div>
                 </div>
@@ -430,7 +430,7 @@
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Proteger aplicativo Web do Windows para setores regulamentados</h3>
+                        <h3>Como criar aplicativos Web seguros com máquinas virtuais do Windows no Azure</h3>
                         <p>Crie um aplicativo Web seguro e de várias camadas com o Windows Server no Azure usando conjuntos de dimensionamento, o Gateway de Aplicativo e balanceadores de carga.</p>
                     </div>
                 </div>

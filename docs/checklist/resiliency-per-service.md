@@ -1,15 +1,16 @@
 ---
 title: Lista de verificação de resiliência para serviços do Azure
+titleSuffix: Azure Design Review Framework
 description: Lista de verificação que fornece orientação de resiliência para vários serviços do Azure.
 author: petertaylor9999
-ms.date: 03/02/2018
+ms.date: 11/26/2018
 ms.custom: resiliency, checklist
-ms.openlocfilehash: 53a37595bd6e70fa3a43e9a72b2ae47d2225009f
-ms.sourcegitcommit: 1b5411f07d74f0a0680b33c266227d24014ba4d1
+ms.openlocfilehash: 55f17d3b24af4be4f313c66923f4153296041545
+ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/26/2018
-ms.locfileid: "52305920"
+ms.lasthandoff: 12/12/2018
+ms.locfileid: "53307173"
 ---
 # <a name="resiliency-checklist-for-specific-azure-services"></a>Lista de verificação de resiliência para serviços específicos do Azure
 
@@ -19,15 +20,15 @@ Resiliência é a capacidade de um sistema de se recuperar de falhas e continuar
 
 **Use a camada Standard ou Premium.** Essas camadas dão suporte a slots de preparo e backups automáticos. Para obter mais informações, consulte [Visão geral aprofundada de planos do Serviço de Aplicativo do Azure](/azure/app-service/azure-web-sites-web-hosting-plans-in-depth-overview/)
 
-**Evite expandir ou reduzir verticalmente.** Em vez disso, selecione uma camada e o tamanho de instância que atendem aos seus requisitos de desempenho sob carga típica e, em seguida, [aumente](/azure/app-service-web/web-sites-scale/) as instâncias para manipular as alterações no volume de tráfego. Expandir e reduzir verticalmente pode disparar uma reinicialização do aplicativo.  
+**Evite expandir ou reduzir verticalmente.** Em vez disso, selecione uma camada e o tamanho de instância que atendem aos seus requisitos de desempenho sob carga típica e, em seguida, [aumente](/azure/app-service-web/web-sites-scale/) as instâncias para manipular as alterações no volume de tráfego. Expandir e reduzir verticalmente pode disparar uma reinicialização do aplicativo.
 
 **Armazene a configuração como configurações de aplicativo.** Use as configurações de aplicativo para manter definições de configuração como configurações de aplicativo. Defina as configurações em seus modelos do Resource Manager ou usando o PowerShell, para que você possa aplicá-las como parte de um processo automatizado de implantação/atualização, que é mais confiável. Para obter mais informações, consulte [Configurar aplicativos Web no Serviço de Aplicativo do Azure](/azure/app-service-web/web-sites-configure/).
 
-**Crie Planos do Serviço de Aplicativo separados para produção e teste.** Não use slots em sua implantação de produção para teste.  Todos os aplicativos dentro do mesmo Plano do Serviço de Aplicativo compartilham as mesmas instâncias de VM. Se você colocar a produção e implantações de teste no mesmo plano, isso poderá afetar negativamente a implantação de produção. Por exemplo, testes de carga podem prejudicar o site de produção dinâmica. Colocando as implantações de teste em um plano separado, você as isola da versão de produção.  
+**Crie Planos do Serviço de Aplicativo separados para produção e teste.** Não use slots em sua implantação de produção para teste.  Todos os aplicativos dentro do mesmo Plano do Serviço de Aplicativo compartilham as mesmas instâncias de VM. Se você colocar a produção e implantações de teste no mesmo plano, isso poderá afetar negativamente a implantação de produção. Por exemplo, testes de carga podem prejudicar o site de produção dinâmica. Colocando as implantações de teste em um plano separado, você as isola da versão de produção.
 
 **Separe aplicativos Web de APIs da Web.** Se sua solução tem um front-end da Web e uma API da Web, considere a possibilidade de decompô-los em aplicativos de Serviço de Aplicativo separados. Esse design torna mais fácil para decompor a solução pela carga de trabalho. Você pode executar o aplicativo Web e a API em Planos do Serviço de Aplicativo separados, de modo que eles possam ser dimensionados de forma independente. Se você não precisar desse nível de escalabilidade inicialmente, poderá implantar os aplicativos no mesmo plano e movê-los para planos separados posteriormente, se necessário.
 
-**Evite usar o recurso de Serviço de Aplicativo de backup para fazer backup de Bancos de Dados SQL do Azure.** Em vez disso, use os [Backups automatizados do Banco de Dados SQL][sql-backup]. O backup do Serviço de Aplicativo exporta o banco de dados para um arquivo .bacpac do SQL, que custa DTUs.  
+**Evite usar o recurso de Serviço de Aplicativo de backup para fazer backup de Bancos de Dados SQL do Azure.** Em vez disso, use os [Backups automatizados do Banco de Dados SQL][sql-backup]. O backup do Serviço de Aplicativo exporta o banco de dados para um arquivo .bacpac do SQL, que custa DTUs.
 
 **Implante em um slot de preparo.** Crie um slot de implantação para preparo. Implante atualizações de aplicativo para o slot de preparo e verifique a implantação antes de trocá-la para produção. Isso reduz a chance de uma atualização inválida em produção. Isso também garante que todas as instâncias sejam aquecidas antes de serem trocadas para produção. Muitos aplicativos têm um tempo significativo de aquecimento e de resfriamento. Para obter mais informações, consulte [Configurar ambientes de preparo para aplicativos Web no Serviço de Aplicativo do Azure](/azure/app-service-web/web-sites-staged-publishing/).
 
@@ -57,7 +58,7 @@ Resiliência é a capacidade de um sistema de se recuperar de falhas e continuar
 
 **Tratar exceções.** . Um consumidor de evento normalmente processa um lote de mensagens em um loop. Você deve tratar exceções neste loop de processamento para evitar a perda de um lote inteiro de mensagens se uma única mensagem causar uma exceção.
 
-**Use uma fila de mensagens mortas.** Se o processamento de uma mensagem resultar em uma falha não transitória, coloque a mensagem sobre uma fila de mensagens mortas, para que você possa acompanhar o status. Dependendo do cenário, você pode tentar novamente a mensagem mais tarde, aplicar uma transação de compensação ou executar alguma outra ação. Observe que os Hubs de Eventos não têm nenhuma funcionalidade interna de fila de mensagens mortas. Você pode usar o Armazenamento de Filas do Azure ou o Barramento de Serviço para implementar uma fila de mensagens mortas ou usar o Azure Functions ou outro mecanismo de eventos.  
+**Use uma fila de mensagens mortas.** Se o processamento de uma mensagem resultar em uma falha não transitória, coloque a mensagem sobre uma fila de mensagens mortas, para que você possa acompanhar o status. Dependendo do cenário, você pode tentar novamente a mensagem mais tarde, aplicar uma transação de compensação ou executar alguma outra ação. Observe que os Hubs de Eventos não têm nenhuma funcionalidade interna de fila de mensagens mortas. Você pode usar o Armazenamento de Filas do Azure ou o Barramento de Serviço para implementar uma fila de mensagens mortas ou usar o Azure Functions ou outro mecanismo de eventos.
 
 **Implementar recuperação de desastres efetuando failover para um namespace secundário de Hubs de Eventos.** Para mais informações consulte [Recuperação de desastre em área geográfica dos Hubs de Eventos](/azure/event-hubs/event-hubs-geo-dr).
 
@@ -67,7 +68,7 @@ Resiliência é a capacidade de um sistema de se recuperar de falhas e continuar
 
 **Configurar a persistência de dados.** A persistência do Redis permite persistir os dados armazenados no Redis. Você também pode tirar instantâneos e fazer backup dos dados, que podem ser carregados em caso de falha de hardware. Para obter mais informações, consulte [Como configurar a persistência de dados para um Cache Redis do Azure Premium](/azure/redis-cache/cache-how-to-premium-persistence)
 
-Caso esteja usando o Cache Redis como um cache de dados temporário e não como um armazenamento persistente, essas recomendações podem não ser aplicadas. 
+Caso esteja usando o Cache Redis como um cache de dados temporário e não como um armazenamento persistente, essas recomendações podem não ser aplicadas.
 
 ## <a name="search"></a>Search
 
@@ -75,8 +76,9 @@ Caso esteja usando o Cache Redis como um cache de dados temporário e não como 
 
 **Configure indexadores para implantações de várias regiões.** Se você tiver uma implantação de várias regiões, considere as opções para a continuidade na indexação.
 
-  * Se a fonte de dados é com replicação geográfica, você geralmente deve apontar cada indexador de cada serviço do Azure Search regional para a respectiva réplica de fonte de dados local. No entanto, essa abordagem não é recomendada para grandes conjuntos de dados armazenados no Banco de Dados SQL do Azure. O motivo é que o Azure Search não pode executar a indexação incremental de réplicas de Banco de Dados SQL secundárias, somente de réplicas primárias. Em vez disso, aponte todos os indexadores para a réplica primária. Após um failover, aponte os indexadores do Azure Search para a nova réplica primária.  
-  * Se a fonte de dados não é com replicação geográfica, aponte vários indexadores na fonte de dados, de forma que os serviços do Azure Search façam a indexação da fonte de dados de modo contínuo e independente. Para obter mais informações, consulte [Considerações de desempenho e otimização do Azure Search][search-optimization].
+- Se a fonte de dados é com replicação geográfica, você geralmente deve apontar cada indexador de cada serviço do Azure Search regional para a respectiva réplica de fonte de dados local. No entanto, essa abordagem não é recomendada para grandes conjuntos de dados armazenados no Banco de Dados SQL do Azure. O motivo é que o Azure Search não pode executar a indexação incremental de réplicas de Banco de Dados SQL secundárias, somente de réplicas primárias. Em vez disso, aponte todos os indexadores para a réplica primária. Após um failover, aponte os indexadores do Azure Search para a nova réplica primária.
+
+- Se a fonte de dados não é com replicação geográfica, aponte vários indexadores na fonte de dados, de forma que os serviços do Azure Search façam a indexação da fonte de dados de modo contínuo e independente. Para obter mais informações, consulte [Considerações de desempenho e otimização do Azure Search][search-optimization].
 
 ## <a name="service-bus"></a>Barramento de Serviço
 
@@ -92,14 +94,13 @@ Caso esteja usando o Cache Redis como um cache de dados temporário e não como 
 
 **Usar a recuperação de desastre em área geográfica**. A recuperação de desastre em área geográfica garante que o processamento de dados continue a operar em uma região ou datacenter diferente, se uma região inteira do Azure ou o datacenter se tornar indisponível devido a um desastre. Para mais informações consulte [Recuperação de desastre em área geográfica do Barramento de Serviço do Azure](/azure/service-bus-messaging/service-bus-geo-dr).
 
-
 ## <a name="storage"></a>Armazenamento
 
 **Para dados de aplicativo, use RA-GRS (armazenamento com redundância geográfica com acesso de leitura).** O armazenamento de RA-GRS replica os dados para uma região secundária e fornece acesso somente leitura da região secundária. Se há uma interrupção de armazenamento na região primária, o aplicativo pode ler os dados da região secundária. Para obter mais informações, consulte [Replicação do Armazenamento do Azure](/azure/storage/storage-redundancy/).
 
 **Para discos de VM, use os Managed Disks.** Os [Managed Disks][managed-disks] fornecem melhor confiabilidade para as VMs em um conjunto de disponibilidade porque os discos ficam suficientemente isolados entre si para evitar pontos únicos de falha. Além disso, os Managed Disks não estão sujeitos a limites de IOPS de VHDs criados em uma conta de armazenamento. Para saber mais, consulte [Gerenciar a disponibilidade de máquinas virtuais Windows no Azure][vm-manage-availability].
 
-**Para o Armazenamento de Filas, crie uma fila de backup em outra região.** Para o armazenamento de fila, a utilidade de uma réplica somente leitura é limitada, porque não é possível enfileirar itens nem removê-los da fila. Em vez disso, crie uma fila de backup em uma conta de armazenamento em outra região. Se houver uma interrupção de armazenamento, o aplicativo poderá usar a fila de backup até que a região primária fique disponível novamente. Dessa forma, o aplicativo ainda poderá processar novas solicitações.  
+**Para o Armazenamento de Filas, crie uma fila de backup em outra região.** Para o armazenamento de fila, a utilidade de uma réplica somente leitura é limitada, porque não é possível enfileirar itens nem removê-los da fila. Em vez disso, crie uma fila de backup em uma conta de armazenamento em outra região. Se houver uma interrupção de armazenamento, o aplicativo poderá usar a fila de backup até que a região primária fique disponível novamente. Dessa forma, o aplicativo ainda poderá processar novas solicitações.
 
 ## <a name="sql-database"></a>Banco de dados SQL
 
@@ -155,7 +156,7 @@ Caso esteja usando o Cache Redis como um cache de dados temporário e não como 
 
 ## <a name="virtual-network"></a>Rede Virtual
 
-**Para incluir endereços IP públicos na lista de permissões ou bloqueá-los, adicione um NSG à sub-rede.** Bloqueie o acesso de usuários mal-intencionados ou permita o acesso somente de usuários que têm o privilégio de acessar o aplicativo.  
+**Para incluir endereços IP públicos na lista de permissões ou bloqueá-los, adicione um NSG à sub-rede.** Bloqueie o acesso de usuários mal-intencionados ou permita o acesso somente de usuários que têm o privilégio de acessar o aplicativo.
 
 **Crie uma investigação de integridade personalizada.** As investigações de integridade do balanceador de carga podem testar HTTP ou TCP. Se uma VM for executada em um servidor HTTP, a investigação HTTP será um melhor indicador do status de integridade do que uma investigação TCP. Para uma investigação HTTP, use um ponto de extremidade personalizado que relata a integridade geral do aplicativo, incluindo todas as dependências críticas. Para obter mais informações, veja [Visão geral do Azure Load Balancer](/azure/load-balancer/load-balancer-overview/).
 
