@@ -1,47 +1,44 @@
 ---
 title: Conectar uma rede local ao Azure usando VPN
-description: Como implementar uma arquitetura de rede site a site segura que abranja uma rede virtual do Azure e uma rede local conectada usando uma VPN.
+titleSuffix: Azure Reference Architectures
+description: Implementar uma arquitetura de rede site a site segura que abranja uma rede virtual do Azure e uma rede local conectada usando uma VPN.
 author: RohitSharma-pnp
 ms.date: 10/22/2018
-pnp.series.title: Connect an on-premises network to Azure
-pnp.series.next: expressroute
-pnp.series.prev: ./index
-cardTitle: VPN
-ms.openlocfilehash: a494ff952dd6c8be3b38c2ca7f6740a44b5b30e1
-ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
+ms.openlocfilehash: a1bb2e250cb261e1a56abfb58b099fd078c068e5
+ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/26/2018
-ms.locfileid: "52295660"
+ms.lasthandoff: 12/08/2018
+ms.locfileid: "53120434"
 ---
 # <a name="connect-an-on-premises-network-to-azure-using-a-vpn-gateway"></a>Conectar uma rede local ao Azure usando um Gateway de VPN
 
-Essa arquitetura de referência mostra como estender uma rede local para o Azure, usando uma VPN (rede virtual privada) site a site. O tráfego flui entre a rede local e uma VNet (Rede Virtual) do Azure por meio de um túnel de VPN IPsec. [**Implante essa solução**.](#deploy-the-solution)
+Essa arquitetura de referência mostra como estender uma rede local para o Azure, usando uma VPN (rede virtual privada) site a site. O tráfego flui entre a rede local e uma VNet (Rede Virtual) do Azure por meio de um túnel de VPN IPsec. [**Implantar esta solução**](#deploy-the-solution).
 
-![[0]][0]
+![Rede híbrida que abrange as infraestruturas locais e do Azure](./images/vpn.png)
 
 *Baixe um [Arquivo Visio][visio-download] dessa arquitetura.*
 
-## <a name="architecture"></a>Arquitetura 
+## <a name="architecture"></a>Arquitetura
 
 A arquitetura consiste nos componentes a seguir.
 
-* **Rede local**. Uma rede de área local privada em execução dentro de uma organização.
+- **Rede local**. Uma rede de área local privada em execução dentro de uma organização.
 
-* **Dispositivo de VPN**. Um dispositivo ou serviço que fornece conectividade externa com a rede local. O dispositivo de VPN pode ser um dispositivo de hardware ou uma solução de software, como o RRAS (Serviço de Roteamento e Acesso Remoto) do Windows Server 2012. Para obter uma lista de dispositivos de VPN com suporte e informações de como configurá-los para se conectar a um Gateway de VPN do Azure, consulte as instruções para o dispositivo selecionado no artigo [Sobre dispositivos VPN para conexões do Gateway de VPN site a site][vpn-appliance].
+- **Dispositivo de VPN**. Um dispositivo ou serviço que fornece conectividade externa com a rede local. O dispositivo de VPN pode ser um dispositivo de hardware ou uma solução de software, como o RRAS (Serviço de Roteamento e Acesso Remoto) do Windows Server 2012. Para obter uma lista de dispositivos de VPN com suporte e informações de como configurá-los para se conectar a um Gateway de VPN do Azure, consulte as instruções para o dispositivo selecionado no artigo [Sobre dispositivos VPN para conexões do Gateway de VPN site a site][vpn-appliance].
 
-* **Rede virtual (VNet)**. O aplicativo de nuvem e os componentes do Gateway de VPN do Azure residem na mesma [VNet][azure-virtual-network].
+- **Rede virtual (VNet)**. O aplicativo de nuvem e os componentes do Gateway de VPN do Azure residem na mesma [VNet][azure-virtual-network].
 
-* **Gateway de VPN do Azure**. O serviço do [Gateway de VPN][azure-vpn-gateway] permite conectar a VNet à rede local por meio de um dispositivo de VPN. Para obter mais informações, consulte [Conectar uma rede local a uma rede virtual do Microsoft Azure][connect-to-an-Azure-vnet]. O Gateway de VPN inclui os seguintes elementos:
-  
-  * **Gateway de rede virtual**. Um recurso que fornece um dispositivo de VPN virtual para a VNet. Ele é responsável por rotear o tráfego da rede local para a VNet.
-  * **Gateway de rede local**. Uma abstração do dispositivo de VPN local. O tráfego de rede do aplicativo de nuvem para a rede local é roteado por esse gateway.
-  * **Conexão**. A conexão tem propriedades que especificam o tipo de conexão (IPsec) e a chave compartilhada com o dispositivo de VPN local para criptografar o tráfego.
-  * **Gateway de sub-rede**. O gateway de rede virtual é mantido em sua própria sub-rede, que está sujeita a vários requisitos, descritos na seção Recomendações abaixo.
+- **Gateway de VPN do Azure**. O serviço do [Gateway de VPN][azure-vpn-gateway] permite conectar a VNet à rede local por meio de um dispositivo de VPN. Para obter mais informações, consulte [Conectar uma rede local a uma rede virtual do Microsoft Azure][connect-to-an-Azure-vnet]. O Gateway de VPN inclui os seguintes elementos:
 
-* **Aplicativo de nuvem**. O aplicativo hospedado no Azure. Ele pode incluir várias camadas, com várias sub-redes conectadas por meio de balanceadores de carga do Azure. Para obter mais informações sobre a infraestrutura do aplicativo, consulte [Execução de cargas de trabalho de VM do Windows][windows-vm-ra] e [Execução de cargas de trabalho de VM do Linux][linux-vm-ra].
+  - **Gateway de rede virtual**. Um recurso que fornece um dispositivo de VPN virtual para a VNet. Ele é responsável por rotear o tráfego da rede local para a VNet.
+  - **Gateway de rede local**. Uma abstração do dispositivo de VPN local. O tráfego de rede do aplicativo de nuvem para a rede local é roteado por esse gateway.
+  - **Conexão**. A conexão tem propriedades que especificam o tipo de conexão (IPsec) e a chave compartilhada com o dispositivo de VPN local para criptografar o tráfego.
+  - **Gateway de sub-rede**. O gateway de rede virtual é mantido em sua própria sub-rede, que está sujeita a vários requisitos, descritos na seção Recomendações abaixo.
 
-* **Balanceador Interno de carga**. O tráfego de rede do Gateway de VPN é roteado para o aplicativo de nuvem por meio de um balanceador de carga interno. O balanceador de carga está localizado na sub-rede de front-end do aplicativo.
+- **Aplicativo de nuvem**. O aplicativo hospedado no Azure. Ele pode incluir várias camadas, com várias sub-redes conectadas por meio de balanceadores de carga do Azure. Para obter mais informações sobre a infraestrutura do aplicativo, consulte [Execução de cargas de trabalho de VM do Windows][windows-vm-ra] e [Execução de cargas de trabalho de VM do Linux][linux-vm-ra].
+
+- **Balanceador Interno de carga**. O tráfego de rede do Gateway de VPN é roteado para o aplicativo de nuvem por meio de um balanceador de carga interno. O balanceador de carga está localizado na sub-rede de front-end do aplicativo.
 
 ## <a name="recommendations"></a>Recomendações
 
@@ -56,12 +53,11 @@ Crie uma sub-rede denominada *GatewaySubnet*, com um intervalo de endereços de 
 1. Defina os bits variáveis no espaço de endereço da VNet como 1, até os bits que estão sendo usados pela sub-rede do gateway e, em seguida, configure os bits restantes como 0.
 2. Converta os bits resultantes em decimais e expresse-os como um espaço de endereço com o comprimento do prefixo definido para o tamanho da sub-rede do gateway.
 
-Por exemplo, para uma VNet com um intervalo de endereços IP igual a 10.20.0.0/16, a aplicação da etapa nº 1 acima transforma-o em 10.20.0b11111111.0b11100000.  Convertê-lo em decimal e expressá-lo como um espaço de endereço produz 10.20.255.224/27. 
+Por exemplo, para uma VNet com um intervalo de endereços IP igual a 10.20.0.0/16, a aplicação da etapa nº 1 acima transforma-o em 10.20.0b11111111.0b11100000.  Convertê-lo em decimal e expressá-lo como um espaço de endereço produz 10.20.255.224/27.
 
 > [!WARNING]
 > Não implante nenhuma VM na sub-rede do gateway. Além disso, não atribua um NSG a essa sub-rede, pois faria com que o gateway parasse de funcionar.
-> 
-> 
+>
 
 ### <a name="virtual-network-gateway"></a>Gateway de rede virtual
 
@@ -77,15 +73,13 @@ Para obter uma lista de dispositivos de VPN com suporte, consulte [Sobre disposi
 
 > [!NOTE]
 > Depois que o gateway for criado, você não poderá mais alterar o tipo de gateway sem excluir e recriar o gateway.
-> 
-> 
+>
 
 Selecione a SKU do Gateway de VPN do Azure que melhor corresponde aos seus requisitos de produtividade. Para obter mais informações, confira [SKUs do gateway][azure-gateway-skus]
 
 > [!NOTE]
 > A SKU básica não é compatível com o Azure ExpressRoute. Você poderá [alterar a SKU][changing-SKUs] depois que o gateway for criado.
-> 
-> 
+>
 
 Você é cobrado com base no período de tempo em que o gateway é provisionado e fica disponível. Consulte [Preços do Gateway de VPN][azure-gateway-charges].
 
@@ -103,9 +97,9 @@ Abra todas as portas exigidas pelo aplicativo de nuvem na rede local.
 
 Teste a conexão para verificar se:
 
-* O dispositivo de VPN local roteia corretamente o tráfego para o aplicativo de nuvem por meio do Gateway de VPN do Azure.
-* A VNet roteia corretamente o tráfego de volta para a rede local.
-* O tráfego proibido em ambas as direções é bloqueado corretamente.
+- O dispositivo de VPN local roteia corretamente o tráfego para o aplicativo de nuvem por meio do Gateway de VPN do Azure.
+- A VNet roteia corretamente o tráfego de volta para a rede local.
+- O tráfego proibido em ambas as direções é bloqueado corretamente.
 
 ## <a name="scalability-considerations"></a>Considerações sobre escalabilidade
 
@@ -123,7 +117,7 @@ Se você precisa garantir que a rede local permaneça disponível para o Gateway
 
 Se sua organização tiver vários sites locais, crie [conexões multisites][vpn-gateway-multi-site] para uma ou mais VNets do Azure. Essa abordagem requer o roteamento dinâmico (baseado em rota), portanto, verifique se o Gateway de VPN local dá suporte a esse recurso.
 
-Para obter detalhes sobre os contratos de nível de serviço, consulte [SLA para Gateway de VPN][sla-for-vpn-gateway]. 
+Para obter detalhes sobre os contratos de nível de serviço, consulte [SLA para Gateway de VPN][sla-for-vpn-gateway].
 
 ## <a name="manageability-considerations"></a>Considerações sobre capacidade de gerenciamento
 
@@ -133,7 +127,7 @@ Use [diagnóstico do Gateway de VPN do Azure][gateway-diagnostic-logs] para capt
 
 Monitore os logs operacionais do Gateway de VPN do Azure usando os logs de auditoria disponíveis no portal do Azure. Logs separados estão disponíveis para o gateway de rede local, o gateway de rede do Azure e a conexão. Essas informações podem ser usadas para acompanhar as alterações feitas no gateway e poderão ser úteis se um gateway que estava em funcionamento parar de funcionar por alguma razão.
 
-![[2]][2]
+![Logs de auditoria no portal do Azure](../_images/guidance-hybrid-network-vpn/audit-logs.png)
 
 Monitore a conectividade e acompanhe os eventos de falha de conectividade. Você pode usar um pacote de monitoramento, como o [Nagios][nagios] para capturar e relatar essas informações.
 
@@ -143,8 +137,7 @@ Gere uma chave compartilhada diferente para cada Gateway de VPN. Use uma chave c
 
 > [!NOTE]
 > No momento, não é possível usar o Azure Key Vault para pré-compartilhar chaves do Gateway de VPN do Azure.
-> 
-> 
+>
 
 Verifique se o dispositivo de VPN local usa um método de criptografia [compatível com o Gateway de VPN do Azure][vpn-appliance-ipsec]. Para roteamento baseado em políticas, o Gateway de VPN do Azure dá suporte aos algoritmos de criptografia 3DES, AES256 e AES128. Os gateways baseados em rota dão suporte para AES256 e 3DES.
 
@@ -154,11 +147,9 @@ Se o aplicativo na VNet envia dados para a Internet, considere [implementar um t
 
 > [!NOTE]
 > O túnel forçado pode afetar a conectividade para serviços do Azure (o serviço de armazenamento, por exemplo) e o Gerenciador de licenças do Windows.
-> 
-> 
+>
 
-
-## <a name="troubleshooting"></a>solução de problemas 
+## <a name="troubleshooting"></a>solução de problemas
 
 Para obter informações gerais de como solucionar erros comuns relacionados à VPN, consulte [Troubleshooting common VPN related error][troubleshooting-vpn-errors] (Solucionando erros comuns relacionados à VPN).
 
@@ -176,7 +167,7 @@ As recomendações a seguir são úteis para determinar se o dispositivo de VPN 
 
         - Inability to connect, possibly due to an incorrect IP address specified for the Azure VPN gateway in the RRAS VPN network interface configuration.
 
-        ```
+        ```console
         EventID            : 20111
         MachineName        : on-prem-vm
         Data               : {41, 3, 0, 0}
@@ -208,7 +199,7 @@ As recomendações a seguir são úteis para determinar se o dispositivo de VPN 
 
         - The wrong shared key being specified in the RRAS VPN network interface configuration.
 
-        ```
+        ```console
         EventID            : 20111
         MachineName        : on-prem-vm
         Data               : {233, 53, 0, 0}
@@ -232,15 +223,15 @@ As recomendações a seguir são úteis para determinar se o dispositivo de VPN 
         Container          :
         ```
 
-    Você também pode obter informações de log de eventos sobre tentativas de conexão por meio do serviço RRAS usando o seguinte comando do PowerShell: 
+    Você também pode obter informações de log de eventos sobre tentativas de conexão por meio do serviço RRAS usando o seguinte comando do PowerShell:
 
-    ```
+    ```powershell
     Get-EventLog -LogName Application -Source RasClient | Format-List -Property *
     ```
 
     Em caso de falha de conexão, esse log conterá erros semelhantes ao seguinte:
 
-    ```
+    ```console
     EventID            : 20227
     MachineName        : on-prem-vm
     Data               : {}
@@ -264,13 +255,13 @@ As recomendações a seguir são úteis para determinar se o dispositivo de VPN 
 
     O dispositivo de VPN pode não estar roteando o tráfego corretamento pelo Gateway de VPN do Azure. Use uma ferramenta como o [PsPing][psping] para verificar a conectividade e o roteamento no Gateway de VPN. Por exemplo, para testar a conectividade de um computador local com um servidor Web localizado na VNet, execute o seguinte comando (substituindo `<<web-server-address>>` pelo endereço do servidor Web):
 
-    ```
+    ```console
     PsPing -t <<web-server-address>>:80
     ```
 
     Se o computador local puder rotear o tráfego para o servidor Web, será exibida uma saída semelhante à seguinte:
 
-    ```
+    ```console
     D:\PSTools>psping -t 10.20.0.5:80
 
     PsPing v2.01 - PsPing - ping, latency, bandwidth measurement utility
@@ -290,7 +281,7 @@ As recomendações a seguir são úteis para determinar se o dispositivo de VPN 
 
     Se o computador local não puder se comunicar com o destino especificado, serão exibidas mensagens assim:
 
-    ```
+    ```console
     D:\PSTools>psping -t 10.20.1.6:80
 
     PsPing v2.01 - PsPing - ping, latency, bandwidth measurement utility
@@ -320,7 +311,7 @@ As recomendações a seguir são úteis para determinar se há algum problema co
 
     Você pode exibir a chave compartilhada armazenada pelo Gateway de VPN do Azure usando o seguinte comando da CLI do Azure:
 
-    ```
+    ```azurecli
     azure network vpn-connection shared-key show <<resource-group>> <<vpn-connection-name>>
     ```
 
@@ -330,13 +321,13 @@ As recomendações a seguir são úteis para determinar se há algum problema co
 
     Você pode exibir os detalhes da sub-rede usando o seguinte comando da CLI do Azure:
 
-    ```
+    ```azurecli
     azure network vnet subnet show -g <<resource-group>> -e <<vnet-name>> -n GatewaySubnet
     ```
 
     Verifique se não há nenhum campo de dados denominado *ID do Grupo de Segurança de Rede*. O exemplo a seguir mostra os resultados de uma instância da *GatewaySubnet* que tem um NSG atribuído (*VPN-Gateway-Group*). Isso poderá impedir que o gateway funcione corretamente se houver regras definidas para este NSG.
 
-    ```
+    ```console
     C:\>azure network vnet subnet show -g profx-prod-rg -e profx-vnet -n GatewaySubnet
         info:    Executing command network vnet subnet show
         + Looking up virtual network "profx-vnet"
@@ -353,7 +344,7 @@ As recomendações a seguir são úteis para determinar se há algum problema co
 
     Verifique as regras do NSG associadas às sub-redes que contêm essas máquinas virtuais. Você pode exibir todas as regras do NSG usando o seguinte comando da CLI do Azure:
 
-    ```
+    ```azurecli
     azure network nsg show -g <<resource-group>> -n <<nsg-name>>
     ```
 
@@ -361,13 +352,13 @@ As recomendações a seguir são úteis para determinar se há algum problema co
 
     Você pode usar o seguinte comando do Azure PowerShell para verificar o status atual da conexão de VPN do Azure. O parâmetro `<<connection-name>>` é o nome da conexão de VPN do Azure que vincula o gateway de rede virtual e o gateway local.
 
-    ```
+    ```powershell
     Get-AzureRmVirtualNetworkGatewayConnection -Name <<connection-name>> - ResourceGroupName <<resource-group>>
     ```
 
     Os snippets de código a seguir realçam a saída gerada quando o gateway está conectado (o primeiro exemplo) e desconectado (o segundo exemplo):
 
-    ```
+    ```powershell
     PS C:\> Get-AzureRmVirtualNetworkGatewayConnection -Name profx-gateway-connection -ResourceGroupName profx-prod-rg
 
     AuthorizationKey           :
@@ -385,7 +376,7 @@ As recomendações a seguir são úteis para determinar se há algum problema co
     ...
     ```
 
-    ```
+    ```powershell
     PS C:\> Get-AzureRmVirtualNetworkGatewayConnection -Name profx-gateway-connection2 -ResourceGroupName profx-prod-rg
 
     AuthorizationKey           :
@@ -411,11 +402,11 @@ As recomendações a seguir são úteis para determinar se há algum problema co
 
     A maneira de verificar isso depende do dispositivo de VPN em execução local. Por exemplo, se você estiver usando o RRAS no Windows Server 2012, será possível usar o Monitor de Desempenho para acompanhar o volume de dados recebido e transmitido pela conexão de VPN. Usando o objeto *RAS Total*, selecione os contadores *Bytes recebidos/s* e *Bytes transmitidos/s*:
 
-    ![[3]][3]
+    ![Contadores de desempenho para monitorar o tráfego de rede da VPN](../_images/guidance-hybrid-network-vpn/RRAS-perf-counters.png)
 
     Compare os resultados com a largura de banda disponível para o Gateway de VPN (de 100 Mbps para SKUs do plano Básico e Standard a 1,25 Gbps para SKUs do VpnGw3):
 
-    ![[4]][4]
+    ![Gráfico de desempenho de rede da VPN de exemplo](../_images/guidance-hybrid-network-vpn/RRAS-perf-graph.png)
 
 - **Verifique se você implantou o número de VMs e os tamanhos corretos para sua carga de aplicativo.**
 
@@ -427,21 +418,22 @@ As recomendações a seguir são úteis para determinar se há algum problema co
 
 ## <a name="deploy-the-solution"></a>Implantar a solução
 
-
-**Pré-requisitos.** Você deve ter uma infraestrutura local existente já configurada com um dispositivo de rede adequado.
+**Pré-requisitos**. Você deve ter uma infraestrutura local existente já configurada com um dispositivo de rede adequado.
 
 Para implantar a solução, execute as etapas a seguir.
 
+<!-- markdownlint-disable MD033 -->
+
 1. Clique no botão abaixo:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fhybrid-networking%2Fvpn%2Fazuredeploy.json" target="_blank"><img src="https://azuredeploy.net/deploybutton.png"/></a>
-2. Aguarde até o link abrir no Portal do Azure e siga estas etapas: 
-   * O nome do **Grupo de recursos** já está definido no arquivo de parâmetros, portanto, selecione **Criar novo** e digite `ra-hybrid-vpn-rg` na caixa de texto.
-   * Selecione a região na caixa suspensa **Local**.
-   * Não edite as caixas de texto **URI da raiz do modelo** ou **URI da raiz do parâmetro**.
-   * Analise os termos e condições e clique na caixa de seleção **Concordo com os termos e condições declarados acima**.
-   * Clique no botão **Comprar**.
+2. Aguarde até o link abrir no Portal do Azure e siga estas etapas:
+   - O nome do **Grupo de recursos** já está definido no arquivo de parâmetros, portanto, selecione **Criar novo** e digite `ra-hybrid-vpn-rg` na caixa de texto.
+   - Selecione a região na caixa suspensa **Local**.
+   - Não edite as caixas de texto **URI da raiz do modelo** ou **URI da raiz do parâmetro**.
+   - Analise os termos e condições e clique na caixa de seleção **Concordo com os termos e condições declarados acima**.
+   - Clique no botão **Comprar**.
 3. Aguarde até que a implantação seja concluída.
 
-
+<!-- markdownlint-enable MD033 -->
 
 <!-- links -->
 
@@ -489,7 +481,3 @@ Para implantar a solução, execute as etapas a seguir.
 [virtualNetworkGateway-parameters]: https://github.com/mspnp/hybrid-networking/vpn/parameters/virtualNetworkGateway.parameters.json
 [azure-cli]: https://azure.microsoft.com/documentation/articles/xplat-cli-install/
 [CIDR]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
-[0]: ./images/vpn.png "Rede híbrida que abrange as infraestruturas locais e do Azure"
-[2]: ../_images/guidance-hybrid-network-vpn/audit-logs.png "Logs de auditoria no portal do Azure"
-[3]: ../_images/guidance-hybrid-network-vpn/RRAS-perf-counters.png "Contadores de desempenho para monitorar o tráfego de rede da VPN"
-[4]: ../_images/guidance-hybrid-network-vpn/RRAS-perf-graph.png "Gráfico de desempenho de rede da VPN de exemplo"

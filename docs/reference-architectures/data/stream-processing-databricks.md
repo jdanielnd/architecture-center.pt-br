@@ -1,22 +1,24 @@
 ---
 title: Processamento de fluxo com o Azure Databricks
-description: Criar um pipeline de processamento de fluxo de ponta a ponta no Azure usando o Azure Databricks
+titleSuffix: Azure Reference Architectures
+description: Criar um pipeline de processamento de fluxo de ponta a ponta no Azure usando o Azure Databricks.
 author: petertaylor9999
 ms.date: 11/30/2018
-ms.openlocfilehash: 0640e900c212d2b75cc9cdd5bec3a4f7c050490d
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.custom: seodec18
+ms.openlocfilehash: 822a3c448dcc2bdd4ae77ef2a2b7a9ffad633440
+ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902826"
+ms.lasthandoff: 12/08/2018
+ms.locfileid: "53120290"
 ---
-# <a name="stream-processing-with-azure-databricks"></a>Processamento de fluxo com o Azure Databricks
+# <a name="create-a-stream-processing-pipeline-with-azure-databricks"></a>Criar um pipeline de processamento de fluxo com o Azure Databricks
 
-Essa arquitetura de referência mostra um pipeline de [processamento de fluxo](/azure/architecture/data-guide/big-data/real-time-processing) de ponta a ponta. Esse tipo de pipeline tem quatro estágios: ingerir, processar, armazenar e analisar e gerar relatórios. Para essa arquitetura de referência, o pipeline ingere dados de duas origens, realiza uma junção em registros relacionados de cada fluxo, enriquece o resultado e calcula uma média em tempo real. Os resultados são armazenados para análise posterior. [**Implante essa solução**.](#deploy-the-solution)
+Essa arquitetura de referência mostra um pipeline de [processamento de fluxo](/azure/architecture/data-guide/big-data/real-time-processing) de ponta a ponta. Esse tipo de pipeline tem quatro estágios: ingerir, processar, armazenar e analisar e gerar relatórios. Para essa arquitetura de referência, o pipeline ingere dados de duas origens, realiza uma junção em registros relacionados de cada fluxo, enriquece o resultado e calcula uma média em tempo real. Os resultados são armazenados para análise posterior. [**Implantar esta solução**](#deploy-the-solution).
 
-![](./images/stream-processing-databricks.png)
+![Arquitetura de referência para processamento de fluxo com o Azure Databricks](./images/stream-processing-databricks.png)
 
-**Cenário**: uma empresa de táxi coleta dados sobre cada viagem. Para esse cenário, assumimos que há dois dispositivos separados enviando dados. O táxi tem um medidor que envia informações sobre cada corrida &mdash; duração, distância e locais de embarque e desembarque de passageiros. Um dispositivo separado aceita pagamentos de clientes e envia dados sobre tarifas. Para identificar as tendências dos passageiros, a empresa de táxi deseja calcular a média de gorjeta por quilômetro percorrido em tempo real, para cada área.
+**Cenário**: Uma empresa de táxi coleta dados sobre cada viagem. Para esse cenário, assumimos que há dois dispositivos separados enviando dados. O táxi tem um medidor que envia informações sobre cada corrida &mdash; duração, distância e locais de embarque e desembarque de passageiros. Um dispositivo separado aceita pagamentos de clientes e envia dados sobre tarifas. Para identificar as tendências dos passageiros, a empresa de táxi deseja calcular a média de gorjeta por quilômetro percorrido em tempo real, para cada área.
 
 ## <a name="architecture"></a>Arquitetura
 
@@ -34,15 +36,15 @@ A arquitetura consiste nos componentes a seguir.
 
 ## <a name="data-ingestion"></a>Ingestão de dados
 
-Para simular uma fonte de dados, essa arquitetura de referência usa o conjunto de dados dos [Dados de táxi de Nova York](https://uofi.app.box.com/v/NYCtaxidata/folder/2332218797)<sup>[[1]](#note1)</sup>. Esse conjunto de dados contém dados sobre viagens de táxi em Nova York durante um período de 4 anos (2010 &ndash; 2013). Ele contém dois tipos de registro: dados de corrida e dados de tarifa. Os dados de corrida incluem a duração da viagem, a distância da viagem e os locais de embarque e desembarque de passageiros. Os dados de tarifa incluem a tarifa, impostos e quantias das gorjetas. Campos comuns em ambos os tipos de registro incluem o número da licença, carteira de habilitação e ID do fornecedor. Juntos, esses três campos fazem a identificação exclusiva de um táxi e um motorista. Os dados são armazenados no formato CSV. 
+Para simular uma fonte de dados, essa arquitetura de referência usa o conjunto de dados dos [Dados de táxi de Nova York](https://uofi.app.box.com/v/NYCtaxidata/folder/2332218797)<sup>[[1]](#note1)</sup>. Esse conjunto de dados contém dados sobre viagens de táxi em Nova York durante um período de 4 anos (2010 &ndash; 2013). Ele contém dois tipos de registro: Dados da corrida e da tarifa. Os dados de corrida incluem a duração da viagem, a distância da viagem e os locais de embarque e desembarque de passageiros. Os dados de tarifa incluem a tarifa, impostos e quantias das gorjetas. Campos comuns em ambos os tipos de registro incluem o número da licença, carteira de habilitação e ID do fornecedor. Juntos, esses três campos fazem a identificação exclusiva de um táxi e um motorista. Os dados são armazenados no formato CSV.
 
-O gerador de dados é um aplicativo .NET Core que lê os registros e os envia para os Hubs de Eventos do Azure. O gerador envia os dados de corrida em formato JSON e os dados de tarifa em formato CSV. 
+O gerador de dados é um aplicativo .NET Core que lê os registros e os envia para os Hubs de Eventos do Azure. O gerador envia os dados de corrida em formato JSON e os dados de tarifa em formato CSV.
 
-Os Hubs de Eventos usam [partições](/azure/event-hubs/event-hubs-features#partitions) para segmentar os dados. As partições permitem que um consumidor leia cada partição em paralelo. Ao enviar dados para os Hubs de Eventos, é possível especificar a chave de partição explicitamente. Caso contrário, os registros são atribuídos a partições no estilo round robin. 
+Os Hubs de Eventos usam [partições](/azure/event-hubs/event-hubs-features#partitions) para segmentar os dados. As partições permitem que um consumidor leia cada partição em paralelo. Ao enviar dados para os Hubs de Eventos, é possível especificar a chave de partição explicitamente. Caso contrário, os registros são atribuídos a partições no estilo round robin.
 
 Nesse cenário, os dados de corrida e de tarifa devem ter a mesma ID de partição para um determinado táxi. Isso permite que o Databricks aplique um grau de paralelismo ao correlacionar os dois fluxos. Um registro na partição *n* dos dados de corrida corresponderá a um registro na partição *n* dos dados de tarifa.
 
-![](./images/stream-processing-databricks-eh.png)
+![Diagrama de processamento de fluxo com o Azure Databricks e os Hubs de Eventos](./images/stream-processing-databricks-eh.png)
 
 No gerador de dados, o modelo de dados comum para ambos os tipos de registro têm uma propriedade `PartitionKey` que é a concatenação de `Medallion`, `HackLicense` e `VendorId`.
 
@@ -84,13 +86,13 @@ using (var client = pool.GetObject())
 
 ### <a name="event-hubs"></a>Hubs de Eventos
 
-A capacidade da taxa de transferência dos Hubs de Eventos é medida em [unidades de produtividade](/azure/event-hubs/event-hubs-features#throughput-units). É possível fazer o dimensionamento automático de um hub de eventos ao permitir a [inflação automática](/azure/event-hubs/event-hubs-auto-inflate), o que dimensiona automaticamente as unidades de produtividade com base no tráfego até um número máximo configurado. 
+A capacidade da taxa de transferência dos Hubs de Eventos é medida em [unidades de produtividade](/azure/event-hubs/event-hubs-features#throughput-units). É possível fazer o dimensionamento automático de um hub de eventos ao permitir a [inflação automática](/azure/event-hubs/event-hubs-auto-inflate), o que dimensiona automaticamente as unidades de produtividade com base no tráfego até um número máximo configurado.
 
 ## <a name="stream-processing"></a>Processamento de fluxo
 
 No Azure Databricks, o processamento de dados é executado por um trabalho. O trabalho é atribuído a um cluster e é executado nele. O trabalho pode ser o código personalizado escrito em Java ou um [bloco de notas](https://docs.databricks.com/user-guide/notebooks/index.html) do Spark.
 
-Nessa arquitetura de referência, o trabalho é um arquivo morto de Java com classes escritas em Java e Scala. Ao especificar o arquivo morto de Java para um trabalho do Databricks, a classe será especificada para ser executada pelo cluster do Databricks. Aqui, o método **main** da classe **com.microsoft.pnp.TaxiCabReader** contém a lógica de processamento de dados. 
+Nessa arquitetura de referência, o trabalho é um arquivo morto de Java com classes escritas em Java e Scala. Ao especificar o arquivo morto de Java para um trabalho do Databricks, a classe será especificada para ser executada pelo cluster do Databricks. Aqui, o método **main** da classe **com.microsoft.pnp.TaxiCabReader** contém a lógica de processamento de dados.
 
 ### <a name="reading-the-stream-from-the-two-event-hub-instances"></a>Ler o fluxo das duas instâncias do hub de eventos
 
@@ -116,9 +118,9 @@ val rideEventHubOptions = EventHubsConf(rideEventHubConnectionString)
 
 ### <a name="enriching-the-data-with-the-neighborhood-information"></a>Como enriquecer os dados com informações sobre a área
 
-Os dados da corrida incluem as coordenadas de latitude e longitude dos locais de coleta e entrega. Embora essas coordenadas sejam úteis, elas não são facilmente consumidas na análise. Portanto, esses dados são enriquecidos com dados de área que são lidos de um [shapefile](https://en.wikipedia.org/wiki/Shapefile). 
+Os dados da corrida incluem as coordenadas de latitude e longitude dos locais de coleta e entrega. Embora essas coordenadas sejam úteis, elas não são facilmente consumidas na análise. Portanto, esses dados são enriquecidos com dados de área que são lidos de um [shapefile](https://en.wikipedia.org/wiki/Shapefile).
 
-O formato shapefile é binário e não é fácil analisá-lo, mas a biblioteca [GeoTools](http://geotools.org/) fornece ferramentas para dados geoespaciais que usam o formato shapefile. Essa biblioteca é usada na classe **com.microsoft.pnp.GeoFinder** para determinar o nome da área com base nas coordenadas de coleta e entrega. 
+O formato shapefile é binário e não é fácil analisá-lo, mas a biblioteca [GeoTools](http://geotools.org/) fornece ferramentas para dados geoespaciais que usam o formato shapefile. Essa biblioteca é usada na classe **com.microsoft.pnp.GeoFinder** para determinar o nome da área com base nas coordenadas de coleta e entrega.
 
 ```scala
 val neighborhoodFinder = (lon: Double, lat: Double) => {
@@ -223,7 +225,6 @@ databricks secrets put --scope "azure-databricks-job" --key "taxi-ride"
 
 No código, os segredos são acessados pelos [utilitários segredos](https://docs.databricks.com/user-guide/dev-tools/dbutils.html#secrets-utilities) do Azure Databricks.
 
-
 ## <a name="monitoring-considerations"></a>Considerações de monitoramento
 
 O Azure Databricks é baseado no Apache Spark e ambos usam [log4j](https://logging.apache.org/log4j/2.x/) como a biblioteca padrão para registros em log. Além do registro em log padrão fornecido pelo Apache Spark, essa arquitetura de referência envia logs e métricas para o [Azure Log Analytics](/azure/log-analytics/).
@@ -267,48 +268,49 @@ spark.streams.addListener(new StreamingMetricsListener())
 
 Os métodos no StreamingMetricsListener são chamados pelo tempo de execução do Apache Spark sempre que um evento de fluxo estruturado ocorre, enviando mensagens de log e métricas para o espaço de trabalho do Azure Log Analytics. Você pode usar as seguintes consultas em seu espaço de trabalho para monitorar o aplicativo:
 
-### <a name="latency-and-throughput-for-streaming-queries"></a>Latência e taxa de transferência de consultas de streaming 
+### <a name="latency-and-throughput-for-streaming-queries"></a>Latência e taxa de transferência de consultas de streaming
 
 ```shell
 taxijob_CL
 | where TimeGenerated > startofday(datetime(<date>)) and TimeGenerated < endofday(datetime(<date>))
-| project  mdc_inputRowsPerSecond_d, mdc_durationms_triggerExecution_d  
+| project  mdc_inputRowsPerSecond_d, mdc_durationms_triggerExecution_d
 | render timechart
-``` 
+```
+
 ### <a name="exceptions-logged-during-stream-query-execution"></a>Exceções registradas durante a execução de consulta de streaming
 
 ```shell
 taxijob_CL
 | where TimeGenerated > startofday(datetime(<date>)) and TimeGenerated < endofday(datetime(<date>))
-| where Level contains "Error" 
+| where Level contains "Error"
 ```
 
 ### <a name="accumulation-of-malformed-fare-and-ride-data"></a>Acumulação de tarifas malformadas e dados da corrida
 
 ```shell
-SparkMetric_CL 
+SparkMetric_CL
 | where TimeGenerated > startofday(datetime(<date>)) and TimeGenerated < endofday(datetime(<date>))
-| render timechart 
+| render timechart
 | where name_s contains "metrics.malformedrides"
 
-SparkMetric_CL 
+SparkMetric_CL
 | where TimeGenerated > startofday(datetime(<date>)) and TimeGenerated < endofday(datetime(<date>))
-| render timechart 
-| where name_s contains "metrics.malformedfares" 
+| render timechart
+| where name_s contains "metrics.malformedfares"
 ```
 
 ### <a name="job-execution-to-trace-resiliency"></a>Execução do trabalho para controlar a resiliência
 
 ```shell
-SparkMetric_CL 
+SparkMetric_CL
 | where TimeGenerated > startofday(datetime(<date>)) and TimeGenerated < endofday(datetime(<date>))
-| render timechart 
-| where name_s contains "driver.DAGScheduler.job.allJobs" 
+| render timechart
+| where name_s contains "driver.DAGScheduler.job.allJobs"
 ```
 
 ## <a name="deploy-the-solution"></a>Implantar a solução
 
-Uma implantação para essa arquitetura de referência está disponível no [GitHub](https://github.com/mspnp/azure-databricks-streaming-analytics). 
+Uma implantação para essa arquitetura de referência está disponível no [GitHub](https://github.com/mspnp/azure-databricks-streaming-analytics).
 
 ### <a name="prerequisites"></a>Pré-requisitos
 
@@ -353,7 +355,7 @@ Uma implantação para essa arquitetura de referência está disponível no [Git
             ...
     ```
 
-5. Abra um navegador da Web e acesse https://www.zillow.com/howto/api/neighborhood-boundaries.htm. 
+5. Abra um navegador da Web e acesse https://www.zillow.com/howto/api/neighborhood-boundaries.htm.
 
 6. Clique em **Limites de área de Nova York** para fazer o download do arquivo.
 
@@ -399,7 +401,7 @@ Uma implantação para essa arquitetura de referência está disponível no [Git
 
 4. A saída da implantação é gravada no console após a conclusão. Pesquise a saída JSON a seguir:
 
-```JSON
+```json
 "outputs": {
         "cosmosDb": {
           "type": "Object",
@@ -425,6 +427,7 @@ Uma implantação para essa arquitetura de referência está disponível no [Git
         }
 },
 ```
+
 Esses valores são os segredos que serão adicionados aos segredos do Databricks nas próximas seções. Mantenha-os seguros até você adicioná-los às seções.
 
 ### <a name="add-a-cassandra-table-to-the-cosmos-db-account"></a>Adicionar uma tabela do Cassandra à conta do Cosmos DB
@@ -433,14 +436,14 @@ Esses valores são os segredos que serão adicionados aos segredos do Databricks
 
 2. Na folha **visão geral**, clique em **adicionar tabela**.
 
-3. Quando a folha **adicionar tabela** abrir, insira `newyorktaxi` na caixa de texto **nome do Keyspace**. 
+3. Quando a folha **adicionar tabela** abrir, insira `newyorktaxi` na caixa de texto **nome do Keyspace**.
 
 4. Na seção **insira o comando CQL para criar a tabela**, digite `neighborhoodstats` na caixa de texto ao lado de `newyorktaxi`.
 
-5. Na caixa de texto que aparece, insira:
-```shell
-(neighborhood text, window_end timestamp, number_of_rides bigint,total_fare_amount double, primary key(neighborhood, window_end))
-```
+5. Na caixa de texto abaixo, insira o seguinte:
+    ```shell
+    (neighborhood text, window_end timestamp, number_of_rides bigint,total_fare_amount double, primary key(neighborhood, window_end))
+    ```
 6. Na caixa de texto **Taxa de transferência (1,000 - 1,000,000 RU/s)**, insira o valor `4000`.
 
 7. Clique em **OK**.
@@ -499,7 +502,7 @@ Após a execução, esse comando abre o editor vi. Insira o valor **secret** da 
 
 ### <a name="add-the-azure-log-analytics-workspace-id-and-primary-key-to-configuration-files"></a>Adicionar a ID do espaço de trabalho do Azure Log Analytics e a chave primária para arquivos de configuração
 
-Para essa seção, você pode exigir a ID do espaço de trabalho do Log Analytics e a chave primária. A ID do espaço de trabalho é o valor **workspaceId** da seção de saída **logAnalytics** na etapa 4 da seção *implantar os recursos do Azure*. A chave primária é o **segredo** da seção de saída. 
+Para essa seção, você pode exigir a ID do espaço de trabalho do Log Analytics e a chave primária. A ID do espaço de trabalho é o valor **workspaceId** da seção de saída **logAnalytics** na etapa 4 da seção *implantar os recursos do Azure*. A chave primária é o **segredo** da seção de saída.
 
 1. Para configurar o registro em log de log4j, abra `\azure\AzureDataBricksJob\src\main\resources\com\microsoft\pnp\azuredatabricksjob\log4j.properties`. Edite os dois valores a seguir:
     ```shell
@@ -515,9 +518,9 @@ Para essa seção, você pode exigir a ID do espaço de trabalho do Log Analytic
 
 ### <a name="build-the-jar-files-for-the-databricks-job-and-databricks-monitoring"></a>Compilar os arquivos .jar para o trabalho do Databricks e para o monitoramento do Databricks
 
-1. Use o Java IDE para importar o arquivo de projeto do Maven chamado **pom.xml** localizado no diretório raiz. 
+1. Use o Java IDE para importar o arquivo de projeto do Maven chamado **pom.xml** localizado no diretório raiz.
 
-2. Execute uma compilação limpa. A saída dessa compilação são arquivos denominados **azure-databricks-trabalho-1.0-snapshot. jar** e **azure-databricks-monitoramento-0.9.jar**. 
+2. Execute uma compilação limpa. A saída dessa compilação são arquivos denominados **azure-databricks-trabalho-1.0-snapshot. jar** e **azure-databricks-monitoramento-0.9.jar**.
 
 ### <a name="configure-custom-logging-for-the-databricks-job"></a>Configurar o registro em log personalizado para o trabalho do Databricks
 
@@ -532,13 +535,13 @@ Para essa seção, você pode exigir a ID do espaço de trabalho do Log Analytic
     ```
 
 3. Embora você ainda não tenha escolhido um nome para o cluster do Databricks, escolha um agora. Você digitará o nome abaixo no caminho do sistema de arquivos do Databricks para seu cluster. Copie o script de inicialização do `\azure\azure-databricks-monitoring\scripts\spark.metrics` para o sistema de arquivos do Databricks inserindo o seguinte comando:
-    ```
+    ```shell
     databricks fs cp --overwrite spark-metrics.sh dbfs:/databricks/init/<cluster-name>/spark-metrics.sh
     ```
 
 ### <a name="create-a-databricks-cluster"></a>Criar um cluster Databricks
 
-1. No espaço de trabalho do Databricks, clique em "Clusters" e em "criar cluster". Insira o nome do cluster que você criou na etapa 3 da seção **configurar o registro em log personalizado para o trabalho do Databricks**. 
+1. No espaço de trabalho do Databricks, clique em "Clusters" e em "criar cluster". Insira o nome do cluster que você criou na etapa 3 da seção **configurar o registro em log personalizado para o trabalho do Databricks**.
 
 2. Escolha um modo de cluster **padrão**.
 
@@ -552,9 +555,9 @@ Para essa seção, você pode exigir a ID do espaço de trabalho do Log Analytic
 
 7. Defina **Trabalhos mín** como **2**.
 
-8. Desmarque a opção **Habilitar o dimensionamento automático**. 
+8. Desmarque a opção **Habilitar o dimensionamento automático**.
 
-9. Abaixo da caixa de diálogo **Término Automático**, clique em **Scripts Init**. 
+9. Abaixo da caixa de diálogo **Término Automático**, clique em **Scripts Init**.
 
 10. Insira **dbfs:/databricks/init/<nome-do-cluster>/spark-metrics.sh** para substituir o nome do cluster criado na etapa 1 para <nome-do-cluster>.
 
@@ -576,50 +579,51 @@ Para essa seção, você pode exigir a ID do espaço de trabalho do Log Analytic
 
 6. No campo de argumentos, insira o seguinte:
     ```shell
-    -n jar:file:/dbfs/azure-databricks-jobs/ZillowNeighborhoods-NY.zip!/ZillowNeighborhoods-NY.shp --taxi-ride-consumer-group taxi-ride-eh-cg --taxi-fare-consumer-group taxi-fare-eh-cg --window-interval "1 minute" --cassandra-host <Cosmos DB Cassandra host name from above> 
-    ``` 
+    -n jar:file:/dbfs/azure-databricks-jobs/ZillowNeighborhoods-NY.zip!/ZillowNeighborhoods-NY.shp --taxi-ride-consumer-group taxi-ride-eh-cg --taxi-fare-consumer-group taxi-fare-eh-cg --window-interval "1 minute" --cassandra-host <Cosmos DB Cassandra host name from above>
+    ```
 
 7. Instale as bibliotecas dependentes seguindo estas etapas:
-    
+
     1. Na interface do usuário do Databricks, clique no botão **doméstica**.
-    
+
     2. Na lista suspensa **Usuários**, clique no nome de conta do usuário para abrir as configurações do espaço de trabalho da conta.
-    
+
     3. Clique na seta suspensa ao lado do nome de sua conta, clique em **criar** e clique em **Biblioteca** para abrir a caixa de diálogo **Nova Biblioteca**.
-    
+
     4. No controle suspenso **Origem**, escolha **Coordenada do Maven**.
-    
-    5. No cabeçalho **Instalar Artefatos do Maven**, insira `com.microsoft.azure:azure-eventhubs-spark_2.11:2.3.5` na caixa de texto **Coordenadas**. 
-    
+
+    5. No cabeçalho **Instalar Artefatos do Maven**, insira `com.microsoft.azure:azure-eventhubs-spark_2.11:2.3.5` na caixa de texto **Coordenadas**.
+
     6. Clique em **Criar biblioteca** para abrir a janela **Artefatos**.
-    
+
     7. Em **Status dos clusters de execução**, marque a caixa de seleção **Anexar automaticamente a todos os clusters**.
-    
+
     8. Repita as etapas de 1 a 7 para a coordenada `com.microsoft.azure.cosmosdb:azure-cosmos-cassandra-spark-helper:1.0.0` do Maven.
-    
+
     9. Repita as etapas de 1 a 6 para a coordenada `org.geotools:gt-shapefile:19.2` do Maven.
-    
+
     10. Clique em **Opções avançadas**.
-    
-    11. Insira `http://download.osgeo.org/webdav/geotools/` na caixa de texto **Repositório**. 
-    
+
+    11. Insira `http://download.osgeo.org/webdav/geotools/` na caixa de texto **Repositório**.
+
     12. Clique em **Criar biblioteca** para abrir a janela **Artefatos**. 
-    
+
     13. Em **Status dos clusters de execução**, marque a caixa de seleção **Anexar automaticamente a todos os clusters**.
 
 8. Adicione as bibliotecas dependentes adicionadas na etapa 7 ao trabalho criado no final da etapa 6:
+
     1. No espaço de trabalho do Azure Databricks, clique em **Trabalhos**.
 
-    2. Clique no nome do trabalho criado na etapa 2 da seção **criar um trabalho do Databricks**. 
-    
-    3. Ao lado da seção **Bibliotecas Dependentes**, clique em **Adicionar** para abrir a caixa de diálogo **Adicionar Biblioteca Dependente**. 
-    
+    2. Clique no nome do trabalho criado na etapa 2 da seção **criar um trabalho do Databricks**.
+
+    3. Ao lado da seção **Bibliotecas Dependentes**, clique em **Adicionar** para abrir a caixa de diálogo **Adicionar Biblioteca Dependente**.
+
     4. Em **Biblioteca de**, escolha **Espaço de trabalho**.
-    
-    5. Clique em **usuários**, nome de usuário e, em seguida, clique em `azure-eventhubs-spark_2.11:2.3.5`. 
-    
+
+    5. Clique em **usuários**, nome de usuário e, em seguida, clique em `azure-eventhubs-spark_2.11:2.3.5`.
+
     6. Clique em **OK**.
-    
+
     7. Repita as etapas de 1 a 6 para `spark-cassandra-connector_2.11:2.3.1` e `gt-shapefile:19.2`.
 
 9. Ao lado **Cluster:**, clique em **Editar**. Isso abrirá o diálogo **Configurar cluster**. Na lista suspensa **Tipo de Cluster**, escolha **Cluster Existente**. Na lista suspensa **Escolher Cluster**, escolha o cluster criado na seção **criar um cluster do Databricks**. Clique em **confirmar**.
@@ -672,4 +676,4 @@ Created 30000 records for TaxiFare
 
 Para verificar se o trabalho do Databricks está sendo executado corretamente, abra o portal do Azure e navegue até o banco de dados do Cosmos DB. Abra a folha **Data Explorer** e examine os dados da tabela **registros do táxi**. 
 
-[1] <span id="note1">Donovan, Brian; Work, Dan (2016): New York City Taxi Trip Data (2010-2013). Universidade de Illinois em Urbana-Champaign. https://doi.org/10.13012/J8PN93H8
+[1] <span id="note1">Donovan, Brian; Work, Dan (2016): Dados de corridas de táxi na Cidade de Nova York (2010-2013). Universidade de Illinois em Urbana-Champaign. https://doi.org/10.13012/J8PN93H8
