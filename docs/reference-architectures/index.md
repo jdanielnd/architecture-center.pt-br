@@ -4,12 +4,12 @@ description: Arquiteturas de referência, plantas e diretrizes de implementaçã
 layout: LandingPage
 ms.topic: landing-page
 ms.date: 08/30/2018
-ms.openlocfilehash: efac05ff95431f9551c6fb76939dbb91cfa01d1d
-ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
+ms.openlocfilehash: 6a86256c504737b5f747a690d27fdf178ac8b4fe
+ms.sourcegitcommit: 8d951fd7e9534054b160be48a1881ae0857561ef
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53307003"
+ms.lasthandoff: 12/13/2018
+ms.locfileid: "53329374"
 ---
 # <a name="azure-reference-architectures"></a>Arquiteturas de referência do Azure
 
@@ -683,6 +683,25 @@ Ir para: [IA](#ai-and-machine-learning) | [Big data](#big-data-solutions) | [Sem
                     <div class="cardText">
                         <h3>Aplicativo Web altamente disponível</h3>
                         <p>Execute um aplicativo Web nos Serviço de Aplicativo para alcançar a alta disponibilidade.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</li>
+<li style="display: flex; flex-direction: column;">
+    <a href="./app-service-web-app/app-monitoring.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
+            <div class="cardPadding" style="display: flex;">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="../_images/icons/app-service.svg" height="140px" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>Monitoramento de aplicativo Web no Azure</h3>
+                        <p>Monitore um aplicativo Web hospedado no Serviço de Aplicativo do Azure.</p>
                     </div>
                 </div>
             </div>
