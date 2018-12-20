@@ -1,40 +1,41 @@
 ---
-title: Proteger aplicativo Web do Windows para setores regulamentados
+title: Como criar aplicativos Web seguros com máquinas virtuais do Windows no Azure
 description: Crie um aplicativo Web seguro e de várias camadas com o Windows Server no Azure usando conjuntos de dimensionamento, o Gateway de Aplicativo e balanceadores de carga.
 author: iainfoulds
-ms.date: 07/11/2018
-ms.openlocfilehash: c7137988bd9b5e26718b4fe0955a3dca3dc638b8
-ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
+ms.date: 12/06/2018
+ms.custom: seodec18
+ms.openlocfilehash: 4e4d2117fbc46eda46f7ef276a71739e3a79270e
+ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "51610712"
+ms.lasthandoff: 12/12/2018
+ms.locfileid: "53307054"
 ---
-# <a name="secure-windows-web-application-for-regulated-industries"></a>Proteger aplicativo Web do Windows para setores regulamentados
+# <a name="building-secure-web-applications-with-windows-virtual-machines-on-azure"></a>Como compilar aplicativos Web seguros com máquinas virtuais do Windows no Azure
 
-Este exemplo de cenário é aplicável para setores regulamentados que têm uma necessidade de proteger aplicativos de várias camadas. Nesse cenário, um aplicativo ASP.NET de front-end se conecta de forma segura a um cluster de Microsoft SQL Server de back-end protegido.
+Este cenário fornece orientações de arquitetura e design para a execução de aplicativos Web seguros e com várias camadas no Microsoft Azure. Neste exemplo, um aplicativo ASP.NET se conecta de forma segura a um cluster do Microsoft SQL Server de back-end protegido usando máquinas virtuais.
 
-Os cenários de aplicativo de exemplo incluem a execução de aplicativos de sala de operações, horas marcadas de pacientes e manutenção de registros ou renovação e pedidos de receitas médicas. Tradicionalmente, as organizações tinham que manter os aplicativos locais herdados e os serviços para esses cenários. Com uma maneira segura de forma e escalonável para implantar esses aplicativos do Windows Server no Azure, as organizações podem modernizar sua implantações e reduzir seus custos operacionais locais e despesas gerais de manutenção.
+Tradicionalmente, as organizações tinham que manter os aplicativos e serviços locais herdados para fornecer uma infraestrutura segura. Ao implantar esses aplicativos com segurança do Windows Server no Azure, as organizações podem modernizar sua implantações e reduzir seus custos operacionais locais e despesas gerais de manutenção.
 
 ## <a name="relevant-use-cases"></a>Casos de uso relevantes
 
-Outros casos de uso relevantes incluem:
+Alguns exemplos de onde esse cenário pode ser aplicado:
 
 * Modernizar as implantações de aplicativo em um ambiente de nuvem seguro.
-* Reduzir o gerenciamento de serviços e aplicativos locais herdados.
+* Redução da sobrecarga de gerenciamento de aplicativos e serviços locais herdados.
 * Melhorar a saúde e experiência de pacientes com novas plataformas de aplicativo.
 
 ## <a name="architecture"></a>Arquitetura
 
 ![Visão geral da arquitetura dos componentes do Azure envolvidos no aplicativo do Windows Server de várias camadas para setores regulamentados][architecture]
 
-Este cenário aborda um aplicativo de setores regulamentados de várias camadas que usa o ASP.NET e o Microsoft SQL Server. O fluxo de dados neste cenário ocorre da seguinte forma:
+Este cenário mostra um aplicativo Web de front-end se conectando a um banco de dados de back-end, os dois em execução no Windows Server 2016. O fluxo de dados neste cenário ocorre da seguinte forma:
 
-1. Os usuários acessam o aplicativo front-end de setores regulamentados do ASP.NET por meio de um Gateway de Aplicativo do Azure.
+1. Os usuários acessam o aplicativo front-end do ASP.NET por meio de um Gateway de Aplicativo do Azure.
 2. O Gateway de Aplicativo distribui o tráfego para instâncias de VM dentro de um conjunto de dimensionamento de máquina virtual do Azure.
-3. O aplicativo ASP.NET conecta-se ao cluster do Microsoft SQL Server em uma camada de back-end por meio de um balanceador de carga do Azure. Essas instâncias do SQL Server de back-end estão em uma rede virtual separada do Azure, protegida pelas regras do grupo de segurança de rede que limitam o fluxo de tráfego.
+3. O aplicativo se conecta ao cluster do Microsoft SQL Server em uma camada de back-end por meio de um balanceador de carga do Azure. Essas instâncias do SQL Server de back-end estão em uma rede virtual separada do Azure, protegida pelas regras do grupo de segurança de rede que limitam o fluxo de tráfego.
 4. O balanceador de carga distribui o tráfego do SQL Server para instâncias de VM em outro conjunto de dimensionamento de máquina virtual.
-5. O Armazenamento de Blobs do Azure atua como uma Testemunha de Nuvem para o cluster do SQL Server na camada de back-end. A conexão de dentro da VNet é habilitado com um ponto de extremidade de serviço de rede virtual para o Armazenamento do Azure.
+5. O Armazenamento de Blobs do Azure atua como uma [testemunha de nuvem][cloud-witness] para o cluster do SQL Server na camada de back-end. A conexão de dentro da VNet é habilitado com um ponto de extremidade de serviço de rede virtual para o Armazenamento do Azure.
 
 ### <a name="components"></a>Componentes
 
@@ -47,7 +48,7 @@ Este cenário aborda um aplicativo de setores regulamentados de várias camadas 
 
 ### <a name="alternatives"></a>Alternativas
 
-* *O Nix, no Windows, pode ser facilmente substituído por vários outros sistemas operacionais como se nada na infraestrutura dependesse do sistema operacional.
+* É possível usar Linux e Windows alternadamente, pois a infraestrutura não depende do sistema operacional.
 
 * [SQL Server para Linux][sql-linux] pode substituir o armazenamento de dados de back-end.
 
@@ -61,7 +62,7 @@ Nesse cenário, as instâncias de VM são implantadas em Zonas de Disponibilidad
 
 A camada de banco de dados pode ser configurada para usar grupos de disponibilidade Always On. Com essa configuração do SQL Server, um banco de dados primário em um cluster é configurado com até oito bancos de dados secundários. Se ocorrer um problema com o banco de dados primário, o cluster faz o failover para um banco de dados secundários, permitindo que o aplicativo continue disponível. Para saber mais informações, confira [Visão geral dos grupos de disponibilidade Always On para SQL Server][sqlalwayson-docs].
 
-Para ver outros tópicos sobre disponibilidade, consulte a [lista de verificação de disponibilidade][availability] no Azure Architecture Center.
+Para conferir mais orientação sobre disponibilidade, confira a [lista de verificação de disponibilidade][availability] no Centro de Arquitetura do Azure.
 
 ### <a name="scalability"></a>Escalabilidade
 
@@ -112,9 +113,9 @@ Nós fornecemos três perfis de custo de exemplo com base no número de instânc
 
 ## <a name="related-resources"></a>Recursos relacionados
 
-Esse cenário usou um conjunto de dimensionamento de máquina virtual de back-end que executa um cluster do Microsoft SQL Server. O Cosmos DB também pode ser usado como uma camada de banco de dados escalonável e segura para os dados de aplicativo. Um [ponto de extremidade de serviço da rede virtual do Azure][vnetendpoint-docs] permite que você possa proteger os recursos essenciais do serviço do Azure somente para suas redes virtuais. Nesse cenário, os pontos de extremidade de rede virtual permitem proteger o tráfego entre a camada de aplicativo front-end e o Cosmos DB. Para saber mais, confira a [Visão geral do Azure Cosmos DB][docs-cosmos-db](/azure/cosmos-db/introduction).
+Esse cenário usou um conjunto de dimensionamento de máquina virtual de back-end que executa um cluster do Microsoft SQL Server. O Cosmos DB também pode ser usado como uma camada de banco de dados escalonável e segura para os dados de aplicativo. Um [ponto de extremidade de serviço da rede virtual do Azure][vnetendpoint-docs] permite que você possa proteger os recursos essenciais do serviço do Azure somente para suas redes virtuais. Nesse cenário, os pontos de extremidade de rede virtual permitem proteger o tráfego entre a camada de aplicativo front-end e o Cosmos DB. Para saber mais, confira a [Visão geral do Azure Cosmos DB](/azure/cosmos-db/introduction).
 
-Você também pode exibir uma [arquitetura detalhada de referência para um aplicativo de N camadas genérico usando o SQL Server][ntiersql-ra].
+Para conferir guias de implementação mais detalhados, examine a [arquitetura de referência para aplicativos de N camadas usando o SQL Server][ntiersql-ra].
 
 <!-- links -->
 [appgateway-docs]: /azure/application-gateway/overview
@@ -137,7 +138,7 @@ Você também pode exibir uma [arquitetura detalhada de referência para um apli
 [pci-dss]: /azure/security/blueprints/pcidss-iaaswa-overview
 [dmz]: /azure/virtual-network/virtual-networks-dmz-nsg
 [sql-linux]: /sql/linux/sql-server-linux-overview?view=sql-server-linux-2017
-
+[cloud-witness]: /windows-server/failover-clustering/deploy-cloud-witness
 [small-pricing]: https://azure.com/e/711bbfcbbc884ef8aa91cdf0f2caff72
 [medium-pricing]: https://azure.com/e/b622d82d79b34b8398c4bce35477856f
 [large-pricing]: https://azure.com/e/1d99d8b92f90496787abecffa1473a93

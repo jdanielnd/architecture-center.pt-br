@@ -1,44 +1,45 @@
 ---
 title: Executar uma VM do Windows no Azure
-description: Como executar uma VM do Windows no Azure, atentando-se para a escalabilidade, resiliência, capacidade de gerenciamento e segurança.
+titleSuffix: Azure Reference Architectures
+description: Melhores práticas para execução de uma máquina virtual com Windows no Azure.
 author: telmosampaio
 ms.date: 09/13/2018
-ms.openlocfilehash: 59e7cf255fcc55c5124e7160d831217ba62a8b88
-ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
+ms.openlocfilehash: 9a6725bfebf468cc3ce7e9ba618d30c30b7d6046
+ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/02/2018
-ms.locfileid: "50916260"
+ms.lasthandoff: 12/08/2018
+ms.locfileid: "53120026"
 ---
-# <a name="run-a-windows-vm-on-azure"></a>Executar uma VM do Windows no Azure
+# <a name="run-a-windows-virtual-machine-on-azure"></a>Executar uma máquina virtual com Windows no Azure
 
-Esse artigo descreve um conjunto de práticas comprovadas para executar uma VM (máquina virtual) no Azure. Ela inclui recomendações para provisionar a VM juntamente com os componentes de rede e armazenamento. [**Implante essa solução.**](#deploy-the-solution)
+Esse artigo descreve um conjunto de práticas comprovadas para execução de uma VM (máquina virtual) com Windows no Azure. Ela inclui recomendações para provisionar a VM juntamente com os componentes de rede e armazenamento. [**Implantar esta solução**](#deploy-the-solution).
 
-![[0]][0]
+![Única arquitetura de VM com Windows no Azure](./images/single-vm-diagram.png)
 
 ## <a name="components"></a>Componentes
 
 O provisionamento de uma VM do Azure requer alguns componentes adicionais além da própria VM, incluindo recursos de rede, armazenamento e computação.
 
-* **Grupo de recursos.** Um [grupo de recursos][resource-manager-overview] é um contêiner lógico que armazena os recursos relacionados ao Azure. Em geral, recursos de grupo baseados em seu tempo de vida e que vão gerenciá-los. 
+- **Grupo de recursos**. Um [grupo de recursos][resource-manager-overview] é um contêiner lógico que armazena os recursos relacionados ao Azure. Em geral, recursos de grupo baseados em seu tempo de vida e que vão gerenciá-los.
 
-* **VM**. Você pode provisionar uma VM a partir de uma lista de imagens publicadas, de um arquivo gerenciado personalizado ou um arquivo de VHD (disco rígido virtual) carregado no armazenamento Blobs do Azure.
+- **VM**. Você pode provisionar uma VM a partir de uma lista de imagens publicadas, de um arquivo gerenciado personalizado ou um arquivo de VHD (disco rígido virtual) carregado no armazenamento Blobs do Azure.
 
-* **Managed Disks**. Os [Azure Managed Disks][managed-disks] simplificam o gerenciamento de disco ao manipular o armazenamento para você. O disco de OS é um VHD armazenado no [Armazenamento do Microsoft Azure ][azure-storage], de modo que ele persiste mesmo quando o computador host está desligado. Também é recomendável criar um ou mais [discos de dados][data-disk], que são VHDs persistentes usados para dados de aplicativo.
+- **Managed Disks**. Os [Azure Managed Disks][managed-disks] simplificam o gerenciamento de disco ao manipular o armazenamento para você. O disco de OS é um VHD armazenado no [Armazenamento do Microsoft Azure ][azure-storage], de modo que ele persiste mesmo quando o computador host está desligado. Também é recomendável criar um ou mais [discos de dados][data-disk], que são VHDs persistentes usados para dados de aplicativo.
 
-* **Disco temporário.** A VM é criada com um disco temporário (a unidade `D:` no Windows). Esse disco é armazenado em uma unidade física no computador host. Ele *não* é salvo no Armazenamento do Microsoft Azure e pode ser excluído durante a reinicialização e outros eventos de ciclo de vida da VM. Use esse disco somente para dados temporários, como arquivos de paginação ou de permuta.
+- **Disco temporário**. A VM é criada com um disco temporário (a unidade `D:` no Windows). Esse disco é armazenado em uma unidade física no computador host. Ele *não* é salvo no Armazenamento do Microsoft Azure e pode ser excluído durante a reinicialização e outros eventos de ciclo de vida da VM. Use esse disco somente para dados temporários, como arquivos de paginação ou de permuta.
 
-* **Rede virtual (VNet).** Cada VM do Azure é implantada em uma VNet que pode ser segmentada em várias sub-redes.
+- **Rede virtual (VNet)**. Cada VM do Azure é implantada em uma VNet que pode ser segmentada em várias sub-redes.
 
-* **NIC (adaptador de rede)**. A NIC permite que a VM se comunique com a rede virtual.  
+- **NIC (adaptador de rede)**. A NIC permite que a VM se comunique com a rede virtual.
 
-* **Endereço IP público.** Um endereço IP público é necessário para se comunicar com a VM &mdash; por exemplo, sobre RDP (área de trabalho remota).  
+- **Endereço IP público**. Um endereço IP público é necessário para se comunicar com a VM &mdash; por exemplo, sobre RDP (área de trabalho remota).
 
-* **DNS do Azure**. [DNS do Azure][azure-dns] é um serviço de hospedagem para domínios DNS, que fornece resolução de nomes usando a infraestrutura do Microsoft Azure. Ao hospedar seus domínios no Azure, você pode gerenciar seus registros DNS usando as mesmas credenciais, APIs, ferramentas e cobrança que seus outros serviços do Azure.
+- **DNS do Azure**. [DNS do Azure][azure-dns] é um serviço de hospedagem para domínios DNS, que fornece resolução de nomes usando a infraestrutura do Microsoft Azure. Ao hospedar seus domínios no Azure, você pode gerenciar seus registros DNS usando as mesmas credenciais, APIs, ferramentas e cobrança que seus outros serviços do Azure.
 
-* **NSG (grupo de segurança de rede)**. Os [Grupos de segurança de rede][nsg] são utilizados para permitir ou recusar o tráfego de rede a VMs. Os NSGs podem ser associados com sub-redes ou com instâncias VM individuais. 
+- **NSG (grupo de segurança de rede)**. Os [Grupos de segurança de rede][nsg] são utilizados para permitir ou recusar o tráfego de rede a VMs. Os NSGs podem ser associados com sub-redes ou com instâncias VM individuais.
 
-* **Diagnósticos.** O registro de diagnóstico é crucial para o gerenciamento e solução de problemas da VM.
+- **Diagnóstico**.  O registro de diagnóstico é crucial para o gerenciamento e solução de problemas da VM.
 
 ## <a name="vm-recommendations"></a>Recomendações de VM
 
@@ -46,17 +47,17 @@ O Azure oferece vários tamanhos de máquinas virtuais diferentes. Para obter ma
 
 Em geral, escolha a região do Azure que esteja mais próxima de seus usuários internos ou clientes. No entanto, nem todos os tamanhos de VM estão disponíveis em todas as regiões. Para obter mais informações, consulte [Serviços por região][services-by-region]. Para obter uma lista dos tamanhos de VM disponíveis em uma região específica, execute o seguinte comando a partir da interface de linha de comando do Azure (CLI):
 
-```
+```azurecli
 az vm list-sizes --location <location>
 ```
 
 Para obter informações sobre como escolher uma imagem de VM publicada, consulte [Localizar imagens de VM do Windows][select-vm-image].
 
-Habilite o monitoramento e diagnóstico, incluindo métricas de integridade básicas, logs de infraestrutura de diagnóstico e [diagnóstico de inicialização][boot-diagnostics]. O diagnóstico de inicialização poderá ajudar a diagnosticar uma falha de inicialização se sua VM entrar em um estado não inicializável. Para saber mais, confira [Habilitar monitoramento e diagnóstico][enable-monitoring].  
+Habilite o monitoramento e diagnóstico, incluindo métricas de integridade básicas, logs de infraestrutura de diagnóstico e [diagnóstico de inicialização][boot-diagnostics]. O diagnóstico de inicialização poderá ajudar a diagnosticar uma falha de inicialização se sua VM entrar em um estado não inicializável. Para saber mais, confira [Habilitar monitoramento e diagnóstico][enable-monitoring].
 
 ## <a name="disk-and-storage-recommendations"></a>Recomendações de disco e de armazenamento
 
-Para um melhor desempenho de E/S de disco, recomendamos o [Armazenamento Premium][premium-storage], que armazena dados em SSDs (unidades de estado sólido). O custo é baseado na capacidade do disco provisionado. O IOPS e a taxa de transferência (ou seja, a taxa de transferência de dados) também dependem do tamanho do disco. Portanto, ao provisionar um disco, considere todos os três fatores (capacidade, IOPS e taxa de transferência). 
+Para um melhor desempenho de E/S de disco, recomendamos o [Armazenamento Premium][premium-storage], que armazena dados em SSDs (unidades de estado sólido). O custo é baseado na capacidade do disco provisionado. O IOPS e a taxa de transferência (ou seja, a taxa de transferência de dados) também dependem do tamanho do disco. Portanto, ao provisionar um disco, considere todos os três fatores (capacidade, IOPS e taxa de transferência).
 
 Também é recomendável usar [Managed Disks][managed-disks]. Os discos gerenciados não exigem uma conta de armazenamento. Você simplesmente especifica o tamanho e o tipo de disco e é implantado como um recurso altamente disponível.
 
@@ -67,13 +68,12 @@ Crie uma conta de armazenamento para manter os logs de diagnóstico. Uma conta L
 > [!NOTE]
 > Se você não estiver usando Managed Disks, crie contas de armazenamento do Azure separadas para que cada VM contenha os VHDs (discos rígidos virtuais), evitando, assim, atingir os [limites (de IOPS)][vm-disk-limits] para contas de armazenamento. Esteja ciente dos limites de E/S totais da conta de armazenamento. Para saber mais, confira [limites de disco da máquina virtual][vm-disk-limits].
 
-
 ## <a name="network-recommendations"></a>Recomendações de rede
 
 Esse endereço IP público pode ser dinâmico ou estático. O padrão é dinâmico.
 
-* Reserve um [endereço IP estático][static-ip] se precisar de um endereço IP fixo que não mudará, &mdash;por exemplo, se precisar criar um registro 'A' de DNS ou adicionar o IP endereço para uma lista segura.
-* Você também pode criar um FQDN (nome de domínio totalmente qualificado) para o endereço IP. Em seguida, é possível registrar um [registro CNAME][cname-record] no DNS que aponta para o FQDN. Para saber mais, consulte [Criar um nome de domínio totalmente qualificado no Portal do Azure][fqdn].
+- Reserve um [endereço IP estático][static-ip] se precisar de um endereço IP fixo que não mudará, &mdash;por exemplo, se precisar criar um registro 'A' de DNS ou adicionar o IP endereço para uma lista segura.
+- Você também pode criar um FQDN (nome de domínio totalmente qualificado) para o endereço IP. Em seguida, é possível registrar um [registro CNAME][cname-record] no DNS que aponta para o FQDN. Para saber mais, consulte [Criar um nome de domínio totalmente qualificado no Portal do Azure][fqdn].
 
 Todos os NSGs contêm um conjunto de [regras padrão][nsg-default-rules], incluindo uma regra que bloqueia todo o tráfego de Internet de entrada. As regras padrão não podem ser excluídas, mas outras regras podem substituí-las. Para habilitar o tráfego de Internet, crie regras que permitam o tráfego de entrada em portas específicas &mdash; por exemplo, a porta 80 para HTTP.
 
@@ -93,45 +93,45 @@ Para se proteger contra perda acidental de dados durante operações normais (po
 
 ## <a name="manageability-considerations"></a>Considerações sobre capacidade de gerenciamento
 
-**Grupos de recursos.** Coloque recursos estreitamente associados que compartilhem o mesmo ciclo de vida no mesmo [grupo de recursos][resource-manager-overview]. Os grupos de recursos permitem implantar e monitorar recursos como um grupo e rastrear custos de cobrança por grupo de recursos. Também é possível excluir recursos como um conjunto, o que é muito útil para implantações de teste. Atribua nomes de recursos significativos para simplificar a localização de um recurso específico e o reconhecimento de sua função. Para obter mais informações, consulte as [Convenções de nomenclatura recomendadas para os Recursos do Azure][naming-conventions].
+**Grupos de recursos**. Coloque recursos estreitamente associados que compartilhem o mesmo ciclo de vida no mesmo [grupo de recursos][resource-manager-overview]. Os grupos de recursos permitem implantar e monitorar recursos como um grupo e rastrear custos de cobrança por grupo de recursos. Também é possível excluir recursos como um conjunto, o que é muito útil para implantações de teste. Atribua nomes de recursos significativos para simplificar a localização de um recurso específico e o reconhecimento de sua função. Para obter mais informações, consulte as [Convenções de nomenclatura recomendadas para os Recursos do Azure][naming-conventions].
 
-**Interrompendo uma VM.** O Azure faz uma distinção entre os estados "parado" e "desalocado". Você será cobrado quando o status da VM for interrompido, mas não quando a VM for desalocada. No Portal do Azure, o botão **Parar** desaloca a VM. No entanto, se você desligar por meio do sistema operacional enquanto estiver conectado, a VM será interrompida, mas **não** desalocada e, portanto, você ainda será cobrado.
+**Interromper uma VM**. O Azure faz uma distinção entre os estados "parado" e "desalocado". Você será cobrado quando o status da VM for interrompido, mas não quando a VM for desalocada. No Portal do Azure, o botão **Parar** desaloca a VM. No entanto, se você desligar por meio do sistema operacional enquanto estiver conectado, a VM será interrompida, mas **não** desalocada e, portanto, você ainda será cobrado.
 
-**Excluindo uma VM.** Se você excluir uma VM, os VHDs não serão excluídos. Isso significa que você poderá excluir com segurança a VM sem perda de dados. No entanto, você ainda será cobrado pelo armazenamento. Para excluir o VHD, exclua o arquivo do [Armazenamento de blobs][blob-storage]. Para evitar a exclusão acidental, use um [bloqueio de recurso][resource-lock] para bloquear o grupo de recursos inteiro ou bloquear recursos individuais, como uma VM.
+**Excluir uma VM**.  Se você excluir uma VM, os VHDs não serão excluídos. Isso significa que você poderá excluir com segurança a VM sem perda de dados. No entanto, você ainda será cobrado pelo armazenamento. Para excluir o VHD, exclua o arquivo do [Armazenamento de blobs][blob-storage]. Para evitar a exclusão acidental, use um [bloqueio de recurso][resource-lock] para bloquear o grupo de recursos inteiro ou bloquear recursos individuais, como uma VM.
 
 ## <a name="security-considerations"></a>Considerações de segurança
 
 Use a [Central de Segurança do Azure][security-center] para obter uma exibição central do estado da segurança de seus recursos do Azure. A Central de Segurança monitora problemas de segurança potenciais e fornece uma visão abrangente da integridade de segurança de sua implantação. A Central de Segurança é configurada por assinatura do Azure. Habilite a coleta de dados de segurança, conforme descrito no [Guia de início rápido da Central de Segurança do Azure][security-center-get-started]. Depois que a coleta de dados for habilitada, a Central de Segurança examinará automaticamente todas as VMs criadas nessa assinatura.
 
-**Gerenciamento de patch.** Se for habilitada, a Central de Segurança verificará se quaisquer atualizações críticas e de segurança estão ausentes. Use as [Configurações da Política de Grupo][group-policy] na VM para habilitar as atualizações automáticas do sistema.
+**Gerenciamento de patch**. Se for habilitada, a Central de Segurança verificará se quaisquer atualizações críticas e de segurança estão ausentes. Use as [Configurações da Política de Grupo][group-policy] na VM para habilitar as atualizações automáticas do sistema.
 
-**Antimalware.** Se for habilitada, a Central de Segurança verificará se o software antimalware está instalado. Você também pode usar a Central de Segurança para instalar o software antimalware por meio do Portal do Azure.
+**Antimalware**.  Se for habilitada, a Central de Segurança verificará se o software antimalware está instalado. Você também pode usar a Central de Segurança para instalar o software antimalware por meio do Portal do Azure.
 
-**Operações.** Use o [RBAC (controle de acesso baseado em função)][rbac] para controlar o acesso aos recursos do Azure implantados. O RBAC permite atribuir funções de autorização aos membros de sua equipe de DevOps. Por exemplo, a função Leitor pode exibir os recursos do Azure, mas não criar, gerenciar nem excluí-los. Algumas funções são específicas a determinados tipos de recursos do Azure. Por exemplo, a função Colaborador da Máquina Virtual pode reiniciar ou desalocar uma VM, redefinir a senha de administrador, criar uma nova VM e, assim por diante. Outras [funções RBAC internas][rbac-roles] que podem ser úteis para esta arquitetura incluem [Usuário de DevTest Labs][rbac-devtest] e [Colaborador de Rede][rbac-network]. Um usuário pode ser atribuído a várias funções, e você pode criar funções personalizadas para permissões ainda mais refinadas.
+**Operações**. Use o [RBAC (controle de acesso baseado em função)][rbac] para controlar o acesso aos recursos do Azure implantados. O RBAC permite atribuir funções de autorização aos membros de sua equipe de DevOps. Por exemplo, a função Leitor pode exibir os recursos do Azure, mas não criar, gerenciar nem excluí-los. Algumas funções são específicas a determinados tipos de recursos do Azure. Por exemplo, a função Colaborador da Máquina Virtual pode reiniciar ou desalocar uma VM, redefinir a senha de administrador, criar uma nova VM e, assim por diante. Outras [funções RBAC internas][rbac-roles] que podem ser úteis para esta arquitetura incluem [Usuário de DevTest Labs][rbac-devtest] e [Colaborador de Rede][rbac-network]. Um usuário pode ser atribuído a várias funções, e você pode criar funções personalizadas para permissões ainda mais refinadas.
 
 > [!NOTE]
-> O RBAC não limita as ações que podem ser executadas por um usuário conectado a uma VM. Essas permissões são determinadas pelo tipo de conta no SO convidado.   
+> O RBAC não limita as ações que podem ser executadas por um usuário conectado a uma VM. Essas permissões são determinadas pelo tipo de conta no SO convidado.
 
 Use os [logs de auditoria][audit-logs] para ver as ações de provisionamento e outros eventos da VM.
 
-**Criptografia de dados.** Considere o uso do [Azure Disk Encryption][disk-encryption] se você precisar criptografar os discos do sistema operacional e de dados. 
+**Criptografia de dados**. Considere o uso do [Azure Disk Encryption][disk-encryption] se você precisar criptografar os discos do sistema operacional e de dados.
 
-**Proteção contra DDoS**. É recomendável habilitar a [Proteção contra DDoS Standard](/azure/virtual-network/ddos-protection-overview), que fornece a mitigação de DDoS adicional para os recursos em uma VNet. Embora a proteção contra DDoS básica seja habilitada automaticamente como parte da plataforma Azure, a Proteção contra DDoS Standard fornece funcionalidades de mitigação ajustadas especificamente para os recursos da Rede Virtual do Azure.  
+**Proteção contra DDoS**. É recomendável habilitar a [Proteção contra DDoS Standard](/azure/virtual-network/ddos-protection-overview), que fornece a mitigação de DDoS adicional para os recursos em uma VNet. Embora a proteção contra DDoS básica seja habilitada automaticamente como parte da plataforma Azure, a Proteção contra DDoS Standard fornece funcionalidades de mitigação ajustadas especificamente para os recursos da Rede Virtual do Azure.
 
 ## <a name="deploy-the-solution"></a>Implantar a solução
 
 Uma implantação para essa arquitetura está disponível no [GitHub][github-folder]. Ela implanta o seguinte:
 
-  * Uma rede virtual com uma única sub-rede denominada **Web** usada para hospedar a VM.
-  * Um NSG com duas regras de entrada para permitir tráfego RDP e HTTP para a VM.
-  * Uma VM que executa a versão mais recente do Windows Server 2016 Datacenter Edition.
-  * Uma extensão de script personalizado de exemplo que formata os dois discos de dados e um script do PowerShell DSC que implanta o IIS (Serviços de Informações da Internet).
+- Uma rede virtual com uma única sub-rede denominada **Web** usada para hospedar a VM.
+- Um NSG com duas regras de entrada para permitir tráfego RDP e HTTP para a VM.
+- Uma VM que executa a versão mais recente do Windows Server 2016 Datacenter Edition.
+- Uma extensão de script personalizado de exemplo que formata os dois discos de dados e um script do PowerShell DSC que implanta o IIS (Serviços de Informações da Internet).
 
 ### <a name="prerequisites"></a>Pré-requisitos
 
 [!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 
-### <a name="deploy-the-solution-using-azbb"></a>Implantar a solução usando azbb
+### <a name="deployment-steps"></a>Etapas de implantação.
 
 Para implantar essa arquitetura de referência, siga estas etapas:
 
@@ -139,20 +139,20 @@ Para implantar essa arquitetura de referência, siga estas etapas:
 
 2. Abra o arquivo `single-vm-v2.json` e insira um nome de usuário e senha entre aspas, depois salve o arquivo.
 
-  ```bash
-  "adminUsername": "",
-  "adminPassword": "",
-  ```
+    ```json
+    "adminUsername": "",
+    "adminPassword": "",
+    ```
 
 3. Execute `azbb` para implantar a VM de exemplo conforme mostrado abaixo.
 
-  ```bash
+  ```azurecli
   azbb -s <subscription_id> -g <resource_group_name> -l <location> -p single-vm-v2.json --deploy
   ```
 
 Para verificar a implantação, execute o seguinte comando da CLI do Azure para localizar o endereço IP público da VM:
 
-```bash
+```azurecli
 az vm show -n ra-single-windows-vm1 -g <resource-group-name> -d -o table
 ```
 
@@ -208,4 +208,3 @@ Para obter informações sobre como personalizar essa implantação, visite noss
 [vm-resize]: /azure/virtual-machines/virtual-machines-linux-change-vm-size
 [vm-size-tables]: /azure/virtual-machines/virtual-machines-windows-sizes
 [vm-sla]: https://azure.microsoft.com/support/legal/sla/virtual-machines
-[0]: ./images/single-vm-diagram.png "Única arquitetura de VM do Windows no Azure"

@@ -3,12 +3,13 @@ title: Executar simulações da dinâmica dos fluidos computacional (CFD) no Azu
 description: Execute a dinâmica dos fluidos computacional (CFD) no Azure.
 author: mikewarr
 ms.date: 09/20/2018
-ms.openlocfilehash: f32e055838d6c62584130f61a0d92b06cc46ec63
-ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
+ms.custom: fasttrack
+ms.openlocfilehash: 42921122d74d07bf890f55be61b04c7e9a4f4e87
+ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "51610627"
+ms.lasthandoff: 12/06/2018
+ms.locfileid: "53004649"
 ---
 # <a name="running-computational-fluid-dynamics-cfd-simulations-on-azure"></a>Executar simulações da dinâmica dos fluidos computacional (CFD) no Azure
 
@@ -89,12 +90,12 @@ O custo de executar uma implantação de HPC usando o servidor do CycleCloud var
 
 Este cenário mostra como os aplicativos de CFD podem ser executados no Azure, as máquinas exigirão a funcionalidade de RDMA, que só está disponível em tamanhos específicos de máquina virtual. Veja a seguir exemplos de custos gerados para um conjunto de dimensionamento alocado continuamente oito horas por dia durante um mês, com saída de dados de 1 TB. Isso inclui também o preço do servidor do Azure CycleCloud e da instalação do Avere vFXT para Azure:
 
-* Região: Europa Setentrional
-* Servidor do Azure CycleCloud: 1x D3 Standard (4x CPUs, 14 GB de Memória, HDD Standard de 32 GB)
-* Servidor do Azure CycleCloud Master: 1x D12 Standard (4x CPUs, 28 GB de Memória, HDD Standard de 32 GB)
-* Matriz do Nó do Azure CycleCloud: 10x H16r Standard (16x CPUs, 112 GB de Memória)
-* Avere vFXT no Cluster do Azure: 3x D16s v3 (200 GB OS, disco de dados SSD Premium de 1-TB)
-* Saída de Dados: 1 TB
+* Região: Norte da Europa
+* Servidor Azure CycleCloud: 1 x Standard D3 (4 x CPUs, 14 GB de memória, Standard HDD 32 GB)
+* Servidor mestre Azure CycleCloud: 1 x Standard D12 v (4 x CPUs, 28 GB de memória, Standard HDD 32 GB)
+* Matriz de Nó do Azure CycleCloud: 10 x Standard H16r (16 x CPUs, 112 GB de memória)
+* Avere vFXT no Azure Cluster: 3 x D16s v3 (Sistema operacional 200 GB, disco de dados Premium SSD 1-TB)
+* Saída de Dados: 1 TB
 
 Analise esta [estimativa de preço][pricing] do hardware listado acima.
 

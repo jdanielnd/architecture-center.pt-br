@@ -1,19 +1,20 @@
 ---
 title: Lista de verificação de disponibilidade
+titleSuffix: Azure Design Review Framework
 description: Lista de verificação que fornece orientação para questões de disponibilidade durante a criação.
 author: dragon119
-ms.date: 01/10/2018
+ms.date: 11/26/2018
 ms.custom: checklist
-ms.openlocfilehash: 5a819c5612fba9623c239bcc43f9004cd97dfb76
-ms.sourcegitcommit: 1b5411f07d74f0a0680b33c266227d24014ba4d1
+ms.openlocfilehash: 37e61b35d73007b9bac1ebaecfbf42792ae3903b
+ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/26/2018
-ms.locfileid: "52305886"
+ms.lasthandoff: 12/12/2018
+ms.locfileid: "53307224"
 ---
 # <a name="availability-checklist"></a>Lista de verificação de disponibilidade
 
-Disponibilidade é a proporção de tempo na qual um sistema é funcional e está operando, e é um dos [pilares da qualidade de software](../guide/pillars.md). Use essa lista de verificação para analisar a arquitetura do aplicativo sob um ponto de vista de disponibilidade. 
+Disponibilidade é a proporção de tempo na qual um sistema é funcional e está operando, e é um dos [pilares da qualidade de software](../guide/pillars.md). Use essa lista de verificação para analisar a arquitetura do aplicativo sob um ponto de vista de disponibilidade.
 
 ## <a name="application-design"></a>Design do aplicativo
 
@@ -29,7 +30,7 @@ Disponibilidade é a proporção de tempo na qual um sistema é funcional e est�
 
 **Criar aplicativos que degradem normalmente.** A carga em um aplicativo pode exceder a capacidade de uma ou mais partes, causando disponibilidade reduzida e conexões com falha. O dimensionamento pode ajudar a minimizar esse problema, mas ele pode atingir um limite imposto por outros fatores como disponibilidade de recursos ou custo. Quando um aplicativo atinge o limite de um recurso, ele deve tomar uma ação apropriada para minimizar o impacto para o usuário. Por exemplo, em um sistema de comércio eletrônico, se o subsistema de processamento de pedidos estiver sobrecarregado ou falhar, ele poderá ser desabilitado temporariamente, enquanto permite outras funcionalidades, como procurar no catálogo de produtos. Pode ser apropriado adiar solicitações a um subsistema com falha permitindo ainda, por exemplo, que os clientes enviem pedidos, mas salvando-os para processamento posterior, quando o subsistema de pedidos estiver disponível novamente.
 
-**Tratar eventos rápidos de intermitência normalmente.** A maioria dos aplicativos precisa lidar com cargas de trabalho que variam ao longo do tempo. O dimensionamento automático pode ajudar a lidar com a carga, mas pode levar algum tempo para instâncias adicionais ficarem online e tratarem das solicitações. Evite que picos de atividade repentinos e inesperados sobrecarreguem o aplicativo: projete-o de modo que coloque em fila as solicitações para os serviços que usa e diminua normalmente o processamento quando as filas estiverem próximas da capacidade total. Verifique se há desempenho e capacidade disponível suficientes sob condições sem intermitência para esvaziar as filas e tratar de solicitações pendentes. Para obter mais informações, consulte a [Padrão de Nivelamento de Carga Baseado em Fila](https://msdn.microsoft.com/library/dn589783.aspx).
+**Tratar eventos rápidos de intermitência normalmente.** A maioria dos aplicativos precisa lidar com cargas de trabalho que variam ao longo do tempo. O dimensionamento automático pode ajudar a lidar com a carga, mas pode levar algum tempo para instâncias adicionais ficarem online e tratarem das solicitações. Evite que picos de atividade repentinos e inesperados sobrecarreguem o aplicativo: projete-o de modo que coloque em fila as solicitações para os serviços que usa e diminua normalmente o processamento quando as filas estiverem próximas da capacidade total. Verifique se há desempenho e capacidade disponível suficientes sob condições sem intermitência para esvaziar as filas e tratar de solicitações pendentes. Para saber mais, confira [Padrão de nivelamento de carga baseado em fila](../patterns/queue-based-load-leveling.md).
 
 ## <a name="deployment-and-maintenance"></a>Implantação e manutenção
 
@@ -55,7 +56,7 @@ Disponibilidade é a proporção de tempo na qual um sistema é funcional e est�
 
 **Use backup periódico e restauração pontual**. Faça regularmente e automaticamente o backup de dados que não são preservados em outro local; além disso, verifique se é possível restaurar de modo confiável tanto os dados quanto o aplicativo em si caso uma falha ocorra. Verifique se os backups atendem ao seu Objetivo de Ponto de Recuperação (RPO). A replicação de dados não é um recurso de backup porque o erro humano ou operações maliciosas podem corromper dados em todas as réplicas. O processo de backup deve ser seguro, para proteger os dados em trânsito e em armazenamento. Bancos de dados ou partes de um repositório de dados podem geralmente ser recuperados para seu estado em um ponto anterior no tempo, usando logs de transação. Para obter mais informações, confira [Recuperação de dados corrompidos ou exclusão acidental](../resiliency/recovery-data-corruption.md)
 
-**Replique discos de VMs usando o Azure Site Recovery.** Quando você replicar VMs do Azure usando a [Recuperação de Site][site-recovery], todos os discos de VM serão replicados continuamente para a região de destino assincronamente. Os pontos de replicação são criados a cada poucos minutos. Isso fornece um RPO na ordem de minutos. 
+**Replique discos de VMs usando o Azure Site Recovery.** Quando você replicar VMs do Azure usando a [Recuperação de Site][site-recovery], todos os discos de VM serão replicados continuamente para a região de destino assincronamente. Os pontos de replicação são criados a cada poucos minutos. Isso fornece um RPO na ordem de minutos.
 
 ## <a name="errors-and-failures"></a>Erros e falhas
 
@@ -63,7 +64,7 @@ Disponibilidade é a proporção de tempo na qual um sistema é funcional e est�
 
 **Repita operações com falha causadas por falhas transitórias.**  Crie uma estratégia de repetição para acessar todos os serviços e recursos nos casos em que eles não oferecem suporte inerente a repetição automática de conexão. Use uma estratégia que inclui um atraso cada vez maior entre as repetições à medida que o número de falhas aumenta, a fim de evitar a sobrecarga do recurso e permitir que ele se recupere normalmente e processe as solicitações em fila. Repetições contínuas com atrasos muito curtos provavelmente agravarão o problema. Para saber mais, consulte [Diretrizes de repetição para serviços específicos](../best-practices/retry-service-specific.md).
 
-**Implemente a interrupção de circuito para evitar falhas em cascata.** Pode haver situações nas quais falhas transitórias ou de outro tipo, que variam quanto à severidade desde uma perda parcial de conectividade até falha total de um serviço, demoram muito mais que o esperado para retornar ao normal. Se um serviço estiver muito ocupado, uma falha em uma parte do sistema pode levar a falhas em cascata e resultar no bloqueio de muitas operações, além de ocupar, simultaneamente, recursos críticos do sistema, como memória, threads e conexões de banco de dados. Em vez de repetir continuamente uma operação com pouca probabilidade de êxito, o aplicativo deve aceitar rapidamente que a operação falhou e lidar normalmente com essa falha. Use o Padrão de Disjuntor para rejeitar as solicitações para operações específicas por períodos definidos. Para saber mais, veja [Padrão de Disjuntor](../patterns/circuit-breaker.md).
+**Implemente a interrupção de circuito para evitar falhas em cascata.** Pode haver situações nas quais falhas transitórias ou de outro tipo, que variam quanto à severidade desde uma perda parcial de conectividade até falha total de um serviço, demoram muito mais que o esperado para retornar ao normal. Se um serviço estiver muito ocupado, uma falha em uma parte do sistema pode levar a falhas em cascata e resultar no bloqueio de muitas operações, além de ocupar, simultaneamente, recursos críticos do sistema, como memória, threads e conexões de banco de dados. Em vez de repetir continuamente uma operação com pouca probabilidade de êxito, o aplicativo deve aceitar rapidamente que a operação falhou e lidar normalmente com essa falha. Use o Padrão de Disjuntor para rejeitar as solicitações para operações específicas por períodos definidos. Para saber mais, confira [Padrão de disjuntor](../patterns/circuit-breaker.md).
 
 **Componha ou faça fallback para vários componentes.** Crie aplicativos para usar múltiplas instâncias sem afetar a operação e as conexões existentes, sempre que possível. Use múltiplas instâncias e distribua solicitações entre elas. Além disso, detecte instâncias com falha e evite enviar solicitações a elas, para maximizar a disponibilidade.
 
@@ -79,7 +80,7 @@ Disponibilidade é a proporção de tempo na qual um sistema é funcional e est�
 
 **Teste os sistemas de monitoramento.**  Sistemas automatizados de failover e fallback e visualização manual de desempenho e integridade do sistema pelo uso de painéis dependem, todos, do funcionamento correto da instrumentação e do monitoramento. Se esses elementos falharem, perderem informações essenciais ou relatarem dados imprecisos, um operador poderá deixar de perceber que o sistema não está íntegro ou que está falhando.
 
-**Acompanhe o progresso de fluxos de trabalho de longa execução e tente novamente em caso de falha.** Fluxos de trabalho de longa execução geralmente são compostos de várias etapas. Certifique-se de que cada etapa seja independente e possa ser repetida para minimizar a chance de que todo o fluxo de trabalho precise ser revertido, ou que várias transações de compensação precisem ser executadas. Monitore e gerencie o progresso de fluxos de trabalho de longa duração implementando um padrão como o [Scheduler Agent Supervisor Pattern](../patterns/scheduler-agent-supervisor.md).
+**Acompanhe o progresso de fluxos de trabalho de longa execução e tente novamente em caso de falha.** Fluxos de trabalho de longa execução geralmente são compostos de várias etapas. Certifique-se de que cada etapa seja independente e possa ser repetida para minimizar a chance de que todo o fluxo de trabalho precise ser revertido, ou que várias transações de compensação precisem ser executadas. Monitore e gerencie o progresso de fluxos de trabalho de longa duração implementando um padrão como o [Padrão de supervisor de agente do agendador](../patterns/scheduler-agent-supervisor.md).
 
 **Planeje-se para a eventualidade de uma recuperação de desastre.** Crie um plano totalmente testado e aceito para a recuperação de qualquer tipo de falha que possa afetar a disponibilidade do sistema. Escolha uma arquitetura de recuperação de desastres em vários locais para os aplicativos de missão crítica. Identifique um proprietário específico do plano de recuperação de desastres, incluindo automação e testes. Certifique-se de que o plano esteja bem documentado e automatize o processo tanto quanto possível. Estabeleça uma estratégia de backup para todos os dados de referência e transacionais e teste a restauração desses backups regularmente. Treine a equipe de operações para executar o plano e executar regularmente simulações de desastres para validar e aprimorar o plano. Se você estiver usando o [Azure Site Recovery][site-recovery] para replicar máquinas virtuais, crie um plano de recuperação totalmente automatizado para fazer o failover de todo o aplicativo em questão de minutos.
 
@@ -87,4 +88,3 @@ Disponibilidade é a proporção de tempo na qual um sistema é funcional e est�
 [availability-sets]:/azure/virtual-machines/virtual-machines-windows-manage-availability/
 [site-recovery]: /azure/site-recovery/
 [site-recovery-test]: /azure/site-recovery/site-recovery-test-failover-to-azure
-

@@ -1,42 +1,42 @@
 ---
 title: Convenções de nomenclatura para recursos do Azure
-description: Convenções de nomenclatura para recursos do Azure. Como nomear máquinas virtuais, contas de armazenamento, redes, redes virtuais, sub-redes e outras entidades do Azure
+titleSuffix: Best practices for cloud applications
+description: Recomendações para nomear máquinas virtuais, contas de armazenamento, redes, redes virtuais, sub-redes e outras entidades do Azure.
 author: telmosampaio
 ms.date: 10/19/2018
-pnp.series.title: Best Practices
-ms.openlocfilehash: 891fa774442ab7ec8f65eb7d8c405fa533db4760
-ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
+ms.custom: seodec18
+ms.openlocfilehash: 4f934102acea24e8e1070ed6a25d63927f0bd252
+ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/02/2018
-ms.locfileid: "50916525"
+ms.lasthandoff: 12/12/2018
+ms.locfileid: "53307071"
 ---
-# <a name="naming-conventions"></a>Convenções de nomenclatura
+# <a name="naming-conventions-for-azure-resources"></a>Convenções de nomenclatura para recursos do Azure
 
-[!INCLUDE [header](../_includes/header.md)]
-
-Este artigo é um resumo das regras e restrições de nomenclatura para recursos do Azure e um conjunto de recomendações para convenções de nomenclatura.  Você pode usar essas recomendações como um ponto de partida para suas próprias convenções específicas às suas necessidades.
+Este artigo é um resumo das regras e restrições de nomenclatura para recursos do Azure e um conjunto de recomendações para convenções de nomenclatura. Você pode usar essas recomendações como um ponto de partida para suas próprias convenções específicas às suas necessidades.
 
 A escolha de um nome para qualquer recurso do Microsoft Azure é importante, pois:
 
-* É difícil alterar um nome posteriormente.
-* Os nomes devem atender aos requisitos de seu tipo de recurso específico.
+- É difícil alterar um nome posteriormente.
+- Os nomes devem atender aos requisitos de seu tipo de recurso específico.
 
 Convenções de nomenclatura consistentes facilitam a localização dos recursos. Elas também podem indicar a função de um recurso em uma solução.
 
 A chave para o sucesso com convenções de nomenclatura é estabelecê-las e segui-las em seus aplicativos e organizações.
 
 ## <a name="naming-subscriptions"></a>Nomeando assinaturas
-Ao nomear as assinaturas do Azure, nomes detalhados facilitam a compreensão do contexto e da finalidade de cada assinatura.  Ao trabalhar em um ambiente com várias assinaturas, seguir uma convenção de nomenclatura compartilhada pode proporcionar mais clareza.
+
+Ao nomear as assinaturas do Azure, nomes detalhados facilitam a compreensão do contexto e da finalidade de cada assinatura. Ao trabalhar em um ambiente com várias assinaturas, seguir uma convenção de nomenclatura compartilhada pode proporcionar mais clareza.
 
 Este é um padrão recomendado para nomear assinaturas:
 
 `<Company> <Department (optional)> <Product Line (optional)> <Environment>`
 
-* A empresa seria a mesma para cada assinatura. No entanto, algumas empresas podem ter empresas filho dentro da estrutura organizacional. Essas empresas podem ser gerenciadas por um grupo central de TI. Nesses casos, elas podem ser diferenciadas tendo o nome da empresa pai (*Contoso*) e o nome da empresa filho (*Northwind*).
-* O departamento é um nome dentro da organização que contém um grupo de indivíduos. Esse item no namespace é opcional.
-* A linha de produtos é um nome específico de um produto ou uma função executada de dentro do departamento. Geralmente isso opcional para serviços e aplicativos internos. Porém, é altamente recomendado para uso em serviços públicos que exigem separação e identificação fácil (como no caso da separação clara de registros de cobrança).
-* O ambiente é o nome que descreve o ciclo de vida de implantação dos aplicativos ou serviços, como Desenvolvimento, Controle de Qualidade ou Produção.
+- A empresa seria a mesma para cada assinatura. No entanto, algumas empresas podem ter empresas filho dentro da estrutura organizacional. Essas empresas podem ser gerenciadas por um grupo central de TI. Nesses casos, elas podem ser diferenciadas tendo o nome da empresa pai (*Contoso*) e o nome da empresa filho (*Northwind*).
+- O departamento é um nome dentro da organização que contém um grupo de indivíduos. Esse item no namespace é opcional.
+- A linha de produtos é um nome específico de um produto ou uma função executada de dentro do departamento. Geralmente isso opcional para serviços e aplicativos internos. Porém, é altamente recomendado para uso em serviços públicos que exigem separação e identificação fácil (como no caso da separação clara de registros de cobrança).
+- O ambiente é o nome que descreve o ciclo de vida de implantação dos aplicativos ou serviços, como Desenvolvimento, Controle de Qualidade ou Produção.
 
 | Empresa | Departamento | Linha de produto ou serviço | Ambiente | Nome completo |
 | --- | --- | --- | --- | --- |
@@ -45,16 +45,16 @@ Este é um padrão recomendado para nomear assinaturas:
 | Contoso |IT |InternalApps |Produção |Contoso IT InternalApps Produção |
 | Contoso |IT |InternalApps |Desenvolvimento |Contoso IT InternalApps Desenvolvimento |
 
-Para obter mais informações sobre como organizar as assinaturas de grandes empresas, consulte [Scaffold corporativo do Azure - governança de assinatura prescritiva][scaffold].
+Para saber mais sobre como organizar as assinaturas de grandes empresas, consulte [Scaffold corporativo do Azure - governança de assinatura prescritiva](/azure/architecture/cloud-adoption/appendix/azure-scaffold).
 
 ## <a name="use-affixes-to-avoid-ambiguity"></a>Use afixos para evitar ambiguidade
 
-Ao nomear recursos no Azure, recomendamos o uso de prefixos ou sufixos comuns para identificar o tipo e o contexto do recurso.  Embora todas as informações sobre o tipo, os metadados e o contexto estejam disponíveis de modo programático, a aplicação de afixos comuns simplifica a identificação visual.  Ao incorporar afixos à sua convenção de nomenclatura, é importante especificar claramente se o afixo fica no início do nome (prefixo) ou no final (sufixo).
+Ao nomear recursos no Azure, recomendamos o uso de prefixos ou sufixos comuns para identificar o tipo e o contexto do recurso. Embora todas as informações sobre o tipo, os metadados e o contexto estejam disponíveis de modo programático, a aplicação de afixos comuns simplifica a identificação visual. Ao incorporar afixos à sua convenção de nomenclatura, é importante especificar claramente se o afixo fica no início do nome (prefixo) ou no final (sufixo).
 
 Por exemplo, veja dois nomes possíveis para um serviço que hospeda um mecanismo de cálculo:
 
-* SvcCalculationEngine (prefixo)
-* CalculationEngineSvc (sufixo)
+- SvcCalculationEngine (prefixo)
+- CalculationEngineSvc (sufixo)
 
 Os afixos podem se referir a diversos aspectos que descrevam os recursos em questão. A tabela a seguir mostra alguns exemplos normalmente usados.
 
@@ -70,7 +70,7 @@ Ao desenvolver uma convenção de nomenclatura específica para sua empresa ou s
 
 ## <a name="naming-rules-and-restrictions"></a>Regras e restrições de nomenclatura
 
-Cada tipo de recurso ou serviço no Azure impõe um conjunto de restrições de nomes e escopo; qualquer convenção de nomenclatura ou padrão deve aderir às regras de nomeação e escopo de requisito.  Por exemplo, embora o nome de uma VM mapeie para um nome DNS (e, portanto, deve ser exclusivo em todo o Azure), o nome de uma rede virtual está no escopo do Grupo de Recursos no qual ele é criado.
+Cada tipo de recurso ou serviço no Azure impõe um conjunto de restrições de nomes e escopo; qualquer convenção de nomenclatura ou padrão deve aderir às regras de nomeação e escopo de requisito. Por exemplo, embora o nome de uma VM mapeie para um nome DNS (e, portanto, deve ser exclusivo em todo o Azure), o nome de uma rede virtual está no escopo do Grupo de Recursos no qual ele é criado.
 
 Em geral, evite usar caracteres especiais (`-` ou `_`) como o primeiro ou último caractere em qualquer nome. Esses caracteres farão com que a maioria das regras de validação falhe.
 
@@ -78,7 +78,7 @@ Em geral, evite usar caracteres especiais (`-` ou `_`) como o primeiro ou últim
 
 | Entidade | Escopo | Comprimento | Capitalização | Caracteres válidos | Padrão sugerido | Exemplo |
 | --- | --- | --- | --- | --- | --- | --- |
-|Grupo de recursos |Assinatura |1-90 |Não diferencia maiúsculas de minúsculas |Alfanumérico, sublinhado, parênteses, hífen, um período (exceto no final) e caracteres Unicode que correspondem ao regex documentado [aqui](/rest/api/resources/resourcegroups/createorupdate).  |`<service short name>-<environment>-rg` |`profx-prod-rg` |
+|Grupo de recursos |Assinatura |1-90 |Não diferencia maiúsculas de minúsculas |Alfanumérico, sublinhado, parênteses, hífen, um período (exceto no final) e caracteres Unicode que correspondem ao regex documentado [aqui](/rest/api/resources/resourcegroups/createorupdate). |`<service short name>-<environment>-rg` |`profx-prod-rg` |
 |Conjunto de disponibilidade |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, sublinhado e hífen |`<service-short-name>-<context>-as` |`profx-sql-as` |
 |Marca |Entidade associada |512 (nome), 256 (valor) |Não diferencia maiúsculas de minúsculas |Alfanumérico |`"key" : "value"` |`"department" : "Central IT"` |
 
@@ -126,10 +126,9 @@ Em geral, evite usar caracteres especiais (`-` ou `_`) como o primeiro ou últim
 | --- | --- | --- | --- | --- | --- | --- |
 |Registro de Contêiner | Global |5 a 50 |Não diferencia maiúsculas de minúsculas | Alfanumérico |`<service short name>registry` |`app1registry` |
 
-
 ## <a name="organize-resources-with-tags"></a>Organizar recursos com marcas
 
-O Azure Resource Manager dá suporte à marcação de entidades com cadeias de caracteres de texto aleatórias com o objetivo de identificar o contexto e simplificar a automação.  Por exemplo, a marca `"sqlVersion"="sql2014ee"` pode identificar VMs que estão executando o SQL Server 2014 Enterprise Edition. As marcas devem ser usadas para ampliar e aprimorar o contexto junto com as convenções de nomenclatura escolhidas.
+O Azure Resource Manager dá suporte à marcação de entidades com cadeias de caracteres de texto aleatórias com o objetivo de identificar o contexto e simplificar a automação. Por exemplo, a marca `"sqlVersion"="sql2014ee"` pode identificar VMs que estão executando o SQL Server 2014 Enterprise Edition. As marcas devem ser usadas para ampliar e aprimorar o contexto junto com as convenções de nomenclatura escolhidas.
 
 > [!TIP]
 > Outra vantagem das marcas é que elas abrangem grupos de recursos, permitindo que você vincule e correlacione entidades em implantações diferentes.
@@ -140,12 +139,12 @@ Para saber mais sobre marcação de recursos, veja [Uso de marcas para organizar
 
 Estes são alguns dos casos de uso de marcação mais comuns:
 
-* **Cobrança**; agrupar recursos e associá-los a códigos de cobrança ou de estorno.
-* **Identificação de contexto do serviço**; identificar grupos de recursos entre Grupos de recursos para operações comuns e agrupamento
-* **Controle de acesso e contexto de segurança**; identificação de função administrativa com base no portfólio, sistema, serviço, aplicativo, instância etc.
+- **Cobrança**. Agrupar recursos e associá-los a códigos de cobrança ou de estorno.
+- **Identificação de contexto de serviço**. Identifique grupos de recursos entre Grupos de Recursos para operações comuns e agrupamento.
+- **Controle de acesso e contexto de segurança**. Identificação de função administrativa com base no portfólio, sistema, serviço, aplicativo, instância etc.
 
 > [!TIP]
-> Marque no começo, marque com frequência.  É melhor ter uma esquema base de marcação aplicado e ajustar ao longo do tempo em vez de ter que fazer ajustes após o fato.
+> Marque no começo, marque com frequência. É melhor ter uma esquema base de marcação aplicado e ajustar ao longo do tempo em vez de ter que fazer ajustes após o fato.
 
 Veja exemplos de algumas abordagens comuns de marcação:
 
@@ -169,12 +168,12 @@ Especialmente em topologias maiores, a nomenclatura cuidadosa das máquinas virt
 
 ### <a name="storage-accounts-and-storage-entities"></a>Contas de armazenamento e entidades de armazenamento
 
-Há dois casos de uso primário para contas de armazenamento: backup de discos para VMs e armazenamento de dados em blobs, em filas e em tabelas.  As contas de armazenamento usadas para discos de VM devem seguir a convenção de nomenclatura de associação com o nome da VM pai (e com a possível necessidade de várias contas de armazenamento para SKUs de VM de alto nível, também aplicam um sufixo numérico).
+Há dois casos de uso primário para contas de armazenamento: backup de discos para VMs e armazenamento de dados em blobs, em filas e em tabelas. As contas de armazenamento usadas para discos de VM devem seguir a convenção de nomenclatura de associação com o nome da VM pai (e com a possível necessidade de várias contas de armazenamento para SKUs de VM de alto nível, também aplicam um sufixo numérico).
 
 > [!TIP]
 > Contas de armazenamento — quer seja para dados ou discos — devem seguir uma convenção de nomenclatura que permita que várias contas de armazenamento sejam aproveitadas (ou seja, sempre usar um sufixo numérico).
 
-É possível configurar um nome de domínio personalizado para acessar dados de blob em sua Conta de Armazenamento do Microsoft Azure. O ponto de extremidade padrão para o serviço Blob é https://\<nome\>.blob.core.windows.net.
+É possível configurar um nome de domínio personalizado para acessar dados de blob em sua Conta de Armazenamento do Microsoft Azure. O ponto de extremidade padrão para o serviço Blob é `https://<name>.blob.core.windows.net`.
 
 Porém, se você mapear um domínio personalizado (como www.contoso.com) para o ponto de extremidade do blob de sua conta de armazenamento, também poderá acessar dados do blob em sua conta de armazenamento usando esse domínio. Por exemplo, com um nome de domínio personalizado, `https://mystorage.blob.core.windows.net/mycontainer/myblob` pode ser acessada como `https://www.contoso.com/mycontainer/myblob`.
 
@@ -182,17 +181,14 @@ Para obter mais informações sobre como configurar esse recurso, confira [Confi
 
 Para obter mais informações sobre como nomear blobs, contêineres e tabelas, confira a lista a seguir:
 
-* [Nomeando e referenciando contêineres, blobs e metadados](https://msdn.microsoft.com/library/dd135715.aspx)
-* [Nomeação de filas e de metadados](https://msdn.microsoft.com/library/dd179349.aspx)
-* [Tabelas de nomenclatura](https://msdn.microsoft.com/library/azure/dd179338.aspx)
+- [Nomeando e referenciando contêineres, blobs e metadados](https://msdn.microsoft.com/library/dd135715.aspx)
+- [Nomeação de filas e de metadados](https://msdn.microsoft.com/library/dd179349.aspx)
+- [Tabelas de nomenclatura](https://msdn.microsoft.com/library/azure/dd179338.aspx)
 
-Um nome de blob pode conter qualquer combinação de caracteres, mas os caracteres reservados de URL devem ser escapados corretamente. Evite nomes de blob que terminem com um ponto (.), com uma barra (/) ou com uma sequência ou uma combinação dos dois. Por convenção, a barra é o separador do diretório **virtual** . Não use uma barra invertida (\\) em um nome de blob. As APIs de cliente podem permitir o uso dela, mas não conseguem aplicar o hash corretamente, e as assinaturas não corresponderão.
+Um nome de blob pode conter qualquer combinação de caracteres, mas os caracteres reservados de URL devem ser escapados corretamente. Evite nomes de blob que terminem com um ponto (.), com uma barra (/) ou com uma sequência ou uma combinação dos dois. Por convenção, a barra é o separador do diretório *virtual* . Não use uma barra invertida (\\) em um nome de blob. As APIs de cliente podem permitir o uso dela, mas não conseguem aplicar o hash corretamente, e as assinaturas não corresponderão.
 
 Não é possível modificar o nome de uma conta de armazenamento ou um contêiner após sua criação. Se quiser usar um novo nome, você deverá excluí-lo e criar um novo.
 
 > [!TIP]
 > Recomendamos o estabelecimento de uma convenção de nomenclatura para todos os tipos e contas de armazenamento antes de embarcar no desenvolvimento de um novo serviço ou aplicativo.
 
-<!-- links -->
-
-[scaffold]: /azure/architecture/cloud-adoption/appendix/azure-scaffold

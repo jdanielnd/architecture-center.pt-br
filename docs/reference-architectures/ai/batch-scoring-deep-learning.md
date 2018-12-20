@@ -1,25 +1,26 @@
 ---
-title: Pontuação em lote para modelos de aprendizado profundo do Azure
-description: Essa arquitetura de referência mostra como aplicar a transferência estilo neural a um vídeo usando a IA do Lote do Azure
+title: Pontuação em lote para modelos de aprendizado profundo
+titleSuffix: Azure Reference Architectures
+description: Essa arquitetura de referência mostra como aplicar a transferência de estilo neural a um vídeo usando a IA do Lote do Azure.
 author: jiata
 ms.date: 10/02/2018
-ms.author: jiata
-ms.openlocfilehash: 1f3f3d3882b2b30eb29acd26c9eab9ff128028e2
-ms.sourcegitcommit: 9eecff565392273d11b8702f1fcecb4d75e27a15
+ms.custom: azcat-ai
+ms.openlocfilehash: 0396903a39d00a4131df65872a63f4b3fde8dce7
+ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/03/2018
-ms.locfileid: "48243710"
+ms.lasthandoff: 12/08/2018
+ms.locfileid: "53119873"
 ---
 # <a name="batch-scoring-on-azure-for-deep-learning-models"></a>Pontuação em lote para modelos de aprendizado profundo do Azure
 
 Essa arquitetura de referência mostra como aplicar a transferência de estilo neural a um vídeo usando a IA do Lote do Azure. A *Transferência de estilo* é uma técnica de aprendizado profundo que compõe uma imagem existente no estilo de outra imagem. Essa arquitetura pode ser generalizada para qualquer cenário que usa a pontuação do lote com aprendizado profundo. [**Implantar esta solução**](#deploy-the-solution).
- 
-![](./_images/batch-ai-deep-learning.png)
+
+![Diagrama da arquitetura para modelos de aprendizado profundo usando a IA do Lote do Azure](./_images/batch-ai-deep-learning.png)
 
 **Cenário**: uma organização de mídia tem um vídeo cujo estilo ela quer alterar para procurar uma pintura específica. A organização quer ser capaz de aplicar esse estilo a todos os quadros do vídeo em tempo hábil e de uma forma automatizada. Para saber mais sobre os algoritmos de transferência de estilo neural, consulte [Transferência de estilo de imagem usando redes neurais convolucionais neurais][image-style-transfer] (PDF).
 
-| Imagem do estilo: | Vídeo de entrada/conteúdo: | Vídeo de saída: | 
+| Imagem do estilo: | Vídeo de entrada/conteúdo: | Vídeo de saída: |
 |--------|--------|---------|
 | <img src="https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/style_image.jpg" width="300"> | [<img src="https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/input_video_image_0.jpg" width="300" height="300">](https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/input_video.mp4 "Vídeo de entrada") *clique para ver o vídeo* | [<img src="https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/output_video_image_0.jpg" width="300" height="300">](https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/output_video.mp4 "Vídeo de saída") *clique para ver o vídeo* |
 
@@ -35,6 +36,7 @@ Essa arquitetura de referência foi projetada para cargas de trabalho que são d
 1. Faça o download dos quadros gerados e insira as imagens de volta em um vídeo.
 
 ## <a name="architecture"></a>Arquitetura
+
 Essa arquitetura é formada pelos componentes a seguir.
 
 ### <a name="compute"></a>Computação
@@ -62,7 +64,7 @@ Essa arquitetura de referência usa filmagens de um orangotango em uma árvore. 
 3. Use o FFmpeg para dividir o vídeo em quadros individuais. Os quadros serão processados de forma independente, em paralelo.
 4. Use o AzCopy para copiar os quadros individuais em seu contêiner de blob.
 
-Nesse estágio, a filmagem está em um formato que pode ser usado para transferência de estilo neural. 
+Nesse estágio, a filmagem está em um formato que pode ser usado para transferência de estilo neural.
 
 ## <a name="performance-considerations"></a>Considerações sobre o desempenho
 
@@ -74,7 +76,7 @@ As GPUs não estão habilitadas por padrão em todas as regiões. Selecione uma 
 
 ### <a name="parallelizing-across-vms-vs-cores"></a>Paralelização em VMs versus núcleos
 
-Ao executar um processo de transferência de estilo como um trabalho em lotes, será necessário paralelizar entre VMs os trabalhos executadas principalmente em GPUs. Há duas abordagens possíveis: você pode criar um cluster maior usando VMs que têm uma única GPU, ou criar um cluster menor usando VMs com várias GPUs. 
+Ao executar um processo de transferência de estilo como um trabalho em lotes, será necessário paralelizar entre VMs os trabalhos executadas principalmente em GPUs. Há duas abordagens possíveis: você pode criar um cluster maior usando VMs que têm uma única GPU, ou criar um cluster menor usando VMs com várias GPUs.
 
 Para essa carga de trabalho, essas duas opções terão um desempenho comparável. Usar menos VMs com mais GPUs por VM pode ajudar a reduzir a movimentação de dados. No entanto, o volume de dados por trabalho para essa carga de trabalho não é muito grande, portanto, você não observará muita limitação por Armazenamento de Blobs.
 
@@ -96,7 +98,7 @@ Para cenários com os dados mais confidenciais, verifique se todas as chaves de 
 
 ### <a name="data-encryption-and-data-movement"></a>Criptografia de dados e movimentação de dados
 
-Essa arquitetura de referência usa transferência de estilo como um exemplo de um processo de pontuação do lote. Para cenários com dados mais confidenciais, os dados no armazenamento devem ser criptografados em repouso. Sempre que os dados são movidos de um local para o próximo, use SSL para proteger a transferência de dados. Para saber mais, confira o [Guia de segurança de Armazenamento do Azure][storage-security]. 
+Essa arquitetura de referência usa transferência de estilo como um exemplo de um processo de pontuação do lote. Para cenários com dados mais confidenciais, os dados no armazenamento devem ser criptografados em repouso. Sempre que os dados são movidos de um local para o próximo, use SSL para proteger a transferência de dados. Para saber mais, confira o [Guia de segurança de Armazenamento do Azure][storage-security].
 
 ### <a name="securing-data-in-a-virtual-network"></a>Proteção dos dados em uma rede virtual
 
@@ -108,26 +110,25 @@ Em cenários com vários usuários, proteja os dados confidenciais contra ativid
 
 - Use o RBAC para limitar o acesso de usuários somente aos recursos necessários.
 - Provisione duas contas de armazenamento separadas. Armazene dados de entrada e saída na primeira conta. Os usuários externos podem obter acesso a essa conta. Armazene scripts executáveis e arquivos de log de saída na outra conta. Os usuários externos não devem ter acesso a essa conta. Isso garantirá que os usuários externos não possam modificar os arquivos executáveis (para injetar código mal-intencionado) e não tenham acesso a arquivos de log, que podem conter informações confidenciais.
-- Os usuários mal-intencionados podem executar DDOS na fila de trabalho ou injetar mensagens suspeitas malformadas na fila de trabalho, fazendo com que o sistema trave ou causando erros de remoção da fila. 
+- Os usuários mal-intencionados podem executar DDOS na fila de trabalho ou injetar mensagens suspeitas malformadas na fila de trabalho, fazendo com que o sistema trave ou causando erros de remoção da fila.
 
 ## <a name="monitoring-and-logging"></a>Monitoramento e registro em log
 
 ### <a name="monitoring-batch-ai-jobs"></a>Monitoramento de trabalhos da IA do Lote
 
-Durante a execução do seu trabalho, é importante monitorar o progresso e certificar-se de que as coisas estão funcionando conforme o esperado. No entanto, pode ser um desafio monitorar um cluster de nós ativos. 
+Durante a execução do seu trabalho, é importante monitorar o progresso e certificar-se de que as coisas estão funcionando conforme o esperado. No entanto, pode ser um desafio monitorar um cluster de nós ativos.
 
-Para ter uma ideia do estado geral do cluster, vá até a folha de IA do Lote do Portal do Azure para inspecionar o estado dos nós no cluster. Se um nó estiver inativo ou se um trabalho falhar, os logs de erro serão salvos no armazenamento de blobs e também poderão ser acessados na folha Trabalhos no portal do Azure. 
+Para ter uma ideia do estado geral do cluster, vá até a folha de IA do Lote do Portal do Azure para inspecionar o estado dos nós no cluster. Se um nó estiver inativo ou se um trabalho falhar, os logs de erro serão salvos no armazenamento de blobs e também poderão ser acessados na folha Trabalhos no portal do Azure.
 
 É possível melhorar ainda mais o monitoramento conectando os logs ao Application Insights ou executando processos separados para sondar o estado do cluster de IA do Lote e seus trabalhos.
 
 ### <a name="logging-in-batch-ai"></a>Registro em log na IA do Lote
 
-A IA do Lote registrará automaticamente todos os stdout/stderr para a conta de armazenamento de blob associada. O uso de uma ferramenta de navegação de armazenamento, como o Gerenciador de Armazenamento, fornecerá uma experiência muito mais fácil para navegação em arquivos de log. 
+A IA do Lote registrará automaticamente todos os stdout/stderr para a conta de armazenamento de blob associada. O uso de uma ferramenta de navegação de armazenamento, como o Gerenciador de Armazenamento, fornecerá uma experiência muito mais fácil para navegação em arquivos de log.
 
-As etapas de implantação para essa arquitetura de referência também mostra como configurar um sistema mais simples de registro em log, de modo que todos os logs em diferentes trabalhos são salvos no mesmo diretório em seu contêiner de blob, conforme mostrado abaixo.
-Use esses logs para monitorar quanto tempo demora para processar cada imagem e cada trabalho. Isso lhe dará uma ideia melhor de como otimizar ainda mais o processo.
+As etapas de implantação para essa arquitetura de referência também mostra como configurar um sistema mais simples de registro em log, de modo que todos os logs em diferentes trabalhos são salvos no mesmo diretório em seu contêiner de blob, conforme mostrado abaixo. Use esses logs para monitorar quanto tempo demora para processar cada imagem e cada trabalho. Isso lhe dará uma ideia melhor de como otimizar ainda mais o processo.
 
-![](./_images/batch-ai-logging.png)
+![Captura de tela de registro em log para a IA do Lote do Azure](./_images/batch-ai-logging.png)
 
 ## <a name="cost-considerations"></a>Considerações de custo
 
@@ -142,6 +143,8 @@ Talvez o dimensionamento automático não seja apropriado para trabalhos em lote
 ## <a name="deploy-the-solution"></a>Implantar a solução
 
 Para implantar essa arquitetura de referência, execute as etapas descritas no [repositório do GitHub][deployment].
+
+<!-- links -->
 
 [azcopy]: /azure/storage/common/storage-use-azcopy-linux
 [batch-ai]: /azure/batch-ai/
