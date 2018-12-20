@@ -3,12 +3,13 @@ title: Front-end de comércio eletrônico no Azure
 description: Hospede um site de comércio eletrônico no Azure.
 author: masonch
 ms.date: 7/13/18
-ms.openlocfilehash: 7baaf4d2986a00ab72b60a540bcd9d864893b109
-ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
+ms.custom: fasttrack
+ms.openlocfilehash: e48f7607fcef6e5048c57f4f8f63b2f6bdd4f183
+ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "51610814"
+ms.lasthandoff: 12/06/2018
+ms.locfileid: "53004855"
 ---
 # <a name="an-e-commerce-front-end-on-azure"></a>Um front-end de comércio eletrônico no Azure
 
@@ -69,7 +70,7 @@ Outras opções para a camada da Web e funções incluem:
 
 Outras opções para a camada de dados incluem:
 
-* [Cosmos DB](/azure/cosmos-db/introduction): banco de dados multimodelo globalmente distribuído da Microsoft. Isso fornece uma plataforma para executar outros modelos de dados, como Mongo DB, Cassandra, dados do Graph ou armazenamento de tabela simples.
+* [Cosmos DB](/azure/cosmos-db/introduction): Banco de dados multimodelo e globalmente distribuído da Microsoft. Isso fornece uma plataforma para executar outros modelos de dados, como Mongo DB, Cassandra, dados do Graph ou armazenamento de tabela simples.
 
 ## <a name="considerations"></a>Considerações
 

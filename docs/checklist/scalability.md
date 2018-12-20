@@ -1,19 +1,20 @@
 ---
 title: Lista de verificação de escalabilidade
+titleSuffix: Azure Design Review Framework
 description: Diretrizes de lista de verificação de escalabilidade para questões de design de dimensionamento automático do Azure.
 author: dragon119
 ms.date: 01/10/2018
 ms.custom: checklist
-ms.openlocfilehash: c3eaf41a038dbdd963f54d6c7cff8a8a772f8c48
-ms.sourcegitcommit: 3d6dba524cc7661740bdbaf43870de7728d60a01
+ms.openlocfilehash: 8bb31e8176238fb32bdf4424aa733b812b5eeb68
+ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/11/2018
-ms.locfileid: "27766098"
+ms.lasthandoff: 12/12/2018
+ms.locfileid: "53307139"
 ---
 # <a name="scalability-checklist"></a>Lista de verificação de escalabilidade
 
-A escalabilidade é a capacidade de um sistema para tratar de aumentos de carga, além de ser um dos [pilares da qualidade de software](../guide/pillars.md). Use essa lista de verificação para examinar a arquitetura do aplicativo sob um ponto de vista de escalabilidade. 
+A escalabilidade é a capacidade de um sistema para tratar de aumentos de carga, além de ser um dos [pilares da qualidade de software](../guide/pillars.md). Use essa lista de verificação para examinar a arquitetura do aplicativo sob um ponto de vista de escalabilidade.
 
 ## <a name="application-design"></a>Design do aplicativo
 
@@ -29,7 +30,7 @@ A escalabilidade é a capacidade de um sistema para tratar de aumentos de carga,
 
 **Descarregue tarefas intensivas de CPU/ES como tarefas de segundo plano**. Se for esperado que uma solicitação para um serviço demore muito tempo para ser executada ou absorva recursos consideráveis, o descarregamento do processamento dessa solicitação será uma tarefa separada. Use funções de trabalho ou trabalhos em segundo plano (dependendo da plataforma de hospedagem) para executar essas tarefas. Essa estratégia permite que o serviço continue a receber outras solicitações e permaneça responsivo.  Para saber mais, consulte [Diretrizes de trabalhos em segundo plano](../best-practices/background-jobs.md).
 
-**Distribua a carga de trabalho para tarefas em segundo plano**. Quando houver muitas tarefas em segundo plano, ou quando as tarefas exigirem um tempo ou recursos consideráveis, distribua o trabalho em várias unidades de computação (como funções de trabalho ou trabalhos em segundo plano). Para ver uma possível solução, confira [Padrão de Clientes Concorrentes](https://msdn.microsoft.com/library/dn568101.aspx).
+**Distribua a carga de trabalho para tarefas em segundo plano**. Quando houver muitas tarefas em segundo plano, ou quando as tarefas exigirem um tempo ou recursos consideráveis, distribua o trabalho em várias unidades de computação (como funções de trabalho ou trabalhos em segundo plano). Para ver uma solução possível, confira [Padrão de clientes concorrentes](../patterns/competing-consumers.md).
 
 **Considere mudar para uma arquitetura de *nada* compartilhado**. Uma arquitetura de nada compartilhado usa nós independentes e autossuficientes sem um ponto único de contenção (como serviços compartilhados ou armazenamento). Em tese, esse sistema pode ser dimensionado quase indefinidamente. Embora uma abordagem completa de nada compartilhado geralmente não seja prática para a maioria dos aplicativos, ela pode fornecer oportunidades de projetar uma escalabilidade melhor. Por exemplo, evitar o uso do estado de sessão do servidor, afinidade de cliente e particionamento de dados são bons exemplos de transição para uma arquitetura de nada compartilhado.
 
@@ -41,7 +42,7 @@ A escalabilidade é a capacidade de um sistema para tratar de aumentos de carga,
 
 **Reduza as interações verborrágicas entre componentes e serviços**. Evite criar interfaces verborrágicas em que um aplicativo precisa fazer várias chamadas para um serviço (cada uma delas retorna uma pequena quantidade de dados), em vez de uma única chamada que pode retornar todos os dados. Sempre que possível, combine várias operações relacionadas em uma única solicitação quando a chamada é para um serviço ou componente que tem latência perceptível. Isso facilita o monitoramento do desempenho e otimiza operações complexas. Por exemplo, use procedimentos armazenados em bancos de dados para encapsular a lógica complexa e reduzir o número de viagens de ida e volta e o bloqueio de recursos.
 
-**Use filas para nivelar a carga de gravações de dados de alta velocidade**. Aumentos na demanda por um serviço podem sobrecarregar o serviço e causar falhas cada vez maiores. Para evitar isso, considere implementar o [Padrão de Nivelamento de Carga Baseado em Fila](https://msdn.microsoft.com/library/dn589783.aspx). Use uma fila que age como um buffer entre uma tarefa e um serviço chamado. Isso pode atenuar cargas pesadas intermitentes que, de outra forma, poderiam causar falha no serviço ou atingir o tempo limite da tarefa.
+**Use filas para nivelar a carga de gravações de dados de alta velocidade**. Aumentos na demanda por um serviço podem sobrecarregar o serviço e causar falhas cada vez maiores. Para evitar isso, considere implementar o [Padrão de Nivelamento de Carga Baseado em Fila](../patterns/queue-based-load-leveling.md). Use uma fila que age como um buffer entre uma tarefa e um serviço chamado. Isso pode atenuar cargas pesadas intermitentes que, de outra forma, poderiam causar falha no serviço ou atingir o tempo limite da tarefa.
 
 **Minimize a carga no repositório de dados**. O repositório de dados é geralmente um gargalo de processamento, um recurso caro e nem sempre é fácil de escalar horizontalmente. Sempre que possível, remova a lógica (como o processamento de documentos XML ou objetos JSON) do repositório de dados e execute o processamento no aplicativo. Por exemplo, em vez de passar XML ao banco de dados (diferente de uma cadeia de caracteres opaca para armazenamento) serialize ou desserialize o XML dentro da camada de aplicativo e passe-o em um formato nativo para o repositório de dados. Em geral, é mais fácil escalar horizontalmente o aplicativo do que o repositório de dados; portanto, você deve tentar fazer o máximo de processamento intensivo de computação dentro do aplicativo possível.
 
@@ -67,7 +68,7 @@ A escalabilidade é a capacidade de um sistema para tratar de aumentos de carga,
 
 **Examinar os antipadrões de desempenho**. Consulte [Antipadrão de desempenho para aplicativos de nuvem](../antipatterns/index.md) para ver práticas comuns que podem causar problemas de escalabilidade quando um aplicativo estiver sob pressão.
 
-**Use chamadas assíncronas**. Sempre que possível, use o código assíncrono ao acessar recursos ou serviços que podem ser limitados por E/S ou largura de banda de rede, ou que tenham uma latência perceptível, para evitar o bloqueio do thread de chamada. 
+**Use chamadas assíncronas**. Sempre que possível, use o código assíncrono ao acessar recursos ou serviços que podem ser limitados por E/S ou largura de banda de rede, ou que tenham uma latência perceptível, para evitar o bloqueio do thread de chamada.
 
 **Evite o bloqueio de recursos e use uma abordagem otimista**. Nunca bloqueie o acesso a recursos como armazenamento ou outros serviços que tenham latência perceptível, pois essa é a causa principal de mau desempenho. Sempre use abordagens otimistas para gerenciar operações simultâneas, como gravar no armazenamento Use recursos da camada de armazenamento para gerenciar conflitos. Em aplicativos distribuídos, os dados só podem ser eventualmente consistentes.
 
@@ -79,8 +80,6 @@ A escalabilidade é a capacidade de um sistema para tratar de aumentos de carga,
   
 > [!NOTE]
 > APIs de alguns serviços reutilizam automaticamente as conexões, desde que as diretrizes específicas do serviço sejam seguidas. É importante entender as condições que permitem a reutilização da conexão para cada serviço usado por seu aplicativo.
-> 
-> 
 
 **Envie solicitações em lotes para otimizar o uso da rede**. Por exemplo, envie e leia mensagens em lotes ao acessar uma fila e execute várias leituras ou gravações em lote ao acessar um cache ou armazenamento. Isso pode ajudar a maximizar a eficiência dos serviços e os armazenamentos de dados, reduzindo o número de chamadas na rede.
 
@@ -90,12 +89,11 @@ A escalabilidade é a capacidade de um sistema para tratar de aumentos de carga,
 
 **Crie dependências de recursos durante a implantação ou a inicialização do aplicativo**. Evite chamadas repetidas para métodos que testam a existência de um recurso e crie o recurso se ele não existir. Métodos como *CloudTable.CreateIfNotExists* e *CloudQueue.CreateIfNotExists* na Biblioteca de Cliente do Armazenamento do Azure seguem esse padrão. Esses métodos podem impor uma sobrecarga considerável se forem chamados antes de cada acesso a uma tabela de armazenamento ou uma fila de armazenamento. Em vez disso:
 
-* Crie os recursos necessários quando o aplicativo for implantado ou quando for iniciado pela primeira vez (uma única chamada para *CreateIfNotExists* para cada recurso no código de inicialização para uma função web ou de trabalho é aceitável). No entanto, não se esqueça de manipular as exceções que poderão surgir se o seu código tentar acessar um recurso que não existe. Nessas situações, você deve registrar a exceção e, possivelmente, alertar um operador sobre a ausência de um recurso.
-* Em alguns casos, pode ser apropriado criar o recurso ausente como parte do código de tratamento de exceções. Mas você deve adotar essa abordagem com cuidado, já que a ausência do recurso pode ser uma indicação de um erro de programação (um nome de recurso incorreto, por exemplo) ou algum outro problema a nível da infraestrutura.
+- Crie os recursos necessários quando o aplicativo for implantado ou quando for iniciado pela primeira vez (uma única chamada para *CreateIfNotExists* para cada recurso no código de inicialização para uma função web ou de trabalho é aceitável). No entanto, não se esqueça de manipular as exceções que poderão surgir se o seu código tentar acessar um recurso que não existe. Nessas situações, você deve registrar a exceção e, possivelmente, alertar um operador sobre a ausência de um recurso.
+- Em alguns casos, pode ser apropriado criar o recurso ausente como parte do código de tratamento de exceções. Mas você deve adotar essa abordagem com cuidado, já que a ausência do recurso pode ser uma indicação de um erro de programação (um nome de recurso incorreto, por exemplo) ou algum outro problema a nível da infraestrutura.
 
 **Use estruturas leves**. Escolha cuidadosamente as APIs e estruturas que você utiliza para minimizar o uso de recursos, o tempo de execução e a carga geral no aplicativo. Por exemplo, o uso da API Web para tratar das solicitações de serviço pode reduzir a superfície do aplicativo e aumentar a velocidade de execução, mas talvez não seja adequado para cenários avançados, onde são necessários recursos adicionais da Windows Communication Foundation.
 
 **Considere minimizar o número de contas de serviço**. Por exemplo, usar uma conta específica para acessar recursos ou serviços que impõem um limite de conexões ou têm desempenho melhor quando menos conexões são mantidas. Essa abordagem é comum para serviços como bancos de dados, mas ela pode afetar a capacidade de auditar operações com precisão devido à representação do usuário original.
 
 **Execute testes de perfil e carga de desempenho** durante o desenvolvimento, como parte das rotinas de teste, e antes da liberação o final para assegurar o desempenho e o dimensionamento necessários para o aplicativo. Esse teste deve ocorrer no mesmo tipo de hardware da plataforma de produção e com os mesmos tipos e quantidades de dados e carga de usuário que serão encontrados em produção. Para saber mais, confira [Testando o desempenho de um serviço de nuvem](/azure/vs-azure-tools-performance-profiling-cloud-services/).
-

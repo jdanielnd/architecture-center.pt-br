@@ -1,33 +1,31 @@
 ---
 title: Criar uma floresta de recursos do AD DS no Azure
+titleSuffix: Azure Reference Architectures
 description: >-
   Como criar um domínio confiável do Active Directory no Azure.
 
   guidance,vpn-gateway,expressroute,load-balancer,virtual-network,active-directory
 author: telmosampaio
 ms.date: 05/02/2018
-pnp.series.title: Identity management
-pnp.series.prev: adds-extend-domain
-pnp.series.next: adfs
-cardTitle: Create an AD DS forest in Azure
-ms.openlocfilehash: 0bbf8aff91aaec8718e44f4450711ff96cfc1878
-ms.sourcegitcommit: 1287d635289b1c49e94f839b537b4944df85111d
+ms.custom: seodec18
+ms.openlocfilehash: e8ad2efd24286f23698bb8e294b15d88232c1166
+ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/27/2018
-ms.locfileid: "52332316"
+ms.lasthandoff: 12/08/2018
+ms.locfileid: "53120366"
 ---
 # <a name="create-an-active-directory-domain-services-ad-ds-resource-forest-in-azure"></a>Criar uma floresta de recursos do AD DS (Active Directory Domain Services) no Azure
 
-Essa arquitetura de referência mostra como criar um domínio separado do Active Directory no Azure que é de confiança nos domínios na sua floresta local do AD. [**Implante essa solução**.](#deploy-the-solution)
+Essa arquitetura de referência mostra como criar um domínio separado do Active Directory no Azure que é de confiança nos domínios na sua floresta local do AD. [**Implantar esta solução**](#deploy-the-solution).
 
-[![0]][0] 
+![Proteger a arquitetura de rede híbrida com domínios separados do Active Directory](./images/adds-forest.png)
 
 *Baixe um [Arquivo Visio][visio-download] dessa arquitetura.*
 
-O AD DS (Active Directory Domain Services) armazena informações de identidade em uma estrutura hierárquica. O nó superior na estrutura hierárquica é conhecido como uma floresta. Uma floresta contém domínios e domínios contêm outros tipos de objetos. Essa arquitetura de referência cria uma floresta do AD DS no Azure com uma relação de confiança de saída unidirecional com um domínio local. A floresta no Azure contém um domínio que não existe localmente. Devido à relação de confiança, os logons realizados nos domínios locais pode ser confiáveis para acessar recursos em um domínio separado do Azure. 
+O AD DS (Active Directory Domain Services) armazena informações de identidade em uma estrutura hierárquica. O nó superior na estrutura hierárquica é conhecido como uma floresta. Uma floresta contém domínios e domínios contêm outros tipos de objetos. Essa arquitetura de referência cria uma floresta do AD DS no Azure com uma relação de confiança de saída unidirecional com um domínio local. A floresta no Azure contém um domínio que não existe localmente. Devido à relação de confiança, os logons realizados nos domínios locais pode ser confiáveis para acessar recursos em um domínio separado do Azure.
 
-Usos típicos para essa arquitetura incluem manter uma separação segurança para objetos e identidades mantidos na nuvem e migrar os domínios individuais do local para a nuvem. 
+Usos típicos para essa arquitetura incluem manter uma separação segurança para objetos e identidades mantidos na nuvem e migrar os domínios individuais do local para a nuvem.
 
 Para obter considerações adicionais, consulte [Escolher uma solução para a integração do Active Directory local ao Azure][considerations]. 
 
@@ -35,17 +33,17 @@ Para obter considerações adicionais, consulte [Escolher uma solução para a i
 
 A arquitetura tem os seguintes componentes.
 
-* **Rede local**. A rede local contém sua própria floresta e domínios do Active Directory.
-* **Servidores do Active Directory**. Esses são controladores de domínio que implementam serviços de domínio em execução como VMs na nuvem. Esses servidores hospedam uma floresta que contém um ou mais domínios, separados daqueles locais.
-* **Relação de confiança unidirecional**. O exemplo no diagrama mostra uma relação de confiança unidirecional do domínio no Azure para o domínio local. Essa relação permite que os usuários locais acessem os recursos no domínio no Azure, mas não o oposto. É possível criar uma relação de confiança bidirecional se os usuários de nuvem também precisarem de acesso aos recursos locais.
-* **Sub-rede do Active Directory**. Os servidores do AD DS são hospedados em uma sub-rede separada. As regras de NSG (grupo de segurança de rede) protegem os servidores do AD DS e fornecem um firewall em tráfego de fontes inesperadas.
-* **Gateway do Azure**. O gateway do Azure fornece uma conexão entre a rede local e a VNet do Azure. Essa pode ser uma [conexão VPN][azure-vpn-gateway] ou do [Azure ExpressRoute][azure-expressroute]. Para obter mais informações, consulte [Implementar uma arquitetura de rede híbrida segura no Azure][implementing-a-secure-hybrid-network-architecture].
+- **Rede local**. A rede local contém sua própria floresta e domínios do Active Directory.
+- **Servidores do Active Directory**. Esses são controladores de domínio que implementam serviços de domínio em execução como VMs na nuvem. Esses servidores hospedam uma floresta que contém um ou mais domínios, separados daqueles locais.
+- **Relação de confiança unidirecional**. O exemplo no diagrama mostra uma relação de confiança unidirecional do domínio no Azure para o domínio local. Essa relação permite que os usuários locais acessem os recursos no domínio no Azure, mas não o oposto. É possível criar uma relação de confiança bidirecional se os usuários de nuvem também precisarem de acesso aos recursos locais.
+- **Sub-rede do Active Directory**. Os servidores do AD DS são hospedados em uma sub-rede separada. As regras de NSG (grupo de segurança de rede) protegem os servidores do AD DS e fornecem um firewall em tráfego de fontes inesperadas.
+- **Gateway do Azure**. O gateway do Azure fornece uma conexão entre a rede local e a VNet do Azure. Essa pode ser uma [conexão VPN][azure-vpn-gateway] ou do [Azure ExpressRoute][azure-expressroute]. Para obter mais informações, consulte [Implementar uma arquitetura de rede híbrida segura no Azure][implementing-a-secure-hybrid-network-architecture].
 
 ## <a name="recommendations"></a>Recomendações
 
 Para obter recomendações específicas sobre a implementação do Active Directory no Azure, consulte os seguintes artigos:
 
-- [Extensão do AD DS (Active Directory Domain Services) para o Azure][adds-extend-domain]. 
+- [Extensão do AD DS (Active Directory Domain Services) para o Azure][adds-extend-domain].
 - [Diretrizes para implantar o Active Directory do Windows Server em máquinas virtuais do Azure][ad-azure-guidelines].
 
 ### <a name="trust"></a>Confiar
@@ -56,8 +54,8 @@ Você pode estabelecer relações de confiança no nível de floresta [criando r
 
 Relações de confiança podem ser unidirecionais ou bidirecionais:
 
-* Uma relação de confiança unidirecional permite que os usuários em um domínio ou floresta (conhecido como o domínio ou a floresta de *entrada*) para acessar os recursos contidos em outro (o domínio ou a floresta de *saída*).
-* Uma relação de confiança bidirecional permite que os usuários no domínio ou floresta acessem os recursos mantidos no outro.
+- Uma relação de confiança unidirecional permite que os usuários em um domínio ou floresta (conhecido como o domínio ou a floresta de *entrada*) para acessar os recursos contidos em outro (o domínio ou a floresta de *saída*).
+- Uma relação de confiança bidirecional permite que os usuários no domínio ou floresta acessem os recursos mantidos no outro.
 
 A tabela a seguir resume as configurações de confiança para alguns cenários simples:
 
@@ -79,8 +77,8 @@ Além disso, considere a possibilidade de designar um ou mais servidores em cada
 
 ## <a name="manageability-considerations"></a>Considerações sobre capacidade de gerenciamento
 
-Para obter informações sobre as considerações de gerenciamento e monitoramento, consulte [Estendendo o Active Directory para o Azure][adds-extend-domain]. 
- 
+Para obter informações sobre as considerações de gerenciamento e monitoramento, consulte [Estendendo o Active Directory para o Azure][adds-extend-domain].
+
 Para obter informações adicionais, consulte [Monitoramento do Active Directory][monitoring_ad]. Você pode instalar ferramentas como o [Microsoft Systems Center][microsoft_systems_center] em um servidor de monitoramento na sub-rede de gerenciamento para ajudar a executar essas tarefas.
 
 ## <a name="security-considerations"></a>Considerações de segurança
@@ -113,9 +111,9 @@ Uma implantação para essa arquitetura está disponível no [GitHub][github]. O
 
 1. Abra o arquivo `azure.json` . Pesquise instâncias de `adminPassword` e `Password` adicione valores para as senhas.
 
-2. No mesmo arquivo, procure por instâncias de `sharedKey` e insira as chaves compartilhadas para a conexão VPN. 
+2. No mesmo arquivo, procure por instâncias de `sharedKey` e insira as chaves compartilhadas para a conexão VPN.
 
-    ```bash
+    ```json
     "sharedKey": "",
     ```
 
@@ -127,30 +125,28 @@ Uma implantação para essa arquitetura está disponível no [GitHub][github]. O
 
    Implante no mesmo grupo de recursos da VNET local.
 
-
 ### <a name="test-the-ad-trust-relation"></a>Testar a relação de confiança do AD
 
 1. Use o portal do Azure, navegue até o grupo de recursos que você criou.
 
 2. Você pode usar o portal do Azure para encontrar a VM denominada `ra-adt-mgmt-vm1`.
 
-2. Clique em `Connect` para abrir uma sessão de área de trabalho remota para a VM. O nome de usuário é `contoso\testuser` e a senha é aquela especificada no arquivo de parâmetros `onprem.json`.
+3. Clique em `Connect` para abrir uma sessão de área de trabalho remota para a VM. O nome de usuário é `contoso\testuser` e a senha é aquela especificada no arquivo de parâmetros `onprem.json`.
 
-3. De dentro de sua sessão de área de trabalho remota, abra outra sessão de área de trabalho remota para 192.168.0.4, que é o endereço IP da VM denominada `ra-adtrust-onpremise-ad-vm1`. O nome de usuário é `contoso\testuser` e a senha é aquela especificada no arquivo de parâmetros `azure.json`.
+4. De dentro de sua sessão de área de trabalho remota, abra outra sessão de área de trabalho remota para 192.168.0.4, que é o endereço IP da VM denominada `ra-adtrust-onpremise-ad-vm1`. O nome de usuário é `contoso\testuser` e a senha é aquela especificada no arquivo de parâmetros `azure.json`.
 
-4. De dentro da sessão da área de trabalho remota para `ra-adtrust-onpremise-ad-vm1`, vá para o **Gerenciador do Servidor** e clique em **Ferramentas** > **Domínios e Relações de Confiança do Active Directory**. 
+5. De dentro da sessão da área de trabalho remota para `ra-adtrust-onpremise-ad-vm1`, vá para o **Gerenciador do Servidor** e clique em **Ferramentas** > **Domínios e Relações de Confiança do Active Directory**.
 
-5. No painel esquerdo, clique com botão direito do contoso.com e selecione **Propriedades**.
+6. No painel esquerdo, clique com botão direito do contoso.com e selecione **Propriedades**.
 
-6. Clique na guia **Relações de Confiança**. Você deve ver treyresearch.net listado como uma relação de confiança recebida.
+7. Clique na guia **Relações de Confiança**. Você deve ver treyresearch.net listado como uma relação de confiança recebida.
 
-![](./images/ad-forest-trust.png)
-
+![Captura de tela da caixa de diálogo de confiança da floresta do Active Directory](./images/ad-forest-trust.png)
 
 ## <a name="next-steps"></a>Próximas etapas
 
-* Conheça as práticas recomendadas para [estender seu domínio do AD DS local para o Azure][adds-extend-domain]
-* Conheça as práticas recomendadas para [criar uma infraestrutura do AD FS][adfs] no Azure.
+- Conheça as práticas recomendadas para [estender seu domínio do AD DS local para o Azure][adds-extend-domain]
+- Conheça as práticas recomendadas para [criar uma infraestrutura do AD FS][adfs] no Azure.
 
 <!-- links -->
 [adds-extend-domain]: adds-extend-domain.md
@@ -179,4 +175,3 @@ Uma implantação para essa arquitetura está disponível no [GitHub][github]. O
 [outgoing-trust]: https://raw.githubusercontent.com/mspnp/identity-reference-architectures/master/adds-forest/extensions/outgoing-trust.ps1
 [verify-a-trust]: https://technet.microsoft.com/library/cc753821.aspx
 [visio-download]: https://archcenter.blob.core.windows.net/cdn/identity-architectures.vsdx
-[0]: ./images/adds-forest.png "Proteger a arquitetura de rede híbrida com domínios separados do Active Directory"

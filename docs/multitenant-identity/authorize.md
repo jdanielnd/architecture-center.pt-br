@@ -6,12 +6,12 @@ ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: app-roles
 pnp.series.next: web-api
-ms.openlocfilehash: bbf702fe6651625a1aeceff7e4e321dd08c38544
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 8ff2317eb85197ed93e048b6a2d836405436cc17
+ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902486"
+ms.lasthandoff: 12/12/2018
+ms.locfileid: "53307156"
 ---
 # <a name="role-based-and-resource-based-authorization"></a>Autorização baseada em funções e recursos
 
@@ -167,7 +167,7 @@ O aplicativo também define um conjunto de possíveis operações nas pesquisas:
 * Atualização
 * Excluir
 * Publicar
-* Não publicar
+* Cancelar Publicação
 
 O código a seguir cria uma lista de permissões para uma pesquisa e usuário específicos. Observe que esse código examina as funções de aplicativo do usuário e os campos de proprietário/colaborador da pesquisa.
 

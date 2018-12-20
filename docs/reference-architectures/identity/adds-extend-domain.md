@@ -1,46 +1,45 @@
 ---
 title: Estender o AD DS (Active Directory Domain Services) para o Azure
+titleSuffix: Azure Reference Architectures
 description: Estender o seu domínio do Active Directory local ao Azure
 author: telmosampaio
 ms.date: 05/02/2018
-pnp.series.title: Identity management
-pnp.series.prev: azure-ad
-pnp.series.next: adds-forest
-ms.openlocfilehash: ff3ef7565b692ad63b7ff779497df0f85d3bca3a
-ms.sourcegitcommit: 1287d635289b1c49e94f839b537b4944df85111d
+ms.custom: seodec18
+ms.openlocfilehash: 69ce95fcf74579f6446cf99dad9ed53ced31fde7
+ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/27/2018
-ms.locfileid: "52332299"
+ms.lasthandoff: 12/08/2018
+ms.locfileid: "53120400"
 ---
 # <a name="extend-active-directory-domain-services-ad-ds-to-azure"></a>Estender o AD DS (Active Directory Domain Services) para o Azure
 
-Essa arquitetura de referência mostra como estender seu ambiente do Active Directory para o Azure a fim de fornecer serviços de autenticação distribuídos usando o AD DS (Active Directory Domain Services). [**Implante essa solução**.](#deploy-the-solution)
+Essa arquitetura de referência mostra como estender seu ambiente do Active Directory para o Azure a fim de fornecer serviços de autenticação distribuídos usando o AD DS (Active Directory Domain Services). [**Implantar esta solução**](#deploy-the-solution).
 
-[![0]][0] 
+![Arquitetura de rede híbrida segura com o Active Directory](./images/adds-extend-domain.png)
 
 *Baixe um [Arquivo Visio][visio-download] dessa arquitetura.*
 
-O AD DS é usado para autenticar o usuário, computador, aplicativo ou outras identidades incluídas em um domínio de segurança. Ele poderá ser hospedado localmente, mas se o aplicativo estiver hospedado parcialmente localmente e parcialmente no Azure, será mais eficiente replicar essa funcionalidade no Azure. Isso pode reduzir a latência causada pelo envio de autenticação e solicitações de autorização local da nuvem de volta para o AD DS em execução local. 
+O AD DS é usado para autenticar o usuário, computador, aplicativo ou outras identidades incluídas em um domínio de segurança. Ele poderá ser hospedado localmente, mas se o aplicativo estiver hospedado parcialmente localmente e parcialmente no Azure, será mais eficiente replicar essa funcionalidade no Azure. Isso pode reduzir a latência causada pelo envio de autenticação e solicitações de autorização local da nuvem de volta para o AD DS em execução local.
 
 Essa arquitetura é geralmente usada quando a rede local e a rede virtual do Azure estão conectadas por uma conexão VPN ou de ExpressRoute. Essa arquitetura também dá suporte à replicação bidirecional, o que significa que alterações podem ser feitas localmente ou na nuvem, e ambas as fontes serão mantidas consistentes. Usos típicos dessa arquitetura incluem aplicativos híbridos em que a funcionalidade é distribuída entre o local e o Azure, e os aplicativos e serviços que realizam autenticação usando o Active Directory.
 
-Para obter considerações adicionais, consulte [Escolher uma solução para a integração do Active Directory local ao Azure][considerations]. 
+Para obter considerações adicionais, consulte [Escolher uma solução para a integração do Active Directory local ao Azure][considerations].
 
-## <a name="architecture"></a>Arquitetura 
+## <a name="architecture"></a>Arquitetura
 
 Essa arquitetura estende aquela mostrada em [DMZ entre o Azure e a Internet][implementing-a-secure-hybrid-network-architecture-with-internet-access]. Ela tem os seguintes componentes.
 
-* **Rede local**. A rede local inclui servidores locais do Active Directory que podem realizar a autenticação e autorização para componentes localizados localmente.
-* **Servidores do Active Directory**. Esses são controladores de domínio que implementam serviços de diretório (AD DS) em execução como VMs na nuvem. Esses servidores podem fornecer autenticação dos componentes em execução na sua rede virtual do Azure.
-* **Sub-rede do Active Directory**. Os servidores do AD DS são hospedados em uma sub-rede separada. As regras de NSG (grupo de segurança de rede) protegem os servidores do AD DS e fornecem um firewall em tráfego de fontes inesperadas.
-* **Sincronização do Gateway do Azure e do Active Directory**. O gateway do Azure fornece uma conexão entre a rede local e a VNet do Azure. Essa pode ser uma [conexão VPN][azure-vpn-gateway] ou do [Azure ExpressRoute][azure-expressroute]. Todas as solicitações de sincronização entre os servidores do Active Directory na nuvem e local passam pelo gateway. UDRs (rotas definidas pelo usuário) lidar com o roteamento para o tráfego local passado para o Azure. Tráfego de e para os servidores do Active Directory não passa pelas NVAs (soluções de virtualização de rede) usadas nesse cenário.
+- **Rede local**. A rede local inclui servidores locais do Active Directory que podem realizar a autenticação e autorização para componentes localizados localmente.
+- **Servidores do Active Directory**. Esses são controladores de domínio que implementam serviços de diretório (AD DS) em execução como VMs na nuvem. Esses servidores podem fornecer autenticação dos componentes em execução na sua rede virtual do Azure.
+- **Sub-rede do Active Directory**. Os servidores do AD DS são hospedados em uma sub-rede separada. As regras de NSG (grupo de segurança de rede) protegem os servidores do AD DS e fornecem um firewall em tráfego de fontes inesperadas.
+- **Sincronização do Gateway do Azure e do Active Directory**. O gateway do Azure fornece uma conexão entre a rede local e a VNet do Azure. Essa pode ser uma [conexão VPN][azure-vpn-gateway] ou do [Azure ExpressRoute][azure-expressroute]. Todas as solicitações de sincronização entre os servidores do Active Directory na nuvem e local passam pelo gateway. UDRs (rotas definidas pelo usuário) lidar com o roteamento para o tráfego local passado para o Azure. Tráfego de e para os servidores do Active Directory não passa pelas NVAs (soluções de virtualização de rede) usadas nesse cenário.
 
-Para obter mais informações sobre como configurar UDRs e as NVAs, consulte [Implementar uma arquitetura de rede híbrida segura no Azure][implementing-a-secure-hybrid-network-architecture]. 
+Para obter mais informações sobre como configurar UDRs e as NVAs, consulte [Implementar uma arquitetura de rede híbrida segura no Azure][implementing-a-secure-hybrid-network-architecture].
 
 ## <a name="recommendations"></a>Recomendações
 
-As seguintes recomendações aplicam-se à maioria dos cenários. Siga estas recomendações, a menos que você tenha um requisito específico que as substitua. 
+As seguintes recomendações aplicam-se à maioria dos cenários. Siga estas recomendações, a menos que você tenha um requisito específico que as substitua.
 
 ### <a name="vm-recommendations"></a>Recomendações de VM
 
@@ -56,10 +55,9 @@ Configure o NIC (adaptador de rede) da VM para cada servidor do AD DS com um end
 
 > [!NOTE]
 > Não configure a NIC de VM para qualquer AD DS com um endereço IP público. Consulte [Considerações de segurança][security-considerations] para ver mais detalhes.
-> 
-> 
+>
 
-O NSG da sub-rede do Active Directory requer regras para permitir tráfego de entrada do local. Para obter informações detalhadas sobre as portas usadas pelo AD DS, consulte [Requisitos de porta do Active Directory e do Active Directory Domain Services][ad-ds-ports]. Além disso, verifique se as tabelas UDR não roteiam o tráfego do AD DS por meio de NVAs usadas nesta arquitetura. 
+O NSG da sub-rede do Active Directory requer regras para permitir tráfego de entrada do local. Para obter informações detalhadas sobre as portas usadas pelo AD DS, consulte [Requisitos de porta do Active Directory e do Active Directory Domain Services][ad-ds-ports]. Além disso, verifique se as tabelas UDR não roteiam o tráfego do AD DS por meio de NVAs usadas nesta arquitetura.
 
 ### <a name="active-directory-site"></a>Site do Active Directory
 
@@ -75,7 +73,7 @@ Recomendamos que você não atribua funções de mestres de operações para os 
 
 ### <a name="monitoring"></a>Monitoramento
 
-Monitore os recursos de VMs do controlador de domínio, bem como os serviços do AD DS e crie um plano para corrigir rapidamente os problemas. Para obter mais informações, consulte [Monitoramento do Active Directory][monitoring_ad]. Você também pode instalar ferramentas como o [Microsoft Systems Center][microsoft_systems_center] no servidor de monitoramento (consulte o diagrama de arquitetura) para ajudar a executar essas tarefas.  
+Monitore os recursos de VMs do controlador de domínio, bem como os serviços do AD DS e crie um plano para corrigir rapidamente os problemas. Para obter mais informações, consulte [Monitoramento do Active Directory][monitoring_ad]. Você também pode instalar ferramentas como o [Microsoft Systems Center][microsoft_systems_center] no servidor de monitoramento (consulte o diagrama de arquitetura) para ajudar a executar essas tarefas.
 
 ## <a name="scalability-considerations"></a>Considerações sobre escalabilidade
 
@@ -121,11 +119,11 @@ Uma implantação para essa arquitetura está disponível no [GitHub][github]. O
 
 ### <a name="deploy-the-azure-vnet"></a>Implantar a VNET do Azure
 
-1. Abra o arquivo `azure.json` .  Pesquise instâncias de `adminPassword` e `Password` adicione valores para as senhas. 
+1. Abra o arquivo `azure.json` .  Pesquise instâncias de `adminPassword` e `Password` adicione valores para as senhas.
 
-2. No mesmo arquivo, procure por instâncias de `sharedKey` e insira as chaves compartilhadas para a conexão VPN. 
+2. No mesmo arquivo, procure por instâncias de `sharedKey` e insira as chaves compartilhadas para a conexão VPN.
 
-    ```bash
+    ```json
     "sharedKey": "",
     ```
 
@@ -149,16 +147,16 @@ Após a conclusão da implantação, você pode testar a conexão do ambiente si
 
 4. De dentro de sua sessão de área de trabalho remota, abra outra sessão de área de trabalho remota para 10.0.4.4, que é o endereço IP da VM denominada `adds-vm1`. O nome de usuário é `contoso\testuser` e a senha é aquela especificada no arquivo de parâmetros `azure.json`.
 
-5. De dentro da sessão da área de trabalho remota para `adds-vm1`, vá para o **Gerenciador do Servidor** e clique em **Adicionar outros servidores para gerenciar.** 
+5. De dentro da sessão da área de trabalho remota para `adds-vm1`, vá para o **Gerenciador do Servidor** e clique em **Adicionar outros servidores para gerenciar.**
 
 6. Na guia **Active Directory**, clique em **Localizar agora**. Você deve ver uma lista das VMs do AD, do AD DS e da Web.
 
-   ![](./images/add-servers-dialog.png)
+   ![Captura de tela da caixa de diálogo Adicionar Servidores](./images/add-servers-dialog.png)
 
 ## <a name="next-steps"></a>Próximas etapas
 
-* Conheça as práticas recomendadas para [criar uma floresta de recursos do AD DS][adds-resource-forest] no Azure.
-* Conheça as práticas recomendadas para [criar uma infraestrutura do Serviços de Federação do Active Directory (AD FS)][adfs] no Azure.
+- Conheça as práticas recomendadas para [criar uma floresta de recursos do AD DS][adds-resource-forest] no Azure.
+- Conheça as práticas recomendadas para [criar uma infraestrutura do Serviços de Federação do Active Directory (AD FS)][adfs] no Azure.
 
 <!-- links -->
 
@@ -178,7 +176,7 @@ Após a conclusão da implantação, você pode testar a conexão do ambiente si
 [capacity-planning-for-adds]: https://social.technet.microsoft.com/wiki/contents/articles/14355.capacity-planning-for-active-directory-domain-services.aspx
 [considerations]: ./considerations.md
 [GitHub]: https://github.com/mspnp/identity-reference-architectures/tree/master/adds-extend-domain
-[microsoft_systems_center]: https://www.microsoft.com/server-cloud/products/system-center-2016/
+[microsoft_systems_center]: https://www.microsoft.com/download/details.aspx?id=50013
 [monitoring_ad]: https://msdn.microsoft.com/library/bb727046.aspx
 [security-considerations]: #security-considerations
 [set-a-static-ip-address]: /azure/virtual-network/virtual-networks-static-private-ip-arm-pportal
@@ -186,4 +184,4 @@ Após a conclusão da implantação, você pode testar a conexão do ambiente si
 [visio-download]: https://archcenter.blob.core.windows.net/cdn/identity-architectures.vsdx
 [vm-windows-sizes]: /azure/virtual-machines/virtual-machines-windows-sizes
 
-[0]: ./images/adds-extend-domain.png "Proteger a arquitetura de rede híbrida com o Active Directory"
+[0]: ./images/adds-extend-domain.png "Arquitetura de rede híbrida segura com o Active Directory"

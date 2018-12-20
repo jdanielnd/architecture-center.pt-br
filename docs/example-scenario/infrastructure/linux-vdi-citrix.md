@@ -3,12 +3,13 @@ title: Áreas de trabalho virtuais do Linux com o Citrix
 description: Crie um ambiente de VDI para áreas de trabalho do Linux usando o Citrix no Azure.
 author: miguelangelopereira
 ms.date: 09/12/2018
-ms.openlocfilehash: 383642b05926c5a09abf0b2f95fef10539d95aec
-ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
+ms.custom: fasttrack
+ms.openlocfilehash: d48163638da05fa075814d3a255ca783610741f8
+ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "51610644"
+ms.lasthandoff: 12/06/2018
+ms.locfileid: "53004773"
 ---
 # <a name="linux-virtual-desktops-with-citrix"></a>Áreas de trabalho virtuais do Linux com o Citrix
 
@@ -44,13 +45,13 @@ Esse cenário de exemplo demonstra como permitir que a rede corporativa acesse a
 
 Nesse cenário, são usados os seguintes SKUs:
 
-- O Citrix ADC (NetScaler): 2 x D4sv3 com [imagem NetScaler 12.0 VPX Standard Edition 200 MBPS PAYG](https://azuremarketplace.microsoft.com/pt-br/marketplace/apps/citrix.netscalervpx-120?tab=PlansAndPrice)
+- Citrix ADC (NetScaler): 2 x D4sv3 com [imagem NetScaler 12.0 VPX Standard Edition 200 MBPS PAYG](https://azuremarketplace.microsoft.com/pt-br/marketplace/apps/citrix.netscalervpx-120?tab=PlansAndPrice)
 - Servidor de licença do Citrix: 1 x D2s v3
 - Citrix VDA: 4 x D8s v3
 - Citrix Storefront: 2 x D2s v3
 - Citrix Delivery Controller: 2 x D2s v3
-- Controlador de domínio: 2 x D2sv3
-- Servidores de Arquivos do Azure: 2 x D2sv3
+- Controladores de domínio: 2 x D2sv3
+- Servidores de Arquivo do Azure: 2 x D2sv3
 
 > [!NOTE]
 > Todas as licenças (além do NetScaler) são BYOL (traga sua própria licença)

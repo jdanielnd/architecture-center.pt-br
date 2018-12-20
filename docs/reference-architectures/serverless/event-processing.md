@@ -1,20 +1,22 @@
 ---
 title: Processamento de evento sem servidor usando o Azure Functions
+titleSuffix: Azure Reference Architectures
 description: Arquitetura de referência que mostra o processamento e ingestão de eventos sem servidor
 author: MikeWasson
 ms.date: 10/16/2018
-ms.openlocfilehash: 76c8b9c1244c987c96e38e50ecad7814cc49cd88
-ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
+ms.custom: seodec18
+ms.openlocfilehash: 1a3c73ca35f7e849211837dee33a530d786c827f
+ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/26/2018
-ms.locfileid: "52295643"
+ms.lasthandoff: 12/08/2018
+ms.locfileid: "53119890"
 ---
 # <a name="serverless-event-processing-using-azure-functions"></a>Processamento de evento sem servidor usando o Azure Functions
 
 Essa arquitetura de referência mostra uma arquitetura [sem servidor](https://azure.microsoft.com/solutions/serverless/) controlada por evento que ingere um fluxo de dados, processa os dados e grava os resultados em um banco de dados back-end. Há uma implantação de referência para essa arquitetura de referência disponível no [GitHub][github].
 
-![](./_images/serverless-event-processing.png)
+![Arquitetura de referência para o processamento de evento sem servidor usando o Azure Functions](./_images/serverless-event-processing.png)
 
 ## <a name="architecture"></a>Arquitetura
 
@@ -49,16 +51,16 @@ A capacidade da taxa de transferência para o Cosmos DB é medida em [Unidades d
 
 Estas são algumas características de uma boa chave de partição:
 
-- O espaço para o valor de chave é grande. 
+- O espaço para o valor de chave é grande.
 - Haverá uma distribuição uniforme de leituras/gravações por valor de chave, evitando teclas de atalho.
-- O máximo de dados armazenado para qualquer valor de chave única não excederá o tamanho máximo da partição física (10 GB). 
-- A chave de partição de um documento não será alterada. Não é possível atualizar a chave de partição em um documento existente. 
+- O máximo de dados armazenado para qualquer valor de chave única não excederá o tamanho máximo da partição física (10 GB).
+- A chave de partição de um documento não será alterada. Não é possível atualizar a chave de partição em um documento existente.
 
 No cenário dessa arquitetura de referência, a função armazena exatamente um documento por dispositivo que está enviando dados. A função atualiza continuamente os documentos com o status mais recente do dispositivo, usando uma operação upsert. A ID do dispositivo é uma boa chave de partição para esse cenário, pois as gravações serão distribuídas uniformemente entre as chaves e o tamanho de cada partição será estritamente limitado, pois há um único documento para cada valor de chave. Para saber mais sobre chaves de particionamento, confira [Particionar e dimensionar no Azure Cosmos DB][cosmosdb-scale].
 
 ## <a name="resiliency-considerations"></a>Considerações de resiliência
 
-Ao usar o gatilho dos Hubs de Eventos com o Functions, capture exceções dentro de seu loop de processamento. Se ocorrer uma exceção sem tratamento, o tempo de execução do Functions não tentará novamente as mensagens. Se não for possível processar uma mensagem, coloque-a em uma fila de mensagens mortas. Use um processo fora de banda para examinar as mensagens e determinar a ação corretiva. 
+Ao usar o gatilho dos Hubs de Eventos com o Functions, capture exceções dentro de seu loop de processamento. Se ocorrer uma exceção sem tratamento, o tempo de execução do Functions não tentará novamente as mensagens. Se não for possível processar uma mensagem, coloque-a em uma fila de mensagens mortas. Use um processo fora de banda para examinar as mensagens e determinar a ação corretiva.
 
 O código a seguir mostra como a função de ingestão captura exceções e coloca as mensagens não processadas em uma fila de mensagens mortas.
 
@@ -99,9 +101,9 @@ public static async Task RunAsync(
 
 Observe que a função usa a [associação de saída do armazenamento de filas][queue-binding] para colocar itens na fila.
 
-O código exibido acima também registra exceções em log para o Application Insights. Use o número de sequência e a chave de partição para correlacionar mensagens mortas com as exceções nos logs. 
+O código exibido acima também registra exceções em log para o Application Insights. Use o número de sequência e a chave de partição para correlacionar mensagens mortas com as exceções nos logs.
 
-As mensagens na fila de mensagens mortas devem ter informações suficientes para você entender o contexto do erro. Neste exemplo, a classe `DeadLetterMessage` contém a mensagem de exceção, os dados do evento original e a mensagem de evento desserializada (se estiver disponível). 
+As mensagens na fila de mensagens mortas devem ter informações suficientes para você entender o contexto do erro. Neste exemplo, a classe `DeadLetterMessage` contém a mensagem de exceção, os dados do evento original e a mensagem de evento desserializada (se estiver disponível).
 
 ```csharp
 public class DeadLetterMessage
@@ -128,7 +130,7 @@ A implantação exibida aqui reside em uma única região do Azure. Para uma abo
 
 ## <a name="deploy-the-solution"></a>Implantar a solução
 
-Para implantar essa arquitetura de referência, confira o [Leiame do GitHub][readme]. 
+Para implantar essa arquitetura de referência, confira o [Leiame do GitHub][readme].
 
 <!-- links -->
 

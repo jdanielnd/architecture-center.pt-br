@@ -3,12 +3,13 @@ title: Ingestão e processamento de dados de IoT automotivos em tempo real
 description: Ingira e processe dados do veículo em tempo real usando IoT.
 author: msdpalam
 ms.date: 09/12/2018
-ms.openlocfilehash: 6562e3277e6b6eb38993132284ad43542ef4c0d3
-ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
+ms.custom: fasttrack
+ms.openlocfilehash: 8c123403f21ce96549fe075675ec2275b79493a3
+ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "51610729"
+ms.lasthandoff: 12/06/2018
+ms.locfileid: "53004881"
 ---
 # <a name="ingestion-and-processing-of-real-time-automotive-iot-data"></a>Ingestão e processamento de dados de IoT automotivos em tempo real
 
@@ -64,7 +65,7 @@ Um pipeline de Big Data mais generalizado pode ser implementado usando outros co
 As tecnologias nesta arquitetura foram escolhidas com base na escala necessária para processamento dos eventos, no SLA dos serviços, no gerenciamento de custos e na facilidade de gerenciamento dos componentes.
 * O [HDInsight Kafka](/azure/hdinsight/kafka/apache-kafka-introduction) gerenciado vem com um SLA integrado 99,9% com o Azure Managed Disks
 * O [Azure Databricks](/azure/azure-databricks/what-is-azure-databricks) é otimizado desde o início para proporcionar desempenho e eficiência de custos na nuvem. O Databricks Runtime adiciona várias funcionalidades essenciais às cargas de trabalho do Apache Spark que podem aumentar o desempenho e reduzir os custos entre dez a 100 vezes quando em execução no Azure, incluindo:
-* O Azure Databricks se integra totalmente aos bancos de dados do Azure e armazena: o [SQL Data Warehouse do Azure](/azure/sql-data-warehouse), o [Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db), o [Azure Data Lake Storage](https://azure.microsoft.com/services/storage/data-lake-storage) e o [Armazenamento de Blobs do Azure](https://azure.microsoft.com/services/storage/blobs)
+* O Azure Databricks integra-se profundamente aos armazenamentos e bancos de dados do Azure: [Azure SQL Data Warehouse](/azure/sql-data-warehouse), [Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db), [Azure Data Lake Storage](https://azure.microsoft.com/services/storage/data-lake-storage) e [Armazenamento de Blobs do Azure](https://azure.microsoft.com/services/storage/blobs)
     * Dimensionamento e término automáticos para clusters do Spark para minimização automática de custos.
     * Otimizações de desempenho, incluindo o armazenamento em cache, a indexação e a otimização de consulta avançada, que pode melhorar o desempenho entre dez a 100 vezes em comparação a implantações tradicionais do Apache Spark em ambientes locais ou na nuvem.
     * A integração com o Azure Active Directory permite que você execute soluções completas baseadas no Azure usando o Azure Databricks.

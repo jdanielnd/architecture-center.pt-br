@@ -3,12 +3,13 @@ title: Renderização de vídeo em 3D no Azure
 description: Execute cargas de trabalho de HPC nativas no Azure usando o serviço de Lote do Azure.
 author: adamboeglin
 ms.date: 07/13/2018
-ms.openlocfilehash: 1ffdaa5467fec73a01b8caa18b71c2bc4e49abbe
-ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
+ms.custom: fasttrack
+ms.openlocfilehash: 7dacefd5179c426912dd97af9af7b5a39505392d
+ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "51610678"
+ms.lasthandoff: 12/06/2018
+ms.locfileid: "53004822"
 ---
 # <a name="3d-video-rendering-on-azure"></a>Renderização de vídeo em 3D no Azure
 
@@ -124,15 +125,15 @@ O custo de usar o Lote do Azure dependerá dos tamanhos de VM que são usados pa
 
 A seguir estão exemplos de custos que poderiam ser cobrados para um trabalho que termina em 8 horas usando um número diferente de servidores:
 
-* 100 VMs de CPU de alto desempenho: [estimativa de custo][hpc-est-high]
+* 100 VMs com CPU de alto desempenho: [Estimativa de custo][hpc-est-high]
 
   100 x H16m (16 núcleos, 225 GB de RAM, Armazenamento Premium de 512 GB), Armazenamento de Blobs de 2 TB, saída de 1 TB
 
-* 50 VMs de CPU de alto desempenho: [estimativa de custo][hpc-est-med]
+* 50 VMs com CPU de alto desempenho: [Estimativa de custo][hpc-est-med]
 
   50 x H16m (16 núcleos, 225 GB de RAM, Armazenamento Premium de 512 GB), Armazenamento de Blobs de 2 TB, saída de 1 TB
 
-* 10 VMs de CPU de alto desempenho: [estimativa de custo][hpc-est-low]
+* 10 VMs com CPU de alto desempenho: [Estimativa de custo][hpc-est-low]
 
   10 x H16m (16 núcleos, 225 GB de RAM, Armazenamento Premium de 512 GB), Armazenamento de Blobs de 2 TB, saída de 1 TB
 

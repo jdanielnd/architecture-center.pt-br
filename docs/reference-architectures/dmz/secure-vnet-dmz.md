@@ -1,57 +1,59 @@
 ---
-title: Implementação de uma DMZ entre o Azure e a Internet
+title: Implementar uma rede de perímetro entre o Azure e a Internet
+titleSuffix: Azure Reference Architectures
 description: Como implementar uma arquitetura de rede híbrida segura com acesso à Internet no Azure.
 author: telmosampaio
 ms.date: 10/22/2018
+ms.custom: seodec18
 pnp.series.title: Network DMZ
 pnp.series.next: nva-ha
 pnp.series.prev: secure-vnet-hybrid
 cardTitle: DMZ between Azure and the Internet
-ms.openlocfilehash: 8d394d8cacd17b3af2b3de13ecb2c3181ef568ba
-ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
+ms.openlocfilehash: ec87cf9aa69bbfea9e40f740fe27e3183bc45fc7
+ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/26/2018
-ms.locfileid: "52295610"
+ms.lasthandoff: 12/08/2018
+ms.locfileid: "53119975"
 ---
-# <a name="dmz-between-azure-and-the-internet"></a>DMZ entre o Azure e a Internet
+# <a name="implement-a-dmz-between-azure-and-the-internet"></a>Implementar uma rede de perímetro entre o Azure e a Internet
 
-Essa arquitetura de referência mostra uma rede híbrido segura que estende a uma rede local para o Azure e também aceita tráfego de Internet. [**Implante essa solução**.](#deploy-the-solution)
+Essa arquitetura de referência mostra uma rede híbrido segura que estende a uma rede local para o Azure e também aceita tráfego de Internet. [**Implantar esta solução**](#deploy-the-solution).
 
-[![0]][0] 
+![Proteger arquitetura de rede híbrida](./images/dmz-public.png)
 
 *Baixe um [Arquivo Visio][visio-download] dessa arquitetura.*
 
-Essa arquitetura de referência estende a arquitetura descrita em [Implementação de uma DMZ entre o Azure e seu datacenter local][implementing-a-secure-hybrid-network-architecture]. Ela adiciona uma DMZ que manipula o tráfego da Internet, além da DMZ privada que manipula o tráfego da rede local 
+Essa arquitetura de referência estende a arquitetura descrita em [Implementação de uma DMZ entre o Azure e seu datacenter local][implementing-a-secure-hybrid-network-architecture]. Ela adiciona uma rede de perímetro que manipula o tráfego da Internet, além da DMZ privada que manipula o tráfego da rede local.
 
-Alguns usos típicos para essa arquitetura:
+Alguns usos típicos dessa arquitetura:
 
-* Aplicativos híbridos nos quais as cargas de trabalho são executadas parcialmente localmente e parcialmente no Azure.
-* A infraestrutura do Azure que roteia o tráfego de entrada local e da Internet.
+- Aplicativos híbridos nos quais as cargas de trabalho são executadas parcialmente localmente e parcialmente no Azure.
+- A infraestrutura do Azure que roteia o tráfego de entrada local e da Internet.
 
 ## <a name="architecture"></a>Arquitetura
 
 A arquitetura consiste nos componentes a seguir.
 
-* **Endereço IP público (PIP)**. O endereço IP do ponto de extremidade público. Usuários externos conectados à Internet podem acessar o sistema por meio desse endereço.
-* **NVA (Solução de Virtualização de Rede)**. Essa arquitetura inclui um pool separado de NVAs para tráfego originado na Internet.
-* **Azure Load Balancer**. Todas as solicitações recebidas da Internet passam por pelo balanceador de carga e são distribuídas para NVAs na DMZ pública.
-* **Sub-rede de entrada da DMZ pública**. Essa sub-rede aceita solicitações do Azure Load Balancer. Solicitações de entrada são passadas para uma das NVAs na DMZ pública.
-* **Sub-rede de saída da DMZ pública**. As solicitações que foram aprovadas pela NVA passam por essa sub-rede por meio do balanceador de carga interno e vão para a camada da Web.
+- **Endereço IP público (PIP)**. O endereço IP do ponto de extremidade público. Usuários externos conectados à Internet podem acessar o sistema por meio desse endereço.
+- **NVA (Solução de Virtualização de Rede)**. Essa arquitetura inclui um pool separado de NVAs para tráfego originado na Internet.
+- **Azure Load Balancer**. Todas as solicitações recebidas da Internet passam por pelo balanceador de carga e são distribuídas para NVAs na DMZ pública.
+- **Sub-rede de entrada da DMZ pública**. Essa sub-rede aceita solicitações do Azure Load Balancer. Solicitações de entrada são passadas para uma das NVAs na DMZ pública.
+- **Sub-rede de saída da DMZ pública**. As solicitações que foram aprovadas pela NVA passam por essa sub-rede por meio do balanceador de carga interno e vão para a camada da Web.
 
 ## <a name="recommendations"></a>Recomendações
 
-As seguintes recomendações aplicam-se à maioria dos cenários. Siga estas recomendações, a menos que você tenha um requisito específico que as substitua. 
+As seguintes recomendações aplicam-se à maioria dos cenários. Siga estas recomendações, a menos que você tenha um requisito específico que as substitua.
 
 ### <a name="nva-recommendations"></a>Recomendações de NVA
 
 Use um conjunto de NVAs para tráfego originado na Internet e outro para o tráfego originado localmente. Usar apenas um conjunto de NVAs para ambos é um risco à segurança, uma vez que ele não oferece nenhum perímetro de segurança entre os dois conjuntos de tráfego de rede. Usar NVAs separadas reduz a complexidade da verificação das regras de segurança e deixa claro quais regras correspondem a quais solicitações de rede de entrada. Um conjunto de NVAs implementa as regras apenas para o tráfego de Internet, enquanto outro conjunto de NVAs implementa as regras apenas para tráfego local.
 
-Inclua uma NVA da camada 7 para terminar as conexões de aplicativo no nível de NVA e manter a compatibilidade com as camadas de back-end. Isso garante a conectividade simétrica na qual o tráfego de resposta de camadas de back-end retorna por meio da NVA.  
+Inclua uma NVA da camada 7 para terminar as conexões de aplicativo no nível de NVA e manter a compatibilidade com as camadas de back-end. Isso garante a conectividade simétrica na qual o tráfego de resposta de camadas de back-end retorna por meio da NVA.
 
 ### <a name="public-load-balancer-recommendations"></a>Recomendações de balanceador de carga público
 
-Para obter escalabilidade e disponibilidade, implante as NVAs da DMZ pública em um [conjunto de disponibilidade][availability-set] e use um [balanceador de carga para a Internet][load-balancer] para distribuir solicitações da Internet para as NVAs no conjunto de disponibilidade.  
+Para obter escalabilidade e disponibilidade, implante as NVAs da DMZ pública em um [conjunto de disponibilidade][availability-set] e use um [balanceador de carga para a Internet][load-balancer] para distribuir solicitações da Internet para as NVAs no conjunto de disponibilidade.
 
 Configure o balanceador de carga para aceitar somente as solicitações nas portas necessárias para o tráfego de Internet. Por exemplo, restrinja as solicitações HTTP de entrada à porta 80 e as solicitações HTTPS de entrada à porta 443.
 
@@ -73,16 +75,15 @@ Se a conectividade de gateway da rede local para o Azure estiver inativa, você 
 
 Essa arquitetura de referência implementa vários níveis de segurança:
 
-* O balanceador de carga para a Internet direciona as solicitações para as NVAs na sub-rede DMZ pública de entrada e apenas nas portas necessárias para o aplicativo.
-* As regras do NSG para as sub-redes da DMZ pública de entrada e saída impedem que as NVAs sejam comprometidas, bloqueando as solicitações que estão fora das regras do NSG.
-* A configuração de roteamento de NAT para as NVAs direciona solicitações de entrada na porta 80 e 443 para o balanceador de carga da camada da Web, mas ignora as solicitações em todas as demais portas.
+- O balanceador de carga para a Internet direciona as solicitações para as NVAs na sub-rede DMZ pública de entrada e apenas nas portas necessárias para o aplicativo.
+- As regras do NSG para as sub-redes da DMZ pública de entrada e saída impedem que as NVAs sejam comprometidas, bloqueando as solicitações que estão fora das regras do NSG.
+- A configuração de roteamento de NAT para as NVAs direciona solicitações de entrada na porta 80 e 443 para o balanceador de carga da camada da Web, mas ignora as solicitações em todas as demais portas.
 
 Você deve registrar todas as solicitações de entrada em todas as portas. Audite os logs regularmente, prestando atenção às solicitações que estão fora dos parâmetros esperados, pois isso pode indicar tentativas de invasão.
 
-
 ## <a name="deploy-the-solution"></a>Implantar a solução
 
-Uma implantação para uma arquitetura de referência que implementa essas recomendações está disponível no [GitHub][github-folder]. 
+Uma implantação para uma arquitetura de referência que implementa essas recomendações está disponível no [GitHub][github-folder].
 
 ### <a name="prerequisites"></a>Pré-requisitos
 
@@ -108,7 +109,7 @@ Uma implantação para uma arquitetura de referência que implementa essas recom
 
 Nesta etapa, você conectará os dois gateways de rede locais.
 
-1. No portal do Azure, navegue até o grupo de recursos que você criou. 
+1. No portal do Azure, navegue até o grupo de recursos que você criou.
 
 2. Localize o recurso denominado `ra-vpn-vgw-pip` e copie o endereço IP mostrado na folha **Visão geral**.
 
@@ -116,13 +117,13 @@ Nesta etapa, você conectará os dois gateways de rede locais.
 
 4. Clique na folha **Configuração**. No **Endereço IP**, cole o endereço IP da etapa 2.
 
-    ![](./images/local-net-gw.png)
+    ![Captura de tela do campo Endereço IP](./images/local-net-gw.png)
 
 5. Clique em **Salvar** e aguarde a conclusão da operação. Isso pode levar cerca de 5 minutos.
 
 6. Encontre o recurso denominado `onprem-vpn-gateway1-pip`. Copie o endereço IP mostrado na folha **Visão geral**.
 
-7. Encontre o recurso denominado `ra-vpn-lgw`. 
+7. Encontre o recurso denominado `ra-vpn-lgw`.
 
 8. Clique na folha **Configuração**. No **Endereço IP**, cole o endereço IP da etapa 6.
 
@@ -132,9 +133,9 @@ Nesta etapa, você conectará os dois gateways de rede locais.
 
 ### <a name="verify-that-network-traffic-reaches-the-web-tier"></a>Verificar se o tráfego de rede atinge a camada da Web
 
-1. No portal do Azure, navegue até o grupo de recursos que você criou. 
+1. No portal do Azure, navegue até o grupo de recursos que você criou.
 
-2. Encontre o recurso denominado `pub-dmz-lb`, que é o balanceador de carga na frente da DMZ pública. 
+2. Encontre o recurso denominado `pub-dmz-lb`, que é o balanceador de carga na frente da DMZ pública.
 
 3. Copie o endereço IP público da folha **Visão geral** e abra-o em um navegador da Web. Você deve ver a home page padrão do servidor Apache2.
 
@@ -154,6 +155,3 @@ Nesta etapa, você conectará os dois gateways de rede locais.
 [network-security-group]: /azure/virtual-network/virtual-networks-nsg
 
 [visio-download]: https://archcenter.blob.core.windows.net/cdn/dmz-reference-architectures.vsdx
-
-
-[0]: ./images/dmz-public.png "Arquitetura de rede híbrida segura"

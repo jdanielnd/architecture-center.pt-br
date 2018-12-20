@@ -3,12 +3,13 @@ title: Usar o Service Fabric para decompor aplicativos monolíticos
 description: Decomponha um grande aplicativo monolítico em microsserviços.
 author: timomta
 ms.date: 09/20/2018
-ms.openlocfilehash: 9194ddd53a6d78f49fea2f7bb36fbc8721a502ea
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.custom: fasttrack
+ms.openlocfilehash: 438d2eabff39356a7593f2da798a74eebe94553a
+ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48819615"
+ms.lasthandoff: 12/06/2018
+ms.locfileid: "53004621"
 ---
 # <a name="using-service-fabric-to-decompose-monolithic-applications"></a>Usar o Service Fabric para decompor aplicativos monolíticos
 
@@ -80,7 +81,7 @@ Para um cluster do Service Fabric hospedado no Azure, a maior parte do custo cor
 
 Outros componentes mais baratos são os encargos de armazenamento para discos virtuais de cada nó e os encargos de saída de E/S de rede do Azure (por exemplo, tráfego de rede saindo do Azure para o navegador do usuário).
 
-Para ter uma ideia do custo, criamos um exemplo que usa alguns valores padrão de tamanho de cluster, rede e armazenamento. Examine a [calculadora de preços](https://azure.com/e/52dea096e5844d5495a7b22a9b2ccdde). Fique à vontade atualizar os valores na calculadora padrão para os valores relevantes à sua situação.
+Para ter uma ideia do custo, criamos um exemplo que usa alguns valores padrão de tamanho de cluster, rede e armazenamento: Examine a [calculadora de preços](https://azure.com/e/52dea096e5844d5495a7b22a9b2ccdde). Fique à vontade atualizar os valores na calculadora padrão para os valores relevantes à sua situação.
 
 ## <a name="next-steps"></a>Próximas etapas
 

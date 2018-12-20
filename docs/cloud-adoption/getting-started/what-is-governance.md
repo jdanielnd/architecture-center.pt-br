@@ -1,16 +1,16 @@
 ---
-title: 'Adoção do Enterprise Cloud: o que é a governança dos recursos da nuvem?'
+title: 'Adoção de Nuvem Empresarial: O que é a governança dos recursos da nuvem?'
 description: Explicação sobre o conceito de governança de acesso a recursos no Azure
 author: petertaylor9999
 ms.date: 09/10/2018
-ms.openlocfilehash: 14c26cbccdbea524a7c7220b3bb98ed2a118c30d
-ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
+ms.openlocfilehash: fb01b2e2823c16e32f8ded696de0b6faf1d2e610
+ms.sourcegitcommit: e7f8676bbffe500fc4d6deb603b7c0b7ba1884a6
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/11/2018
-ms.locfileid: "44389206"
+ms.lasthandoff: 12/10/2018
+ms.locfileid: "53179273"
 ---
-# <a name="enterprise-cloud-adoption-what-is-cloud-resource-governance"></a>Adoção do Enterprise Cloud: o que é a governança dos recursos da nuvem?
+# <a name="enterprise-cloud-adoption-what-is-cloud-resource-governance"></a>Adoção de Nuvem Empresarial: O que é a governança dos recursos da nuvem?
 
 Em [Como funciona o Azure?](what-is-azure.md), você aprendeu que o Azure é uma coleção de servidores e hardware de rede que executa software e hardware virtualizado em nome dos usuários. Azure permite o desenvolvimento de sua organização e os departamentos de TI para ser ágil, tornando mais fácil criar, ler, atualizar e excluir recursos conforme necessário.
 
@@ -20,7 +20,7 @@ A solução para esse problema é a **governança** de acesso a recursos. Govern
 
 > [!VIDEO https://www.microsoft.com/en-us/videoplayer/embed/RE2ii94] 
 
-Essas metas e requisitos são exclusivos de cada organização e, portanto, não é possível ter uma abordagem única para governança. Em vez disso, o Azure implementa duas ferramentas de administração primária, **recursos com base em controle de acesso (RBAC)**, e **diretiva recursos**, e depende de cada organização para criar seu modelo de governança usá-los.
+Essas metas e requisitos são exclusivos de cada organização e, portanto, não é possível ter uma abordagem única para governança. Em vez disso, o Azure implementa duas ferramentas de governança primária, **RBAC (controle de acesso baseado em função)** e **política de recursos**, e depende de cada organização criar seu modelo de governança usando essas ferramentas.
 
 O RBAC define funções, e as funções definem os recursos para um usuário atribuído à função. Por exemplo, a função **proprietário** habilita todos os recursos (criar, ler, atualizar e excluir) para um recurso, enquanto as funções **leitor** habilita somente a capacidade de leitura. As funções podem ser definidas com um escopo amplo que se aplique a vários tipos de recursos ou um escopo estreito que se aplique a alguns. 
 

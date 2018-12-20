@@ -1,22 +1,20 @@
 ---
 title: Conectar uma rede local ao Azure usando o ExpressRoute
-description: Como implementar uma arquitetura de rede site a site segura que abranja uma rede virtual do Azure e uma rede local conectada usando o Azure ExpressRoute.
+titleSuffix: Azure Reference Architectures
+description: Implementar uma arquitetura de rede site a site segura que abranja uma rede virtual do Azure e uma rede local conectada usando o Azure ExpressRoute.
 author: telmosampaio
 ms.date: 10/22/2017
-pnp.series.title: Connect an on-premises network to Azure
-pnp.series.next: expressroute-vpn-failover
-pnp.series.prev: vpn
-cardTitle: ExpressRoute
-ms.openlocfilehash: 16711acb179c05152fc5ef8c7bf3eeb8d067a382
-ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
+ms.custom: seodec18
+ms.openlocfilehash: 8e9de168fe2969159f62ce84a19f4b21fd1cb538
+ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/02/2018
-ms.locfileid: "50916610"
+ms.lasthandoff: 12/08/2018
+ms.locfileid: "53120383"
 ---
 # <a name="connect-an-on-premises-network-to-azure-using-expressroute"></a>Conectar uma rede local ao Azure usando o ExpressRoute
 
-Essa arquitetura de referência mostra como conectar uma rede local a redes virtuais no Azure usando o [Azure ExpressRoute][expressroute-introduction]. Conexões do ExpressRoute usam uma conexão privada dedicada por meio de um provedor de conectividade de terceiros. A conexão privada estende sua rede local para o Azure. [**Implante essa solução**.](#deploy-the-solution)
+Essa arquitetura de referência mostra como conectar uma rede local a redes virtuais no Azure usando o [Azure ExpressRoute][expressroute-introduction]. Conexões do ExpressRoute usam uma conexão privada dedicada por meio de um provedor de conectividade de terceiros. A conexão privada estende sua rede local para o Azure. [**Implantar esta solução**](#deploy-the-solution).
 
 ![[0]][0]
 
@@ -26,20 +24,20 @@ Essa arquitetura de referência mostra como conectar uma rede local a redes virt
 
 A arquitetura consiste nos componentes a seguir.
 
-* **Rede corporativa local**. Uma rede de área local privada em execução dentro de uma organização.
+- **Rede corporativa local**. Uma rede de área local privada em execução dentro de uma organização.
 
-* **Circuito do ExpressRoute**. Um circuito de camada 2 ou de camada 3 fornecido pelo provedor de conectividade que une a rede local com o Azure por meio de roteadores de borda. O circuito usa a infraestrutura de hardware gerenciada pelo provedor de conectividade.
+- **Circuito do ExpressRoute**. Um circuito de camada 2 ou de camada 3 fornecido pelo provedor de conectividade que une a rede local com o Azure por meio de roteadores de borda. O circuito usa a infraestrutura de hardware gerenciada pelo provedor de conectividade.
 
-* **Roteadores de borda locais**. Roteadores que se conectam a rede local ao circuito gerenciado pelo provedor. Dependendo de como sua conexão é provisionada, talvez seja necessário fornecer endereços IP públicos usados pelos roteadores.
-* **Roteadores de borda da Microsoft**. Dois roteadores em uma configuração altamente disponível de tipo ativo-ativo. Esses roteadores permitem que um provedor de conectividade conecte seus circuitos diretamente ao seu datacenter. Dependendo de como sua conexão é provisionada, talvez seja necessário fornecer endereços IP públicos usados pelos roteadores.
+- **Roteadores de borda locais**. Roteadores que se conectam a rede local ao circuito gerenciado pelo provedor. Dependendo de como sua conexão é provisionada, talvez seja necessário fornecer endereços IP públicos usados pelos roteadores.
+- **Roteadores de borda da Microsoft**. Dois roteadores em uma configuração altamente disponível de tipo ativo-ativo. Esses roteadores permitem que um provedor de conectividade conecte seus circuitos diretamente ao seu datacenter. Dependendo de como sua conexão é provisionada, talvez seja necessário fornecer endereços IP públicos usados pelos roteadores.
 
-* **Redes virtuais do Azure (VNets)**. Cada VNet reside em uma única região do Azure e pode hospedar várias camadas de aplicativos. As camadas de aplicativo podem ser segmentadas usando sub-redes em cada VNet.
+- **Redes virtuais do Azure (VNets)**. Cada VNet reside em uma única região do Azure e pode hospedar várias camadas de aplicativos. As camadas de aplicativo podem ser segmentadas usando sub-redes em cada VNet.
 
-* **Serviços públicos do Azure**. Serviços do Azure que podem ser usados em um aplicativo híbrido. Esses serviços também estão disponíveis na Internet, mas acessá-los usando um circuito do ExpressRoute fornece baixa latência e desempenho mais previsível, porque o tráfego não passa pela Internet. Conexões são executadas usando [emparelhamento público][expressroute-peering], com os endereços pertencentes à sua organização ou fornecidos pelo seu provedor de conectividade.
+- **Serviços públicos do Azure**. Serviços do Azure que podem ser usados em um aplicativo híbrido. Esses serviços também estão disponíveis na Internet, mas acessá-los usando um circuito do ExpressRoute fornece baixa latência e desempenho mais previsível, porque o tráfego não passa pela Internet. Conexões são executadas usando [emparelhamento público][expressroute-peering], com os endereços pertencentes à sua organização ou fornecidos pelo seu provedor de conectividade.
 
-* **Serviços do Office 365**. Os serviços fornecidos pela Microsoft e aplicativos do Office 365 publicamente disponíveis. Conexões são realizadas usando [emparelhamento da Microsoft][expressroute-peering], com os endereços pertencentes à sua organização ou fornecidos pelo seu provedor de conectividade. Você também pode se conectar diretamente ao Microsoft CRM Online por meio do emparelhamento da Microsoft.
+- **Serviços do Office 365**. Os serviços fornecidos pela Microsoft e aplicativos do Office 365 publicamente disponíveis. Conexões são realizadas usando [emparelhamento da Microsoft][expressroute-peering], com os endereços pertencentes à sua organização ou fornecidos pelo seu provedor de conectividade. Você também pode se conectar diretamente ao Microsoft CRM Online por meio do emparelhamento da Microsoft.
 
-* **Provedores de conectividade** (não mostrados). Empresas que fornecem uma conexão usando conectividade de camada 2 ou camada 3 entre o seu datacenter e um datacenter do Azure.
+- **Provedores de conectividade** (não mostrados). Empresas que fornecem uma conexão usando conectividade de camada 2 ou camada 3 entre o seu datacenter e um datacenter do Azure.
 
 ## <a name="recommendations"></a>Recomendações
 
@@ -55,9 +53,9 @@ Get-AzureRmExpressRouteServiceProvider
 
 Provedores de conectividade do ExpressRoute conectam seu datacenter à Microsoft das seguintes maneiras:
 
-* **Colocalizado em uma troca de nuvem**. Se você estiver colocalizado em uma instalação que tenha uma troca de nuvem, poderá solicitar conexões cruzadas virtuais ao Azure por meio da troca Ethernet do provedor da colocalização. Os provedores da colocalização podem oferecer conexões cruzadas de camada 2 ou conexões cruzadas gerenciadas de camada 3 entre sua infraestrutura na instalação de colocalização e o Azure.
-* **Conexões Ethernet ponto a ponto**. Você pode conectar seus data centers/escritórios locais ao Azure por meio de links de Ethernet ponto a ponto. Os provedores de Ethernet ponto a ponto podem oferecer conexões de camada 2 ou conexões gerenciadas de camada 3 entre seu site e o Azure.
-* **Redes qualquer para qualquer (IPVPN)**. Você pode integrar sua WAN (rede de longa distância) com o Azure. Provedores de Internet IPVPN (rede virtual privada de protocolo IP), normalmente uma VPN de mudança de rótulo multiprotocolo, oferecem conectividade de qualquer para qualquer entre suas filiais e data centers. O Azure pode ser interconectado à sua WAN para que ela fique exatamente igual a qualquer outra filial. Normalmente, os provedores de rede WAN oferecem conectividade gerenciada de camada 3.
+- **Colocalizado em uma troca de nuvem**. Se você estiver colocalizado em uma instalação que tenha uma troca de nuvem, poderá solicitar conexões cruzadas virtuais ao Azure por meio da troca Ethernet do provedor da colocalização. Os provedores da colocalização podem oferecer conexões cruzadas de camada 2 ou conexões cruzadas gerenciadas de camada 3 entre sua infraestrutura na instalação de colocalização e o Azure.
+- **Conexões Ethernet ponto a ponto**. Você pode conectar seus data centers/escritórios locais ao Azure por meio de links de Ethernet ponto a ponto. Os provedores de Ethernet ponto a ponto podem oferecer conexões de camada 2 ou conexões gerenciadas de camada 3 entre seu site e o Azure.
+- **Redes qualquer para qualquer (IPVPN)**. Você pode integrar sua WAN (rede de longa distância) com o Azure. Provedores de Internet IPVPN (rede virtual privada de protocolo IP), normalmente uma VPN de mudança de rótulo multiprotocolo, oferecem conectividade de qualquer para qualquer entre suas filiais e data centers. O Azure pode ser interconectado à sua WAN para que ela fique exatamente igual a qualquer outra filial. Normalmente, os provedores de rede WAN oferecem conectividade gerenciada de camada 3.
 
 Para obter mais informações sobre provedores de conectividade, consulte a [Introdução ao ExpressRoute][expressroute-introduction].
 
@@ -70,14 +68,14 @@ Se você ainda não o fez, adicione uma sub-rede denominada `GatewaySubnet` à s
 Crie um circuito do ExpressRoute conforme descrito a seguir:
 
 1. Execute o seguinte comando do PowerShell:
-   
+
     ```powershell
     New-AzureRmExpressRouteCircuit -Name <<circuit-name>> -ResourceGroupName <<resource-group>> -Location <<location>> -SkuTier <<sku-tier>> -SkuFamily <<sku-family>> -ServiceProviderName <<service-provider-name>> -PeeringLocation <<peering-location>> -BandwidthInMbps <<bandwidth-in-mbps>>
     ```
 2. Envie o `ServiceKey` para o novo circuito para o provedor de serviços.
 
 3. Aguarde até que o provedor provisione o circuito. Para verificar o estado de provisionamento de um circuito, execute o seguinte comando do PowerShell:
-   
+
     ```powershell
     Get-AzureRmExpressRouteCircuit -Name <<circuit-name>> -ResourceGroupName <<resource-group>>
     ```
@@ -86,15 +84,15 @@ Crie um circuito do ExpressRoute conforme descrito a seguir:
 
     > [!NOTE]
     > Se você estiver usando uma conexão de camada 3, o provedor deverá configurar e gerenciar o roteamento para você. Você fornece as informações necessárias para habilitar o provedor a implementar as rotas apropriadas.
-    > 
-    > 
+    >
+    >
 
 4. Se você estiver usando uma conexão de camada 2:
 
-    1. Reserve duas sub-redes /30 compostas de endereços IP públicos válidos para cada tipo de emparelhamento que você deseja implementar. Essas sub-redes /30 serão usadas para fornecer endereços IP para os roteadores usados para o circuito. Se você estiver implementando emparelhamento privado, público e da Microsoft, você precisará de seis sub-redes /30 com endereços IP públicos válidos.     
+    1. Reserve duas sub-redes /30 compostas de endereços IP públicos válidos para cada tipo de emparelhamento que você deseja implementar. Essas sub-redes /30 serão usadas para fornecer endereços IP para os roteadores usados para o circuito. Se você estiver implementando emparelhamento privado, público e da Microsoft, você precisará de seis sub-redes /30 com endereços IP públicos válidos.
 
     2. Configure o roteamento para o circuito do ExpressRoute. Execute os seguinte comandos do PowerShell para cada tipo de emparelhamento a configurar (privado, público e da Microsoft). Para obter mais informações, consulte [Criar e modificar o roteamento de um circuito do ExpressRoute][configure-expressroute-routing].
-   
+
         ```powershell
         Set-AzureRmExpressRouteCircuitPeeringConfig -Name <<peering-name>> -Circuit <<circuit-name>> -PeeringType <<peering-type>> -PeerASN <<peer-asn>> -PrimaryPeerAddressPrefix <<primary-peer-address-prefix>> -SecondaryPeerAddressPrefix <<secondary-peer-address-prefix>> -VlanId <<vlan-id>>
 
@@ -113,7 +111,7 @@ Crie um circuito do ExpressRoute conforme descrito a seguir:
 
 Você pode conectar múltiplas VNets localizadas em regiões diferentes ao mesmo circuito do ExpressRoute, desde que todas as VNets e o circuito do ExpressRoute estejam localizados na mesma região geopolítica.
 
-### <a name="troubleshooting"></a>solução de problemas 
+### <a name="troubleshooting"></a>solução de problemas
 
 Se um circuito do ExpressRoute que funcionava anteriormente agora falha ao se conectar sem que tenha ocorrido nenhuma alteração de configuração local ou dentro de sua VNet privada, você provavelmente precisará entrar em contato com o provedor de conectividade e trabalhar com eles para corrigir o problema. Use os seguintes comandos do Powershell para verificar se o circuito do ExpressRoute foi configurado:
 
@@ -123,7 +121,7 @@ Get-AzureRmExpressRouteCircuit -Name <<circuit-name>> -ResourceGroupName <<resou
 
 A saída desse comando mostra várias propriedades para o circuito, incluindo `ProvisioningState`, `CircuitProvisioningState` e `ServiceProviderProvisioningState` conforme mostrado abaixo.
 
-```
+```powershell
 ProvisioningState                : Succeeded
 Sku                              : {
                                      "Name": "Standard_MeteredData",
@@ -144,19 +142,19 @@ Se seu provedor já tinha provisionado o circuito e o `ProvisioningState` está 
 
 ## <a name="scalability-considerations"></a>Considerações sobre escalabilidade
 
-Os circuitos do ExpressRoute fornecem um caminho de alta largura de banda entre redes. Em geral, quanto maior a largura de banda, maior o custo. 
+Os circuitos do ExpressRoute fornecem um caminho de alta largura de banda entre redes. Em geral, quanto maior a largura de banda, maior o custo.
 
 O ExpressRoute oferece dois [planos de preços][expressroute-pricing] para clientes, um plano limitado e um plano de dados ilimitado. Os encargos variam de acordo com a largura de banda do circuito. A largura de banda disponível provavelmente será diferente para cada provedor. Use o cmdlet `Get-AzureRmExpressRouteServiceProvider` para ver os provedores disponíveis na sua região e as larguras de banda que eles oferecem.
- 
+
 Um único circuito do ExpressRoute pode dar suporte a um determinado número de emparelhamentos e links de VNet. Para obter mais informações, consulte [limites do ExpressRoute](/azure/azure-subscription-service-limits).
 
 A um custo adicional, o complemento ExpressRoute Premium oferece algumas funcionalidades adicionais:
 
-* Aumento dos limites de rota para emparelhamento público e privado. 
-* Aumento do número de links de VNet por circuito do ExpressRoute. 
-* Conectividade global para serviços.
+- Aumento dos limites de rota para emparelhamento público e privado.
+- Aumento do número de links de VNet por circuito do ExpressRoute.
+- Conectividade global para serviços.
 
-Consulte [Preços do ExpressRoute][expressroute-pricing] para obter detalhes. 
+Consulte [Preços do ExpressRoute][expressroute-pricing] para obter detalhes.
 
 Circuitos de ExpressRoute são projetados para permitir intermitências de rede temporárias de até duas vezes o limite de largura de banda que você adquiriu, sem nenhum custo adicional. Isso é alcançado por meio de links redundantes. No entanto, nem todos os provedores de conectividade dão suporte a esse recurso. Verifique se que o seu provedor de conectividade permite esse recurso antes de depender dele.
 
@@ -186,8 +184,8 @@ Embora alguns provedores permitam que você altere a largura de banda, verifique
 
     > [!IMPORTANT]
     > Verifique se a propriedade `Sku.Name` corresponde a `Sku.Tier` e `Sku.Family`. Se você alterar a família e camada, mas não o nome, a conexão será desabilitada.
-    > 
-    > 
+    >
+    >
 
     Você pode fazer upgrade do SKU sem interrupções, mas você não pode mudar do plano de preços ilimitado para o limitado. Ao fazer o downgrade do SKU, o consumo de largura de banda deve permanecer dentro do limite padrão do SKU padrão.
 
@@ -199,26 +197,26 @@ Por padrão, as sessões BGP usam um valor de tempo limite de ociosidade de 60 s
 
 Você poderá configurar a alta disponibilidade para a conexão do Azure de maneiras diferentes, dependendo do tipo de provedor que você usar e do número de circuitos do ExpressRoute e de conexões de gateway de rede virtual que você pretender configurar. O exemplo a seguir resume as opções de disponibilidade:
 
-* Se você estiver usando uma conexão de camada 2, implante roteadores redundantes em sua rede local em uma configuração ativo-ativo. Conecte o circuito primário a um roteador e o circuito secundário ao outro. Isso lhe dará uma conexão altamente disponível em ambas as extremidades da conexão. Isso é necessário se você precisar de contrato de nível de serviço (SLA) do ExpressRoute. Consulte [SLA para o Azure ExpressRoute][sla-for-expressroute] para obter detalhes.
+- Se você estiver usando uma conexão de camada 2, implante roteadores redundantes em sua rede local em uma configuração ativo-ativo. Conecte o circuito primário a um roteador e o circuito secundário ao outro. Isso lhe dará uma conexão altamente disponível em ambas as extremidades da conexão. Isso é necessário se você precisar de contrato de nível de serviço (SLA) do ExpressRoute. Consulte [SLA para o Azure ExpressRoute][sla-for-expressroute] para obter detalhes.
 
     O diagrama a seguir mostra uma configuração com roteadores locais redundantes conectados aos circuitos primários e secundários. Cada circuito manipula o tráfego para um emparelhamento público e um emparelhamento privado (um par de espaços de endereço /30 é designado a cada emparelhamento, conforme descrito na seção anterior).
 
     ![[1]][1]
 
-* Se você estiver usando uma conexão de camada 3, verifique se que ele forneça sessões de BGP redundantes que controlem a disponibilidade para você.
+- Se você estiver usando uma conexão de camada 3, verifique se que ele forneça sessões de BGP redundantes que controlem a disponibilidade para você.
 
-* Conecte a VNet a vários circuitos do ExpressRoute fornecidos por diferentes provedores de serviço. Essa estratégia fornece funcionalidades adicionais de recuperação de desastre e alta disponibilidade.
+- Conecte a VNet a vários circuitos do ExpressRoute fornecidos por diferentes provedores de serviço. Essa estratégia fornece funcionalidades adicionais de recuperação de desastre e alta disponibilidade.
 
-* Configure uma VPN site a site como um caminho de failover para o ExpressRoute. Para obter mais informações sobre essa opção, consulte [Conectar uma rede local ao Azure usando o ExpressRoute com failover de VPN][highly-available-network-architecture].
- Essa opção só se aplica ao emparelhamento privado. Para serviços do Azure e o Office 365, a Internet é o único caminho de failover. 
+- Configure uma VPN site a site como um caminho de failover para o ExpressRoute. Para obter mais informações sobre essa opção, consulte [Conectar uma rede local ao Azure usando o ExpressRoute com failover de VPN][highly-available-network-architecture].
+ Essa opção só se aplica ao emparelhamento privado. Para serviços do Azure e o Office 365, a Internet é o único caminho de failover.
 
 ## <a name="manageability-considerations"></a>Considerações sobre capacidade de gerenciamento
 
-Você pode usar o [Kit de ferramentas do Azure conectividade (AzureCT)][azurect] para monitorar a conectividade entre o datacenter local e o Azure. 
+Você pode usar o [Kit de ferramentas do Azure conectividade (AzureCT)][azurect] para monitorar a conectividade entre o datacenter local e o Azure.
 
 ## <a name="security-considerations"></a>Considerações de segurança
 
-Você pode configurar opções de segurança para sua conexão do Azure de maneiras diferentes, dependendo de suas necessidades de conformidade e questões de segurança. 
+Você pode configurar opções de segurança para sua conexão do Azure de maneiras diferentes, dependendo de suas necessidades de conformidade e questões de segurança.
 
 O ExpressRoute funciona na camada 3. Ameaças na camada de aplicativo podem ser evitadas por meio de um dispositivo de segurança de rede que restringe o tráfego a recursos legítimos. Além disso, as conexões do ExpressRoute usando o emparelhamento público podem ser iniciadas apenas localmente. Isso impede que um serviço invasor acesse e comprometa dados locais da Internet.
 
@@ -235,36 +233,43 @@ Para maximizar a segurança, não habilite um endereço IP público para suas VM
 Se você deve expor pontos de extremidade de gerenciamento para VMs a uma rede externa, use NSGs ou listas de controle de acesso para restringir a visibilidade dessas portas para uma lista de permissões de endereços IP ou redes.
 
 > [!NOTE]
-> Por padrão, VMs do Azure implantadas por meio do Portal do Azure incluem um endereço IP público que fornece acesso de logon.  
-> 
-> 
-
+> Por padrão, VMs do Azure implantadas por meio do Portal do Azure incluem um endereço IP público que fornece acesso de logon.
+>
 
 ## <a name="deploy-the-solution"></a>Implantar a solução
 
-**Pré-requisitos.** Você deve ter uma infraestrutura local existente já configurada com um dispositivo de rede adequado.
+**Pré-requisitos**. Você deve ter uma infraestrutura local existente já configurada com um dispositivo de rede adequado.
 
 Para implantar a solução, execute as etapas a seguir.
 
+<!-- markdownlint-disable MD033 -->
+
 1. Clique no botão abaixo:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fhybrid-networking%2Fexpressroute%2Fazuredeploy.json" target="_blank"><img src="https://azuredeploy.net/deploybutton.png"/></a>
+
 2. Aguarde até o link abrir no Portal do Azure e siga estas etapas:
-   * O nome do **Grupo de recursos** já está definido no arquivo de parâmetros, portanto, selecione **Criar novo** e digite `ra-hybrid-er-rg` na caixa de texto.
-   * Selecione a região na caixa suspensa **Local**.
-   * Não edite as caixas de texto **URI da raiz do modelo** ou **URI da raiz do parâmetro**.
-   * Analise os termos e condições e clique na caixa de seleção **Concordo com os termos e condições declarados acima**.
-   * Clique no botão **Comprar**.
+   - O nome do **Grupo de recursos** já está definido no arquivo de parâmetros, portanto, selecione **Criar novo** e digite `ra-hybrid-er-rg` na caixa de texto.
+   - Selecione a região na caixa suspensa **Local**.
+   - Não edite as caixas de texto **URI da raiz do modelo** ou **URI da raiz do parâmetro**.
+   - Analise os termos e condições e clique na caixa de seleção **Concordo com os termos e condições declarados acima**.
+   - Clique no botão **Comprar**.
+
 3. Aguarde até que a implantação seja concluída.
+
 4. Clique no botão abaixo:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fhybrid-networking%2Fexpressroute%2Fazuredeploy-expressRouteCircuit.json" target="_blank"><img src="https://azuredeploy.net/deploybutton.png"/></a>
+
 5. Aguarde até o link abrir no Portal do Azure e siga estas etapas:
-   * Selecione **Usar existente** na seção **Grupo de recursos** e digite `ra-hybrid-er-rg` na caixa de texto.
-   * Selecione a região na caixa suspensa **Local**.
-   * Não edite as caixas de texto **URI da raiz do modelo** ou **URI da raiz do parâmetro**.
-   * Analise os termos e condições e clique na caixa de seleção **Concordo com os termos e condições declarados acima**.
-   * Clique no botão **Comprar**.
+   - Selecione **Usar existente** na seção **Grupo de recursos** e digite `ra-hybrid-er-rg` na caixa de texto.
+   - Selecione a região na caixa suspensa **Local**.
+   - Não edite as caixas de texto **URI da raiz do modelo** ou **URI da raiz do parâmetro**.
+   - Analise os termos e condições e clique na caixa de seleção **Concordo com os termos e condições declarados acima**.
+   - Clique no botão **Comprar**.
+
 6. Aguarde até que a implantação seja concluída.
 
+<!-- markdownlint-enable MD033 -->
 
 <!-- links -->
+
 [forced-tuneling]: ../dmz/secure-vnet-hybrid.md
 [highly-available-network-architecture]: ./expressroute-vpn-failover.md
 
@@ -283,8 +288,9 @@ Para implantar a solução, execute as etapas a seguir.
 [er-circuit-parameters]: https://github.com/mspnp/reference-architectures/tree/master/hybrid-networking/expressroute/parameters/expressRouteCircuit.parameters.json
 [azure-powershell-download]: https://azure.microsoft.com/documentation/articles/powershell-install-configure/
 [azure-cli]: https://azure.microsoft.com/documentation/articles/xplat-cli-install/
+
 [0]: ./images/expressroute.png "Arquitetura de rede híbrida usando o Azure ExpressRoute"
 [1]: ../_images/guidance-hybrid-network-expressroute/figure2.png "Usando roteadores redundantes com circuitos primários e secundários do ExpressRoute"
 [2]: ../_images/guidance-hybrid-network-expressroute/figure3.png "Adicionar dispositivos de segurança para a rede local"
 [3]: ../_images/guidance-hybrid-network-expressroute/figure4.png "Usando túnel forçado para auditar o tráfego direcionado à Internet"
-[4]: ../_images/guidance-hybrid-network-expressroute/figure5.png "Localizando a ServiceKey de um circuito do ExpressRoute"  
+[4]: ../_images/guidance-hybrid-network-expressroute/figure5.png "Localizando a ServiceKey de um circuito do ExpressRoute"

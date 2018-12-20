@@ -1,58 +1,59 @@
 ---
-title: Aplicativo de n camadas com SQL Server
-description: Como implementar uma arquitetura multicamadas no Azure, para obter disponibilidade, segurança, escalabilidade e capacidade de gerenciamento.
+title: Aplicativo de n camadas do Windows com SQL Server
+titleSuffix: Azure Reference Architectures
+description: Implementar uma arquitetura multicamadas no Azure, para obter disponibilidade, segurança, escalabilidade e capacidade de gerenciamento.
 author: MikeWasson
 ms.date: 11/12/2018
-ms.openlocfilehash: 857b666ef8af8fec21d7a8a9756508344aa07acc
-ms.sourcegitcommit: 9293350ab66fb5ed042ff363f7a76603bf68f568
+ms.openlocfilehash: 38983dec83718f53fc1ffd79c1347582200f5db0
+ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "51577116"
+ms.lasthandoff: 12/08/2018
+ms.locfileid: "53120111"
 ---
 # <a name="windows-n-tier-application-on-azure-with-sql-server"></a>Aplicativo de N camadas do Windows no Azure com SQL Server
 
-Essa arquitetura de referência mostra como implantar VMs e uma rede virtual configurada para um aplicativo de N camadas usando o SQL Server no Windows para a camada de dados. [**Implante essa solução**.](#deploy-the-solution) 
+Essa arquitetura de referência mostra como implantar VMs e uma rede virtual configurada para um aplicativo de N camadas usando o SQL Server no Windows para a camada de dados. [**Implantar esta solução**](#deploy-the-solution).
 
-![[0]][0]
+![Arquitetura de N camadas usando o Microsoft Azure](./images/n-tier-sql-server.png)
 
 *Baixe um [Arquivo Visio][visio-download] dessa arquitetura.*
 
-## <a name="architecture"></a>Arquitetura 
+## <a name="architecture"></a>Arquitetura
 
 A arquitetura tem os seguintes componentes:
 
-* **Grupo de recursos.** [Grupos de recursos][resource-manager-overview] são utilizados para agrupar os recursos para que eles possam ser gerenciados pelo tempo de vida, o proprietário ou outros critérios.
+- **Grupo de recursos**. [Grupos de recursos][resource-manager-overview] são utilizados para agrupar os recursos para que eles possam ser gerenciados pelo tempo de vida, o proprietário ou outros critérios.
 
-* **Rede Virtual (VNet) e sub-redes.** Cada VM do Azure é implantada em uma VNet que pode ser segmentada em sub-redes. Sempre crie uma sub-rede separada para cada camada. 
+- **VNet (Rede Virtual) e sub-redes**. Cada VM do Azure é implantada em uma VNet que pode ser segmentada em sub-redes. Sempre crie uma sub-rede separada para cada camada.
 
-* **Gateway de aplicativo**. [O Gateway de Aplicativo do Azure](/azure/application-gateway/) é um balanceador de carga de camada 7. Nessa arquitetura, ele roteia as solicitações HTTP para o front-end da web. Gateway de Aplicativo também fornece um [firewall do aplicativo Web](/azure/application-gateway/waf-overview) (WAF) que protege o aplicativo contra vulnerabilidades e explorações comuns. 
+- **Gateway de aplicativo**. [O Gateway de Aplicativo do Azure](/azure/application-gateway/) é um balanceador de carga de camada 7. Nessa arquitetura, ele roteia as solicitações HTTP para o front-end da web. Gateway de Aplicativo também fornece um [firewall do aplicativo Web](/azure/application-gateway/waf-overview) (WAF) que protege o aplicativo contra vulnerabilidades e explorações comuns.
 
-* **NSGs.** Use os NSGs [grupos de segurança de rede][nsg] para restringir o tráfego de rede na VNet. Por exemplo, na arquitetura de três camadas mostrada aqui, a camada de banco de dados não aceita o tráfego de front-end da Web, somente da camada comercial e da sub-rede de gerenciamento.
+- **NSGs**. Use os NSGs [grupos de segurança de rede][nsg] para restringir o tráfego de rede na VNet. Por exemplo, na arquitetura de três camadas mostrada aqui, a camada de banco de dados não aceita o tráfego de front-end da Web, somente da camada comercial e da sub-rede de gerenciamento.
 
-* **Proteção contra DDoS**. Embora a plataforma do Azure forneça proteção básica em relação a ataques de negação de serviço distribuído (DDoS), é recomendável usar [Proteção contra DDoS Standard][ddos], que melhorou os recursos de mitigação de DDoS. Confira [Considerações de segurança](#security-considerations).
+- **Proteção contra DDoS**. Embora a plataforma do Azure forneça proteção básica em relação a ataques de negação de serviço distribuído (DDoS), é recomendável usar [Proteção contra DDoS Standard][ddos], que melhorou os recursos de mitigação de DDoS. Confira [Considerações de segurança](#security-considerations).
 
-* **Máquinas virtuais**. Para obter recomendações sobre como configurar máquinas virtuais, consulte [Executar uma VM do Windows no Azure](./windows-vm.md) e [Executar uma VM do Linux no Azure](./linux-vm.md).
+- **Máquinas virtuais**. Para obter recomendações sobre como configurar máquinas virtuais, consulte [Executar uma VM do Windows no Azure](./windows-vm.md) e [Executar uma VM do Linux no Azure](./linux-vm.md).
 
-* **Conjuntos de disponibilidade.** Crie um [conjunto de disponibilidade][azure-availability-sets] para cada camada e provisione pelo menos duas VMs em cada camada, o que torna as VMs qualificadas para um [contrato de nível de serviço (SLA)][vm-sla] maior.
+- **Conjuntos de disponibilidade**. Crie um [conjunto de disponibilidade][azure-availability-sets] para cada camada e provisione pelo menos duas VMs em cada camada, o que torna as VMs qualificadas para um [contrato de nível de serviço (SLA)][vm-sla] maior.
 
-* **Balanceadores de carga.** Use o [Azure Load Balancer] [ load-balancer] para distribuir o tráfego de rede da camada da Web para a camada comercial e da camada comercial para o SQL Server.
+- **Balanceadores de carga**. Use o [Azure Load Balancer] [ load-balancer] para distribuir o tráfego de rede da camada da Web para a camada comercial e da camada comercial para o SQL Server.
 
-* **Endereço IP público**. É necessário ter um endereço IP público para que aplicativo possa receber o tráfego da Internet.
+- **Endereço IP público**. É necessário ter um endereço IP público para que aplicativo possa receber o tráfego da Internet.
 
-* **Jumpbox.** Também chamada de um [host bastião]. Uma VM protegida na rede que os administradores usam para se conectar às outras VMs. O jumpbox tem um NSG que permite o tráfego remoto apenas de endereços IP públicos em uma lista segura. O NSG deve permitir o tráfego de RDP (área de trabalho remota).
+- **Jumpbox**. Também chamada de um [host bastião]. Uma VM protegida na rede que os administradores usam para se conectar às outras VMs. O jumpbox tem um NSG que permite o tráfego remoto apenas de endereços IP públicos em uma lista segura. O NSG deve permitir o tráfego de RDP (área de trabalho remota).
 
-* **Grupo de Disponibilidade Always On do SQL Server.** Fornece alta disponibilidade na camada de dados, habilitando replicação e failover. Usa a tecnologia WSFC (Cluster de Failover do Windows Server) para o failover.
+- **Grupo de Disponibilidade Always On do SQL Server**. Fornece alta disponibilidade na camada de dados, habilitando replicação e failover. Usa a tecnologia WSFC (Cluster de Failover do Windows Server) para o failover.
 
-* **Servidores AD DS (Active Directory Domain Services)**. Os objetos de computação do cluster de failover e suas funções em cluster associadas são criados no Active Directory Domain Services (AD DS).
+- **Servidores AD DS (Active Directory Domain Services)**. Os objetos de computação do cluster de failover e suas funções em cluster associadas são criados no Active Directory Domain Services (AD DS).
 
-* **Testemunha de Nuvem**. Um cluster de failover requer mais da metade dos seus nós em execução, que é conhecido como ter quorum. Se o cluster tem apenas dois nós, uma partição de rede pode fazer com que cada nó pense que é o principal. Nesse caso, é necessário uma *testemunha* para desempatar e estabelecer o quorum. Testemunha é um recurso, como um disco compartilhado, que pode agir como um desempate para estabelecer o quorum. A Testemunha de Nuvem é um tipo que usa o Armazenamento de Blobs do Azure. Para saber mais sobre o conceito de quorum, consulte [Entendendo o cluster e o quorum de pool](/windows-server/storage/storage-spaces/understand-quorum). Para obter mais informações sobre a Testemunha de Nuvem, consulte [Implantar uma Testemunha de Nuvem para um Cluster de Failover](/windows-server/failover-clustering/deploy-cloud-witness). 
+- **Testemunha de Nuvem**. Um cluster de failover requer mais da metade dos seus nós em execução, que é conhecido como ter quorum. Se o cluster tem apenas dois nós, uma partição de rede pode fazer com que cada nó pense que é o principal. Nesse caso, é necessário uma *testemunha* para desempatar e estabelecer o quorum. Testemunha é um recurso, como um disco compartilhado, que pode agir como um desempate para estabelecer o quorum. A Testemunha de Nuvem é um tipo que usa o Armazenamento de Blobs do Azure. Para saber mais sobre o conceito de quorum, consulte [Entendendo o cluster e o quorum de pool](/windows-server/storage/storage-spaces/understand-quorum). Para obter mais informações sobre a Testemunha de Nuvem, consulte [Implantar uma Testemunha de Nuvem para um Cluster de Failover](/windows-server/failover-clustering/deploy-cloud-witness).
 
-* **DNS do Azure**. O [DNS do Azure][azure-dns] é um serviço de hospedagem para domínios DNS. Ele fornece resolução de nomes usando a infraestrutura do Microsoft Azure. Ao hospedar seus domínios no Azure, você pode gerenciar seus registros DNS usando as mesmas credenciais, APIs, ferramentas e cobrança que seus outros serviços do Azure.
+- **DNS do Azure**. O [DNS do Azure][azure-dns] é um serviço de hospedagem para domínios DNS. Ele fornece resolução de nomes usando a infraestrutura do Microsoft Azure. Ao hospedar seus domínios no Azure, você pode gerenciar seus registros DNS usando as mesmas credenciais, APIs, ferramentas e cobrança que seus outros serviços do Azure.
 
 ## <a name="recommendations"></a>Recomendações
 
-Seus requisitos podem ser diferentes dos requisitos da arquitetura descrita aqui. Use essas recomendações como ponto de partida. 
+Seus requisitos podem ser diferentes dos requisitos da arquitetura descrita aqui. Use essas recomendações como ponto de partida.
 
 ### <a name="vnet--subnets"></a>VNet / Sub-redes
 
@@ -70,15 +71,14 @@ Defina as regras do balanceador de carga para direcionar tráfego de rede para a
 
 ### <a name="network-security-groups"></a>Grupos de segurança de rede
 
-Use as regras de NSG para restringir o tráfego entre as camadas. Na arquitetura de três camadas mostrada acima, a camada da Web não se comunica diretamente com a camada de banco de dados. Para impor isso, a camada de banco de dados deve bloquear o tráfego de entrada da sub-rede da camada da Web.  
+Use as regras de NSG para restringir o tráfego entre as camadas. Na arquitetura de três camadas mostrada acima, a camada da Web não se comunica diretamente com a camada de banco de dados. Para impor isso, a camada de banco de dados deve bloquear o tráfego de entrada da sub-rede da camada da Web.
 
-1. Negue todo o tráfego de entrada do VNet. (Use a marca `VIRTUAL_NETWORK` na regra.) 
-2. Permita o tráfego de entrada da sub-rede de camada de negócios.  
+1. Negue todo o tráfego de entrada do VNet. (Use a marca `VIRTUAL_NETWORK` na regra.)
+2. Permita o tráfego de entrada da sub-rede de camada de negócios.
 3. Permita o tráfego de entrada da própria sub-rede de camada de dados. Essa regra permite a comunicação entre as VMs de banco de dados, que é necessária para failover e replicação de banco de dados.
 4. Permita o tráfego RDP (porta 3389) da sub-rede jumpbox. Essa regra permite que os administradores se conectem à camada de banco de dados do jumpbox.
 
 Criar regras de 2 &ndash; 4 com prioridade mais alta que a primeira regra, para que elas a substituam.
-
 
 ### <a name="sql-server-always-on-availability-groups"></a>Grupos de Disponibilidade Always On do SQL Server
 
@@ -88,15 +88,14 @@ Outras camadas se conectam ao banco de dados por meio de um [ouvinte do grupo de
 
 Configure um grupo de disponibilidade Always On do SQL Server da seguinte maneira:
 
-1. Crie um cluster WSFC (Clustering de Failover do Windows Server), um Grupo de Disponibilidade Always On do SQL Server e uma réplica primária. Para obter mais informações, consulte [Introdução aos Grupos de disponibilidade Always On][sql-alwayson-getting-started]. 
+1. Crie um cluster WSFC (Clustering de Failover do Windows Server), um Grupo de Disponibilidade Always On do SQL Server e uma réplica primária. Para obter mais informações, consulte [Introdução aos Grupos de disponibilidade Always On][sql-alwayson-getting-started].
 2. Crie um balanceador de carga interno com um endereço IP privado estático.
-3. Crie um ouvinte do grupo de disponibilidade e mapeie o nome DNS do ouvinte para o endereço IP de um balanceador de carga interno. 
+3. Crie um ouvinte do grupo de disponibilidade e mapeie o nome DNS do ouvinte para o endereço IP de um balanceador de carga interno.
 4. Crie uma regra do balanceador de carga para a porta de escuta do SQL Server (porta TCP 1433 por padrão). A regra do balanceador de carga deve habilitar *IP flutuante*, também chamado de Retorno de Servidor Direto. Isso faz com que a VM responda diretamente para o cliente, o que permite uma conexão direta com a réplica primária.
-  
+
    > [!NOTE]
    > Quando o IP flutuante está habilitado, o número da porta de front-end deve ser igual ao número da porta de back-end na regra do balanceador de carga.
-   > 
-   > 
+   >
 
 Quando um cliente SQL tenta se conectar, o balanceador de carga roteia a solicitação de conexão para a réplica primária. Se houver um failover para outra réplica, o balanceador de carga encaminhará automaticamente as novas solicitações para uma nova réplica primária. Para obter mais informações, consulte [Configurar um ouvinte de ILB para Grupos de Disponibilidade Always On do SQL Server][sql-alwayson-ilb].
 
@@ -139,12 +138,12 @@ O balanceador de carga utiliza [investigações de integridade][health-probes] p
 
 Aqui estão algumas recomendações sobre as investigações de integridade do balanceador de carga:
 
-* As investigações podem testar HTTP ou TCP. Se suas VMs são executadas em um servidor HTTP, crie uma investigação HTTP. Caso contrário, crie uma investigação TCP.
-* Para uma investigação HTTP, especifique o caminho para um ponto de extremidade HTTP. A investigação verifica uma resposta HTTP 200 para esse caminho. Esse caminho pode ser o caminho raiz (“/”) ou um ponto de extremidade de monitoramento de integridade que implementa lógica personalizada para verificar a integridade do aplicativo. O ponto de extremidade deve permitir solicitações HTTP anônimas.
-* A investigação é enviada de um endereço IP [conhecido][health-probe-ip], 168.63.129.16. Não bloqueie o tráfego de ou para esse IP em nenhuma política de firewall ou regra de NSG.
-* Use os [logs de investigação de integridade][health-probe-log] para exibir o status das investigações de integridade. Habilite o registro em log no Portal do Azure para cada balanceador de carga. Os logs são gravados no Armazenamento de Blobs do Azure. Os logs mostram quantas VMs não estão recebendo o tráfego de rede devido a respostas de investigação com falha.
+- As investigações podem testar HTTP ou TCP. Se suas VMs são executadas em um servidor HTTP, crie uma investigação HTTP. Caso contrário, crie uma investigação TCP.
+- Para uma investigação HTTP, especifique o caminho para um ponto de extremidade HTTP. A investigação verifica uma resposta HTTP 200 para esse caminho. Esse caminho pode ser o caminho raiz (“/”) ou um ponto de extremidade de monitoramento de integridade que implementa lógica personalizada para verificar a integridade do aplicativo. O ponto de extremidade deve permitir solicitações HTTP anônimas.
+- A investigação é enviada de um endereço IP [conhecido][health-probe-ip], 168.63.129.16. Não bloqueie o tráfego de ou para esse IP em nenhuma política de firewall ou regra de NSG.
+- Use os [logs de investigação de integridade][health-probe-log] para exibir o status das investigações de integridade. Habilite o registro em log no Portal do Azure para cada balanceador de carga. Os logs são gravados no Armazenamento de Blobs do Azure. Os logs mostram quantas VMs não estão recebendo o tráfego de rede devido a respostas de investigação com falha.
 
-Se você precisar de disponibilidade mais alta do que a fornecida pelo [SLA do Azure SLA para VMs][vm-sla], replique o aplicativo em duas regiões e use o Gerenciador de Tráfego do Azure para failover. Para obter mais informações, consulte [Aplicativo de N camadas de várias regiões para alta disponibilidade][multi-dc].  
+Se você precisar de disponibilidade mais alta do que a fornecida pelo [SLA do Azure SLA para VMs][vm-sla], replique o aplicativo em duas regiões e use o Gerenciador de Tráfego do Azure para failover. Para obter mais informações, consulte [Aplicativo de N camadas de várias regiões para alta disponibilidade][multi-dc].
 
 ## <a name="security-considerations"></a>Considerações de segurança
 
@@ -154,7 +153,7 @@ Redes virtuais são um limite de isolamento de tráfego no Azure. As VMs em uma 
 
 **Criptografia**. Criptografe dados confidenciais em repouso e use o [Azure Key Vault][azure-key-vault] para gerenciar as chaves de criptografia de banco de dados. O Key Vault pode armazenar chaves de criptografia em HSMs (módulos de segurança de hardware). Para mais informações, consulte [Configurar a Integração do Azure Key Vault para o SQL nas VMs do Azure][sql-keyvault]. Também é recomendado para armazenar segredos do aplicativo, como cadeias de caracteres de conexão de banco de dados, no cofre de chaves.
 
-**Proteção contra DDoS**. A plataforma do Azure fornece a proteção contra DDoS básica por padrão. Essa proteção básica se destina a proteger a infraestrutura do Azure como um todo. Embora a proteção contra DDoS básica esteja habilitada automaticamente, é recomendável usar a [Proteção contra DDoS Standard][ddos]. A proteção Standard utiliza ajuste adaptável, com base nos padrões de tráfego de rede do seu aplicativo, para detectar ameaças. Isso permite aplicar mitigações de risco contra ataques de DDoS que podem não ser detectadas pelas políticas de DDoS de toda a infraestrutura. A proteção Standard também fornece alertas, telemetria e análise por meio do Azure Monitor. Para obter mais informações, confira [Proteção contra DDoS do Azure: práticas recomendadas e arquiteturas de referência][ddos-best-practices].
+**Proteção contra DDoS**. A plataforma do Azure fornece a proteção contra DDoS básica por padrão. Essa proteção básica se destina a proteger a infraestrutura do Azure como um todo. Embora a proteção contra DDoS básica esteja habilitada automaticamente, é recomendável usar a [Proteção contra DDoS Standard][ddos]. A proteção Standard utiliza ajuste adaptável, com base nos padrões de tráfego de rede do seu aplicativo, para detectar ameaças. Isso permite aplicar mitigações de risco contra ataques de DDoS que podem não ser detectadas pelas políticas de DDoS de toda a infraestrutura. A proteção Standard também fornece alertas, telemetria e análise por meio do Azure Monitor. Para saber mais, confira [Proteção contra DDoS do Azure: Melhores práticas e arquiteturas de referência][ddos-best-practices].
 
 ## <a name="deploy-the-solution"></a>Implantar a solução
 
@@ -164,17 +163,17 @@ Uma implantação para essa arquitetura de referência está disponível no [Git
 
 [!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 
-### <a name="deploy-the-solution"></a>Implantar a solução
+### <a name="deployment-steps"></a>Etapas de implantação.
 
 1. Execute o seguinte comando para criar um grupo de recursos.
 
-    ```bash
+    ```azurecli
     az group create --location <location> --name <resource-group-name>
     ```
 
 2. Execute o seguinte comando para criar uma conta de Armazenamento para a Testemunha de Nuvem.
 
-    ```bash
+    ```azurecli
     az storage account create --location <location> \
       --name <storage-account-name> \
       --resource-group <resource-group-name> \
@@ -183,7 +182,7 @@ Uma implantação para essa arquitetura de referência está disponível no [Git
 
 3. Navegue para a pasta `virtual-machines\n-tier-windows` do repositório GitHub de arquiteturas de referência.
 
-4. Abra o arquivo `n-tier-windows.json` . 
+4. Abra o arquivo `n-tier-windows.json` .
 
 5. Procurar todas as instâncias de "witnessStorageBlobEndPoint" e substitua o texto do espaço reservado pelo nome da conta de Armazenamento da etapa 2.
 
@@ -193,7 +192,7 @@ Uma implantação para essa arquitetura de referência está disponível no [Git
 
 6. Execute o comando a seguir para enumerar as chaves de conta para a conta de armazenamento.
 
-    ```bash
+    ```azurecli
     az storage account keys list \
       --account-name <storage-account-name> \
       --resource-group <resource-group-name>
@@ -225,16 +224,15 @@ Uma implantação para essa arquitetura de referência está disponível no [Git
 8. No arquivo `n-tier-windows.json`, procure todas as instâncias de `[replace-with-password]` e `[replace-with-sql-password]` substitua-as por uma senha forte. Salve o arquivo.
 
     > [!NOTE]
-    > Se você alterar o nome de usuário do administrador, também terá que atualizar os blocos `extensions` no arquivo JSON. 
+    > Se você alterar o nome de usuário do administrador, também terá que atualizar os blocos `extensions` no arquivo JSON.
 
 9. Execute o seguinte comando para implantar a arquitetura.
 
-    ```bash
+    ```azurecli
     azbb -s <your subscription_id> -g <resource_group_name> -l <location> -p n-tier-windows.json --deploy
     ```
 
 Para obter mais informações sobre a implantação dessa arquitetura de referência de exemplo utilizando blocos de construção Blocos de Construção do Azure, visite o repositório [GitHub][git].
-
 
 <!-- links -->
 [dmz]: ../dmz/secure-vnet-dmz.md
@@ -264,8 +262,7 @@ Para obter mais informações sobre a implantação dessa arquitetura de referê
 [vnet faq]: /azure/virtual-network/virtual-networks-faq
 [wsfc-whats-new]: https://technet.microsoft.com/windows-server-docs/failover-clustering/whats-new-in-failover-clustering
 [visio-download]: https://archcenter.blob.core.windows.net/cdn/vm-reference-architectures.vsdx
-[0]: ./images/n-tier-sql-server.png "Arquitetura de N camadas usando o Microsoft Azure"
-[resource-manager-overview]: /azure/azure-resource-manager/resource-group-overview 
+[resource-manager-overview]: /azure/azure-resource-manager/resource-group-overview
 [vmss]: /azure/virtual-machine-scale-sets/virtual-machine-scale-sets-overview
 [load-balancer]: /azure/load-balancer/
 [load-balancer-hashing]: /azure/load-balancer/load-balancer-overview#load-balancer-features

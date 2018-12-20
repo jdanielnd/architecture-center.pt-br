@@ -1,64 +1,65 @@
 ---
-title: Implementando uma arquitetura de rede híbrida segura no Azure
-description: Como implementar uma arquitetura de rede híbrida segura no Azure.
+title: Implementar uma arquitetura de rede híbrida segura
+titleSuffix: Azure Reference Architectures
+description: Implemente uma arquitetura de rede híbrida segura no Azure.
 author: telmosampaio
 ms.date: 10/22/2018
+ms.custom: seodec18
 pnp.series.title: Network DMZ
 pnp.series.prev: ./index
 pnp.series.next: secure-vnet-dmz
 cardTitle: DMZ between Azure and on-premises
-ms.openlocfilehash: e13503c65430e46ef50898e471594a2ade3824b6
-ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
+ms.openlocfilehash: c57f741aa0e68783f457f94ea6fd84e1d552f059
+ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/02/2018
-ms.locfileid: "50916466"
+ms.lasthandoff: 12/08/2018
+ms.locfileid: "53120417"
 ---
-# <a name="dmz-between-azure-and-your-on-premises-datacenter"></a>DMZ entre o Azure e o datacenter local
+# <a name="implement-a-dmz-between-azure-and-your-on-premises-datacenter"></a>Implementar uma rede de perímetro entre o Azure e o datacenter local
 
-Essa arquitetura de referência mostra uma rede híbrida segura que estende uma rede local para o Azure. A arquitetura implementa uma rede de perímetro, também chamada de *DMZ*, entre a rede local e uma VNet (rede virtual) do Azure. O DMZ inclui NVAs (soluções de virtualização de rede) que implementam a funcionalidade de segurança, como firewalls e inspeção de pacotes. Todo o tráfego de saída da VNet é enviado por túnel forçadamente à Internet por meio da rede local, para que ele possa ser auditado. [**Implante essa solução**.](#deploy-the-solution)
+Essa arquitetura de referência mostra uma rede híbrida segura que estende uma rede local para o Azure. A arquitetura implementa uma rede de perímetro, também chamada de *DMZ*, entre a rede local e uma VNet (rede virtual) do Azure. O DMZ inclui NVAs (soluções de virtualização de rede) que implementam a funcionalidade de segurança, como firewalls e inspeção de pacotes. Todo o tráfego de saída da VNet é enviado por túnel forçadamente à Internet por meio da rede local, para que ele possa ser auditado. [**Implantar esta solução**](#deploy-the-solution).
 
-[![0]][0] 
+![Proteger arquitetura de rede híbrida](./images/dmz-private.png)
 
 *Baixe um [Arquivo Visio][visio-download] dessa arquitetura.*
 
 Essa arquitetura exige uma conexão com o datacenter local, usando um [Gateway de VPN][ra-vpn] ou uma conexão do [ExpressRoute][ra-expressroute]. Alguns usos típicos dessa arquitetura:
 
-* Aplicativos híbridos nos quais as cargas de trabalho são executadas parcialmente localmente e parcialmente no Azure.
-* Infraestrutura que requer um controle granular sobre o tráfego que entra em uma VNet do Azure proveniente de um datacenter local.
-* Aplicativos que precisam auditar o tráfego de saída. Isso geralmente é um requisito de regulamentação de muitos sistemas comerciais e pode ajudar a evitar a divulgação de informações privadas.
+- Aplicativos híbridos nos quais as cargas de trabalho são executadas parcialmente localmente e parcialmente no Azure.
+- Infraestrutura que requer um controle granular sobre o tráfego que entra em uma VNet do Azure proveniente de um datacenter local.
+- Aplicativos que precisam auditar o tráfego de saída. Isso geralmente é um requisito de regulamentação de muitos sistemas comerciais e pode ajudar a evitar a divulgação de informações privadas.
 
 ## <a name="architecture"></a>Arquitetura
 
 A arquitetura consiste nos componentes a seguir.
 
-* **Rede local**. Uma rede local privada implementada em uma organização.
-* **VNet (rede virtual) do Azure**. A VNet hospeda o aplicativo e outros recursos em execução no Azure.
-* **Gateway**. O gateway fornece conectividade entre os roteadores na rede local e na VNet.
-* **NVA (solução de virtualização de rede)**. NVA é um termo genérico que descreve uma VM que executa tarefas como permitir ou negar acesso como um firewall, otimizar operações de WAN (rede de longa distância) (incluindo compactação de rede), roteamento personalizado ou outros recursos de rede.
-* **Sub-redes de camada da Web, de camada de negócios e de camada de dados**. Sub-redes que hospedam as VMs e os serviços que implementam um aplicativo de três camadas de exemplo em execução na nuvem. Consulte [Executar VMs do Windows para um aplicativo de N camadas no Azure][ra-n-tier] para obter mais informações.
-* **UDR (rotas definidas pelo usuário)**. As [rotas definidas pelo usuário][udr-overview] definem o fluxo de tráfego de IP nas VNets do Azure.
+- **Rede local**. Uma rede local privada implementada em uma organização.
+- **VNet (rede virtual) do Azure**. A VNet hospeda o aplicativo e outros recursos em execução no Azure.
+- **Gateway**. O gateway fornece conectividade entre os roteadores na rede local e na VNet.
+- **NVA (solução de virtualização de rede)**. NVA é um termo genérico que descreve uma VM que executa tarefas como permitir ou negar acesso como um firewall, otimizar operações de WAN (rede de longa distância) (incluindo compactação de rede), roteamento personalizado ou outros recursos de rede.
+- **Sub-redes de camada da Web, de camada de negócios e de camada de dados**. Sub-redes que hospedam as VMs e os serviços que implementam um aplicativo de três camadas de exemplo em execução na nuvem. Consulte [Executar VMs do Windows para um aplicativo de N camadas no Azure][ra-n-tier] para obter mais informações.
+- **UDR (rotas definidas pelo usuário)**. As [rotas definidas pelo usuário][udr-overview] definem o fluxo de tráfego de IP nas VNets do Azure.
 
     > [!NOTE]
     > Dependendo dos requisitos da sua conexão de VPN, você pode configurar rotas de BGP (Border Gateway Protocol) em vez de usar UDRs para implementar as regras de encaminhamento que retornam o tráfego por meio da rede local.
-    > 
-    > 
+    >
 
-* **Sub-rede de gerenciamento.** Essa sub-rede contém VMs que implementam recursos de gerenciamento e monitoramentos para os componentes em execução na VNet.
+- **Sub-rede de gerenciamento**. Essa sub-rede contém VMs que implementam recursos de gerenciamento e monitoramentos para os componentes em execução na VNet.
 
 ## <a name="recommendations"></a>Recomendações
 
-As seguintes recomendações aplicam-se à maioria dos cenários. Siga estas recomendações, a menos que você tenha um requisito específico que as substitua. 
+As seguintes recomendações aplicam-se à maioria dos cenários. Siga estas recomendações, a menos que você tenha um requisito específico que as substitua.
 
 ### <a name="access-control-recommendations"></a>Recomendações de controle de acesso
 
-Use o [RBAC ][rbac] (controle de acesso baseado em função) para gerenciar os recursos em seu aplicativo. Considere criar as seguintes [funções personalizadas][rbac-custom-roles]:
+Use o [RBAC (controle de acesso baseado em função)][rbac] para gerenciar os recursos em seu aplicativo. Considere criar as seguintes [funções personalizadas][rbac-custom-roles]:
 
-- Uma função de DevOps com permissões para administrar a infraestrutura do aplicativo, implantar os componentes do aplicativo e monitorar e reiniciar VMs.  
+- Uma função de DevOps com permissões para administrar a infraestrutura do aplicativo, implantar os componentes do aplicativo e monitorar e reiniciar VMs.
 
 - Uma função de administrador de TI centralizada para gerenciar e monitorar recursos de rede.
 
-- Uma função de administrador de TI de segurança para gerenciar recursos de rede segura, como as NVAs. 
+- Uma função de administrador de TI de segurança para gerenciar recursos de rede segura, como as NVAs.
 
 As funções de DevOps e de administrador de TI não devem ter acesso aos recursos de NVA. Esse acesso deve ser restrito à função de administrador de TI de segurança.
 
@@ -68,9 +69,9 @@ Os recursos do Azure como VMs, VNets e balanceadores de carga podem ser gerencia
 
 É recomendável criar os grupos de recursos a seguir:
 
-* Um grupo de recursos que contenha a VNet (excluindo as VMs), os NSGs e os recursos de gateway para conectar-se à rede local. Atribua a função de administrador de TI centralizada a esse grupo de recursos.
-* Um grupo de recursos que contenha as VMs para as NVAs (incluindo o balanceador de carga), o jumpbox e outras VMs de gerenciamento e a UDR da sub-rede do gateway que force todo o tráfego pelas NVAs. Atribua a função de administrador de TI de segurança a este grupo de recursos.
-* Grupos de recursos separados para cada camada de aplicativo que contenha o balanceador de carga e as VMs. Observe que esse grupo de recursos não deve incluir as sub-redes de cada camada. Atribua a função de DevOps a este grupo de recursos.
+- Um grupo de recursos que contenha a VNet (excluindo as VMs), os NSGs e os recursos de gateway para conectar-se à rede local. Atribua a função de administrador de TI centralizada a esse grupo de recursos.
+- Um grupo de recursos que contenha as VMs para as NVAs (incluindo o balanceador de carga), o jumpbox e outras VMs de gerenciamento e a UDR da sub-rede do gateway que force todo o tráfego pelas NVAs. Atribua a função de administrador de TI de segurança a este grupo de recursos.
+- Grupos de recursos separados para cada camada de aplicativo que contenha o balanceador de carga e as VMs. Observe que esse grupo de recursos não deve incluir as sub-redes de cada camada. Atribua a função de DevOps a este grupo de recursos.
 
 ### <a name="virtual-network-gateway-recommendations"></a>Recomendações do gateway de rede virtual
 
@@ -78,20 +79,19 @@ O tráfego local passa para a VNet por meio de um gateway de rede virtual. É re
 
 ### <a name="nva-recommendations"></a>Recomendações de NVA
 
-As NVAs fornecem diferentes serviços para gerenciar e monitorar o tráfego de rede. O [Azure Marketplace][azure-marketplace-nva] oferece vários NVAs de fornecedores terceiros que você pode usar. Se nenhuma dessas NVAs de terceiros atender aos seus requisitos, você poderá criar uma NVA personalizada usando VMs. 
+As NVAs fornecem diferentes serviços para gerenciar e monitorar o tráfego de rede. O [Azure Marketplace][azure-marketplace-nva] oferece vários NVAs de fornecedores terceiros que você pode usar. Se nenhuma dessas NVAs de terceiros atender aos seus requisitos, você poderá criar uma NVA personalizada usando VMs.
 
 Por exemplo, a implantação da solução para essa arquitetura de referência implementa uma NVA com a seguinte funcionalidade em uma VM:
 
-* O tráfego é roteado usando [encaminhamento de IP][ip-forwarding] nos NICs (adaptadores de rede) da NVA.
-* O tráfego terá permissão para passar pela NVA somente se ele for apropriado para isso. Cada VM da NVA na arquitetura de referência é um roteador simples do Linux. O tráfego de entrada chega no adaptador de rede *eth0* e o tráfego de saída corresponde às regras definidas por scripts personalizados expedidos por meio da adaptador de rede *eth1*.
-* As NVAs só podem ser configuradas por meio da sub-rede de gerenciamento. 
-* O tráfego roteado para a sub-rede de gerenciamento não passa pelas NVAs. Caso contrário, se as NVAs falharem, não haverá nenhuma rota para a sub-rede de gerenciamento para corrigi-las.  
-* As VMs da NVA são colocadas em um [conjunto de disponibilidade][availability-set] atrás de um balanceador de carga. A UDR na sub-rede do gateway direciona as solicitações da NVA ao balanceador de carga.
+- O tráfego é roteado usando [encaminhamento de IP][ip-forwarding] nos NICs (adaptadores de rede) da NVA.
+- O tráfego terá permissão para passar pela NVA somente se ele for apropriado para isso. Cada VM da NVA na arquitetura de referência é um roteador simples do Linux. O tráfego de entrada chega no adaptador de rede *eth0* e o tráfego de saída corresponde às regras definidas por scripts personalizados expedidos por meio da adaptador de rede *eth1*.
+- As NVAs só podem ser configuradas por meio da sub-rede de gerenciamento.
+- O tráfego roteado para a sub-rede de gerenciamento não passa pelas NVAs. Caso contrário, se as NVAs falharem, não haverá nenhuma rota para a sub-rede de gerenciamento para corrigi-las.
+- As VMs da NVA são colocadas em um [conjunto de disponibilidade][availability-set] atrás de um balanceador de carga. A UDR na sub-rede do gateway direciona as solicitações da NVA ao balanceador de carga.
 
 Inclua uma NVA da camada 7 para encerrar conexões de aplicativo no nível da NVA e manter a afinidade com as camadas de back-end. Isso garante a conectividade simétrica, na qual o tráfego de resposta das camadas de back-end retorna por meio da NVA.
 
 Outra opção a ser considerada é conectar várias NVAs em série, com cada NVA executando uma tarefa de segurança especializada. Isso permite que cada função de segurança seja gerenciada considerando cada NVA. Por exemplo, uma NVA que implementa um firewall pode ser colocada em série com uma NVA que executa serviços de identidade. A compensação para facilitar o gerenciamento é a adição de saltos de rede extras que podem aumentar a latência, portanto, verifique se isso não afeta o desempenho do aplicativo.
-
 
 ### <a name="nsg-recommendations"></a>Recomendações de NSG
 
@@ -105,15 +105,13 @@ Também é recomendável que os NSGs de cada sub-rede forneçam um segundo níve
 
 > [!NOTE]
 > Não bloqueie completamente o tráfego de Internet das camadas de aplicativo, pois isso impedirá que essas camadas usem os serviços de PaaS do Azure que se baseiam em endereços IP públicos, como o log de diagnóstico de VM, o download de extensões de VM e outras funcionalidades. O diagnóstico do Azure também requer que componentes possam ler e gravar em uma conta de armazenamento do Azure.
-> 
-> 
 
 Verifique se o tráfego de saída da Internet é forçado ao túnel corretamente. Se você estiver usando uma conexão de VPN com o [serviço de roteamento e acesso remoto][routing-and-remote-access-service] em um servidor local, use uma ferramenta como o [WireShark][wireshark] ou o [Microsoft Message Analyzer](https://www.microsoft.com/download/details.aspx?id=44226).
 
 ### <a name="management-subnet-recommendations"></a>Recomendações da sub-rede de gerenciamento
 
 A sub-rede de gerenciamento contém um jumpbox que executa as funcionalidades de gerenciamento e de monitoramento. Restrinja a execução de todas as tarefas de gerenciamento seguro ao jumpbox.
- 
+
 Não crie um endereço IP público para o jumpbox. Nesse caso, crie uma rota para acessar o jumpbox por meio do gateway de entrada. Crie regras do NSG para que a sub-rede de gerenciamento só responda a solicitações da rota permitida.
 
 ## <a name="scalability-considerations"></a>Considerações sobre escalabilidade
@@ -130,7 +128,7 @@ Conforme mencionado, a arquitetura de referência usa um pool de dispositivos NV
 
 Se você estiver usando o Azure ExpressRoute para fornecer conectividade entre a VNet e a rede local, [configure um Gateway de VPN para fornecer failover][ra-vpn-failover] se a conexão do ExpressRoute ficar indisponível.
 
-Para obter informações específicas de como manter a disponibilidade para conexões de VPN e do ExpressRoute, consulte as considerações de disponibilidade [Implementing a hybrid network architecture with Azure and on-premises VPN][guidance-vpn-gateway-availability] (Implementando uma arquitetura de rede híbrida com o Azure e VPN local) e [Implementing a hybrid network architecture with Azure ExpressRoute][guidance-expressroute-availability] (Implementando uma arquitetura de rede híbrida com o Azure ExpressRoute). 
+Para obter informações específicas de como manter a disponibilidade para conexões de VPN e do ExpressRoute, consulte as considerações de disponibilidade [Implementing a hybrid network architecture with Azure and on-premises VPN][guidance-vpn-gateway-availability] (Implementando uma arquitetura de rede híbrida com o Azure e VPN local) e [Implementing a hybrid network architecture with Azure ExpressRoute][guidance-expressroute-availability] (Implementando uma arquitetura de rede híbrida com o Azure ExpressRoute).
 
 ## <a name="manageability-considerations"></a>Considerações sobre capacidade de gerenciamento
 
@@ -149,19 +147,22 @@ Você pode encontrar informações adicionais especificamente destinadas ao moni
 Essa arquitetura de referência implementa vários níveis de segurança.
 
 ### <a name="routing-all-on-premises-user-requests-through-the-nva"></a>Roteando todas as solicitações de usuário locais por meio da NVA
+
 A UDR na sub-rede do gateway bloqueia todas as solicitações de usuário que não são recebidas do local. A UDR passa as solicitações permitidas para as NVAs na sub-rede do DMZ privado e essas solicitações somente serão passadas para o aplicativo se forem permitidas pelas regras da NVA. Você pode adicionar outras rotas para a UDR, mas não ignore as NVAs nem bloqueie o tráfego administrativo destinado à sub-rede de gerenciamento acidentalmente.
 
 O balanceador de carga na frente das NVAs também atua como um dispositivo de segurança ignorando o tráfego nas portas que não estão abertas nas regras de balanceamento de carga. Os balanceadores de carga na arquitetura de referência só escutam as solicitações HTTP na porta 80 e as solicitações HTTPS na porta 443. Documente todas as regras adicionais que você adicionar aos balanceadores de carga e monitore o tráfego para garantir que não haja nenhum problema de segurança.
 
 ### <a name="using-nsgs-to-blockpass-traffic-between-application-tiers"></a>Usando os NSGs para bloquear/aprovar o tráfego entre as camadas de aplicativo
+
 O tráfego entre camadas é restringido usando NSGs. A camada de negócios bloqueia todo o tráfego que não se origina na camada da Web e a camada de dados bloqueia todo o tráfego que não se origina na camada de negócios. Se você tiver o requisito de expandir as regras do NSG para ampliar o acesso a essas camadas, pondere esses requisitos em relação aos riscos de segurança. Cada novo caminho de entrada representa uma oportunidade para danos de aplicativo ou perda de dados acidental ou intencional.
 
 ### <a name="devops-access"></a>Acesso de DevOps
+
 Use o [RBAC][rbac] para restringir as operações que DevOps pode executar em cada camada. Ao conceder permissões, use o [princípio de privilégios mínimos][security-principle-of-least-privilege]. Registre em log todas as operações administrativas e execute auditorias regulares para confirmar se todas as alterações de configuração foram planejadas.
 
 ## <a name="deploy-the-solution"></a>Implantar a solução
 
-Uma implantação para uma arquitetura de referência que implementa essas recomendações está disponível no [GitHub][github-folder]. 
+Uma implantação para uma arquitetura de referência que implementa essas recomendações está disponível no [GitHub][github-folder].
 
 ### <a name="prerequisites"></a>Pré-requisitos
 
@@ -187,7 +188,7 @@ Uma implantação para uma arquitetura de referência que implementa essas recom
 
 Nesta etapa, você conectará os dois gateways de rede locais.
 
-1. No portal do Azure, navegue até o grupo de recursos que você criou. 
+1. No portal do Azure, navegue até o grupo de recursos que você criou.
 
 2. Localize o recurso denominado `ra-vpn-vgw-pip` e copie o endereço IP mostrado na folha **Visão geral**.
 
@@ -195,13 +196,13 @@ Nesta etapa, você conectará os dois gateways de rede locais.
 
 4. Clique na folha **Configuração**. No **Endereço IP**, cole o endereço IP da etapa 2.
 
-    ![](./images/local-net-gw.png)
+    ![Captura de tela do campo Endereço IP](./images/local-net-gw.png)
 
 5. Clique em **Salvar** e aguarde a conclusão da operação. Isso pode levar cerca de 5 minutos.
 
 6. Encontre o recurso denominado `onprem-vpn-gateway1-pip`. Copie o endereço IP mostrado na folha **Visão geral**.
 
-7. Encontre o recurso denominado `ra-vpn-lgw`. 
+7. Encontre o recurso denominado `ra-vpn-lgw`.
 
 8. Clique na folha **Configuração**. No **Endereço IP**, cole o endereço IP da etapa 6.
 
@@ -211,7 +212,7 @@ Nesta etapa, você conectará os dois gateways de rede locais.
 
 ### <a name="verify-that-network-traffic-reaches-the-web-tier"></a>Verificar se o tráfego de rede atinge a camada da Web
 
-1. No portal do Azure, navegue até o grupo de recursos que você criou. 
+1. No portal do Azure, navegue até o grupo de recursos que você criou.
 
 2. Encontre o recurso denominado `int-dmz-lb`, que é o balanceador de carga na frente da DMZ privada. Copie o endereço IP privado da folha **Visão geral**.
 
@@ -221,13 +222,12 @@ Nesta etapa, você conectará os dois gateways de rede locais.
 
 ## <a name="next-steps"></a>Próximas etapas
 
-* Aprenda a implementar uma [rede de perímetro entre o Azure e a Internet](secure-vnet-dmz.md).
-* Aprenda a implementar uma [arquitetura de rede híbrida altamente disponível][ra-vpn-failover].
-* Para obter mais informações de como gerenciar a segurança da rede com o Azure, consulte [Segurança de rede e serviços em nuvem da Microsoft][cloud-services-network-security].
-* Para obter informações detalhadas sobre como proteger recursos no Azure, consulte [Introdução à segurança do Microsoft Azure][getting-started-with-azure-security]. 
-* Para obter detalhes adicionais de como solucionar preocupações de segurança em uma conexão de gateway do Azure, consulte [Implementing a hybrid network architecture with Azure and on-premises VPN][guidance-vpn-gateway-security] (Implementando uma arquitetura de rede híbrida com o Azure e VPN local) e [Implementing a hybrid network architecture with Azure ExpressRoute][guidance-expressroute-security] (Implementando uma arquitetura de rede híbrida com o Azure ExpressRoute).
-* [Solução de problemas de virtualização de rede no Azure](/azure/virtual-network/virtual-network-troubleshoot-nva)
-  > 
+- Aprenda a implementar uma [rede de perímetro entre o Azure e a Internet](secure-vnet-dmz.md).
+- Aprenda a implementar uma [arquitetura de rede híbrida altamente disponível][ra-vpn-failover].
+- Para obter mais informações de como gerenciar a segurança da rede com o Azure, consulte [Segurança de rede e serviços em nuvem da Microsoft][cloud-services-network-security].
+- Para obter informações detalhadas sobre como proteger recursos no Azure, consulte [Introdução à segurança do Microsoft Azure][getting-started-with-azure-security].
+- Para obter detalhes adicionais de como solucionar preocupações de segurança em uma conexão de gateway do Azure, consulte [Implementing a hybrid network architecture with Azure and on-premises VPN][guidance-vpn-gateway-security] (Implementando uma arquitetura de rede híbrida com o Azure e VPN local) e [Implementing a hybrid network architecture with Azure ExpressRoute][guidance-expressroute-security] (Implementando uma arquitetura de rede híbrida com o Azure ExpressRoute).
+- [Solução de problemas de virtualização de rede no Azure](/azure/virtual-network/virtual-network-troubleshoot-nva)
 
 <!-- links -->
 
@@ -260,4 +260,3 @@ Nesta etapa, você conectará os dois gateways de rede locais.
 [udr-overview]: /azure/virtual-network/virtual-networks-udr-overview
 [visio-download]: https://archcenter.blob.core.windows.net/cdn/dmz-reference-architectures.vsdx
 [wireshark]: https://www.wireshark.org/
-[0]: ./images/dmz-private.png "Arquitetura de rede híbrida segura"

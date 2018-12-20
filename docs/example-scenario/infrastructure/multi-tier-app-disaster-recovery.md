@@ -3,20 +3,21 @@ title: Aplicativo Web de várias camadas criado para alta disponibilidade e recu
 description: Criar um aplicativo Web de várias camadas projetado para alta disponibilidade e recuperação de desastres no Azure usando máquinas virtuais do Azure, conjuntos de disponibilidade, zonas de disponibilidade, Azure Site Recovery e Gerenciador de Tráfego do Azure
 author: sujayt
 ms.date: 11/16/2018
-ms.openlocfilehash: 28593c680746dc5ac8f7f25641faa57569dcc53f
-ms.sourcegitcommit: 16bc6a91b6b9565ca3bcc72d6eb27c2c4ae935e4
+ms.custom: product-team
+ms.openlocfilehash: 71534dc095d5fba137a0e610d4e725c2efc6b432
+ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/28/2018
-ms.locfileid: "52579448"
+ms.lasthandoff: 12/06/2018
+ms.locfileid: "53004591"
 ---
 # <a name="multitier-web-application-built-for-high-availability-and-disaster-recovery-on-azure"></a>Aplicativo Web de várias camadas criado para alta disponibilidade e recuperação de desastres no Azure
 
 Este cenário de exemplo é aplicável a qualquer setor que precise implantar aplicativos multicamadas resilientes criados para alta disponibilidade e recuperação de desastre. Nesse cenário, o aplicativo é formado por três camadas.
 
-- Camada da Web: a camada superior, incluindo a interface do usuário. Essa camada analisa as interações do usuário e passa as ações para a próxima camada para processamento.
+- Camada da Web: A camada superior, incluindo a interface do usuário. Essa camada analisa as interações do usuário e passa as ações para a próxima camada para processamento.
 - Camada de negócios: processa as interações do usuário e toma decisões lógicas sobre as próximas etapas. Essa camada se conecta à camada da Web e à camada de dados.
-- Camada de dados: armazena os dados do aplicativo. Um banco de dados, o armazenamento de objetos ou o armazenamento de arquivos normalmente é usado.
+- Camada de dados: Armazena os dados do aplicativo. Um banco de dados, o armazenamento de objetos ou o armazenamento de arquivos normalmente é usado.
 
 Cenários de aplicativo comuns incluem qualquer aplicativo de missão crítica em execução no Windows ou Linux. Isso pode ser um aplicativo pronto para uso, como SAP e SharePoint, ou um aplicativo de linha de negócios personalizado.
 

@@ -1,14 +1,16 @@
 ---
-title: Pontuação em tempo real de Python Scikit-Learn e modelos de aprendizado profundo (deep learning) no Azure
+title: Pontuação em tempo real dos modelos do Python
+titleSuffix: Azure Reference Architectures
 description: Essa arquitetura de referência mostra como implantar modelos de Python como serviços Web no Azure para fazer previsões em tempo real.
 author: njray
 ms.date: 11/09/2018
-ms.openlocfilehash: ff385e232c69e46b0afc6b15e73983bd856b9b2b
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.custom: azcat-ai
+ms.openlocfilehash: e2312d1d1d2444f9915f4e6aa067c1487e096d3e
+ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902571"
+ms.lasthandoff: 12/08/2018
+ms.locfileid: "53120349"
 ---
 # <a name="real-time-scoring-of-python-scikit-learn-and-deep-learning-models-on-azure"></a>Pontuação em tempo real de Python Scikit-Learn e modelos de aprendizado profundo (deep learning) no Azure
 
@@ -16,7 +18,7 @@ Essa arquitetura de referência mostra como implantar modelos de Python como ser
 
 Duas implementações de referência para essa arquitetura estão disponíveis no GitHub, uma para [modelos normais de Python][github-python] e outro para [modelos de aprendizado profundo][github-dl].
 
-![](./_images/python-model-architecture.png)
+![Diagrama da arquitetura para pontuação em tempo real dos modelos em Python no Azure](./_images/python-model-architecture.png)
 
 ## <a name="scenarios"></a>Cenários
 
@@ -28,33 +30,33 @@ Esse cenário usa um subconjunto dos dados de pergunta do Stack Overflow que inc
 
 O fluxo de aplicativo para essa arquitetura é o seguinte:
 
-1.  O cliente envia uma solicitação HTTP POST com os dados codificados da pergunta.
+1. O cliente envia uma solicitação HTTP POST com os dados codificados da pergunta.
 
-2.  O aplicativo Flask extrai a pergunta da solicitação.
+2. O aplicativo Flask extrai a pergunta da solicitação.
 
-3.  A questão é enviada para o modelo de pipeline de scikit-learn para personalização e pontuação.
+3. A questão é enviada para o modelo de pipeline de scikit-learn para personalização e pontuação.
 
-4.  As perguntas mais frequentes correspondentes às suas pontuações são redirecionadas para um objeto JSON e retornadas ao cliente.
+4. As perguntas mais frequentes correspondentes às suas pontuações são redirecionadas para um objeto JSON e retornadas ao cliente.
 
 Aqui está uma captura de tela do aplicativo de exemplo que consome os resultados:
 
-![](./_images/python-faq-matches.png)
+![Captura de tela do aplicativo de exemplo](./_images/python-faq-matches.png)
 
-**Cenário 2: Classificação de imagens.** Este cenário mostra como implantar um modelo de Rede Neural Convolucional (CNN) como um serviço Web para fornecer previsões em imagens. Para este cenário, os “Dados de entrada” no diagrama da arquitetura referem-se aos arquivos de imagem. CNNs são muito eficazes em pesquisa visual computacional para tarefas como classificação de imagem e detecção de objetos. Este cenário foi desenvolvido para as estruturas TensorFlow, Keras (com back-end do TensorFlow) e PyTorch. No entanto, ele pode ser generalizado para qualquer cenário que use modelos de aprendizado profundo para fazer previsões em tempo real.
+**Cenário 2: Classificação de imagens**. Este cenário mostra como implantar um modelo de Rede Neural Convolucional (CNN) como um serviço Web para fornecer previsões em imagens. Para este cenário, os “Dados de entrada” no diagrama da arquitetura referem-se aos arquivos de imagem. CNNs são muito eficazes em pesquisa visual computacional para tarefas como classificação de imagem e detecção de objetos. Este cenário foi desenvolvido para as estruturas TensorFlow, Keras (com back-end do TensorFlow) e PyTorch. No entanto, ele pode ser generalizado para qualquer cenário que use modelos de aprendizado profundo para fazer previsões em tempo real.
 
 Esse cenário usa um modelo ResNet-152 pré-treinado no conjunto de dados ImageNet-1K (1.000 classes) para prever a qual categoria (veja a figura abaixo) uma imagem pertence. Essas previsões são feitas em tempo real usando um ponto de extremidade da API REST.
 
-![](./_images/python-example-predictions.png)
+![Exemplo de previsões](./_images/python-example-predictions.png)
 
 O fluxo do aplicativo para o modelo de aprendizado profundo é o seguinte:
 
-1.  O cliente envia uma solicitação HTTP POST com os dados de imagem codificados.
+1. O cliente envia uma solicitação HTTP POST com os dados de imagem codificados.
 
-2.  O aplicativo Flask extrai a imagem da solicitação.
+2. O aplicativo Flask extrai a imagem da solicitação.
 
-3.  A imagem é pré-processada e enviada para o modelo de pontuação.
+3. A imagem é pré-processada e enviada para o modelo de pontuação.
 
-4.  O resultado da pontuação é redirecionado para um objeto JSON e retornado ao cliente.
+4. O resultado da pontuação é redirecionado para um objeto JSON e retornado ao cliente.
 
 ## <a name="architecture"></a>Arquitetura
 
@@ -70,7 +72,7 @@ O **[Docker Hub][docker]** é usado para armazenar a imagem do Docker que é imp
 
 ## <a name="performance-considerations"></a>Considerações sobre o desempenho
 
-Para arquiteturas de pontuação em tempo real, o desempenho de taxa de transferência se torna uma consideração dominante. Para modelos de Python normais, é geralmente aceito que CPUs são suficientes para lidar com a carga de trabalho. 
+Para arquiteturas de pontuação em tempo real, o desempenho de taxa de transferência se torna uma consideração dominante. Para modelos de Python normais, é geralmente aceito que CPUs são suficientes para lidar com a carga de trabalho.
 
 No entanto, para cargas de trabalho de aprendizado profundo, quando a velocidade é um gargalo, GPUs geralmente fornecem melhor [desempenho][gpus-vs-cpus] em comparação com CPUs. Para corresponder ao desempenho de GPU usando CPUs, geralmente é necessário um cluster com um grande número de CPUs.
 
@@ -90,11 +92,11 @@ Para visibilidade sobre o desempenho do AKS, use o recurso de [Azure Monitor par
 
 Ao implantar seu aplicativo, monitore o cluster do AKS para verificar se ele está funcionando conforme o esperado, se todos os nós estão operacionais e se todos os pods estão em execução. Embora você possa usar a ferramenta de linha de comando [kubectl][kubectl] para recuperar o status de pod, o Kubernetes também inclui um painel Web para o monitoramento básico do status do cluster e gerenciamento.
 
-![](./_images/python-kubernetes-dashboard.png)
+![Captura de tela do painel do Kubernetes](./_images/python-kubernetes-dashboard.png)
 
 Para ver o estado geral do cluster e dos nós, vá até a seção **Nós** no painel do Kubernetes. Se um nó está inativo ou falhou, você pode exibir os logs de erros nessa página. Da mesma forma, vá até as seções **Pods** e **Implantações** para obter informações sobre o número de pods e o status da implantação.
 
-### <a name="aks-logs"></a>Logs do AKS 
+### <a name="aks-logs"></a>Logs do AKS
 
 O AKS registra automaticamente todos os stdout/stderr para os logs dos pods no cluster. Use kubectl para vê-los e ver também os eventos de nível de nó e logs. Para obter detalhes, confira as etapas de implantação.
 
@@ -120,10 +122,12 @@ Use o [RBAC][rbac] para controlar o acesso aos recursos do Azure que você impla
 
 ## <a name="deployment"></a>Implantação
 
-Para implantar essa arquitetura de referência, execute as etapas descritas no repositório do GitHub: 
+Para implantar essa arquitetura de referência, execute as etapas descritas no repositório do GitHub:
 
-  - [Modelos de Python normais][github-python]
-  - [Modelos de aprendizado profundo][github-dl]
+- [Modelos de Python normais][github-python]
+- [Modelos de aprendizado profundo][github-dl]
+
+<!-- links -->
 
 [aad-auth]: /azure/aks/aad-integration
 [acr]: /azure/container-registry/
@@ -150,4 +154,3 @@ Para implantar essa arquitetura de referência, execute as etapas descritas no r
 [scikit]: https://pypi.org/project/scikit-learn/
 [security-center]: /azure/security-center/security-center-intro
 [vm]: /azure/virtual-machines/
-
