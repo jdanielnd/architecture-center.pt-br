@@ -1,21 +1,22 @@
 ---
 title: Criar um pipeline de CI/CD usando o Azure DevOps
+titleSuffix: Azure Example Scenarios
 description: Crie e libere um aplicativo .NET para aplicativos Web do Azure usando o Azure DevOps.
 author: christianreddington
 ms.date: 12/06/2018
 ms.custom:
 - fasttrack
 - seodec18
-ms.openlocfilehash: 23945493115522d099b6b26922f567653da0367e
-ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
+ms.openlocfilehash: ae2dddd7567c6b69f936b3b9c9339313389e3bf6
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53307275"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53643791"
 ---
 # <a name="design-a-cicd-pipeline-using-azure-devops"></a>Criar um pipeline de CI/CD usando o Azure DevOps
 
-Este cenário fornece orientações de arquitetura e design para a criação de um pipeline de CI (integração contínua) e CD (implantação contínua).  Neste exemplo, o pipeline de CI/CD implanta um aplicativo Web do .NET de duas camadas para o Serviço de Aplicativo do Azure.
+Este cenário fornece orientações de arquitetura e design para a criação de um pipeline de CI (integração contínua) e CD (implantação contínua). Neste exemplo, o pipeline de CI/CD implanta um aplicativo Web do .NET de duas camadas para o Serviço de Aplicativo do Azure.
 
 A migração para processos de CI/CD modernos fornece muitos benefícios para compilações, implantações, teste e monitoramento de aplicativos. Ao usar o Azure DevOps juntamente com outros serviços, como o Serviço de Aplicativo, as organizações podem se concentrar no desenvolvimento de seus aplicativos, em vez do gerenciamento da infraestrutura de suporte.
 
@@ -84,7 +85,7 @@ Essa [árvore de decisão para serviços de computação do Azure](/azure/archit
 
 ### <a name="prerequisites"></a>Pré-requisitos
 
-- Você deve ter uma conta do Azure já criada. Se você não tiver uma assinatura do Azure, crie uma [conta gratuita][azure-free-account] antes de começar.
+- Você deve ter uma conta do Azure já criada. Se você não tiver uma assinatura do Azure, crie uma [conta gratuita](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) antes de começar.
 
 - Você deve se inscrever em uma organização do Azure DevOps. Para saber mais, consulte [Início Rápido: Criar sua organização][vsts-account-create].
 
@@ -119,7 +120,6 @@ Examine os seguintes recursos para saber mais sobre CI/CD e o Azure DevOps:
 [ansible]: /azure/ansible/
 [application-insights]: /azure/application-insights/app-insights-overview
 [app-service-reference-architecture]: ../../reference-architectures/app-service-web-app/basic-web-app.md
-[azure-free-account]: https://azure.microsoft.com/free/?WT.mc_id=A261C142F
 [arm-templates]: /azure/azure-resource-manager/resource-group-overview#template-deployment
 [architecture]: ./media/architecture-devops-dotnet-webapp.svg
 [chef]: /azure/chef/
