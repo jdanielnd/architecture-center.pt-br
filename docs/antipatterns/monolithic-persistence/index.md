@@ -1,14 +1,16 @@
 ---
 title: Antipadrão de persistência monolítica
+titleSuffix: Performance antipatterns for cloud apps
 description: Colocar todos os dados de um aplicativo em um único armazenamento de dados pode prejudicar o desempenho.
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: 8cc67a41adf7ca4e3c5475eea86e38b75dd65d4d
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: c54a99dd0754cb2cb6cf4ad85b23a518c14a978b
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429104"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54010249"
 ---
 # <a name="monolithic-persistence-antipattern"></a>Antipadrão de persistência monolítica
 
@@ -16,12 +18,12 @@ Colocar todos os dados de um aplicativo em um único armazenamento de dados pode
 
 ## <a name="problem-description"></a>Descrição do problema
 
-Historicamente, os aplicativos geralmente usavam um único armazenamento de dados, independentemente dos diferentes tipos de dados que o aplicativo precisasse armazenar. Geralmente, isso era feito para simplificar o design do aplicativo, ou para coincidir com o conjunto de habilidades existentes da equipe de desenvolvimento. 
+Historicamente, os aplicativos geralmente usavam um único armazenamento de dados, independentemente dos diferentes tipos de dados que o aplicativo precisasse armazenar. Geralmente, isso era feito para simplificar o design do aplicativo, ou para coincidir com o conjunto de habilidades existentes da equipe de desenvolvimento.
 
 Sistemas baseados em nuvem modernos geralmente possuem requisitos funcionais e não funcionais adicionais e precisam armazenar muitos tipos heterogêneos de dados, como documentos, imagens, dados armazenados em cache, mensagens em fila, os logs de aplicativo e telemetria. Seguir a abordagem tradicional e colocar todas essas informações no mesmo armazenamento de dados pode prejudicar o desempenho, por dois motivos principais:
 
 - Armazenar e recuperar grandes quantidades de dados não relacionados no mesmo armazenamento de dados pode causar contenção, que por sua vez, leva a tempos de resposta mais lentos e falhas de conexão.
-- Independentemente do armazenamento de dados escolhido, talvez ele não seja o mais adequado para todos os diferentes tipos de dados ou ele pode não ser otimizado para as operações o aplicativo executa. 
+- Independentemente do armazenamento de dados escolhido, talvez ele não seja o mais adequado para todos os diferentes tipos de dados ou ele pode não ser otimizado para as operações o aplicativo executa.
 
 O exemplo a seguir mostra um controlador ASP.NET Web API que adiciona um novo registro em um banco de dados e também registra o resultado em um log. O log é mantido no mesmo banco de dados que os dados de negócios. Você pode encontrar o exemplo completo [aqui][sample-app].
 
@@ -43,7 +45,7 @@ A taxa na qual os registros de log são gerados provavelmente afetará o desempe
 
 ## <a name="how-to-fix-the-problem"></a>Como corrigir o problema
 
-Dados separados de acordo com o uso. Para cada conjunto de dados, selecione um armazenamento de dados que melhor descreva como o conjunto de dados será usado. No exemplo anterior, o aplicativo deve fazer o registro em log em um armazenamento separado do banco de dados que contém dados de negócios: 
+Dados separados de acordo com o uso. Para cada conjunto de dados, selecione um armazenamento de dados que melhor descreva como o conjunto de dados será usado. No exemplo anterior, o aplicativo deve fazer o registro em log em um armazenamento separado do banco de dados que contém dados de negócios:
 
 ```csharp
 public class PolyController : ApiController
@@ -76,10 +78,10 @@ O sistema provavelmente ficará bem mais lento e eventualmente falhará, já que
 Você pode executar as etapas a seguir para ajudar a identificar a causa.
 
 1. Instrumentar o sistema para registrar as principais estatísticas de desempenho. Capture informações de tempo para cada operação, bem como os pontos onde o aplicativo lê e grava dados.
-1. Se possível, monitore o sistema em execução por alguns dias em um ambiente de produção para obter uma visão real de como o sistema é usado. Se isso não for possível, execute testes de carga com script com um volume realista de usuários virtuais executando uma série normal de operações.
-2. Use os dados de telemetria para identificar os períodos de baixo desempenho.
-3. Identifique quais armazenamentos de dados foram acessados durante esses períodos.
-4. Identifique os recursos de armazenamento de dados que podem estar com problemas de contenção.
+2. Se possível, monitore o sistema em execução por alguns dias em um ambiente de produção para obter uma visão real de como o sistema é usado. Se isso não for possível, execute testes de carga com script com um volume realista de usuários virtuais executando uma série normal de operações.
+3. Use os dados de telemetria para identificar os períodos de baixo desempenho.
+4. Identifique quais armazenamentos de dados foram acessados durante esses períodos.
+5. Identifique os recursos de armazenamento de dados que podem estar com problemas de contenção.
 
 ## <a name="example-diagnosis"></a>Diagnóstico de exemplo
 
@@ -107,7 +109,7 @@ O gráfico a seguir mostra a utilização de unidades da taxa de transferência 
 
 ### <a name="examine-the-telemetry-for-the-data-stores"></a>Examinar a telemetria para os armazenamentos de dados
 
-Instrumente os armazenamentos de dados para capturar os detalhes de baixo nível da atividade. No aplicativo de exemplo, as estatísticas de acesso de dados mostraram um alto volume de operações de inserção executadas na tabela `PurchaseOrderHeader` e na tabela `MonoLog`. 
+Instrumente os armazenamentos de dados para capturar os detalhes de baixo nível da atividade. No aplicativo de exemplo, as estatísticas de acesso de dados mostraram um alto volume de operações de inserção executadas na tabela `PurchaseOrderHeader` e na tabela `MonoLog`.
 
 ![As estatísticas de acesso a dados para o aplicativo de exemplo][MonolithicDataAccessStats]
 
@@ -133,12 +135,11 @@ Da mesma forma, a utilização máxima de DTU do banco de dados de log atinge so
 
 ![O monitor do banco de dados no portal clássico do Azure mostrando a utilização de recursos do banco de dados de log no cenário do Polyglot][LogDatabaseUtilization]
 
-
 ## <a name="related-resources"></a>Recursos relacionados
 
 - [Escolha o armazenamento de dados correto][data-store-overview]
 - [Critérios para escolher um armazenamento de dados][data-store-comparison]
-- [Acesso de dados para soluções altamente escalonáveis: Usando persistência no SQL, NoSQL e Polyglot][Data-Access-Guide]
+- [Acesso a dados para soluções altamente escalonáveis: Usando SQL, NoSQL e persistência poliglota][Data-Access-Guide]
 - [Particionamento de dados][DataPartitioningGuidance]
 
 [sample-app]: https://github.com/mspnp/performance-optimization/tree/master/MonolithicPersistence

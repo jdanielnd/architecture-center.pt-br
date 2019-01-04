@@ -5,12 +5,12 @@ keywords: Especialistas em AWS, comparação com o Azure, comparação com o AWS
 author: lbrader
 ms.date: 09/19/2018
 pnp.series.title: Azure for AWS Professionals
-ms.openlocfilehash: 0735d24b223a5e5cab6030774280c038c28f35e6
-ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
+ms.openlocfilehash: e6077349a285df56d234f3cc2a14dc0d0d33da55
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/02/2018
-ms.locfileid: "50916678"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011660"
 ---
 # <a name="azure-for-aws-professionals"></a>Azure para profissionais do AWS
 
@@ -63,7 +63,7 @@ Esses limites podem ser aumentados até o máximo [preenchendo-se uma solicitaç
 
 O termo "recurso" no Azure é usado tal como no AWS, significando qualquer instância de computação, objeto de armazenamento, dispositivo de rede ou outra entidade que você pode criar ou configurar na plataforma.
 
-Os recursos do Azure são implantados e gerenciados com um destes dois modelos: [Azure Resource Manager](/azure/azure-resource-manager/resource-group-overview) ou o antigo [modelo de implantação clássico](/azure/azure-resource-manager/resource-manager-deployment-model) do Azure.
+Os recursos do Azure são implantados e gerenciados usando um destes dois modelos: [Azure Resource Manager](/azure/azure-resource-manager/resource-group-overview) ou o [modelo de implantação clássico](/azure/azure-resource-manager/resource-manager-deployment-model) do Azure mais antigo.
 Todos os recursos novos são criados com o modelo Resource Manager.
 
 ### <a name="resource-groups"></a>Grupos de recursos
@@ -174,7 +174,7 @@ Embora os tipos de instâncias do AWS e os tamanhos de máquinas virtuais do Azu
 
 -   [Tamanhos das máquinas virtuais no Azure (Linux)](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/)
 
-Diferentemente da cobrança por segundo do AWS, as VMs sob demanda do Azure são cobradas por minuto.
+Semelhante à cobrança por segundo do AWS, as VMs sob demanda do Azure são cobradas por minuto.
 
 #### <a name="ebs-and-azure-storage-for-vm-disks"></a>EBS e Armazenamento do Azure para discos de VM
 
@@ -217,11 +217,11 @@ O Azure oferece vários serviços de computação sem equivalente direto no AWS:
 
 -   [Criar uma VM do Linux no Azure usando o Portal](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-quick-create-portal/)
 
--   [Arquitetura de referência no Azure: processamento de uma VM Linux no Azure](https://azure.microsoft.com/documentation/articles/guidance-compute-single-vm-linux/)
+-   [Arquitetura de Referência do Azure: Executando uma VM do Linux no Azure](https://azure.microsoft.com/documentation/articles/guidance-compute-single-vm-linux/)
 
 -   [Get started with Node.js web apps in Azure App Service (Introdução aos aplicativos Web do Node.js no Serviço de Aplicativo do Azure)](https://azure.microsoft.com/documentation/articles/app-service-web-nodejs-get-started/)
 
--   [Arquitetura de referência do Azure: aplicativo Web básico](https://azure.microsoft.com/documentation/articles/guidance-web-apps-basic/)
+-   [Arquitetura de Referência do Azure: aplicativo Web básico](https://azure.microsoft.com/documentation/articles/guidance-web-apps-basic/)
 
 -   [Criar sua primeira Função do Azure](https://azure.microsoft.com/documentation/articles/functions-create-first-azure-function/)
 
@@ -258,7 +258,7 @@ Para dados que são acessados com pouca frequência, mas devem estar disponívei
 
 -   [Guia de segurança do Armazenamento do Azure](https://azure.microsoft.com/documentation/articles/storage-security-guide/)
 
--   [Padrões e práticas: diretriz da Rede de Distribuição de Conteúdo (CDN)](https://azure.microsoft.com/documentation/articles/best-practices-cdn/)
+-   [Padrões e Práticas: diretrizes da Rede de Distribuição de Conteúdo (CDN)](https://azure.microsoft.com/documentation/articles/best-practices-cdn/)
 
 ### <a name="networking"></a>Rede
 
@@ -310,7 +310,7 @@ Os custos de RDS do AWS são determinados pela quantidade de recursos de hardwar
 
 -   [Configurar a replicação geográfica para o Banco de Dados SQL do Azure com o portal do Azure](https://azure.microsoft.com/documentation/articles/sql-database-geo-replication-portal/)
 
--   [Introdução ao Cosmos DB: um banco de dados JSON NoSQL](/azure/cosmos-db/sql-api-introduction)
+-   [Introdução ao Cosmos DB: um banco de dados NoSQL JSON](/azure/cosmos-db/sql-api-introduction)
 
 -   [Como usar o armazenamento de Tabela do Azure com Node.js](https://azure.microsoft.com/documentation/articles/storage-nodejs-how-to-use-table-storage/)
 

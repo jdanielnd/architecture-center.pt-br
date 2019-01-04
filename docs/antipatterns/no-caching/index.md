@@ -1,18 +1,20 @@
 ---
 title: Nenhum antipadrão de cache
+titleSuffix: Performance antipatterns for cloud apps
 description: Buscar repetidamente os mesmos dados pode reduzir o desempenho e a escalabilidade.
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: ec19cde567fb63248c121328322e834d99c841e8
-ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
+ms.custom: seodec18
+ms.openlocfilehash: c2a5cdbb8863f87b8928558c8237e8659032ac32
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/26/2018
-ms.locfileid: "52295575"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011592"
 ---
 # <a name="no-caching-antipattern"></a>Nenhum antipadrão de cache
 
-Em um aplicativo de nuvem que trata muitas solicitações simultâneas, buscar repetidamente os mesmos dados pode reduzir o desempenho e a escalabilidade. 
+Em um aplicativo de nuvem que trata muitas solicitações simultâneas, buscar repetidamente os mesmos dados pode reduzir o desempenho e a escalabilidade.
 
 ## <a name="problem-description"></a>Descrição do problema
 
@@ -46,7 +48,7 @@ Você pode encontrar o exemplo completo [aqui][sample-app].
 
 Esse antipadrão geralmente ocorre porque:
 
-- Não usar um cache é mais simples de implementar, e funciona bem em cargas baixas. O cache torna o código mais complicado. 
+- Não usar um cache é mais simples de implementar, e funciona bem em cargas baixas. O cache torna o código mais complicado.
 - As vantagens e desvantagens do uso de um cache não são claramente compreendidas.
 - Há uma preocupação quanto à sobrecarga de manter a precisão e a atualização de dados armazenados em cache.
 - Um aplicativo foi migrado de um sistema local, em que a latência de rede não era um problema e o sistema foi executado em hardwares mais caros de alto desempenho, para que o cache não fosse considerado no design original.
@@ -59,7 +61,7 @@ A estratégia de cache mais popular é a estratégia *sob demanda* ou *cache-asi
 - Na leitura, o aplicativo tenta ler os dados do cache. Se os dados não estiverem no cache, o aplicativo recupera-o da fonte de dados e o adiciona ao cache.
 - Na gravação, o aplicativo grava a alteração diretamente na fonte de dados e remove o valor antigo do cache. Ele será recuperado e adicionado ao cache da próxima vez que for necessário.
 
-Essa abordagem é adequada para dados que são alterados com frequência. Aqui está o exemplo anterior atualizado para usar o padrão [Cache-Aside][cache-aside-pattern].  
+Essa abordagem é adequada para dados que são alterados com frequência. Aqui está o exemplo anterior atualizado para usar o padrão [Cache-Aside][cache-aside-pattern].
 
 ```csharp
 public class CachedPersonRepository : IPersonRepository
@@ -100,7 +102,7 @@ public class CacheService
 }
 ```
 
-Observe que o método `GetAsync` agora chama a classe `CacheService`, em vez de chamar diretamente o banco de dados. Primeiro, a classe `CacheService` tenta obter o item do Cache Redis do Azure. Se o valor não for encontrado no Cache Redis, o `CacheService` invoca uma função lambda que foi passada pelo chamador. A função lambda é responsável por buscar os dados do banco de dados. Essa implementação separa o repositório da solução de cache específica e separa o `CacheService` do banco de dados. 
+Observe que o método `GetAsync` agora chama a classe `CacheService`, em vez de chamar diretamente o banco de dados. Primeiro, a classe `CacheService` tenta obter o item do Cache Redis do Azure. Se o valor não for encontrado no Cache Redis, o `CacheService` invoca uma função lambda que foi passada pelo chamador. A função lambda é responsável por buscar os dados do banco de dados. Essa implementação separa o repositório da solução de cache específica e separa o `CacheService` do banco de dados.
 
 ## <a name="considerations"></a>Considerações
 
@@ -112,11 +114,11 @@ Observe que o método `GetAsync` agora chama a classe `CacheService`, em vez de 
 
 - Você não precisa colocar em cache as entidades completas. Se grande parte de uma entidade for estática, mas somente uma pequena parte for alterada com frequência, coloque em cache os elementos estáticos e recupere os elementos dinâmicos da fonte de dados. Essa abordagem pode ajudar a reduzir o volume de E/S que está sendo executado em relação à fonte de dados.
 
-- Em alguns casos, se os dados voláteis forem de curta duração, pode ser útil para colocar em cache. Por exemplo, considere um dispositivo que envia continuamente as atualizações de status. Pode fazer sentido armazenar em cache essas informações conforme elas chegam e não gravá-las em um repositório persistente.  
+- Em alguns casos, se os dados voláteis forem de curta duração, pode ser útil para colocar em cache. Por exemplo, considere um dispositivo que envia continuamente as atualizações de status. Pode fazer sentido armazenar em cache essas informações conforme elas chegam e não gravá-las em um repositório persistente.
 
 - Para impedir que os dados se tornem obsoletos, muitas soluções de cache oferecem suporte a períodos de validade configurável, para que os dados sejam removidos do cache automaticamente após um intervalo especificado. Talvez seja necessário ajustar o tempo de expiração para seu cenário. Os dados que são altamente estáticos podem permanecer no cache por períodos mais longos que os dados voláteis que podem se tornar obsoletos rapidamente.
 
-- Se a solução de cache não fornecer expiração interna, você precisará implementar um processo em segundo plano que ocasionalmente varre o cache, para impedir que ele cresça sem limites. 
+- Se a solução de cache não fornecer expiração interna, você precisará implementar um processo em segundo plano que ocasionalmente varre o cache, para impedir que ele cresça sem limites.
 
 - Além de armazenar em cache os dados de uma fonte de dados externa, você pode usar o cache para salvar os resultados de cálculos complexos. Antes de fazer isso, no entanto, instrumente o aplicativo para determinar se o aplicativo está realmente associado à CPU.
 
@@ -130,16 +132,15 @@ Observe que o método `GetAsync` agora chama a classe `CacheService`, em vez de 
 
 Você pode executar as etapas a seguir para ajudar a identificar se a falta de cache está causando problemas de desempenho:
 
-1. Examine o design do aplicativo. Faça um inventário de todos os repositórios de dados que o aplicativo utiliza. Para cada um, determine se o aplicativo está usando um cache. Se possível, determine a frequência com a qual os dados são alterados. Bons candidatos inicias para o cache incluem dados que são alterados lentamente e dados de referência estática lidos com frequência. 
+1. Examine o design do aplicativo. Faça um inventário de todos os repositórios de dados que o aplicativo utiliza. Para cada um, determine se o aplicativo está usando um cache. Se possível, determine a frequência com a qual os dados são alterados. Bons candidatos inicias para o cache incluem dados que são alterados lentamente e dados de referência estática lidos com frequência.
 
 2. Instrumente o aplicativo e monitore o sistema ao vivo para descobrir a frequência com a qual o aplicativo recupera dados ou calcula informações.
 
 3. Crie um perfil para o aplicativo em um ambiente de teste para capturar métricas de baixo nível sobre a sobrecarga associada com operações de acesso de dados ou outros cálculos frequentemente executados.
 
-4. Execute o teste de carga em um ambiente de teste para identificar como o sistema responde sob uma carga de trabalho normal e sob uma carga pesada. O teste de carga deve simular o padrão de acesso a dados observado no ambiente de produção usando cargas de trabalho reais. 
+4. Execute o teste de carga em um ambiente de teste para identificar como o sistema responde sob uma carga de trabalho normal e sob uma carga pesada. O teste de carga deve simular o padrão de acesso a dados observado no ambiente de produção usando cargas de trabalho reais.
 
-5. Examine as estatísticas de acesso a dados para os armazenamentos de dados subjacentes e examine quantas vezes as mesmas solicitações de dados são repetidas. 
-
+5. Examine as estatísticas de acesso a dados para os armazenamentos de dados subjacentes e examine quantas vezes as mesmas solicitações de dados são repetidas.
 
 ## <a name="example-diagnosis"></a>Diagnóstico de exemplo
 
@@ -147,17 +148,17 @@ As seções a seguir aplicam essas etapas ao aplicativo de exemplo descrito ante
 
 ### <a name="instrument-the-application-and-monitor-the-live-system"></a>Instrumentar o aplicativo e monitorar o sistema ao vivo
 
-Instrumente o aplicativo e monitore-o para obter informações sobre as solicitações específicas feitas pelos usuários enquanto o aplicativo está em produção. 
+Instrumente o aplicativo e monitore-o para obter informações sobre as solicitações específicas feitas pelos usuários enquanto o aplicativo está em produção.
 
 A imagem a seguir mostra o monitoramento dados capturados por [New Relic][NewRelic] durante um teste de carga. Nesse caso, a única operação HTTP GET executada é `Person/GetAsync`. Mas, em um ambiente de produção ao vivo, saber a frequência relativa com a qual cada solicitação é executada pode fornecer informações sobre os recursos que devem ser armazenados em cache.
 
 ![New Relic mostrando as solicitações do servidor para o aplicativo CachingDemo][NewRelic-server-requests]
 
-Se precisar de uma análise mais profunda, você pode usar um criador de perfil para capturar dados de desempenho de baixo nível em um ambiente de teste (não no sistema de produção). Examine as métricas, como taxas de solicitação de E/S, o uso da memória e a utilização da CPU. Essas métricas podem mostrar um grande número de solicitações para um armazenamento de dados ou serviço, ou processamento repetido que realiza o mesmo cálculo. 
+Se precisar de uma análise mais profunda, você pode usar um criador de perfil para capturar dados de desempenho de baixo nível em um ambiente de teste (não no sistema de produção). Examine as métricas, como taxas de solicitação de E/S, o uso da memória e a utilização da CPU. Essas métricas podem mostrar um grande número de solicitações para um armazenamento de dados ou serviço, ou processamento repetido que realiza o mesmo cálculo.
 
 ### <a name="load-test-the-application"></a>Fazer teste de carga no aplicativo
 
-O gráfico a seguir mostra os resultados do teste de carga para o aplicativo de exemplo. O teste de carga simula uma carga de etapa de até 800 usuários executando uma série típica de operações. 
+O gráfico a seguir mostra os resultados do teste de carga para o aplicativo de exemplo. O teste de carga simula uma carga de etapa de até 800 usuários executando uma série típica de operações.
 
 ![Resultados do teste de carga de desempenho para o cenário sem cache][Performance-Load-Test-Results-Uncached]
 
@@ -178,7 +179,7 @@ A coluna `UseCount` nos resultados indica a frequência com a qual cada consulta
 
 ![Resultados da consulta das exibições de gerenciamento dinâmico no Servidor de Gerenciamento do SQL Server][Dynamic-Management-Views]
 
-Aqui está a consulta SQL que está causando tantas solicitações de banco de dados: 
+Aqui está a consulta SQL que está causando tantas solicitações de banco de dados:
 
 ```SQL
 (@p__linq__0 int)SELECT TOP (2)
@@ -197,7 +198,7 @@ Depois que você incorporar um cache, repita os testes de carga e compare os res
 
 ![Resultados do teste de carga de desempenho para o cenário com cache][Performance-Load-Test-Results-Cached]
 
-O volume de testes bem-sucedido ainda atinge um limite, mas em uma carga de usuário maior. A taxa de solicitação com essa carga é significativamente maior do que a anterior. O tempo médio de teste ainda aumenta com a carga, mas o tempo de resposta máximo é 0,05 ms, comparados com 1 ms anterior a um aperfeiçoamento &mdash; 20&times;. 
+O volume de testes bem-sucedido ainda atinge um limite, mas em uma carga de usuário maior. A taxa de solicitação com essa carga é significativamente maior do que a anterior. O tempo médio de teste ainda aumenta com a carga, mas o tempo de resposta máximo é 0,05 ms, comparados com 1 ms anterior a um aperfeiçoamento &mdash; 20&times;.
 
 ## <a name="related-resources"></a>Recursos relacionados
 

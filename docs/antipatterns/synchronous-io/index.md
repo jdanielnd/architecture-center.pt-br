@@ -1,14 +1,16 @@
 ---
 title: Antipadrão de E/S síncrona
+titleSuffix: Performance antipatterns for cloud apps
 description: O bloqueio do thread de chamada durante a conclusão da E/S pode reduzir o desempenho e afetar a escalabilidade vertical.
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: 961eacb82344ec7e71aaa96fb4cd8bc530721e96
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: 209295cfc911ae168bca2f1c64dc930a27a9a4ba
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429002"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54009331"
 ---
 # <a name="synchronous-io-antipattern"></a>Antipadrão de E/S síncrona
 
@@ -27,9 +29,9 @@ Exemplos comuns de E/S incluem:
 
 Esse antipadrão geralmente ocorre porque:
 
-- Ele parece ser a maneira mais fácil para executar uma operação. 
+- Ele parece ser a maneira mais fácil para executar uma operação.
 - O aplicativo requer uma resposta de uma solicitação.
-- O aplicativo usa uma biblioteca que só fornece métodos síncronos de E/S. 
+- O aplicativo usa uma biblioteca que só fornece métodos síncronos de E/S.
 - Uma biblioteca externa executa operações de E/S síncrona internamente. Uma única chamada de E/S síncrona pode bloquear uma cadeia de chamada inteira.
 
 O código a seguir carrega um arquivo para o armazenamento de Blobs do Azure. Há dois locais em que os blocos de código aguardam a E/S síncrona, o método `CreateIfNotExists` e o método `UploadFromStream`.
@@ -77,7 +79,7 @@ Você pode encontrar o código completo para ambos os exemplos [aqui][sample-app
 
 ## <a name="how-to-fix-the-problem"></a>Como corrigir o problema
 
-Substitua as operações de E/S síncrona com operações assíncronas. Isso libera o thread atual para continuar executando trabalho significativo em vez de bloquear e ajuda a melhorar a utilização dos recursos de computação. Executar E/S assíncrona é especialmente eficiente para lidar com um surto inesperado em solicitações de aplicativos cliente. 
+Substitua as operações de E/S síncrona com operações assíncronas. Isso libera o thread atual para continuar executando trabalho significativo em vez de bloquear e ajuda a melhorar a utilização dos recursos de computação. Executar E/S assíncrona é especialmente eficiente para lidar com um surto inesperado em solicitações de aplicativos cliente.
 
 Muitas bibliotecas fornecem versões síncronas e assíncronas dos métodos. Sempre que possível, use as versões assíncronas. Aqui está a versão assíncrona do exemplo anterior que carrega um arquivo para o armazenamento de Blobs do Azure.
 
@@ -123,7 +125,7 @@ public class AsyncController : ApiController
 }
 ```
 
-Para bibliotecas que não fornecem versões assíncronas de operações, pode ser possível criar wrappers assíncronos em torno de métodos síncronos selecionados. Siga essa abordagem com cuidado. Embora possa melhorar a capacidade de resposta no thread que invoca o wrapper assíncrono, ele realmente consome mais recursos. Um thread adicional pode ser criado e não há sobrecarga associada à sincronização do trabalho realizado por esse thread. Alguns desafios são discutidos nesta postagem de blog: [Devo divulgar wrappers assíncronos para métodos síncronos?][async-wrappers]
+Para bibliotecas que não fornecem versões assíncronas de operações, pode ser possível criar wrappers assíncronos em torno de métodos síncronos selecionados. Siga essa abordagem com cuidado. Embora possa melhorar a capacidade de resposta no thread que invoca o wrapper assíncrono, ele realmente consome mais recursos. Um thread adicional pode ser criado e não há sobrecarga associada à sincronização do trabalho realizado por esse thread. Alguns desafios são discutidos nessa postagem no blog: [Devo expor wrappers assíncronos a métodos síncronos?][async-wrappers]
 
 Aqui está um exemplo de um wrapper em torno de um método síncrono de assíncrono.
 
@@ -193,16 +195,10 @@ O seguinte gráfico mostra os resultados da versão assíncrona do código de te
 
 A taxa de transferência é muito maior. Sobre a mesma duração como o teste anterior, o sistema manipula com êxito um aumento de dez vezes quase na taxa de transferência, medida em solicitações por segundo. Além disso, o tempo médio de resposta é relativamente constante e permanece aproximadamente 25 vezes menor do que o teste anterior.
 
-
 [sample-app]: https://github.com/mspnp/performance-optimization/tree/master/SynchronousIO
-
-
 [async-wrappers]: https://blogs.msdn.microsoft.com/pfxteam/2012/03/24/should-i-expose-asynchronous-wrappers-for-synchronous-methods/
 [performance-counters]: /azure/cloud-services/cloud-services-dotnet-diagnostics-performance-counters
 [web-sites-monitor]: /azure/app-service-web/web-sites-monitor
 
 [sync-performance]: _images/SyncPerformance.jpg
 [async-performance]: _images/AsyncPerformance.jpg
-
-
-
