@@ -4,18 +4,20 @@ description: Arquiteturas de referência, plantas e diretrizes de implementaçã
 layout: LandingPage
 ms.topic: landing-page
 ms.date: 08/30/2018
-ms.openlocfilehash: 05f93aedc49cc71a35d8c0303af0342ed0ba47f7
-ms.sourcegitcommit: 032f402482762f4e674aeebbc122ad18dfba11eb
+ms.openlocfilehash: 173698aee0a67578beaa806a59e1c7b0265cdd61
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/14/2018
-ms.locfileid: "53396412"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011796"
 ---
 # <a name="azure-reference-architectures"></a>Arquiteturas de referência do Azure
 
 Nossas arquiteturas de referência são organizadas por cenário, com arquiteturas relacionadas agrupadas juntos. Cada arquitetura inclui as práticas recomendadas, junto com as considerações sobre escalabilidade, disponibilidade, capacidade de gerenciamento e segurança. Mais também incluem uma solução implantável.
 
 Ir para: [IA](#ai-and-machine-learning) | [Big data](#big-data-solutions) | [Sem servidor](#serverless-applications) | [Redes virtuais](#virtual-networks) | [Cargas de trabalho de VM](#vm-workloads) | [SAP](#sap) | [Aplicativos Web](#web-applications) | [Active Directory](#extend-on-premises-active-directory-to-azure)
+
+<!-- markdownlint-disable MD033 -->
 
 ## <a name="ai-and-machine-learning"></a>IA e machine learning
 
@@ -750,3 +752,4 @@ Ir para: [IA](#ai-and-machine-learning) | [Big data](#big-data-solutions) | [Sem
 </li>
 </ul>
 
+<!-- markdownlint-disable MD033 -->

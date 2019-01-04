@@ -5,12 +5,12 @@ description: Arquitetura recomendada que mostra como implantar e operar um servi
 author: njray
 ms.date: 04/30/2018
 ms.custom: seodec18
-ms.openlocfilehash: 26bf9cadc8db0cd4fcc61023619ca61bb7b87855
-ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
+ms.openlocfilehash: 3500e05631ad34af0abc8e0f7a3e2b4919157746
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/20/2018
-ms.locfileid: "53644148"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011337"
 ---
 # <a name="run-a-jenkins-server-on-azure"></a>Executar um servidor Jenkins no Azure
 
@@ -192,7 +192,7 @@ Use o [Plug-in do Azure AD][configure-azure-ad] no Centro de Atualização Jenki
 
 O administrador do Jenkins executa a etapa para configurar o plug-in do agente de VM do Azure, que já está instalado.
 
-[Siga estas etapas para configurar o plug-in][configure-agent]. Para obter um tutorial sobre como configurar as entidades de serviço para o plug-in, consulte [Dimensionar as implantações Jenkins para atender à demanda com agentes de VM do Azure][scale-agent].
+[Siga estas etapas para configurar o plug-in][configure-agent]. Para obter um tutorial sobre como configurar as entidades de serviço para o plug-in, confira [Dimensionar as implantações Jenkins para atender à demanda com agentes de VM do Azure][scale-agent].
 
 ### <a name="step-4-provision-jenkins-server-with-azure-storage"></a>Etapa 4: Provisionar Armazenamento do Azure para o servidor Jenkins
 
