@@ -1,14 +1,16 @@
 ---
 title: Antipadrão de E/S com ruídos
+titleSuffix: Performance antipatterns for cloud apps
 description: Um grande número de solicitações de E/S pode prejudicar o desempenho e a capacidade de resposta.
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: 17193198918cc742b2e3f30e77dfc5c3f2726ebf
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: c018e365d0a6244f77d119ad59f601e9c7ea965c
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428560"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011218"
 ---
 # <a name="chatty-io-antipattern"></a>Antipadrão de E/S com ruídos
 
@@ -26,7 +28,7 @@ O exemplo a seguir lê em um banco de dados de produtos. Há três tabelas: `Pro
 2. Localize todos os produtos nessa subcategoria consultando a tabela `Product`.
 3. Para cada produto, consulte os dados de preço na tabela `ProductPriceListHistory`.
 
-O aplicativo usa o [Entity Framework][ef] para consultar o banco de dados. Você pode encontrar o exemplo completo [aqui][code-sample]. 
+O aplicativo usa o [Entity Framework][ef] para consultar o banco de dados. Você pode encontrar o exemplo completo [aqui][code-sample].
 
 ```csharp
 public async Task<IHttpActionResult> GetProductsInSubCategoryAsync(int subcategoryId)
@@ -57,11 +59,11 @@ public async Task<IHttpActionResult> GetProductsInSubCategoryAsync(int subcatego
 }
 ```
 
-Esse exemplo mostra o problema explicitamente, mas, às vezes, um O/RM pode mascarar o problema se ele busca implicitamente um registro filho por vez. Isso é conhecido como "problema N+1". 
+Esse exemplo mostra o problema explicitamente, mas, às vezes, um O/RM pode mascarar o problema se ele busca implicitamente um registro filho por vez. Isso é conhecido como "problema N+1".
 
 ### <a name="implementing-a-single-logical-operation-as-a-series-of-http-requests"></a>Implementando uma única operação lógica como uma série de solicitações HTTP
 
-Isso geralmente acontece quando os desenvolvedores tentam seguir um paradigma orientado a objetos e tratam os objetos remotos como se fossem objetos locais na memória. Também pode resultar em muitas viagens de ida e volta da rede. Por exemplo, a seguinte API da Web expõe as propriedades individuais dos objetos `User` por meio de métodos HTTP GET individuais. 
+Isso geralmente acontece quando os desenvolvedores tentam seguir um paradigma orientado a objetos e tratam os objetos remotos como se fossem objetos locais na memória. Também pode resultar em muitas viagens de ida e volta da rede. Por exemplo, a seguinte API da Web expõe as propriedades individuais dos objetos `User` por meio de métodos HTTP GET individuais.
 
 ```csharp
 public class UserController : ApiController
@@ -89,7 +91,7 @@ public class UserController : ApiController
 }
 ```
 
-Embora não haja nada tecnicamente errado com essa abordagem, a maioria dos clientes provavelmente precisará obter várias propriedades de cada `User`, resultando em um código do cliente, como a seguir. 
+Embora não haja nada tecnicamente errado com essa abordagem, a maioria dos clientes provavelmente precisará obter várias propriedades de cada `User`, resultando em um código do cliente, como a seguir.
 
 ```csharp
 HttpResponseMessage response = await client.GetAsync("users/1/username");
@@ -107,7 +109,7 @@ var dob = await response.Content.ReadAsStringAsync();
 
 ### <a name="reading-and-writing-to-a-file-on-disk"></a>Lendo e gravando em um arquivo no disco
 
-A E/S do arquivo envolve abrir um arquivo e ir para o ponto apropriado antes de ler ou gravar os dados. Quando a operação é concluída, o arquivo pode ser fechado para salvar os recursos do sistema operacional. Um aplicativo que lê e grava continuamente pequenas quantidades de informações em um arquivo irá gerar uma sobrecarga significativa de E/S. Pequenas solicitações de gravação também podem causar a fragmentação do arquivo, reduzindo ainda mais a velocidade das operações de E/S subsequentes. 
+A E/S do arquivo envolve abrir um arquivo e ir para o ponto apropriado antes de ler ou gravar os dados. Quando a operação é concluída, o arquivo pode ser fechado para salvar os recursos do sistema operacional. Um aplicativo que lê e grava continuamente pequenas quantidades de informações em um arquivo irá gerar uma sobrecarga significativa de E/S. Pequenas solicitações de gravação também podem causar a fragmentação do arquivo, reduzindo ainda mais a velocidade das operações de E/S subsequentes.
 
 O exemplo a seguir usa um `FileStream` para gravar um objeto `Customer` em um arquivo. Criar o `FileStream` abre o arquivo e descartá-lo fecha o arquivo. (A instrução `using` descarta automaticamente o objeto `FileStream`.) Se o aplicativo chamar esse método repetidamente à medida que novos clientes são adicionados, a sobrecarga de E/S poderá acumular-se rapidamente.
 
@@ -211,7 +213,7 @@ await SaveCustomerListToFileAsync(customers);
 
 - Os dois primeiros exemplos fazem *menos* chamadas de E/S, mas cada um recupera *mais* informações. Você deve considerar a compensação entre esses dois fatores. A resposta certa dependerá dos padrões de uso reais. No exemplo de API da Web, pode acontecer que os clientes normalmente precisem apenas do nome de usuário. Nesse caso, talvez faça sentido exibi-lo como uma chamada da API separada. Para obter mais informações, confira o antipadrão de [Busca Incorreta][extraneous-fetching].
 
-- Ao ler os dados, não torne suas solicitações de E/S muito grandes. Um aplicativo deve recuperar apenas as informações que provavelmente usará. 
+- Ao ler os dados, não torne suas solicitações de E/S muito grandes. Um aplicativo deve recuperar apenas as informações que provavelmente usará.
 
 - Às vezes, é útil dividir as informações de um objeto em duas partes: *os dados acessados com frequência* responsáveis pela maioria das solicitações, e os *dados acessados com menos frequência* e usados raramente. Geralmente, os dados acessados com mais frequência são uma parte relativamente pequena do total de dados para um objeto, portanto, retornar apenas essa parte pode economizar uma sobrecarga de E/S significativa.
 
@@ -231,7 +233,7 @@ Você pode executar as etapas a seguir para ajudar a identificar as causas dos p
 2. Realize testes de carga de cada operação identificada na etapa anterior.
 3. Durante os testes de carga, colete dados de telemetria sobre as solicitações de acesso a dados feitas por cada operação.
 4. Colete estatísticas detalhadas para cada solicitação enviada para um armazenamento de dados.
-5. Crie um perfil para o aplicativo no ambiente de teste para estabelecer onde os possíveis gargalos de E/S podem estar ocorrendo. 
+5. Crie um perfil para o aplicativo no ambiente de teste para estabelecer onde os possíveis gargalos de E/S podem estar ocorrendo.
 
 Procure esses sintomas:
 
@@ -246,16 +248,16 @@ As seções a seguir aplicam essas etapas no exemplo mostrado anteriormente que 
 
 ### <a name="load-test-the-application"></a>Fazer teste de carga no aplicativo
 
-Este gráfico mostra os resultados do teste de carga. O tempo médio de resposta é medido em 10 s por solicitação. O gráfico mostra uma latência muito alta. Com uma carga de 1.000 usuários, um usuário terá que esperar aproximadamente um minuto para ver os resultados de uma consulta. 
+Este gráfico mostra os resultados do teste de carga. O tempo médio de resposta é medido em 10 s por solicitação. O gráfico mostra uma latência muito alta. Com uma carga de 1.000 usuários, um usuário terá que esperar aproximadamente um minuto para ver os resultados de uma consulta.
 
 ![Os resultados do teste de carga dos indicadores-chave para o aplicativo de exemplo de E/S com ruídos][key-indicators-chatty-io]
 
 > [!NOTE]
-> O aplicativo foi implantado como um aplicativo Web do Serviço de Aplicativo do Azure, usando o Banco de Dados SQL do Azure. O teste de carga usou uma carga de trabalho da etapa simulada de até 1.000 usuários simultâneos. O banco de dados foi configurado com um pool de conexões com suporte de até 1.000 conexões simultâneas para reduzir a chance de que uma contenção por conexões afete os resultados. 
+> O aplicativo foi implantado como um aplicativo Web do Serviço de Aplicativo do Azure, usando o Banco de Dados SQL do Azure. O teste de carga usou uma carga de trabalho da etapa simulada de até 1.000 usuários simultâneos. O banco de dados foi configurado com um pool de conexões com suporte de até 1.000 conexões simultâneas para reduzir a chance de que uma contenção por conexões afete os resultados.
 
 ### <a name="monitor-the-application"></a>Monitorar o aplicativo
 
-Você pode usar um pacote APM (monitoramento de desempenho do aplicativo) para capturar e analisar as principais métricas que podem identificar a E/S com ruídos. Quais métricas são importantes dependerá da carga de trabalho de E/S. Neste exemplo, as solicitações de E/S interessantes foram as consultas do banco de dados. 
+Você pode usar um pacote APM (monitoramento de desempenho do aplicativo) para capturar e analisar as principais métricas que podem identificar a E/S com ruídos. Quais métricas são importantes dependerá da carga de trabalho de E/S. Neste exemplo, as solicitações de E/S interessantes foram as consultas do banco de dados.
 
 A imagem a seguir mostra os resultados gerados usando o [APM do New Relic][new-relic]. O tempo de resposta médio do banco de dados atingiu um pico em aproximadamente 5,6 s por solicitação durante a carga de trabalho máxima. O sistema foi capaz de oferecer suporte a uma média de 410 solicitações por minuto durante o teste.
 
@@ -279,7 +281,7 @@ A imagem seguinte mostra as instruções SQL reais que foram emitidas. A consult
 
 ![Detalhes da consulta para o aplicativo de exemplo em teste][queries3]
 
-Se você estiver usando um O/RM, como o Entity Framework, rastrear as consultas SQL poderá fornecer informações sobre como o O/RM converte as chamadas da programação em instruções SQL e indicará as áreas onde o acesso aos dados pode ser otimizado. 
+Se você estiver usando um O/RM, como o Entity Framework, rastrear as consultas SQL poderá fornecer informações sobre como o O/RM converte as chamadas da programação em instruções SQL e indicará as áreas onde o acesso aos dados pode ser otimizado.
 
 ### <a name="implement-the-solution-and-verify-the-result"></a>Implementar a solução e verificar o resultado
 
@@ -293,7 +295,7 @@ Desta vez, o sistema ofereceu suporte a uma média de 3.970 solicitações por m
 
 ![Visão geral da transação para a API robusta][databasetraffic2]
 
-Rastrear a instrução SQL mostra que todos os dados são buscados em uma única instrução SELECT. Embora essa consulta seja muito mais complexa, ela é executada apenas uma vez por operação. E embora as junções complexas possam ficar caras, os sistemas do banco de dados relacional são otimizados para esse tipo de consulta.  
+Rastrear a instrução SQL mostra que todos os dados são buscados em uma única instrução SELECT. Embora essa consulta seja muito mais complexa, ela é executada apenas uma vez por operação. E embora as junções complexas possam ficar caras, os sistemas do banco de dados relacional são otimizados para esse tipo de consulta.
 
 ![Detalhes da consulta para a API robusta][queries4]
 
@@ -322,4 +324,3 @@ Rastrear a instrução SQL mostra que todos os dados são buscados em uma única
 [queries2]: _images/DatabaseQueries2.jpg
 [queries3]: _images/DatabaseQueries3.jpg
 [queries4]: _images/DatabaseQueries4.jpg
-

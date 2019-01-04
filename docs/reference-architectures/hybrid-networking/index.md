@@ -4,12 +4,12 @@ titleSuffix: Azure Reference Architectures
 description: Comparar arquiteturas de referência para conectar uma rede local ao Azure.
 author: telmosampaio
 ms.date: 07/02/2018
-ms.openlocfilehash: de509b6d95805f4fc871f6dbd76a87d2c0bec6f1
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.openlocfilehash: f13249f225ad7ab5072de2b2175cdc2ffb6d0074
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53119907"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011048"
 ---
 # <a name="choose-a-solution-for-connecting-an-on-premises-network-to-azure"></a>Escolha uma solução para conectar uma rede local ao Azure
 
@@ -21,39 +21,41 @@ Um [gateway de VPN](/azure/vpn-gateway/vpn-gateway-about-vpngateways) é um tipo
 
 Essa arquitetura é adequada a aplicativos híbridos em que o tráfego entre o hardware local e a nuvem provavelmente será leve ou se você estiver disposto a trocar um latência levemente maior pela flexibilidade e a potência de processamento da nuvem.
 
-**Benefícios**
+### <a name="benefits"></a>Benefícios
 
 - Simples de configurar.
 
-**Desafios**
+### <a name="challenges"></a>Desafios
 
 - Requer um dispositivo VPN local.
 - Embora a Microsoft garanta disponibilidade de 99,9% para cada Gateway de VPN, este [SLA](https://azure.microsoft.com/support/legal/sla/vpn-gateway/) só cobre o gateway VPN e não sua conexão de rede para o gateway.
 - Uma conexão VPN sobre o Gateway de VPN do Azure atualmente tem suporte para um máximo de 1,25 Gbps de largura de banda. Talvez seja necessário particionar sua rede virtual do Azure em várias conexões VPN caso você pretenda exceder essa taxa de transferência.
 
-**Arquitetura de referência**
+### <a name="reference-architecture"></a>Arquitetura de referência
 
 - [Rede híbrida usando um gateway de VPN](./vpn.md)
 
+<!-- markdownlint-disable MD024 -->
+
 ## <a name="azure-expressroute-connection"></a>Conexão do Azure ExpressRoute
 
-Conexões do [ExpressRoute](/azure/expressroute/) usam uma conexão privada dedicada por meio de um provedor de conectividade de terceiros. A conexão privada estende sua rede local para o Azure. 
+Conexões do [ExpressRoute](/azure/expressroute/) usam uma conexão privada dedicada por meio de um provedor de conectividade de terceiros. A conexão privada estende sua rede local para o Azure.
 
-Essa arquitetura é adequada para aplicativos híbridos executando cargas de trabalho críticas em grande escala que exigem um alto grau de escalabilidade. 
+Essa arquitetura é adequada para aplicativos híbridos executando cargas de trabalho críticas em grande escala que exigem um alto grau de escalabilidade.
 
-**Benefícios**
+### <a name="benefits"></a>Benefícios
 
 - Largura de banda muito maior disponível; até 10 Gbps, dependendo do provedor de conectividade.
 - Dá suporte a dimensionamento dinâmico da largura de banda para ajudar a reduzir os custos durante períodos de menor demanda. No entanto, nem todos os provedores de conectividade têm essa opção.
 - Pode permitir o acesso direto da sua organização a nuvens nacionais, dependendo do provedor de conectividade.
 - SLA de 99,9% de disponibilidade em toda a conexão.
 
-**Desafios**
+### <a name="challenges"></a>Desafios
 
 - A configuração pode ser complexa. Criar uma conexão do ExpressRoute requer trabalhar com um provedor de conectividade de terceiros. O provedor é responsável por provisionar a conexão de rede.
 - Requer roteadores de alta largura de banda localmente.
 
-**Arquitetura de referência**
+### <a name="reference-architecture"></a>Arquitetura de referência
 
 - [Rede híbrida com o ExpressRoute](./expressroute.md)
 
@@ -61,26 +63,28 @@ Essa arquitetura é adequada para aplicativos híbridos executando cargas de tra
 
 Esta opção combina as duas anteriores, usando o ExpressRoute em condições normais, mas fazendo failover para uma conexão VPN se houver uma perda de conectividade no circuito do ExpressRoute.
 
-Essa arquitetura é adequada para aplicativos híbridos que precisam de maior largura de banda do ExpressRoute e também exigem conectividade de rede altamente disponível. 
+Essa arquitetura é adequada para aplicativos híbridos que precisam de maior largura de banda do ExpressRoute e também exigem conectividade de rede altamente disponível.
 
-**Benefícios**
+### <a name="benefits"></a>Benefícios
 
 - Alta disponibilidade se o circuito do ExpressRoute falhar, embora a conexão de fallback esteja em uma rede de largura de banda inferior.
 
-**Desafios**
+### <a name="challenges"></a>Desafios
 
 - Complexo de configurar. Você precisa configurar uma conexão VPN e um circuito ExpressRoute.
 - Requer hardware redundante (dispositivos VPN) e uma conexão de Gateway VPN do Azure redundante pela qual você paga encargos.
 
-**Arquitetura de referência**
+### <a name="reference-architecture"></a>Arquitetura de referência
 
 - [Rede híbrida com o ExpressRoute e failover de VPN](./expressroute-vpn-failover.md)
+
+<!-- markdownlint-disable MD024 -->
 
 ## <a name="hub-spoke-network-topology"></a>Topologia de rede hub-spoke
 
 Uma topologia de rede hub-spoke é uma maneira de isolar as cargas de trabalho enquanto compartilha os serviços, como a identidade e a segurança. O hub é uma VNet (rede virtual) no Azure que atua como ponto central de conectividade para sua rede local. Os spokes são VNets que se emparelham com o hub. Os serviços compartilhados são implantados no hub, enquanto as cargas de trabalho individuais são implantadas como spokes.
 
-**Arquiteturas de referência**
+### <a name="reference-architectures"></a>Arquiteturas de referência
 
 - [Topologia hub-spoke](./hub-spoke.md)
 - [Topologia hub-spoke com serviços compartilhados](./shared-services.md)

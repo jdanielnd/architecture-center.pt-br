@@ -1,18 +1,20 @@
 ---
 title: Antipadrão de Banco de Dados Ocupado
+titleSuffix: Performance antipatterns for cloud apps
 description: Descarregamento de processamento em um servidor de banco de dados pode causar problemas de desempenho e escalabilidade.
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: a14a350aefc1801ae08cb4a8d0eb3d5b248c92bf
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: 11bce03aed2e988d0a814b3298818715ba42c1c5
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428900"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011456"
 ---
 # <a name="busy-database-antipattern"></a>Antipadrão de Banco de Dados Ocupado
 
-O processamento de descarregamento para um servidor de banco de dados pode fazer com que ele gaste uma proporção significativa de tempo de execução do código, em vez de responder às solicitações para armazenar e recuperar dados. 
+O processamento de descarregamento para um servidor de banco de dados pode fazer com que ele gaste uma proporção significativa de tempo de execução do código, em vez de responder às solicitações para armazenar e recuperar dados.
 
 ## <a name="problem-description"></a>Descrição do problema
 
@@ -217,9 +219,9 @@ using (var command = new SqlCommand(...))
 
 ## <a name="how-to-detect-the-problem"></a>Como detectar o problema
 
-Os sintomas de um banco de dados ocupado incluem um declínio desproporcional de tempos de resposta e a taxa de transferência em operações que acessam o banco de dados. 
+Os sintomas de um banco de dados ocupado incluem um declínio desproporcional de tempos de resposta e a taxa de transferência em operações que acessam o banco de dados.
 
-Você pode executar as etapas a seguir para ajudar a identificar o problema: 
+Você pode executar as etapas a seguir para ajudar a identificar o problema:
 
 1. Use o monitoramento de desempenho para identificar o tempo que o sistema de produção passa executando a atividade de banco de dados.
 
@@ -261,10 +263,9 @@ A utilização da CPU e DTU mostra que o sistema levou mais tempo para alcançar
 
 ![O monitor de Banco de Dados SQL do Azure mostrando o desempenho do banco de dados ao executar o processamento no aplicativo cliente][ProcessingInClientApplicationMonitor]
 
-## <a name="related-resources"></a>Recursos relacionados 
+## <a name="related-resources"></a>Recursos relacionados
 
 - [Antipadrão de Busca Incorreta][ExtraneousFetching]
-
 
 [dtu]: /azure/sql-database/sql-database-service-tiers-dtu
 [ExtraneousFetching]: ../extraneous-fetching/index.md
