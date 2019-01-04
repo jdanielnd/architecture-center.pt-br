@@ -4,12 +4,12 @@ description: Arquiteturas de referência, plantas e diretrizes de implementaçã
 layout: LandingPage
 ms.topic: landing-page
 ms.date: 08/30/2018
-ms.openlocfilehash: 6a86256c504737b5f747a690d27fdf178ac8b4fe
-ms.sourcegitcommit: 8d951fd7e9534054b160be48a1881ae0857561ef
+ms.openlocfilehash: 05f93aedc49cc71a35d8c0303af0342ed0ba47f7
+ms.sourcegitcommit: 032f402482762f4e674aeebbc122ad18dfba11eb
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/13/2018
-ms.locfileid: "53329374"
+ms.lasthandoff: 12/14/2018
+ms.locfileid: "53396412"
 ---
 # <a name="azure-reference-architectures"></a>Arquiteturas de referência do Azure
 
@@ -21,6 +21,26 @@ Ir para: [IA](#ai-and-machine-learning) | [Big data](#big-data-solutions) | [Sem
 
 <!-- markdownlint-disable MD033 -->
 <ul  class="panelContent cardsF">
+<!-- Batch scoring of Python models -->
+<li style="display: flex; flex-direction: column;">
+    <a href="./ai/batch-scoring-python.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
+            <div class="cardPadding" style="display: flex;">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="../_images/icons/python-powered-h.svg" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>Pontuação em lote dos modelos de Python</h3>
+                        <p>Pontue em lote vários modelos de Python em paralelo em um agendamento usando a IA do Lote do Azure.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</li>
 <!-- Batch scoring for deep learning models -->
 <li style="display: flex; flex-direction: column;">
     <a href="./ai/batch-scoring-deep-learning.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
@@ -41,7 +61,7 @@ Ir para: [IA](#ai-and-machine-learning) | [Big data](#big-data-solutions) | [Sem
         </div>
     </a>
 </li>
-<!-- Batch scoring for deep learning models -->
+<!-- Real-time scoring of Python models -->
 <li style="display: flex; flex-direction: column;">
     <a href="./ai/realtime-scoring-python.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -61,7 +81,7 @@ Ir para: [IA](#ai-and-machine-learning) | [Big data](#big-data-solutions) | [Sem
         </div>
     </a>
 </li>
-<!-- Batch scoring for R models -->
+<!-- Real-time scoring of R models -->
 <li style="display: flex; flex-direction: column;">
     <a href="./ai/realtime-scoring-r.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -75,6 +95,26 @@ Ir para: [IA](#ai-and-machine-learning) | [Big data](#big-data-solutions) | [Sem
                     <div class="cardText">
                         <h3>Pontuação em tempo real dos modelos do Machine Learning em R</h3>
                         <p>Implemente um serviço de previsão em tempo real em R usando o Microsoft Machine Learning Server em execução no Serviço de Kubernetes do Azure (AKS).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</li>
+<!-- Real-time Recommendation API -->
+<li style="display: flex; flex-direction: column;">
+    <a href="./ai/real-time-recommendation.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
+            <div class="cardPadding" style="display: flex;">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="../_images/icons/machine-learning.svg" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>API de recomendação em tempo real</h3>
+                        <p>Treine um modelo de recomendação usando o Azure Databricks e implante-o como uma API usando o Azure Machine Learning.</p>
                     </div>
                 </div>
             </div>
