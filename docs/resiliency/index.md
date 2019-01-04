@@ -2,24 +2,25 @@
 title: Desenvolvimento de aplicativos resilientes para o Azure
 description: Como criar aplicativos resilientes no Azure, para alta disponibilidade e recuperação de desastres.
 author: MikeWasson
-ms.date: 11/26/2018
+ms.date: 12/18/2018
 ms.custom: resiliency
-ms.openlocfilehash: a97a26928002b8248344a239159fe7defa99931c
-ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
+ms.openlocfilehash: 1638bc84b436d3d826f8ad9497ddb5a1310c14da
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/06/2018
-ms.locfileid: "53005049"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53644250"
 ---
 # <a name="designing-resilient-applications-for-azure"></a>Desenvolvimento de aplicativos resilientes para o Azure
 
 Em um sistema distribuído, ocorrerão falhas. O hardware pode falhar. A rede pode ter falhas transitórias. Raramente, um serviço ou uma região inteira pode sofrer uma interrupção. Mesmo assim, devemos estar preparados para isso.
 
-Criar um aplicativo confiável na nuvem é diferente da criação de um aplicativo confiável em uma configuração empresarial. Embora historicamente você possa ter comprado um hardware superior para escalar verticalmente, em um ambiente de nuvem, é preciso escalar horizontalmente. Os custos para ambientes em nuvem são mantidos baixos com o uso de hardware de mercadoria. Em vez de nos concentrarmos em evitar falhas e otimizar o "tempo médio entre falhas", neste novo ambiente, o foco muda para "tempo médio de restauração." O objetivo é minimizar o efeito de uma falha.
+Criar um aplicativo confiável na nuvem é diferente da criação de um aplicativo confiável em uma configuração empresarial. Embora historicamente você possa ter comprado um hardware superior para escalar verticalmente, em um ambiente de nuvem, é preciso escalar horizontalmente. Os custos para ambientes em nuvem são mantidos baixos com o uso de hardware de mercadoria. Em vez de tentar evitar completamente a falha, a meta é minimizar os efeitos de uma falha no sistema.
 
 Este artigo fornece uma visão geral de como criar aplicativos resilientes no Microsoft Azure. Ele começa com uma definição do termo *resiliência* e conceitos de relacionados. Em seguida, descreve um processo para a obtenção de resiliência, usando uma abordagem estruturada sobre o tempo de vida de um aplicativo, desde o design e a implementação até a implantação e as operações.
 
 ## <a name="what-is-resiliency"></a>O que é resiliência?
+
 **Resiliência** é a capacidade de um sistema de se recuperar de falhas e continuar funcionando. Não se trata de *evitar* falhas, mas *responder* a elas de uma maneira que evite o tempo de inatividade ou a perda de dados. A meta de resiliência é retornar o aplicativo a um estado totalmente funcional após uma falha.
 
 Dois aspectos importantes de resiliência são alta disponibilidade e recuperação de desastres.
@@ -38,6 +39,7 @@ O **backup de dados** é uma parte fundamental da recuperação de desastre. Se 
 Backup é diferente de **replicação de dados**. Replicação de dados envolve a cópia de dados quase em tempo real, para que o sistema possa realizar failover rapidamente para uma réplica. Muitos sistemas de bancos de dados são compatíveis com replicação; Por exemplo, o SQL Server é compatível com Grupos de Disponibilidade Always On do SQL Server. A replicação de dados pode reduzir o tempo necessário para recuperar-se de uma interrupção, garantindo que uma réplica dos dados esteja sempre disponível. No entanto, a replicação de dados não protegerá contra erro humano. Se os dados forem corrompidos devido a erro humano, eles serão apenas copiados para as réplicas. Portanto, você ainda precisa incluir o backup de longo prazo em sua estratégia de DR.
 
 ## <a name="process-to-achieve-resiliency"></a>Processo para obter resiliência
+
 Resiliência não é um complemento. Ela deve ser criada no sistema e colocada em prática operacional. Aqui está um modelo geral a seguir:
 
 1. **Defina** seus requisitos de disponibilidade, com base nas necessidades de negócios.
@@ -51,34 +53,47 @@ Resiliência não é um complemento. Ela deve ser criada no sistema e colocada e
 No restante deste artigo, vamos abordar cada uma dessas etapas mais detalhadamente.
 
 ## <a name="define-your-availability-requirements"></a>Definir requisitos de disponibilidade
+
 O planejamento da resiliência começa com os requisitos de negócios. A seguir estão algumas abordagens para pensarmos sobre resiliência sob esses aspectos.
 
 ### <a name="decompose-by-workload"></a>Decompor por carga de trabalho
+
 Muitas soluções de nuvem consistem em várias cargas de trabalho de aplicativos. O termo "carga de trabalho" neste contexto significa um recurso discreto ou uma tarefa de computação, que pode ser logicamente separada de outras tarefas, em termos de requisitos de armazenamento de dados e lógica de negócios. Por exemplo, um aplicativo de comércio eletrônico pode incluir as cargas de trabalho a seguir:
 
 * Procura e pesquisa em um catálogo de produtos.
 * Criação e controle de pedidos.
 * Exibição de recomendações.
 
-Essas cargas de trabalho podem ter diferentes requisitos de disponibilidade, escalabilidade, consistência de dados, recuperação de desastres e assim por diante. Novamente, essas são decisões comerciais.
+Essas cargas de trabalho podem ter diferentes requisitos de disponibilidade, escalabilidade, consistência de dados e recuperação de desastres. Há decisões de negócios que devem ser feitas em termos de custo de balanceamento versus risco.
 
-Considere também os padrões de uso. Há certos períodos críticos quando o sistema tem que estar disponível? Por exemplo, um serviço de arquivamento de imposto não pode ficar inativo antes do prazo de entrega, um serviço de streaming de vídeo tem que continuar durante um evento esportivo importante, e assim por diante. Durante os períodos críticos, talvez sejam necessárias implantações redundantes em várias regiões, para que o aplicativo possa fazer failover se uma região falhar. No entanto, uma implantação em várias regiões é mais cara, portanto, durante horários menos críticos, você pode executar o aplicativo em uma única região.
+Considere também os padrões de uso. Há certos períodos críticos quando o sistema tem que estar disponível? Por exemplo, um serviço de arquivamento de imposto não pode ficar inativo antes do prazo de entrega, um serviço de streaming de vídeo tem que continuar durante um evento esportivo importante, e assim por diante. Durante os períodos críticos, talvez sejam necessárias implantações redundantes em várias regiões, para que o aplicativo possa fazer failover se uma região falhar. No entanto, uma implantação em várias regiões é potencialmente mais cara, por isso, durante horários menos críticos, você pode executar o aplicativo em uma única região. Em alguns casos, a despesa adicional pode ser reduzida usando técnicas sem servidor modernas, que usam a cobrança baseada em consumo, para que você não seja cobrado pelos recursos de computação pouco utilizados.
 
 ### <a name="rto-and-rpo"></a>RTO e RPO
-Duas métricas importantes a considerar são o Objetivo do Tempo de Recuperação e o Objetivo do Ponto de Recuperação.
 
-* **Objetivo do Tempo de Recuperação** (RTO) é o tempo máximo aceitável que um aplicativo pode ficar indisponível após um incidente. Se o RTO for de 90 minutos, você deverá ser capaz de restaurar o aplicativo para um estado de execução dentro de 90 minutos a partir do início de um desastre. Se você tiver um RTO muito baixo, poderá manter uma segunda implantação continuamente em execução no modo de espera, para proteger-se contra uma interrupção regional.
+Duas métricas importantes a considerar são o Objetivo do Tempo de Recuperação e o Objetivo do Ponto de Recuperação, pois elas pertencem à recuperação de desastres.
+
+* **Objetivo do Tempo de Recuperação** (RTO) é o tempo máximo aceitável que um aplicativo pode ficar indisponível após um incidente. Se o RTO for de 90 minutos, você deverá ser capaz de restaurar o aplicativo para um estado de execução dentro de 90 minutos a partir do início de um desastre. Se você tiver um RTO muito baixo, poderá manter uma segunda implantação regional executando continuamente uma configuração ativa/passiva em modo de espera, para se proteger de uma interrupção regional. Em alguns casos, você pode implantar uma configuração ativa/ativa para alcançar um RTO ainda menor.
 
 * **Objetivo do Ponto de Recuperação** (RPO) é a duração máxima de perda de dados aceitável durante um desastre. Por exemplo, se você armazena dados em um único banco de dados, com nenhuma replicação para outros bancos de dados, e executar backups a cada hora, poderá perder até uma hora de dados.
 
-RTO e RPO são os requisitos de negócios. Realizar uma avaliação de risco pode ajudá-lo a definir o RTO e o RPO do aplicativo. Outra métrica comum é **Tempo Médio para Recuperar** (MTTR), que é o tempo médio necessário para restaurar o aplicativo após uma falha. MTTR é um fato empírico sobre um sistema. Se o MTTR exceder o RTO, uma falha no sistema causará uma interrupção do negócio inaceitável, porque não é possível restaurar o sistema dentro do RTO definido.
+RTO e RPO são os requisitos não funcionais de um sistema e devem ser determinados pelos requisitos de negócios. Para obter esses valores, é uma boa ideia conduzir uma avaliação de risco para compreender claramente o custo do tempo de inatividade ou da perda de dados.
+
+### <a name="mttr-and-mtbf"></a>MTTR e MTBF
+
+Duas outras medidas comuns de disponibilidade são o tempo médio de recuperação (MTTR) e o tempo médio entre falhas (MTBF). Essas medidas são, no geral, usadas internamente pelos provedores de serviço para determinar onde adicionar redundância a serviços de nuvem e quais SLAs fornecer aos clientes.
+
+**Tempo médio para recuperar** (MTTR) é o tempo médio que leva para restaurar um componente após uma falha. MTTR é um fato empírico sobre um componente. Com base no MTTR de cada componente, você pode estimar o MTTR de um aplicativo inteiro. A criação de aplicativos de vários componentes com valores baixos de MTTR resulta em um aplicativo com um MTTR geral baixo &mdash; que se recupera rapidamente de falhas.
+
+**Tempo médio entre falhas** (MTBF) é o tempo de execução que um componente pode razoavelmente esperar que dure entre interrupções. Essa métrica pode ajudar você a calcular a frequência com que um serviço ficará indisponível. Um componente não confiável tem um MTBF baixo, resultando em um número baixo de SLA para esse componente. No entanto, um MTBF baixo pode ser reduzido com a implantação de várias instâncias do componente e a implementação de failover entre elas.
+
+> [!NOTE]
+> Se QUALQUER um dos valores dos componentes em uma configuração de alta disponibilidade MTTR exceder o RTO do sistema, uma falha no sistema causará uma interrupção inaceitável dos negócios. Não será possível restaurar o sistema dentro do RTO definido.
 
 ### <a name="slas"></a>SLAs
 O [SLA (Contrato de Nível de Serviço)][sla] descreve os compromissos da Microsoft com relação ao tempo de atividade e à conectividade. Se o SLA para um serviço específico for de 99,9%, isso significa que você deve esperar que o serviço esteja disponível 99,9% do tempo.
 
 > [!NOTE]
 > O SLA do Azure também inclui provisões para se obter um crédito de serviço se o SLA não for atendido, além de definições específicas de "disponibilidade" para cada serviço. Esse aspecto do SLA atua como uma política de imposição.
->
 >
 
 Você deve definir seus próprios SLAs de destino para cada carga de trabalho em sua solução. Um SLA possibilita avaliar se a arquitetura atende aos requisitos de negócios. Por exemplo, se uma carga de trabalho requer tempo de disponibilidade de 99,99%, mas depende de um serviço com um SLA de 99,9%, o serviço não poderá ser um ponto único de falha no sistema. Uma solução é ter um caminho de fallback no caso de falha do serviço ou tomar outras medidas para recuperar uma falha nesse serviço.
@@ -100,6 +115,7 @@ Aqui estão algumas outras considerações ao definir um SLA:
 * Para obter quatro 9s (99,99%), você provavelmente não pode depender de intervenção manual para se recuperar de falhas. O aplicativo deve ser de autodiagnóstico e autorrecuperação.
 * Além de quatro 9s, é difícil detectar problemas rápido o suficiente para atender ao SLA.
 * Pense no intervalo de tempo ao qual a medição do seu SLA está relacionada. Quanto menor for o intervalo, menor será a tolerância. Provavelmente não faz sentido definir seu SLA em termos de tempo de atividade por hora ou dia.
+* Considere as medidas de MTBF e MTTR. Quanto menor o SLA, menor será a frequência com que o serviço poderá ficar inativo, e mais rápida deverá ser a recuperação do serviço.
 
 ### <a name="composite-slas"></a>SLAs compostos
 Considere um aplicativo Web do Serviço de Aplicativo que grava no banco de dados do SQL Azure. No momento da redação deste artigo, esses serviços do Azure têm os seguintes SLAs:
@@ -111,7 +127,7 @@ Considere um aplicativo Web do Serviço de Aplicativo que grava no banco de dado
 
 Qual é o tempo de inatividade máximo esperado para este aplicativo? Se o serviço falhar, o aplicativo inteiro falhará. Em geral, a probabilidade de cada serviço com falha é independente, portanto, o SLA composto para este aplicativo é de 99,95% &times; 99,99% = % 99,94%. Isso é menos do que os SLAs individuais, o que não é surpresa, porque um aplicativo que depende de vários serviços possui mais pontos de falha em potencial.
 
-Por outro lado, você pode melhorar o SLA composto criando caminhos de fallback independentes. Por exemplo, se o banco de dados SQL não estiver disponível, coloque as transações em uma fila, para serem processadas posteriormente.
+Por outro lado, você pode melhorar o SLA composto criando caminhos de fallback independentes. Por exemplo, se o banco de dados SQL não estiver disponível, coloque as transações em uma fila, para serem processadas posteriormente. 
 
 ![SLA composto](./images/sla2.png)
 
@@ -125,17 +141,18 @@ O SLA composto total é:
 
 Mas existem compensações para essa abordagem. A lógica do aplicativo é mais complexa. Você está pagando pela fila e pode haver problemas de consistência de dados a serem considerados.
 
-**SLA para implantações em várias regiões**. Outra técnica de HA é implantar o aplicativo em mais de uma região e usar o Gerenciador de Tráfego do Azure para fazer o failover se o aplicativo falhar em uma região. Para uma implantação de duas regiões, o SLA composto é calculado da maneira a seguir.
+**SLA para implantações em várias regiões**. Outra técnica de HA é implantar o aplicativo em mais de uma região e usar o Gerenciador de Tráfego do Azure para fazer o failover se o aplicativo falhar em uma região. Para uma implantação de múltiplas regiões, o SLA composto é calculado da maneira a seguir.
 
-Permita que *N* seja o SLA composto para o aplicativo implantado em uma região. A possibilidade esperada de que o aplicativo falhará em ambas as regiões ao mesmo tempo será de (1 &minus; N) &times; (1 &minus; N). Portanto:
+Seja *N* o SLA composto para o aplicativo implantado em uma região e *R* o número de regiões em que o aplicativo é implantado. A possibilidade esperada de que o aplicativo falhará em todas as regiões ao mesmo tempo será de ((1 &minus N) ^ R).
 
-* SLA combinado para ambas as regiões = 1 &minus; (1 &minus; N)(1 &minus; N) = N + (1 &minus; N)N
+Por exemplo, se o SLA de região única é de 99,95%,
 
-Por fim, você deve considerar o [SLA para o Gerenciador de Tráfego][tm-sla]. No momento da redação deste artigo, o SLA para o SLA do Gerenciador de Tráfego é de 99,99%.
+* O SLA combinado para duas regiões = (1 &minus; (0,9995 ^ 2)) = 99,999975%
+* O SLA combinado para quatro regiões = (1 &minus; (0,9995 ^ 4)) = 99,999999%
 
-* SLA composto = 99,99% &times; (SLA combinado para ambas as regiões)
+Você também deve considerar o [SLA para o Gerenciador de Tráfego][tm-sla]. No momento da redação deste artigo, o SLA para o SLA do Gerenciador de Tráfego é de 99,99%.
 
-Além disso, o failover não é instantâneo e pode resultar em algum tempo de inatividade durante um failover. Consulte [Monitoramento e failover de ponto de extremidade do Gerenciador de tráfego][tm-failover].
+Além disso, o failover não é instantâneo em configurações ativas-passivas, o que pode resultar em algum tempo de inatividade durante um failover. Consulte [Monitoramento e failover de ponto de extremidade do Gerenciador de tráfego][tm-failover].
 
 O número calculado de SLA é uma linha de base útil, mas ela não informa a história toda sobre a disponibilidade. Geralmente, um aplicativo pode degradar normalmente quando um caminho não crítico falha. Considere um aplicativo que mostra um catálogo de livros. Se o aplicativo não pode recuperar a imagem em miniatura da capa, poderá mostrar uma imagem de espaço reservado. Nesse caso, a falha ao obter a imagem não reduz o tempo de atividade do aplicativo, embora afete a experiência do usuário.  
 
@@ -147,10 +164,10 @@ Durante a fase de design, você deve executar uma Análise do Modo de Falha (FMA
 * Como o aplicativo responderá a esse tipo de falha?
 * Como você pode fazer logon e monitorar esse tipo de falha?
 
-Para obter mais informações sobre o processo FMA, com as recomendações específicas para o Azure, consulte [Orientação de resiliência do Azure: Análise de Falha de Modo][fma].
+Para obter mais informações sobre o processo FMA, com as recomendações específicas para o Azure, confira [Orientação de resiliência do Azure: Análise do modo de falha][fma].
 
 ### <a name="example-of-identifying-failure-modes-and-detection-strategy"></a>Exemplo de identificação de modos de falha e estratégia de detecção
-**Ponto de falha:** chamada para um serviço Web externo/API.
+**Ponto de falha:** Chamada para um serviço Web externo/API.
 
 | Modo de falha | Estratégia de detecção |
 | --- | --- |
@@ -158,7 +175,6 @@ Para obter mais informações sobre o processo FMA, com as recomendações espec
 | Limitação |HTTP 429 (Número Excessivo de Solicitações) |
 | Autenticação |HTTP 401 (Não Autorizado) |
 | Resposta lenta |Tempo limite da solicitação atingido |
-
 
 ### <a name="redundancy-and-designing-for-failure"></a>Redundância e a criação pensando em falha
 
@@ -168,19 +184,21 @@ Uma das principais maneiras de se tornar um aplicativo resiliente é por meio de
 
 O Azure tem um número de recursos para tornar um aplicativo redundante em cada nível de falha, desde uma VM individual até uma região inteira.
 
-![](./images/redundancy.svg)
+![Recursos de resiliência do Azure](./images/redundancy.svg)
 
-**VM individual**. O Azure fornece um SLA de tempo de atividade para VMs individuais. Embora você possa obter um SLA mais alto executando duas ou mais VMs, uma única VM pode ser suficientemente confiável para algumas cargas de trabalho. Para cargas de trabalho de produção, é recomendável usar duas ou mais máquinas virtuais para redundância.
+**VM individual**. O Azure fornece um [SLA de tempo de atividade](https://azure.microsoft.com/support/legal/sla/virtual-machines) para VMs únicas. (A VM deve usar o armazenamento premium para todos os discos do sistema operacional e discos de dados.) Embora você possa obter um SLA mais alto executando duas ou mais VMs, uma única VM pode ser suficientemente confiável para algumas cargas de trabalho. No entanto, para cargas de trabalho de produção, é recomendável usar duas ou mais máquinas virtuais para redundância.
 
 **Conjuntos de disponibilidade**. Para se proteger contra falhas de hardware localizadas, como falha em um comutador de rede ou de disco, implante duas ou mais VMs em um conjunto de disponibilidade. Um conjunto de disponibilidade consiste em dois ou mais *domínios de falha* que compartilham um comutador de rede e uma fonte de energia comuns. Máquinas virtuais em um conjunto de disponibilidade são distribuídas entre os domínios de falha, portanto, se uma falha de hardware afeta um domínio de falha, o tráfego de rede ainda poderá ser roteado para as VMs nos outros domínios de falha. Para obter mais informações sobre conjuntos de disponibilidade, consulte [Gerenciar a disponibilidade das máquinas virtuais do Windows no Azure](/azure/virtual-machines/windows/manage-availability).
 
-**Zonas de disponibilidades**.  Uma Zona de Disponibilidade é uma zona fisicamente separada em uma região do Azure. Cada zona de disponibilidade tem uma rede, resfriamento e fonte de energia distintos. A implantação de VMs em zonas de disponibilidade ajuda a proteger um aplicativo contra falhas em todo o datacenter.
+**Zonas de disponibilidades**.  Uma Zona de Disponibilidade é uma zona fisicamente separada em uma região do Azure. Cada zona de disponibilidade tem uma rede, resfriamento e fonte de energia distintos. A implantação de VMs em zonas de disponibilidade ajuda a proteger um aplicativo contra falhas em todo o datacenter. Nem todas as regiões oferecem suporte às Zonas de Disponibilidade. Para obter uma lista de regiões com suporte e serviços, confira [O que são Zonas de Disponibilidade no Azure?](/azure/availability-zones/az-overview).
 
-**Azure Site Recovery**.  Replica as máquinas virtuais do Azure para outra região do Azure para necessidades de continuidade dos negócios e de recuperação de desastres. Você pode realizar análises periódicas de recuperação de desastres para garantir que atende às necessidades de conformidade. A máquina virtual será replicada com as configurações especificadas para a região selecionada para que você possa recuperar seus aplicativos em caso de interrupções na região de origem. Para obter mais informações, confira [Replicar VMs do Azure usando o ASR][site-recovery].
+Se você estiver planejando usar as Zonas de Disponibilidade em sua implantação, primeiro confirme se sua arquitetura de aplicativo e a base de código podem dar suporte a essa configuração. Se você estiver implantando o software commercial off-the-shelf, consulte o fornecedor de software e teste adequadamente antes de implantar na produção. Um aplicativo deve ser capaz de manter o estado e evitar a perda de dados durante uma interrupção dentro da zona configurada. O aplicativo deve oferecer suporte à execução em uma infraestrutura distribuída e elástica com nenhum componente de infraestrutura embutido em código especificado na base de código. 
+
+**Azure Site Recovery**.  Replica as máquinas virtuais do Azure para outra região do Azure para necessidades de continuidade dos negócios e de recuperação de desastres. Você pode realizar análises periódicas de recuperação de desastres para garantir que atende às necessidades de conformidade. A máquina virtual será replicada com as configurações especificadas para a região selecionada para que você possa recuperar seus aplicativos em caso de interrupções na região de origem. Para obter mais informações, confira [Replicar VMs do Azure usando o ASR][site-recovery]. Considere os números de RTO e RPO para sua solução aqui e certifique-se de que, durante o teste, o ponto de recuperação e de tempo de recuperação é apropriado para suas necessidades.
 
 **Regiões emparelhadas**. Para proteger um aplicativo contra uma interrupção regional, você pode implantar o aplicativo em várias regiões, usando o Gerenciador de Tráfego do Azure para distribuir o tráfego de Internet para as diferentes regiões. Cada região do Azure é emparelhada com outra. Juntas, elas formam um [par regional](/azure/best-practices-availability-paired-regions). Com a exceção do Sul do Brasil, pares regionais estão localizados na mesma região geográfica para atender aos requisitos de residência de dados para fins de jurisdição de imposição fiscal e legal.
 
-Quando você cria um aplicativo de várias regiões, leve em consideração que a latência de rede entre diferentes regiões é maior do que a obtida em uma região. Por exemplo, se você estiver replicando de um banco de dados para habilitar o failover, use a replicação síncrona de dados dentro de uma região, mas a replicação assíncrona de dados entre regiões.
+Quando você cria um aplicativo de várias regiões, leve em consideração que a latência de rede entre diferentes regiões é maior do que a obtida em uma região. Por exemplo, se você estiver replicando de um banco de dados para habilitar o failover, use a replicação síncrona de dados dentro de uma região, mas a replicação assíncrona de dados entre regiões. 
 
 | &nbsp; | Conjunto de disponibilidade | Zona de disponibilidade | Azure Site Recovery/Região emparelhada |
 |--------|------------------|-------------------|---------------|
@@ -204,7 +222,7 @@ Cada tentativa de repetição é adicionada à latência total. Além disso, um 
 * Escale um aplicativo do Serviço de Aplicativo do Azure horizontalmente para várias instâncias. O Serviço de Aplicativo equilibra automaticamente a carga entre as instâncias. Consulte [Aplicativo Web básico][ra-basic-web].
 * Use o [Gerenciador de Tráfego do Azure][tm] para distribuir o tráfego em um conjunto de pontos de extremidade.
 
-**Replique os dados**. A replicação de dados é uma estratégia geral para manipular falhas não transitórias em um armazenamento de dados. Muitas tecnologias de armazenamento fornecem replicação interna, inclusive o Banco de Dados SQL do Azure, Cosmos DB e Apache Cassandra. É importante considerar os caminhos de leitura e gravação. Dependendo da tecnologia de armazenamento, você pode ter várias réplicas graváveis, ou uma só réplica gravável e várias somente leitura.
+**Replique os dados**. A replicação de dados é uma estratégia geral para manipular falhas não transitórias em um armazenamento de dados. Muitas tecnologias de armazenamento fornecem replicação interna, inclusive o Armazenamento do Microsoft Azure, o Banco de Dados SQL do Azure, o Cosmos DB e o Apache Cassandra. É importante considerar os caminhos de leitura e gravação. Dependendo da tecnologia de armazenamento, você pode ter várias réplicas graváveis, ou uma só réplica gravável e várias somente leitura.
 
 Para maximizar a disponibilidade, as réplicas podem ser colocadas em várias regiões. No entanto, isso aumenta a latência na replicação de dados. Normalmente, a replicação entre regiões é feita de forma assíncrona, o que implica um modelo de consistência eventual e a possível perda de dados, se uma réplica falhar.
 

@@ -1,14 +1,17 @@
 ---
 title: Padrões de design na nuvem
-description: Padrões de design de nuvem para o Microsoft Azure
+titleSuffix: Azure Architecture Center
+description: Padrões de design na nuvem para a criação de aplicativos confiáveis, escalonáveis e seguros na nuvem
 keywords: Azure
+author: dragon119
 ms.date: 12/10/2018
-ms.openlocfilehash: 26ee59ef15fc63bb5e823cd85f610cd9ad01177a
-ms.sourcegitcommit: 9a15af3a25f25b8730968d32cbb006434b183e18
+ms.custom: seodec18
+ms.openlocfilehash: 003bef866b0cd873122cfb8d4730b95ba49d3d7f
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/11/2018
-ms.locfileid: "53234043"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011286"
 ---
 # <a name="cloud-design-patterns"></a>Padrões de design na nuvem
 
@@ -18,6 +21,7 @@ Cada padrão descreve o problema ao qual o padrão se destina, as consideraçõe
 
 ## <a name="challenges-in-cloud-development"></a>Desafios de desenvolvimento em nuvem
 
+<!-- markdownlint-disable MD033 -->
 <table>
 <tr>
     <td style="width: 64px; vertical-align: middle;"><a href="./category/availability.md"><img src="_images/category/availability.svg" alt="Availability" /></a></td>
@@ -76,6 +80,7 @@ Cada padrão descreve o problema ao qual o padrão se destina, as consideraçõe
     </td>
 </tr>
 </table>
+<!-- markdownlint-disable MD033 -->
 
 ## <a name="catalog-of-patterns"></a>Catálogo de padrões
 
@@ -114,4 +119,3 @@ Cada padrão descreve o problema ao qual o padrão se destina, as consideraçõe
 |                      [Strangler](./strangler.md)                      |                                            Migre incrementalmente um sistema herdado substituindo gradualmente partes específicas de funcionalidade por serviços e aplicativos novos.                                            |
 |                     [Limitação](./throttling.md)                     |                                                 Controle o consumo de recursos usados por uma instância de um aplicativo, um locatário individual ou todo o serviço.                                                 |
 |                      [Valet Key](./valet-key.md)                      |                                                        Use um token ou chave que fornece aos clientes acesso direto e restrito a um determinado recurso ou serviço.                                                        |
-

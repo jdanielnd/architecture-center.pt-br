@@ -5,12 +5,12 @@ description: Arquitetura recomendada que mostra como implantar e operar um servi
 author: njray
 ms.date: 04/30/2018
 ms.custom: seodec18
-ms.openlocfilehash: 9dc4eb27f6c2bc8896770a2d0cd01b738c18c593
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.openlocfilehash: 26bf9cadc8db0cd4fcc61023619ca61bb7b87855
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53120264"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53644148"
 ---
 # <a name="run-a-jenkins-server-on-azure"></a>Executar um servidor Jenkins no Azure
 
@@ -188,33 +188,39 @@ A etapa é executada pelo administrador Jenkins, que também deve ter uma conta 
 
 Use o [Plug-in do Azure AD][configure-azure-ad] no Centro de Atualização Jenkins no servidor Jenkins e siga as instruções para configurar o SSO.
 
-### <a name="step-3-provision-jenkins-server-with-azure-vm-agent-plugin"></a>Etapa 3: Provisionar ao servidor Jenkins um plug-in do Agente de VM do Azure
+### <a name="step-3-provision-jenkins-server-with-azure-vm-agent-plugin"></a>Etapa 3: Provisionar plug-in do Agente de VM do Azure para o servidor Jenkins
 
 O administrador do Jenkins executa a etapa para configurar o plug-in do agente de VM do Azure, que já está instalado.
 
 [Siga estas etapas para configurar o plug-in][configure-agent]. Para obter um tutorial sobre como configurar as entidades de serviço para o plug-in, consulte [Dimensionar as implantações Jenkins para atender à demanda com agentes de VM do Azure][scale-agent].
 
-### <a name="step-4-provision-jenkins-server-with-azure-storage"></a>Etapa 4: Provisionar ao servidor Jenkins um Armazenamento do Microsoft Azure
+### <a name="step-4-provision-jenkins-server-with-azure-storage"></a>Etapa 4: Provisionar Armazenamento do Azure para o servidor Jenkins
 
 O administrador do Jenkins executa a etapa, que configura o plug-in do Armazenamento do Microsoft Azure, que já está instalado.
 
 [Siga estas etapas para configurar o plug-in][configure-storage].
 
-### <a name="step-5-provision-jenkins-server-with-azure-credential-plugin"></a>Etapa 5: Provisionar ao servidor Jenkins um plug-in de Credencial do Azure
+### <a name="step-5-provision-jenkins-server-with-azure-credential-plugin"></a>Etapa 5: Provisionar plug-in de Credencial do Azure para o servidor Jenkins
 
 O administrador do Jenkins executa a etapa para configurar o plug-in do agente de Credencial do Azure, que já está instalado.
 
 [Siga estas etapas para configurar o plug-in][configure-credential].
 
-### <a name="step-6-provision-jenkins-server-for-monitoring-by-the-azure-monitor-service"></a>Etapa 6: Provisione o servidor Jenkins para o monitoramento pelo Serviço do Azure Monitor
+### <a name="step-6-provision-jenkins-server-for-monitoring-by-the-azure-monitor-service"></a>Etapa 6: Provisionar o servidor Jenkins para monitoramento pelo Serviço do Azure Monitor
 
 Para configurar o monitoramento para seu servidor Jenkins, siga as instruções em [Criar alertas de métrica no Azure Monitor para os serviços do Azure][create-metric].
 
-### <a name="step-7-provision-jenkins-server-with-managed-disks-for-disaster-recovery"></a>Etapa 7: Provisione Managed Disks ao servidor Jenkins para a recuperação de desastres
+### <a name="step-7-provision-jenkins-server-with-managed-disks-for-disaster-recovery"></a>Etapa 7: Provisionar para o servidor Jenkins os Managed Disks para a recuperação de desastres
 
 O grupo do produtos Microsoft Jenkins criou scripts de recuperação de desastres que compilam um disco gerenciado usado para salvar o estado de Jenkins. Se o servidor desligar, poderá ser restaurado a seu último estado.
 
 Baixe e execute os scripts de recuperação de desastres do [GitHub][disaster].
+
+Talvez você queira examinar o seguinte [cenário de exemplo do Azure](/azure/architecture/example-scenario) que demonstra as soluções específicas usando algumas das mesmas tecnologias:
+
+- [Pipeline de CI/CD para cargas de trabalho baseadas em contêiner](/azure/architecture/example-scenario/apps/devops-with-aks)
+
+<!-- links -->
 
 [acs]: https://aka.ms/azjenkinsacs
 [ad-sp]: /azure/active-directory/develop/active-directory-integrating-applications
