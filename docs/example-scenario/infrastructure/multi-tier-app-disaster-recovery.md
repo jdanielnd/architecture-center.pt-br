@@ -1,15 +1,16 @@
 ---
-title: Aplicativo Web de várias camadas criado para alta disponibilidade e recuperação de desastres no Azure
+title: Aplicativo Web de várias camadas criado para HA/DR
+titleSuffix: Azure Example Scenarios
 description: Criar um aplicativo Web de várias camadas projetado para alta disponibilidade e recuperação de desastres no Azure usando máquinas virtuais do Azure, conjuntos de disponibilidade, zonas de disponibilidade, Azure Site Recovery e Gerenciador de Tráfego do Azure
 author: sujayt
 ms.date: 11/16/2018
 ms.custom: product-team
-ms.openlocfilehash: 71534dc095d5fba137a0e610d4e725c2efc6b432
-ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
+ms.openlocfilehash: baa468697b4a72975e3b192efc9bdf1861a0c0da
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/06/2018
-ms.locfileid: "53004591"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53644029"
 ---
 # <a name="multitier-web-application-built-for-high-availability-and-disaster-recovery-on-azure"></a>Aplicativo Web de várias camadas criado para alta disponibilidade e recuperação de desastres no Azure
 
@@ -25,9 +26,9 @@ Cenários de aplicativo comuns incluem qualquer aplicativo de missão crítica e
 
 Outros casos de uso relevantes incluem:
 
-* Implantar aplicativos altamente resilientes, como SAP e SharePoint
-* Projetar um plano de continuidade de negócios e recuperação de desastres para aplicativos de linha de negócios
-* Configurar a recuperação de desastres e executar treinamentos relacionados para fins de conformidade
+- Implantar aplicativos altamente resilientes, como SAP e SharePoint
+- Projetar um plano de continuidade de negócios e recuperação de desastres para aplicativos de linha de negócios
+- Configurar a recuperação de desastres e executar treinamentos relacionados para fins de conformidade
 
 ## <a name="architecture"></a>Arquitetura
 
@@ -49,17 +50,17 @@ Este cenário apresenta um aplicativo de várias camadas que usa o ASP.NET e o M
 
 ### <a name="components"></a>Componentes
 
-* Os [conjuntos de disponibilidade][docs-availability-sets] garantem que as VMs implantadas no Azure sejam distribuídas entre vários nós de hardware isolados em um cluster. Se ocorrer uma falha de hardware ou software no Azure, somente um subconjunto de suas VMs será afetado e toda sua solução permanecerá disponível e operacional.
-* As [zonas de disponibilidade][docs-availability-zones] ajudam a proteger os aplicativos e os dados contra falhas no datacenter. As zonas de disponibilidade são locais físicos separados em uma região do Azure. Cada zona é composta por um ou mais datacenters equipados com energia, resfriamento e rede independentes. 
-* O [Azure Site Recovery (ASR)][docs-azure-site-recovery] permite replicar máquinas virtuais para outra região do Azure para necessidades de continuidade dos negócios e de recuperação de desastres. Você pode realizar análises periódicas de recuperação de desastres para garantir que atende às necessidades de conformidade. A máquina virtual será replicada com as configurações especificadas para a região selecionada para que você possa recuperar seus aplicativos em caso de interrupções na região de origem.
-* O [Gerenciador de Tráfego do Azure][docs-traffic-manager] é um balanceador de carga de tráfego baseado em DNS que distribui o tráfego de maneira ideal para serviços em todas as regiões globais do Azure, fornecendo alta disponibilidade e capacidade de resposta.
-* O [Azure Load Balancer][docs-load-balancer] distribui o tráfego de entrada de acordo com as regras e investigações de integridade. O balanceador de carga fornece baixa latência e alta taxa de transferência e pode ser escalado verticalmente em milhões de fluxos para aplicativos TCP e UDP. Um balanceador de carga público é usado neste cenário para distribuir o tráfego de clientes para a camada da Web. Um balanceador de carga interno é usado neste cenário para distribuir o tráfego da camada de negócios para o cluster do SQL Server de back-end.
+- Os [conjuntos de disponibilidade][docs-availability-sets] garantem que as VMs implantadas no Azure sejam distribuídas entre vários nós de hardware isolados em um cluster. Se ocorrer uma falha de hardware ou software no Azure, somente um subconjunto de suas VMs será afetado e toda sua solução permanecerá disponível e operacional.
+- As [zonas de disponibilidade][docs-availability-zones] ajudam a proteger os aplicativos e os dados contra falhas no datacenter. As zonas de disponibilidade são locais físicos separados em uma região do Azure. Cada zona é composta por um ou mais datacenters equipados com energia, resfriamento e rede independentes.
+- O [Azure Site Recovery (ASR)][docs-azure-site-recovery] permite replicar máquinas virtuais para outra região do Azure para necessidades de continuidade dos negócios e de recuperação de desastres. Você pode realizar análises periódicas de recuperação de desastres para garantir que atende às necessidades de conformidade. A máquina virtual será replicada com as configurações especificadas para a região selecionada para que você possa recuperar seus aplicativos em caso de interrupções na região de origem.
+- O [Gerenciador de Tráfego do Azure][docs-traffic-manager] é um balanceador de carga de tráfego baseado em DNS que distribui o tráfego de maneira ideal para serviços em todas as regiões globais do Azure, fornecendo alta disponibilidade e capacidade de resposta.
+- O [Azure Load Balancer][docs-load-balancer] distribui o tráfego de entrada de acordo com as regras e investigações de integridade. O balanceador de carga fornece baixa latência e alta taxa de transferência e pode ser escalado verticalmente em milhões de fluxos para aplicativos TCP e UDP. Um balanceador de carga público é usado neste cenário para distribuir o tráfego de clientes para a camada da Web. Um balanceador de carga interno é usado neste cenário para distribuir o tráfego da camada de negócios para o cluster do SQL Server de back-end.
 
 ### <a name="alternatives"></a>Alternativas
 
-* O Windows pode ser substituído por outros sistemas operacionais já que nada na infraestrutura depende do sistema operacional.
-* [SQL Server para Linux][docs-sql-server-linux] pode substituir o armazenamento de dados de back-end.
-* O banco de dados pode ser substituído por qualquer aplicativo de banco de dados padrão disponível.
+- O Windows pode ser substituído por outros sistemas operacionais já que nada na infraestrutura depende do sistema operacional.
+- [SQL Server para Linux][docs-sql-server-linux] pode substituir o armazenamento de dados de back-end.
+- O banco de dados pode ser substituído por qualquer aplicativo de banco de dados padrão disponível.
 
 ## <a name="other-considerations"></a>Outras considerações
 

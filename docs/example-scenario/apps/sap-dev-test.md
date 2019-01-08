@@ -1,15 +1,16 @@
 ---
-title: Ambientes de desenvolvimento/teste para cargas de trabalho do SAP no Azure
+title: Ambientes de desenvolvimento/teste para cargas de trabalho do SAP
+titleSuffix: Azure Example Scenarios
 description: Crie um ambiente de desenvolvimento/teste para cargas de trabalho do SAP.
 author: AndrewDibbins
 ms.date: 7/11/18
 ms.custom: fasttrack
-ms.openlocfilehash: 84665bfeb6ada568c631e1db72b97269d79f2e60
-ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
+ms.openlocfilehash: 3f6c828e8757a3f82ad6972a8f21cd2fed629162
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/06/2018
-ms.locfileid: "53004672"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53643961"
 ---
 # <a name="devtest-environments-for-sap-workloads-on-azure"></a>Ambientes de desenvolvimento/teste para cargas de trabalho do SAP no Azure
 
@@ -17,16 +18,16 @@ Este exemplo mostra como estabelecer um ambiente de desenvolvimento/teste do SAP
 
 Para casos de uso de produção veja as arquiteturas SAP de referência disponíveis abaixo:
 
-* [SAP NetWeaver para AnyDB][sap-netweaver]
-* [SAP S/4HANA][sap-hana]
-* [SAP em instâncias grandes do Azure][sap-large]
+- [SAP NetWeaver para AnyDB][sap-netweaver]
+- [SAP S/4HANA][sap-hana]
+- [SAP em instâncias grandes do Azure][sap-large]
 
 ## <a name="relevant-use-cases"></a>Casos de uso relevantes
 
 Outros casos de uso relevantes incluem:
 
-* Cargas de trabalho do SAP não críticas e que não são de produção (área restrita, desenvolvimento, teste, garantia de qualidade)
-* Cargas de trabalho de negócios não críticas do SAP
+- Cargas de trabalho do SAP não críticas e que não são de produção (área restrita, desenvolvimento, teste, garantia de qualidade)
+- Cargas de trabalho de negócios não críticas do SAP
 
 ## <a name="architecture"></a>Arquitetura
 
@@ -35,17 +36,17 @@ Outros casos de uso relevantes incluem:
 Este cenário demonstra o provisionamento de um único banco de dados do sistema do SAP e o servidor de aplicativos SAP em uma única máquina virtual. O fluxo de dados neste cenário ocorre da seguinte forma:
 
 1. Os clientes usam a interface do usuário do SAP ou outras ferramentas de cliente (Excel, um navegador da Web ou outro aplicativo Web) para acessar o sistema SAP com base no Azure.
-2. A conectividade é fornecida por meio do uso do ExpressRoute estabelecido. A conexão do ExpressRoute é terminada no Azure no gateway do ExpressRoute. O tráfego de rede é roteado pelo gateway do ExpressRoute para a sub-rede do gateway e desta para a sub-rede spoke da camada de aplicativo (confira o padrão [hub-spoke][hub-spoke]) e por um gateway de segurança de rede até a máquina virtual do aplicativo SAP.
+2. A conectividade é fornecida por meio do uso do ExpressRoute estabelecido. A conexão do ExpressRoute é terminada no Azure no gateway do ExpressRoute. O tráfego de rede é roteado pelo gateway do ExpressRoute para a sub-rede do gateway e desta para a sub-rede spoke da camada de aplicativo (confira o [padrão hub-spoke][hub-spoke]) e por um Gateway de Segurança de Rede até a máquina virtual do aplicativo SAP.
 3. Os servidores de gerenciamento de identidade oferecem serviços de autenticação.
 4. A caixa de atalhos oferece recursos de gerenciamento local.
 
 ### <a name="components"></a>Componentes
 
-* As [Redes Virtuais](/azure/virtual-network/virtual-networks-overview) são a base das comunicações de rede no Azure.
-* As [Máquinas Virtuais](/azure/virtual-machines/windows/overview) do Azure oferecem uma infraestrutura sob demanda, de alta capacidade de dimensionamento, virtualizada que usa um servidor Windows ou Linux.
-* O [ExpressRoute](/azure/expressroute/expressroute-introduction) permite que você estenda suas redes locais até a nuvem da Microsoft por meio de conexão privada facilitada por um provedor de conectividade.
-* [Grupo de segurança de rede](/azure/virtual-network/security-overview) permite limitar o tráfego de rede para recursos em uma rede virtual. Um grupo de segurança de rede contém uma lista de regras de segurança que permitem ou negam o tráfego de rede de entrada ou saída com base no endereço IP de origem ou destino, na porta e no protocolo. 
-* Os [Grupos de Recursos](/azure/azure-resource-manager/resource-group-overview#resource-groups) atuam como contêineres lógicos para recursos do Azure.
+- As [Redes Virtuais](/azure/virtual-network/virtual-networks-overview) são a base das comunicações de rede no Azure.
+- As [Máquinas Virtuais](/azure/virtual-machines/windows/overview) do Azure oferecem uma infraestrutura sob demanda, de alta capacidade de dimensionamento, virtualizada que usa um servidor Windows ou Linux.
+- O [ExpressRoute](/azure/expressroute/expressroute-introduction) permite que você estenda suas redes locais até a nuvem da Microsoft por meio de conexão privada facilitada por um provedor de conectividade.
+- [Grupo de segurança de rede](/azure/virtual-network/security-overview) permite limitar o tráfego de rede para recursos em uma rede virtual. Um grupo de segurança de rede contém uma lista de regras de segurança que permitem ou negam o tráfego de rede de entrada ou saída com base no endereço IP de origem ou destino, na porta e no protocolo.
+- Os [Grupos de Recursos](/azure/azure-resource-manager/resource-group-overview#resource-groups) atuam como contêineres lógicos para recursos do Azure.
 
 ## <a name="considerations"></a>Considerações
 
@@ -81,18 +82,22 @@ Extra grande|64000|M64s|4xP20, 1xP10|[Extra grande](https://azure.com/e/975fb58a
 > [!NOTE]
 > Esse preço é um guia que indica somente as VMs e os custos de armazenamento. Isso exclui rede, armazenamento de backup e encargos de entrada/saída de dados.
 
-* [Pequeno](https://azure.com/e/9d26b9612da9466bb7a800eab56e71d1): um sistema pequeno é composto por uma VM do tipo D8s_v3 com 8x vCPUs, 32 GB de RAM e 200 GB de armazenamento temporário, além de dois discos de armazenamento premium de 512 GB e um de 128 GB.
-* [Médio](https://azure.com/e/465bd07047d148baab032b2f461550cd): um sistema médio é composto por uma VM do tipo D16s_v3 com 16x vCPUs, 64 GB de RAM e 400 GB de armazenamento temporário, além de três discos de armazenamento premium de 512 GB e um de 128 GB.
-* [Grande](https://azure.com/e/ada2e849d68b41c3839cc976000c6931): um sistema grande é composto por uma VM do tipo E32s_v3 com 32x vCPUs, 256 GB de RAM e 512 GB de armazenamento temporário, além de três discos de armazenamento premium de 512 GB e um de 128 GB.
-* [Extra grande](https://azure.com/e/975fb58a965c4fbbb54c5c9179c61cef): um sistema extragrande é composto por uma VM do tipo M64s com 64x vCPUs, 1024 GB de RAM e 2000 GB de armazenamento temporário, além de quatro discos de armazenamento premium de 512 GB e um de 128 GB.
+- [Pequeno](https://azure.com/e/9d26b9612da9466bb7a800eab56e71d1): um sistema pequeno é composto por uma VM do tipo D8s_v3 com 8x vCPUs, 32 GB de RAM e 200 GB de armazenamento temporário, além de dois discos de armazenamento premium de 512 GB e um de 128 GB.
+- [Médio](https://azure.com/e/465bd07047d148baab032b2f461550cd): um sistema médio é composto por uma VM do tipo D16s_v3 com 16x vCPUs, 64 GB de RAM e 400 GB de armazenamento temporário, além de três discos de armazenamento premium de 512 GB e um de 128 GB.
+- [Grande](https://azure.com/e/ada2e849d68b41c3839cc976000c6931): um sistema grande é composto por uma VM do tipo E32s_v3 com 32x vCPUs, 256 GB de RAM e 512 GB de armazenamento temporário, além de três discos de armazenamento premium de 512 GB e um de 128 GB.
+- [Extra grande](https://azure.com/e/975fb58a965c4fbbb54c5c9179c61cef): um sistema extragrande é composto por uma VM do tipo M64s com 64x vCPUs, 1024 GB de RAM e 2000 GB de armazenamento temporário, além de quatro discos de armazenamento premium de 512 GB e um de 128 GB.
 
 ## <a name="deployment"></a>Implantação
 
 Clique aqui para implantar a infraestrutura subjacente para esse cenário.
 
+<!-- markdownlint-disable MD033 -->
+
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Fsolution-architectures%2Fmaster%2Fapps%2Fsap-2tier%2Fazuredeploy.json" target="_blank">
     <img src="https://azuredeploy.net/deploybutton.png"/>
 </a>
+
+<!-- markdownlint-enable MD033 -->
 
 > [!NOTE]
 > SAP e Oracle não são instalados durante essa implantação. Você deve implantar esses componentes separadamente.

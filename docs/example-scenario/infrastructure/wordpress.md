@@ -1,14 +1,15 @@
 ---
-title: Sites altamente escalonáveis e seguros do WordPress no Azure
+title: Sites altamente escalonáveis e seguros do WordPress
+titleSuffix: Azure Example Scenarios
 description: Crie um site do WordPress altamente escalonável e seguro para eventos de mídia.
 author: david-stanford
 ms.date: 09/18/2018
-ms.openlocfilehash: 6ff39d09fa301c8c68ce2a644cc489c0e87a22fa
-ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
+ms.openlocfilehash: c0dad12e1da1f17b75d0661195123da4a8267152
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "51610593"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53644030"
 ---
 # <a name="highly-scalable-and-secure-wordpress-website"></a>Site altamente escalonável e seguro do WordPress
 
@@ -18,10 +19,10 @@ Este cenário de exemplo se aplica a empresas que precisam de instalações do W
 
 Outros casos de uso relevantes incluem:
 
-* Eventos de mídia que causam aumento no tráfego.
-* Blogs que usam o WordPress como sistema de gestão de conteúdo.
-* Sites de comércio eletrônico ou de negócios que usam o WordPress.
-* Sites da Web criados usando outros sistemas de gestão de conteúdo.
+- Eventos de mídia que causam aumento no tráfego.
+- Blogs que usam o WordPress como sistema de gestão de conteúdo.
+- Sites de comércio eletrônico ou de negócios que usam o WordPress.
+- Sites da Web criados usando outros sistemas de gestão de conteúdo.
 
 ## <a name="architecture"></a>Arquitetura
 
@@ -47,19 +48,19 @@ O segundo fluxo de trabalho diz respeito a como os autores contribuem com novos 
 
 ### <a name="components"></a>Componentes
 
-* A [Rede de Distribuição de Conteúdo (CDN)](/azure/cdn/cdn-overview) é uma rede distribuída de servidores que fornece conteúdo com eficiência da Web para os usuários. As CDNs minimizam a latência armazenando conteúdos em cache nos servidores de borda em localizações de ponto de presença próximas aos usuários finais.
-* As [redes virtuais](/azure/virtual-network/virtual-networks-overview) permitem que recursos como as VMs se comuniquem de forma segura com a Internet, com as redes locais e com outras VMs. Redes virtuais fornecem isolamento e segmentação, filtram e roteiam o tráfego e permitem a conexão entre locais. As duas redes são conectadas por meio do emparelhamento VNet.
-* Os [grupos de segurança de rede](/azure/virtual-network/security-overview) contêm uma lista de regras de segurança que permitem ou rejeitam o tráfego de rede de entrada ou de saída com base no endereço IP de origem ou destino, na porta e no protocolo. As redes virtuais neste cenário são protegidas com regras de grupo de segurança de rede que restringem o fluxo de tráfego entre os componentes do aplicativo.
-* Os [balanceadores de carga](/azure/load-balancer/load-balancer-overview) distribuem o tráfego de entrada de acordo com regras e investigações de integridade. O balanceador de carga fornece baixa latência e alta taxa de transferência e pode ser escalado verticalmente em milhões de fluxos para aplicativos TCP e UDP. Um balanceador de carga é usado neste cenário para difundir o tráfego da rede de distribuição de conteúdo para os servidores Web front-end.
-* Os [conjuntos de dimensionamento de máquinas virtuais][docs-vmss] possibilitam a criação e o gerenciamento de um grupo idêntico de VMs com balanceamento de carga. O número de instâncias de VM pode aumentar ou diminuir automaticamente em resposta à demanda ou a um agendamento definido. Dois conjuntos separados de dimensionamento de máquinas virtuais são usados neste cenário: um para os servidores Web front-end que distribuem conteúdos e um para os servidores Web front-end usados para criar novos conteúdos.
-* Os [Arquivos do Azure](/azure/storage/files/storage-files-introduction) fornecem um compartilhamento de arquivos na nuvem totalmente gerenciado que hospeda todo o conteúdo do WordPress neste cenário, para que todas as VMs tenham acesso aos dados.
-* O [Azure Key Vault](/azure/key-vault/key-vault-overview) é usado para armazenar e controlar rigidamente o acesso a senhas, certificados e chaves.
-* O [Azure Active Directory (Azure AD)](/azure/active-directory/fundamentals/active-directory-whatis) é um serviço de gerenciamento de identidades e diretórios multilocatário baseado em nuvem. Neste cenário, o Azure AD fornece serviços de autenticação para o site e os túneis de VPN.
+- A [Rede de Distribuição de Conteúdo (CDN)](/azure/cdn/cdn-overview) é uma rede distribuída de servidores que fornece conteúdo com eficiência da Web para os usuários. As CDNs minimizam a latência armazenando conteúdos em cache nos servidores de borda em localizações de ponto de presença próximas aos usuários finais.
+- As [redes virtuais](/azure/virtual-network/virtual-networks-overview) permitem que recursos como as VMs se comuniquem de forma segura com a Internet, com as redes locais e com outras VMs. Redes virtuais fornecem isolamento e segmentação, filtram e roteiam o tráfego e permitem a conexão entre locais. As duas redes são conectadas por meio do emparelhamento VNet.
+- Os [grupos de segurança de rede](/azure/virtual-network/security-overview) contêm uma lista de regras de segurança que permitem ou rejeitam o tráfego de rede de entrada ou de saída com base no endereço IP de origem ou destino, na porta e no protocolo. As redes virtuais neste cenário são protegidas com regras de grupo de segurança de rede que restringem o fluxo de tráfego entre os componentes do aplicativo.
+- Os [balanceadores de carga](/azure/load-balancer/load-balancer-overview) distribuem o tráfego de entrada de acordo com regras e investigações de integridade. O balanceador de carga fornece baixa latência e alta taxa de transferência e pode ser escalado verticalmente em milhões de fluxos para aplicativos TCP e UDP. Um balanceador de carga é usado neste cenário para difundir o tráfego da rede de distribuição de conteúdo para os servidores Web front-end.
+- Os [conjuntos de dimensionamento de máquinas virtuais][docs-vmss] possibilitam a criação e o gerenciamento de um grupo idêntico de VMs com balanceamento de carga. O número de instâncias de VM pode aumentar ou diminuir automaticamente em resposta à demanda ou a um agendamento definido. Dois conjuntos separados de dimensionamento de máquinas virtuais são usados neste cenário: um para os servidores Web front-end que distribuem conteúdos e um para os servidores Web front-end usados para criar novos conteúdos.
+- Os [Arquivos do Azure](/azure/storage/files/storage-files-introduction) fornecem um compartilhamento de arquivos na nuvem totalmente gerenciado que hospeda todo o conteúdo do WordPress neste cenário, para que todas as VMs tenham acesso aos dados.
+- O [Azure Key Vault](/azure/key-vault/key-vault-overview) é usado para armazenar e controlar rigidamente o acesso a senhas, certificados e chaves.
+- O [Azure Active Directory (Azure AD)](/azure/active-directory/fundamentals/active-directory-whatis) é um serviço de gerenciamento de identidades e diretórios multilocatário baseado em nuvem. Neste cenário, o Azure AD fornece serviços de autenticação para o site e os túneis de VPN.
 
 ### <a name="alternatives"></a>Alternativas
 
-* O [SQL Server para Linux](/azure/virtual-machines/linux/sql/sql-server-linux-virtual-machines-overview) pode substituir o armazenamento de dados MariaDB.
-* O [banco de dados do Azure para MySQL](/azure/mysql/overview) pode substituir o armazenamento de dados MariaDB caso você prefira uma solução totalmente gerenciada.
+- O [SQL Server para Linux](/azure/virtual-machines/linux/sql/sql-server-linux-virtual-machines-overview) pode substituir o armazenamento de dados MariaDB.
+- O [banco de dados do Azure para MySQL](/azure/mysql/overview) pode substituir o armazenamento de dados MariaDB caso você prefira uma solução totalmente gerenciada.
 
 ## <a name="considerations"></a>Considerações
 
@@ -95,9 +96,9 @@ Para explorar o custo de executar esse cenário, todos os serviços são pré-co
 
 Fornecemos um [perfil de custo] pré-configurado [pricing] com base no diagrama de arquitetura fornecido acima. Para configurar a calculadora de preços para seu caso de uso, existem algumas considerações principais a levar em conta:
 
-* Quanto tráfego em GB/mês você espera? A quantidade de tráfego terá o maior impacto em seu custo, pois afetará a quantidade de VMs necessárias para expor os dados no conjunto de dimensionamento de máquinas virtuais. Além disso, ela estará diretamente correlacionada com a quantidade de dados expostos por meio da CDN.
-* Quanto de novos dados você vai gravar em seu site? Os novos dados gravados em seu site se correlacionam com a quantidade de dados espelhada em todas as regiões.
-* Quanto do seu conteúdo é dinâmico? Quanto é estático? A variação de conteúdos dinâmicos e estáticos influencia a quantidade de dados que precisa ser recuperada da camada de banco de dados em contraposição à quantidade que será armazenada em cache na CDN.
+- Quanto tráfego em GB/mês você espera? A quantidade de tráfego terá o maior impacto em seu custo, pois afetará a quantidade de VMs necessárias para expor os dados no conjunto de dimensionamento de máquinas virtuais. Além disso, ela estará diretamente correlacionada com a quantidade de dados expostos por meio da CDN.
+- Quanto de novos dados você vai gravar em seu site? Os novos dados gravados em seu site se correlacionam com a quantidade de dados espelhada em todas as regiões.
+- Quanto do seu conteúdo é dinâmico? Quanto é estático? A variação de conteúdos dinâmicos e estáticos influencia a quantidade de dados que precisa ser recuperada da camada de banco de dados em contraposição à quantidade que será armazenada em cache na CDN.
 
 <!-- links -->
 [architecture]: ./media/architecture-secure-scalable-wordpress.png

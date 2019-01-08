@@ -5,12 +5,12 @@ description: Implante um aplicativo em máquinas virtuais do Azure em várias re
 author: MikeWasson
 ms.date: 07/19/2018
 ms.custom: seodec18
-ms.openlocfilehash: 5036d8c74dbf92d9547ab866b15b1576df48e3eb
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.openlocfilehash: 84da8aaef7e552beff1f06befbaa2e50a3ac3d8b
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53119992"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53643690"
 ---
 # <a name="run-an-n-tier-application-in-multiple-azure-regions-for-high-availability"></a>Executar aplicativo de N camadas em várias regiões do Azure para ter alta disponibilidade
 
@@ -159,6 +159,13 @@ Teste a resiliência do sistema a falhas. Aqui estão alguns cenários comuns de
 - Desligamento do serviço DNS nos controladores de domínio.
 
 Meça o tempo de recuperação e verifique se ele cumpre seus requisitos de negócios. Teste também combinações dos modos de falha.
+
+## <a name="related-resources"></a>Recursos relacionados
+
+Talvez seja melhor examinar os seguintes [cenários de exemplo do Azure](/azure/architecture/example-scenario), que demonstram soluções específicas usando algumas das mesmas tecnologias:
+
+- [Aplicativo Web de várias camadas criado para alta disponibilidade e recuperação de desastre no Azure](/azure/architecture/example-scenario/infrastructure/multi-tier-app-disaster-recovery)
+- [Compilando aplicativos Web seguros com máquinas virtuais do Windows no Azure](/azure/architecture/example-scenario/infrastructure/regulated-multitier-app)
 
 <!-- links -->
 

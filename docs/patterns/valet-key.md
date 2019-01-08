@@ -8,12 +8,12 @@ pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - data-management
 - security
-ms.openlocfilehash: 791132eabf926cc285567454c60f894efa286433
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 99d3fbe05e34d61edc0d339f34665e557b250b05
+ms.sourcegitcommit: fb22348f917a76e30a6c090fcd4a18decba0b398
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24542034"
+ms.lasthandoff: 12/16/2018
+ms.locfileid: "53450880"
 ---
 # <a name="valet-key-pattern"></a>Padrão Valet Key
 
@@ -41,7 +41,7 @@ O cliente usa esse token para acessar um recurso específico no repositório de 
 
 Também é possível configurar uma chave que tenha outras dependências, como o escopo dos dados. Por exemplo, dependendo dos recursos do repositório de dados, a chave pode especificar uma tabela completa em um repositório de dados ou apenas as linhas específicas em uma tabela. Nos sistemas de armazenamento em nuvem, a chave pode especificar um contêiner ou apenas um item específico dentro de um contêiner.
 
-A chave também pode ser invalidada pelo aplicativo. Essa é uma abordagem útil se o cliente notificar o servidor que a operação de transferência de dados está completa. O servidor poderá, então, invalidar essa chave para evitar transferência adicional.
+A chave também pode ser invalidada pelo aplicativo. Essa é uma abordagem útil se o cliente notificar o servidor que a operação de transferência de dados está completa. O servidor poderá invalidar essa chave para evitar mais acesso.
 
 Usar esse padrão pode simplificar o gerenciamento de acesso aos recursos, porque não há necessidade de criar e autenticar um usuário, conceder permissões e, posteriormente, remover o usuário novamente. Isso também facilita limitar a localização, a permissão e do período de validade&mdash;, simplesmente gerando uma chave no tempo de execução. Os fatores importantes são para limitar o período de validade e especialmente a localização do recurso, tão rigorosamente o quanto possível para que o destinatário possa usá-la apenas para o propósito pretendido.
 

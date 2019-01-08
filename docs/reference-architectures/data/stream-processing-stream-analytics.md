@@ -5,12 +5,12 @@ description: Crie um pipeline de processamento de fluxo de ponta a ponta no Azur
 author: MikeWasson
 ms.date: 11/06/2018
 ms.custom: seodec18
-ms.openlocfilehash: 44eaf51f2180be250defbeb0d141ab24f7f17d4b
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.openlocfilehash: 130f297d3cfdeb1900ada79f1e9c65ec542dc2b7
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53119924"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53643740"
 ---
 # <a name="create-a-stream-processing-pipeline-with-azure-stream-analytics"></a>Criar um pipeline de processamento de fluxo com o Azure Stream Analytics
 
@@ -221,4 +221,14 @@ Curiosamente, isso criava o efeito colateral de aumento da utilização de SU no
 
 Para a implantação e execução da implementação de referência, siga as etapas em [Leia-me do GitHub][github].
 
-[github]: https://github.com/mspnp/reference-architectures/tree/master/data/streaming_asa
+## <a name="related-resources"></a>Recursos relacionados
+
+Talvez seja melhor examinar os seguintes [cenários de exemplo do Azure](/azure/architecture/example-scenario), que demonstram soluções específicas usando algumas das mesmas tecnologias:
+
+- [Análise de dados e de IoT no setor de construção civil](/azure/architecture/example-scenario/data/big-data-with-iot)
+- [Detecção de fraude em tempo real](/azure/architecture/example-scenario/data/fraud-detection)
+
+<!-- links -->
+
+[github]: https://github.com/mspnp/azure-stream-analytics-data-pipeline
+

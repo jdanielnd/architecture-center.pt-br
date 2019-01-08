@@ -5,12 +5,12 @@ description: Práticas comprovadas para executar o SAP S/4HANA em um ambiente Li
 author: lbrader
 ms.date: 08/03/2018
 ms.custom: seodec18
-ms.openlocfilehash: 4014d5736527a2f29692720d199b4a1aa8f76020
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.openlocfilehash: ace5348ccb32299b2f4167b3d384ba72972ca9ad
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53120179"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53643983"
 ---
 # <a name="deploy-sap-netweaver-windows-for-anydb-on-azure-virtual-machines"></a>Implantar o SAP NetWeaver (Windows) para AnyDB em máquinas virtuais do Azure
 
@@ -179,5 +179,14 @@ As comunidades podem responder a perguntas e ajudá-lo a configurar uma implanta
 - [Suporte da Comunidade do Azure](https://azure.microsoft.com/support/community/)
 - [Comunidade do SAP](https://www.sap.com/community.html)
 - [Stack Overflow](https://stackoverflow.com/tags/sap/)
+
+## <a name="related-resources"></a>Recursos relacionados
+
+Talvez seja melhor examinar os seguintes [cenários de exemplo do Azure](/azure/architecture/example-scenario), que demonstram soluções específicas usando algumas das mesmas tecnologias:
+
+- [Executando cargas de trabalho de produção do SAP usando um Oracle Database no Azure](/azure/architecture/example-scenario/apps/sap-production)
+- [Ambientes de desenvolvimento/teste para cargas de trabalho do SAP no Azure](/azure/architecture/example-scenario/apps/sap-dev-test)
+
+<!-- links -->
 
 [visio-download]: https://archcenter.blob.core.windows.net/cdn/sap-reference-architectures.vsdx

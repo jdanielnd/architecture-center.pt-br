@@ -1,14 +1,15 @@
 ---
 title: Pipeline de CI/CD para cargas de trabalho baseados em contêiner
+titleSuffix: Azure Example Scenarios
 description: Crie um pipeline DevOps para um aplicativo Web Node.js que usa Jenkins, Registro de Contêiner do Azure, Serviço de Kubernetes do Azure, Cosmos DB e Grafana.
 author: iainfoulds
 ms.date: 07/05/2018
-ms.openlocfilehash: db8de674ee2789c5b41cebebee5745ecc8544122
-ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
+ms.openlocfilehash: 9d2681294b5c332e15259706518e4b02a488002f
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "51610831"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53643757"
 ---
 # <a name="cicd-pipeline-for-container-based-workloads"></a>Pipeline de CI/CD para cargas de trabalho baseados em contêiner
 
@@ -22,9 +23,9 @@ Usando serviços do Azure, como o Serviço de Kubernetes do Azure, o Registro de
 
 Outros casos de uso relevantes incluem:
 
-* Modernizar práticas de desenvolvimento de aplicativos para uma abordagem de microsserviços baseada em contêiner.
-* Acelerar o desenvolvimento de aplicativos e ciclos de vida de implantação.
-* Automatizar implantações de teste ou ambientes de aceitação para validação.
+- Modernizar práticas de desenvolvimento de aplicativos para uma abordagem de microsserviços baseada em contêiner.
+- Acelerar o desenvolvimento de aplicativos e ciclos de vida de implantação.
+- Automatizar implantações de teste ou ambientes de aceitação para validação.
 
 ## <a name="architecture"></a>Arquitetura
 
@@ -43,19 +44,19 @@ Este cenário trata de um pipeline DevOps para um aplicativo Web do Node.js e um
 
 ### <a name="components"></a>Componentes
 
-* O [Jenkins][jenkins] é um servidor de automação de software livre que pode se integrar aos serviços do Azure para habilitar a CI (integração contínua) e a CD (implantação contínua). Neste cenário, o Jenkins orquestra a criação de novas imagens de contêiner com base nas confirmações no controle do código-fonte, envia por push essas imagens para o Registro de Contêiner do Azure e atualiza as instâncias do aplicativo no Serviço de Kubernetes do Azure.
-* As [Máquinas Virtuais do Linux do Azure][docs-virtual-machines] são a plataforma de IaaS usada para executar as instâncias do Jenkins e do Grafana.
-* O [Registro de Contêiner do Azure][docs-acr] armazena e gerencia imagens de contêiner que são usadas pelo cluster do Serviço de Kubernetes do Azure. As imagens são armazenadas com segurança e podem ser replicadas em outras regiões pela plataforma do Azure para acelerar os tempos de implantação.
-* O [Serviço de Kubernetes do Azure][docs-aks] é uma plataforma Kubernetes gerenciada que permite implantar e gerenciar aplicativos em contêineres sem conhecimento de orquestração de contêiner. Como um serviço Kubernetes hospedado, o Azure lida com as tarefas críticas para você, como o monitoramento da integridade e a manutenção.
-* O [Azure Cosmos DB][docs-cosmos-db] é um banco de dados multimodelo distribuído globalmente que permite que você escolha entre vários modelos de banco de dados e de consistência para atender às suas necessidades. Com o Cosmos DB, os dados podem ser replicados globalmente e não há a necessidade de implantação ou configuração de nenhum cluster de gerenciamento ou replicação.
-* O [Azure Monitor][docs-azure-monitor] ajuda-o a rastrear o desempenho, manter a segurança e identificar tendências. As métricas obtidas pelo Monitor podem ser usadas por outros recursos e ferramentas, como o Grafana.
-* O [Grafana][grafana] é uma solução de software livre para consultar, visualizar, alertar e entender métricas. Um plug-in da fonte de dados para o Azure Monitor permite que o Grafana crie painéis visuais para monitorar o desempenho de seus aplicativos em execução no Serviço de Kubernetes do Azure que usam o Cosmos DB.
+- O [Jenkins][jenkins] é um servidor de automação de software livre que pode se integrar aos serviços do Azure para habilitar a CI (integração contínua) e a CD (implantação contínua). Neste cenário, o Jenkins orquestra a criação de novas imagens de contêiner com base nas confirmações no controle do código-fonte, envia por push essas imagens para o Registro de Contêiner do Azure e atualiza as instâncias do aplicativo no Serviço de Kubernetes do Azure.
+- As [Máquinas Virtuais do Linux do Azure][docs-virtual-machines] são a plataforma de IaaS usada para executar as instâncias do Jenkins e do Grafana.
+- O [Registro de Contêiner do Azure][docs-acr] armazena e gerencia imagens de contêiner que são usadas pelo cluster do Serviço de Kubernetes do Azure. As imagens são armazenadas com segurança e podem ser replicadas em outras regiões pela plataforma do Azure para acelerar os tempos de implantação.
+- O [Serviço de Kubernetes do Azure][docs-aks] é uma plataforma Kubernetes gerenciada que permite implantar e gerenciar aplicativos em contêineres sem conhecimento de orquestração de contêiner. Como um serviço Kubernetes hospedado, o Azure lida com as tarefas críticas para você, como o monitoramento da integridade e a manutenção.
+- O [Azure Cosmos DB][docs-cosmos-db] é um banco de dados multimodelo distribuído globalmente que permite que você escolha entre vários modelos de banco de dados e de consistência para atender às suas necessidades. Com o Cosmos DB, os dados podem ser replicados globalmente e não há a necessidade de implantação ou configuração de nenhum cluster de gerenciamento ou replicação.
+- O [Azure Monitor][docs-azure-monitor] ajuda-o a rastrear o desempenho, manter a segurança e identificar tendências. As métricas obtidas pelo Monitor podem ser usadas por outros recursos e ferramentas, como o Grafana.
+- O [Grafana][grafana] é uma solução de software livre para consultar, visualizar, alertar e entender métricas. Um plug-in da fonte de dados para o Azure Monitor permite que o Grafana crie painéis visuais para monitorar o desempenho de seus aplicativos em execução no Serviço de Kubernetes do Azure que usam o Cosmos DB.
 
 ### <a name="alternatives"></a>Alternativas
 
-* O [Azure Pipelines][azure-pipelines] ajuda a implementar um pipeline de CI (integração contínua), teste contínuo e CD (implantação contínua) em qualquer aplicativo.
-* O [Kubernetes][kubernetes] pode ser executado diretamente em VMs do Azure em vez de usar um serviço gerenciado, se você quiser mais controle sobre o cluster.
-* O [Service Fabric][service-fabric] é outro orquestrador de contêiner alternativo que pode substituir o AKS.
+- O [Azure Pipelines][azure-pipelines] ajuda a implementar um pipeline de CI (integração contínua), teste contínuo e CD (implantação contínua) em qualquer aplicativo.
+- O [Kubernetes][kubernetes] pode ser executado diretamente em VMs do Azure em vez de usar um serviço gerenciado, se você quiser mais controle sobre o cluster.
+- O [Service Fabric][service-fabric] é outro orquestrador de contêiner alternativo que pode substituir o AKS.
 
 ## <a name="considerations"></a>Considerações
 
@@ -71,7 +72,7 @@ Para ver outros tópicos sobre disponibilidade, consulte a [lista de verificaç�
 
 O Serviço de Kubernetes do Azure permite que você dimensione o número de nós de cluster para atender às demandas dos aplicativos. À medida que seu aplicativo aumenta, você pode escalar horizontalmente o número de nós de Kubernetes que executa o serviço.
 
-Os dados do aplicativo são armazenados no Azure Cosmos DB, um banco de dados multimodelo distribuído globalmente que pode ser dimensionado globalmente. O cosmos DB abstrai a necessidade de dimensionar sua infraestrutura, como é feito com os componentes de banco de dados tradicional, e você pode optar por replicar o Cosmos DB globalmente para atender às demandas de seus clientes.
+Os dados do aplicativo são armazenados no Azure Cosmos DB, um banco de dados multimodelo distribuído globalmente que pode ser dimensionado globalmente. O Cosmos DB abstrai a necessidade de dimensionar sua infraestrutura, como é feito com os componentes de banco de dados tradicional e você pode optar por replicar o Cosmos DB globalmente para atender às demandas de seus clientes.
 
 Para outros tópicos de escalabilidade, confira a [lista de verificação de escalabilidade][scalability] disponível no Centro de Arquitetura do Azure.
 
@@ -91,11 +92,13 @@ Para obter diretrizes gerais sobre como criar soluções resilientes, confira [P
 
 ## <a name="deploy-the-scenario"></a>Implantar o cenário
 
-**Pré-requisitos.**
+### <a name="prerequisites"></a>Pré-requisitos
 
-* Você deve ter uma conta do Azure já criada. Se você não tiver uma assinatura do Azure, crie uma [conta gratuita](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) antes de começar.
-* Você precisa de um par de chaves públicas SSH. Para obter etapas sobre como criar um par de chaves públicas, confira [Criar e usar um par de chaves SSH para VMs Linux][sshkeydocs].
-* Você precisa de uma entidade de serviço do Azure AD (Active Directory) para a autenticação de serviço e recursos. Se necessário, crie uma entidade de serviço com [az ad sp create-for-rbac][createsp]
+- Você deve ter uma conta do Azure já criada. Se você não tiver uma assinatura do Azure, crie uma [conta gratuita](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) antes de começar.
+
+- Você precisa de um par de chaves públicas SSH. Para obter etapas sobre como criar um par de chaves públicas, confira [Criar e usar um par de chaves SSH para VMs Linux][sshkeydocs].
+
+- Você precisa de uma entidade de serviço do Azure AD (Active Directory) para a autenticação de serviço e recursos. Se necessário, crie uma entidade de serviço com [az ad sp create-for-rbac][createsp]
 
     ```azurecli-interactive
     az ad sp create-for-rbac --name myDevOpsScenario
@@ -103,17 +106,23 @@ Para obter diretrizes gerais sobre como criar soluções resilientes, confira [P
 
     Anote o *appId* e a *senha* na saída desse comando. Forneça esses valores ao modelo quando implantar o cenário.
 
+### <a name="walk-through"></a>Passo a passo
+
 Para implantar esse cenário com um modelo do Azure Resource Manager, execute as etapas a seguir.
+
+<!-- markdownlint-disable MD033 -->
 
 1. Clique no botão **Implantar no Azure**:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Fsolution-architectures%2Fmaster%2Fapps%2Fdevops-with-aks%2Fazuredeploy.json" target="_blank"><img src="https://azuredeploy.net/deploybutton.png"/></a>
 2. Aguarde até que a implantação de modelo seja aberta no portal do Azure e conclua as seguintes etapas:
-   * Escolha **Criar novo** recurso de grupo e insira um nome como *myAKSDevOpsScenario* na caixa de texto.
-   * Selecione uma região na caixa suspensa **Local**.
-   * Insira sua ID de entidade de segurança de aplicativo de serviço e a senha no comando `az ad sp create-for-rbac`.
-   * Forneça um nome de usuário e uma senha segura para a instância do Jenkins e o console do Grafana.
-   * Forneça uma chave SSH para proteger logons nas VMs Linux.
-   * Analise os termos e condições e marque a opção **Concordo com os termos e condições declarados acima**.
-   * Selecione o botão **Comprar**.
+   - Escolha **Criar novo** recurso de grupo e insira um nome como *myAKSDevOpsScenario* na caixa de texto.
+   - Selecione uma região na caixa suspensa **Local**.
+   - Insira sua ID de entidade de segurança de aplicativo de serviço e a senha no comando `az ad sp create-for-rbac`.
+   - Forneça um nome de usuário e uma senha segura para a instância do Jenkins e o console do Grafana.
+   - Forneça uma chave SSH para proteger logons nas VMs Linux.
+   - Analise os termos e condições e marque a opção **Concordo com os termos e condições declarados acima**.
+   - Selecione o botão **Comprar**.
+
+<!-- markdownlint-enable MD033 -->
 
 Pode levar 15 a 20 minutos para a implantação ser concluída.
 
@@ -123,9 +132,9 @@ Para explorar o custo de executar esse cenário, todos os serviços são pré-co
 
 Nós fornecemos três perfis de custo de exemplo com base no número de imagens de contêiner a serem armazenados e nós de Kubernetes para executar seus aplicativos.
 
-* [Pequeno][small-pricing]: esse exemplo de preço refere-se a mil builds de contêiner por mês.
-* [Médio][medium-pricing]: esse exemplo de preço refere-se a 100 mil builds de contêiner por mês.
-* [Grande][large-pricing]: esse exemplo de preço refere-se a 1 milhão de builds de contêiner por mês.
+- [Pequeno][small-pricing]: esse exemplo de preço refere-se a mil builds de contêiner por mês.
+- [Médio][medium-pricing]: esse exemplo de preço refere-se a 100 mil builds de contêiner por mês.
+- [Grande][large-pricing]: esse exemplo de preço refere-se a 1 milhão de builds de contêiner por mês.
 
 ## <a name="related-resources"></a>Recursos relacionados
 

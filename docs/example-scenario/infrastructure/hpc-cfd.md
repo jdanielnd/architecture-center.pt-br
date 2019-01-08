@@ -1,15 +1,16 @@
 ---
-title: Executar simulações da dinâmica dos fluidos computacional (CFD) no Azure
+title: Executando simulações da CFD
+titleSuffix: Azure Example Scenarios
 description: Execute a dinâmica dos fluidos computacional (CFD) no Azure.
 author: mikewarr
 ms.date: 09/20/2018
 ms.custom: fasttrack
-ms.openlocfilehash: 42921122d74d07bf890f55be61b04c7e9a4f4e87
-ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
+ms.openlocfilehash: af43a60e952d75f84b4c7903a1567b0c76b9f4c4
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/06/2018
-ms.locfileid: "53004649"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53643927"
 ---
 # <a name="running-computational-fluid-dynamics-cfd-simulations-on-azure"></a>Executar simulações da dinâmica dos fluidos computacional (CFD) no Azure
 
@@ -23,11 +24,11 @@ Para simplificar a criação, o gerenciamento e a otimização de clusters do HP
 
 Outros setores relevantes para aplicativos de CFD incluem:
 
-* Aeronáutico
-* Automotivo
-* HVAC de construção
-* Óleo e gás
-* Ciências da vida
+- Aeronáutico
+- Automotivo
+- HVAC de construção
+- Óleo e gás
+- Ciências da vida
 
 ## <a name="architecture"></a>Arquitetura
 
@@ -46,12 +47,12 @@ Este diagrama mostra uma visão geral de alto nível de um típico design híbri
 
 ### <a name="components"></a>Componentes
 
-* O [Azure CycleCloud][cyclecloud] é uma ferramenta para criar, gerenciar, operar e otimizar clusters de HPC e Big Compute no Azure.
-* O [Avere vFXT no Azure][avere] é usado para fornecer um sistema de arquivos clusterizados de escala empresarial desenvolvido para a nuvem.
-* As [Máquinas Virtuais (VMs) do Microsoft Azure][vms] são usadas para criar um conjunto estático de instâncias de computação.
-* Os [Conjuntos de Dimensionamento de Máquinas Virtuais (conjunto de dimensionamento de máquinas virtuais)][vmss] fornece um grupo de VMs idênticas que podem ser ampliadas ou reduzidas no Azure CycleCloud.
-* As [contas do Armazenamento do Azure](/azure/storage/common/storage-introduction) são usadas para a sincronização e a retenção de dados.
-* As [Redes Virtuais](/azure/virtual-network/virtual-networks-overview) permitem vários tipos de recursos do Azure, como Máquinas Virtuais (VMs) do Microsoft Azure, a fim de se comunicar de forma segura com a Internet, com as redes locais e com outras VMs.
+- O [Azure CycleCloud][cyclecloud] é uma ferramenta para criar, gerenciar, operar e otimizar clusters de HPC e Big Compute no Azure.
+- O [Avere vFXT no Azure][avere] é usado para fornecer um sistema de arquivos clusterizados de escala empresarial desenvolvido para a nuvem.
+- As [Máquinas Virtuais (VMs) do Microsoft Azure][vms] são usadas para criar um conjunto estático de instâncias de computação.
+- Os [Conjuntos de Dimensionamento de Máquinas Virtuais (conjunto de dimensionamento de máquinas virtuais)][vmss] fornece um grupo de VMs idênticas que podem ser ampliadas ou reduzidas no Azure CycleCloud.
+- As [contas do Armazenamento do Azure](/azure/storage/common/storage-introduction) são usadas para a sincronização e a retenção de dados.
+- As [Redes Virtuais](/azure/virtual-network/virtual-networks-overview) permitem vários tipos de recursos do Azure, como Máquinas Virtuais (VMs) do Microsoft Azure, a fim de se comunicar de forma segura com a Internet, com as redes locais e com outras VMs.
 
 ### <a name="alternatives"></a>Alternativas
 
@@ -65,15 +66,22 @@ O dimensionamento dos nós de execução no Azure CycleCloud pode ser feito manu
 
 Confira orientações gerais sobre como criar soluções seguras na [Documentação de segurança do Azure][security].
 
-## <a name="deploy-this-scenario"></a>Implantar este cenário
+## <a name="deploy-the-scenario"></a>Implantar o cenário
 
-Alguns pré-requisitos são necessários antes da implantação no Azure. Siga estas etapas antes de implantar o modelo do Resource Manager:
+### <a name="prerequisites"></a>Pré-requisitos
+
+Siga estas etapas antes de implantar o modelo do Resource Manager:
+
 1. Crie uma [entidade de serviço][cycle-svcprin] para recuperar o appId, displayName, nome, senha e locatário.
 2. Gere um [par de chaves SSH][cycle-ssh] para entrar com segurança no servidor CycleCloud.
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCycleCloudCommunity%2Fcyclecloud_arm%2Fmaster%2Fazuredeploy.json" target="_blank">
-    <img src="https://azuredeploy.net/deploybutton.png"/>
-</a>
+    <!-- markdownlint-disable MD033 -->
+
+    <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCycleCloudCommunity%2Fcyclecloud_arm%2Fmaster%2Fazuredeploy.json" target="_blank">
+        <img src="https://azuredeploy.net/deploybutton.png"/>
+    </a>
+
+    <!-- markdownlint-enable MD033 -->
 
 3. [Faça logon no servidor do CycleCloud][cycle-login] para configurar e criar um novo cluster.
 4. [Crie um cluster][cycle-create].
@@ -90,12 +98,12 @@ O custo de executar uma implantação de HPC usando o servidor do CycleCloud var
 
 Este cenário mostra como os aplicativos de CFD podem ser executados no Azure, as máquinas exigirão a funcionalidade de RDMA, que só está disponível em tamanhos específicos de máquina virtual. Veja a seguir exemplos de custos gerados para um conjunto de dimensionamento alocado continuamente oito horas por dia durante um mês, com saída de dados de 1 TB. Isso inclui também o preço do servidor do Azure CycleCloud e da instalação do Avere vFXT para Azure:
 
-* Região: Norte da Europa
-* Servidor Azure CycleCloud: 1 x Standard D3 (4 x CPUs, 14 GB de memória, Standard HDD 32 GB)
-* Servidor mestre Azure CycleCloud: 1 x Standard D12 v (4 x CPUs, 28 GB de memória, Standard HDD 32 GB)
-* Matriz de Nó do Azure CycleCloud: 10 x Standard H16r (16 x CPUs, 112 GB de memória)
-* Avere vFXT no Azure Cluster: 3 x D16s v3 (Sistema operacional 200 GB, disco de dados Premium SSD 1-TB)
-* Saída de Dados: 1 TB
+- Região: Norte da Europa
+- Servidor Azure CycleCloud: 1 x Standard D3 (4 x CPUs, 14 GB de memória, Standard HDD 32 GB)
+- Servidor mestre Azure CycleCloud: 1 x Standard D12 v (4 x CPUs, 28 GB de memória, Standard HDD 32 GB)
+- Matriz de Nó do Azure CycleCloud: 10 x Standard H16r (16 x CPUs, 112 GB de memória)
+- Avere vFXT no Azure Cluster: 3 x D16s v3 (Sistema operacional 200 GB, disco de dados Premium SSD 1-TB)
+- Saída de Dados: 1 TB
 
 Analise esta [estimativa de preço][pricing] do hardware listado acima.
 
@@ -105,8 +113,8 @@ Depois de implantar o exemplo, saiba mais sobre o [Azure CycleCloud][cyclecloud]
 
 ## <a name="related-resources"></a>Recursos relacionados
 
-* [Instâncias de Máquina Compatíveis com RDMA][rdma]
-* [Personalizar uma Máquina Virtual da Instância do RDMA][rdma-custom]
+- [Instâncias de Máquina Compatíveis com RDMA][rdma]
+- [Personalizar uma Máquina Virtual da Instância do RDMA][rdma-custom]
 
 <!-- links -->
 [architecture]: ./media/architecture-hpc-cfd.png

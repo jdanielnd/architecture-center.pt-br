@@ -5,12 +5,12 @@ description: Use o Azure para obter insights comerciais dos dados relacionais ar
 author: MikeWasson
 ms.date: 11/06/2018
 ms.custom: seodec18
-ms.openlocfilehash: 656bf6f1bd342856fd8a2d2aa0b62a9dd4d4f87f
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.openlocfilehash: 3808cc5d09e2e0a5aaee1a6cfcb050b98a0ef2ee
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53120077"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53644216"
 ---
 # <a name="enterprise-bi-in-azure-with-sql-data-warehouse"></a>Enterprise BI no Azure com o SQL Data Warehouse
 
@@ -113,7 +113,7 @@ Crie as tabelas de preparo como tabelas de heap, que não são indexadas. As con
 
 O PolyBase aproveita automaticamente as vantagens do paralelismo no warehouse.  O desempenho de carga é dimensionado conforme você aumenta as DWUs. Para um melhor desempenho, use uma única operação de carregamento. Não há nenhum benefício de desempenho em dividir os dados de entrada em partes e executar vários carregamentos simultâneos.
 
-O PolyBase pode ler arquivos compactados em Gzip. No entanto, somente um único leitor é usado por arquivo compactado, já que a descompactação do arquivo é uma operação de thread único. Portanto, evite o carregamento de um único arquivo compactado grande. Em vez disso, divida os dados em vários arquivos compactados, para se beneficiar do paralelismo. 
+O PolyBase pode ler arquivos compactados em Gzip. No entanto, somente um único leitor é usado por arquivo compactado, já que a descompactação do arquivo é uma operação de thread único. Portanto, evite o carregamento de um único arquivo compactado grande. Em vez disso, divida os dados em vários arquivos compactados, para se beneficiar do paralelismo.
 
 Esteja ciente das seguintes limitações:
 
@@ -183,10 +183,10 @@ Considere usar o recurso de firewall do Analysis Services para colocar endereço
 
 ### <a name="authorization"></a>Autorização
 
-O Azure Analysis Services usa o Azure AD (Azure Active Directory) para autenticar usuários que se conectam a um servidor do Analysis Services. Você pode restringir quais dados um usuário específico é capaz de exibir criando funções e atribuindo os usuários ou grupos do Azure AD a essas funções. Para cada função, você pode: 
+O Azure Analysis Services usa o Azure AD (Azure Active Directory) para autenticar usuários que se conectam a um servidor do Analysis Services. Você pode restringir quais dados um usuário específico é capaz de exibir criando funções e atribuindo os usuários ou grupos do Azure AD a essas funções. Para cada função, você pode:
 
-- Proteger tabelas ou colunas individualmente. 
-- Proteger linhas individualmente com base em expressões de filtro. 
+- Proteger tabelas ou colunas individualmente.
+- Proteger linhas individualmente com base em expressões de filtro.
 
 Para saber mais, confira [Gerenciar usuários e funções de banco de dados](/azure/analysis-services/analysis-services-database-users).
 
@@ -202,6 +202,13 @@ Para a implantação e execução da implementação de referência, siga as eta
 ## <a name="next-steps"></a>Próximas etapas
 
 - Use o Azure Data Factory para automatizar o pipeline ELT. Confira [Enterprise BI automatizada com o SQL Data Warehouse e Azure Data Factory][adf-ra].
+
+## <a name="related-resources"></a>Recursos relacionados
+
+O ideal é examinar os seguintes [cenários de exemplo do Azure](/azure/architecture/example-scenario), que demonstram soluções específicas usando algumas das mesmas tecnologias:
+
+- [Data warehouse e análise para vendas e marketing](/azure/architecture/example-scenario/data/data-warehouse)
+- [ETL Híbrido com Azure Data Factory e SSIS local existentes](/azure/architecture/example-scenario/data/hybrid-etl-with-adf)
 
 <!-- links -->
 
