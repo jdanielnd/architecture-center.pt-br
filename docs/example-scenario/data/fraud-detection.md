@@ -1,14 +1,15 @@
 ---
-title: Detecção de fraude em tempo real no Azure
+title: Detecção de fraude em tempo real
+titleSuffix: Azure Example Scenarios
 description: Detecte atividades fraudulentas em tempo real usando os Hubs de Eventos do Azure e o Stream Analytics.
 author: alexbuckgit
 ms.date: 07/05/2018
-ms.openlocfilehash: bd9eb4d572651c4e57a0043226860623cd8d17e1
-ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
+ms.openlocfilehash: 9e4d8c5d24acc414ab38722d2df59102395250fb
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "51610598"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53643398"
 ---
 # <a name="real-time-fraud-detection-on-azure"></a>Detecção de fraude em tempo real no Azure
 
@@ -24,9 +25,9 @@ Este exemplo representa parte de uma estratégia e uma arquitetura de processame
 
 Outros casos de uso relevantes incluem:
 
-* Detectar chamadas fraudulentas em cenários de telecomunicações.
-* Identificar transações fraudulentas de cartão de crédito para instituições bancárias.
-* Identificar compras fraudulentas em cenários de varejo ou comércio eletrônico.
+- Detectar chamadas fraudulentas em cenários de telecomunicações.
+- Identificar transações fraudulentas de cartão de crédito para instituições bancárias.
+- Identificar compras fraudulentas em cenários de varejo ou comércio eletrônico.
 
 ## <a name="architecture"></a>Arquitetura
 
@@ -34,28 +35,28 @@ Outros casos de uso relevantes incluem:
 
 Este cenário cobre os componentes de back-end de um pipeline de análise em tempo real. O fluxo de dados deste cenário ocorre da seguinte forma:
 
-1. Metadados de chamadas de celular são enviados do sistema de origem para uma instância dos Hubs de Eventos do Azure. 
+1. Metadados de chamadas de celular são enviados do sistema de origem para uma instância dos Hubs de Eventos do Azure.
 2. Um trabalho do Stream Analytics é iniciado e recebe dados da fonte do hub de eventos.
 3. O trabalho do Stream Analytics executa uma consulta predefinida para transformar o fluxo de entrada e analisá-lo com base em um algoritmo de transações fraudulentas. Essa consulta usa uma janela em cascata para segmentar o fluxo em unidades temporais distintas.
 4. O trabalho do Stream Analytics grava o fluxo transformado que representa chamadas fraudulentas para um coletor de saída do Armazenamentos de blobs do Azure.
 
 ### <a name="components"></a>Componentes
 
-* Os [Hubs de Eventos do Azure][docs-event-hubs] são uma plataforma de streaming em tempo real e um serviço de ingestão de eventos capaz de receber e processar milhões de eventos por segundo. Os Hubs de Eventos podem processar e armazenar eventos, dados ou telemetria produzidos pelos dispositivos e software distribuídos. Neste cenário, os Hubs de Eventos recebem todos os metadados de chamadas telefônicas que serão analisadas em relação a atividades fraudulentas.
-* O [Azure Stream Analytics][docs-stream-analytics] é um mecanismo de processamento de eventos que permite examinar grandes volumes de fluxo de dados de dispositivos e de outras fontes de dados. Ele também oferece suporte à extração de informações dos fluxos de dados para identificar padrões e relações. Esses padrões podem disparar outras ações downstream. Neste cenário, o Stream Analytics transforma o fluxo de entrada do Hub de Eventos para identificar chamadas fraudulentas.
-* O [Armazenamento de Blobs](/azure/storage/blobs/storage-blobs-introduction) é usado neste cenário para armazenar os resultados do trabalho do Stream Analytics.
+- Os [Hubs de Eventos do Azure][docs-event-hubs] são uma plataforma de streaming em tempo real e um serviço de ingestão de eventos capaz de receber e processar milhões de eventos por segundo. Os Hubs de Eventos podem processar e armazenar eventos, dados ou telemetria produzidos pelos dispositivos e software distribuídos. Neste cenário, os Hubs de Eventos recebem todos os metadados de chamadas telefônicas que serão analisadas em relação a atividades fraudulentas.
+- O [Azure Stream Analytics][docs-stream-analytics] é um mecanismo de processamento de eventos que permite examinar grandes volumes de fluxo de dados de dispositivos e de outras fontes de dados. Ele também oferece suporte à extração de informações dos fluxos de dados para identificar padrões e relações. Esses padrões podem disparar outras ações downstream. Neste cenário, o Stream Analytics transforma o fluxo de entrada do Hub de Eventos para identificar chamadas fraudulentas.
+- O [Armazenamento de Blobs](/azure/storage/blobs/storage-blobs-introduction) é usado neste cenário para armazenar os resultados do trabalho do Stream Analytics.
 
 ## <a name="considerations"></a>Considerações
 
 ### <a name="alternatives"></a>Alternativas
 
-Muitas opções de tecnologia estão disponíveis para ingestão de mensagens em tempo real, armazenamento de dados, processamento de fluxo, armazenamento de dados analíticos, análise e relatórios. Para obter uma visão geral dessas opções, seus recursos e os principais critérios de seleção, confira [Arquiteturas de Big Data: processamento em tempo real](/azure/architecture/data-guide/technology-choices/real-time-ingestion) no Guia de Arquitetura de Dados do Azure.
+Muitas opções de tecnologia estão disponíveis para ingestão de mensagens em tempo real, armazenamento de dados, processamento de fluxo, armazenamento de dados analíticos, análise e relatórios. Para obter uma visão geral dessas opções, seus recursos e principais critérios de seleção, confira [Arquiteturas de Big Data: Processamento em tempo real](/azure/architecture/data-guide/technology-choices/real-time-ingestion) no Guia de Arquitetura de Dados do Azure.
 
 Além disso, os algoritmos mais complexos para detecção de fraude podem ser produzidos por vários serviços de aprendizado de máquina no Azure. Para obter uma visão geral dessas opções, confira [Opções de tecnologia para aprendizado de máquina](/azure/architecture/data-guide/technology-choices/data-science-and-machine-learning) no [Guia de Arquitetura de Dados do Azure](../../data-guide/index.md).
 
 ### <a name="availability"></a>Disponibilidade
 
-O Azure Monitor fornece interfaces de usuário unificadas para monitoramento entre os diferentes serviços do Azure. Para obter mais informações, confira [Monitoramento no Microsoft Azure](/azure/monitoring-and-diagnostics/monitoring-overview). Os Hubs de Eventos e o Stream Analytics estão integrados ao Azure Monitor. 
+O Azure Monitor fornece interfaces de usuário unificadas para monitoramento entre os diferentes serviços do Azure. Para obter mais informações, confira [Monitoramento no Microsoft Azure](/azure/monitoring-and-diagnostics/monitoring-overview). Os Hubs de Eventos e o Stream Analytics estão integrados ao Azure Monitor.
 
 Para outras considerações sobre disponibilidade, confira a [lista de verificação de disponibilidade][availability] no Azure Architecture Center.
 
@@ -85,9 +86,9 @@ Para explorar o custo de executar esse cenário, todos os serviços são pré-co
 
 Fornecemos três perfis de custo de exemplo com base na quantidade de tráfego que você espera receber:
 
-* [Pequeno][small-pricing]: processa um milhão de eventos por meio de uma unidade de streaming padrão por mês.
-* [Médio][medium-pricing]: processa 100 milhões de eventos por meio de cinco unidades de streaming padrão por mês.
-* [Grande][large-pricing]: processa 999 milhões de eventos por meio de 20 unidades de streaming padrão por mês.
+- [Pequeno][small-pricing]: processa um milhão de eventos por meio de uma unidade de streaming padrão por mês.
+- [Médio][medium-pricing]: processa 100 milhões de eventos por meio de cinco unidades de streaming padrão por mês.
+- [Grande][large-pricing]: processa 999 milhões de eventos por meio de 20 unidades de streaming padrão por mês.
 
 ## <a name="related-resources"></a>Recursos relacionados
 
@@ -110,4 +111,3 @@ Cenários de detecção de fraude mais complexos podem se beneficiar de um model
 [scalability]: /azure/architecture/checklist/scalability
 [resiliency]: ../../resiliency/index.md
 [security]: /azure/security/
-

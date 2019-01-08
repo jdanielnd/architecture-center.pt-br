@@ -9,12 +9,12 @@ pnp.pattern.categories:
 - data-management
 - design-implementation
 - performance-scalability
-ms.openlocfilehash: 9a2eecdff7494fb627ea5c4655e6edc789bd5bdf
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: de9530f7dd55c0ce5460cd3b58ab9f216c9b5c8c
+ms.sourcegitcommit: fb22348f917a76e30a6c090fcd4a18decba0b398
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429682"
+ms.lasthandoff: 12/16/2018
+ms.locfileid: "53450863"
 ---
 # <a name="command-and-query-responsibility-segregation-cqrs-pattern"></a>Padrão CQRS (Segregação de Responsabilidade de Consulta e Comando)
 
@@ -39,8 +39,6 @@ No entanto, a abordagem CRUD tradicional possui algumas desvantagens:
 - Isso arrisca a contenção de dados quando os registros são bloqueados no armazenamento de dados em um domínio colaborativo, onde vários atores operam em paralelo no mesmo conjunto de dados. Ou atualizar conflitos causados por atualizações simultâneas quando o bloqueio otimista é utilizado. Esses riscos aumentam à medida que a complexidade e a produção do sistema crescem. Além disso, a abordagem tradicional pode ter um efeito negativo no desempenho devido à carga no armazenamento de dados e na camada de acesso aos dados, e a complexidade das consultas necessárias para recuperar informações.
 
 - Isso pode tornar o gerenciamento de segurança e permissões mais complexo porque cada entidade está sujeita tanto a operações de leitura como de gravação, o que pode expor dados no contexto errado.
-
-> Para uma compreensão mais profunda dos limites da abordagem CRUD, consulte [CRUD, Somente quando você puder custear isso](https://blogs.msdn.microsoft.com/maarten_mullender/2004/07/23/crud-only-when-you-can-afford-it-revisited/).
 
 ## <a name="solution"></a>Solução
 
@@ -248,6 +246,6 @@ Os seguintes padrões e diretrizes serão úteis ao implementar esse padrão:
 
 - [Padrão de Exibição Materializada](materialized-view.md). O modelo de leitura de uma implementação CQRS pode conter exibições materializadas dos dados do modelo de gravação, ou o modelo de leitura pode ser utilizado para gerar exibições materializadas.
 
-- Guia de padrões e práticas [Recurso CQRS](https://aka.ms/cqrs). Em particular, a [Introdução ao Padrão de Segregação de Responsabilidade de Consulta de Comando](https://msdn.microsoft.com/library/jj591573.aspx) explora o padrão e quando isso é útil e o [Epílogo: Lições Aprendidas](https://msdn.microsoft.com/library/jj591568.aspx) ajuda-o a entender alguns dos problemas que surgiram ao usar este padrão.
+- Guia de padrões e práticas [Recurso CQRS](https://aka.ms/cqrs). Mais especificamente, [Apresentando o padrão de segregação de responsabilidade da consulta de comando](https://msdn.microsoft.com/library/jj591573.aspx) explora o padrão e quando ele é útil, e [Epílogo: lições aprendidas](https://msdn.microsoft.com/library/jj591568.aspx) ajuda você a entender alguns dos problemas que surgem ao usar esse padrão.
 
 - A postagem [CQRS por Martin Fowler](https://martinfowler.com/bliki/CQRS.html), que explica os conceitos básicos do padrão e links para outros recursos úteis.

@@ -1,25 +1,26 @@
 ---
 title: ETL Híbrido com SSIS local existente e Azure Data Factory
+titleSuffix: Azure Example Scenarios
 description: ETL Híbrido com implantações SSIS (SQL Server Integration Services) locais existentes e Azure Data Factory
 author: alhieng
 ms.date: 9/20/2018
 ms.custom: tsp-team
-ms.openlocfilehash: cc6c2bfe85dc0d1eb8ad29e044611f1e435810c3
-ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
+ms.openlocfilehash: 387b0aa1927a8d316aad76100f577da13833eae6
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53306782"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53643497"
 ---
 # <a name="hybrid-etl-with-existing-on-premises-ssis-and-azure-data-factory"></a>ETL Híbrido com SSIS local existente e Azure Data Factory
 
-As organizações que migram seus bancos de dados do SQL Server para a nuvem podem obter uma enorme economia de custos, ganhos de desempenho, flexibilidade adicional e maior escalabilidade. No entanto, a reformulação de processos existentes de ETL (extrair, transformar e carregar) criados com o SSIS (SQL Server Integration Services) pode ser um obstáculo de migração. Em outros casos, o processo de carregamento de dados requer lógica complexa e/ou componentes específicos da ferramenta de dados que ainda não são suportados pelo Azure Data Factory v2 (ADF). Os recursos do SSIS normalmente usados incluem transformações de Pesquisa Difusa e Agrupamento Difuso, Change Data Capture (CDC), Dimensões de Alteração Lenta (SCD) e Data Quality Services (DQS).
+As organizações que migram seus bancos de dados do SQL Server para a nuvem podem obter uma enorme economia de custos, ganhos de desempenho, flexibilidade adicional e maior escalabilidade. No entanto, a reformulação de processos existentes de ETL (extrair, transformar e carregar) criados com o SSIS (SQL Server Integration Services) pode ser um obstáculo de migração. Em outros casos, o processo de carregamento de dados requer lógica complexa e/ou componentes específicos da ferramenta de dados que ainda não têm suporte pelo Azure Data Factory v2. Os recursos do SSIS normalmente usados incluem transformações de Pesquisa Difusa e Agrupamento Difuso, Change Data Capture (CDC), Dimensões de Alteração Lenta (SCD) e Data Quality Services (DQS).
 
-Uma abordagem de ETL híbrida pode ser a opção mais adequada para facilitar uma migração lift-and-shift de um banco de dados SQL existente. Uma abordagem híbrida usa o ADF como o principal mecanismo de orquestração, mas continua a aproveitar os pacotes existentes do SSIS para limpar dados e trabalhar com recursos locais. Essa abordagem usa o Tempo de Execução de Integração (IR) do ADF do SQL Server para habilitar um lift-and-shift dos bancos de dados existentes para a nuvem, enquanto usa o código existente e os pacotes do SSIS.
+Uma abordagem de ETL híbrida pode ser a opção mais adequada para facilitar uma migração lift-and-shift de um banco de dados SQL existente. Uma abordagem híbrida usa o Data Factory como o principal mecanismo de orquestração, mas continua a aproveitar os pacotes SSIS existentes para limpar dados e trabalhar com recursos locais. Essa abordagem usa o IR (Tempo de Execução de Integração) do SQL Server do Data Factory para habilitar um lift-and-shift dos bancos de dados existentes para a nuvem enquanto usa o código existente e os pacotes do SSIS.
 
-Este cenário de exemplo é relevante para organizações que estão movendo bancos de dados para a nuvem e considerando o uso do ADF como seu principal mecanismo ETL baseado na nuvem, ao mesmo tempo em que incorporam pacotes SSIS existentes em seu novo fluxo de trabalho de dados na nuvem. Muitas organizações investiram significativamente no desenvolvimento de pacotes SSIS ETL para tarefas de dados específicas. Regravar esses pacotes pode ser uma tarefa desestimulante. Além disso, muitos pacotes de código existentes têm dependências de recursos locais, impedindo a migração para a nuvem.
+Este cenário de exemplo é relevante para organizações que estão movendo bancos de dados para a nuvem e considerando o uso do Data Factory como seu principal mecanismo ETL baseado na nuvem, ao mesmo tempo em que incorporam pacotes do SSIS existentes ao novo fluxo de trabalho de dados na nuvem. Muitas organizações investiram significativamente no desenvolvimento de pacotes SSIS ETL para tarefas de dados específicas. Regravar esses pacotes pode ser uma tarefa desestimulante. Além disso, muitos pacotes de código existentes têm dependências de recursos locais, impedindo a migração para a nuvem.
 
-O ADF permite que os clientes aproveitem seus pacotes ETL existentes, limitando ainda mais o investimento no desenvolvimento de ETL no local. Este exemplo discute possíveis casos de uso para aproveitar pacotes SSIS existentes como parte de um novo fluxo de trabalho de dados em nuvem usando o Azure Data Factory v2.
+O Data Factory permite que os clientes aproveitem seus pacotes ETL existentes, limitando ainda mais o investimento no desenvolvimento de ETL local. Este exemplo discute possíveis casos de uso para aproveitar pacotes SSIS existentes como parte de um novo fluxo de trabalho de dados em nuvem usando o Azure Data Factory v2.
 
 ## <a name="potential-use-cases"></a>Possíveis casos de uso
 
@@ -27,10 +28,10 @@ Tradicionalmente, o SSIS tem sido a ferramenta de ETL preferida por muitos profi
 
 Veja abaixo vários possíveis casos de uso locais:
 
-* Carregar logs do roteador de rede para um banco de dados de análise.
-* Preparar dados de emprego de recursos humanos para relatórios analíticos.
-* Carregar dados de produtos e vendas em um data warehouse para previsão de vendas.
-* Automatizar o carregamento ou armazenamento de dados operacionais ou data warehouses para finanças e contabilidade.
+- Carregar logs do roteador de rede para um banco de dados de análise.
+- Preparar dados de emprego de recursos humanos para relatórios analíticos.
+- Carregar dados de produtos e vendas em um data warehouse para previsão de vendas.
+- Automatizar o carregamento ou armazenamento de dados operacionais ou data warehouses para finanças e contabilidade.
 
 ## <a name="architecture"></a>Arquitetura
 
@@ -44,10 +45,10 @@ Veja abaixo vários possíveis casos de uso locais:
 
 ### <a name="components"></a>Componentes
 
-* O [armazenamento de blobs][docs-blob-storage] é usado para armazenar arquivos e também atua como uma fonte do Data Factory para recuperar dados.
-* O [SQL Server Integration Services][docs-ssis] contém os pacotes de ETL locais usados para executar cargas de trabalho específicas da tarefa.
-* O [Azure Data Factory][docs-data-factory] é o mecanismo de orquestração da nuvem que usa dados de várias fontes e combina, orquestra e carrega os dados em um data warehouse.
-* O [SQL Data Warehouse][docs-sql-data-warehouse] centraliza os dados na nuvem para facilitar o acesso usando consultas SQL ANSI padrão.
+- O [armazenamento de blobs][docs-blob-storage] é usado para armazenar arquivos e também atua como uma fonte do Data Factory para recuperar dados.
+- O [SQL Server Integration Services][docs-ssis] contém os pacotes de ETL locais usados para executar cargas de trabalho específicas da tarefa.
+- O [Azure Data Factory][docs-data-factory] é o mecanismo de orquestração da nuvem que usa dados de várias fontes e combina, orquestra e carrega os dados em um data warehouse.
+- O [SQL Data Warehouse][docs-sql-data-warehouse] centraliza os dados na nuvem para facilitar o acesso usando consultas SQL ANSI padrão.
 
 ### <a name="alternatives"></a>Alternativas
 
@@ -61,26 +62,26 @@ Na abordagem hospedada no Azure, você deve decidir quanta energia é necessári
 
 A decisão é muito mais fácil quando você já tem pacotes SSIS existentes que possuem dependências locais, como fontes de dados ou arquivos que não podem ser acessados pelo Azure. Nesse cenário, sua única opção é o IR auto-hospedado. Essa abordagem fornece a maior flexibilidade para aproveitar a nuvem como o mecanismo de orquestração, sem precisar reescrever os pacotes existentes.
 
-Em última análise, a intenção é mover os dados processados para a nuvem para serem ainda mais refinados ou combiná-los com outros dados armazenados na nuvem. Como parte do processo de design, mantenha o controle do número de atividades usadas nos pipelines do ADF. Para saber mais, confira [Pipelines e atividades no Azure Data Factory](/azure/data-factory/concepts-pipelines-activities).
+Em última análise, a intenção é mover os dados processados para a nuvem para serem ainda mais refinados ou combiná-los com outros dados armazenados na nuvem. Como parte do processo de design, acompanhe o número de atividades usadas nos pipelines do Data Factory. Para saber mais, confira [Pipelines e atividades no Azure Data Factory](/azure/data-factory/concepts-pipelines-activities).
 
 ## <a name="pricing"></a>Preços
 
-O Azure Data Factory é uma maneira econômica de orquestrar a movimentação de dados na nuvem. O custo é baseado em vários fatores.
+O Data Factory é uma maneira econômica de orquestrar a movimentação de dados na nuvem. O custo é baseado em vários fatores.
 
-* Número de execuções do pipeline
-* Número de entidades/atividades usadas dentro do pipeline
-* Número de operações de monitoramento
-* Número de Execuções da Integração (IR hospedado no Azure ou IR auto-hospedado)
+- Número de execuções do pipeline
+- Número de entidades/atividades usadas dentro do pipeline
+- Número de operações de monitoramento
+- Número de Execuções da Integração (IR hospedado no Azure ou IR auto-hospedado)
 
-O ADF usa a cobrança com base no consumo. Portanto, o custo só é incorrido durante as execuções e o monitoramento do pipeline. A execução de um pipeline básico custaria apenas 50 centavos e o monitoramento apenas 25 centavos. A [calculadora de custos do Azure](https://azure.microsoft.com/pricing/calculator/) pode ser usada para criar uma estimativa mais precisa com base em sua carga de trabalho específica.
+O Data Factory faz cobrança com base no consumo. Portanto, o custo só é incorrido durante as execuções e o monitoramento do pipeline. A execução de um pipeline básico custaria apenas 50 centavos e o monitoramento apenas 25 centavos. A [calculadora de custos do Azure](https://azure.microsoft.com/pricing/calculator/) pode ser usada para criar uma estimativa mais precisa com base em sua carga de trabalho específica.
 
-Ao executar uma carga de trabalho de ETL híbrida, você deve levar em consideração o custo da máquina virtual usada para hospedar seus pacotes do SSIS. Esse custo é baseado no tamanho da VM que varia de um D1v2 (1 núcleo, 3,5 GB de RAM, disco de 50 GB) a um E64V3 (64 núcleos, 432 GB de RAM, disco de 1600 GB).  Se você precisar de orientação adicional sobre a escolha do tamanho apropriado da VM, confira as [Considerações sobre o desempenho da VM](/azure/cloud-services/cloud-services-sizes-specs#performance-considerations).
+Ao executar uma carga de trabalho de ETL híbrida, você deve levar em consideração o custo da máquina virtual usada para hospedar seus pacotes do SSIS. Esse custo é baseado no tamanho da VM que varia de um D1v2 (1 núcleo, 3,5 GB de RAM, disco de 50 GB) a um E64V3 (64 núcleos, 432 GB de RAM, disco de 1600 GB). Se você precisar de orientação adicional sobre a escolha do tamanho apropriado da VM, confira as [Considerações sobre o desempenho da VM](/azure/cloud-services/cloud-services-sizes-specs#performance-considerations).
 
 ## <a name="next-steps"></a>Próximas etapas
 
-* Saiba mais sobre o [Azure Data Factory](https://azure.microsoft.com/services/data-factory/).
-* Introdução ao Azure Data Factory seguindo o [tutorial passo a passo](/azure/data-factory/#step-by-step-tutorials).
-* [Provisionar o Azure-SSIS Integration Runtime no Azure Data Factory](/azure/data-factory/tutorial-deploy-ssis-packages-azure).
+- Saiba mais sobre o [Azure Data Factory](https://azure.microsoft.com/services/data-factory/).
+- Introdução ao Azure Data Factory seguindo o [tutorial passo a passo](/azure/data-factory/#step-by-step-tutorials).
+- [Provisionar o Azure-SSIS Integration Runtime no Azure Data Factory](/azure/data-factory/tutorial-deploy-ssis-packages-azure).
 
 <!-- links -->
 [architecture-diagram]: ./media/architecture-diagram-hybrid-etl-with-adf.png

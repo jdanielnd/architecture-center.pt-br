@@ -5,18 +5,18 @@ description: Automatize um fluxo de trabalho de extração, carga e transformaç
 author: MikeWasson
 ms.date: 11/06/2018
 ms.custom: seodec18
-ms.openlocfilehash: d87583802496f8be85e44c896ae7d6a26306cffc
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.openlocfilehash: 8263da7675beb61add371c945aab72b203c2349c
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53120332"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53643979"
 ---
 # <a name="automated-enterprise-bi-with-sql-data-warehouse-and-azure-data-factory"></a>Enterprise BI automatizada com o SQL Data Warehouse e Azure Data Factory
 
 Essa arquitetura de referência mostra como executar um carregamento incremental em um pipeline [ELT (extrair-carregar-transformar)](../../data-guide/relational-data/etl.md#extract-load-and-transform-elt). Ela usa o Azure Data Factory para automatizar o pipeline ELT. O pipeline move incrementalmente os dados de OLTP mais recentes de um banco de dados do SQL Server local no SQL Data Warehouse. Os dados transacionais são transformados em um modelo de tabela para análise.
 
-> [!VIDEO https://www.microsoft.com/en-us/videoplayer/embed/RE2Gnz2]
+> [!VIDEO <https://www.microsoft.com/videoplayer/embed/RE2Gnz2>]
 
 Há uma implantação de referência para essa arquitetura de referência disponível no [GitHub][github].
 
@@ -201,7 +201,16 @@ Para a implantação e execução da implementação de referência, siga as eta
 - Uma instância do Azure Analysis Services.
 - O Azure Data Factory e o pipeline do Data Factory para o trabalho ELT.
 
+## <a name="related-resources"></a>Recursos relacionados
+
+O ideal é examinar os seguintes [cenários de exemplo do Azure](/azure/architecture/example-scenario), que demonstram soluções específicas usando algumas das mesmas tecnologias:
+
+- [Data warehouse e análise para vendas e marketing](/azure/architecture/example-scenario/data/data-warehouse)
+- [ETL Híbrido com Azure Data Factory e SSIS local existentes](/azure/architecture/example-scenario/data/hybrid-etl-with-adf)
+
+<!-- links -->
+
 [adf]: /azure/data-factory
-[github]: https://github.com/mspnp/reference-architectures/tree/master/data/enterprise_bi_sqldw_advanced
+[github]: https://github.com/mspnp/azure-data-factory-sqldw-elt-pipeline
 [MergeLocation]: https://github.com/mspnp/reference-architectures/blob/master/data/enterprise_bi_sqldw_advanced/azure/sqldw_scripts/city/%5BIntegration%5D.%5BMergeLocation%5D.sql
 [wwi]: /sql/sample/world-wide-importers/wide-world-importers-oltp-database
