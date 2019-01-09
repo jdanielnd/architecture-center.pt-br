@@ -4,12 +4,12 @@ description: Como criar aplicativos resilientes no Azure, para alta disponibilid
 author: MikeWasson
 ms.date: 12/18/2018
 ms.custom: resiliency
-ms.openlocfilehash: 1638bc84b436d3d826f8ad9497ddb5a1310c14da
-ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
+ms.openlocfilehash: 28ad589c6d54a1574b5cd5c4f08e3c6adfe349c3
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/20/2018
-ms.locfileid: "53644250"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113120"
 ---
 # <a name="designing-resilient-applications-for-azure"></a>Desenvolvimento de aplicativos resilientes para o Azure
 
@@ -19,14 +19,18 @@ Criar um aplicativo confiável na nuvem é diferente da criação de um aplicati
 
 Este artigo fornece uma visão geral de como criar aplicativos resilientes no Microsoft Azure. Ele começa com uma definição do termo *resiliência* e conceitos de relacionados. Em seguida, descreve um processo para a obtenção de resiliência, usando uma abordagem estruturada sobre o tempo de vida de um aplicativo, desde o design e a implementação até a implantação e as operações.
 
+<!-- markdownlint-disable MD026 -->
+
 ## <a name="what-is-resiliency"></a>O que é resiliência?
+
+<!-- markdownlint-enable MD026 -->
 
 **Resiliência** é a capacidade de um sistema de se recuperar de falhas e continuar funcionando. Não se trata de *evitar* falhas, mas *responder* a elas de uma maneira que evite o tempo de inatividade ou a perda de dados. A meta de resiliência é retornar o aplicativo a um estado totalmente funcional após uma falha.
 
 Dois aspectos importantes de resiliência são alta disponibilidade e recuperação de desastres.
 
-* **HA (Alta Disponibilidade)** é a capacidade do aplicativo de continuar em execução em um estado íntegro, sem tempo de inatividade significativo. Por “estado íntegro” queremos dizer o aplicativo está respondendo e os usuários podem se conectar ao aplicativo e interagir com ele.  
-* **DR (Recuperação de Desastre)** é a capacidade de recuperação de incidentes raros, mas sérios: falhas não transitórias em larga escala, como interrupções de serviço que afetam toda a região. A recuperação de desastre inclui backup e arquivamento de dados e pode incluir a intervenção manual, como a restauração um banco de dados com base em um backup.
+- **HA (Alta Disponibilidade)** é a capacidade do aplicativo de continuar em execução em um estado íntegro, sem tempo de inatividade significativo. Por “estado íntegro” queremos dizer o aplicativo está respondendo e os usuários podem se conectar ao aplicativo e interagir com ele.  
+- **DR (Recuperação de Desastre)** é a capacidade de recuperação de incidentes raros, mas sérios: falhas não transitórias em larga escala, como interrupções de serviço que afetam toda a região. A recuperação de desastre inclui backup e arquivamento de dados e pode incluir a intervenção manual, como a restauração um banco de dados com base em um backup.
 
 Uma das formas de diferenciar a HA da DR é que a última é iniciada quando o impacto de uma falha excede a capacidade do design da HA para tratá-la.  
 
@@ -36,7 +40,7 @@ Outro termo comum é **Continuidade dos Negócios** (BC), que é a capacidade de
 
 O **backup de dados** é uma parte fundamental da recuperação de desastre. Se os componentes sem monitoração de estado de um aplicativo falharem, você sempre poderá reimplantá-los. Mas se os dados forem perdidos, o sistema não poderá retornar a um estado estável. O backup dos dados deve ser feito, idealmente em uma região diferente para o caso de um desastre em toda a região.
 
-Backup é diferente de **replicação de dados**. Replicação de dados envolve a cópia de dados quase em tempo real, para que o sistema possa realizar failover rapidamente para uma réplica. Muitos sistemas de bancos de dados são compatíveis com replicação; Por exemplo, o SQL Server é compatível com Grupos de Disponibilidade Always On do SQL Server. A replicação de dados pode reduzir o tempo necessário para recuperar-se de uma interrupção, garantindo que uma réplica dos dados esteja sempre disponível. No entanto, a replicação de dados não protegerá contra erro humano. Se os dados forem corrompidos devido a erro humano, eles serão apenas copiados para as réplicas. Portanto, você ainda precisa incluir o backup de longo prazo em sua estratégia de DR.
+Backup é diferente de *replicação de dados*. Replicação de dados envolve a cópia de dados quase em tempo real, para que o sistema possa realizar failover rapidamente para uma réplica. Muitos sistemas de bancos de dados são compatíveis com replicação; Por exemplo, o SQL Server é compatível com Grupos de Disponibilidade Always On do SQL Server. A replicação de dados pode reduzir o tempo necessário para recuperar-se de uma interrupção, garantindo que uma réplica dos dados esteja sempre disponível. No entanto, a replicação de dados não protegerá contra erro humano. Se os dados forem corrompidos devido a erro humano, eles serão apenas copiados para as réplicas. Portanto, você ainda precisa incluir o backup de longo prazo em sua estratégia de DR.
 
 ## <a name="process-to-achieve-resiliency"></a>Processo para obter resiliência
 
@@ -60,9 +64,9 @@ O planejamento da resiliência começa com os requisitos de negócios. A seguir 
 
 Muitas soluções de nuvem consistem em várias cargas de trabalho de aplicativos. O termo "carga de trabalho" neste contexto significa um recurso discreto ou uma tarefa de computação, que pode ser logicamente separada de outras tarefas, em termos de requisitos de armazenamento de dados e lógica de negócios. Por exemplo, um aplicativo de comércio eletrônico pode incluir as cargas de trabalho a seguir:
 
-* Procura e pesquisa em um catálogo de produtos.
-* Criação e controle de pedidos.
-* Exibição de recomendações.
+- Procura e pesquisa em um catálogo de produtos.
+- Criação e controle de pedidos.
+- Exibição de recomendações.
 
 Essas cargas de trabalho podem ter diferentes requisitos de disponibilidade, escalabilidade, consistência de dados e recuperação de desastres. Há decisões de negócios que devem ser feitas em termos de custo de balanceamento versus risco.
 
@@ -72,9 +76,9 @@ Considere também os padrões de uso. Há certos períodos críticos quando o si
 
 Duas métricas importantes a considerar são o Objetivo do Tempo de Recuperação e o Objetivo do Ponto de Recuperação, pois elas pertencem à recuperação de desastres.
 
-* **Objetivo do Tempo de Recuperação** (RTO) é o tempo máximo aceitável que um aplicativo pode ficar indisponível após um incidente. Se o RTO for de 90 minutos, você deverá ser capaz de restaurar o aplicativo para um estado de execução dentro de 90 minutos a partir do início de um desastre. Se você tiver um RTO muito baixo, poderá manter uma segunda implantação regional executando continuamente uma configuração ativa/passiva em modo de espera, para se proteger de uma interrupção regional. Em alguns casos, você pode implantar uma configuração ativa/ativa para alcançar um RTO ainda menor.
+- **Objetivo do Tempo de Recuperação** (RTO) é o tempo máximo aceitável que um aplicativo pode ficar indisponível após um incidente. Se o RTO for de 90 minutos, você deverá ser capaz de restaurar o aplicativo para um estado de execução dentro de 90 minutos a partir do início de um desastre. Se você tiver um RTO muito baixo, poderá manter uma segunda implantação regional executando continuamente uma configuração ativa/passiva em modo de espera, para se proteger de uma interrupção regional. Em alguns casos, você pode implantar uma configuração ativa/ativa para alcançar um RTO ainda menor.
 
-* **Objetivo do Ponto de Recuperação** (RPO) é a duração máxima de perda de dados aceitável durante um desastre. Por exemplo, se você armazena dados em um único banco de dados, com nenhuma replicação para outros bancos de dados, e executar backups a cada hora, poderá perder até uma hora de dados.
+- **Objetivo do Ponto de Recuperação** (RPO) é a duração máxima de perda de dados aceitável durante um desastre. Por exemplo, se você armazena dados em um único banco de dados, com nenhuma replicação para outros bancos de dados, e executar backups a cada hora, poderá perder até uma hora de dados.
 
 RTO e RPO são os requisitos não funcionais de um sistema e devem ser determinados pelos requisitos de negócios. Para obter esses valores, é uma boa ideia conduzir uma avaliação de risco para compreender claramente o custo do tempo de inatividade ou da perda de dados.
 
@@ -90,11 +94,11 @@ Duas outras medidas comuns de disponibilidade são o tempo médio de recuperaç�
 > Se QUALQUER um dos valores dos componentes em uma configuração de alta disponibilidade MTTR exceder o RTO do sistema, uma falha no sistema causará uma interrupção inaceitável dos negócios. Não será possível restaurar o sistema dentro do RTO definido.
 
 ### <a name="slas"></a>SLAs
+
 O [SLA (Contrato de Nível de Serviço)][sla] descreve os compromissos da Microsoft com relação ao tempo de atividade e à conectividade. Se o SLA para um serviço específico for de 99,9%, isso significa que você deve esperar que o serviço esteja disponível 99,9% do tempo.
 
 > [!NOTE]
 > O SLA do Azure também inclui provisões para se obter um crédito de serviço se o SLA não for atendido, além de definições específicas de "disponibilidade" para cada serviço. Esse aspecto do SLA atua como uma política de imposição.
->
 
 Você deve definir seus próprios SLAs de destino para cada carga de trabalho em sua solução. Um SLA possibilita avaliar se a arquitetura atende aos requisitos de negócios. Por exemplo, se uma carga de trabalho requer tempo de disponibilidade de 99,99%, mas depende de um serviço com um SLA de 99,9%, o serviço não poderá ser um ponto único de falha no sistema. Uma solução é ter um caminho de fallback no caso de falha do serviço ou tomar outras medidas para recuperar uma falha nesse serviço.
 
@@ -112,32 +116,33 @@ Obviamente, a alta disponibilidade é melhor, no caso de tudo ser igual. Mas, qu
 
 Aqui estão algumas outras considerações ao definir um SLA:
 
-* Para obter quatro 9s (99,99%), você provavelmente não pode depender de intervenção manual para se recuperar de falhas. O aplicativo deve ser de autodiagnóstico e autorrecuperação.
-* Além de quatro 9s, é difícil detectar problemas rápido o suficiente para atender ao SLA.
-* Pense no intervalo de tempo ao qual a medição do seu SLA está relacionada. Quanto menor for o intervalo, menor será a tolerância. Provavelmente não faz sentido definir seu SLA em termos de tempo de atividade por hora ou dia.
-* Considere as medidas de MTBF e MTTR. Quanto menor o SLA, menor será a frequência com que o serviço poderá ficar inativo, e mais rápida deverá ser a recuperação do serviço.
+- Para obter quatro 9s (99,99%), você provavelmente não pode depender de intervenção manual para se recuperar de falhas. O aplicativo deve ser de autodiagnóstico e autorrecuperação.
+- Além de quatro 9s, é difícil detectar problemas rápido o suficiente para atender ao SLA.
+- Pense no intervalo de tempo ao qual a medição do seu SLA está relacionada. Quanto menor for o intervalo, menor será a tolerância. Provavelmente não faz sentido definir seu SLA em termos de tempo de atividade por hora ou dia.
+- Considere as medidas de MTBF e MTTR. Quanto menor o SLA, menor será a frequência com que o serviço poderá ficar inativo, e mais rápida deverá ser a recuperação do serviço.
 
 ### <a name="composite-slas"></a>SLAs compostos
+
 Considere um aplicativo Web do Serviço de Aplicativo que grava no banco de dados do SQL Azure. No momento da redação deste artigo, esses serviços do Azure têm os seguintes SLAs:
 
-* Aplicativos Web do Serviço de Aplicativo = 99,95%
-* Banco de dados SQL = 99,99%
+- Aplicativos Web do Serviço de Aplicativo = 99,95%
+- Banco de dados SQL = 99,99%
 
 ![SLA composto](./images/sla1.png)
 
 Qual é o tempo de inatividade máximo esperado para este aplicativo? Se o serviço falhar, o aplicativo inteiro falhará. Em geral, a probabilidade de cada serviço com falha é independente, portanto, o SLA composto para este aplicativo é de 99,95% &times; 99,99% = % 99,94%. Isso é menos do que os SLAs individuais, o que não é surpresa, porque um aplicativo que depende de vários serviços possui mais pontos de falha em potencial.
 
-Por outro lado, você pode melhorar o SLA composto criando caminhos de fallback independentes. Por exemplo, se o banco de dados SQL não estiver disponível, coloque as transações em uma fila, para serem processadas posteriormente. 
+Por outro lado, você pode melhorar o SLA composto criando caminhos de fallback independentes. Por exemplo, se o banco de dados SQL não estiver disponível, coloque as transações em uma fila, para serem processadas posteriormente.
 
 ![SLA composto](./images/sla2.png)
 
 Com esse design, o aplicativo ainda estará disponível mesmo se não puder se conectar ao banco de dados. No entanto, ele falhará se o banco de dados e a fila falharem ao mesmo tempo. A porcentagem esperada de tempo de uma falha simultânea é de 0,0001 &times; 0,001, portanto, o SLA composto para este caminho combinado é:  
 
-* Banco de dados OU fila = 1,0 &minus; (0,0001 &times; 0,001) = 99,99999%
+- Banco de dados OU fila = 1,0 &minus; (0,0001 &times; 0,001) = 99,99999%
 
 O SLA composto total é:
 
-* Aplicativo Web E (banco de dados OU fila) = 99,95% &times; 99,99999% = ~99,95%
+- Aplicativo Web E (banco de dados OU fila) = 99,95% &times; 99,99999% = ~99,95%
 
 Mas existem compensações para essa abordagem. A lógica do aplicativo é mais complexa. Você está pagando pela fila e pode haver problemas de consistência de dados a serem considerados.
 
@@ -147,8 +152,8 @@ Seja *N* o SLA composto para o aplicativo implantado em uma região e *R* o núm
 
 Por exemplo, se o SLA de região única é de 99,95%,
 
-* O SLA combinado para duas regiões = (1 &minus; (0,9995 ^ 2)) = 99,999975%
-* O SLA combinado para quatro regiões = (1 &minus; (0,9995 ^ 4)) = 99,999999%
+- O SLA combinado para duas regiões = (1 &minus; (0,9995 ^ 2)) = 99,999975%
+- O SLA combinado para quatro regiões = (1 &minus; (0,9995 ^ 4)) = 99,999999%
 
 Você também deve considerar o [SLA para o Gerenciador de Tráfego][tm-sla]. No momento da redação deste artigo, o SLA para o SLA do Gerenciador de Tráfego é de 99,99%.
 
@@ -160,13 +165,14 @@ O número calculado de SLA é uma linha de base útil, mas ela não informa a hi
 
 Durante a fase de design, você deve executar uma Análise do Modo de Falha (FMA). O objetivo de uma FMA é identificar possíveis pontos de falha e definir como o aplicativo responde a essas falhas.
 
-* Como o aplicativo detectará esse tipo de falha?
-* Como o aplicativo responderá a esse tipo de falha?
-* Como você pode fazer logon e monitorar esse tipo de falha?
+- Como o aplicativo detectará esse tipo de falha?
+- Como o aplicativo responderá a esse tipo de falha?
+- Como você pode fazer logon e monitorar esse tipo de falha?
 
 Para obter mais informações sobre o processo FMA, com as recomendações específicas para o Azure, confira [Orientação de resiliência do Azure: Análise do modo de falha][fma].
 
 ### <a name="example-of-identifying-failure-modes-and-detection-strategy"></a>Exemplo de identificação de modos de falha e estratégia de detecção
+
 **Ponto de falha:** Chamada para um serviço Web externo/API.
 
 | Modo de falha | Estratégia de detecção |
@@ -192,13 +198,13 @@ O Azure tem um número de recursos para tornar um aplicativo redundante em cada 
 
 **Zonas de disponibilidades**.  Uma Zona de Disponibilidade é uma zona fisicamente separada em uma região do Azure. Cada zona de disponibilidade tem uma rede, resfriamento e fonte de energia distintos. A implantação de VMs em zonas de disponibilidade ajuda a proteger um aplicativo contra falhas em todo o datacenter. Nem todas as regiões oferecem suporte às Zonas de Disponibilidade. Para obter uma lista de regiões com suporte e serviços, confira [O que são Zonas de Disponibilidade no Azure?](/azure/availability-zones/az-overview).
 
-Se você estiver planejando usar as Zonas de Disponibilidade em sua implantação, primeiro confirme se sua arquitetura de aplicativo e a base de código podem dar suporte a essa configuração. Se você estiver implantando o software commercial off-the-shelf, consulte o fornecedor de software e teste adequadamente antes de implantar na produção. Um aplicativo deve ser capaz de manter o estado e evitar a perda de dados durante uma interrupção dentro da zona configurada. O aplicativo deve oferecer suporte à execução em uma infraestrutura distribuída e elástica com nenhum componente de infraestrutura embutido em código especificado na base de código. 
+Se você estiver planejando usar as Zonas de Disponibilidade em sua implantação, primeiro confirme se sua arquitetura de aplicativo e a base de código podem dar suporte a essa configuração. Se você estiver implantando o software commercial off-the-shelf, consulte o fornecedor de software e teste adequadamente antes de implantar na produção. Um aplicativo deve ser capaz de manter o estado e evitar a perda de dados durante uma interrupção dentro da zona configurada. O aplicativo deve oferecer suporte à execução em uma infraestrutura distribuída e elástica com nenhum componente de infraestrutura embutido em código especificado na base de código.
 
 **Azure Site Recovery**.  Replica as máquinas virtuais do Azure para outra região do Azure para necessidades de continuidade dos negócios e de recuperação de desastres. Você pode realizar análises periódicas de recuperação de desastres para garantir que atende às necessidades de conformidade. A máquina virtual será replicada com as configurações especificadas para a região selecionada para que você possa recuperar seus aplicativos em caso de interrupções na região de origem. Para obter mais informações, confira [Replicar VMs do Azure usando o ASR][site-recovery]. Considere os números de RTO e RPO para sua solução aqui e certifique-se de que, durante o teste, o ponto de recuperação e de tempo de recuperação é apropriado para suas necessidades.
 
 **Regiões emparelhadas**. Para proteger um aplicativo contra uma interrupção regional, você pode implantar o aplicativo em várias regiões, usando o Gerenciador de Tráfego do Azure para distribuir o tráfego de Internet para as diferentes regiões. Cada região do Azure é emparelhada com outra. Juntas, elas formam um [par regional](/azure/best-practices-availability-paired-regions). Com a exceção do Sul do Brasil, pares regionais estão localizados na mesma região geográfica para atender aos requisitos de residência de dados para fins de jurisdição de imposição fiscal e legal.
 
-Quando você cria um aplicativo de várias regiões, leve em consideração que a latência de rede entre diferentes regiões é maior do que a obtida em uma região. Por exemplo, se você estiver replicando de um banco de dados para habilitar o failover, use a replicação síncrona de dados dentro de uma região, mas a replicação assíncrona de dados entre regiões. 
+Quando você cria um aplicativo de várias regiões, leve em consideração que a latência de rede entre diferentes regiões é maior do que a obtida em uma região. Por exemplo, se você estiver replicando de um banco de dados para habilitar o failover, use a replicação síncrona de dados dentro de uma região, mas a replicação assíncrona de dados entre regiões.
 
 | &nbsp; | Conjunto de disponibilidade | Zona de disponibilidade | Azure Site Recovery/Região emparelhada |
 |--------|------------------|-------------------|---------------|
@@ -208,19 +214,20 @@ Quando você cria um aplicativo de várias regiões, leve em consideração que 
 | Rede virtual  | VNET | VNET | Emparelhamento VNET entre regiões |
 
 ## <a name="implement-resiliency-strategies"></a>Implementar estratégias de resiliência
+
 Esta seção traz uma pesquisa de algumas estratégias comuns de resiliência. A maioria delas não se limita a uma tecnologia específica. As descrições nesta seção resumem a ideia geral de cada técnica, com links para leituras adicionais.
 
 **Repita as falhas temporárias**. As falhas transitórias podem ser causadas por perda momentânea de conectividade de rede, interrupção na conexão com o banco de dados ou tempo limite atingido quando um serviço está ocupado. Frequentemente, uma falha temporária pode ser resolvida repetindo-se a solicitação. Em muitos serviços do Azure, o SDK do cliente implementa tentativas automáticas de forma transparente para o chamador. Consulte [Orientação específica sobre repetição de serviço][retry-service-specific guidance].
 
 Cada tentativa de repetição é adicionada à latência total. Além disso, um número excessivo de solicitações com falha pode causar afunilamento, pois as solicitações pendentes se acumulam na fila. Essas solicitações bloqueadas podem reter recursos críticos do sistema, como memória, threads, conexões de banco de dados e outros, e provocar falhas em cascata. Para evitar isso, aumente o atraso entre as tentativas de repetição e limite o número total de solicitações com falha.
 
-![](./images/retry.png)
+![Diagrama de tentativas de repetição](./images/retry.png)
 
 **Balanceie a carga entre as instâncias**. Para ter escalabilidade, um aplicativo em nuvem deve ser capaz de se expandir com a adição de mais instâncias. Essa abordagem também aumenta a resiliência, porque as instâncias não íntegras podem ser removidas da rotação. Por exemplo: 
 
-* Coloque duas ou mais VMs por trás de um balanceador de carga. O balanceador de carga distribui o tráfego para todas as VMs. Consulte [Executar VMs com balanceamento de carga para escalabilidade e disponibilidade][ra-multi-vm].
-* Escale um aplicativo do Serviço de Aplicativo do Azure horizontalmente para várias instâncias. O Serviço de Aplicativo equilibra automaticamente a carga entre as instâncias. Consulte [Aplicativo Web básico][ra-basic-web].
-* Use o [Gerenciador de Tráfego do Azure][tm] para distribuir o tráfego em um conjunto de pontos de extremidade.
+- Coloque duas ou mais VMs por trás de um balanceador de carga. O balanceador de carga distribui o tráfego para todas as VMs. Consulte [Executar VMs com balanceamento de carga para escalabilidade e disponibilidade][ra-multi-vm].
+- Escale um aplicativo do Serviço de Aplicativo do Azure horizontalmente para várias instâncias. O Serviço de Aplicativo equilibra automaticamente a carga entre as instâncias. Consulte [Aplicativo Web básico][ra-basic-web].
+- Use o [Gerenciador de Tráfego do Azure][tm] para distribuir o tráfego em um conjunto de pontos de extremidade.
 
 **Replique os dados**. A replicação de dados é uma estratégia geral para manipular falhas não transitórias em um armazenamento de dados. Muitas tecnologias de armazenamento fornecem replicação interna, inclusive o Armazenamento do Microsoft Azure, o Banco de Dados SQL do Azure, o Cosmos DB e o Apache Cassandra. É importante considerar os caminhos de leitura e gravação. Dependendo da tecnologia de armazenamento, você pode ter várias réplicas graváveis, ou uma só réplica gravável e várias somente leitura.
 
@@ -230,10 +237,10 @@ Você pode suar o [Azure Site Recovery][site-recovery] para replicar as máquina
 
 **Degradar normalmente**. Se um serviço falhar e não houver caminho de failover, o aplicativo pode conseguir degradar o serviço normalmente e continuar fornecendo uma experiência de usuário aceitável. Por exemplo: 
 
-* Colocar um item de trabalho em uma fila a ser tratada mais tarde.
-* Retornar um valor estimado.
-* Usar dados armazenados em cache localmente.
-* Exibir uma mensagem de erro para o usuário. (Essa opção é melhor do que o aplicativo parar de responder às solicitações.)
+- Colocar um item de trabalho em uma fila a ser tratada mais tarde.
+- Retornar um valor estimado.
+- Usar dados armazenados em cache localmente.
+- Exibir uma mensagem de erro para o usuário. (Essa opção é melhor do que o aplicativo parar de responder às solicitações.)
 
 **Limite os usuários de alto volume**. Às vezes, um pequeno número de usuários cria uma carga excessiva. Isso pode afetar os outros, reduzindo a disponibilidade geral do aplicativo.
 
@@ -252,62 +259,65 @@ Para evitar isso, você pode particionar um sistema em grupos isolados, para que
 
 Exemplos:
 
-* Particionar um banco de dados (por locatário, por exemplo) e atribuir um pool de instâncias de servidor Web a cada partição.  
-* Usar pools de threads separados, para isolar as chamadas para diferentes serviços. Isso ajuda a evitar falhas em cascata, se houver falha em um dos serviços. Para ver um exemplo, consulte a [biblioteca Hystrix][hystrix] da Netflix.
-* Usar [contêineres][containers] para limitar os recursos disponíveis a um determinado subsistema.
+- Particionar um banco de dados (por locatário, por exemplo) e atribuir um pool de instâncias de servidor Web a cada partição.  
+- Usar pools de threads separados, para isolar as chamadas para diferentes serviços. Isso ajuda a evitar falhas em cascata, se houver falha em um dos serviços. Para ver um exemplo, consulte a [biblioteca Hystrix][hystrix] da Netflix.
+- Usar [contêineres][containers] para limitar os recursos disponíveis a um determinado subsistema.
 
-![](./images/bulkhead.png)
+![Diagrama do padrão de Bulkhead](./images/bulkhead.png)
 
 **Aplique transações de compensação**. Um [transação de compensação][compensating-transaction-pattern] é uma transação que desfaz os efeitos de outra transação concluída. Em um sistema distribuído, pode ser muito difícil obter uma consistência transacional sólida. As transações de compensação são uma forma de obter consistência usando uma série de transações individuais menores, que podem ser desfeitas em cada etapa.
 
 Por exemplo, para fazer uma viagem, um cliente pode precisar reservar um voo, acomodações de hotel e um carro. Se alguma dessas etapas falhar, toda a operação falhará. Em vez de tentar usar uma única transação distribuída em toda a operação, você pode definir uma transação de compensação para cada etapa. Por exemplo, para desfazer uma reserva de carro, cancelar essa reserva. Para concluir toda a operação, um coordenador executa cada etapa. Se alguma delas falhar, o coordenador aplica transações de compensação para desfazer todas as etapas concluídas.
 
 ## <a name="test-for-resiliency"></a>Testar resiliência
+
 Em geral, não se pode testar a resiliência da mesma maneira que a funcionalidade do aplicativo (executando testes unitários e outros). Em vez disso, deve-se testar a execução da carga de trabalho de ponta a ponta sob condições de falha intermitentes.
 
 O teste é um processo iterativo. Teste o aplicativo, avalie o resultado, analise e resolva as falhas resultantes, e repita o processo.
 
 **Teste de injeção de falha**. Teste a resiliência do sistema durante falhas, seja disparando falhas reais ou fazendo simulações. Aqui estão alguns cenários comuns de falha para teste:
 
-* desligamento de instâncias de VM
-* falha de processos
-* expiração de certificados
-* mudança de chaves de acesso
-* desligamento do serviço DNS em controladores de domínio
-* limitação de recursos do sistema disponíveis, como RAM ou número de threads
-* desmontagem de discos
-* reimplantação de uma VM
+- desligamento de instâncias de VM
+- falha de processos
+- expiração de certificados
+- mudança de chaves de acesso
+- desligamento do serviço DNS em controladores de domínio
+- limitação de recursos do sistema disponíveis, como RAM ou número de threads
+- desmontagem de discos
+- reimplantação de uma VM
 
 Meça o tempo de recuperação e verifique se os seus requisitos de negócios estão sendo cumpridos. Teste também combinações dos modos de falha. Certifique-se de que as falhas não se propaguem em cascata e que sejam tratadas isoladamente.
 
 Essa é outra razão pela qual é importante analisar possíveis pontos de falha durante a fase de design. Os resultados dessa análise devem funcionar como informações para o seu plano de teste.
 
-**Teste de carga**. O teste de carga é crucial para identificar falhas que só ocorrem sob condições de carga, como um banco de dados de back-end sobrecarregado ou limitações de serviço. Teste a carga de pico usando dados de produção ou sintéticos, desde que estes se aproximem o máximo possível dos dados de produção. O objetivo é observar como o aplicativo se comporta sob condições do mundo real.   
+**Teste de carga**. O teste de carga é crucial para identificar falhas que só ocorrem sob condições de carga, como um banco de dados de back-end sobrecarregado ou limitações de serviço. Teste a carga de pico usando dados de produção ou sintéticos, desde que estes se aproximem o máximo possível dos dados de produção. O objetivo é observar como o aplicativo se comporta sob condições do mundo real.
 
 **Análises de recuperação de desastres**. Não basta ter um bom plano de recuperação de desastres em vigor. Você precisa testá-lo periodicamente para garantir que seu plano de recuperação funcione bem quando precisar. Para as máquinas virtuais do Azure, você pode usar o [Azure Site Recovery][site-recovery] para replicar e [executar análises de DR][site-recovery-test-failover] sem afetar os aplicativos de produção ou a replicação contínua.
 
 ## <a name="deploy-using-reliable-processes"></a>Implantar usando processos confiáveis
+
 Quando um aplicativo é implantado para produção, as atualizações são uma possível fonte de erros. Na pior das hipóteses, uma atualização corrompida pode causar inatividade. Para evitar isso, o processo de implantação deve ser repetível e previsível. A implantação inclui etapas de provisionamento de recursos do Azure, implantação do código do aplicativo e aplicação de definições de configuração. Uma atualização pode envolver todas ou parte dessas três.
 
 O ponto fundamental é que implantações manuais são propensas a erro. Por isso, é recomendável um processo idempotente automatizado, que você pode executar sob demanda e, caso haja alguma falha, executar novamente.
 
-* Use modelos do Azure Resource Manager para automatizar o provisionamento de recursos do Azure.
-* Use o [Azure Automation Desired State Configuration][dsc] (DSC) para configurar VMs.
-* Use um processo de implantação automática para o código do aplicativo.
+- Use modelos do Azure Resource Manager para automatizar o provisionamento de recursos do Azure.
+- Use o [Azure Automation Desired State Configuration][dsc] (DSC) para configurar VMs.
+- Use um processo de implantação automática para o código do aplicativo.
 
 Dois conceitos relacionados à implantação resiliente são: *infraestrutura como código* e *infraestrutura imutável*.
 
-* **Infraestrutura como código** é a prática de usar código para provisionar e configurar a infraestrutura. A infraestrutura como código pode usar abordagem declarativa ou imperativa (ou mesmo uma combinação de ambas). Os modelos do Resource Manager são um exemplo de abordagem declarativa. Os scripts do PowerShell são um exemplo de abordagem imperativa.
-* **Infraestrutura imutável** é o princípio segundo o qual não se deve modificar a infraestrutura após sua implantação para produção. Caso contrário, você pode entrar em um estado em que foram aplicadas alterações ad hoc, no qual é difícil saber exatamente o que mudou e chegar a uma conclusão em relação ao sistema.
+- **Infraestrutura como código** é a prática de usar código para provisionar e configurar a infraestrutura. A infraestrutura como código pode usar abordagem declarativa ou imperativa (ou mesmo uma combinação de ambas). Os modelos do Resource Manager são um exemplo de abordagem declarativa. Os scripts do PowerShell são um exemplo de abordagem imperativa.
+- **Infraestrutura imutável** é o princípio segundo o qual não se deve modificar a infraestrutura após sua implantação para produção. Caso contrário, você pode entrar em um estado em que foram aplicadas alterações ad hoc, no qual é difícil saber exatamente o que mudou e chegar a uma conclusão em relação ao sistema.
 
 Outra questão é como lançar uma atualização do aplicativo. Recomendamos técnicas como as chamadas implantações “blue-green” e versões “canário”, que enviam atualizações de forma altamente controlada, visando a minimizar os possíveis impactos de uma implantação incorreta.
 
-* A [Implantação “blue-green”][blue-green] é uma técnica em que a atualização é implantada em um ambiente de produção à parte do aplicativo ao vivo. Após validar a implantação, alterne o roteamento de tráfego para a versão atualizada. Por exemplo, o recurso Aplicativos Web do Serviço de Aplicativo do Azure permite isso com slots de preparo.
-* As [versões “canário”][canary-release] são semelhantes às implantações “blue-green”. Em vez de alternar todo o tráfego para a versão atualizada, lança-se a atualização para uma pequena porcentagem de usuários encaminhando uma parte do tráfego para a nova implantação. Se houver problemas, interrompe-se o processo volta-se à implantação anterior. Se tudo correr bem, encaminha-se mais uma parte do tráfego para a nova versão, até atingir 100%.
+- A [Implantação “blue-green”][blue-green] é uma técnica em que a atualização é implantada em um ambiente de produção à parte do aplicativo ao vivo. Após validar a implantação, alterne o roteamento de tráfego para a versão atualizada. Por exemplo, o recurso Aplicativos Web do Serviço de Aplicativo do Azure permite isso com slots de preparo.
+- As [versões “canário”][canary-release] são semelhantes às implantações “blue-green”. Em vez de alternar todo o tráfego para a versão atualizada, lança-se a atualização para uma pequena porcentagem de usuários encaminhando uma parte do tráfego para a nova implantação. Se houver problemas, interrompe-se o processo volta-se à implantação anterior. Se tudo correr bem, encaminha-se mais uma parte do tráfego para a nova versão, até atingir 100%.
 
 Qualquer que seja a abordagem, certifique-se de poder reverter para a última implantação íntegra, caso a nova versão não funcione. Além disso, se houver erros, os logs de aplicativo devem indicar a versão causadora do erro.
 
 ## <a name="monitor-to-detect-failures"></a>Monitorar para detectar falhas
+
 O monitoramento e o diagnóstico são cruciais para garantir a resiliência. Se algo falhar, você precisa saber o que falhou, e também ter informações sobre a causa da falha.
 
 O monitoramento de um sistema distribuído em larga escala representa um desafio significativo. Pense em um aplicativo executado em algumas dezenas de VMs; &mdash;não é prático fazer logon em cada uma delas e examinar seus arquivos de log para tentar solucionar um problema. Além disso, o número de instâncias de VM provavelmente não é estático. As VMs são adicionadas e removidas com a expansão e retração do aplicativo, e, ocasionalmente, uma instância pode falhar e precisar ser provisionada novamente. Além disso, um aplicativo de nuvem típico pode usar vários armazenamentos de dados (armazenamento do Azure, Banco de Dados SQL, Cosmos DB, cache Redis) e uma única ação do usuário pode abranger vários subsistemas.
@@ -316,45 +326,46 @@ Pode-se considerar o processo de monitoramento e diagnóstico como um pipeline c
 
 ![SLA composto](./images/monitoring.png)
 
-* **Instrumentação**. Os dados brutos para monitoramento e diagnóstico vêm de várias fontes, inclusive logs de aplicativo e de servidor Web, contadores de desempenho do sistema operacional, logs de banco de dados e diagnósticos incorporados à plataforma Azure. A maioria dos serviços do Azure tem um recurso de diagnóstico que pode ser usado para determinar a causa dos problemas.
-* **Coleta e armazenamento**. Dados de instrumentação brutos podem ser mantidos em vários locais e com vários formatos (por exemplo, logs de rastreamento de aplicativo e do IIS, contadores de desempenho). Essas fontes diferentes são coletadas, consolidadas e colocadas em um armazenamento confiável.
-* **Análise e diagnóstico**. Após os dados serem consolidados, eles podem ser analisados para solucionar problemas e fornecer uma visão geral da integridade do aplicativo.
-* **Visualização e alertas**. Neste estágio, os dados de telemetria são apresentados de forma que um operador pode notar rapidamente problemas ou tendências. Exemplo: inclusão de painéis ou alertas por email.  
+- **Instrumentação**. Os dados brutos para monitoramento e diagnóstico vêm de várias fontes, inclusive logs de aplicativo e de servidor Web, contadores de desempenho do sistema operacional, logs de banco de dados e diagnósticos incorporados à plataforma Azure. A maioria dos serviços do Azure tem um recurso de diagnóstico que pode ser usado para determinar a causa dos problemas.
+- **Coleta e armazenamento**. Dados de instrumentação brutos podem ser mantidos em vários locais e com vários formatos (por exemplo, logs de rastreamento de aplicativo e do IIS, contadores de desempenho). Essas fontes diferentes são coletadas, consolidadas e colocadas em um armazenamento confiável.
+- **Análise e diagnóstico**. Após os dados serem consolidados, eles podem ser analisados para solucionar problemas e fornecer uma visão geral da integridade do aplicativo.
+- **Visualização e alertas**. Neste estágio, os dados de telemetria são apresentados de forma que um operador pode notar rapidamente problemas ou tendências. Exemplo: inclusão de painéis ou alertas por email.  
 
 Monitoramento não é o mesmo que detecção de falha. Por exemplo, seu aplicativo pode detectar um erro transitório e tentar novamente, sem que haja qualquer inatividade. Mas ele deve registrar essa operação de repetição, para que se possa monitorar a taxa de erros e ter uma visão geral da integridade do aplicativo.
 
 Os logs de aplicativo são uma fonte importante de dados de diagnóstico. Algumas práticas recomendadas para o log de aplicativo são:
 
-* Obtenha logs na fase de produção. Caso contrário, você perderá informações onde mais precisa.
-* Obtenha logs de eventos nos limites dos serviços. Inclua uma ID de correlação que flua nos limites dos serviços. Se uma transação fluir em vários serviços e houver uma falha, a ID de correlação ajudará a identificar o motivo da falha da transação.
-* Use o log semântico, também conhecido como registro em log estruturado. Os logs não estruturados dificultam a automatização do consumo e da análise dos dados do log, necessários em escala de nuvem.
-* Use logs assíncronos. Caso contrário, o próprio sistema de registro em log pode provocar falha do aplicativo com solicitações de backup, pois ocorre bloqueio durante a espera para gravar um evento de log.
-* Log de aplicativo não é o mesmo que auditoria. A auditoria pode ser feita por motivos regulatórios ou de conformidade. Sendo assim, os registros de auditoria devem ser concluídos, não sendo aceitável remover nenhum deles durante o processamento de transações. Se um aplicativo exigir auditoria, ela deve ser mantida à parte do log de diagnóstico.
+- Obtenha logs na fase de produção. Caso contrário, você perderá informações onde mais precisa.
+- Obtenha logs de eventos nos limites dos serviços. Inclua uma ID de correlação que flua nos limites dos serviços. Se uma transação fluir em vários serviços e houver uma falha, a ID de correlação ajudará a identificar o motivo da falha da transação.
+- Use o log semântico, também conhecido como registro em log estruturado. Os logs não estruturados dificultam a automatização do consumo e da análise dos dados do log, necessários em escala de nuvem.
+- Use logs assíncronos. Caso contrário, o próprio sistema de registro em log pode provocar falha do aplicativo com solicitações de backup, pois ocorre bloqueio durante a espera para gravar um evento de log.
+- Log de aplicativo não é o mesmo que auditoria. A auditoria pode ser feita por motivos regulatórios ou de conformidade. Sendo assim, os registros de auditoria devem ser concluídos, não sendo aceitável remover nenhum deles durante o processamento de transações. Se um aplicativo exigir auditoria, ela deve ser mantida à parte do log de diagnóstico.
 
 Para obter mais informações sobre monitoramento e diagnóstico, consulte [Diretrizes de monitoramento e diagnóstico][monitoring-guidance].
 
 ## <a name="respond-to-failures"></a>Responder a falhas
+
 As seções anteriores se concentraram em estratégias de recuperação automatizada, que são essenciais para a alta disponibilidade. No entanto, às vezes, a intervenção manual, é necessária.
 
-* **Alertas**. Monitore seu aplicativo, observando sinais de aviso que podem exigir intervenção proativa. Por exemplo, se você vir que o Banco de Dados SQL ou o Cosmos DB limitam repetidamente o seu aplicativo, talvez seja preciso aumentar a capacidade do banco de dados ou otimizar suas consultas. Neste exemplo, mesmo que o aplicativo consiga manipular esses erros de limitação de forma transparente, sua telemetria deve gerar um alerta, para que você possa acompanhar.  
-* **Failover manual**. Alguns sistemas não conseguem executar failover automaticamente, e ele deve ser manual. Para máquinas virtuais do Azure configuradas com o [Azure Site Recovery][site-recovery], você pode [realizar failover][site-recovery-failover] e recuperar suas máquinas virtuais em outra região numa questão de minutos.
-* **Testes de preparação operacional**. Se o seu aplicativo executar failover para uma região secundária, você deve executar um teste de preparação operacional antes do failback para a região principal. Esse teste deve verificar se a região principal está íntegra e pronta para receber o tráfego.
-* **Verificação de consistência de dados**. Se houver falha em um armazenamento de dados, pode haver inconsistências de dados quando o armazenamento voltar a ser disponibilizado, especialmente se os dados tiverem sido replicados.
-* **Restauração com base em backup**. Por exemplo, se o Banco de Dados SQL sofrer uma interrupção regional, você pode fazer uma restauração geográfica do banco de dados com base no backup mais recente.
+- **Alertas**. Monitore seu aplicativo, observando sinais de aviso que podem exigir intervenção proativa. Por exemplo, se você vir que o Banco de Dados SQL ou o Cosmos DB limitam repetidamente o seu aplicativo, talvez seja preciso aumentar a capacidade do banco de dados ou otimizar suas consultas. Neste exemplo, mesmo que o aplicativo consiga manipular esses erros de limitação de forma transparente, sua telemetria deve gerar um alerta, para que você possa acompanhar.  
+- **Failover manual**. Alguns sistemas não conseguem executar failover automaticamente, e ele deve ser manual. Para máquinas virtuais do Azure configuradas com o [Azure Site Recovery][site-recovery], você pode [realizar failover][site-recovery-failover] e recuperar suas máquinas virtuais em outra região numa questão de minutos.
+- **Testes de preparação operacional**. Se o seu aplicativo executar failover para uma região secundária, você deve executar um teste de preparação operacional antes do failback para a região principal. Esse teste deve verificar se a região principal está íntegra e pronta para receber o tráfego.
+- **Verificação de consistência de dados**. Se houver falha em um armazenamento de dados, pode haver inconsistências de dados quando o armazenamento voltar a ser disponibilizado, especialmente se os dados tiverem sido replicados.
+- **Restauração com base em backup**. Por exemplo, se o Banco de Dados SQL sofrer uma interrupção regional, você pode fazer uma restauração geográfica do banco de dados com base no backup mais recente.
 
 Documente e teste seu plano de recuperação de desastres. Avalie o impacto das falhas de aplicativos sobre os negócios. Automatize o processo tanto quanto possível, e documente todas as etapas manuais, como failover manual ou restauração de dados com base em backups. Teste regularmente seu processo de recuperação de desastres, para validar e aprimorar o plano.
 
 ## <a name="summary"></a>Resumo
+
 Este artigo discutiu a resiliência sob uma perspectiva holística, enfatizando alguns dos desafios exclusivos da nuvem. Eles incluem a natureza distribuída de computação em nuvem, o uso de hardware de mercadoria e a presença de falhas de rede temporárias.
 
 Estes são os principais pontos a serem lembrados neste artigo:
 
-* A resiliência leva à maior disponibilidade e diminui o tempo médio de recuperação de falhas.
-* A resiliência na nuvem requer um conjunto de técnicas diferentes das soluções tradicionais locais.
-* A resiliência não é acidental. Ela deve ser projetada e construída desde o início.
-* Resiliência é algo que deve existir em todas as partes do ciclo de vida do aplicativo, do planejamento e da codificação às operações.
-* Teste e monitore!
-
+- A resiliência leva à maior disponibilidade e diminui o tempo médio de recuperação de falhas.
+- A resiliência na nuvem requer um conjunto de técnicas diferentes das soluções tradicionais locais.
+- A resiliência não é acidental. Ela deve ser projetada e construída desde o início.
+- Resiliência é algo que deve existir em todas as partes do ciclo de vida do aplicativo, do planejamento e da codificação às operações.
+- Teste e monitore!
 
 <!-- links -->
 

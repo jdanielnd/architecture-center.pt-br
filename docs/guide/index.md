@@ -2,12 +2,12 @@
 layout: LandingPage
 ms.topic: landing-page
 ms.date: 08/30/2018
-ms.openlocfilehash: a1cac753d384c0fee0af204cddaeea1e63213b9f
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.openlocfilehash: ce1642f237cfae579cc987777c61c8d6eabff571
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43325852"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113868"
 ---
 # <a name="azure-application-architecture-guide"></a>Guia de Arquitetura do Aplicativo do Azure
 
@@ -15,9 +15,11 @@ Este guia apresenta uma abordagem estruturada para a criação de aplicativos do
 
 ## <a name="introduction"></a>Introdução
 
-A nuvem está mudando a maneira como os aplicativos são criados. Em vez de monolitos, aplicativos são decompostos em serviços descentralizados menores. Esses serviços se comunicam por meio de APIs, ou usando o serviço de mensagens ou eventos assíncronos. Os aplicativos são dimensionadaos horizontalmente, adicionando novas instâncias de acordo com a demanda. 
+A nuvem está mudando a maneira como os aplicativos são criados. Em vez de monolitos, aplicativos são decompostos em serviços descentralizados menores. Esses serviços se comunicam por meio de APIs, ou usando o serviço de mensagens ou eventos assíncronos. Os aplicativos são dimensionadaos horizontalmente, adicionando novas instâncias de acordo com a demanda.
 
-Essas tendências trazem novos desafios. O estado do aplicativo é distribuído. As operações são feitas em paralelo e de maneira assíncrona. O sistema como um todo deve ser resiliente quando ocorrem falhas. As implantações devem ser automatizadas e previsíveis. Monitoramento e telemetria são essenciais para obter informações sobre o sistema. O Guia de Arquitetura do Aplicativo do Azure foi criado para ajudá-lo a entender melhor essas mudanças. 
+Essas tendências trazem novos desafios. O estado do aplicativo é distribuído. As operações são feitas em paralelo e de maneira assíncrona. O sistema como um todo deve ser resiliente quando ocorrem falhas. As implantações devem ser automatizadas e previsíveis. Monitoramento e telemetria são essenciais para obter informações sobre o sistema. O Guia de Arquitetura do Aplicativo do Azure foi criado para ajudá-lo a entender melhor essas mudanças.
+
+<!-- markdownlint-disable MD033 -->
 
 <table>
 <thead>
@@ -47,6 +49,8 @@ Infraestrutura imutável<br/>
 </tbody>
 </table>
 
+<!-- markdownlint-enable MD033 -->
+
 Este guia destina-se a arquitetos de aplicativos, desenvolvedores e equipes de operações. Não é um guia de instruções para usar serviços individuais do Azure. Depois de ler este guia, você entenderá os padrões de arquitetura e práticas recomendadas para aplicar ao criar a plataforma de nuvem do Azure. Também pode baixar uma [versão em livro eletrônico do guia][ebook].
 
 ## <a name="how-this-guide-is-structured"></a>Como este guia é estruturado
@@ -63,7 +67,7 @@ Saiba mais:
 
 ### <a name="technology-choices"></a>Opções de tecnologia
 
-Duas opções de tecnologia devem ser decididas logo no início, porque elas afetam toda a sua arquitetura. São a escolha do serviço de computação e armazenamentos de dados. *Computação* se refere ao modelo de hospedagem dos recursos de computação em que seu aplicativo é executado. *Armazenamentos de dados* incluem bancos de dados, mas também o armazenamento das filas de mensagens, caches, logs e tudo que um aplicativo pode manter no armazenamento. 
+Duas opções de tecnologia devem ser decididas logo no início, porque elas afetam toda a sua arquitetura. São a escolha do serviço de computação e armazenamentos de dados. *Computação* se refere ao modelo de hospedagem dos recursos de computação em que seu aplicativo é executado. *Armazenamentos de dados* incluem bancos de dados, mas também o armazenamento das filas de mensagens, caches, logs e tudo que um aplicativo pode manter no armazenamento.
 
 Saiba mais:
 
@@ -78,12 +82,10 @@ Saiba mais:
 
 - [Princípios de design](./design-principles/index.md)
 
-
 ### <a name="quality-pillars"></a>Pilares da qualidade
 
-Um aplicativo na nuvem bem-sucedido focará os cinco pilares de qualidade do software: escalabilidade, disponibilidade, flexibilidade, gerenciamento e segurança. Use nossas listas de verificação do design para avaliar a arquitetura de acordo com os pilares da qualidade.
+Um aplicativo em nuvem bem-sucedido se concentrará em cinco pilares de qualidade de software: Escalabilidade, disponibilidade, resiliência, gerenciamento e segurança. Use nossas listas de verificação do design para avaliar a arquitetura de acordo com os pilares da qualidade.
 
 - [Pilares de qualidade](./pillars.md)
-
 
 [ebook]: https://azure.microsoft.com/campaigns/cloud-application-architecture-guide/
