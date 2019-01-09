@@ -3,32 +3,32 @@ title: Dados relacionais
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: 0ed15bfe93c0cebffb377543eda9dd84e65d7c02
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 499e7c632bd6bfee31c0625f4d647825107ea2bb
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52901398"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54111811"
 ---
 # <a name="traditional-relational-database-solutions"></a>Soluções tradicionais de banco de dados relacional
 
-Dados relacionais são dados modelados com o modelo relacional. Nesse modelo, os dados são expressos como tuplas. Uma *tupla* é um conjunto de pares de atributo/valor. Por exemplo, uma tupla pode ser (itemid = 5, orderid = 1, item = "Chair", amount = 200.00). Um conjunto de tuplas que compartilham os mesmos atributos é chamado de uma *relação*. 
+Dados relacionais são dados modelados com o modelo relacional. Nesse modelo, os dados são expressos como tuplas. Uma *tupla* é um conjunto de pares de atributo/valor. Por exemplo, uma tupla pode ser (itemid = 5, orderid = 1, item = "Chair", amount = 200.00). Um conjunto de tuplas que compartilham os mesmos atributos é chamado de uma *relação*.
 
 As relações são naturalmente representadas como tabelas, em que cada tupla é exposta como uma linha na tabela. No entanto, as linhas têm uma ordenação explícita, ao contrário das tuplas. O esquema de banco de dados define as colunas (cabeçalhos) de cada tabela. Cada coluna é definida com um nome e um tipo de dados para todos os valores armazenados nessa coluna em todas as linhas na tabela.
 
 ![Exemplo que mostra os dados usando um banco de dados relacional](../images/example-relational.png)
 
-Um armazenamento de dados que organiza dados usando o modelo relacional é chamado de um banco de dados relacional. As chaves primárias identificam com exclusividade as linhas dentro de uma tabela. Os campos de chave estrangeira são usados em uma tabela para se referir a uma linha em outra tabela referenciando a chave primária da outra tabela. Chaves estrangeiras são usadas para manter a integridade referencial, garantindo que as linhas referenciadas não sejam alteradas nem excluídas enquanto a linha de referência depender dela. 
+Um armazenamento de dados que organiza dados usando o modelo relacional é chamado de um banco de dados relacional. As chaves primárias identificam com exclusividade as linhas dentro de uma tabela. Os campos de chave estrangeira são usados em uma tabela para se referir a uma linha em outra tabela referenciando a chave primária da outra tabela. Chaves estrangeiras são usadas para manter a integridade referencial, garantindo que as linhas referenciadas não sejam alteradas nem excluídas enquanto a linha de referência depender dela.
 
 ![Exemplo que mostra os dados usando um banco de dados relacional](../images/example-relational2.png)
 
 Os bancos de dados relacionais dão suporte a vários tipos de restrições que ajudam a garantir a integridade dos dados:
 
-- As restrições exclusivas garantem que todos os valores em uma coluna sejam exclusivos. 
+- As restrições exclusivas garantem que todos os valores em uma coluna sejam exclusivos.
 
 - As restrições de chave estrangeira impõem um vínculo entre os dados nas duas tabelas. Uma chave estrangeira referencia a chave primária ou outra chave exclusiva de outra tabela. Uma restrição de chave estrangeira impõe a integridade referencial, não permitindo alterações que gerem valores inválidos de chave estrangeira.
 
-- As restrições de verificação, também conhecidas como restrições de integridade de entidade, limitam os valores que podem ser armazenados em uma única coluna ou em relação aos valores em outras colunas da mesma linha. 
+- As restrições de verificação, também conhecidas como restrições de integridade de entidade, limitam os valores que podem ser armazenados em uma única coluna ou em relação aos valores em outras colunas da mesma linha.
 
 A maioria dos bancos de dados relacionais usa a linguagem SQL que permite uma abordagem declarativa para a consulta. A consulta descreve o resultado desejado, mas não as etapas para executar a consulta. O mecanismo então decide a melhor maneira de executar a consulta. Isso é diferente de uma abordagem de procedimento, em que o programa de consulta especifica as etapas de processamento de forma explícita. No entanto, os bancos de dados relacionais podem armazenar rotinas de código executável na forma de procedimentos armazenados e funções, o que permite uma combinação de abordagens declarativas e de procedimento.
 
