@@ -3,18 +3,22 @@ title: Escolhendo uma tecnologia de análise de dados e relatórios
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: a5e793c9caf50daca4ef7e40c49e54f25f04e856
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 5b4947f53edf595c206ef4f55572dadc1a9daa09
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902409"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54111403"
 ---
 # <a name="choosing-a-data-analytics-technology-in-azure"></a>Escolhendo uma tecnologia de análise de dados no Azure
 
-A meta da maioria das soluções de Big Data é gerar insights sobre os dados por meio de análise e relatórios. Isso pode incluir visualizações e relatórios pré-configurados ou a exploração interativa de dados. 
+A meta da maioria das soluções de Big Data é gerar insights sobre os dados por meio de análise e relatórios. Isso pode incluir visualizações e relatórios pré-configurados ou a exploração interativa de dados.
+
+<!-- markdownlint-disable MD026 -->
 
 ## <a name="what-are-your-options-when-choosing-a-data-analytics-technology"></a>Quais são as opções disponíveis ao escolher uma tecnologia de análise de dados?
+
+<!-- markdownlint-disable MD026 -->
 
 Há várias opções para análise, visualizações e relatórios no Azure, dependendo de suas necessidades:
 
@@ -29,7 +33,7 @@ O [Power BI](/power-bi/) é um pacote de ferramentas de análise de negócios. E
 
 As organizações podem usar o Power BI para gerar relatórios e publicá-los na organização. Todos podem criar dashboards personalizados, com governança e [segurança internas](/power-bi/service-admin-power-bi-security). O Power BI usa o [Azure AD](/azure/active-directory/) (Azure Active Directory) para autenticar os usuários que fazem logon no serviço do Power BI e usa as credenciais de logon do Power BI sempre que um usuário tenta acessar recursos que exigem autenticação.
 
-### <a name="jupyter-notebooks"></a>Notebooks Jupyter 
+### <a name="jupyter-notebooks"></a>Notebooks Jupyter
 
 O [Jupyter Notebooks](https://jupyter.readthedocs.io/en/latest/index.html) fornece um shell baseado em navegador que possibilita aos cientistas de dados criar arquivos de *bloco de anotações* que contêm o código e texto markdown do Python, Scala ou R, tornando-o uma maneira eficiente para colaborar com o compartilhamento e a documentação de código e resultados em um único documento.
 
@@ -49,15 +53,15 @@ Ao contrário dos blocos de anotações do Jupyter em execução em um cluster H
 
 Principais benefícios:
 
-* Serviço gratuito &mdash; nenhuma assinatura do Azure é necessária.
-* Não há necessidade de instalar o Jupyter e as distribuições do R ou Python com suporte localmente &mdash; basta usar um navegador.
-* Gerencie suas próprias bibliotecas online e acesse-as em qualquer dispositivo.
-* Compartilhe seus blocos de anotações com colaboradores.
+- Serviço gratuito &mdash; nenhuma assinatura do Azure é necessária.
+- Não há necessidade de instalar o Jupyter e as distribuições do R ou Python com suporte localmente &mdash; basta usar um navegador.
+- Gerencie suas próprias bibliotecas online e acesse-as em qualquer dispositivo.
+- Compartilhe seus blocos de anotações com colaboradores.
 
 Considerações:
 
-* Você não poderá acessar os blocos de anotações quando estiver offline.
-* As funcionalidades de processamento limitadas do serviço gratuito de bloco de anotações podem não ser suficientes para treinar modelos grandes ou complexos.
+- Você não poderá acessar os blocos de anotações quando estiver offline.
+- As funcionalidades de processamento limitadas do serviço gratuito de bloco de anotações podem não ser suficientes para treinar modelos grandes ou complexos.
 
 ## <a name="key-selection-criteria"></a>Principais critérios de seleção
 
@@ -73,9 +77,11 @@ Para restringir as opções, comece respondendo a estas perguntas:
 
 ## <a name="capability-matrix"></a>Matriz de funcionalidades
 
-As tabelas a seguir resumem as principais diferenças em funcionalidades. 
+As tabelas a seguir resumem as principais diferenças em funcionalidades.
 
 ### <a name="general-capabilities"></a>Funcionalidades gerais
+
+<!-- markdownlint-disable MD033 -->
 
 | | Power BI | Notebooks Jupyter | Zeppelin Notebooks | Microsoft Azure Notebooks |
 | --- | --- | --- | --- | --- |
@@ -90,6 +96,8 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 | Preços | Gratuito para o Power BI Desktop (criação); consulte [Preços](https://powerbi.microsoft.com/pricing/) para obter as opções de hospedagem | Grátis | Grátis | Grátis |
 | Colaboração de multiusuário | [Sim](/power-bi/service-how-to-collaborate-distribute-dashboards-reports) | Sim (por meio de compartilhamento ou com um servidor de multiusuário como o [JupyterHub](https://github.com/jupyterhub/jupyterhub)) | SIM | Sim (por meio de compartilhamento) |
 
+<!-- markdownlint-enable MD033 -->
+
 [1] Quando usado como parte de um cluster HDInsight gerenciado.
 
 [2] Com o uso do Power BI Desktop.
@@ -97,4 +105,3 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 [2] Pesquise o [repositório do Maven](https://search.maven.org/) para obter pacotes contribuídos pela comunidade.
 
 [3] Os pacotes do Python podem ser instalados com o Pip ou o Conda. Os pacotes do R podem ser instalados por meio do CRAN ou do GitHub. Os pacotes em F# podem ser instalados por meio de nuget.org usando o [gerenciador de dependência do Paket](https://fsprojects.github.io/Paket/).
-

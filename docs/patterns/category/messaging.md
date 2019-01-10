@@ -1,16 +1,17 @@
 ---
 title: Padrões de mensagens
+titleSuffix: Cloud Design Patterns
 description: A natureza distribuída dos aplicativos de nuvem exige uma infraestrutura de mensagens que conecta os componentes e serviços, idealmente de uma maneira flexível para maximizar a escalabilidade. O sistema de mensagens assíncronas é amplamente usado e fornece muitos benefícios, mas também traz desafios, como a ordenação de mensagens, o gerenciamento de mensagens suspeitas, a idempotência e muito mais.
 keywords: padrão de design
 author: dragon119
 ms.date: 12/07/2018
-pnp.series.title: Cloud Design Patterns
-ms.openlocfilehash: 754e9a7dcad20dc1c4471af00f3f142f18022d62
-ms.sourcegitcommit: a0a9981e7586bed8d876a54e055dea1e392118f8
+ms.custom: seodec18
+ms.openlocfilehash: 4619d30c152f050f3f95aee3f9983b8fe85911ed
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/11/2018
-ms.locfileid: "53233873"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011320"
 ---
 # <a name="messaging-patterns"></a>Padrões de mensagens
 

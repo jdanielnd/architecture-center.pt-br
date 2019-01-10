@@ -3,18 +3,18 @@ title: Dados de série temporal
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: 9664940729430b08d7be52564e4971ec5e2b94d8
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 80dc797e6df16bff73fb9c5116ccce34d7d846f0
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52901959"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54111930"
 ---
 # <a name="time-series-solutions"></a>Soluções de série temporal
 
 Os dados de série temporal são um conjunto de valores organizados por tempo. Exemplos comuns de dados de série temporal incluem dados de sensor, preços de compra de ações, dados de fluxo de cliques e telemetria do aplicativo. Os dados de série temporal podem ser analisados quanto a tendências históricas, alertas em tempo real ou modelagem preditiva.
 
-![Time Series Insights](./images/time-series-insights.png) 
+![Time Series Insights](./images/time-series-insights.png)
 
 Dados de série temporal representam como um processo ou um ativo é alterado ao longo do tempo. Os dados têm um carimbo de data/hora, porém, o mais importante, o tempo é o eixo mais significativo para exibir ou analisar os dados. Os dados de série temporal normalmente são recebidos na ordem de tempo e geralmente são tratados como uma inserção, em vez de uma atualização do banco de dados. Por isso, a alteração é medida ao longo do tempo, permitindo que você olhe para trás e preveja uma alteração futura. Dessa forma, os dados de série temporal são mais bem visualizados com gráficos de dispersão ou de linhas.
 
@@ -31,13 +31,13 @@ Em cada um desses casos, você pode ver como o tempo é mais significativo como 
 
 ## <a name="when-to-use-this-solution"></a>Quando usar esta solução
 
-Escolha uma solução de série temporal quando precisar ingerir dados cujo valor estratégico é voltado para alterações em um período e basicamente, você inserir novos dados e raramente atualizar esses dados, caso você atualize-os. Use essas informações para detectar anomalias, visualizar tendências e comparar dados atuais com os dados históricos, entre outras coisas. Esse tipo de arquitetura também é mais adequado para modelagem preditiva e previsão de resultados, porque você tem o registro do histórico de alterações ao longo do tempo, que pode ser aplicado a qualquer quantidade de modelos de previsão. 
+Escolha uma solução de série temporal quando precisar ingerir dados cujo valor estratégico é voltado para alterações em um período e basicamente, você inserir novos dados e raramente atualizar esses dados, caso você atualize-os. Use essas informações para detectar anomalias, visualizar tendências e comparar dados atuais com os dados históricos, entre outras coisas. Esse tipo de arquitetura também é mais adequado para modelagem preditiva e previsão de resultados, porque você tem o registro do histórico de alterações ao longo do tempo, que pode ser aplicado a qualquer quantidade de modelos de previsão.
 
 O uso da série temporal oferece os seguintes benefícios:
 
-* Representa claramente como um ativo ou processo é alterado ao longo do tempo.
-* Ajuda a você a detectar rapidamente as alterações em uma variedade de fontes relacionadas, fazendo com que as anomalias e as tendências iminentes se destaquem com clareza.
-* Mais adequado para modelagem preditiva e previsão.
+- Representa claramente como um ativo ou processo é alterado ao longo do tempo.
+- Ajuda a você a detectar rapidamente as alterações em uma variedade de fontes relacionadas, fazendo com que as anomalias e as tendências iminentes se destaquem com clareza.
+- Mais adequado para modelagem preditiva e previsão.
 
 ### <a name="internet-of-things-iot"></a>Internet das coisas (IoT)
 
@@ -53,18 +53,19 @@ O ideal é que você tenha uma camada de processamento de fluxo que pode manipul
 
 ## <a name="challenges"></a>Desafios
 
-* Os dados de série temporal geralmente são um volume muito alto, especialmente em cenários de IoT. Armazenamento, indexação, consulta, análise e visualização de dados de série temporal podem ser um desafio. 
-* Pode ser um desafio encontrar a combinação certa de armazenamento de alta velocidade e operações de computação eficientes para manipular a análise em tempo real, ao mesmo tempo que minimiza o tempo de colocação no mercado e o investimento de custo geral.
+- Os dados de série temporal geralmente são um volume muito alto, especialmente em cenários de IoT. Armazenamento, indexação, consulta, análise e visualização de dados de série temporal podem ser um desafio.
+
+- Pode ser um desafio encontrar a combinação certa de armazenamento de alta velocidade e operações de computação eficientes para manipular a análise em tempo real, ao mesmo tempo que minimiza o tempo de colocação no mercado e o investimento de custo geral.
 
 ## <a name="architecture"></a>Arquitetura
 
-Em muitos cenários que envolvem dados de série temporal, como IoT, os dados são capturados em tempo real. Dessa forma, uma arquitetura de [processamento em tempo real](../big-data/real-time-processing.md) é apropriada. 
+Em muitos cenários que envolvem dados de série temporal, como IoT, os dados são capturados em tempo real. Dessa forma, uma arquitetura de [processamento em tempo real](../big-data/real-time-processing.md) é apropriada.
 
 Os dados de uma ou mais fontes de dados são ingeridos na camada de fluxo de buffer pelo [Hub IoT](/azure/iot-hub/), [Hubs de Eventos](/azure/event-hubs/) ou [Kafka no HDInsight](/azure/hdinsight/kafka/apache-kafka-introduction). Em seguida, os dados são processados na camada de processamento de fluxo que, opcionalmente, pode entregar os dados processados para um serviço de aprendizado de máquina para análise preditiva. Os dados processados são armazenados em um armazenamento de dados analíticos, como o [HBase](/azure/hdinsight/hbase/apache-hbase-overview), [Azure Cosmos DB](/azure/cosmos-db/), Azure Data Lake ou Armazenamento de Blobs. Um aplicativo ou serviço de análise e relatórios, como o Power BI ou o OpenTSDB (se for armazenado no HBase) pode ser usado para exibir os dados de série temporal para análise.
 
 Outra opção é usar o [Azure Time Series Insights](/azure/time-series-insights/). O Time Series Insights é um serviço totalmente gerenciado para dados de série temporal. Nessa arquitetura, o Time Series Insights executa as funções de processamento de fluxo, armazenamento de dados e análise e relatórios. Ele aceita os dados de streaming do Hub IoT ou dos Hubs de Eventos e armazena, processa, analisa e exibe os dados quase em tempo real. Ele não pré-agrega os dados, mas armazena os eventos brutos.
 
-O Time Series Insights é esquema adaptável, o que significa que você não precisa fazer nenhuma preparação de dados para começar a obter insights. Isso permite que você explore, compare e correlacione uma variedade de fontes de dados diretamente. Ele também fornece filtros e agregações semelhantes ao SQL, a capacidade de construir, visualizar, comparar e sobrepor vários padrões de série temporal, mapas de calor e a capacidade de salvar e compartilhar consultas. 
+O Time Series Insights é esquema adaptável, o que significa que você não precisa fazer nenhuma preparação de dados para começar a obter insights. Isso permite que você explore, compare e correlacione uma variedade de fontes de dados diretamente. Ele também fornece filtros e agregações semelhantes ao SQL, a capacidade de construir, visualizar, comparar e sobrepor vários padrões de série temporal, mapas de calor e a capacidade de salvar e compartilhar consultas.
 
 ## <a name="technology-choices"></a>Opções de tecnologia
 

@@ -1,18 +1,17 @@
 ---
-title: Identidade federada
-description: Autenticação de delegado a um provedor de identidade externo.
+title: Padrão de identidade federada
+titleSuffix: Cloud Design Patterns
+description: Delegar autenticação a um provedor de identidade externa.
 keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- security
-ms.openlocfilehash: a1edbdd080309383201d33e73602e2f18928c080
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.custom: seodec18
+ms.openlocfilehash: b268000a81edbb2f224a9244d5949def75854f04
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24542626"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54110350"
 ---
 # <a name="federated-identity-pattern"></a>Padrão de identidade federada
 
@@ -41,7 +40,6 @@ Os provedores de identidade confiável incluem diretórios corporativos, serviç
 A figura ilustra o Padrão de identidade federada quando um aplicativo cliente precisa acessar um serviço que requer autenticação. A autenticação é realizada por um IdP que funciona junto com um STS. O IdP emite tokens de segurança que fornecem informações sobre o usuário autenticado. Essas informações, chamadas de declarações, incluem a identidade do usuário e também podem incluir outras informações, como associação de função e os direitos de acesso mais granulares.
 
 ![Uma visão geral da autenticação federada](./_images/federated-identity-overview.png)
-
 
 Esse modelo geralmente é chamado de controle de acesso baseado em declarações. Os aplicativos e serviços autorizam o acesso aos recursos e funcionalidades com base nas declarações contidas no token. O serviço que exige autenticação deve confiar no IdP. O aplicativo cliente contata o IdP que executa a autenticação. Se a autenticação for bem-sucedida, o IdP retornará um token que contém as declarações que identificam o usuário para o STS (observe que o IdP e o STS podem ser o mesmo serviço). O STS pode transformar e aumentar as declarações no token com base nas regras predefinidas, antes de retorná-lo para o cliente. O aplicativo cliente pode, então, transmitir esse token para o serviço como uma prova de sua identidade.
 
@@ -85,7 +83,6 @@ Uma organização hospeda um aplicativo SaaS (software como serviço) de vários
 
 ![Como os usuários em um assinante de grandes empresas acessam o aplicativo](./_images/federated-identity-multitenat.png)
 
-
 A figura mostra como os locatários são autenticados com seu próprio provedor de identidade (etapa 1), nesse caso o ADFS. Depois de autenticar com êxito um locatário, o ADFS emite um token. O navegador do cliente encaminha esse token para o provedor de federação do aplicativo SaaS, que confia nos tokens emitidos pelo AD FS do locatário, a fim de retornar um token válido para o provedor de federação de SaaS (etapa 2). Se necessário, o provedor de federação de SaaS executa uma transformação sobre as declarações no token para declarações que o aplicativo reconhece (etapa 3) antes de retornar o novo token para o navegador do cliente. O aplicativo confia nos tokens emitidos pelo provedor de federação de SaaS e usa as declarações no token para aplicar as regras de autorização (etapa 4).
 
 Os locatários não precisam se lembrar das credenciais separadas para acessar o aplicativo e um administrador de empresa do locatário pode configurar seu no próprio ADFS a lista de usuários que podem acessar o aplicativo.
@@ -95,5 +92,5 @@ Os locatários não precisam se lembrar das credenciais separadas para acessar o
 - [Microsoft Azure Active Directory](https://azure.microsoft.com/services/active-directory/)
 - [Active Directory Domain Services](https://msdn.microsoft.com/library/bb897402.aspx)
 - [Serviços de Federação do Active Directory (AD FS)](https://msdn.microsoft.com/library/bb897402.aspx)
-- [Gerenciamento de identidades para aplicativos multilocatários no Microsoft Azure](https://azure.microsoft.com/documentation/articles/guidance-multitenant-identity/)
-- [Aplicativos multilocatários no Azure](https://azure.microsoft.com/documentation/articles/dotnet-develop-multitenant-applications/)
+- [Gerenciamento de identidades para aplicativos multilocatários no Microsoft Azure](/azure/architecture/multitenant-identity)
+- [Aplicativos multilocatários no Azure](/azure/dotnet-develop-multitenant-applications)

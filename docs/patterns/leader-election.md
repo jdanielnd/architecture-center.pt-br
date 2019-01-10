@@ -1,19 +1,17 @@
 ---
-title: Eleição de Líder
+title: Padrão de eleição de líder
+titleSuffix: Cloud Design Patterns
 description: Coordene as ações executadas por uma coleção de instâncias de tarefa de colaboração em um aplicativo distribuído elegendo uma instância como a líder que assume a responsabilidade por gerenciar as demais instâncias.
 keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- design-implementation
-- resiliency
-ms.openlocfilehash: 6cc4b19e889cc9fc692e388498cc16ea56b1c981
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: cfc29e3490735c16b41c494e6cecbb8972cdc705
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429189"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54010132"
 ---
 # <a name="leader-election-pattern"></a>Padrão de eleição de líder
 
@@ -41,6 +39,7 @@ Uma única instância de tarefa deve ser eleita para atuar como líder e essa in
 O sistema deve fornecer um mecanismo robusto para selecionar o líder. Esse método precisa lidar com eventos como interrupções da rede ou falhas de processo. Em muitas soluções, as instâncias de tarefa subordinadas monitoram o líder por meio de algum tipo de método de pulsação ou por meio de sondagem. Se o líder designado terminar inesperadamente ou se uma falha de rede deixar o líder indisponível para as instâncias de tarefa subordinadas, será necessário eleger um novo líder.
 
 Há várias estratégias para eleger o líder entre um conjunto de tarefas em um ambiente distribuído, incluindo:
+
 - Selecionar a instância da tarefa com a ID de processo ou instância mais baixa.
 - Corrida para adquirir um mutex compartilhado e distribuído. A primeira instância de tarefa que adquirir o mutex é o líder. No entanto, o sistema deve garantir que, se o líder for encerrado ou desconectado do restante do sistema, o mutex será liberado para permitir que outra instância de tarefa torne-se o líder.
 - Implementação de um dos algoritmos comuns de eleição de líder, como o [Algoritmo Bully](https://www.cs.colostate.edu/~cs551/CourseNotes/Synchronization/BullyExample.html) ou [Algoritmo Ring](https://www.cs.colostate.edu/~cs551/CourseNotes/Synchronization/RingElectExample.html). Esses algoritmos presumem que cada candidato na eleição tem uma ID exclusiva e que ele pode se comunicar com os outros candidatos de maneira confiável.
@@ -48,6 +47,7 @@ Há várias estratégias para eleger o líder entre um conjunto de tarefas em um
 ## <a name="issues-and-considerations"></a>Problemas e considerações
 
 Considere os seguintes pontos ao decidir como implementar esse padrão:
+
 - O processo de eleger um líder deve ser resistente a falhas transitórias e persistentes.
 - Deve ser possível detectar quando o líder falhou ou ficou indisponível (por exemplo, devido a uma falha de comunicação). A rapidez de detecção necessária depende do sistema. Alguns sistemas podem funcionar por um curto período sem um líder, durante o qual uma falha temporária pode ser corrigida. Em outros casos, pode ser necessário detectar a falha do líder imediatamente e disparar uma nova eleição.
 - Em um sistema que implementa o dimensionamento automático horizontal, o líder poderia ser terminado se o sistema for reduzido e desligar alguns dos recursos de computação.
@@ -59,9 +59,10 @@ Considere os seguintes pontos ao decidir como implementar esse padrão:
 
 Use esse padrão quando as tarefas em um aplicativo distribuído, como uma solução hospedada na nuvem, precisarem de coordenação cuidadosa e não houver nenhum líder natural.
 
->  Evite transformar o líder em um gargalo no sistema. É a finalidade do líder coordenar o trabalho das tarefas subordinadas e ele não precisa necessariamente participar desse trabalho em si &mdash; embora deva ser capaz de fazer isso se a tarefa não for eleita como o líder.
+> Evite transformar o líder em um gargalo no sistema. É a finalidade do líder coordenar o trabalho das tarefas subordinadas e ele não precisa necessariamente participar desse trabalho em si &mdash; embora deva ser capaz de fazer isso se a tarefa não for eleita como o líder.
 
 Esse padrão pode não ser útil se:
+
 - Há um líder natural ou processo dedicado que sempre pode atuar como o líder. Por exemplo, seria possível implementar um processo de singleton que coordena as instâncias de tarefa. Se esse processo falhar ou se tornar não íntegro, o sistema poderá desligá-lo e reiniciá-lo.
 - A coordenação entre as tarefas pode ser alcançada usando um método mais simples. Por exemplo, se várias instâncias de tarefa precisam simplesmente de acesso coordenado a um recurso compartilhado, uma solução melhor é usar o bloqueio otimista ou pessimista para controlar o acesso.
 - Uma solução de terceiros é mais apropriada. Por exemplo, o serviço do Microsoft Azure HDInsight (baseado em Apache Hadoop) usa os serviços fornecidos pelo Apache Zookeeper para coordenar o mapa e reduzir as tarefas que coletam e resumem os dados.
@@ -70,8 +71,8 @@ Esse padrão pode não ser útil se:
 
 O projeto DistributedMutex na solução LeaderElection (um exemplo que demonstra esse padrão está disponível no [GitHub](https://github.com/mspnp/cloud-design-patterns/tree/master/leader-election)) mostra como usar uma concessão em um Azure Storage Blob para fornecer um mecanismo para implementar um mutex compartilhado e distribuído. O mutex pode ser usado para eleger um líder dentre um grupo de instâncias de função em um serviço de nuvem do Azure. A primeira instância de função a adquirir a concessão é eleita como líder e permanece dessa forma até liberar a concessão ou não for capaz de renová-la. Outras instâncias de função podem continuar a monitorar a concessão de blob caso o líder não esteja mais disponível.
 
->  Uma concessão de blob é um bloqueio de gravação exclusivo em um blob. Um único blob pode estar sujeito a apenas uma concessão ao mesmo tempo. Uma instância de função pode solicitar uma concessão em um blob especificado e ele receberá a concessão se nenhuma outra instância de função mantém uma concessão no mesmo blob. Caso contrário, a solicitação gerará uma exceção.
-> 
+> Uma concessão de blob é um bloqueio de gravação exclusivo em um blob. Um único blob pode estar sujeito a apenas uma concessão ao mesmo tempo. Uma instância de função pode solicitar uma concessão em um blob especificado e ele receberá a concessão se nenhuma outra instância de função mantém uma concessão no mesmo blob. Caso contrário, a solicitação gerará uma exceção.
+>
 > Para evitar que uma instância de função com falha retenha a concessão indefinidamente, especifique um tempo de vida para a concessão. Quando ele expirar, a concessão ficará disponível. No entanto, enquanto uma instância de função contém a concessão, ela pode solicitar a renovação da concessão e ela será concedida por um período adicional. A instância de função pode repetir continuamente esse processo se desejar manter a concessão.
 > Para obter mais informações sobre como conceder um blob, consulte [Blob de concessão (API REST)](https://msdn.microsoft.com/library/azure/ee691972.aspx).
 
@@ -167,7 +168,6 @@ O `KeepRenewingLease` é outro método auxiliar que usa o objeto `BlobLeaseManag
 
 ![A Figura 1 ilustra as funções da classe BlobDistributedMutex](./_images/leader-election-diagram.png)
 
-
 O exemplo de código a seguir mostra como usar a classe `BlobDistributedMutex` em uma função de trabalho. Esse código adquire uma concessão em um blob denominado `MyLeaderCoordinatorTask` no contêiner de concessão no armazenamento de desenvolvimento e especifica que o código definido no método `MyLeaderCoordinatorTask` deve ser executado se a instância de função for eleita como líder.
 
 ```csharp
@@ -186,6 +186,7 @@ private static async Task MyLeaderCoordinatorTask(CancellationToken token)
 ```
 
 Observe os pontos a seguir sobre a solução de exemplo:
+
 - O blob é um ponto único de falha em potencial. Se o serviço Blob ficar indisponível ou estiver inacessível, o líder não poderá renovar a concessão e nenhuma outra instância de função poderá adquiri-la. Nesse caso, nenhuma instância de função será capaz de atuar como o líder. No entanto, o serviço Blob é projetado para ser resiliente, por isso uma falha completa do serviço Blob é considerada extremamente improvável.
 - Se a tarefa que está sendo executada pelo líder parar, ele poderá continuar a renovar a concessão, impedindo que qualquer outra instância de função adquira a concessão e assuma a função de líder para coordenar tarefas. No mundo real, a integridade do líder deve ser verificada em intervalos frequentes.
 - O processo de eleição é não determinístico. Você não pode fazer suposições sobre qual instância de função obterá a concessão de blob e se tornará o líder.
@@ -194,6 +195,7 @@ Observe os pontos a seguir sobre a solução de exemplo:
 ## <a name="related-patterns-and-guidance"></a>Diretrizes e padrões relacionados
 
 As diretrizes a seguir também podem ser relevantes ao implementar esse padrão:
+
 - Esse padrão tem um [aplicativos de exemplo](https://github.com/mspnp/cloud-design-patterns/tree/master/leader-election) baixável.
 - [Diretrizes de dimensionamento automático](https://msdn.microsoft.com/library/dn589774.aspx). É possível iniciar e parar instâncias dos hosts de tarefa à medida que a carga do aplicativo varia. O dimensionamento automático pode ajudar a manter a taxa de transferência e o desempenho durante horários de pico de processamento.
 - [Diretrizes de particionamento de computação](https://msdn.microsoft.com/library/dn589773.aspx). Este guia descreve como alocar tarefas para hosts em um serviço de nuvem de maneira a ajudar a minimizar os custos de execução e manter a escalabilidade, desempenho, disponibilidade e segurança do serviço.

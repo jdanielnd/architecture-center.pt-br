@@ -1,18 +1,17 @@
 ---
-title: Consumidores concorrentes
+title: Padrão de consumidores concorrentes
+titleSuffix: Cloud Design Patterns
 description: Habilite vários consumidores simultâneos para processar as mensagens recebidas no mesmo canal de mensagens.
 keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- messaging
-ms.openlocfilehash: aea172dcdb33c0d8513fb69715f1549b4a20f5e6
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: 77459ff42422969acdc83e66535197547d555de1
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428357"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54112100"
 ---
 # <a name="competing-consumers-pattern"></a>Padrão de consumidores concorrentes
 
@@ -34,7 +33,7 @@ Use uma fila de mensagens para implementar o canal de comunicação entre o apli
 
 Essa solução oferece as seguintes vantagens:
 
-- Ele fornece um sistema para redistribuir a carga que pode lidar com grandes variações no volume de solicitações enviadas por instâncias de aplicativo. A fila atua como um buffer entre as instâncias do aplicativo e as instâncias de serviço do consumidor. Isso pode ajudar a minimizar o impacto sobre a disponibilidade e a capacidade de resposta tanto do aplicativo quanto das instâncias de serviço, conforme descrito pelo [Padrão de nivelamento de carga baseado em fila](queue-based-load-leveling.md). Lidar com uma mensagem que requer que processamento de longa execução não impede que outras mensagens sejam tratadas simultaneamente por outras instâncias do serviço do consumidor.
+- Ele fornece um sistema para redistribuir a carga que pode lidar com grandes variações no volume de solicitações enviadas por instâncias de aplicativo. A fila atua como um buffer entre as instâncias do aplicativo e as instâncias de serviço do consumidor. Isso pode ajudar a minimizar o impacto sobre a disponibilidade e a capacidade de resposta tanto do aplicativo quanto das instâncias de serviço, conforme descrito pelo [Padrão de nivelamento de carga baseado em fila](./queue-based-load-leveling.md). Lidar com uma mensagem que requer que processamento de longa execução não impede que outras mensagens sejam tratadas simultaneamente por outras instâncias do serviço do consumidor.
 
 - Isso aumenta a confiabilidade. Se um produtor se comunica diretamente com um consumidor em vez de usar esse padrão, mas não monitora o consumidor, há uma grande probabilidade de que as mensagens poderiam ser perdidas ou não conseguirem ser processadas se o consumidor falhar. Nesse padrão, as mensagens não são enviadas para uma instância de serviço específica. Uma instância de serviço com falha não bloqueará um produtor e as mensagens podem ser processadas por qualquer instância de serviço do trabalho.
 
@@ -85,8 +84,9 @@ Esse padrão pode não ser útil se:
 
 O Azure fornece filas de armazenamento e filas do Barramento de Serviço que podem atuar como um mecanismo para implementar esse padrão. A lógica do aplicativo pode postar mensagens em uma fila e os consumidores implementados como tarefas em uma ou mais funções podem recuperá-las dessa fila e processá-las. Para garantir a resiliência, uma fila do Barramento de Serviço permite que um consumidor use o modo `PeekLock` quando recuperar uma mensagem da fila. Na verdade, esse modo não remove a mensagem, mas simplesmente a oculta de outros consumidores. O consumidor original poderá excluí-la quando tiver terminado de processá-la. Se o consumidor falhar, o bloqueio de inspeção atingirá o tempo limite e a mensagem se tornará visível novamente, permitindo que outro consumidor possa recuperá-la.
 
-> Para ver informações detalhadas sobre como usar filas do Barramento de Serviço do Azure, consulte [Filas, tópicos e assinaturas do Barramento de Serviço](https://msdn.microsoft.com/library/windowsazure/hh367516.aspx).
-Para obter mais informações sobre como usar filas do armazenamento do Azure, consulte [Introdução ao Armazenamento de Filas do Azure usando o .NET](https://azure.microsoft.com/documentation/articles/storage-dotnet-how-to-use-queues/).
+Para ver informações detalhadas sobre como usar filas do Barramento de Serviço do Azure, consulte [Filas, tópicos e assinaturas do Barramento de Serviço](https://msdn.microsoft.com/library/windowsazure/hh367516.aspx).
+
+Para obter mais informações sobre como usar filas do armazenamento do Azure, consulte [Introdução ao Armazenamento de Filas do Azure usando o .NET](/azure/storage/queues/storage-dotnet-how-to-use-queues).
 
 O código a seguir da classe `QueueManager` na solução CompetingConsumers disponível no [GitHub](https://github.com/mspnp/cloud-design-patterns/tree/master/competing-consumers) mostra como criar uma fila usando uma instância `QueueClient` no manipulador de eventos `Start` em uma função Web ou de trabalho.
 
@@ -174,7 +174,7 @@ private void OptionsOnExceptionReceived(object sender,
 }
 ```
 
-Observe que os recursos de dimensionamento automático, como aqueles disponíveis no Azure, podem ser usados para iniciar e parar instâncias de função, à medida que o tamanho da fila varia. Para saber mais, consulte as [Diretrizes de dimensionamento automático](https://msdn.microsoft.com/library/dn589774.aspx). Além disso, não é necessário manter uma correspondência um para um entre as instâncias de função e os processos de trabalho &mdash; uma única instância de função pode implementar vários processos de trabalho. Para obter mais informações, consulte [Padrão de consolidação de recursos de computação](compute-resource-consolidation.md).
+Observe que os recursos de dimensionamento automático, como aqueles disponíveis no Azure, podem ser usados para iniciar e parar instâncias de função, à medida que o tamanho da fila varia. Para saber mais, consulte as [Diretrizes de dimensionamento automático](https://msdn.microsoft.com/library/dn589774.aspx). Além disso, não é necessário manter uma correspondência um para um entre as instâncias de função e os processos de trabalho &mdash; uma única instância de função pode implementar vários processos de trabalho. Para obter mais informações, consulte [Padrão de consolidação de recursos de computação](./compute-resource-consolidation.md).
 
 ## <a name="related-patterns-and-guidance"></a>Diretrizes e padrões relacionados
 
@@ -184,8 +184,8 @@ Os padrões e diretrizes a seguir também podem ser relevantes ao implementar es
 
 - [Diretrizes de dimensionamento automático](https://msdn.microsoft.com/library/dn589774.aspx). Pode ser possível iniciar e parar instâncias de um serviço do consumidor, visto que o tamanho da fila na qual os aplicativos postam as mensagens varia. O dimensionamento automático pode ajudar a manter a taxa de transferência durante horários de pico de processamento.
 
-- [Padrão de consolidação de recursos de computação](compute-resource-consolidation.md). Pode ser possível consolidar várias instâncias de um serviço do consumidor em um único processo para reduzir os custos e a sobrecarga de gerenciamento. O Padrão de consolidação de recursos de computação descreve os benefícios e as vantagens e desvantagens de seguir essa abordagem.
+- [Padrão de consolidação de recursos de computação](./compute-resource-consolidation.md). Pode ser possível consolidar várias instâncias de um serviço do consumidor em um único processo para reduzir os custos e a sobrecarga de gerenciamento. O Padrão de consolidação de recursos de computação descreve os benefícios e as vantagens e desvantagens de seguir essa abordagem.
 
-- [Padrão de nivelamento de carga baseado em fila](queue-based-load-leveling.md). Apresentar uma fila de mensagens pode agregar resiliência ao sistema, permitindo que as instâncias de serviço lidem com volumes variáveis de solicitações de instâncias do aplicativo. A fila de mensagens atua como um buffer que nivela a carga. O Padrão de nivelamento de carga com base em fila descreve esse cenário mais detalhadamente.
+- [Padrão de nivelamento de carga baseado em fila](./queue-based-load-leveling.md). Apresentar uma fila de mensagens pode agregar resiliência ao sistema, permitindo que as instâncias de serviço lidem com volumes variáveis de solicitações de instâncias do aplicativo. A fila de mensagens atua como um buffer que nivela a carga. O Padrão de nivelamento de carga com base em fila descreve esse cenário mais detalhadamente.
 
 - Esse padrão tem um [aplicativo de exemplo](https://github.com/mspnp/cloud-design-patterns/tree/master/competing-consumers) associado a ele.

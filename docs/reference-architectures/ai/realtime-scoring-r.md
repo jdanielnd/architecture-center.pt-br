@@ -2,14 +2,14 @@
 title: Pontuação em tempo real dos modelos do Machine Learning em R
 description: Implemente um serviço de previsão em tempo real em R usando o Machine Learning Server em execução no Serviço de Kubernetes do Azure (AKS).
 author: njray
-ms.date: 12/12/18
+ms.date: 12/12/2018
 ms.custom: azcat-ai
-ms.openlocfilehash: a6069704c48fbc1f1a1e4b5df428011d6b5b883d
-ms.sourcegitcommit: 62d2211badd1d6950e8cb819d70c9a4ab1ee01d9
+ms.openlocfilehash: 6f3447d1dcab801ccdaf4cf88611725cc00eb68d
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53318985"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54112270"
 ---
 # <a name="real-time-scoring-of-r-machine-learning-models"></a>Pontuação em tempo real dos modelos do Machine Learning em R
 
@@ -51,7 +51,7 @@ A [Operacionalização de Modelo][operationalization] do Machine Learning Server
 
 Para que a Operacionalização de Modelo funcione corretamente com o Machine Learning Server em contêineres, você deve instalar um certificado JSON Web Token (JWT). Essa implantação usa um certificado fornecido pela Microsoft. Em um ambiente de produção, forneça o seu próprio.
 
-Para o tráfego entre o AKS e o Registro de Contêiner, considere habilitar o [controle de acesso baseado em função][rbac] (RBAC) para limitar os privilégios de acesso apenas para quem precisa. 
+Para o tráfego entre o AKS e o Registro de Contêiner, considere habilitar o [controle de acesso baseado em função][rbac] (RBAC) para limitar os privilégios de acesso apenas para quem precisa.
 
 ### <a name="separate-storage"></a>Armazenamento separado
 

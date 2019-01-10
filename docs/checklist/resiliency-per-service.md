@@ -5,12 +5,12 @@ description: Lista de verificação que fornece orientação de resiliência par
 author: petertaylor9999
 ms.date: 11/26/2018
 ms.custom: resiliency, checklist
-ms.openlocfilehash: 55f17d3b24af4be4f313c66923f4153296041545
-ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
+ms.openlocfilehash: e1fb780cf9f54a5078cc5d3c6b597b351f93e05e
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53307173"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54112661"
 ---
 # <a name="resiliency-checklist-for-specific-azure-services"></a>Lista de verificação de resiliência para serviços específicos do Azure
 
@@ -124,7 +124,7 @@ Caso esteja usando o Cache Redis como um cache de dados temporário e não como 
 
 **Replicar o banco de dados.** Use os Grupos de Disponibilidade Always On do SQL Server para replicar o banco de dados. Fornece alta disponibilidade se uma instância do SQL Server falha. Para obter mais informações, consulte [Executar VMs do Windows para um aplicativo de N camadas](../reference-architectures/virtual-machines-windows/n-tier.md)
 
-**Fazer backup do banco de dados**. Se você já estiver usando [Backup do Azure](https://azure.microsoft.com/documentation/services/backup/) para fazer backup de suas VMs, considere usar o [Backup do Azure para cargas de trabalho do SQL Server usando o DPM](/azure/backup/backup-azure-backup-sql/). Com essa abordagem, há uma função de administrador de backup para a organização e um procedimento de recuperação unificado para as VMs e o SQL Server. Caso contrário, use o [Backup gerenciado pelo SQL Server para o Microsoft Azure](https://msdn.microsoft.com/library/dn449496.aspx).
+**Fazer backup do banco de dados**. Se você já estiver usando [Backup do Azure](/azure/backup/) para fazer backup de suas VMs, considere usar o [Backup do Azure para cargas de trabalho do SQL Server usando o DPM](/azure/backup/backup-azure-backup-sql/). Com essa abordagem, há uma função de administrador de backup para a organização e um procedimento de recuperação unificado para as VMs e o SQL Server. Caso contrário, use o [Backup gerenciado pelo SQL Server para o Microsoft Azure](https://msdn.microsoft.com/library/dn449496.aspx).
 
 ## <a name="traffic-manager"></a>Gerenciador de Tráfego
 

@@ -5,12 +5,12 @@ description: Implantar soluções de virtualização de rede com alta disponibil
 author: telmosampaio
 ms.date: 12/08/2018
 ms.custom: seodec18
-ms.openlocfilehash: d3f9017db1bbf9741b10db16eb5a3dbab78f1160
-ms.sourcegitcommit: 7d21aec9d9de0004ac777c1d1e364f53aac2350d
+ms.openlocfilehash: 646721f80d19f493b7674884f8108762d743201b
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/09/2018
-ms.locfileid: "53120745"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011082"
 ---
 # <a name="deploy-highly-available-network-virtual-appliances"></a>Implantar soluções de virtualização de rede altamente disponíveis
 
@@ -30,6 +30,8 @@ Para tornar uma NVA altamente disponível, implante mais de uma NVA em um conjun
 
 As arquiteturas a seguir descrevem os recursos e a configuração necessários para NVAs altamente disponíveis:
 
+<!-- markdownlint-disable MD033 -->
+
 | Solução | Benefícios | Considerações |
 | --- | --- | --- |
 | [Entrada com NVAs na camada 7][ingress-with-layer-7] |Todos os nós de NVA estão ativos |Requer uma NVA que pode encerrar conexões e usar SNAT<br/> Requer um conjunto separado de NVAs para o tráfego proveniente da Internet e do Azure <br/> Só pode ser usado para tráfego proveniente de fora do Azure |
@@ -37,6 +39,8 @@ As arquiteturas a seguir descrevem os recursos e a configuração necessários p
 | [Entrada-saída com NVAs na camada 7][ingress-egress-with-layer-7] |Todos os nós estão ativos<br/>Capaz de lidar com tráfego originado no Azure |Requer uma NVA que pode encerrar conexões e usar SNAT<br/>Requer um conjunto separado de NVAs para o tráfego proveniente da Internet e do Azure |
 | [Opção PIP-UDR][pip-udr-switch] |Conjunto único de NVAs para todo o tráfego<br/>Pode lidar com todo o tráfego (sem limite nas regras de porta) |Ativo-passivo<br/>Requer um processo de failover |
 | [PIP-UDR sem SNAT](#pip-udr-nvas-without-snat) | Conjunto único de NVAs para todo o tráfego<br/>Pode lidar com todo o tráfego (sem limite nas regras de porta)<br/>Não exige configuração de SNAT para solicitações de entrada |Ativo-passivo<br/>Requer um processo de failover<br/>A lógica de investigação e failover é executada fora da rede virtual |
+
+<!-- markdown-enable MD033 -->
 
 ## <a name="ingress-with-layer-7-nvas"></a>Entrada com NVAs na camada 7
 

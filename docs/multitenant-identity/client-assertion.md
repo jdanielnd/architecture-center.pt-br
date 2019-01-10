@@ -6,18 +6,19 @@ ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: adfs
 pnp.series.next: key-vault
-ms.openlocfilehash: 58eed82c982fe1c6cba0f04b237d92d117a26fd4
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: b5951153fff109b648e7e4f74daac0f414240fe4
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902249"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113137"
 ---
 # <a name="use-client-assertion-to-get-access-tokens-from-azure-ad"></a>Usar a declaração do cliente para obter tokens de acesso do Azure AD
 
 [Código de exemplo do ![GitHub](../_images/github.png)][sample application]
 
 ## <a name="background"></a>Segundo plano
+
 Ao usar o fluxo de código de autorização ou o fluxo híbrido no OpenID Connect, o cliente troca um código de autorização por um token de acesso. Durante essa etapa, o cliente deve se autenticar no servidor.
 
 ![Segredo do cliente](./images/client-secret.png)
@@ -26,7 +27,7 @@ Uma maneira de autenticar o cliente é usar um segredo do cliente. É assim que 
 
 Veja um exemplo de solicitação do cliente para o IDP, solicitando um token de acesso. Observe o parâmetro `client_secret` .
 
-```
+```http
 POST https://login.microsoftonline.com/b9bd2162xxx/oauth2/token HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
 
@@ -45,7 +46,7 @@ Para obter segurança adicional, você pode usar a [declaração do cliente] em 
 
 Veja uma solicitação de token usando a declaração do cliente:
 
-```
+```http
 POST https://login.microsoftonline.com/b9bd2162xxx/oauth2/token HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
 
@@ -61,8 +62,6 @@ Observe que o parâmetro `client_secret` não é mais usado. Em vez disso, o par
 
 > [!NOTE]
 > Os certificados x. 509 não são a única forma de asserção de cliente; nosso foco nele aqui é porque ele tem suporte do Azure AD.
-> 
-> 
 
 No tempo de execução, o aplicativo Web lê o certificado do repositório de certificados. O certificado deve ser instalado no mesmo computador que o aplicativo Web.
 
@@ -100,7 +99,8 @@ Para saber mais sobre como configurar a asserção de cliente no aplicativo Surv
 
 [**Avançar**][key vault]
 
-<!-- Links -->
+<!-- links -->
+
 [configure-web-app]: /azure/app-service-web/web-sites-configure/
 [azure-management-portal]: https://portal.azure.com
 [declaração do cliente]: https://tools.ietf.org/html/rfc7521

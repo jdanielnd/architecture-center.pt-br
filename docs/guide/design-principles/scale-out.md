@@ -1,14 +1,16 @@
 ---
 title: Design a aumentar
+titleSuffix: Azure Application Architecture Guide
 description: Aplicativos de nuvem devem ser criados para escala horizontal.
 author: MikeWasson
 ms.date: 08/30/2018
-ms.openlocfilehash: 9b57f4e6a17eece4f5283436e104c286602bb54f
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.custom: seojan19
+ms.openlocfilehash: 9e8a36146c711fda2b03e00dfeb3554caf1fd5f0
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43325647"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113052"
 ---
 # <a name="design-to-scale-out"></a>Design a aumentar
 
@@ -18,11 +20,11 @@ Uma vantagem importante da nuvem é a escala elástica &mdash; a habilidade de u
 
 ## <a name="recommendations"></a>Recomendações
 
-**Evitar a adesão de instância**. Adesão ou *afinidade de sessão*, é quando as solicitações do mesmo cliente sempre são roteadas para o mesmo servidor. A adesão limita a capacidade de aumentar o aplicativo. Por exemplo, o tráfego de um usuário de alto volume não será distribuído entre instâncias. Causas de adesão incluem armazenamento de estado de sessão na memória e usar chaves específicas de computador para a criptografia. Todas as instâncias devem conseguir lidar com uma solicitação. 
+**Evitar a adesão de instância**. Adesão ou *afinidade de sessão*, é quando as solicitações do mesmo cliente sempre são roteadas para o mesmo servidor. A adesão limita a capacidade de aumentar o aplicativo. Por exemplo, o tráfego de um usuário de alto volume não será distribuído entre instâncias. Causas de adesão incluem armazenamento de estado de sessão na memória e usar chaves específicas de computador para a criptografia. Todas as instâncias devem conseguir lidar com uma solicitação.
 
-**Identificar gargalos**. Escalar horizontalmente não é uma correção mágica para todos os problemas de desempenho. Por exemplo, se seu banco de dados de back-end for o gargalo, não adiantará adicionar mais servidores Web. Primeiro identifique e resolva os gargalos do sistema antes de lançar mais instâncias no problema. Partes com estado do sistema são a causa mais provável de gargalos. 
+**Identificar gargalos**. Escalar horizontalmente não é uma correção mágica para todos os problemas de desempenho. Por exemplo, se seu banco de dados de back-end for o gargalo, não adiantará adicionar mais servidores Web. Primeiro identifique e resolva os gargalos do sistema antes de lançar mais instâncias no problema. Partes com estado do sistema são a causa mais provável de gargalos.
 
-**Decompor cargas de trabalho por requisitos de escalabilidade.**  Os aplicativos geralmente consistem em várias cargas de trabalho, com diferentes requisitos de dimensionamento. Por exemplo, um aplicativo pode ter um site voltado ao público e um site de administração separados. O site público pode apresentar surtos repentinos no tráfego, enquanto o site de administração tem uma carga menor e mais previsível. 
+**Decompor cargas de trabalho por requisitos de escalabilidade.**  Os aplicativos geralmente consistem em várias cargas de trabalho, com diferentes requisitos de dimensionamento. Por exemplo, um aplicativo pode ter um site voltado ao público e um site de administração separados. O site público pode apresentar surtos repentinos no tráfego, enquanto o site de administração tem uma carga menor e mais previsível.
 
 **Descarregar tarefas com uso intenso de recursos.** As tarefas que exigem muitos recursos de CPU ou E/S devem ser movidas para [trabalhos em segundo plano][background-jobs] quando possível para minimizar a carga no front-end que está manipulando as solicitações do usuário.
 
@@ -32,11 +34,10 @@ Uma vantagem importante da nuvem é a escala elástica &mdash; a habilidade de u
 
 **Design para reduzir horizontalmente**.  Lembre-se de que, com a escala elástica, o aplicativo terá períodos de redução horizontal, quando as instâncias são removidas. O aplicativo deve tratar normalmente instâncias que estão sendo removidas. Aqui estão algumas maneiras de tratar a redução horizontal:
 
-- Escutar eventos de desligamento (quando disponíveis) e desligar corretamente. 
-- Clientes/consumidores de um serviço devem dar suporte a tratamento de falhas transitórias e novas tentativas. 
-- Para tarefas de longa execução, considere dividir o trabalho, usando pontos de verificação ou o padrão [Pipes e Filtros][pipes-filters-pattern]. 
-- Coloque os itens de trabalho em uma fila para que outra instância possa assumir o trabalho se uma instância for removida no meio do processamento. 
-
+- Escutar eventos de desligamento (quando disponíveis) e desligar corretamente.
+- Clientes/consumidores de um serviço devem dar suporte a tratamento de falhas transitórias e novas tentativas.
+- Para tarefas de longa execução, considere dividir o trabalho, usando pontos de verificação ou o padrão [Pipes e Filtros][pipes-filters-pattern].
+- Coloque os itens de trabalho em uma fila para que outra instância possa assumir o trabalho se uma instância for removida no meio do processamento.
 
 <!-- links -->
 

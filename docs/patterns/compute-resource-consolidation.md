@@ -1,18 +1,17 @@
 ---
-title: Consolidação de Recursos de Computação
-description: Consolidar várias tarefas ou operações em uma única unidade de computação
+title: Padrão de consolidação de recursos de computação
+titleSuffix: Cloud Design Patterns
+description: Consolidar várias tarefas ou operações em uma única unidade de computação.
 keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- design-implementation
-ms.openlocfilehash: bd212b8b4406a08058f811db030843f732e08cdc
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: 0f787537fb97f52ad69df7f0784b7fca3c45d7d1
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428832"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54111471"
 ---
 # <a name="compute-resource-consolidation-pattern"></a>Padrão de consolidação de recursos de computação
 
@@ -27,7 +26,6 @@ Um aplicativo de nuvem geralmente implementa uma variedade de operações. Em al
 Como um exemplo, a figura mostra a estrutura simplificada de uma solução hospedada na nuvem que é implementada utilizando mais de uma unidade computacional. Cada unidade computacional é executada em seu próprio ambiente virtual. Cada função foi implementada como uma tarefa separada (rotulada Tarefa A através da Tarefa E) em execução em sua própria unidade computacional.
 
 ![Tarefas em execução em um ambiente de nuvem utilizando um conjunto de unidades computacionais dedicadas](./_images/compute-resource-consolidation-diagram.png)
-
 
 Cada unidade computacional consome recursos passíveis de cobrança, mesmo que seja ocioso ou de uso leve. Portanto, essa não é sempre a solução mais econômica.
 
@@ -67,7 +65,7 @@ Considere os seguintes pontos ao implementar esse padrão:
 **Contenção**. Evite introduzir contenção entre tarefas que competem por recursos na mesma unidade computacional. Idealmente, tarefas que compartilham a mesma unidade computacional devem exibir características de utilização de recursos diferentes. Por exemplo, duas tarefas intensivas em computação provavelmente não devem residir na mesma unidade computacional e, tampouco, duas tarefas que consomem grandes quantidades de memória. No entanto, combinar uma tarefa intensiva de computação com uma tarefa que exige uma grande quantidade de memória é uma combinação viável.
 
 > [!NOTE]
->  Considere consolidar recursos de computação apenas para um sistema que esteja em produção por um período de tempo, de modo que os operadores e desenvolvedores possam monitorar o sistema e criar um _mapa de calor_ que identifica como cada tarefa utiliza diferentes recursos. Este mapa pode ser utilizado para determinar quais tarefas são boas candidatas a compartilhar recursos de computação.
+> Considere consolidar recursos de computação apenas para um sistema que esteja em produção por um período de tempo, de modo que os operadores e desenvolvedores possam monitorar o sistema e criar um _mapa de calor_ que identifica como cada tarefa utiliza diferentes recursos. Este mapa pode ser utilizado para determinar quais tarefas são boas candidatas a compartilhar recursos de computação.
 
 **Complexidade**. Combinar várias tarefas em uma única unidade computacional adiciona complexidade ao código na unidade, possivelmente tornando mais difícil testar, depurar e manter.
 
@@ -85,7 +83,7 @@ Esse padrão pode não ser adequado para tarefas que realizam operações críti
 
 Ao compilar um serviço de nuvem no Azure, é possível consolidar o processamento realizado por várias tarefas em uma única função. Normalmente, essa é uma função de trabalho que executa tarefas de processamento assíncrono ou em segundo plano.
 
-> Em alguns casos, é possível incluir tarefas de processamento assíncrono ou em seguindo plano na função web. Essa técnica ajuda a reduzir custos e simplificar a implantação, embora possa impactar a capacidade de resposta e escalabilidade da interface voltada ao público fornecida pela função web. 
+> Em alguns casos, é possível incluir tarefas de processamento assíncrono ou em seguindo plano na função web. Essa técnica ajuda a reduzir custos e simplificar a implantação, embora possa impactar a capacidade de resposta e escalabilidade da interface voltada ao público fornecida pela função web.
 
 A função responsável por iniciar e interromper as tarefas. Quando o controlador de malha do Azure carrega uma função, isso eleva o evento `Start` para a função. Você pode substituir o `OnStart` método da classe`WebRole` ou `WorkerRole` para lidar com esse evento, talvez para inicializar os dados e outros recursos que as tarefas desse método dependem.
 
@@ -104,7 +102,6 @@ Quando uma função é desligada ou é reciclada, o controlador de malha impedir
 As tarefas são iniciadas pelo método `Run`, que aguarda a conclusão das tarefas. As tarefas implementam a lógica de negócios do serviço de nuvem e podem responder às mensagens postadas na função através do Azure Load Balancer. A figura mostra o ciclo de vida de tarefas e recursos em uma função em um serviço de nuvem do Azure.
 
 ![O ciclo de vida de tarefas e recursos em uma função em um serviço de nuvem do Azure](./_images/compute-resource-consolidation-lifecycle.png)
-
 
 O arquivo _WorkerRole.cs_ no projeto _ComputeResourceConsolidation.Worker_ mostra um exemplo de como você pode implementar esse padrão em um serviço de nuvem do Azure.
 

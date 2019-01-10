@@ -4,12 +4,12 @@ titleSuffix: Azure Example Scenarios
 description: Crie um pipeline de processamento de pedidos altamente escalonável usando o Azure Cosmos DB.
 author: alexbuckgit
 ms.date: 07/10/2018
-ms.openlocfilehash: fe4e9d64e96d0be66534198bc60e2a73dad43e84
-ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
+ms.openlocfilehash: 285db7979f8a20ae75b534dcea5174b7151047ca
+ms.sourcegitcommit: 7d9efe716e8c9e99f3fafa9d0213d48c23d9713d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/20/2018
-ms.locfileid: "53644182"
+ms.lasthandoff: 01/09/2019
+ms.locfileid: "54160818"
 ---
 # <a name="scalable-order-processing-on-azure"></a>Processamento de pedidos escalonável no Azure
 
@@ -49,7 +49,7 @@ Essa arquitetura fornece detalhes sobre os principais componentes de um pipeline
 
 Muitas opções de tecnologia estão disponíveis para ingestão de mensagens em tempo real, armazenamento de dados, processamento de fluxo, armazenamento de dados analíticos, análise e relatórios. Para obter uma visão geral dessas opções, seus recursos e principais critérios de seleção, confira [Arquiteturas de Big Data: processamento em tempo real](/azure/architecture/data-guide/technology-choices/real-time-ingestion) no [Guia de Arquitetura de Dados do Azure](/azure/architecture/data-guide).
 
-Microsserviços se tornaram um estilo popular de arquitetura para criar aplicativos de nuvem resilientes, altamente escalonáveis, implantáveis independentemente e capazes de evoluir rapidamente. Os microsserviços exigem uma abordagem diferente para o design e criação de aplicativos. Ferramentas como o Docker, Kubernetes, Azure Service Fabric e Nomad permitem o desenvolvimento de arquiteturas baseadas em microsserviços. Para obter orientações sobre como criar e executar uma arquitetura baseada em microsserviços, confira [Criando microsserviços no Azure] (/azure/architecture/microservices), no Centro de Arquitetura do Azure.
+Microsserviços se tornaram um estilo popular de arquitetura para criar aplicativos de nuvem resilientes, altamente escalonáveis, implantáveis independentemente e capazes de evoluir rapidamente. Os microsserviços exigem uma abordagem diferente para o design e criação de aplicativos. Ferramentas como o Docker, Kubernetes, Azure Service Fabric e Nomad permitem o desenvolvimento de arquiteturas baseadas em microsserviços. Para obter orientação sobre a criação e execução de uma arquitetura baseada em microsserviços, consulte [Criando microsserviços no Azure](/azure/architecture/microservices) no Azure Architecture Center.
 
 ### <a name="availability"></a>Disponibilidade
 

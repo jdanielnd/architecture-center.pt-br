@@ -1,19 +1,17 @@
 ---
-title: Fornecimento do evento
+title: Padrão de fornecimento do evento
+titleSuffix: Cloud Design Patterns
 description: Use um repositório somente de acréscimo para registrar a série inteira de eventos que descrevem as ações realizadas nos dados em um domínio.
 keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- data-management
-- performance-scalability
-ms.openlocfilehash: 1cb63b61f5eb97726e266f797dfe13011907c95f
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: 56db321e33ecef17704eda4eda971ff3c7e44133
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429325"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011626"
 ---
 # <a name="event-sourcing-pattern"></a>Padrão de fornecimento do evento
 
@@ -42,14 +40,13 @@ O padrão de fornecimento do evento define uma abordagem para lidar com operaç�
 
 Os eventos são persistidos em um repositório de eventos que atua como o sistema de registro (fonte de dados autoritativa) sobre o estado atual dos dados. O repositório de eventos geralmente publica esses eventos de modo que os consumidores possam ser notificados e os manipulem se necessário. Os consumidores podem, por exemplo, iniciar tarefas que aplicam as operações nos eventos a outros sistemas ou então executar qualquer ação associada necessária para a conclusão da operação. Observe que o código do aplicativo que gera os eventos é separado dos sistemas que assinam os eventos.
 
-Usos típicos dos eventos publicados pelo repositório de eventos são manter exibições materializadas de entidades conforme elas são alteradas por ações no aplicativo, bem como para integração com sistemas externos. Por exemplo, um sistema pode manter uma exibição materializada de todas as ordens de cliente que é usada para popular partes da interface do usuário. Conforme o aplicativo adiciona novas ordens, adiciona ou remove itens na ordem e adiciona informações de envio, os eventos que descrevem essas alterações podem ser manipulados e usados para atualizar a [exibição materializada](materialized-view.md).
+Usos típicos dos eventos publicados pelo repositório de eventos são manter exibições materializadas de entidades conforme elas são alteradas por ações no aplicativo, bem como para integração com sistemas externos. Por exemplo, um sistema pode manter uma exibição materializada de todas as ordens de cliente que é usada para popular partes da interface do usuário. Conforme o aplicativo adiciona novas ordens, adiciona ou remove itens na ordem e adiciona informações de envio, os eventos que descrevem essas alterações podem ser manipulados e usados para atualizar a [exibição materializada](./materialized-view.md).
 
 Além disso, os aplicativos podem ler a qualquer momento o histórico de eventos e usá-lo para materializar o estado atual de uma entidade, reproduzindo e consumindo todos os eventos relacionados a essa entidade. Isso pode ocorrer sob demanda para materializar um objeto de domínio ao lidar com uma solicitação ou por meio de uma tarefa agendada para que o estado da entidade possa ser armazenado como uma exibição materializada para dar suporte à camada de apresentação.
 
 A figura mostra uma visão geral do padrão, incluindo algumas das opções para usar o fluxo de eventos, como criar uma exibição materializada, integrar eventos com sistemas e aplicativos externos e reproduzir eventos para criar projeções do estado atual do entidades específicas.
 
 ![Uma visão geral e um exemplo do padrão de fornecimento do evento](./_images/event-sourcing-overview.png)
-
 
 O padrão de fornecimento do evento fornece as seguintes vantagens:
 
@@ -128,7 +125,6 @@ O diagrama a seguir ilustra como o subsistema de reserva de lugares do sistema d
 
 ![Usando o fornecimento do evento para capturar informações sobre reservas de lugares em um sistema de gerenciamento de conferência](./_images/event-sourcing-bounded-context.png)
 
-
 A sequência de ações para reservar dois lugares é conforme descrito a seguir:
 
 1. A interface do usuário emite um comando para reservar lugares para dois participantes. O comando é manipulado por um manipulador de comandos separado. Uma parte da lógica que é separada da interface do usuário e é responsável por gerenciar solicitações lançadas como comandos.
@@ -153,11 +149,11 @@ Além de fornecer mais escopo para escalabilidade, usar um repositório de event
 
 Os padrões e diretrizes a seguir também podem ser relevantes ao implementar esse padrão:
 
-- [Padrão de CQRS (comando e segregação de responsabilidade de consulta)](cqrs.md). O repositório de gravação que fornece a origem permanente das informações de uma implementação de CQRS é normalmente baseado em uma implementação do padrão do fornecimento do evento. Descreve como separar as operações que leem dados em um aplicativo das operações que atualizam dados usando interfaces separadas.
+- [Padrão de comando e segregação de responsabilidade de consulta (CQRS)](./cqrs.md). O repositório de gravação que fornece a origem permanente das informações de uma implementação de CQRS é normalmente baseado em uma implementação do padrão do fornecimento do evento. Descreve como separar as operações que leem dados em um aplicativo das operações que atualizam dados usando interfaces separadas.
 
-- [Padrão de Exibição Materializada](materialized-view.md). O armazenamento de dados usado em um sistema baseado em evento de fornecimento normalmente não é adequado para consultar de modo eficiente. Em vez disso, uma abordagem comum é gerar previamente exibições dos dados em intervalos regulares ou quando os dados são alterados. Mostra como isso pode ser feito.
+- [Padrão de Exibição Materializada](./materialized-view.md). O armazenamento de dados usado em um sistema baseado em evento de fornecimento normalmente não é adequado para consultar de modo eficiente. Em vez disso, uma abordagem comum é gerar previamente exibições dos dados em intervalos regulares ou quando os dados são alterados. Mostra como isso pode ser feito.
 
-- [Padrão de Transação de Compensação](compensating-transaction.md). Os dados existentes em um repositório de fornecimento do evento não são atualizados, em vez disso, são adicionadas novas entradas que fazem a transição de estado das entidades para os novos valores. Para reverter uma alteração, as entradas de compensação são usadas porque não é possível simplesmente reverter a alteração anterior. Descreve como desfazer o trabalho realizado por uma operação anterior.
+- [Padrão de Transação de Compensação](./compensating-transaction.md). Os dados existentes em um repositório de fornecimento do evento não são atualizados, em vez disso, são adicionadas novas entradas que fazem a transição de estado das entidades para os novos valores. Para reverter uma alteração, as entradas de compensação são usadas porque não é possível simplesmente reverter a alteração anterior. Descreve como desfazer o trabalho realizado por uma operação anterior.
 
 - [Primer de Consistência de Dados](https://msdn.microsoft.com/library/dn589800.aspx). Ao usar fornecimento do evento com um repositório de leitura separado ou exibições materializadas, os dados de leitura não serão imediatamente consistentes, mas em vez disso serão apenas eventualmente consistentes. Resume os problemas que envolvem a manutenção da consistência em dados distribuídos.
 

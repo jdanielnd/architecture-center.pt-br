@@ -1,19 +1,17 @@
 ---
-title: Fila de prioridade
+title: Padrão de fila de prioridade
+titleSuffix: Cloud Design Patterns
 description: Priorize as solicitações enviadas a serviços para que as solicitações com uma prioridade mais alta sejam recebidas e processadas mais rapidamente do que aquelas com uma prioridade mais baixa.
 keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- messaging
-- performance-scalability
-ms.openlocfilehash: 400bfbc03cf5640ff32a551636b01d60e6c0ec50
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: ddd9cc9ec85c6ed23fabaaa58424736ba1aa9421
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428492"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011116"
 ---
 # <a name="priority-queue-pattern"></a>Padrão de fila de prioridade
 
@@ -31,12 +29,11 @@ Uma fila é geralmente uma estrutura PEPS (primeiro a entrar, primeiro a sair), 
 
 ![Figura 1 – Uso de um mecanismo de enfileiramento que dá suporte à priorização de mensagem](./_images/priority-queue-pattern.png)
 
-> A maioria das implementações de fila de mensagens dá suporte a vários consumidores (seguindo o [padrão de Consumidores concorrentes](https://msdn.microsoft.com/library/dn568101.aspx)), e o número de processos do consumidor pode ser escalado verticalmente ou reduzido horizontalmente dependendo da demanda.
+> A maioria das implementações de fila de mensagens dá suporte a vários consumidores (seguindo o [padrão de Consumidores concorrentes](./competing-consumers.md)), e o número de processos do consumidor pode ser escalado verticalmente ou reduzido horizontalmente dependendo da demanda.
 
 Em sistemas que não dão suporte a filas de mensagens baseadas em prioridade, uma solução alternativa é manter uma fila separada para cada prioridade. O aplicativo é responsável por postar mensagens na fila apropriada. Cada fila pode ter um pool separado de consumidores. Filas de prioridade mais alta podem ter um pool maior de consumidores em execução no hardware mais rápido que as filas de prioridade mais baixa. A figura a seguir ilustra o uso de filas de mensagens separadas para cada prioridade.
 
 ![Figura 2 – Uso de filas de mensagens separadas para cada prioridade](./_images/priority-queue-separate.png)
-
 
 Uma variação dessa estratégia é ter um único pool de consumidores que verifica se há mensagens em filas de alta prioridade primeiro e só então começa a buscar mensagens das filas de prioridade mais baixa. Há algumas diferenças semânticas entre uma solução que usa um único pool de processos do consumidor (com uma única fila que dá suporte a mensagens com prioridades diferentes ou com várias filas que cada uma lida com mensagens de uma única prioridade) e uma solução que usa várias filas com um pool separado para cada fila.
 
@@ -88,7 +85,6 @@ Uma solução do Azure pode implementar um tópico de Barramento de Serviço e u
 
 ![Figura 3 – Implementação de uma fila de prioridade com tópicos e assinaturas do Barramento de Serviço do Azure](./_images/priority-queue-service-bus.png)
 
-
 Na figura acima, o aplicativo cria várias mensagens e atribui uma propriedade personalizada chamada `Priority` em cada mensagem com um valor, `High` ou `Low`. O aplicativo posta essas mensagens em um tópico. O tópico tem duas assinaturas associadas que filtram mensagens examinando a propriedade `Priority`. Uma assinatura aceita mensagens onde a propriedade `Priority` está definida como `High`, e o outra aceita mensagens onde a propriedade `Priority` está definida como `Low`. Um pool de consumidores lê as mensagens de cada assinatura. A assinatura de alta prioridade tem um pool maior, e esses consumidores podem estar em execução em computadores mais potentes com mais recursos disponíveis que os consumidores no pool de baixa prioridade.
 
 Observe que não há nada de especial sobre a designação de mensagens de prioridade alta e baixa neste exemplo. Elas são simplesmente rótulos especificados como propriedades em cada mensagem e são usadas para direcionar mensagens para uma assinatura específica. Se forem necessárias prioridades adicionais, será relativamente fácil criar mais assinaturas e pools de processos do consumidor para lidar com essas prioridades.
@@ -121,6 +117,7 @@ public class PriorityWorkerRole : RoleEntryPoint
   }
 }
 ```
+
 As funções de trabalho `PriorityQueue.High` e `PriorityQueue.Low` substituem a funcionalidade padrão do método `ProcessMessage`. O código a seguir mostra o método `ProcessMessage` para a função de trabalho `PriorityQueue.High`.
 
 ```csharp
@@ -170,11 +167,10 @@ Os padrões e diretrizes a seguir também podem ser relevantes ao implementar es
 
 - [Prévia de mensagens assíncronas](https://msdn.microsoft.com/library/dn589781.aspx). Um serviço do consumidor que processa uma solicitação talvez precise enviar uma resposta para a instância do aplicativo que postou a solicitação. Fornece informações sobre as estratégias que você pode usar para implementar mensagens de solicitação/resposta.
 
-- [Padrão de consumidores concorrentes](competing-consumers.md). Para aumentar a taxa de transferência das filas, é possível ter vários consumidores que escutam na mesma fila e processar as tarefas em paralelo. Esses consumidores competirão por mensagens, mas apenas um deve ser capaz de processar cada mensagem. Fornece mais informações sobre as vantagens e desvantagens de implementar essa abordagem.
+- [Padrão de consumidores concorrentes](./competing-consumers.md). Para aumentar a taxa de transferência das filas, é possível ter vários consumidores que escutam na mesma fila e processar as tarefas em paralelo. Esses consumidores competirão por mensagens, mas apenas um deve ser capaz de processar cada mensagem. Fornece mais informações sobre as vantagens e desvantagens de implementar essa abordagem.
 
-- [Padrão de limitação](throttling.md). Você pode implementar a limitação usando filas. A prioridade de mensagens pode ser usada para garantir que as solicitações de aplicativos críticos ou aplicativos sendo executados por clientes de alto valor recebam prioridade sobre solicitações de aplicativos menos importantes.
+- [Padrão de limitação](./throttling.md). Você pode implementar a limitação usando filas. A prioridade de mensagens pode ser usada para garantir que as solicitações de aplicativos críticos ou aplicativos sendo executados por clientes de alto valor recebam prioridade sobre solicitações de aplicativos menos importantes.
 
 - [Diretrizes de dimensionamento automático](https://msdn.microsoft.com/library/dn589774.aspx). É possível dimensionar o tamanho do pool de processos do consumidor manipulando uma fila dependendo do tamanho dela. Essa estratégia pode ajudar a melhorar o desempenho, especialmente para pools que lidam com mensagens de alta prioridade.
 
 - [Padrões de integração empresarial com o Barramento de Serviço](https://abhishekrlal.com/2013/01/11/enterprise-integration-patterns-with-service-bus-part-2/) no blog de Abhishek Lal.
-

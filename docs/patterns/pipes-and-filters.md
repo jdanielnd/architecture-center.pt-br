@@ -1,19 +1,17 @@
 ---
-title: Pipes e filtros
+title: Padrão de pipes e filtros
+titleSuffix: Cloud Design Patterns
 description: Dividir uma tarefa que executa processamento complexo em uma série de elementos separados que podem ser reutilizados.
 keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- design-implementation
-- messaging
-ms.openlocfilehash: fd616676f9487bdfe1bf23b3d0fec6c65b97a8f4
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: 7084b538159f7104d2322e35f94f43e905f700bf
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429563"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011677"
 ---
 # <a name="pipes-and-filters-pattern"></a>Padrão de pipes e filtros
 
@@ -39,7 +37,6 @@ Dividir o processamento necessário para cada stream em um conjunto de component
 
 ![Figura 2 - Uma solução implementada usando pipes e filtros](./_images/pipes-and-filters-solution.png)
 
-
 O tempo necessário para processar uma solicitação única depende da velocidade do filtro lento no pipeline. Um ou mais filtros podem ser um gargalo, especialmente se um grande número de solicitações aparecer em um stream de uma determinada fonte de dados. Uma vantagem chave da estrutura de pipeline é que ele oferece oportunidades para executar instâncias paralelas de filtros lentos, permitindo que o sistema espalhe a carga e melhore a taxa de transferência.
 
 Os filtros que compõem um pipeline podem ser executados em diferentes computadores, permitindo que sejam escalados de forma independente e aproveitem a elasticidade que muitos ambientes de nuvem fornecem. Um filtro que é computacionalmente intensivo pode ser executado em hardware de alto desempenho, enquanto outros filtros menos exigentes podem ser hospedados em hardware de mercadoria menos caro. Os filtros não precisam estar no mesmo centro de dados ou localização geográfica, o que permite que cada elemento em um pipeline seja executado em um ambiente próximo dos recursos necessários.  A próxima figura mostra um exemplo aplicado ao pipeline para os dados da Fonte 1.
@@ -50,11 +47,12 @@ Se a entrada e a saída de um filtro estiverem estruturadas como um stream, ser�
 
 Outro benefício é a resiliência que esse modelo pode fornecer. Se um filtro falhar ou o comutador em que ele estiver executando não estiver mais disponível, o pipeline poderá reagendar o trabalho que o filtro estava executando e direcionar esse trabalho para outra instância do componente. A falha de um único filtro não resulta necessariamente na falha de todo o pipeline.
 
-O uso do padrão de Pipes e Filtros em conjunto com o [padrão de Transação de Compensação](compensating-transaction.md) é uma abordagem alternativa para implementar transações distribuídas. Uma transação distribuída pode ser dividida em tarefas compensáveis e separáveis, cada uma das quais pode ser implementada utilizando um filtro que também implementa o padrão de Transação de Compensação. Os filtros em um pipeline podem ser implementados como tarefas hospedadas separadas que executam perto dos dados que eles mantêm.
+O uso do padrão de Pipes e Filtros em conjunto com o [padrão de Transação de Compensação](./compensating-transaction.md) é uma abordagem alternativa para implementar transações distribuídas. Uma transação distribuída pode ser dividida em tarefas compensáveis e separáveis, cada uma das quais pode ser implementada utilizando um filtro que também implementa o padrão de Transação de Compensação. Os filtros em um pipeline podem ser implementados como tarefas hospedadas separadas que executam perto dos dados que eles mantêm.
 
 ## <a name="issues-and-considerations"></a>Problemas e considerações
 
 Os seguintes pontos devem ser considerados ao decidir como implementar esse padrão:
+
 - **Complexidade**. A flexibilidade aumentada que esse padrão fornece também pode introduzir complexidade, especialmente se os filtros em um pipeline estiverem distribuídos em diferentes servidores.
 
 - **Confiabilidade**. Use uma infraestrutura que garanta que os dados que fluem entre filtros em um pipeline não sejam perdidos.
@@ -70,11 +68,12 @@ Os seguintes pontos devem ser considerados ao decidir como implementar esse padr
 ## <a name="when-to-use-this-pattern"></a>Quando usar esse padrão
 
 Use esse padrão quando:
+
 - O processamento exigido por um aplicativo pode ser facilmente dividido em um conjunto de etapas independentes.
 
 - As etapas de processamento executadas por um aplicativo têm requisitos de escalabilidade diferentes.
 
-    >  É possível agrupar filtros que devem escalar no mesmo processo. Para obter mais informações, consulte o [padrão de Consolidação de Recursos de Computação](compute-resource-consolidation.md).
+    >  É possível agrupar filtros que devem escalar no mesmo processo. Para obter mais informações, consulte o [padrão de Consolidação de Recursos de Computação](./compute-resource-consolidation.md).
 
 - É necessária flexibilidade para permitir a reordenação das etapas de processamento executadas por um aplicativo ou a capacidade de adicionar e remover etapas.
 
@@ -83,6 +82,7 @@ Use esse padrão quando:
 - É necessária uma solução confiável que minimize os efeitos da falha em uma etapa, enquanto os dados estão sendo processados.
 
 Esse padrão pode não ser útil quando:
+
 - As etapas de processamento executadas por um aplicativo não são independentes ou devem ser realizadas juntas como parte da mesma transação.
 
 - A quantidade de contexto ou informações de estado exigidas por uma etapa torna esta abordagem ineficiente. Pode ser possível persistir informações de estado em um banco de dados, mas não utilize essa estratégia se a carga adicional no banco de dados causar contenção excessiva.
@@ -93,10 +93,9 @@ Você pode utilizar uma sequência de filas de mensagens para fornecer a infraes
 
 ![Figura 4 - Implementando um pipeline utilizando filas de mensagens](./_images/pipes-and-filters-message-queues.png)
 
-
 Se estiver compilando uma solução no Azure, você poderá utilizar as filas do Barramento de Serviço para fornecer um mecanismo de enfileiramento confiável e escalonável. A classe `ServiceBusPipeFilter` mostrada abaixo em C# demonstra como é possível implementar um filtro que recebe mensagens de entrada de uma fila, processa essas mensagens e posta os resultados em outra fila.
 
->  A classe `ServiceBusPipeFilter` está definida no projeto PipesAndFilters.Shared disponível a partir do [GitHub](https://github.com/mspnp/cloud-design-patterns/tree/master/pipes-and-filters).
+> A classe `ServiceBusPipeFilter` está definida no projeto PipesAndFilters.Shared disponível a partir do [GitHub](https://github.com/mspnp/cloud-design-patterns/tree/master/pipes-and-filters).
 
 ```csharp
 public class ServiceBusPipeFilter
@@ -278,8 +277,9 @@ public class FinalReceiverRoleEntry : RoleEntryPoint
 ## <a name="related-patterns-and-guidance"></a>Diretrizes e padrões relacionados
 
 Os padrões e diretrizes a seguir também podem ser relevantes ao implementar esse padrão:
+
 - Um exemplo que demonstra esse padrão está disponível em [GitHub](https://github.com/mspnp/cloud-design-patterns/tree/master/pipes-and-filters).
-- [Padrão de consumidores concorrentes](competing-consumers.md). Um pipeline pode conter várias instâncias de um ou mais filtros. Essa abordagem é útil para executar instâncias paralelas de filtros lentos, permitindo que o sistema espalhe a carga e melhore a taxa de transferência. Cada instância de um filtro competirá por entrada com as outras instâncias, duas instâncias de um filtro não poderão processar os mesmos dados. Fornece uma explicação sobre essa abordagem.
-- [Padrão de consolidação de recursos de computação](compute-resource-consolidation.md). Pode ser possível agrupar filtros que devem ser escalados em conjunto no mesmo processo. Fornece mais informações sobre os benefícios e compensações dessa estratégia.
-- [Padrão de Transação de Compensação](compensating-transaction.md). Um filtro pode ser implementado como uma operação que pode ser revertida, ou que possui uma operação de compensação que restaura o estado a uma versão anterior em caso de falha. Explica como isso pode ser implementado para manter ou obter uma consistência eventual.
+- [Padrão de consumidores concorrentes](./competing-consumers.md). Um pipeline pode conter várias instâncias de um ou mais filtros. Essa abordagem é útil para executar instâncias paralelas de filtros lentos, permitindo que o sistema espalhe a carga e melhore a taxa de transferência. Cada instância de um filtro competirá por entrada com as outras instâncias, duas instâncias de um filtro não poderão processar os mesmos dados. Fornece uma explicação sobre essa abordagem.
+- [Padrão de consolidação de recursos de computação](./compute-resource-consolidation.md). Pode ser possível agrupar filtros que devem ser escalados em conjunto no mesmo processo. Fornece mais informações sobre os benefícios e compensações dessa estratégia.
+- [Padrão de Transação de Compensação](./compensating-transaction.md). Um filtro pode ser implementado como uma operação que pode ser revertida, ou que possui uma operação de compensação que restaura o estado a uma versão anterior em caso de falha. Explica como isso pode ser implementado para manter ou obter uma consistência eventual.
 - [Padrões de Idempotência](https://blog.jonathanoliver.com/idempotency-patterns/) no blog de Jonathan Oliver.

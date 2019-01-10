@@ -1,19 +1,17 @@
 ---
-title: Repositório de configuração externo
+title: Padrão de repositório de configuração externo
+titleSuffix: Cloud Design Patterns
 description: Mova as informações de configuração para fora do pacote de implantação de aplicativo para um local centralizado.
 keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- design-implementation
-- management-monitoring
-ms.openlocfilehash: 733ca979903d1526d3a1a6b281a8903893e19fda
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.custom: seodec18
+ms.openlocfilehash: 7e37e5bc052a9d8e8747a3a4ac3d79a311185ea4
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24542274"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011303"
 ---
 # <a name="external-configuration-store-pattern"></a>Padrão de repositório de configuração externo
 
@@ -40,7 +38,6 @@ O repositório de backup escolhido para as informações de configuração deve 
 > Muitos sistemas de configuração internos leem os dados quando o aplicativo é iniciado e os armazenar em cache na memória para fornecer acesso rápido e minimizar o impacto sobre o desempenho do aplicativo. Dependendo do tipo de repositório de backup usado e da latência dele, pode ser útil implementar um mecanismo de armazenamento em cache no repositório de configuração externo. Para saber mais, consulte [Diretrizes de caching](https://msdn.microsoft.com/library/dn589802.aspx). A figura mostra uma visão geral do Padrão de repositório de configuração externo com um cache local opcional.
 
 ![Uma visão geral do Padrão de repositório de configuração externo com um cache local opcional](./_images/external-configuration-store-overview.png)
-
 
 ## <a name="issues-and-considerations"></a>Problemas e considerações
 
@@ -101,7 +98,7 @@ A classe `ExternalConfigurationManager` fornece um wrapper em torno de um objeto
 
 Observe que todas as configurações também são armazenadas em cache em um objeto `Dictionary` dentro da classe `ExternalConfigurationManager` para acesso rápido. O método `GetSetting` usado para recuperar uma definição de configuração lê os dados do cache. Se a configuração não for encontrada no cache, ela será recuperada do objeto `BlobSettingsStore`.
 
-O método `GetSettings` invoca o método `CheckForConfigurationChanges` para detectar se as informações de configuração no armazenamento de blobs foi alterado. Ele faz isso examinando o número de versão e comparando-o com o número de versão atual do objeto `ExternalConfigurationManager`. Se uma ou mais alterações ocorrerem, o evento `Changed` é acionado e as definições de configuração armazenados em cache no objeto `Dictionary` são atualizadas. Este é um aplicativo do [Padrão cache-aside](cache-aside.md).
+O método `GetSettings` invoca o método `CheckForConfigurationChanges` para detectar se as informações de configuração no armazenamento de blobs foi alterado. Ele faz isso examinando o número de versão e comparando-o com o número de versão atual do objeto `ExternalConfigurationManager`. Se uma ou mais alterações ocorrerem, o evento `Changed` é acionado e as definições de configuração armazenados em cache no objeto `Dictionary` são atualizadas. Este é um aplicativo do [Padrão cache-aside](./cache-aside.md).
 
 O exemplo de código a seguir mostra como o evento `Changed`, o método `GetSettings` e o método `CheckForConfigurationChanges` são implementados:
 
@@ -130,7 +127,7 @@ public class ExternalConfigurationManager : IDisposable
   public string GetAppSetting(string key)
   {
     ...
-    // Try to get the value from the settings cache. 
+    // Try to get the value from the settings cache.
     // If there's a cache miss, get the setting from the settings store and refresh the settings cache.
 
     string value;

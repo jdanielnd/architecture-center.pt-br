@@ -3,12 +3,12 @@ title: OLTP (processamento de transações online)
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: be24bc173359539785385de4a188e7536f6d2ffe
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 331da288384bf14581eeda35116085d759807245
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902742"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113953"
 ---
 # <a name="online-transaction-processing-oltp"></a>OLTP (processamento de transações online)
 
@@ -16,11 +16,11 @@ O gerenciamento de dados transacionais usando sistemas de computador é conhecid
 
 ## <a name="transactional-data"></a>Dados transacionais
 
-Dados transacionais são informações que acompanham as interações relacionadas às atividades de uma organização. Normalmente, essas interações são transações comerciais, como pagamentos recebidos de clientes, pagamentos feitos a fornecedores e movimentação de produtos pelo inventário, pedidos feitos ou serviços entregues. Eventos transacionais, que representam as transações em si, normalmente contêm uma dimensão temporal, alguns valores numéricos e referências a outros dados. 
+Dados transacionais são informações que acompanham as interações relacionadas às atividades de uma organização. Normalmente, essas interações são transações comerciais, como pagamentos recebidos de clientes, pagamentos feitos a fornecedores e movimentação de produtos pelo inventário, pedidos feitos ou serviços entregues. Eventos transacionais, que representam as transações em si, normalmente contêm uma dimensão temporal, alguns valores numéricos e referências a outros dados.
 
 As transações normalmente precisam ser *atômicas* e *consistentes*. Atomicidade significa que uma transação inteira sempre tem êxito ou falha como uma unidade de trabalho e nunca é deixada em um estado concluído incompleto. Se uma transação não pode ser concluída, o sistema de banco de dados precisa reverter todas as etapas que já foram realizadas como parte dessa transação. Em um RDBMS tradicional, essa reversão ocorre automaticamente se uma transação não pode ser concluída. Consistência significa que as transações sempre deixam os dados em um estado válido. (Essas são descrições muito informais de atomicidade e consistência. Há definições mais formais dessas propriedades, como [ACID](https://en.wikipedia.org/wiki/ACID).)
 
-Bancos de dados transacionais podem dar suporte à coerência forte em transações que usam várias estratégias de bloqueio, como bloqueio pessimista, a fim de garantir que todos os dados sejam altamente consistentes dentro do contexto da empresa, para todos os usuários e processos. 
+Bancos de dados transacionais podem dar suporte à coerência forte em transações que usam várias estratégias de bloqueio, como bloqueio pessimista, a fim de garantir que todos os dados sejam altamente consistentes dentro do contexto da empresa, para todos os usuários e processos.
 
 A arquitetura de implantação mais comum que usa dados transacionais é a camada de armazenamento de dados em uma arquitetura de três camadas. Uma arquitetura de três camadas normalmente consiste em uma camada de apresentação, uma camada de lógica de negócios e uma camada de armazenamento de dados. Uma arquitetura de implantação relacionada é a arquitetura [de N camadas](/azure/architecture/guide/architecture-styles/n-tier), que pode ter várias camadas intermediárias que manipulam a lógica de negócios.
 
@@ -44,7 +44,7 @@ Os dados transacionais tendem a ter as seguintes características:
 | Modelo | Relacional |
 | Forma dos dados | Tabular |
 | Flexibilidade de consulta | Altamente flexível |
-| Escala | Pequeno (MBs) a grande (alguns TBs) | 
+| Escala | Pequeno (MBs) a grande (alguns TBs) |
 
 ## <a name="when-to-use-this-solution"></a>Quando usar esta solução
 
@@ -53,6 +53,7 @@ Escolha o OLTP quando precisar processar e armazenar transações comerciais com
 Os sistemas OLTP foram projetados para processar e armazenar transações com eficiência, bem como consultar dados transacionais. A meta de processar e armazenar transações individuais com eficiência por um sistema OLTP é parcialmente realizada pela normalização de dados &mdash; ou seja, sua divisão em partes menores que são menos redundantes. Isso dá suporte à eficiência, porque permite que o sistema OLTP processe grandes quantidades de transações de forma independente e evita o processamento extra necessário para manter a integridade dos dados na presença de dados redundantes.
 
 ## <a name="challenges"></a>Desafios
+
 A implementação e o uso de um sistema OLTP pode apresentar alguns desafios:
 
 - Os sistemas OLTP nem sempre são bons para manipular agregações em grandes volumes de dados, embora haja exceções, como uma solução bem planejada baseada no SQL Server. A análise dos dados, que se baseia em cálculos de agregação em milhões de transações individuais, faz uso muito intensivo de recursos de um sistema OLTP. Eles podem ser lentos para serem executados e podem causar lentidão, bloqueando outras transações no banco de dados.
@@ -80,7 +81,7 @@ Para restringir as opções, comece respondendo a estas perguntas:
 
 - Sua solução tem dependências específicas para compatibilidade com o Microsoft SQL Server, MySQL ou PostgreSQL? Seu aplicativo pode limitar os armazenamentos de dados que você pode escolher com base nos fatores condutores que dão suporte à comunicação com o armazenamento de dados ou nas suposições que ele faz sobre qual banco de dados é usado.
 
-- Seus requisitos de taxa de transferência de gravação são particularmente altos? Em caso afirmativo, escolha uma opção que fornece tabelas em memória. 
+- Seus requisitos de taxa de transferência de gravação são particularmente altos? Em caso afirmativo, escolha uma opção que fornece tabelas em memória.
 
 - Sua solução é de multilocatário? Nesse caso, considere opções que dão suporte a pools de capacidade, em que várias instâncias de banco de dados são extraídas de um pool elástico de recursos, em vez de recursos fixos por banco de dados. Isso pode ajudá-lo a distribuir melhor a capacidade em todas as instâncias de banco de dados e pode tornar a solução mais econômica.
 
@@ -94,13 +95,17 @@ Para restringir as opções, comece respondendo a estas perguntas:
 
 As tabelas a seguir resumem as principais diferenças em funcionalidades.
 
-### <a name="general-capabilities"></a>Funcionalidades gerais 
+### <a name="general-capabilities"></a>Funcionalidades gerais
+
+<!-- markdownlint-disable MD033 -->
 
 |                              | Banco de Dados SQL do Azure | SQL Server em uma máquina virtual do Azure | Banco de Dados do Azure para MySQL | Banco de Dados do Azure para PostgreSQL |
 |------------------------------|--------------------|----------------------------------------|--------------------------|-------------------------------|
 |      É um Serviço Gerenciado      |        SIM         |                   Não                    |           sim            |              SIM              |
 |       É executado na plataforma       |        N/D         |         Windows, Linux, Docker         |           N/D            |              N/D              |
 | Programação <sup>1</sup> |   T-SQL, .NET, R   |         T-SQL, .NET, R, Python         |  T-SQL, .NET, R, Python  |              SQL              |
+
+<!-- markdownlint-enable MD033 -->
 
 [1] Não incluindo o suporte de driver do cliente, que permite que muitas linguagens de programação se conectem e usem o armazenamento de dados OLTP.
 
@@ -116,7 +121,7 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 ### <a name="analytic-workload-capabilities"></a>Funcionalidades de carga de trabalho analítica
 
 | | Banco de Dados SQL do Azure | SQL Server em uma máquina virtual do Azure| Banco de Dados do Azure para MySQL | Banco de Dados do Azure para PostgreSQL|
-| --- | --- | --- | --- | --- | --- | 
+| --- | --- | --- | --- | --- | --- |
 | Tabelas temporais | SIM | sim | Não | Não  |
 | Tabelas em memória (com otimização de memória) | SIM | sim | Não | Não  |
 | Suporte de columnstore | SIM | sim | Não | Não  |
@@ -125,9 +130,9 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 ### <a name="availability-capabilities"></a>Recursos de disponibilidade
 
 | | Banco de Dados SQL do Azure | SQL Server em uma máquina virtual do Azure| Banco de Dados do Azure para MySQL | Banco de Dados do Azure para PostgreSQL|
-| --- | --- | --- | --- | --- | --- | 
-| Secundários legíveis | SIM | sim | Não | Não  | 
-| Replicação geográfica | SIM | sim | Não | Não  | 
+| --- | --- | --- | --- | --- | --- |
+| Secundários legíveis | SIM | sim | Não | Não  |
+| Replicação geográfica | SIM | sim | Não | Não  |
 | Failover automático para o secundário | SIM | Não | Não | Não |
 | Restauração pontual | SIM | sim | sim | SIM |
 
@@ -145,4 +150,3 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 |                                         Autenticação multifator                                         |        SIM         |                  sim                   |            Não            |              Não                |
 | Dá suporte ao [Always Encrypted](/sql/relational-databases/security/encryption/always-encrypted-database-engine) |        SIM         |                  sim                   |           sim            |              Não                |
 |                                                 IP Privado                                                  |         Não          |                  sim                   |           sim            |              Não                |
-

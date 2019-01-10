@@ -1,19 +1,17 @@
 ---
-title: Valet Key
+title: Padrão Valet Key
+titleSuffix: Cloud Design Patterns
 description: Use um token ou chave que fornece aos clientes acesso direto e restrito a um determinado recurso ou serviço.
 keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- data-management
-- security
-ms.openlocfilehash: 99d3fbe05e34d61edc0d339f34665e557b250b05
-ms.sourcegitcommit: fb22348f917a76e30a6c090fcd4a18decba0b398
+ms.custom: seodec18
+ms.openlocfilehash: 09173717d499d524d4d5dad2c1202c1bf361b1e5
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/16/2018
-ms.locfileid: "53450880"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54009858"
 ---
 # <a name="valet-key-pattern"></a>Padrão Valet Key
 
@@ -105,7 +103,7 @@ O Azure fornece suporte a assinaturas de acesso compartilhado no Armazenamento d
 
 As assinaturas de acesso compartilhado do Azure também fornecem suporte a políticas de acesso armazenadas em servidor que podem ser associadas a um recurso específico, como uma tabela ou blob. Esse recurso fornece controle e flexibilidade adicionais em comparação com tokens de assinatura de acesso compartilhado gerado por aplicativos e deve ser usado sempre que possível. As configurações definidas em uma política armazenada em servidor podem ser alteradas e são refletidas no token sem requerer que um novo token seja emitido, mas, as configurações definidas no token não podem ser alteradas sem emitir um novo token. Essa abordagem também permite revogar um token de assinatura de acesso compartilhado válido antes de expirar.
 
-> Para obter mais informações, consulte [Introdução à SAS (Assinatura de Acesso Compartilhado) de tabela, SAS de fila e atualização para SAS de Blob](https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/12/introducing-table-sas-shared-access-signature-queue-sas-and-update-to-blob-sas/) e [Uso de assinaturas de acesso compartilhado](https://azure.microsoft.com/documentation/articles/storage-dotnet-shared-access-signature-part-1/) no MSDN.
+> Para obter mais informações, consulte [Introdução à SAS (Assinatura de Acesso Compartilhado) de tabela, SAS de fila e atualização para SAS de Blob](https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/12/introducing-table-sas-shared-access-signature-queue-sas-and-update-to-blob-sas/) e [Uso de assinaturas de acesso compartilhado](/azure/storage/common/storage-dotnet-shared-access-signature-part-1) no MSDN.
 
 O código a seguir mostra como criar um token de assinatura de acesso compartilhado válido por cinco minutos. O método `GetSharedAccessReferenceForUpload` retorna um token de assinatura de acesso compartilhado que pode ser usado para carregar um arquivo para o Armazenamento de Blobs do Azure.
 
@@ -162,9 +160,10 @@ public class ValuesController : ApiController
 ## <a name="next-steps"></a>Próximas etapas
 
 Os padrões e diretrizes a seguir também podem ser relevantes ao implementar esse padrão:
+
 - Um exemplo que demonstra esse padrão está disponível em [GitHub](https://github.com/mspnp/cloud-design-patterns/tree/master/valet-key).
-- [Padrão de gatekeeper](gatekeeper.md). Este padrão pode ser utilizado em conjunto com o padrão Valet Key para proteger aplicativos e serviços, utilizando uma instância de host dedicada que age como agente entre clientes e o aplicativo ou serviço. O gatekeeper valida e limpa as solicitações, e transmite as solicitações e os dados entre o cliente e o aplicativo. Isso pode fornecer uma camada adicional de segurança e reduzir a superfície de ataque do sistema.
-- [Padrão de hospedagem de conteúdo estático](static-content-hosting.md). Descreve como implantar recursos estáticos em um serviço de armazenamento baseado em nuvem que pode entregar esses recursos diretamente ao cliente para reduzir o requisito de instâncias de computação dispendiosas. Onde os recursos não se destinam a ser publicamente disponíveis, o padrão Valet Key poderá ser usado para protegê-los.
+- [Padrão de gatekeeper](./gatekeeper.md). Este padrão pode ser utilizado em conjunto com o padrão Valet Key para proteger aplicativos e serviços, utilizando uma instância de host dedicada que age como agente entre clientes e o aplicativo ou serviço. O gatekeeper valida e limpa as solicitações, e transmite as solicitações e os dados entre o cliente e o aplicativo. Isso pode fornecer uma camada adicional de segurança e reduzir a superfície de ataque do sistema.
+- [Padrão de hospedagem de conteúdo estático](./static-content-hosting.md). Descreve como implantar recursos estáticos em um serviço de armazenamento baseado em nuvem que pode entregar esses recursos diretamente ao cliente para reduzir o requisito de instâncias de computação dispendiosas. Onde os recursos não se destinam a ser publicamente disponíveis, o padrão Valet Key poderá ser usado para protegê-los.
 - [Introdução à SAS (Assinatura de Acesso Compartilhado) de tabela, SAS de fila e atualização para SAS de Blob](https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/12/introducing-table-sas-shared-access-signature-queue-sas-and-update-to-blob-sas/)
-- [Uso de assinaturas de acesso compartilhado](https://azure.microsoft.com/documentation/articles/storage-dotnet-shared-access-signature-part-1/)
-- [Autenticação de assinatura de acesso compartilhado com Barramento de serviço](https://azure.microsoft.com/documentation/articles/service-bus-shared-access-signature-authentication/)
+- [Uso de assinaturas de acesso compartilhado](/azure/storage/common/storage-dotnet-shared-access-signature-part-1)
+- [Autenticação de assinatura de acesso compartilhado com Barramento de serviço](/azure/service-bus-messaging/service-bus-sas)

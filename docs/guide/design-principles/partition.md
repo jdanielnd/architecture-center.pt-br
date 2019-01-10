@@ -1,14 +1,16 @@
 ---
 title: Partição de limites
-description: Usar o particionamento para contornar os limites de banco de dados, de rede e de computação
+titleSuffix: Azure Application Architecture Guide
+description: Use particionamento para contornar o banco de dados, rede e limites de computação.
 author: MikeWasson
 ms.date: 08/30/2018
-ms.openlocfilehash: 2f6bf797c2c7e5af7c487635c19eaf77eee77dec
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.custom: seojan19
+ms.openlocfilehash: f6c0daa1b1ea469413156fdf3cd6969f98528fb3
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43326289"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54110485"
 ---
 # <a name="partition-around-limits"></a>Partição de limites
 
@@ -22,7 +24,7 @@ Há várias maneiras de particionar um sistema, como:
 
 - Partição de uma fila ou mensagem de barramento para evitar limites sobre o número de solicitações ou o número de conexões simultâneas.
 
-- Partição de um aplicativo Web do Serviço de Aplicativo para evitar limites no número de instâncias por plano do Serviço de Aplicativo. 
+- Partição de um aplicativo Web do Serviço de Aplicativo para evitar limites no número de instâncias por plano do Serviço de Aplicativo.
 
 Um banco de dados pode ser particionado *horizontalmente*, *verticalmente* ou *funcionalmente*.
 
@@ -40,14 +42,12 @@ Para obter diretrizes mais detalhadas, veja [Particionamento de dados][data-part
 
 **Projete a chave de partição para evitar pontos de acesso**. Se você particionar um banco de dados, mas se um fragmento ainda tiver a maioria das solicitações, você ainda não terá solucionado o problema. Idealmente, a carga é distribuída uniformemente entre todas as partições. Por exemplo, o hash por ID de cliente e não a primeira letra do nome do cliente, pois algumas letras são mais frequentes. O mesmo princípio se aplica no particionamento de uma fila de mensagens. Selecione uma chave de partição que leve a uma distribuição uniforme de mensagens em um conjunto de filas. Para saber mais, veja [Fragmentação][sharding].
 
-**Particione em torno da assinatura do Azure e limites de serviço**. Os componentes e os serviços individuais têm limites, mas também há limites para assinaturas e grupos de recursos. Para aplicativos muito grandes, talvez seja necessário particionar em torno desses limites.  
+**Particione em torno da assinatura do Azure e limites de serviço**. Os componentes e os serviços individuais têm limites, mas também há limites para assinaturas e grupos de recursos. Para aplicativos muito grandes, talvez seja necessário particionar em torno desses limites.
 
-**Particione em níveis diferentes**. Considere um servidor de banco de dados implantado em uma máquina virtual. A máquina virtual tem um VHD cujo backup é feito pelo Armazenamento do Azure. A conta de armazenamento pertence a uma assinatura do Azure. Observe que cada etapa na hierarquia tem limites. O servidor de banco de dados pode ter um limite de pool de conexão. As máquinas virtuais têm limites de CPU e de rede. O Armazenamento tem limites de IOPS. A assinatura tem limites no número de núcleos de VM. Geralmente, é mais fácil particionar a parte inferior na hierarquia. Somente os aplicativos grandes devem precisar de particionamento no nível da assinatura. 
+**Particione em níveis diferentes**. Considere um servidor de banco de dados implantado em uma máquina virtual. A máquina virtual tem um VHD cujo backup é feito pelo Armazenamento do Azure. A conta de armazenamento pertence a uma assinatura do Azure. Observe que cada etapa na hierarquia tem limites. O servidor de banco de dados pode ter um limite de pool de conexão. As máquinas virtuais têm limites de CPU e de rede. O Armazenamento tem limites de IOPS. A assinatura tem limites no número de núcleos de VM. Geralmente, é mais fácil particionar a parte inferior na hierarquia. Somente os aplicativos grandes devem precisar de particionamento no nível da assinatura.
 
 <!-- links -->
 
 [azure-limits]: /azure/azure-subscription-service-limits
 [data-partitioning-guidance]: ../../best-practices/data-partitioning.md
 [sharding]: ../../patterns/sharding.md
-
- 

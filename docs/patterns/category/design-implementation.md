@@ -1,21 +1,21 @@
 ---
 title: Padrões de design e implementação
+titleSuffix: Cloud Design Patterns
 description: Um bom design abrange fatores como a consistência e a coerência no design do componente e implantação, facilidade de manutenção para simplificar a administração e desenvolvimento e capacidade de reutilização para permitir que componentes e subsistemas para ser usado em outros aplicativos e em outros cenários. As decisões tomadas durante a fase de design e implementação tem um grande impacto sobre a qualidade e o custo total de propriedade de aplicativos e serviços hospedados pela nuvem.
 keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-ms.openlocfilehash: 861445ceeca62e5b1e62fd4cb33924c35e10c0b0
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.custom: seodec18
+ms.openlocfilehash: 38b20fad513109051d40c1b9556f75fa86e03dd7
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30847791"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54009790"
 ---
 # <a name="design-and-implementation-patterns"></a>Padrões de design e implementação
 
 Um bom design abrange fatores como a consistência e a coerência no design do componente e implantação, facilidade de manutenção para simplificar a administração e desenvolvimento e capacidade de reutilização para permitir que componentes e subsistemas para ser usado em outros aplicativos e em outros cenários. As decisões tomadas durante a fase de design e implementação tem um grande impacto sobre a qualidade e o custo total de propriedade de aplicativos e serviços hospedados pela nuvem.
-
 
 |                                Padrão                                 |                                                                                                      Resumo                                                                                                       |
 |------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -33,4 +33,3 @@ Um bom design abrange fatores como a consistência e a coerência no design do c
 |                        [Sidecar](../sidecar.md)                        |                                                  Implante os componentes de um aplicativo em um processo ou contêiner separado para fornecer isolamento e encapsulamento.                                                  |
 |         [Hospedagem de Conteúdo Estático](../static-content-hosting.md)         |                                                        Implante o conteúdo estático para um serviço de armazenamento baseado em nuvem que pode enviá-las diretamente para o cliente.                                                        |
 |                      [Strangler](../strangler.md)                      |                                         Migre incrementalmente um sistema herdado substituindo gradualmente partes específicas de funcionalidade por serviços e aplicativos novos.                                          |
-

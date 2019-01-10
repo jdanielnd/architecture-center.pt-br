@@ -3,24 +3,24 @@ title: OLAP (processamento analítico online)
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: beed0d642e85096efc0b6fe492181b8dcd771d2d
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 2f938796a741b8a26694742f1098e29728e6818d
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902591"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113562"
 ---
 # <a name="online-analytical-processing-olap"></a>OLAP (processamento analítico online)
 
 O OLAP (processamento analítico online) é uma tecnologia que organiza bancos de dados comerciais grandes e dá suporte à análise complexa. Ele pode ser usado para executar consultas analíticas complexas sem prejudicar sistemas transacionais.
 
-Os bancos de dados que uma empresa usa para armazenar todas as suas transações e registros são chamados bancos de dados [OLTP (processamento de transações online)](online-transaction-processing.md). Esses bancos de dados geralmente têm registros que são inseridos individualmente. Muitas vezes, eles contêm uma grande quantidade de informações que são importantes para a organização. No entanto, os bancos de dados que são usados para OLTP não foram projetados para análise. Portanto, a recuperação de respostas com base nesses bancos de dados é cara em termos de tempo e esforço. Os sistemas OLAP foram projetados para ajudar a extrair essas informações de business intelligence dos dados de uma maneira com alto desempenho. Isso ocorre porque os bancos de dados OLAP são otimizados para cargas de trabalho com leitura intensa e com pouca gravação.
+Os bancos de dados que uma empresa usa para armazenar todas as suas transações e registros são chamados bancos de dados [OLTP (processamento de transações online)](./online-transaction-processing.md). Esses bancos de dados geralmente têm registros que são inseridos individualmente. Muitas vezes, eles contêm uma grande quantidade de informações que são importantes para a organização. No entanto, os bancos de dados que são usados para OLTP não foram projetados para análise. Portanto, a recuperação de respostas com base nesses bancos de dados é cara em termos de tempo e esforço. Os sistemas OLAP foram projetados para ajudar a extrair essas informações de business intelligence dos dados de uma maneira com alto desempenho. Isso ocorre porque os bancos de dados OLAP são otimizados para cargas de trabalho com leitura intensa e com pouca gravação.
 
-![OLAP no Azure](../images/olap-data-pipeline.png) 
+![OLAP no Azure](../images/olap-data-pipeline.png)
 
 ## <a name="semantic-modeling"></a>Modelagem semântica
 
-Um modelo de dados semântico é um modelo conceitual que descreve o significado dos elementos de dados que ele contém. As empresas costumam ter seus próprios termos para coisas, às vezes, com sinônimos ou até mesmo significados diferentes para o mesmo termo. Por exemplo, um banco de dados de inventário pode acompanhar uma parte do equipamento com uma ID de ativo e um número de série, mas um banco de dados de vendas pode se referir ao número de série como a ID de ativo. Não há nenhuma maneira simples para relacionar esses valores sem um modelo que descreve a relação. 
+Um modelo de dados semântico é um modelo conceitual que descreve o significado dos elementos de dados que ele contém. As empresas costumam ter seus próprios termos para coisas, às vezes, com sinônimos ou até mesmo significados diferentes para o mesmo termo. Por exemplo, um banco de dados de inventário pode acompanhar uma parte do equipamento com uma ID de ativo e um número de série, mas um banco de dados de vendas pode se referir ao número de série como a ID de ativo. Não há nenhuma maneira simples para relacionar esses valores sem um modelo que descreve a relação.
 
 A modelagem semântica fornece um nível de abstração no esquema de banco de dados, de modo que os usuários não precisem conhecer as estruturas de dados subjacentes. Isso facilita para os usuários finais consultar dados sem executar agregações e junções no esquema subjacente. Além disso, normalmente, as colunas são renomeadas com nomes mais amigáveis, de modo que o contexto e o significado dos dados sejam mais óbvios.
 
@@ -29,7 +29,7 @@ A modelagem semântica é predominantemente usada para cenários de leitura inte
 - Os comportamentos de agregação são definidos para que as ferramentas de relatórios os exibam corretamente.
 - A lógica de negócios e os cálculos são definidos.
 - Os cálculos orientados por tempo são incluídos.
-- Os dados normalmente são integrados de várias fontes. 
+- Os dados normalmente são integrados de várias fontes.
 
 Tradicionalmente, a camada semântica é colocada em um data warehouse por esses motivos.
 
@@ -37,10 +37,11 @@ Tradicionalmente, a camada semântica é colocada em um data warehouse por esses
 
 Há dois tipos principais de modelos semânticos:
 
-* **Tabular**. Usa constructos de modelagem relacional (modelo, tabelas, colunas). Internamente, os metadados são herdados de constructos de modelagem OLAP (cubos, dimensões, medidas). O código e o script usam metadados OLAP.
-* **Multidimensional**. Usa constructos de modelagem OLAP tradicionais (cubos, dimensões, medidas).
+- **Tabular**. Usa constructos de modelagem relacional (modelo, tabelas, colunas). Internamente, os metadados são herdados de constructos de modelagem OLAP (cubos, dimensões, medidas). O código e o script usam metadados OLAP.
+- **Multidimensional**. Usa constructos de modelagem OLAP tradicionais (cubos, dimensões, medidas).
 
 Serviço do Azure relevante:
+
 - [Azure Analysis Services](https://azure.microsoft.com/services/analysis-services/)
 
 ## <a name="example-use-case"></a>Caso de uso de exemplo
@@ -72,9 +73,9 @@ A modelagem semântica e o processamento analítico tendem a ter as seguintes ca
 
 Considere o uso do OLAP nos seguintes cenários:
 
-- Você precisa executar consultas analíticas e ad hoc complexas rapidamente, sem prejudicar os sistemas OLTP. 
+- Você precisa executar consultas analíticas e ad hoc complexas rapidamente, sem prejudicar os sistemas OLTP.
 - Você deseja fornecer aos usuários empresariais uma maneira simples de gerar relatórios com base em seus dados
-- Você deseja fornecer várias agregações que permitirão aos usuários obter resultados consistentes e rápidos. 
+- Você deseja fornecer várias agregações que permitirão aos usuários obter resultados consistentes e rápidos.
 
 O OLAP é especialmente útil para aplicação de cálculos de agregação em grandes quantidades de dados. Os sistemas OLAP são otimizados para cenários com leitura intensa, como análise e business intelligence. O OLAP permite aos usuários segmentar dados multidimensionais em fatias que podem ser exibidas em duas dimensões (como uma tabela dinâmica) ou filtrar os dados por valores específicos. Esse processo, às vezes, é chamado de "segmentar e analisar" os dados e pode ser feito independentemente se os dados são particionados em várias fontes de dados. Isso ajuda os usuários a localizar tendências, identificar padrões e explorar os dados sem precisar saber os detalhes da análise de dados tradicional.
 
@@ -109,11 +110,11 @@ Para restringir as opções, comece respondendo a estas perguntas:
 
 - Você precisa de autenticação segura usando o Azure AD (Azure Active Directory)?
 
-- Você deseja realizar a análise em tempo real? Nesse caso, restrinja as opções àquelas que dão suporte à análise em tempo real. 
+- Você deseja realizar a análise em tempo real? Nesse caso, restrinja as opções àquelas que dão suporte à análise em tempo real.
 
     A *análise em tempo real*, neste contexto, se aplica a uma única fonte de dados, como um aplicativo ERP (planejamento de recursos empresariais), que executará uma carga de trabalho operacional e uma carga de trabalho de análise. Caso precise integrar dados de várias fontes ou de desempenho extremo de análise usando dados pré-agregados, como cubos, você ainda poderá precisar de um data warehouse separado.
 
-- Você precisa usar dados pré-agregados, por exemplo, para fornecer modelos semânticos que tornam a análise mais amigável aos negócios? Em caso afirmativo, escolha uma opção que dá suporte a cubos multidimensionais ou modelos semânticos de tabela. 
+- Você precisa usar dados pré-agregados, por exemplo, para fornecer modelos semânticos que tornam a análise mais amigável aos negócios? Em caso afirmativo, escolha uma opção que dá suporte a cubos multidimensionais ou modelos semânticos de tabela.
 
     O fornecimento de agregações pode ajudar os usuários a calcular agregações de dados com consistência. Os dados pré-agregados também podem fornecer um grande aumento de desempenho ao lidar com várias colunas em várias linhas. Os dados podem ser pré-agregados em cubos multidimensionais ou modelos semânticos de tabela.
 
@@ -125,6 +126,8 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 
 ### <a name="general-capabilities"></a>Funcionalidades gerais
 
+<!-- markdownlint-disable MD033 -->
+
 | | Azure Analysis Services | SQL Server Analysis Services | SQL Server com Índices Columnstore | Banco de dados SQL do Azure com Índices Columnstore |
 | --- | --- | --- | --- | --- |
 | É um serviço gerenciado | SIM | Não | Não  | SIM |
@@ -134,6 +137,8 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 | Dá suporte à análise em tempo real | Não  | Não  | sim | SIM |
 | Exige que o processo copie dados das origens | SIM | sim | Não | Não  |
 | Integração com o Azure AD | SIM | Não  | Não <sup>2</sup> | SIM |
+
+<!-- markdownlint-enable MD033 -->
 
 [1] Embora o SQL Server e o Banco de Dados SQL do Azure não possa ser usado para consultar e integrar várias fontes de dados externas, você ainda poderá criar um pipeline que faz isso para você usando o [SSIS](/sql/integration-services/sql-server-integration-services) ou o [Azure Data Factory](/azure/data-factory/). O SQL Server hospedado em uma VM do Azure traz opções adicionais, como servidores vinculados e o [PolyBase](/sql/relational-databases/polybase/polybase-guide). Para obter mais informações, consulte [Orquestração de pipeline, fluxo de controle e movimentação de dados](../technology-choices/pipeline-orchestration-data-movement.md).
 
@@ -146,4 +151,3 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 | Servidores regionais redundantes para alta disponibilidade |           SIM           |              Não               |                 sim                 |                     SIM                     |
 |             Dá suporte à expansão da consulta             |           SIM           |              Não               |                 Sim                 |                     Não                       |
 |          Escalabilidade dinâmica (escalar verticalmente)          |           SIM           |              Não               |                 Sim                 |                     Não                       |
-

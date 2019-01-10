@@ -1,23 +1,23 @@
 ---
 title: Padrões de Gerenciamento de Dados
+titleSuffix: Cloud Design Patterns
 description: O gerenciamento de dados é o elemento principal de aplicativos em nuvem e influencia a maioria dos atributos de qualidade. Os dados normalmente são hospedados em diferentes locais e em vários servidores por motivos como desempenho, escalabilidade ou a disponibilidade, e isso pode apresentar uma série de desafios. Por exemplo, deve ser mantida a consistência dos dados e dados normalmente precisam ser sincronizados em diferentes locais.
 keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-ms.openlocfilehash: b80c2a127af07e1e362e9078e2a476d33a26ef7c
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.custom: seodec18
+ms.openlocfilehash: ff6d5703af64ddd8b012b588ddfe810da0b6630c
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30847083"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54009178"
 ---
 # <a name="data-management-patterns"></a>Padrões de Gerenciamento de Dados
 
 [!INCLUDE [header](../../_includes/header.md)]
 
 O gerenciamento de dados é o elemento principal de aplicativos em nuvem e influencia a maioria dos atributos de qualidade. Os dados normalmente são hospedados em diferentes locais e em vários servidores por motivos como desempenho, escalabilidade ou a disponibilidade, e isso pode apresentar uma série de desafios. Por exemplo, deve ser mantida a consistência dos dados e dados normalmente precisam ser sincronizados em diferentes locais.
-
 
 |                        Padrão                         |                                                                  Resumo                                                                  |
 |--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
@@ -29,4 +29,3 @@ O gerenciamento de dados é o elemento principal de aplicativos em nuvem e influ
 |               [Fragmentação](../sharding.md)               |                                    Divida um armazenamento de dados em um conjunto de partições horizontais ou fragmentos.                                     |
 | [Hospedagem de Conteúdo Estático](../static-content-hosting.md) |                   Implante conteúdo estático em um serviço de armazenamento baseado em nuvem que pode enviá-lo diretamente para o cliente.                    |
 |              [Valet Key](../valet-key.md)              |                 Use um token ou chave que fornece aos clientes acesso direto e restrito a um determinado recurso ou serviço.                 |
-

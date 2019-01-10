@@ -2,15 +2,15 @@
 title: Pontuação em tempo real dos modelos do Python
 titleSuffix: Azure Reference Architectures
 description: Essa arquitetura de referência mostra como implantar modelos de Python como serviços Web no Azure para fazer previsões em tempo real.
-author: njray
+author: msalvaris
 ms.date: 11/09/2018
 ms.custom: azcat-ai
-ms.openlocfilehash: e2312d1d1d2444f9915f4e6aa067c1487e096d3e
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.openlocfilehash: b40072b43630adf13e8ead0b6aa6bec59ca1bfac
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53120349"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54110885"
 ---
 # <a name="real-time-scoring-of-python-scikit-learn-and-deep-learning-models-on-azure"></a>Pontuação em tempo real de Python Scikit-Learn e modelos de aprendizado profundo (deep learning) no Azure
 
@@ -26,7 +26,7 @@ As implementações de referência demonstram dois cenários usando essa arquite
 
 **Cenário 1: Correspondência de perguntas frequentes**. Este cenário mostra como implantar um modelo de correspondência de perguntas frequentes (FAQ) como um serviço Web para fornecer previsões para as perguntas do usuário. Para este cenário, os “Dados de entrada” no diagrama da arquitetura referem-se a cadeias de caracteres de texto contendo perguntas do usuário que devem ser associadas a uma lista de perguntas frequentes. Esse cenário foi desenvolvido para a biblioteca de Machine Learning [scikit-learn][scikit] para Python, mas pode ser generalizada para qualquer cenário que use modelos de Python para fazer previsões em tempo real.
 
-Esse cenário usa um subconjunto dos dados de pergunta do Stack Overflow que inclui perguntas originais marcadas como JavaScript, suas perguntas duplicadas e suas respostas. Ele treina um pipeline de scikit-learn para prever a probabilidade de correspondência de uma pergunta duplicada com cada uma das perguntas originais. Essas previsões são feitas em tempo real usando um ponto de extremidade de API REST.
+Esse cenário usa um subconjunto dos dados de pergunta do Stack Overflow que inclui perguntas originais marcadas como JavaScript, suas perguntas duplicadas e suas respostas. Ele treina um pipeline de scikit-learn para prever a probabilidade de correspondência de uma pergunta duplicada com cada uma das perguntas originais. Essas previsões são feitas em tempo real usando um ponto de extremidade da API REST.
 
 O fluxo de aplicativo para essa arquitetura é o seguinte:
 

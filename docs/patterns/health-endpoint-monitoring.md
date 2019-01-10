@@ -1,20 +1,17 @@
 ---
-title: Monitoramento do Ponto de Extremidade de Integridade
+title: Padrão de monitoramento do ponto de extremidade de integridade
+titleSuffix: Cloud Design Patterns
 description: Implemente verificações funcionais dentro de um aplicativo cujas ferramentas externas podem acessar por meio de pontos de extremidade expostos em intervalos regulares.
 keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- availability
-- management-monitoring
-- resiliency
-ms.openlocfilehash: 22a4e47c4dd8dd3dd11a4238e859acbea49f9d1b
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: 85a1355ff47e6fce80d9b2ed114024651eb994db
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428968"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54114242"
 ---
 # <a name="health-endpoint-monitoring-pattern"></a>Padrão de monitoramento do ponto de extremidade de integridade
 
@@ -42,6 +39,7 @@ O código de resposta indica o status do aplicativo e, opcionalmente, quaisquer 
 ![Visão geral do padrão](./_images/health-endpoint-monitoring-pattern.png)
 
 Outras verificações que podem ser realizadas pelo código de monitoramento de integridade no aplicativo incluem:
+
 - Verificação do armazenamento em nuvem ou um banco de dados para disponibilidade e tempo de resposta.
 - Verificação de outros serviços ou recursos localizados no aplicativo, ou situados em outros locais, mas utilizados pelo aplicativo.
 
@@ -67,7 +65,7 @@ Considere os seguintes pontos ao decidir como implementar esse padrão:
 
 Como validar a resposta. Por exemplo, somente um código de status de 200 (OK) único é suficiente para verificar se o aplicativo está funcionando corretamente? Embora isso forneça a medida mais básica de disponibilidade do aplicativo, e é a implementação mínima desse padrão, fornece pouca informação sobre as operações, tendências e possíveis problemas futuros no aplicativo.
 
-   >  Verifique se o aplicativo retorna um 200 (OK) corretamente somente quando o recurso de destino é encontrado e processado. Em alguns cenários, como quando ao utilizar uma página mestre para hospedar a página da Web de destino, o servidor envia um código de status de 200 (OK) ao invés de um código 404 (Não Encontrado), mesmo quando a página de conteúdo de destino não foi encontrada.
+   > Verifique se o aplicativo retorna um 200 (OK) corretamente somente quando o recurso de destino é encontrado e processado. Em alguns cenários, como quando ao utilizar uma página mestre para hospedar a página da Web de destino, o servidor envia um código de status de 200 (OK) ao invés de um código 404 (Não Encontrado), mesmo quando a página de conteúdo de destino não foi encontrada.
 
 O número de pontos de extremidade para expor um aplicativo. Uma abordagem é expor ao menos um ponto de extremidade para os principais serviços que o aplicativo utiliza e um outro para os serviços de menor prioridade, permitindo que diferentes níveis de importância sejam atribuídos a cada resultado de monitoramento. Considere também expor mais pontos de extremidade, como um para cada serviço principal, para granularidade de monitoramento adicional. Por exemplo, uma verificação de integridade pode verificar o banco de dados, o armazenamento e um serviço de geocodificação externo que um aplicativo utiliza, cada um exigindo um nível diferente de tempo de atividade e tempo de resposta. O aplicativo ainda poderá ser íntegro se o serviço de geocodificação, ou alguma outra tarefa em segundo plano, não estiver disponível por alguns minutos.
 
@@ -98,6 +96,7 @@ Como configurar a segurança para os pontos de extremidade de monitoramento para
 ## <a name="when-to-use-this-pattern"></a>Quando usar esse padrão
 
 Esse padrão é útil para:
+
 - Monitorar sites e aplicativos Web para verificar a disponibilidade.
 - Monitorar sites e aplicativos Web para verificar a operação correta.
 - Monitorar serviços compartilhados ou camada intermediária para detectar e isolar uma falha que poderia interromper outros aplicativos.
@@ -134,6 +133,7 @@ public ActionResult CoreServices()
   return new HttpStatusCodeResult((int)HttpStatusCode.OK);
 }
 ```
+
 O método `ObscurePath` mostra como você pode ler um caminho da configuração do aplicativo e usá-lo como ponto de extremidade para testes. Este exemplo, em C#, também mostra como você pode aceitar uma ID como um parâmetro e utilizá-la para verificar solicitações válidas.
 
 ```csharp
@@ -178,6 +178,7 @@ public ActionResult TestResponseFromConfig()
   return new HttpStatusCodeResult(returnStatusCode);
 }
 ```
+
 ## <a name="monitoring-endpoints-in-azure-hosted-applications"></a>Monitorar pontos de extremidade em aplicativos hospedados no Azure
 
 Algumas opções para monitorar pontos de extremidades em aplicativos do Azure são:
@@ -192,7 +193,7 @@ Algumas opções para monitorar pontos de extremidades em aplicativos do Azure s
 
 As condições que você pode monitorar variam de acordo com o mecanismo de hospedagem escolhido para seu aplicativo (como Sites, Serviços de Nuvem, Máquinas Virtuais ou Serviços Móveis), mas todos eles incluem a capacidade de criar uma regra de alerta que utilize um ponto de extremidade da web que você especifica nas configurações do seu serviço. Este ponto de extremidade deve responder em tempo hábil para que o sistema de alerta possa detectar que o aplicativo está executando corretamente.
 
->  Leia mais informações sobre [criar notificações de alerta ][portal-alerts].
+> Leia mais informações sobre [criar notificações de alerta ][portal-alerts].
 
 Se você hospedar seu aplicativo nas funções de trabalho e web nos Serviços de Nuvem do Azure ou Máquinas Virtuais, será possível tirar proveito de um dos serviços internos no Azure, chamado Gerenciador de Tráfego. O Gerenciador de Tráfego é um serviço de balanceamento de carga e roteamento que pode distribuir solicitações para instâncias específicas do seu aplicativo hospedado nos Serviços de Nuvem baseado em uma variedade de regras e configurações.
 
@@ -200,13 +201,14 @@ Além das solicitações de roteamento, o Gerenciador de Tráfego exibe uma URL,
 
 No entanto, o Gerenciador de Tráfego aguardará apenas dez segundos para receber uma resposta da URL de monitoramento. Portanto, você deverá garantir que seu código de verificação de integridade execute nesse tempo, permitindo a latência da rede para viagem de ida e volta do Gerenciador de Tráfego para o seu aplicativo e novamente.
 
->  Leia mais informações sobre o uso do [Gerenciador de Tráfego para monitorar seus aplicativos](https://azure.microsoft.com/documentation/services/traffic-manager/). O Gerenciador de Tráfego também é discutido nas [Diretrizes de Implantação de Datacenter Múltiplo](https://msdn.microsoft.com/library/dn589779.aspx).
+> Leia mais informações sobre o uso do [Gerenciador de Tráfego para monitorar seus aplicativos](/azure/traffic-manager/). O Gerenciador de Tráfego também é discutido nas [Diretrizes de Implantação de Datacenter Múltiplo](https://msdn.microsoft.com/library/dn589779.aspx).
 
 ## <a name="related-guidance"></a>Diretrizes relacionadas
 
 As diretrizes a seguir podem ser úteis ao implementar esse padrão:
+
 - [Diretrizes sobre Instrumentação e Telemetria](https://msdn.microsoft.com/library/dn589775.aspx). A verificação da integridade dos serviços e componentes geralmente é feita por investigação, mas também é útil ter informações no local para monitorar o desempenho do aplicativo e detectar eventos que ocorrem em tempo de execução. Esses dados podem ser transmitidos de volta às ferramentas de monitoramento como informações adicionais para o monitoramento de integridade. As Diretrizes de Telemetria e Instrumentação obtêm informações de diagnóstico remoto coletadas por instrumentação em aplicativos.
 - [Receber notificações de alerta][portal-alerts].
 - Esse padrão inclui um [aplicativo de exemplo](https://github.com/mspnp/cloud-design-patterns/tree/master/health-endpoint-monitoring) para fazer o download.
 
-[portal-alerts]: https://azure.microsoft.com/documentation/articles/insights-receive-alert-notifications/
+[portal-alerts]: /azure/azure-monitor/platform/alerts-metric

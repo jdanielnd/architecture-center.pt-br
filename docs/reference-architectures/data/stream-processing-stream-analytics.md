@@ -5,12 +5,12 @@ description: Crie um pipeline de processamento de fluxo de ponta a ponta no Azur
 author: MikeWasson
 ms.date: 11/06/2018
 ms.custom: seodec18
-ms.openlocfilehash: 130f297d3cfdeb1900ada79f1e9c65ec542dc2b7
-ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
+ms.openlocfilehash: abd020fa12883ae3d23623c53e15fe025590de6f
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/20/2018
-ms.locfileid: "53643740"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011575"
 ---
 # <a name="create-a-stream-processing-pipeline-with-azure-stream-analytics"></a>Criar um pipeline de processamento de fluxo com o Azure Stream Analytics
 
@@ -40,13 +40,13 @@ A arquitetura consiste nos componentes a seguir.
 
 ## <a name="data-ingestion"></a>Ingestão de dados
 
-<!-- markdownlint-disable MD033 MD034 -->
+<!-- markdownlint-disable MD033 -->
 
 Para simular uma fonte de dados, essa arquitetura de referência usa o conjunto de dados dos [Dados de táxi de Nova York](https://uofi.app.box.com/v/NYCtaxidata/folder/2332218797)<sup>[[1]](#note1)</sup>. Esse conjunto de dados contém dados sobre viagens de táxi em Nova York durante um período de 4 anos (2010 &ndash; 2013). Ele contém dois tipos de registro: Dados da corrida e da tarifa. Os dados de corrida incluem a duração da viagem, a distância da viagem e os locais de embarque e desembarque de passageiros. Os dados de tarifa incluem a tarifa, impostos e quantias das gorjetas. Campos comuns em ambos os tipos de registro incluem o número da licença, carteira de habilitação e ID do fornecedor. Juntos, esses três campos fazem a identificação exclusiva de um táxi e um motorista. Os dados são armazenados no formato CSV.
 
-[1] <span id="note1">Donovan, Brian; Work, Dan (2016): Dados de corridas de táxi na Cidade de Nova York (2010-2013). Universidade de Illinois em Urbana-Champaign. https://doi.org/10.13012/J8PN93H8
+[1] <span id="note1">Donovan, Brian; Work, Dan (2016): Dados de corridas de táxi na Cidade de Nova York (2010-2013). Universidade de Illinois em Urbana-Champaign. <https://doi.org/10.13012/J8PN93H8>
 
-<!-- markdownlint-enable MD033 MD034 -->
+<!-- markdownlint-enable MD033 -->
 
 O gerador de dados é um aplicativo .NET Core que lê os registros e os envia para os Hubs de Eventos do Azure. O gerador envia os dados de corrida em formato JSON e os dados de tarifa em formato CSV.
 

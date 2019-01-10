@@ -5,12 +5,12 @@ description: Use o Azure para obter insights comerciais dos dados relacionais ar
 author: MikeWasson
 ms.date: 11/06/2018
 ms.custom: seodec18
-ms.openlocfilehash: 3808cc5d09e2e0a5aaee1a6cfcb050b98a0ef2ee
-ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
+ms.openlocfilehash: 2f15b8d4376638e6e8e522e5150a3b3c247cba8f
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/20/2018
-ms.locfileid: "53644216"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54010283"
 ---
 # <a name="enterprise-bi-in-azure-with-sql-data-warehouse"></a>Enterprise BI no Azure com o SQL Data Warehouse
 
@@ -72,7 +72,7 @@ As seções a seguir descrevem esses estágios mais detalhadamente.
 
 O utilitário [bcp](/sql/tools/bcp-utility) (programa de cópia em massa) é uma maneira rápida de criar arquivos de texto simples de tabelas SQL. Nesta etapa, você seleciona as colunas que deseja exportar, mas não transforma os dados. As transformações de dados devem ocorrer no SQL Data Warehouse.
 
-**Recomendações**
+**Recomendações:**
 
 Se possível, agende a extração de dados fora do horário de pico para minimizar a contenção de recursos no ambiente de produção.
 
@@ -84,7 +84,7 @@ Você pode acelerar a transferência de rede salvando os dados exportados no for
 
 O utilitário [AzCopy](/azure/storage/common/storage-use-azcopy) foi projetado para a cópia de dados de alto desempenho no armazenamento de blobs do Azure.
 
-**Recomendações**
+**Recomendações:**
 
 Crie a conta de armazenamento em uma região perto do local da fonte de dados. Implante a conta de armazenamento e a instância do SQL Data Warehouse na mesma região.
 
@@ -105,7 +105,7 @@ O carregamento de dados é um processo de duas etapas:
 1. Crie um conjunto de tabelas externas para os dados. Uma tabela externa é uma definição de tabela que aponta para dados armazenados fora do warehouse &mdash;, neste caso, os arquivos simples no armazenamento de blobs. Essa etapa não move os dados para o warehouse.
 2. Crie tabelas de preparo e carregue os dados nas tabelas de preparo. Essa etapa copia os dados para o warehouse.
 
-**Recomendações**
+**Recomendações:**
 
 Quando você tiver grandes quantidades de dados (mais de 1 TB) e estiver executando uma carga de trabalho de análise que será beneficiada pelo paralelismo, considere o SQL Data Warehouse. O SQL Data Warehouse não é uma boa opção para cargas de trabalho OLTP ou conjuntos de dados menores (< 250GB). Para conjuntos de dados menores que 250GB, considere o Banco de Dados SQL ou o SQL Server. Para saber mais, confira [Armazenagem de Dados](../../data-guide/relational-data/data-warehousing.md).
 
@@ -155,7 +155,7 @@ O Power BI dá suporte a duas opções de conexão com o Azure Analysis Services
 
 Recomendamos a Conexão dinâmica porque ela não requer a cópia de dados no modelo do Power BI. Além disso, o uso do DirectQuery garante que os resultados sejam sempre consistentes com os dados de origem mais recentes. Para saber mais, confira [Conectar com o Power BI](/azure/analysis-services/analysis-services-connect-pbi).
 
-**Recomendações**
+**Recomendações:**
 
 Evite executar consultas ao painel de BI diretamente no data warehouse. Os painéis de BI exigem tempos de resposta muito baixos, que as consultas diretas ao warehouse poderão não conseguir atender. Além disso, a atualização do painel afetará o número de consultas simultâneas, o que pode afetar o desempenho.
 

@@ -1,21 +1,21 @@
 ---
 title: Padrões de Gerenciamento e Monitoramento
+titleSuffix: Cloud Design Patterns
 description: Os aplicativos de nuvem são executados em um data center remoto em que você não tem controle total da infraestrutura ou, em alguns casos, o sistema operacional. Isso pode tornar o gerenciamento e o monitoramento mais difíceis do que uma implantação local. Os aplicativos devem expor informações de tempo de execução que os operadores e os administradores podem usar para gerenciar e monitorar o sistema, bem como dar suporte a mudanças nos requisitos de negócios e a personalização sem a necessidade de parar ou reimplantar o aplicativo.
 keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-ms.openlocfilehash: faab137d59ce952e169839a71abdbbb3103ea772
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.custom: seodec18
+ms.openlocfilehash: fc75a3a56323b61651b9e840068a3117b31cf203
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30846783"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54009348"
 ---
 # <a name="management-and-monitoring-patterns"></a>Padrões de Gerenciamento e Monitoramento
 
 Os aplicativos de nuvem são executados em um data center remoto em que você não tem controle total da infraestrutura ou, em alguns casos, o sistema operacional. Isso pode tornar o gerenciamento e o monitoramento mais difíceis do que uma implantação local. Os aplicativos devem expor informações de tempo de execução que os operadores e os administradores podem usar para gerenciar e monitorar o sistema, bem como dar suporte a mudanças nos requisitos de negócios e a personalização sem a necessidade de parar ou reimplantar o aplicativo.
-
 
 |                              Padrão                               |                                                              Resumo                                                              |
 |--------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
@@ -28,4 +28,3 @@ Os aplicativos de nuvem são executados em um data center remoto em que você n�
 |   [Monitoramento do ponto de extremidade de integridade](../health-endpoint-monitoring.md)   |   Implemente verificações funcionais dentro de um aplicativo que ferramentas externas podem acessar por meio de pontos de extremidade expostos a intervalos regulares.    |
 |                      [Sidecar](../sidecar.md)                      |         Implante os componentes de um aplicativo em um processo ou contêiner separado para fornecer isolamento e encapsulamento.          |
 |                    [Estrangulador](../strangler.md)                    | Migre incrementalmente um sistema herdado substituindo gradualmente partes específicas de funcionalidade por serviços e aplicativos novos. |
-

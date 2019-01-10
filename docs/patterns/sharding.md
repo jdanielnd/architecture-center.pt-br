@@ -1,19 +1,17 @@
 ---
-title: Fragmentação
+title: Padrão de fragmentação
+titleSuffix: Cloud Design Patterns
 description: Divida um armazenamento de dados em um conjunto de partições horizontais ou fragmentos.
 keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- data-management
-- performance-scalability
-ms.openlocfilehash: bc2b6aeb6966d14327a21849adbbfe635eae59df
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: 52c0579e4b08aa18456e0cc5a26742aab39a1a7e
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428849"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54010317"
 ---
 # <a name="sharding-pattern"></a>Padrão de fragmentação
 
@@ -57,7 +55,7 @@ A abstração do local físico dos dados na lógica de fragmentação fornece um
 
 Para garantir o desempenho e a escalabilidade ideais, é importante dividir os dados de maneira adequada para os tipos de consultas que o aplicativo executa. Em muitos casos, é improvável que o esquema de fragmentação corresponda exatamente aos requisitos de cada consulta. Por exemplo, em um sistema multilocatário, um aplicativo pode precisar recuperar dados de locatário usando a ID de locatário, mas ele também pode precisar consultar esses dados com base em algum outro atributo, como nome ou local do locatário. Para lidar com essas situações, implemente uma estratégia de fragmentação com uma chave de fragmentação que ofereça suporte às consultas realizadas com mais frequência.
 
-Se as consultas regularmente recuperam dados usando uma combinação de valores de atributo, você provavelmente pode definir uma chave de fragmentação composta vinculando atributos. Como alternativa, use um padrão como [Tabela de Índice](index-table.md) para oferecer pesquisa rápida de dados com base em atributos que não são cobertos pela chave de fragmentação.
+Se as consultas regularmente recuperam dados usando uma combinação de valores de atributo, você provavelmente pode definir uma chave de fragmentação composta vinculando atributos. Como alternativa, use um padrão como [Tabela de Índice](./index-table.md) para oferecer pesquisa rápida de dados com base em atributos que não são cobertos pela chave de fragmentação.
 
 ## <a name="sharding-strategies"></a>Estratégias de fragmentação
 
@@ -67,8 +65,7 @@ Três estratégias são usadas frequentemente ao selecionar a chave de fragmenta
 
    ![Figura 1 - Fragmentação dos dados de locatário com base nos IDs de locatário](./_images/sharding-tenant.png)
 
-
-   O mapeamento entre a chave de fragmentação e o armazenamento físico pode ser baseado em fragmentos físicos nos quais cada chave de fragmentação é mapeada a uma partição física. Como alternativa, uma técnica mais flexível para rebalancear fragmentos é o particionamento virtual, no qual as chaves de fragmentação são mapeadas ao mesmo número de fragmentos virtuais, que por sua vez são mapeados a menos partições físicas. Nessa abordagem, um aplicativo localiza os dados usando uma chave de fragmentação que se refere a um fragmento virtual e o sistema mapeia de maneira transparentemente fragmentos virtuais a partições físicas. O mapeamento entre um fragmento virtual e uma partição física pode mudar sem a necessidade de modificar o código do aplicativo para usar um conjunto diferente de chaves de fragmentação.
+O mapeamento entre a chave de fragmentação e o armazenamento físico pode ser baseado em fragmentos físicos nos quais cada chave de fragmentação é mapeada a uma partição física. Como alternativa, uma técnica mais flexível para rebalancear fragmentos é o particionamento virtual, no qual as chaves de fragmentação são mapeadas ao mesmo número de fragmentos virtuais, que por sua vez são mapeados a menos partições físicas. Nessa abordagem, um aplicativo localiza os dados usando uma chave de fragmentação que se refere a um fragmento virtual e o sistema mapeia de maneira transparentemente fragmentos virtuais a partições físicas. O mapeamento entre um fragmento virtual e uma partição física pode mudar sem a necessidade de modificar o código do aplicativo para usar um conjunto diferente de chaves de fragmentação.
 
 **A estratégia de intervalo**. Essa estratégia agrupa itens relacionados no mesmo fragmento e os classifica por chave de fragmentação&mdash;as chaves de fragmentação são sequenciais. É útil para aplicativos que frequentemente recuperam conjuntos de itens usando consultas de intervalo (consultas que retornam um conjunto de itens de dados para uma chave de fragmentação que fica dentro de um determinado intervalo). Por exemplo, se um aplicativo precisar localizar regularmente todos os pedidos feitos em um determinado mês, esses dados podem ser recuperados mais rapidamente se todos os pedidos de um mês estiverem armazenados ordenados por data e hora no mesmo fragmento. Se cada pedido foi armazenado em um fragmento diferente, eles precisam ser buscados individualmente executando um grande número de consultas pontuais (consultas que retornam um único item de dados). A figura seguinte ilustra como armazenar conjuntos sequenciais (intervalos) de dados no fragmento.
 
@@ -124,7 +121,7 @@ Considere os seguintes pontos ao decidir como implementar esse padrão:
 
     >  Valores incrementados automaticamente em outros campos que não chaves de fragmentação também podem causar problemas. Por exemplo, se você usar campos incrementados automaticamente para gerar IDs exclusivas, dois itens diferentes localizados em fragmentos diferentes podem ter atribuída uma mesma ID.
 
-- Pode não ser possível criar uma chave de fragmentação que atenda aos requisitos de cada possível consulta dos dados. Fragmente os dados para dar suporte às consultas mais frequentemente executadas e, se necessário, crie tabelas de índice secundárias para dar suporte a consultas que recuperem dados usando os critérios baseados em atributos que não façam parte da chave de fragmentação. Para saber mais, confira o [Padrão de Tabela de Índice](index-table.md).
+- Pode não ser possível criar uma chave de fragmentação que atenda aos requisitos de cada possível consulta dos dados. Fragmente os dados para dar suporte às consultas mais frequentemente executadas e, se necessário, crie tabelas de índice secundárias para dar suporte a consultas que recuperem dados usando os critérios baseados em atributos que não façam parte da chave de fragmentação. Para saber mais, confira o [Padrão de Tabela de Índice](./index-table.md).
 
 - Consultas que acessam apenas um único fragmento são mais eficientes do que aquelas que recuperam dados de vários fragmentos, portanto, evite implementar um sistema de fragmentação que resulte em aplicativos que executam grandes números de consultas que unem dados mantidos em fragmentos diferentes. Lembre-se de que um único fragmento pode conter os dados de vários tipos de entidades. Considere a desnormalização de seus dados para manter as entidades relacionadas que normalmente são consultadas em conjunto (por exemplo, os detalhes de clientes e os pedidos que eles fizeram) no mesmo fragmento para reduzir o número de leituras separadas que um aplicativo realiza.
 
@@ -150,7 +147,8 @@ Considere os seguintes pontos ao decidir como implementar esse padrão:
 
 Use esse padrão quando um repositório de dados possa possivelmente precisar ser dimensionado além dos recursos disponíveis para um único nó de armazenamento ou para melhorar o desempenho reduzindo a contenção em um repositório de dados.
 
->  O foco principal da fragmentação é melhorar o desempenho e escalabilidade de um sistema, mas como subproduto também pode melhorar a disponibilidade devido a como os dados são divididos em partições separadas. Uma falha em uma partição não necessariamente impede que um aplicativo acesse os dados mantidos em outras partições e um operador pode realizar manutenção ou recuperação de uma ou mais partições sem tornar todos os dados inacessíveis para um aplicativo. Para saber mais, consulte [Diretrizes de particionamento de dados](https://msdn.microsoft.com/library/dn589795.aspx).
+> [!NOTE]
+O foco principal da fragmentação é melhorar o desempenho e escalabilidade de um sistema, mas como subproduto também pode melhorar a disponibilidade devido a como os dados são divididos em partições separadas. Uma falha em uma partição não necessariamente impede que um aplicativo acesse os dados mantidos em outras partições e um operador pode realizar manutenção ou recuperação de uma ou mais partições sem tornar todos os dados inacessíveis para um aplicativo. Para saber mais, consulte [Diretrizes de particionamento de dados](https://msdn.microsoft.com/library/dn589795.aspx).
 
 ## <a name="example"></a>Exemplo
 
@@ -215,7 +213,8 @@ Trace.TraceInformation("Fanout query complete - Record Count: {0}",
 ## <a name="related-patterns-and-guidance"></a>Diretrizes e padrões relacionados
 
 Os padrões e diretrizes a seguir também podem ser relevantes ao implementar esse padrão:
+
 - [Primer de Consistência de Dados](https://msdn.microsoft.com/library/dn589800.aspx). Talvez seja necessário manter a consistência de dados distribuídos entre fragmentos diferentes. Resume os problemas em torno da manutenção de consistência de dados distribuídos e descreve os benefícios e as vantagens e desvantagens de modelos diferentes de consistência.
 - [Diretrizes de Particionamento de Dados](https://msdn.microsoft.com/library/dn589795.aspx). A fragmentação de um repositório de dados pode apresentar uma variedade de outros problemas. Descreve esses problemas em relação ao particionamento de repositórios de dados na nuvem para melhorar a escalabilidade, reduzir a contenção e otimizar o desempenho.
-- [Padrão de Tabela de Índice](index-table.md). Às vezes, não é possível oferecem suporte total a consultas apenas por meio do design da chave de fragmentação. Permite que um aplicativo recupere rapidamente os dados de um repositório de dados grande especificando uma chave que não seja a chave de fragmentação.
-- [Padrão de Exibição Materializada](materialized-view.md). Para manter o desempenho de algumas operações de consulta, é útil criar exibições materializadas que agreguem e resumam dados, especialmente se esses dados de resumo se basearem em informações distribuídas entre fragmentos. Descreve como gerar e preencher esses modos de exibição.
+- [Padrão de Tabela de Índice](./index-table.md). Às vezes, não é possível oferecem suporte total a consultas apenas por meio do design da chave de fragmentação. Permite que um aplicativo recupere rapidamente os dados de um repositório de dados grande especificando uma chave que não seja a chave de fragmentação.
+- [Padrão de Exibição Materializada](./materialized-view.md). Para manter o desempenho de algumas operações de consulta, é útil criar exibições materializadas que agreguem e resumam dados, especialmente se esses dados de resumo se basearem em informações distribuídas entre fragmentos. Descreve como gerar e preencher esses modos de exibição.

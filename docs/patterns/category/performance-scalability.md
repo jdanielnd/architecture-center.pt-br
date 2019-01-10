@@ -1,23 +1,23 @@
 ---
 title: Padrões de desempenho e Escalabilidade
+titleSuffix: Cloud Design Patterns
 description: O desempenho é uma indicação de que a capacidade de resposta de um sistema para executar qualquer ação dentro de um determinado intervalo, enquanto a escalabilidade é a capacidade de um sistema para lidar com o aumento de carga sem impacto no desempenho ou para os recursos disponíveis ser prontamente aumentado. Aplicativos de nuvem normalmente encontram cargas de trabalho variável e picos na atividade. Prever esses, especialmente em um cenário de multilocatário, é quase impossível. Em vez disso, os aplicativos devem ser capazes de expansão dentro dos limites para atender aos picos de demanda e a escala em quando a demanda diminui. Os problemas de escalabilidade de computação não apenas instâncias, mas outros elementos, como o armazenamento de dados, infraestrutura de mensagens e muito mais.
 keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-ms.openlocfilehash: e60c7c5779e73925d7eed51b41eb37e5c2ad49ff
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.custom: seodec18
+ms.openlocfilehash: 986e17f943e2238d70a5c9e0fd4c84e37c5f06a6
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30848522"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011020"
 ---
 # <a name="performance-and-scalability-patterns"></a>Padrões de desempenho e Escalabilidade
 
 [!INCLUDE [header](../../_includes/header.md)]
 
 O desempenho é uma indicação de que a capacidade de resposta de um sistema para executar qualquer ação dentro de um determinado intervalo, enquanto a escalabilidade é a capacidade de um sistema para lidar com o aumento de carga sem impacto no desempenho ou para os recursos disponíveis ser prontamente aumentado. Aplicativos de nuvem normalmente encontram cargas de trabalho variável e picos na atividade. Prever esses, especialmente em um cenário de multilocatário, é quase impossível. Em vez disso, os aplicativos devem ser capazes de expansão dentro dos limites para atender aos picos de demanda e a escala em quando a demanda diminui. Os problemas de escalabilidade de computação não apenas instâncias, mas outros elementos, como o armazenamento de dados, infraestrutura de mensagens e muito mais.
-
 
 |                           Padrão                            |                                                                        Resumo                                                                         |
 |--------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -31,4 +31,3 @@ O desempenho é uma indicação de que a capacidade de resposta de um sistema pa
 |                  [Fragmentação](../sharding.md)                  |                                           Divida um armazenamento de dados em um conjunto de partições horizontais ou fragmentos.                                           |
 |    [Hospedagem de Conteúdo Estático](../static-content-hosting.md)    |                          Implante conteúdo estático em um serviço de armazenamento baseado em nuvem que pode enviá-lo diretamente para o cliente.                          |
 |                [Limitação](../throttling.md)                |                Controle o consumo de recursos usados por uma instância de um aplicativo, um locatário individual ou todo o serviço.                 |
-

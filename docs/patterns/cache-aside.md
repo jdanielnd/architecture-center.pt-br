@@ -1,19 +1,17 @@
 ---
-title: Cache-Aside
-description: Carregar dados sob demanda em um cache de um armazenamento de dados
+title: Padrão Cache-Aside
+titleSuffix: Cloud Design Patterns
+description: Carregar dados sob demanda em um cache de um armazenamento de dados.
 keywords: padrão de design
 author: dragon119
 ms.date: 11/01/2018
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- data-management
-- performance-scalability
-ms.openlocfilehash: 4c93ed02ff28e79cedc26f83364592baba96821d
-ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
+ms.custom: seodec18
+ms.openlocfilehash: 96dee3ca766414a3a17ea161f13c9fcd15001b4d
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/02/2018
-ms.locfileid: "50916355"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54114157"
 ---
 # <a name="cache-aside-pattern"></a>Padrão Cache-Aside
 
@@ -35,14 +33,13 @@ Um aplicativo pode emular a funcionalidade de cache de read-through implementand
 
 ![Usar o padrão de Cache-Aside para armazenar dados no cache](./_images/cache-aside-diagram.png)
 
-
 Se um aplicativo atualiza as informações, ele pode seguir a estratégia de write-through modificando o armazenamento de dados e invalidando o item correspondente no cache.
 
 Quando o item é necessário a seguir, usar a estratégia de cache-aside fará com que os dados atualizados sejam recuperados no armazenamento de dados e adicionados novamente ao cache.
 
 ## <a name="issues-and-considerations"></a>Problemas e considerações
 
-Considere os seguintes pontos ao decidir como implementar esse padrão: 
+Considere os seguintes pontos ao decidir como implementar esse padrão:
 
 **Tempo de vida dos dados armazenados em cache**. Vários caches implementam uma política de expiração que invalida os dados e os remove do cache se ele não for acessado por um período especificado. Para o cache-aside ser efetivado, verifique se a política de expiração corresponde ao padrão de acesso para aplicativos que usam os dados. Não faça o período de validade muito curto, porque isso pode fazer com que os aplicativos recuperem continuamente os dados do armazenamento de dados e adicionem-nos ao cache. Da mesma forma, não faça o período de validade longo demais a ponto dos dados em cache se tornarem provavelmente obsoletos. Lembre-se de que o cache é mais eficiente para dados relativamente estáticos ou dados lidos com frequência.
 
@@ -68,9 +65,9 @@ Esse padrão pode não ser adequado:
 
 ## <a name="example"></a>Exemplo
 
-No Microsoft Azure você pode usar o Cache Redis do Azure para criar um cache distribuído que pode ser compartilhado por várias instâncias de um aplicativo. 
+No Microsoft Azure você pode usar o Cache Redis do Azure para criar um cache distribuído que pode ser compartilhado por várias instâncias de um aplicativo.
 
-Esses exemplos de código a seguir usam o cliente [StackExchange.Redis], que é uma biblioteca de cliente Redis gravada para o .NET. Para se conectar a uma instância do Cache Redis do Azure, chame o método estático `ConnectionMultiplexer.Connect`e passe a cadeia de conexão. O método retorna um `ConnectionMultiplexer` que representa a conexão. Uma abordagem para compartilhar uma instância do `ConnectionMultiplexer` em seu aplicativo deve ter uma propriedade estática que retorna uma instância conectada, semelhante ao exemplo a seguir. Essa abordagem oferece uma maneira thread-safe de inicializar somente uma única instância conectada.
+Esses exemplos de código a seguir usam o cliente [StackExchange.Redis](https://github.com/StackExchange/StackExchange.Redis), que é uma biblioteca de cliente Redis gravada para o .NET. Para se conectar a uma instância do Cache Redis do Azure, chame o método estático `ConnectionMultiplexer.Connect`e passe a cadeia de conexão. O método retorna um `ConnectionMultiplexer` que representa a conexão. Uma abordagem para compartilhar uma instância do `ConnectionMultiplexer` em seu aplicativo deve ter uma propriedade estática que retorna uma instância conectada, semelhante ao exemplo a seguir. Essa abordagem oferece uma maneira thread-safe de inicializar somente uma única instância conectada.
 
 ```csharp
 private static ConnectionMultiplexer Connection;
@@ -89,7 +86,6 @@ O método `GetMyEntityAsync` no exemplo de código a seguir mostra uma implement
 
 Um objeto é identificado usando uma ID inteira como chave. O método `GetMyEntityAsync` tenta recuperar um item com essa chave do cache. Se um item correspondente for encontrado, ele é retornado. Se não houver nenhuma correspondência no cache, o método `GetMyEntityAsync` recupera o objeto de um armazenamento de dados, adiciona-o ao cache e, em seguida, retorna-o. O código que realmente lê os dados do armazenamento de dados não é mostrado aqui, pois ele depende do armazenamento de dados. Observe que o item de cache é configurado para expirar, a fim de impedir que ele se torne obsoleto, caso tenha se atualizado em outro lugar.
 
-
 ```csharp
 // Set five minute expiration as a default
 private const double DefaultExpirationTimeInMinutes = 5.0;
@@ -99,23 +95,23 @@ public async Task<MyEntity> GetMyEntityAsync(int id)
   // Define a unique key for this method and its parameters.
   var key = $"MyEntity:{id}";
   var cache = Connection.GetDatabase();
-  
+
   // Try to get the entity from the cache.
   var json = await cache.StringGetAsync(key).ConfigureAwait(false);
-  var value = string.IsNullOrWhiteSpace(json) 
-                ? default(MyEntity) 
+  var value = string.IsNullOrWhiteSpace(json)
+                ? default(MyEntity)
                 : JsonConvert.DeserializeObject<MyEntity>(json);
-  
+
   if (value == null) // Cache miss
   {
     // If there's a cache miss, get the entity from the original store and cache it.
-    // Code has been omitted because it's data store dependent.  
+    // Code has been omitted because it is data store dependent.
     value = ...;
 
     // Avoid caching a null value.
     if (value != null)
     {
-      // Put the item in the cache with a custom expiration time that 
+      // Put the item in the cache with a custom expiration time that
       // depends on how critical it is to have stale data.
       await cache.StringSetAsync(key, JsonConvert.SerializeObject(value)).ConfigureAwait(false);
       await cache.KeyExpireAsync(key, TimeSpan.FromMinutes(DefaultExpirationTimeInMinutes)).ConfigureAwait(false);
@@ -126,7 +122,7 @@ public async Task<MyEntity> GetMyEntityAsync(int id)
 }
 ```
 
->  Os exemplos usam o Cache Redis para acessar o armazenamento e recuperar as informações do cache. Para obter mais informações, confira [Como usar o Cache Redis do Microsoft Azure](https://docs.microsoft.com/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache) e [Como criar um aplicativo Web com o Cache Redis](https://docs.microsoft.com/azure/redis-cache/cache-web-app-howto)
+> Os exemplos usam o Cache Redis para acessar o armazenamento e recuperar as informações do cache. Para obter mais informações, confira [Como usar o Cache Redis do Microsoft Azure](https://docs.microsoft.com/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache) e [Como criar um aplicativo Web com o Cache Redis](https://docs.microsoft.com/azure/redis-cache/cache-web-app-howto)
 
 O método `UpdateEntityAsync` mostrado a seguir demonstra como invalidar um objeto no cache quando o valor é alterado pelo aplicativo. O código atualiza o armazenamento de dados original e, em seguida, remove o item do cache.
 
@@ -134,7 +130,7 @@ O método `UpdateEntityAsync` mostrado a seguir demonstra como invalidar um obje
 public async Task UpdateEntityAsync(MyEntity entity)
 {
     // Update the object in the original data store.
-    await this.store.UpdateEntityAsync(entity).ConfigureAwait(false); 
+    await this.store.UpdateEntityAsync(entity).ConfigureAwait(false);
 
     // Invalidate the current cache object.
     var cache = Connection.GetDatabase();
@@ -147,14 +143,10 @@ public async Task UpdateEntityAsync(MyEntity entity)
 > [!NOTE]
 > A ordem das etapas é importante. Atualize o armazenamento de dados *antes* de remover o item do cache. Se você remover o item do cache primeiro, há uma pequena janela de tempo quando um cliente pode obter o item antes de atualizar o armazenamento de dados. Isso resultará na perda de cache (porque o item foi removido do cache), fazendo com que a versão anterior do item seja obtida no repositório de dados e adicionado de volta ao cache. O resultado será dados obsoletos do cache.
 
-
-## <a name="related-guidance"></a>Diretrizes relacionadas 
+## <a name="related-guidance"></a>Diretrizes relacionadas
 
 As informações a seguir também podem ser relevantes ao implementar esse padrão:
 
 - [Diretrizes de cache](https://docs.microsoft.com/azure/architecture/best-practices/caching). Fornece informações adicionais sobre como você pode armazenar dados em cache em uma solução de nuvem, e os problemas que você deve considerar ao implementar um cache.
 
 - [Primer de Consistência de Dados](https://msdn.microsoft.com/library/dn589800.aspx). Os aplicativos de nuvem geralmente usam dados distribuídos entre armazenamentos de dados. Gerenciar e manter a consistência dos dados nesse ambiente são um aspecto crítico do sistema, especialmente a simultaneidade e os problemas de disponibilidade que podem surgir. Este primer descreve problemas sobre a consistência entre dados distribuídos e resume como um aplicativo pode implementar a consistência eventual para manter a disponibilidade dos dados.
-
-
-[StackExchange.Redis]: https://github.com/StackExchange/StackExchange.Redis
