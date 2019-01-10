@@ -7,12 +7,12 @@ tags: azure-resource-manager
 ms.service: virtual-network
 ms.date: 11/28/2018
 ms.author: jonor
-ms.openlocfilehash: 1d8a9e860ab1a66104dc4133eb5f22ffb4706b84
-ms.sourcegitcommit: 5a3fa0bf35376bbe4a6dd668f2d7d44f9cf9c806
+ms.openlocfilehash: f02cc7df1e90ba3de97a1c25777ab6d27bfdf697
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/14/2018
-ms.locfileid: "53411677"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011160"
 ---
 # <a name="azure-virtual-datacenter-a-network-perspective"></a>Datacenter virtual do Azure: uma perspectiva de rede
 
@@ -51,15 +51,6 @@ Uma implementação de VDC permite que as empresas coloquem cargas de trabalho e
 -   Implementação de segurança compartilhada ou centralizada e requisitos de acesso entre cargas de trabalho.
 -   Como combinar TI centralizada e DevOps apropriadamente para uma grande empresa.
 
-O segredo para aproveitar as vantagens do VDC é uma topologia centralizada, hub-spoke, com uma mistura de recursos do Azure: 
-
-- [Rede Virtual do Azure][VNet]. 
-- [Grupos de segurança de rede (NSGs)][NSG].
-- [Emparelhamento de rede virtual][VNetPeering]. 
-- [UDRs (Rotas Definidas pelo Usuário)][UDR].
-- Serviços de identificação do Azure com o [controle de acesso baseado em função (RBAC)][RBAC]. 
-- Opcionalmente, [Firewall do Azure][AzFW], [DNS do Azure][DNS], [Azure Front Door] [ AFD] e [WAN Virtual do Azure][vWAN].
-
 A chave para desbloquear as vantagens do VDC é uma topologia de rede hub-spoke centralizada com uma combinação de recursos e serviços do Azure:
 
 * [Rede Virtual do Azure][VNet];
@@ -79,9 +70,6 @@ As organizações que estão considerando o DevOps também podem utilizar os con
 ## <a name="considerations-for-implementing-a-virtual-datacenter"></a>Considerações sobre a implementação de um Datacenter Virtual
 
 Ao projetar uma implementação de VDC, há várias questões importantes a considerar:
-
-### <a name="identity-and-directory-services"></a>Serviços de identidade e diretório
-Serviços de identidade e diretório são um aspecto fundamental de todos os datacenters, sejam locais ou na nuvem. A identidade está relacionada a todos os aspectos de acesso e a autorização aos serviços no VDC. Para garantir que somente usuários e processos autorizados acessem seus recursos e a conta do Azure, o Azure usa vários tipos de credenciais para autenticação. Eles incluem senhas para acessar a conta do Azure, chaves de criptografia, assinaturas digitais e certificados. 
 
 ### <a name="identity-and-directory-service"></a>Serviço de Identidade e Diretório
 
@@ -202,7 +190,7 @@ Uma arquitetura comum para esses tipos de ambientes de várias camadas consiste 
 
 A presença de diferentes locatários do Azure AD impõe a separação entre ambientes. O mesmo grupo de usuários, como a TI central, precisa autenticar usando um URI diferente para acessar um locatário diferente do Azure AD, a fim de modificar as funções ou permissões de ambientes do Azure DevOps ou de produção de um projeto. A presença de diferentes autenticações de usuário para acessar diferentes ambientes reduz possíveis interrupções e outros problemas causados por erros humanos.
 
-#### <a name="component-type-infrastructure"></a>Tipo de componente: infraestrutura
+#### <a name="component-type-infrastructure"></a>Tipo de componente: Infraestrutura
 
 Esse tipo de componente é o local em que a maioria da infraestrutura de suporte reside. Também é o ponto em que as equipes centralizadas de TI, Segurança e/ou Conformidade passam a maior parte do tempo.
 
@@ -281,7 +269,7 @@ O [**Gateway de Aplicativo**][AppGW] é uma solução de virtualização dedicad
 
 [**Proteção contra DDoS do Azure Standard**][DDOS] fornece funcionalidades de mitigação adicionais à camada de [serviço Básica][DDOS] ajustadas especificamente para os recursos de Rede Virtual do Azure. A Proteção contra DDoS Standard é simples de habilitar e não exige nenhuma alteração no aplicativo. Políticas de proteção são ajustadas por meio do monitoramento de tráfego dedicado e algoritmos de aprendizado de máquina. As políticas são aplicadas a endereços IP públicos associados aos recursos implantados em redes virtuais. Os exemplos são instâncias do Azure Load Balancer, Gateway de Aplicativo do Azure e Azure Service Fabric. A telemetria em tempo real está disponível por meio de exibições do Azure Monitor durante um ataque e para o histórico. Proteções de camada de aplicativo podem ser adicionadas por meio do firewall do aplicativo Web do Gateway de Aplicativo do Azure. A proteção é fornecida para endereços IP públicos IPv4 do Azure.
 
-#### <a name="component-type-monitoring"></a>Tipo de componente: monitoramento
+#### <a name="component-type-monitoring"></a>Tipo de componente: Monitoramento
 
 Componentes de monitoramento oferecem visibilidade e alertas de todos os outros tipos de componentes. Todas as equipes devem ter acesso ao monitoramento para os componentes e serviços aos quais elas têm acesso. Se você tiver equipes de operações ou suporte técnico centralizadas, elas precisarão ter acesso integrado aos dados fornecidos por esses componentes.
 
@@ -324,7 +312,7 @@ O [Observador de Rede do Azure][NetWatch] fornece ferramentas para monitorar, di
 
 A solução [Monitor de Desempenho de Rede][NPM] dentro do Operations Management Suite pode fornecer informações detalhadas de rede ponta a ponta. Essas informações incluem uma exibição única de redes do Azure e redes locais. A solução tem monitores específicos para ExpressRoute e serviços públicos.
 
-#### <a name="component-type-workloads"></a>Tipo de componente: cargas de trabalho
+#### <a name="component-type-workloads"></a>Tipo de componente: Cargas de trabalho
 
 Componentes de carga de trabalho são o local em que seus aplicativos reais e serviços residem. Também é o ponto em que as equipes de desenvolvimento de aplicativo passam a maior parte do tempo.
 
@@ -340,7 +328,7 @@ As possibilidades de carga de trabalho são infinitas. A seguir estão apenas al
 
 **Big Data/Análise**: quando os dados precisam ser escalados verticalmente para um volume muito grande, os bancos de dados podem não ser escalados de modo adequado. A tecnologia Hadoop oferece um sistema para executar consultas distribuídas em paralelo em um grande número de nós. Os clientes têm a opção de executar cargas de trabalho de dados em VMs de IaaS ou PaaS ([HDInsight][HDI]). O HDInsight dá suporte à implantação em uma VNet baseada em locais, podendo ser implantada em um cluster de um spoke do VDC.
 
-**Eventos e mensagens**: [Os Hubs de Eventos do Azure][EventHubs] são um serviço de ingestão de telemetria de hiperescala que coleta, transforma e armazena milhões de eventos. Como uma plataforma de streaming distribuída, oferece baixa latência e tempo de retenção configurável, permitindo a ingestão de grandes quantidades de telemetria no Azure e a leitura de dados de vários aplicativos. Com Hubs de Evento, um único fluxo pode dar suporte a pipelines tanto em tempo real quanto em lote.
+**Eventos e mensagens**: Os Hubs de Eventos do Azure[EventHubs] são um serviço de ingestão de telemetria de hiperescala que coleta, transforma e armazena milhões de eventos. Como uma plataforma de streaming distribuída, oferece baixa latência e tempo de retenção configurável, permitindo a ingestão de grandes quantidades de telemetria no Azure e a leitura de dados de vários aplicativos. Com Hubs de Evento, um único fluxo pode dar suporte a pipelines tanto em tempo real quanto em lote.
 
 Você pode implementar um serviço entre aplicativos e serviços por meio de mensagens de nuvem altamente confiável usando o [Barramento de Serviço do Azure][ServiceBus]. Ele oferece um sistema de mensagens agenciado e assíncrono entre o cliente e o servidor, recursos de mensagens PEPS (primeiro a entrar, primeiro a sair) e de publicação e assinatura.
 
