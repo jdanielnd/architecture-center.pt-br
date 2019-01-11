@@ -4,18 +4,18 @@ description: Arquiteturas de referência, plantas e diretrizes de implementaçã
 layout: LandingPage
 ms.topic: landing-page
 ms.date: 08/30/2018
-ms.openlocfilehash: 173698aee0a67578beaa806a59e1c7b0265cdd61
-ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
+ms.openlocfilehash: 4e0f3b32abc8d2e0da9b139b0e6aae1d48152a37
+ms.sourcegitcommit: 7d9efe716e8c9e99f3fafa9d0213d48c23d9713d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/04/2019
-ms.locfileid: "54011796"
+ms.lasthandoff: 01/09/2019
+ms.locfileid: "54160767"
 ---
 # <a name="azure-reference-architectures"></a>Arquiteturas de referência do Azure
 
 Nossas arquiteturas de referência são organizadas por cenário, com arquiteturas relacionadas agrupadas juntos. Cada arquitetura inclui as práticas recomendadas, junto com as considerações sobre escalabilidade, disponibilidade, capacidade de gerenciamento e segurança. Mais também incluem uma solução implantável.
 
-Ir para: [IA](#ai-and-machine-learning) | [Big data](#big-data-solutions) | [Sem servidor](#serverless-applications) | [Redes virtuais](#virtual-networks) | [Cargas de trabalho de VM](#vm-workloads) | [SAP](#sap) | [Aplicativos Web](#web-applications) | [Active Directory](#extend-on-premises-active-directory-to-azure)
+Ir para: [IA](#ai-and-machine-learning) | [Big Data](#big-data-solutions) | [IoT](#internet-of-things) | [Sem servidor](#serverless-applications) | [Redes virtuais](#virtual-networks) | [Cargas de trabalho de VM](#vm-workloads) | [SAP](#sap) | [Aplicativos Web](#web-applications) | [Active Directory](#extend-on-premises-active-directory-to-azure)
 
 <!-- markdownlint-disable MD033 -->
 
@@ -201,6 +201,31 @@ Ir para: [IA](#ai-and-machine-learning) | [Big data](#big-data-solutions) | [Sem
                     <div class="cardText">
                         <h3>Processamento de fluxo com o Azure Stream Analytics</h3>
                         <p>Pipeline de processamento do fluxo de ponta a ponta que correlaciona os registros de dois fluxos de dados para calcular uma média móvel.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</li>
+</ul>
+
+## <a name="internet-of-things"></a>Internet das coisas
+
+<ul class="panelContent cardsF">
+<!-- IoT reference architecture -->
+<li style="display: flex; flex-direction: column;">
+    <a href="./iot/index.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
+            <div class="cardPadding" style="display: flex;">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="./iot/_images/iot.svg" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>Arquitetura de referência de IoT do Azure</h3>
+                        <p>Arquitetura recomendada para aplicativos de IoT no Azure usando os componentes do PaaS (plataforma como serviço).</p>
                     </div>
                 </div>
             </div>
