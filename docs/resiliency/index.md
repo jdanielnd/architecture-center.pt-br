@@ -4,12 +4,12 @@ description: Como criar aplicativos resilientes no Azure, para alta disponibilid
 author: MikeWasson
 ms.date: 12/18/2018
 ms.custom: resiliency
-ms.openlocfilehash: 28ad589c6d54a1574b5cd5c4f08e3c6adfe349c3
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.openlocfilehash: ef8fd64756c483528aa83048e23f6387dedb74d6
+ms.sourcegitcommit: 7d9efe716e8c9e99f3fafa9d0213d48c23d9713d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54113120"
+ms.lasthandoff: 01/09/2019
+ms.locfileid: "54160852"
 ---
 # <a name="designing-resilient-applications-for-azure"></a>Desenvolvimento de aplicativos resilientes para o Azure
 
@@ -148,7 +148,7 @@ Mas existem compensações para essa abordagem. A lógica do aplicativo é mais 
 
 **SLA para implantações em várias regiões**. Outra técnica de HA é implantar o aplicativo em mais de uma região e usar o Gerenciador de Tráfego do Azure para fazer o failover se o aplicativo falhar em uma região. Para uma implantação de múltiplas regiões, o SLA composto é calculado da maneira a seguir.
 
-Seja *N* o SLA composto para o aplicativo implantado em uma região e *R* o número de regiões em que o aplicativo é implantado. A possibilidade esperada de que o aplicativo falhará em todas as regiões ao mesmo tempo será de ((1 &minus N) ^ R).
+Seja *N* o SLA composto para o aplicativo implantado em uma região e *R* o número de regiões em que o aplicativo é implantado. A possibilidade esperada de o aplicativo falhar em todas as regiões ao mesmo tempo é de ((1 &minus; N) ^ R).
 
 Por exemplo, se o SLA de região única é de 99,95%,
 
