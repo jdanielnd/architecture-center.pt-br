@@ -1,23 +1,24 @@
 ---
 title: Trabalhar com identidades baseadas em declarações em aplicativos multilocatários
-description: Como usar declarações para autorização e validação de emissor
+description: Como usar declarações para autorização e validação do emissor.
 author: MikeWasson
 ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: authenticate
 pnp.series.next: signup
-ms.openlocfilehash: 3ed6c7c9a48f3617f82112e76878c770099fde3e
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: ffaa6085dd9ca9ddec203e6661575e984b2e25e0
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902401"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113579"
 ---
 # <a name="work-with-claims-based-identities"></a>Trabalhar com identidades baseadas em declarações
 
 [Código de exemplo do ![GitHub](../_images/github.png)][sample application]
 
 ## <a name="claims-in-azure-ad"></a>Declarações no Azure AD
+
 Quando um usuário faz logon, o Microsoft Azure AD envia um token de ID que contém um conjunto de declarações sobre o usuário. Uma declaração é simplesmente uma informação expressada como um par chave/valor. Por exemplo, `email`=`bob@contoso.com`.  Declarações têm um emissor &mdash; nesse caso, o Azure AD &mdash;, que é a entidade que autentica o usuário e cria as declarações. Você confia nas declarações porque confia no emissor. (Por outro lado, se você não confiar o emissor, não confiará nas declarações.)
 
 Em um alto nível:
@@ -51,15 +52,15 @@ Essa tabela lista os tipos de declaração que aparecem no token de ID. No ASP.N
 * upn > `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn`
 
 ## <a name="claims-transformations"></a>Transformações de declarações
+
 Durante o fluxo de autenticação, talvez você queira modificar as declarações obtidas do IDP. No ASP.NET Core, você pode executar a transformação de declarações dentro do evento **AuthenticationValidated** no middleware do OpenID Connect. (Confira [Eventos de autenticação].)
 
 As declarações que você adicionar durante **AuthenticationValidated** serão armazenadas no cookie de autenticação de sessão. Elas não serão enviadas por push de volta ao Azure AD.
 
 Veja alguns exemplos de transformação de declarações:
 
-* **Normalização de declarações normalização**ou uniformizar as declarações entre os usuários. Isso é especialmente relevante se você estiver obtendo declarações de vários IDPs que podem usar tipos de declaração diferentes para informações semelhantes.
-  Por exemplo, o Azure AD envia uma declaração "upn" que contém o email do usuário. Outros IDPs podem enviar uma declaração "email". O código abaixo converte a declaração "upn" em uma declaração "email":
-  
+* **Normalização de declarações normalização**ou uniformizar as declarações entre os usuários. Isso é especialmente relevante se você estiver obtendo declarações de vários IDPs que podem usar tipos de declaração diferentes para informações semelhantes. Por exemplo, o Azure AD envia uma declaração "upn" que contém o email do usuário. Outros IDPs podem enviar uma declaração "email". O código abaixo converte a declaração "upn" em uma declaração "email":
+
   ```csharp
   var email = principal.FindFirst(ClaimTypes.Upn)?.Value;
   if (!string.IsNullOrWhiteSpace(email))
@@ -67,12 +68,14 @@ Veja alguns exemplos de transformação de declarações:
       identity.AddClaim(new Claim(ClaimTypes.Email, email));
   }
   ```
+
 * Adicione **valores de declaração padrão** para declarações que não estão presentes &mdash; por exemplo, atribuir um usuário a uma função padrão. Em alguns casos, isso pode simplificar a lógica da autorização.
-* Adicione **tipos de declaração personalizada** com informações específicas do aplicativo sobre o usuário. Por exemplo, você pode armazenar informações sobre o usuário em um banco de dados. Você poderia adicionar uma declaração personalizada com essas informações ao tíquete de autenticação. A declaração é armazenada em um cookie, por isso basta obtê-la no banco de dados uma vez por sessão de logon. Por outro lado, também é recomendável evitar a criação de cookies excessivamente grandes, portanto você precisa considerar o equilíbrio entre o tamanho do cookie e as pesquisas de banco de dados.   
+* Adicione **tipos de declaração personalizada** com informações específicas do aplicativo sobre o usuário. Por exemplo, você pode armazenar informações sobre o usuário em um banco de dados. Você poderia adicionar uma declaração personalizada com essas informações ao tíquete de autenticação. A declaração é armazenada em um cookie, por isso basta obtê-la no banco de dados uma vez por sessão de logon. Por outro lado, também é recomendável evitar a criação de cookies excessivamente grandes, portanto você precisa considerar o equilíbrio entre o tamanho do cookie e as pesquisas de banco de dados.
 
 Depois que o fluxo de autenticação for concluído, as declarações estarão disponíveis em `HttpContext.User`. Nesse ponto, você deve tratá-los como uma coleção &mdash; somente leitura, por exemplo, usando-os para tomar decisões de autorização.
 
 ## <a name="issuer-validation"></a>Validação do emissor
+
 No OpenID Connect, a declaração do emissor ("iss") identifica o IDP que emitiu o token de ID. Parte do fluxo de autenticação OIDC serve para verificar se a declaração do emissor corresponde ao emissor verdadeiro. O middleware OIDC lida com isso para você.
 
 No Azure AD, o valor de emissor é exclusivo por locatário do AD (`https://sts.windows.net/<tenantID>`). Portanto, o aplicativo deve fazer uma verificação adicional para ter certeza de que o emissor representa um locatário que tem permissão para entrar no aplicativo.
@@ -87,25 +90,28 @@ Para um aplicativo de locatário único, você pode apenas verificar se o emisso
 Para ver uma discussão mais detalhada, confira [Inscrição e integração de locatário em aplicativos multilocatário][signup].
 
 ## <a name="using-claims-for-authorization"></a>Usando declarações para autorização
+
 Com declarações, a identidade de um usuário não é uma entidade monolítica. Por exemplo, um usuário pode ter um endereço de email, número de telefone, aniversário, sexo, etc. O IDP do usuário pode armazenar todas essas informações. Porém, ao autenticar o usuário, você normalmente obtém um subconjunto dessas declarações. Neste modelo, a identidade do usuário é simplesmente um pacote de declarações. Ao tomar decisões de autorização sobre um usuário, você procura por determinados conjuntos de declarações. Em outras palavras, a pergunta “O usuário X pode executar a ação Y?” se torna “O usuário X tem a declaração Z?”.
 
 Veja alguns padrões básicos para verificar declarações.
 
 * Para verificar se o usuário tem uma declaração específica com um valor específico:
-  
+
    ```csharp
    if (User.HasClaim(ClaimTypes.Role, "Admin")) { ... }
    ```
+
    Esse código verifica se o usuário tem uma declaração Função com o valor "Admin". Ele aborda corretamente o caso de usuários que não tenham a declaração Função ou tenham várias declarações Função.
   
    A classe **ClaimTypes** define constantes para tipos de declaração comuns. No entanto, você pode usar qualquer valor da cadeia de caracteres para o tipo de declaração.
 * Para obter um único valor de um tipo de declaração, quando você espera que haja no máximo um valor:
-  
+
   ```csharp
   string email = User.FindFirst(ClaimTypes.Email)?.Value;
   ```
+
 * Para obter todos os valores de um tipo de declaração:
-  
+
   ```csharp
   IEnumerable<Claim> groups = User.FindAll("groups");
   ```
@@ -114,8 +120,7 @@ Para obter mais informações, consulte [Autorização baseada em recursos e em 
 
 [**Avançar**][signup]
 
-
-<!-- Links -->
+<!-- links -->
 
 [parâmetro de escopo]: https://nat.sakimura.org/2012/01/26/scopes-and-claims-in-openid-connect/
 [Tipos de declaração e token com suporte]: /azure/active-directory/active-directory-token-and-claims/

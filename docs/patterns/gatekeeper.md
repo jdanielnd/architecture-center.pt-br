@@ -1,18 +1,17 @@
 ---
-title: Gatekeeper
+title: Padrão de gatekeeper
+titleSuffix: Cloud Design Patterns
 description: Proteger aplicativos e serviços usando uma instância de host dedicado que atua como intermediário entre clientes e o aplicativo ou serviço, valida e corrige solicitações e passa solicitações e dados entre eles.
 keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- security
-ms.openlocfilehash: 39f8548bbccb5e19d433f65b2e7e09147d676996
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.custom: seodec18
+ms.openlocfilehash: a45ace8ea05e4a7dd1d8a48653e94a5fe5bfb0f6
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24541314"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54009688"
 ---
 # <a name="gatekeeper-pattern"></a>Padrão de gatekeeper
 
@@ -32,12 +31,11 @@ Para minimizar o risco de clientes obterem acesso a informações e serviços co
 
 ![Visão geral de alto nível desse padrão](./_images/gatekeeper-diagram.png)
 
-
 O padrão de gatekeeper pode ser usado para simplesmente proteger o armazenamento ou pode ser usado como fachada mais abrangente para proteger todas as funções do aplicativo. Os fatores importantes são:
 
-- **Validação controlada.** O gatekeeper valida todas as solicitações e rejeita as que não atendem aos requisitos de validação.
-- **Risco e exposição limitados.** O gatekeeper não tem acesso às credenciais ou às chaves usadas pelo host confiável para acessar o armazenamento e serviços. Se o gatekeeper estiver comprometido, o invasor não obterá acesso a essas credenciais ou chaves.
-- **Segurança adequada.** O gatekeeper é executado em modo de privilégio limitado, enquanto o restante do aplicativo é executado no modo de confiança total necessário para acessar o armazenamento e os serviços. Se o gatekeeper estiver comprometido, ele não poderá acessar diretamente os serviços ou dados do aplicativo.
+- **Validação controlada**. O gatekeeper valida todas as solicitações e rejeita as que não atendem aos requisitos de validação.
+- **Risco e exposição limitados**. O gatekeeper não tem acesso às credenciais ou às chaves usadas pelo host confiável para acessar o armazenamento e serviços. Se o gatekeeper estiver comprometido, o invasor não obterá acesso a essas credenciais ou chaves.
+- **Segurança adequada**. O gatekeeper é executado em modo de privilégio limitado, enquanto o restante do aplicativo é executado no modo de confiança total necessário para acessar o armazenamento e os serviços. Se o gatekeeper estiver comprometido, ele não poderá acessar diretamente os serviços ou dados do aplicativo.
 
 Esse padrão funciona como firewall em uma topografia de rede típica. Ele permite que o gatekeeper examine as solicitações e tome uma decisão sobre se deve passar a solicitação para o host confiável (às vezes chamado de keymaster) que executa as tarefas necessárias. Essa decisão normalmente requer que gatekeeper valide e limpe o conteúdo da solicitação antes de passá-la para o host confiável.
 
@@ -65,7 +63,6 @@ Quando hospedado em nuvem, esse padrão pode ser implementado ao desacoplar a fu
 
 ![Um exemplo do padrão usando as funções de trabalho e da web de Serviços de Nuvem](./_images/gatekeeper-endpoint.png)
 
-
 ## <a name="related-patterns"></a>Padrões relacionados
 
-O [padrão de chave de manobrista](valet-key.md) também pode ser relevante ao implementar o padrão do Gatekeeper. Na comunicação entre o Gatekeeper e as funções confiáveis, é recomendável aumentar a segurança usando chaves ou tokens que limitem as permissões de acesso aos recursos. Descreve como usar um token ou chave que forneça aos clientes acesso direto e restrito a um determinado recurso ou serviço.
+O [padrão de chave de manobrista](./valet-key.md) também pode ser relevante ao implementar o padrão do Gatekeeper. Na comunicação entre o Gatekeeper e as funções confiáveis, é recomendável aumentar a segurança usando chaves ou tokens que limitem as permissões de acesso aos recursos. Descreve como usar um token ou chave que forneça aos clientes acesso direto e restrito a um determinado recurso ou serviço.

@@ -1,19 +1,17 @@
 ---
-title: Supervisor de Agente do Agendador
+title: Padrão de supervisor de agente do Agendador
+titleSuffix: Cloud Design Patterns
 description: Coordene um conjunto de ações em um conjunto distribuído de serviços e outros recursos remotos.
 keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- messaging
-- resiliency
-ms.openlocfilehash: 7914708413d68689e2326df28ced00e5fc3a5dd8
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: 7e1f45b1f2f206e1739d69bab6d4b2641f58a0f9
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428662"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011711"
 ---
 # <a name="scheduler-agent-supervisor-pattern"></a>Padrão de supervisor de agente do Agendador
 
@@ -25,7 +23,7 @@ Coordene um conjunto de ações distribuídas como uma única operação. Se qua
 
 Um aplicativo executa tarefas que incluem uma série de etapas, algumas das quais podem invocar serviços remotos ou acessar recursos remotos. As etapas individuais podem ser independentes umas das outras, mas elas são organizadas pela lógica de aplicativo que implementa a tarefa.
 
-Sempre que possível, o aplicativo deve garantir que a tarefa seja concluída e resolver as falhas que possam ocorrer ao acessar serviços ou recursos remotos. As falhas podem ocorrer por várias razões. Por exemplo, a rede pode estar inativa, as comunicações podem ser interrompidas, um serviço remoto pode não estar respondendo ou pode estar em estado instável ou um recurso remoto pode estar temporariamente inacessível, talvez devido a restrições de recursos. Em muitos casos as falhas serão transitórias e podem ser tratadas por meio de [padrão de Repetição][retry-pattern].
+Sempre que possível, o aplicativo deve garantir que a tarefa seja concluída e resolver as falhas que possam ocorrer ao acessar serviços ou recursos remotos. As falhas podem ocorrer por várias razões. Por exemplo, a rede pode estar inativa, as comunicações podem ser interrompidas, um serviço remoto pode não estar respondendo ou pode estar em estado instável ou um recurso remoto pode estar temporariamente inacessível, talvez devido a restrições de recursos. Em muitos casos, as falhas serão transitórias e podem ser tratadas por meio de [padrão de repetição](./retry.md).
 
 Se o aplicativo detectar uma falha mais permanente da qual não pode se recurar com facilidade, ele deve ser capaz de restaurar o sistema para um estado consistente e garantir a integridade de toda a operação.
 
@@ -47,8 +45,8 @@ O Agendador mantém informações sobre o andamento da tarefa e o estado de cada
 
 ![Figura 1 - Os atores no padrão de Supervisor de Agente do Agendador](./_images/scheduler-agent-supervisor-pattern.png)
 
-
-> Esse diagrama mostra uma versão simplificada do padrão. Em uma implementação real, pode haver várias instâncias do Agendador em execução simultaneamente, cada uma um subconjunto da tarefas. Da mesma forma, o sistema pode executar várias instâncias de cada Agente, ou até mesmo vários Supervisores. Nesse caso, os Supervisores devem coordenar o trabalho entre si com cuidado para garantir que eles não compitam para recuperar as mesmas etapas e tarefas com falha. O [padrão de Eleição de Líder](leader-election.md) fornece uma solução possível para esse problema.
+> [!NOTE]
+> Esse diagrama mostra uma versão simplificada do padrão. Em uma implementação real, pode haver várias instâncias do Agendador em execução simultaneamente, cada uma um subconjunto da tarefas. Da mesma forma, o sistema pode executar várias instâncias de cada Agente, ou até mesmo vários Supervisores. Nesse caso, os Supervisores devem coordenar o trabalho entre si com cuidado para garantir que eles não compitam para recuperar as mesmas etapas e tarefas com falha. O [padrão de Eleição de Líder](./leader-election.md) fornece uma solução possível para esse problema.
 
 Quando o aplicativo está pronto para executar uma tarefa, ele envia uma solicitação para o Agendador. O Agendador registra as informações de estado inicial sobre a tarefa e suas etapas (por exemplo, etapa ainda não iniciada) no repositório de estado e, em seguida, começa a executar as operações definidas pelo fluxo de trabalho. Como o Agendador inicia cada etapa, ele atualiza as informações sobre o estado da etapa no repositório de estado (por exemplo, etapa em execução).
 
@@ -60,11 +58,11 @@ Se o Agente falhar, o Agendador não receberá uma resposta. O padrão não faz 
 
 Se uma etapa expirar ou falhar, o repositório de estado conterá um registro que indica que a etapa está em execução, mas o tempo de conclusão terá passado. O Supervisor procura as etapas assim e tenta recuperá-las. Uma estratégia possível é o Supervisor atualizar o valor de conclusão para prolongar o tempo disponível para concluir a etapa e, em seguida, enviar uma mensagem para o Agendador identificando a etapa que atingiu o tempo limite. O Agendador pode tentar repetir esta etapa. No entanto, esse design requer que as tarefas sejam idempotentes.
 
-O Supervisor pode precisar impedir que a mesma etapa seja repetida se continuamente falhar ou expirar. Para fazer isso, o Supervisor pode manter uma contagem de repetição para cada etapa, junto com as informações de estado, no repositório de estado. Se essa contagem exceder um limite predefinido, o Supervisor pode adotar uma estratégia de espera por um longo período antes de notificar o Agendador de que ele deve tentar novamente a etapa, com a expectativa de que a falha seja resolvida durante esse período. Como alternativa, o Supervisor pode enviar uma mensagem para o Agendador para solicitar que toda a tarefa seja desfeita implementando um [padrão de Transação de Compensação](compensating-transaction.md). Essa abordagem dependerá do Agendador e dos Agentes que fornecem as informações necessárias para implementar as operações de compensação para cada etapa concluída com êxito.
+O Supervisor pode precisar impedir que a mesma etapa seja repetida se continuamente falhar ou expirar. Para fazer isso, o Supervisor pode manter uma contagem de repetição para cada etapa, junto com as informações de estado, no repositório de estado. Se essa contagem exceder um limite predefinido, o Supervisor pode adotar uma estratégia de espera por um longo período antes de notificar o Agendador de que ele deve tentar novamente a etapa, com a expectativa de que a falha seja resolvida durante esse período. Como alternativa, o Supervisor pode enviar uma mensagem para o Agendador para solicitar que toda a tarefa seja desfeita implementando um [padrão de Transação de Compensação](./compensating-transaction.md). Essa abordagem dependerá do Agendador e dos Agentes que fornecem as informações necessárias para implementar as operações de compensação para cada etapa concluída com êxito.
 
 > Não é a finalidade do Supervisor monitorar o Agendador e os Agentes e reiniciá-los se eles falharem. Esse aspecto do sistema deve ser tratado pela infraestrutura na qual esses componentes estão em execução. Da mesma forma, o Supervisor não deve ter conhecimento das operações de negócios que as tarefas executadas pelo Agendador estão executando (incluindo como compensar caso essas tarefas falhem). Essa é a finalidade da lógica de fluxo de trabalho implementada pelo Agendador. É de responsabilidade exclusiva do Supervisor determinar se uma etapa falhou e providenciar para que ela seja repetida ou para a tarefa inteira contendo a etapa que falhou seja desfeita.
 
-Se o Agendador for reiniciado após uma falha ou o fluxo de trabalho sendo executado pelo Agendador terminar inesperadamente, o Agendador deverá ser capaz de determinar o status de qualquer tarefa em andamento que estava tratando quando falhou e estar preparado para continuar esta tarefa a partir desse ponto. Os detalhes de implementação desse processo são provavelmente específicas do sistema. Se a tarefa não puder ser recuperada, pode ser necessário desfazer o trabalho já foi executado pela tarefa. Isso também pode exigir a implementação de uma [transação de compensação](compensating-transaction.md).
+Se o Agendador for reiniciado após uma falha ou o fluxo de trabalho sendo executado pelo Agendador terminar inesperadamente, o Agendador deverá ser capaz de determinar o status de qualquer tarefa em andamento que estava tratando quando falhou e estar preparado para continuar esta tarefa a partir desse ponto. Os detalhes de implementação desse processo são provavelmente específicas do sistema. Se a tarefa não puder ser recuperada, pode ser necessário desfazer o trabalho já foi executado pela tarefa. Isso também pode exigir a implementação de uma [transação de compensação](./compensating-transaction.md).
 
 A principal vantagem desse padrão é que o sistema é resiliente em caso de falhas inesperadas temporárias ou irrecuperáveis. O sistema pode ser construído para se autorrecuperar. Por exemplo, se um Agente ou o Agendador falhar, um novo pode ser iniciado e o Supervisor pode providenciar para que uma tarefa seja retomada. Se o Supervisor falhar, outra instância pode ser iniciada e pode assumir a partir onde a falha ocorreu. Se o Supervisor for agendado para ser executado periodicamente, uma nova instância poderá ser iniciada automaticamente após um intervalo predefinido. O repositório de estado pode ser replicado para chegar a um nível ainda maior de resiliência.
 
@@ -102,15 +100,16 @@ As informações de estado que o processo de envio cria para o pedido incluem:
 
 - **ProcessState**. O estado atual da tarefa tratando o pedido. Os possíveis estados são:
 
-    - **Pendente**. O pedido foi criado, mas o processamento ainda não foi iniciado.
-    - **Processando**. O pedido está sendo processado no momento.
-    - **Processado**. O pedido foi processado com êxito.
-    - **Erro**. O processamento de pedido falhou.
+  - **Pendente**. O pedido foi criado, mas o processamento ainda não foi iniciado.
+  - **Processando**. O pedido está sendo processado no momento.
+  - **Processado**. O pedido foi processado com êxito.
+  - **Erro**. O processamento de pedido falhou.
 
 - **FailureCount**. O número de tentativas de processamento do pedido.
 
 Nessa informação de estado, o campo `OrderID` é copiado da ID do novo pedido. Os campos `LockedBy` e `CompleteBy` são definidos como `null`, o campo `ProcessState` é definido como `Pending` e o campo `FailureCount` é definido como 0.
 
+> [!NOTE]
 > Nesse exemplo, a lógica de tratamento de pedido é relativamente simples e tem apenas uma única etapa que invoca um serviço remoto. Em um cenário mais complexo de várias etapas, o processo de envio provavelmente envolveria várias etapas e, portanto, vários registros seriam criados no repositório de estado, cada um deles descrevendo o estado de uma etapa individual.
 
 O Agendador também é executado como parte de uma função de trabalho e implementa a lógica de negócios que controla o pedido. Uma instância do Agendador sonda novos pedidos examina o repositório de estado quanto a registros em que o campo `LockedBy` é nulo e o campo `ProcessState` está pendente. Quando o Agendador encontra um novo pedido, ele preenche imediatamente o campo `LockedBy` com sua própria ID de instância, define o campo `CompleteBy` para um horário apropriado e define o campo `ProcessState` para processamento. O código é projetado para ser exclusivo e atômico para garantir que duas instâncias simultâneas do Agendador não possam tentar tratar o mesmo pedido simultaneamente.
@@ -136,14 +135,13 @@ Para permitir que o status do pedido seja relatado, o aplicativo pode usar sua p
 ## <a name="related-patterns-and-guidance"></a>Diretrizes e padrões relacionados
 
 Os padrões e diretrizes a seguir também podem ser relevantes ao implementar esse padrão:
-- [Padrão de repetição][retry-pattern]. Um Agente pode usar esse padrão para repetir de modo transparente uma operação que acessa um serviço ou recurso remoto que tenha falhado anteriormente. Use quando a expectativa é de que a causa da falha é transitória e pode ser corrigida.
-- [Padrão de disjuntor](circuit-breaker.md). Um Agente pode usar esse padrão para tratar as falhas que consumem uma quantidade variável de tempo para serem corrigidas ao se conectar a um serviço ou recurso remoto.
-- [Padrão de Transação de Compensação](compensating-transaction.md). Se o fluxo de trabalho que está sendo executado por um Agendador não puder ser concluído com êxito, poderá ser necessário desfazer qualquer trabalho executado anteriormente. O padrão de Transação de Compensação descreve como isso pode ser feito para operações que seguem o modelo de consistência futuro. Esses tipos de operações geralmente são implementados por um Agendador que executa fluxos de trabalho e processos de negócios complexos.
+
+- [Padrão de repetição](./retry.md). Um Agente pode usar esse padrão para repetir de modo transparente uma operação que acessa um serviço ou recurso remoto que tenha falhado anteriormente. Use quando a expectativa é de que a causa da falha é transitória e pode ser corrigida.
+- [Padrão de disjuntor](./circuit-breaker.md). Um Agente pode usar esse padrão para tratar as falhas que consumem uma quantidade variável de tempo para serem corrigidas ao se conectar a um serviço ou recurso remoto.
+- [Padrão de Transação de Compensação](./compensating-transaction.md). Se o fluxo de trabalho que está sendo executado por um Agendador não puder ser concluído com êxito, poderá ser necessário desfazer qualquer trabalho executado anteriormente. O padrão de Transação de Compensação descreve como isso pode ser feito para operações que seguem o modelo de consistência futuro. Esses tipos de operações geralmente são implementados por um Agendador que executa fluxos de trabalho e processos de negócios complexos.
 - [Prévia de mensagens assíncronas](https://msdn.microsoft.com/library/dn589781.aspx). Os componentes no padrão de Supervisor de Agente do Agendador normalmente são executados separados uns dos outros e se comunicam de forma assíncrona. Descreve algumas das abordagens que podem ser usadas para implementar a comunicação assíncrona com base em filas de mensagens.
-- [Padrão de eleição de líder](leader-election.md). Talvez seja necessário coordenar as ações de várias instâncias de um Supervisor para impedir que tentem recuperar o mesmo processo com falha. O padrão de eleição de líder descreve como fazer isso.
+- [Padrão de eleição de líder](./leader-election.md). Talvez seja necessário coordenar as ações de várias instâncias de um Supervisor para impedir que tentem recuperar o mesmo processo com falha. O padrão de eleição de líder descreve como fazer isso.
 - [Arquitetura de nuvem: o padrão de Agendador-Agente-Supervisor](https://blogs.msdn.microsoft.com/clemensv/2010/09/27/cloud-architecture-the-scheduler-agent-supervisor-pattern/) no blog de Clemens Vasters
 - [Padrão de gerenciador de processo](https://www.enterpriseintegrationpatterns.com/patterns/messaging/ProcessManager.html)
 - [Referência 6: uma saga em Sagas](https://msdn.microsoft.com/library/jj591569.aspx). Um exemplo que mostra como o padrão CQRS usa um gerenciador de processo (parte do guia Recurso CQRS).
 - [Agendador do Microsoft Azure](https://azure.microsoft.com/services/scheduler/)
-
-[retry-pattern]: ./retry.md

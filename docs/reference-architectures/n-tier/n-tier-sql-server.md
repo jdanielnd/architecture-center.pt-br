@@ -4,12 +4,12 @@ titleSuffix: Azure Reference Architectures
 description: Implementar uma arquitetura multicamadas no Azure, para obter disponibilidade, segurança, escalabilidade e capacidade de gerenciamento.
 author: MikeWasson
 ms.date: 11/12/2018
-ms.openlocfilehash: 38983dec83718f53fc1ffd79c1347582200f5db0
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.openlocfilehash: e7dbd8dd2b8e5aff8f18ff9b87fce0b76a850bce
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53120111"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011371"
 ---
 # <a name="windows-n-tier-application-on-azure-with-sql-server"></a>Aplicativo de N camadas do Windows no Azure com SQL Server
 

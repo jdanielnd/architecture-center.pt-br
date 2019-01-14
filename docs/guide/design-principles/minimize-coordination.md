@@ -1,30 +1,32 @@
 ---
 title: Minimizar a coordenação
-description: Minimizar a coordenação entre os serviços de aplicativos para atingir a escalabilidade
+titleSuffix: Azure Application Architecture Guide
+description: Minimize a coordenação entre os serviços de aplicativos para atingir a escalabilidade.
 author: MikeWasson
 ms.date: 08/30/2018
-ms.openlocfilehash: 0e0aa34f851ee743a0c4bebc6d9ca63d7f3ae203
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.custom: seojan19
+ms.openlocfilehash: ec1a7a3de2be4954b07a87b774f8ae7c2bd1f736
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43326207"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113086"
 ---
-# <a name="minimize-coordination"></a>Minimizar a coordenação 
+# <a name="minimize-coordination"></a>Minimizar a coordenação
 
 ## <a name="minimize-coordination-between-application-services-to-achieve-scalability"></a>Minimizar a coordenação entre os serviços de aplicativos para atingir a escalabilidade
 
-A maioria dos aplicativos de nuvem consiste em vários serviços de aplicativo &mdash; front-ends da Web, bancos de dados, processos de negócios, relatórios e análises e assim por diante. Para obter escalabilidade e confiabilidade, cada um desses serviços deve ser executado em várias instâncias. 
+A maioria dos aplicativos de nuvem consiste em vários serviços de aplicativo &mdash; front-ends da Web, bancos de dados, processos de negócios, relatórios e análises e assim por diante. Para obter escalabilidade e confiabilidade, cada um desses serviços deve ser executado em várias instâncias.
 
 O que acontece quando duas instâncias tentam realizar operações simultâneas que afetam a algum estado compartilhado? Em alguns casos, deve haver coordenação entre nós, por exemplo, para preservar as garantias ACID. Neste diagrama, `Node2` está aguardando `Node1` para liberar um bloqueio de banco de dados:
 
-![](./images/database-lock.svg)
+![Diagrama de bloqueio do banco de dados](./images/database-lock.svg)
 
 A coordenação limita os benefícios de escala horizontal e cria afunilamentos. Neste exemplo, ao expandir o aplicativo e adicionar mais instâncias, você verá a contenção de bloqueio maior. No pior dos casos, as instâncias de front-end passam a maior parte do tempo aguardando bloqueios.
 
 As semânticas "Exatamente uma vez" são outra fonte de coordenação frequente. Por exemplo, um pedido deve ser processado exatamente uma vez. Dois trabalhadores estão ouvindo novas ordens. `Worker1` pega um pedido para processamento. O aplicativo deve garantir que `Worker2` não duplique o trabalho, mas também se `Worker1` falhar, que o pedido não seja descartado.
 
-![](./images/coordination.svg)
+![Diagrama de coordenação](./images/coordination.svg)
 
 Você pode usar um padrão como [Supervisor de Agente de Agendador][sas-pattern] para coordenar entre os trabalhadores, mas nesse caso, uma abordagem melhor seria particionar o trabalho. Cada trabalho é atribuído a um determinado intervalo de pedidos (digamos, por região de cobrança). Se um trabalho falhar, uma nova instância assume onde a instância anterior foi interrompida, mas as várias instâncias não estão concorrendo.
 
@@ -32,13 +34,13 @@ Você pode usar um padrão como [Supervisor de Agente de Agendador][sas-pattern]
 
 **Adote a consistência eventual**. Quando os dados são distribuídos, leva coordenação para impor as garantias de consistência forte. Por exemplo, suponha que uma operação atualize dois bancos de dados. Em vez de colocá-lo em um escopo de transação única, é melhor se o sistema puder acomodar a consistência eventual, talvez usando o padrão [Transação de Compensação][compensating-transaction] para reverter logicamente após uma falha.
 
-**Usar eventos de domínio para sincronizar o estado**. Um [evento de domínio][domain-event] é um evento que registra quando acontecer algo que tenha importância no domínio. Os serviços interessados podem escutar o evento, em vez de usar uma transação global para coordenar entre vários serviços. Se essa abordagem for usada, o sistema deverá tolerar a consistência eventual (veja o item anterior). 
+**Usar eventos de domínio para sincronizar o estado**. Um [evento de domínio][domain-event] é um evento que registra quando acontecer algo que tenha importância no domínio. Os serviços interessados podem escutar o evento, em vez de usar uma transação global para coordenar entre vários serviços. Se essa abordagem for usada, o sistema deverá tolerar a consistência eventual (veja o item anterior).
 
-**Considere os padrões como o CQRS e o fornecimento de evento**. Esses dois padrões podem ajudar a reduzir a contenção entre as cargas de trabalho de leitura e gravação. 
+**Considere os padrões como o CQRS e o fornecimento de evento**. Esses dois padrões podem ajudar a reduzir a contenção entre as cargas de trabalho de leitura e gravação.
 
-- O [padrão CQRS][cqrs-pattern] separa as operações de gravação e de leitura. Em algumas implementações, os dados de leitura são separados fisicamente dos dados de gravação. 
+- O [padrão CQRS][cqrs-pattern] separa as operações de gravação e de leitura. Em algumas implementações, os dados de leitura são separados fisicamente dos dados de gravação.
 
-- No [padrão Evento de Fornecimento][event-sourcing], as alterações de estado são registradas como uma série de eventos para um armazenamento de dados somente de acréscimo. O acréscimo de um evento ao fluxo é uma operação atômica, exigindo bloqueio mínimo. 
+- No [padrão Evento de Fornecimento][event-sourcing], as alterações de estado são registradas como uma série de eventos para um armazenamento de dados somente de acréscimo. O acréscimo de um evento ao fluxo é uma operação atômica, exigindo bloqueio mínimo.
 
 Esses dois padrões se complementam. Se o armazenamento de somente gravação CQRS usa fontes de evento, o armazenamento de somente leitura pode escutar os mesmos eventos criar um instantâneo de leitura do estado atual, otimizado para consultas. Antes de adotar o CQRS ou o fornecimento de evento, no entanto, lembre-se dos desafios dessa abordagem. Para saber mais, veja [estilo de arquitetura do CQRS][cqrs-style].
 
@@ -46,16 +48,15 @@ Esses dois padrões se complementam. Se o armazenamento de somente gravação CQ
 
 **Criar operações idempotentes**. Quando possível, projete as operações como idempotentes. Dessa forma, elas poderão ser manipuladas usando a semântica at-least-once. Por exemplo, você pode colocar itens de trabalho em uma fila. Se um trabalho falhar no meio de uma operação, outro trabalhador simplesmente escolhe o item de trabalho.
 
-**Use o processamento paralelo assíncrono**. Se uma operação exigir várias etapas executadas de forma assíncrona (como chamadas de serviço remoto), você poderá chamá-los em paralelo e, em seguida, agregar os resultados. Essa abordagem supõe que cada etapa não dependa dos resultados da etapa anterior.   
+**Use o processamento paralelo assíncrono**. Se uma operação exigir várias etapas executadas de forma assíncrona (como chamadas de serviço remoto), você poderá chamá-los em paralelo e, em seguida, agregar os resultados. Essa abordagem supõe que cada etapa não dependa dos resultados da etapa anterior.
 
-**Use a simultaneidade otimista quando possível**. O controle de simultaneidade pessimista usa bloqueios de banco de dados para evitar conflitos. Isso pode causar baixo desempenho e reduzir a disponibilidade. Com o controle de simultaneidade otimista, cada transação modifica uma cópia ou um instantâneo dos dados. Quando a transação é confirmada, o mecanismo de banco de dados valida a transação e rejeita qualquer transação que possa afetar a consistência do banco de dados. 
+**Use a simultaneidade otimista quando possível**. O controle de simultaneidade pessimista usa bloqueios de banco de dados para evitar conflitos. Isso pode causar baixo desempenho e reduzir a disponibilidade. Com o controle de simultaneidade otimista, cada transação modifica uma cópia ou um instantâneo dos dados. Quando a transação é confirmada, o mecanismo de banco de dados valida a transação e rejeita qualquer transação que possa afetar a consistência do banco de dados.
 
 O banco de dados SQL do Azure e o SQL Server oferecem suporte à simultaneidade otimista por meio de [isolamento de instantâneo][sql-snapshot-isolation]. Alguns serviços de armazenamento do Azure oferecem suporte à simultaneidade otimista com Etags, incluindo o [Azure Cosmos DB][cosmosdb-faq] e o [Armazenamento do Azure][storage-concurrency].
 
 **Considere o MapReduce ou outros algoritmos paralelos e distribuídos**. Dependendo dos dados e o tipo de trabalho a ser executado, você poderá dividir o trabalho em tarefas independentes que podem ser executadas por vários nós de trabalho em paralelo. Veja [Estilo de arquitetura de computação intensa][big-compute].
 
-**Use a seleção de preenchimento para coordenação**. Em casos em que você precisa coordenar operações, verifique se o coordenador não entrar em um ponto único de falha no aplicativo. Com o [padrão Eleição do Líder][leader-election], uma instância é líder a qualquer momento e atua como o coordenador. Se o líder falhar, uma nova instância é escolhida para ser o líder. 
- 
+**Use a seleção de preenchimento para coordenação**. Em casos em que você precisa coordenar operações, verifique se o coordenador não entrar em um ponto único de falha no aplicativo. Com o [padrão Eleição do Líder][leader-election], uma instância é líder a qualquer momento e atua como o coordenador. Se o líder falhar, uma nova instância é escolhida para ser o líder.
 
 <!-- links -->
 

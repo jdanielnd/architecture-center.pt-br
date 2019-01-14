@@ -1,18 +1,17 @@
 ---
-title: Transação de Compensação
+title: Padrão de Transação de Compensação
+titleSuffix: Cloud Design Patterns
 description: Desfaça o trabalho executado por uma série de etapas que, juntas, definem uma operação que acabe sendo consistente.
 keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- resiliency
-ms.openlocfilehash: 3d58537d9c77b97332bcabf762b9af7ed2f20421
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: b81151a6db08c2c14c7f26af3b4b79bfd22a18bb
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428135"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011609"
 ---
 # <a name="compensating-transaction-pattern"></a>Padrão de Transação de Compensação
 
@@ -86,7 +85,7 @@ Observe que as etapas na transação de compensação podem não ser o oposto ex
 
 ![Criar uma transação de compensação para desfazer uma transação de execução longa para reservar um roteiro de viagem](./_images/compensating-transaction-diagram.png)
 
-
+> [!NOTE]
 > Pode ser possível que as etapas na transação de compensação sejam executadas em paralelo, dependendo de como você criou a lógica de compensação para cada etapa.
 
 Em muitas soluções de negócios, a falha de uma única etapa não exige a reversão do sistema usando uma transação de compensação. Por exemplo, se &mdash; após ter reservado os voos F1, F2 e F3 no cenário de site de viagem&mdash; o cliente não puder reservar um quarto no hotel H1, é preferível oferecer ao cliente um quarto em um hotel diferente na mesma cidade em vez de cancelar os voos. O cliente ainda pode optar por cancelar (quando então a transação de compensação é executada e desfaz as reservas feitas nos voos F1, F2 e F3), mas essa decisão deve ser feita pelo cliente e não pelo sistema.
@@ -97,6 +96,6 @@ Os padrões e diretrizes a seguir também podem ser relevantes ao implementar es
 
 - [Primer de Consistência de Dados](https://msdn.microsoft.com/library/dn589800.aspx). O padrão de Transações de Compensação geralmente é usado para desfazer operações que implementam o modelo de consistência eventual. Esse primer fornece informações sobre as vantagens e desvantagens da consistência eventual.
 
-- [Padrão Agendador-Agente-Supervisor](scheduler-agent-supervisor.md). Descreve como implementar sistemas resilientes que executam operações de negócios que usam recursos e serviços distribuídos. Às vezes, pode ser necessário desfazer o trabalho executado por uma operação usando uma transação de compensação.
+- [Padrão Agendador-Agente-Supervisor](./scheduler-agent-supervisor.md). Descreve como implementar sistemas resilientes que executam operações de negócios que usam recursos e serviços distribuídos. Às vezes, pode ser necessário desfazer o trabalho executado por uma operação usando uma transação de compensação.
 
-- [Padrão de Repetição](./retry.md). Pode ser caro executar as transações de compensação, por isso pode ser possível minimizar seu uso com a implementação de uma política efetiva de repetição de operações com falha seguindo o Padrão de repetição.
+- [Padrão de repetição](./retry.md). Pode ser caro executar as transações de compensação, por isso pode ser possível minimizar seu uso com a implementação de uma política efetiva de repetição de operações com falha seguindo o Padrão de repetição.

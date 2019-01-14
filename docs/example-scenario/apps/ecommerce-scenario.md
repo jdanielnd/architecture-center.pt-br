@@ -3,14 +3,14 @@ title: Front-end de comércio eletrônico
 titleSuffix: Azure Example Scenarios
 description: Hospede um site de comércio eletrônico no Azure.
 author: masonch
-ms.date: 7/13/18
+ms.date: 07/13/2018
 ms.custom: fasttrack
-ms.openlocfilehash: d6587218813fa450b284f3a300c7254a3c9fe41f
-ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
+ms.openlocfilehash: f07c21b8eb9d812b9831abe8f2e4f6d131893df2
+ms.sourcegitcommit: 7d9efe716e8c9e99f3fafa9d0213d48c23d9713d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/20/2018
-ms.locfileid: "53643944"
+ms.lasthandoff: 01/09/2019
+ms.locfileid: "54160801"
 ---
 # <a name="an-e-commerce-front-end-on-azure"></a>Um front-end de comércio eletrônico no Azure
 
@@ -67,7 +67,7 @@ Outras opções para a camada da Web e funções incluem:
 - [Service Fabric][docs-service-fabric] - Uma plataforma voltada à criação de componentes distribuídos que se beneficiam da implantação e execução em um cluster com um alto grau de controle. O Service Fabric também pode ser usado para hospedar contêineres.
 - [Serviço de Kubernetes do Azure][docs-kubernetes-service] – Uma plataforma para criar e implantar soluções baseadas em contêiner que podem ser usadas como uma implementação de uma arquitetura de microsserviços. Isso permite agilidade aos diferentes componentes do aplicativo para que eles sejam capazes de dimensionar de modo independente sob demanda.
 - [Instâncias de Contêiner do Azure][docs-container-instances] - Uma maneira de implantar e executar rapidamente contêineres com um ciclo de vida curto. Os contêineres aqui são geralmente implantados para executar um trabalho de processamento rápido, como processar uma mensagem ou executar um cálculo, e, depois, são desprovisionados assim que forem concluídos.
-- [Barramento de Serviço] [service-bus] pode ser usado no lugar da Fila de Armazenamento.
+- O [Barramento de Serviço][service-bus] pode ser usado no lugar da Fila de Armazenamento.
 
 Outras opções para a camada de dados incluem:
 
@@ -156,5 +156,6 @@ Fornecemos três perfis de custo de exemplo com base na quantidade de tráfego q
 [resiliency]: /azure/architecture/checklist/resiliency
 [scalability]: /azure/architecture/checklist/scalability
 [secure-development]: https://www.microsoft.com/SDL/process/design.aspx
+[service-bus]: /azure/service-bus-messaging/
 [sql-geo-replication]: /azure/sql-database/sql-database-geo-replication-overview
 [storage-geo-redudancy]: /azure/storage/common/storage-redundancy-grs

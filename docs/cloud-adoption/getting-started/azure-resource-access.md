@@ -1,16 +1,16 @@
 ---
-title: 'Adoção do Enterprise Cloud: gerenciamento de acesso a recursos no Azure'
-description: 'Explicação dos constructos de gerenciamento de acesso a recursos no Azure: Azure Resource Manager, assinaturas, grupos de recursos e recursos'
+title: 'Adoção da Nuvem Empresarial: Gerenciamento de acesso aos recursos no Azure'
+description: 'Explicação dos constructos de gerenciamento de acesso de recursos no Azure: Azure Resource Manager, assinaturas, grupos de recursos e recursos'
 author: petertaylor9999
 ms.date: 09/10/2018
-ms.openlocfilehash: c26b01d207bc4eb100653a826a053b394d03d1e6
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: 8cb28d0dd5dbdfcef846786083d5197f435bf3ea
+ms.sourcegitcommit: 7d9efe716e8c9e99f3fafa9d0213d48c23d9713d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428696"
+ms.lasthandoff: 01/09/2019
+ms.locfileid: "54160784"
 ---
-# <a name="enterprise-cloud-adoption-resource-access-management-in-azure"></a>Adoção do Enterprise Cloud: gerenciamento de acesso a recursos no Azure
+# <a name="enterprise-cloud-adoption-resource-access-management-in-azure"></a>Adoção da Nuvem Empresarial: Gerenciamento de acesso aos recursos no Azure
 
 Em [O que é governança de recursos de nuvem?](what-is-governance.md), você aprendeu que governança é o processo contínuo de gerenciar, monitorar e auditar o uso de recursos do Azure para atender às metas e requisitos da sua organização. Antes de prosseguir para aprender a criar um modelo de governança, é importante entender os controles de gerenciamento de acesso a recursos no Azure. A configuração desses controles de gerenciamento de acesso a recursos constitui a base do seu modelo de governança.
 

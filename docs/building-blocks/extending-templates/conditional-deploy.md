@@ -1,14 +1,14 @@
 ---
 title: Implantar condicionalmente um recurso em um modelo do Azure Resource Manager
-description: Descreve como estender a funcionalidade de modelos do Azure Resource Manager para implantar condicionalmente um recurso dependendo do valor de um parâmetro
+description: Descreve como estender a funcionalidade de modelos do Azure Resource Manager para implantar condicionalmente um recurso dependendo do valor de um parâmetro.
 author: petertay
 ms.date: 10/30/2018
-ms.openlocfilehash: 2c74e17a5f38f9225b696640a23b55b1285276bb
-ms.sourcegitcommit: e9eb2b895037da0633ef3ccebdea2fcce047620f
+ms.openlocfilehash: 0e02fbbd130bd6be2fc10173c8466b028d5d61da
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/30/2018
-ms.locfileid: "50251831"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113460"
 ---
 # <a name="conditionally-deploy-a-resource-in-an-azure-resource-manager-template"></a>Implantar condicionalmente um recurso em um modelo do Azure Resource Manager
 
@@ -22,7 +22,7 @@ Vamos examinar um modelo de exemplo que demonstra isso. Nosso modelo usa o [elem
 
 Vamos observar cada seção do modelo.
 
-O elemento `parameters` define um parâmetro único chamado `virtualNetworkPeerings`: 
+O elemento `parameters` define um parâmetro único chamado `virtualNetworkPeerings`:
 
 ```json
 {
@@ -35,6 +35,7 @@ O elemento `parameters` define um parâmetro único chamado `virtualNetworkPeeri
     }
   },
 ```
+
 Nosso parâmetro `virtualNetworkPeerings` é uma `array` e tem o seguinte esquema:
 
 ```json
@@ -95,9 +96,10 @@ As propriedades no nosso parâmetro especificam as [configurações relacionadas
     }
 ]
 ```
+
 Há algumas coisas acontecendo nessa parte do nosso modelo. Primeiro, o recurso real sendo implantado é um modelo embutido do tipo `Microsoft.Resources/deployments` que inclui seu próprio modelo que implanta o `Microsoft.Network/virtualNetworks/virtualNetworkPeerings` de fato.
 
-Nosso `name` para o modelo embutido torna-se exclusivo ao se concatenar a iteração atual do `copyIndex()` com o prefixo `vnp-`. 
+Nosso `name` para o modelo embutido torna-se exclusivo ao se concatenar a iteração atual do `copyIndex()` com o prefixo `vnp-`.
 
 O elemento `condition` especifica que nosso recurso deve ser processado quando a função `greater()` é avaliada como `true`. Aqui estamos testando se a matriz do parâmetro `virtualNetworkPeerings` é `greater()` que zero. Se positivo, ela é avaliada como `true`, e a `condition` é atendida. Caso contrário, é `false`.
 
@@ -116,7 +118,7 @@ Em seguida, especificamos nosso loop de `copy`. Trata-se de um loop `serial` que
   },
 ```
 
-Nossa variável `workaround` inclui duas propriedades, uma nomeada como `true` e outra nomeada como `false`. A propriedade `true` é avaliada como o valor da matriz de parâmetros `virtualNetworkPeerings`. A propriedade `false` é avaliada como um objeto vazio, incluindo as propriedades nomeadas que o Gerenciador de Recursos espera ver &mdash;. Observe que `false` é, na verdade, uma matriz, assim como nosso parâmetro `virtualNetworkPeerings`, o que satisfaz a validação. 
+Nossa variável `workaround` inclui duas propriedades, uma nomeada como `true` e outra nomeada como `false`. A propriedade `true` é avaliada como o valor da matriz de parâmetros `virtualNetworkPeerings`. A propriedade `false` é avaliada como um objeto vazio, incluindo as propriedades nomeadas que o Gerenciador de Recursos espera ver &mdash;. Observe que `false` é, na verdade, uma matriz, assim como nosso parâmetro `virtualNetworkPeerings`, o que satisfaz a validação.
 
 A variável `peerings` usa nossa variável `workaround` mais uma vez testando se o comprimento da matriz de parâmetros `virtualNetworkPeerings` é maior que zero. Em caso positivo, a `string` é avaliada como `true` e a variável `workaround` é avaliada como a matriz do parâmetro `virtualNetworkPeerings`. Caso contrário, será avaliada como `false`, e a variável `workaround` é avaliada como nosso objeto vazio no primeiro elemento da matriz.
 
@@ -137,7 +139,7 @@ az group deployment create -g <resource-group-name> \
 * Como parâmetros de modelo, use objetos em vez de valores escalares. Confira [Usar um objeto como um parâmetro em um modelo do Azure Resource Manager](./objects-as-parameters.md)
 
 <!-- links -->
-[azure-resource-manager-condition]: /azure/azure-resource-manager/resource-group-authoring-templates#resources
+[azure-resource-manager-condition]: /azure/azure-resource-manager/resource-manager-templates-resources#condition
 [azure-resource-manager-variable]: /azure/azure-resource-manager/resource-group-authoring-templates#variables
 [vnet-peering-resource-schema]: /azure/templates/microsoft.network/virtualnetworks/virtualnetworkpeerings
 [cli]: /cli/azure/?view=azure-cli-latest

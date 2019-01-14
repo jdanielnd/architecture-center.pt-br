@@ -1,22 +1,24 @@
 ---
 title: Visão geral das opções de computação do Azure
-description: Visão geral das opções de computação do Azure
+titleSuffix: Azure Application Architecture Guide
+description: Uma visão geral das opções de computação do Azure.
 author: MikeWasson
 ms.date: 06/13/2018
-ms.openlocfilehash: cb59c4472b183d9a14031497f0b6db673938c9a9
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.custom: seojan19
+ms.openlocfilehash: 80e57263207ef3a96791d61097ff9f0e3259bf53
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818812"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54111488"
 ---
 # <a name="overview-of-azure-compute-options"></a>Visão geral das opções de computação do Azure
 
-O termo *computação* refere-se ao modelo de hospedagem para os recursos de computação em que seu aplicativo é executado. 
+O termo *computação* refere-se ao modelo de hospedagem para os recursos de computação em que seu aplicativo é executado.
 
 ## <a name="overview"></a>Visão geral
 
-Em uma extremidade do espectro está a **Infraestrutura como serviço (IaaS)**. Com o IaaS, você provisiona as VMs de que precisa, juntamente com componentes associados de rede e armazenamento. Depois implante os software e aplicativos que desejar nas VMs. Esse modelo é o mais próximo a um ambiente local tradicional, com a exceção de que a Microsoft gerencia a infraestrutura. Você ainda gerencia as VMs individuais.  
+Em uma extremidade do espectro está a **Infraestrutura como serviço (IaaS)**. Com o IaaS, você provisiona as VMs de que precisa, juntamente com componentes associados de rede e armazenamento. Depois implante os software e aplicativos que desejar nas VMs. Esse modelo é o mais próximo a um ambiente local tradicional, com a exceção de que a Microsoft gerencia a infraestrutura. Você ainda gerencia as VMs individuais.
 
 A **Plataforma como serviço (PaaS)** fornece um ambiente de hospedagem gerenciado, no qual você pode implantar seu aplicativo sem a necessidade de gerenciar VMs ou recursos de rede. Por exemplo, em vez de criar VMs individuais, você especifica uma contagem de instâncias, e o serviço vai provisionar, configurar e gerenciar os recursos necessários. O Serviço de Aplicativo do Azure é um exemplo de um serviço de PaaS.
 
@@ -32,22 +34,22 @@ Estas são as principais opções de computação disponíveis no Azure atualmen
 
 - As [Máquinas Virtuais](/azure/virtual-machines/) são um serviço IaaS e permitem que você implante e gerencie VMs dentro de uma rede virtual (VNet).
 - O [Serviço de Aplicativo](/azure/app-service/app-service-value-prop-what-is) é uma oferta de PaaS gerenciada para hospedar aplicativos Web, back-ends de aplicativo móvel, APIs RESTful ou processos automatizados de negócios.
-- O [Service Fabric](/azure/service-fabric/service-fabric-overview) é uma plataforma de sistemas distribuídos que pode ser executado em vários ambientes, incluindo o Azure ou no local. O Service Fabric é um orquestrador de microsserviços em um cluster de computadores. 
+- O [Service Fabric](/azure/service-fabric/service-fabric-overview) é uma plataforma de sistemas distribuídos que pode ser executado em vários ambientes, incluindo o Azure ou no local. O Service Fabric é um orquestrador de microsserviços em um cluster de computadores.
 - O [Serviço de Contêiner do Azure](/azure/container-service/container-service-intro) permite criar, configurar e gerenciar um cluster de VMs pré-configuradas para executar aplicativos em contêineres.
 - As [Instâncias de Contêiner do Azure](/azure/container-instances/container-instances-overview) oferecem a maneira mais rápida e simples para executar um contêiner no Azure, sem a necessidade de provisionar máquinas virtuais nem adotar um serviço de nível superior.
 - O [Azure Functions](/azure/azure-functions/functions-overview) é um serviço gerenciado de FaaS.
 - O [Lote do Azure](/azure/batch/batch-technical-overview) é um serviço gerenciado para execução de aplicativos HPC (computação de alto desempenho) paralelos e em grande escala.
-- O [Serviços de Nuvem](/azure/cloud-services/cloud-services-choose-me) é um serviço gerenciado para executar aplicativos de nuvem. Ele usa um modelo de hospedagem PaaS. 
+- O [Serviços de Nuvem](/azure/cloud-services/cloud-services-choose-me) é um serviço gerenciado para executar aplicativos de nuvem. Ele usa um modelo de hospedagem PaaS.
 
 Ao selecionar uma opção de computação, estes são alguns fatores a serem considerados:
 
-- Modelo de hospedagem. Como o serviço está hospedado? Quais requisitos e limitações são impostos por esse ambiente de hospedagem? 
+- Modelo de hospedagem. Como o serviço está hospedado? Quais requisitos e limitações são impostos por esse ambiente de hospedagem?
 - DevOps. Há suporte interno para atualizações de aplicativo? Qual é o modelo de implantação?
-- Escalabilidade. Como o serviço trata da adição ou remoção de instâncias? Ele consegue dimensionar automaticamente baseado na carga e em outras métricas? 
-- Disponibilidade. Qual é o serviço de SLA? 
+- Escalabilidade. Como o serviço trata da adição ou remoção de instâncias? Ele consegue dimensionar automaticamente baseado na carga e em outras métricas?
+- Disponibilidade. Qual é o serviço de SLA?
 - Custo. Além do custo do serviço em si, leve em consideração o custo de operações para gerenciar uma solução compilada nesse serviço. Por exemplo, soluções IaaS podem ter um custo de operações maior.
-- Quais são as limitações gerais de cada serviço? 
-- Quais tipos de arquiteturas de aplicativo são apropriados para esse serviço? 
+- Quais são as limitações gerais de cada serviço?
+- Quais tipos de arquiteturas de aplicativo são apropriados para esse serviço?
 
 ## <a name="next-steps"></a>Próximas etapas
 

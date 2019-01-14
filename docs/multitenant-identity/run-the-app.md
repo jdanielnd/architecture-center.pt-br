@@ -1,14 +1,14 @@
 ---
 title: Executar o aplicativo Surveys
-description: Como executar o aplicativo de exemplo Surveys localmente
+description: Como executar o aplicativo de exemplo Surveys localmente.
 author: MikeWasson
 ms.date: 07/21/2017
-ms.openlocfilehash: cc43f713886692167550336dbdcecdfbfc835bc3
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: b73eeb04755b3dc8443b215bb034c82e3095681d
+ms.sourcegitcommit: 7d9efe716e8c9e99f3fafa9d0213d48c23d9713d
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902656"
+ms.lasthandoff: 01/09/2019
+ms.locfileid: "54160750"
 ---
 # <a name="run-the-surveys-application"></a>Executar o aplicativo Surveys
 
@@ -24,8 +24,9 @@ Aqui está um resumo das etapas:
 6. Adicione funções de aplicativo aos usuários.
 
 ## <a name="prerequisites"></a>Pré-requisitos
--   [Visual Studio 2017][VS2017]
--   Conta do [Microsoft Azure](https://azure.microsoft.com)
+
+- [Visual Studio 2017] [ VS2017] com a [carga de trabalho ASP.NET e desenvolvimento Web](https://visualstudio.microsoft.com/vs/support/selecting-workloads-visual-studio-2017) instalada
+- Conta do [Microsoft Azure](https://azure.microsoft.com)
 
 ## <a name="create-the-tailspin-tenant"></a>Criar o locatário Tailspin
 
@@ -37,19 +38,19 @@ Nesta etapa, você criará um diretório do Azure AD para Tailspin.
 
 2. Clique em **+ Criar um Recurso** > **Identidade** > **Azure Active Directory**.
 
-3. Digite `Tailspin` para o nome da organização e insira um nome de domínio. O nome de domínio terá o formato `xxxx.onmicrosoft.com` e deverá ser globalmente exclusivo. 
+3. Digite `Tailspin` para o nome da organização e insira um nome de domínio. O nome de domínio terá o formato `xxxx.onmicrosoft.com` e deverá ser globalmente exclusivo.
 
-    ![](./images/running-the-app/new-tenant.png)
+    ![Caixa de diálogo Criar diretório](./images/running-the-app/new-tenant.png)
 
 4. Clique em **Criar**. A criação do novo diretório pode levar alguns minutos.
 
 Para completar o cenário de ponta a ponta, você precisará de um segundo diretório do Azure AD para representar um cliente que se inscreva para o aplicativo. Você pode usar o diretório do Azure AD padrão (não Tailspin) ou criar um novo diretório para essa finalidade. Os exemplos, usamos Contoso como o cliente fictício.
 
-## <a name="register-the-surveys-web-api"></a>Registrar a API web do Surveys 
+## <a name="register-the-surveys-web-api"></a>Registrar a API web do Surveys
 
 1. No [portal do Azure][portal], mude para o novo diretório Tailspin selecionando sua conta no canto superior direito do portal.
 
-2. No painel de navegação esquerdo, escolha **Azure Active Directory**. 
+2. No painel de navegação esquerdo, escolha **Azure Active Directory**.
 
 3. Clique em **Registros do aplicativo** > **Novo registro de aplicativo**.
 
@@ -60,13 +61,13 @@ Para completar o cenário de ponta a ponta, você precisará de um segundo diret
    - **Tipo de Aplicativo**: `Web app / API`
 
    - **URL de logon**: `https://localhost:44301/`
-   
-   ![](./images/running-the-app/register-web-api.png) 
+
+   ![Captura de tela para registrar a API da Web](./images/running-the-app/register-web-api.png)
 
 5. Clique em **Criar**.
 
 6. Na folha **Registros do aplicativo**, selecione o novo aplicativo **Surveys.WebAPI**.
- 
+
 7. Em seguida, clique em **Configurações** > **Propriedades**.
 
 8. Na caixa de edição **URI da ID do aplicativo**, digite `https://<domain>/surveys.webapi`, em que `<domain>` é o nome de domínio do diretório. Por exemplo: `https://tailspin.onmicrosoft.com/surveys.webapi`
@@ -77,29 +78,29 @@ Para completar o cenário de ponta a ponta, você precisará de um segundo diret
 
 10. Clique em **Salvar**.
 
-## <a name="register-the-surveys-web-app"></a>Registrar o aplicativo Web Surveys 
+## <a name="register-the-surveys-web-app"></a>Registrar o aplicativo Web Surveys
 
 1. Navegue de volta para a folha **Registros do aplicativo** e clique em **Novo registro de aplicativo**.
 
 2. Na folha **Criar**, insira as seguintes informações:
 
-   - **Nome**: `Surveys`
-   - **Tipo de Aplicativo**: `Web app / API`
-   - **URL de logon**: `https://localhost:44300/`
-   
-   Observe que a URL de entrada tem um número da porta diferente do aplicativo `Surveys.WebAPI` na etapa anterior.
+    - **Nome**: `Surveys`
+    - **Tipo de Aplicativo**: `Web app / API`
+    - **URL de logon**: `https://localhost:44300/`
+
+    Observe que a URL de entrada tem um número da porta diferente do aplicativo `Surveys.WebAPI` na etapa anterior.
 
 3. Clique em **Criar**.
- 
+
 4. Na folha **Registros do aplicativo**, selecione o novo aplicativo **Surveys**.
- 
+
 5. Copie a ID do Aplicativo. Você precisará dessas informações posteriormente.
 
-    ![](./images/running-the-app/application-id.png)
+    ![Captura de tela da cópia da ID do aplicativo](./images/running-the-app/application-id.png)
 
 6. Clique em **Propriedades**.
 
-7. Na caixa de edição **URI da ID do aplicativo**, digite `https://<domain>/surveys`, em que `<domain>` é o nome de domínio do diretório. 
+7. Na caixa de edição **URI da ID do aplicativo**, digite `https://<domain>/surveys`, em que `<domain>` é o nome de domínio do diretório.
 
     ![Configurações](./images/running-the-app/settings.png)
 
@@ -108,7 +109,7 @@ Para completar o cenário de ponta a ponta, você precisará de um segundo diret
 9. Clique em **Salvar**.
 
 10. Na folha **Configurações**, clique em **URLs de resposta**.
- 
+
 11. Adicione a seguinte URL de resposta: `https://localhost:44300/signin-oidc`.
 
 12. Clique em **Salvar**.
@@ -117,14 +118,14 @@ Para completar o cenário de ponta a ponta, você precisará de um segundo diret
 
 14. Insira uma descrição, como `client secret`.
 
-15. Na lista suspensa **Selecionar Duração**, selecione **1 ano**. 
+15. Na lista suspensa **Selecionar Duração**, selecione **1 ano**.
 
 16. Clique em **Salvar**. A chave será gerada quando você salvar.
 
 17. Antes de sair da folha, copie o valor da chave.
 
-    > [!NOTE] 
-    > A chave não ficará visível novamente depois de sair da folha. 
+    > [!NOTE]
+    > A chave não ficará visível novamente depois de sair da folha.
 
 18. Em **ACESSO À API**, clique em **Permissões necessárias**.
 
@@ -142,15 +143,14 @@ Para completar o cenário de ponta a ponta, você precisará de um segundo diret
 
 23. Clique em **Selecionar** > **Concluído**.
 
-
 ## <a name="update-the-application-manifests"></a>Atualizar os manifestos do aplicativo
 
 1. Volte para a folha **Configurações** para o aplicativo `Surveys.WebAPI`.
 
 2. Clique em **Manifesto** > **Editar**.
 
-    ![](./images/running-the-app/manifest.png)
- 
+    ![Captura de tela da edição do manifesto do aplicativo](./images/running-the-app/manifest.png)
+
 3. Adicione o seguinte JSON ao elemento `appRoles`. Gere novos GUIDs para as propriedades `id`.
 
    ```json
@@ -188,9 +188,9 @@ Agora, repita as mesmas etapas para o aplicativo Surveys, mas não adicione uma 
 
 O aplicativo Surveys usa Redis para armazenar em cache tokens de acesso OAuth 2. Para criar o cache:
 
-1.  Vá para [Portal do Azure](https://portal.azure.com) e clique em **+ Criar um Recurso** > **Bancos de dados** > **Cache Redis**.
+1. Vá para [Portal do Azure](https://portal.azure.com) e clique em **+ Criar um Recurso** > **Bancos de dados** > **Cache Redis**.
 
-2.  Preencha as informações necessárias, incluindo o nome DNS, o grupo de recursos, o local e o tipo de preço. Você pode criar um novo grupo de recursos ou usar um grupo de recursos existente.
+2. Preencha as informações necessárias, incluindo o nome DNS, o grupo de recursos, o local e o tipo de preço. Você pode criar um novo grupo de recursos ou usar um grupo de recursos existente.
 
 3. Clique em **Criar**.
 
@@ -202,12 +202,12 @@ Para obter mais informações sobre como criar um cache Redis, consulte [Como us
 
 ## <a name="set-application-secrets"></a>Definir segredos do aplicativo
 
-1.  Abra a solução Tailspin.Surveys no Visual Studio.
+1. Abra a solução Tailspin.Surveys no Visual Studio.
 
-2.  No Gerenciador de Soluções, clique com o botão direito no projeto Tailspin.Surveys.Web e selecione **Gerenciar Segredos do Usuário**.
+2. No Gerenciador de Soluções, clique com o botão direito no projeto Tailspin.Surveys.Web e selecione **Gerenciar Segredos do Usuário**.
 
-3.  No arquivo secrets.json, cole o seguinte:
-    
+3. No arquivo secrets.json, cole o seguinte:
+
     ```json
     {
       "AzureAd": {
@@ -221,7 +221,7 @@ Para obter mais informações sobre como criar um cache Redis, consulte [Como us
       }
     }
     ```
-   
+
     Substitua os itens mostrados entre colchetes da seguinte maneira:
 
     - `AzureAd:ClientId`: a ID do aplicativo Surveys.
@@ -229,9 +229,9 @@ Para obter mais informações sobre como criar um cache Redis, consulte [Como us
     - `AzureAd:WebApiResourceId`: o URI da ID do Aplicativo que você especificou quando criou o aplicativo Surveys.WebAPI no Azure AD. Deve ter o formato `https://<directory>.onmicrosoft.com/surveys.webapi`
     - `Redis:Configuration`: crie essa cadeia de caracteres usando o nome DNS do cache Redis e a chave de acesso primária. Por exemplo, "tailspin.redis.cache.windows.net,password=2h5tBxxx,ssl=true".
 
-4.  Salve o arquivo secrets.json atualizado.
+4. Salve o arquivo secrets.json atualizado.
 
-5.  Repita essas etapas para o projeto Tailspin.Surveys.WebAPI e cole o seguinte no secrets.json. Substitua os itens entre colchetes, como antes.
+5. Repita essas etapas para o projeto Tailspin.Surveys.WebAPI e cole o seguinte no secrets.json. Substitua os itens entre colchetes, como antes.
 
     ```json
     {
@@ -248,25 +248,25 @@ Para obter mais informações sobre como criar um cache Redis, consulte [Como us
 
 Nesta etapa, você usará o Entity Framework 7 para criar um banco de dados SQL local usando o LocalDB.
 
-1.  Abra uma janela Comando
+1. Abra uma janela Comando
 
-2.  Navegue até o projeto Tailspin.Surveys.Data.
+2. Navegue até o projeto Tailspin.Surveys.Data.
 
-3.  Execute o comando a seguir:
+3. Execute o comando a seguir:
 
-    ```
+    ```bat
     dotnet ef database update --startup-project ..\Tailspin.Surveys.Web
     ```
-    
+
 ## <a name="run-the-application"></a>Executar o aplicativo
 
 Para executar o aplicativo, inicie os projetos Tailspin.Surveys.Web e Tailspin.Surveys.WebAPI.
 
 Você pode definir o Visual Studio para executar os dois projetos automaticamente em F5 da seguinte maneira:
 
-1.  No Gerenciador de Soluções, clique com o botão direito do mouse na solução e selecione **Definir Projetos de Inicialização**.
-2.  Selecione **Vários projetos de inicialização**.
-3.  Defina **Ação** = **Iniciar** para os projetos Tailspin.Surveys.Web e Tailspin.Surveys.WebAPI.
+1. No Gerenciador de Soluções, clique com o botão direito do mouse na solução e selecione **Definir Projetos de Inicialização**.
+2. Selecione **Vários projetos de inicialização**.
+3. Defina **Ação** = **Iniciar** para os projetos Tailspin.Surveys.Web e Tailspin.Surveys.WebAPI.
 
 ## <a name="sign-up-a-new-tenant"></a>Inscrever um novo locatário
 
@@ -288,39 +288,38 @@ O aplicativo registra o locatário e, em seguida, você é desconectado. O aplic
 
 Quando um locatário se inscreve, um administrador do AD para o locatário deve atribuir funções de aplicativo aos usuários.
 
+1. No [portal do Azure][portal], mude para o diretório do Azure AD que você usou para inscrever-se para o aplicativo Surveys.
 
-1. No [portal do Azure][portal], mude para o diretório do Azure AD que você usou para inscrever-se para o aplicativo Surveys. 
-
-2. No painel de navegação esquerdo, escolha **Azure Active Directory**. 
+2. No painel de navegação esquerdo, escolha **Azure Active Directory**.
 
 3. Acesse **Aplicativos empresariais** > **Todos os aplicativos**. O portal listará `Survey` e `Survey.WebAPI`. Caso contrário, conclua o processo de inscrição.
 
-4.  Clique em executar o aplicativo Surveys.
+4. Clique em executar o aplicativo Surveys.
 
-5.  Clique em **Usuários e Grupos**.
+5. Clique em **Usuários e Grupos**.
 
-4.  Clique em **Adicionar usuário**.
+6. Clique em **Adicionar usuário**.
 
-5.  Se você tiver o Azure AD Premium, clique em **Usuários e grupos**. Caso contrário, clique em **Usuários**. (Atribuir uma função a um grupo requer o Azure AD Premium.)
+7. Se você tiver o Azure AD Premium, clique em **Usuários e grupos**. Caso contrário, clique em **Usuários**. (Atribuir uma função a um grupo requer o Azure AD Premium.)
 
-6. Selecione um ou mais usuários e clique em **Selecionar**.
+8. Selecione um ou mais usuários e clique em **Selecionar**.
 
     ![Selecionar usuário ou grupo](./images/running-the-app/select-user-or-group.png)
 
-6.  Selecione a função e clique em **Selecionar**.
+9. Selecione a função e clique em **Selecionar**.
 
     ![Selecionar usuário ou grupo](./images/running-the-app/select-role.png)
 
-7.  Clique em **Atribuir**.
+10. Clique em **Atribuir**.
 
 Repita as mesmas etapas para atribuir funções ao aplicativo Survey.WebAPI.
 
-> Importante: um usuário deve sempre ter as mesmas funções tanto em Survey quanto em Survey.WebAPI. Caso contrário, o usuário terá permissões inconsistente, o que pode levar a erros 403 (proibido) da API Web.
+> [!IMPORTANT]
+> Um usuário deve sempre ter as mesmas funções tanto em Survey quanto em Survey.WebAPI. Caso contrário, o usuário terá permissões inconsistente, o que pode levar a erros 403 (proibido) da API Web.
 
 Agora volte para o aplicativo e entre novamente. Clique em **Minhas Pesquisas**. Se o usuário for atribuído à função SurveyAdmin ou SurveyCreator, você verá um botão **Criar pesquisa**, que indica se o usuário tem permissões para criar uma nova pesquisa.
 
 ![Minhas pesquisas](./images/running-the-app/screenshot3.png)
-
 
 <!-- links -->
 

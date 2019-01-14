@@ -1,14 +1,17 @@
 ---
 title: Padrão de descarregamento de gateway
+titleSuffix: Cloud Design Patterns
 description: Descarregue a funcionalidade de serviço especializado ou compartilhado para um proxy do gateway.
+keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: 6b3e4541aae77349ca91c18c788ddb508912361d
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.custom: seodec18
+ms.openlocfilehash: 50af3d8593279986ed6efee55667187424c18e56
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24540002"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54010198"
 ---
 # <a name="gateway-offloading-pattern"></a>Padrão de descarregamento de gateway
 
@@ -24,12 +27,12 @@ Outros serviços comuns, como autenticação, autorização, registro em log, mo
 
 ## <a name="solution"></a>Solução
 
-Descarregue alguns recursos em um gateway de API, particularmente preocupações abrangentes como gerenciamento de certificados, autenticação, término de SSL, monitoramento, conversão de protocolo ou limitação. 
+Descarregue alguns recursos em um gateway de API, particularmente preocupações abrangentes como gerenciamento de certificados, autenticação, término de SSL, monitoramento, conversão de protocolo ou limitação.
 
 O diagrama a seguir mostra um gateway de API que termina as conexões SSL de entrada. Ele solicita dados em nome do solicitante original de qualquer upstream de servidor HTTP do gateway de API.
 
- ![](./_images/gateway-offload.png)
- 
+ ![Diagrama do padrão de descarregamento de gateway](./_images/gateway-offload.png)
+
 Os benefícios desse padrão incluem:
 
 - Simplificar o desenvolvimento de serviços removendo a necessidade de distribuir e manter recursos de suporte, como certificados de servidor Web e a configuração de sites seguros. Uma configuração mais simples resulta em gerenciamento e escalabilidade mais fáceis e simplifica as atualizações de serviço.
@@ -40,10 +43,10 @@ Os benefícios desse padrão incluem:
 
 ## <a name="issues-and-considerations"></a>Problemas e considerações
 
-- Assegure que o gateway de API seja altamente disponível e resistente a falhas. Evite pontos únicos de falha executando várias instâncias do seu gateway de API. 
+- Assegure que o gateway de API seja altamente disponível e resistente a falhas. Evite pontos únicos de falha executando várias instâncias do seu gateway de API.
 - Assegure que o gateway seja projetado para os requisitos de capacidade e dimensionamento de seu aplicativo e pontos de extremidade. Verifique se o gateway não se torna um gargalo do aplicativo e se é suficientemente escalonável.
 - Descarregue somente recursos que sejam usados pelo aplicativo inteiro, como a segurança ou transferência de dados.
-- A lógica de negócios nunca deve ser descarregada para o gateway de API. 
+- A lógica de negócios nunca deve ser descarregada para o gateway de API.
 - Se precisar controlar transações, leve em consideração gerar IDs de correlação para fins de registro de log.
 
 ## <a name="when-to-use-this-pattern"></a>Quando usar esse padrão
@@ -60,7 +63,7 @@ Esse padrão pode não ser adequado caso ele introduza um acoplamento entre serv
 
 Ao usar o Nginx como o dispositivo de descarregamento de SSL, a configuração a seguir encerra uma conexão SSL de entrada e distribui a conexão para um dos três servidores HTTP de upstream.
 
-```
+```console
 upstream iis {
         server  10.3.0.10    max_fails=3    fail_timeout=15s;
         server  10.3.0.20    max_fails=3    fail_timeout=15s;
@@ -89,4 +92,3 @@ proxy_set_header X-Real-IP $remote_addr;
 - [Padrão de back-ends para front-ends](./backends-for-frontends.md)
 - [Padrão de agregação de gateway](./gateway-aggregation.md)
 - [Padrão de roteamento de gateway](./gateway-routing.md)
-

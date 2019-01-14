@@ -3,12 +3,12 @@ title: Processamento em lotes
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: fe07d4d6501d4778025b75807f4d6be5854c3e09
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 50e50ae121fda7ceb9dd298b8a072bd7cc4053d9
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52901976"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54114174"
 ---
 # <a name="batch-processing"></a>Processamento em lotes
 
@@ -16,7 +16,7 @@ Um cenário comum de Big Data é o processamento em lotes de dados em repouso. N
 
 Por exemplo, os logs de um servidor Web podem ser copiados para uma pasta e então processados durante a noite para gerar relatórios diários das atividades da Web.
 
-![](./images/batch-pipeline.png)
+![Diagrama de um pipeline de processamento em lote](./images/batch-pipeline.png)
 
 ## <a name="when-to-use-this-solution"></a>Quando usar esta solução
 
@@ -34,15 +34,15 @@ Um exemplo de processamento em lotes é transformar um conjunto grande de arquiv
 
 Uma arquitetura de processamento em lotes tem os componentes lógicos a seguir, mostrados no diagrama acima.
 
-- **Armazenamento de dados.** Normalmente, um armazenamento de arquivos distribuído que pode atuar como um repositório de amplos volumes de arquivos grandes em vários formatos. Genericamente, esse tipo de repositório costuma ser conhecido como um data lake. 
+- **Armazenamento de dados**. Normalmente, um armazenamento de arquivos distribuído que pode atuar como um repositório de amplos volumes de arquivos grandes em vários formatos. Genericamente, esse tipo de repositório costuma ser conhecido como um data lake.
 
-- **Processamento em lotes.** Com frequência, a natureza de alto volume de Big Data significa que as soluções precisam processar arquivos de dados usando trabalhos em lotes de execução longa para filtrar, agregar e, de outro modo, preparar os dados para análise. Normalmente, esses trabalhos envolvem ler arquivos de origem, processá-los e gravar a saída para novos arquivos. 
+- **Processamento em lotes**. Com frequência, a natureza de alto volume de Big Data significa que as soluções precisam processar arquivos de dados usando trabalhos em lotes de execução longa para filtrar, agregar e, de outro modo, preparar os dados para análise. Normalmente, esses trabalhos envolvem ler arquivos de origem, processá-los e gravar a saída para novos arquivos.
 
-- **Armazenamento de dados analíticos.** Muitas soluções de Big Data foram projetadas para preparar dados para análise e então fornecer os dados processados em um formato estruturado que pode ser consultado com ferramentas analíticas. 
+- **Armazenamento de dados analíticos**. Muitas soluções de Big Data foram projetadas para preparar dados para análise e então fornecer os dados processados em um formato estruturado que pode ser consultado com ferramentas analíticas.
 
-- **Análise e relatórios.** A meta da maioria das soluções de Big Data é gerar insights sobre os dados por meio de análise e relatórios. 
+- **Análise e relatórios**. A meta da maioria das soluções de Big Data é gerar insights sobre os dados por meio de análise e relatórios.
 
-- **Orquestração.** Normalmente, com o processamento em lotes, um pouco de orquestração é necessário para migrar ou copiar os dados para o armazenamento de dados, o processamento em lotes, o armazenamento de dados analíticos e as camadas de relatórios.
+- **Orquestração**. Normalmente, com o processamento em lotes, um pouco de orquestração é necessário para migrar ou copiar os dados para o armazenamento de dados, o processamento em lotes, o armazenamento de dados analíticos e as camadas de relatórios.
 
 ## <a name="technology-choices"></a>Opções de tecnologia
 
@@ -55,7 +55,11 @@ As tecnologias a seguir são as opções recomendadas de soluções de processam
 
 Para obter mais informações, consulte [Armazenamento de dados](../technology-choices/data-storage.md).
 
+<!-- markdownlint-disable MD024 -->
+
 ### <a name="batch-processing"></a>Processamento em lotes
+
+<!-- markdownlint-enable MD024 -->
 
 - **U-SQL**. O U-SQL é a linguagem de processamento de consulta usada pelo Azure Data Lake Analytics. Ele combina a natureza declarativa do SQL com a extensibilidade de procedimentos do C# e aproveita o paralelismo para permitir o processamento eficiente de dados em grande escala.
 - **Hive**. O Hive é uma linguagem semelhante ao SQL que é compatível com a maioria das distribuições do Hadoop, incluindo HDInsight. Ele pode ser usado para processar dados de qualquer repositório compatível com o HDFS, incluindo o armazenamento de blobs do Azure e o Azure Data Lake Store.

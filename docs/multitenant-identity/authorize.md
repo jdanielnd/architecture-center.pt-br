@@ -1,17 +1,17 @@
 ---
 title: Autorização em aplicativos multilocatário
-description: Como executar a autorização em um aplicativo multilocatário
+description: Como executar a autorização em um aplicativo multilocatário.
 author: MikeWasson
 ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: app-roles
 pnp.series.next: web-api
-ms.openlocfilehash: 8ff2317eb85197ed93e048b6a2d836405436cc17
-ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
+ms.openlocfilehash: 6e406a7e80b77dea161db194a82ccae043bdc777
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53307156"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54110332"
 ---
 # <a name="role-based-and-resource-based-authorization"></a>Autorização baseada em funções e recursos
 
@@ -25,6 +25,7 @@ Nossa [implementação de referência] é um aplicativo ASP.NET Core. Neste arti
 Um aplicativo típico utiliza uma mistura das duas abordagens. Por exemplo, para excluir um recurso, o usuário deve ser o proprietário do recurso *ou* um administrador.
 
 ## <a name="role-based-authorization"></a>Autorização baseada em função
+
 Por exemplo, o aplicativo [Tailspin Surveys][Tailspin] define as seguintes funções:
 
 * Administrador. Pode executar todas as operações CRUD em qualquer pesquisa que pertença ao locatário.
@@ -38,6 +39,7 @@ Para uma discussão sobre como definir e gerenciar funções, confira [Funções
 Independentemente de como você gerenciar as funções, seu código de autorização terá uma aparência semelhante. O ASP.NET Core tem uma abstração chamada [políticas de autorização][policies]. Com esse recurso, você define políticas de autorização no código e depois aplica-as às ações do controlador. A política é dissociada do controlador.
 
 ### <a name="create-policies"></a>Criar políticas
+
 Para definir uma política, primeiro crie uma classe que implemente `IAuthorizationRequirement`. É mais fácil derivar de `AuthorizationHandler`. No método `Handle` , examine as solicitações relevantes.
 
 Veja um exemplo do aplicativo Tailspin Surveys:
@@ -47,7 +49,7 @@ public class SurveyCreatorRequirement : AuthorizationHandler<SurveyCreatorRequir
 {
     protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, SurveyCreatorRequirement requirement)
     {
-        if (context.User.HasClaim(ClaimTypes.Role, Roles.SurveyAdmin) || 
+        if (context.User.HasClaim(ClaimTypes.Role, Roles.SurveyAdmin) ||
             context.User.HasClaim(ClaimTypes.Role, Roles.SurveyCreator))
         {
             context.Succeed(requirement);
@@ -68,7 +70,7 @@ services.AddAuthorization(options =>
         policy =>
         {
             policy.AddRequirements(new SurveyCreatorRequirement());
-            policy.RequireAuthenticatedUser(); // Adds DenyAnonymousAuthorizationRequirement 
+            policy.RequireAuthenticatedUser(); // Adds DenyAnonymousAuthorizationRequirement
             // By adding the CookieAuthenticationDefaults.AuthenticationScheme, if an authenticated
             // user is not in the appropriate role, they will be redirected to a "forbidden" page.
             policy.AddAuthenticationSchemes(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -87,6 +89,7 @@ services.AddAuthorization(options =>
 Esse código também define o esquema de autenticação, que diz ao ASP.NET qual middleware de autenticação deverá ser executado se a autorização falhar. Nesse caso, especificamos o middleware de autenticação de cookie, porque o middleware de autenticação de cookie pode redirecionar o usuário para uma página "Proibida". O local da página Proibida é definido na opção `AccessDeniedPath` para o middleware de cookie; consulte [Configurando o middleware de autenticação].
 
 ### <a name="authorize-controller-actions"></a>Autorizar ações do controlador
+
 Por fim, para autorizar uma ação em um controlador MVC, defina a política no atributo `Authorize` :
 
 ```csharp
@@ -112,6 +115,7 @@ Ainda existe suporte para isso no ASP.NET Core, mas existem algumas desvantagens
 * As políticas permitem decisões de autorização mais complexas (por exemplo, idade maior ou igual a 21), que não podem ser expressas pela associação de função simples.
 
 ## <a name="resource-based-authorization"></a>Autorização baseada em recursos
+
 *Autorização baseada em recursos* ocorre sempre que a autorização depender de um recurso específico que será afetado por uma operação. No aplicativo Tailspin Surveys, cada pesquisa tem um proprietário e de zero a muitos colaboradores.
 
 * O proprietário pode ler, atualizar, excluir, publicar e cancelar a publicação da pesquisa.
@@ -247,7 +251,8 @@ static readonly Dictionary<OperationAuthorizationRequirement, Func<List<UserPerm
 
 [**Avançar**][web-api]
 
-<!-- Links -->
+<!-- links -->
+
 [Tailspin]: tailspin.md
 
 [Funções de aplicativo]: app-roles.md

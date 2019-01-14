@@ -3,16 +3,16 @@ title: Escolhendo uma tecnologia de processamento em lotes
 description: ''
 author: zoinerTejada
 ms.date: 11/03/2018
-ms.openlocfilehash: 51de9ab5a0d8e3f91ddcc4dceb4a748f49fa925b
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 0c6392fb0a921e95f2704696fb2447ac5ec6f4c0
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902282"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54111318"
 ---
 # <a name="choosing-a-batch-processing-technology-in-azure"></a>Escolhendo uma tecnologia de processamento em lotes no Azure
 
-Com frequência, as soluções de Big Data usam trabalhos em lotes de execução longa para filtrar, agregar e, de outro modo, preparar os dados para análise. Normalmente, esses trabalhos envolvem a leitura de arquivos de origem de um armazenamento escalonável (como o HDFS, Azure Data Lake Store e Armazenamento do Azure), seu processamento e gravação da saída em novos arquivos no armazenamento escalonável. 
+Com frequência, as soluções de Big Data usam trabalhos em lotes de execução longa para filtrar, agregar e, de outro modo, preparar os dados para análise. Normalmente, esses trabalhos envolvem a leitura de arquivos de origem de um armazenamento escalonável (como o HDFS, Azure Data Lake Store e Armazenamento do Azure), seu processamento e gravação da saída em novos arquivos no armazenamento escalonável.
 
 O principal requisito desses mecanismos de processamento em lotes é a capacidade de expandir cálculos, para manipular um grande volume de dados. No entanto, ao contrário do processamento em tempo real, o processamento em lotes deve ter latências (o tempo entre a ingestão de dados e o cálculo de um resultado) que são medidas em minutos a horas.
 
@@ -24,10 +24,10 @@ O [SQL Data Warehouse](/azure/sql-data-warehouse/) é um sistema distribuído pr
 
 ### <a name="azure-data-lake-analytics"></a>Análise Azure Data Lake
 
-O [Data Lake Analytics](/azure/data-lake-analytics/data-lake-analytics-overview) é um serviço do trabalho de análise sob demanda. Ele é otimizado para o processamento distribuído de grandes conjuntos de dados armazenados no Azure Data Lake Store. 
+O [Data Lake Analytics](/azure/data-lake-analytics/data-lake-analytics-overview) é um serviço do trabalho de análise sob demanda. Ele é otimizado para o processamento distribuído de grandes conjuntos de dados armazenados no Azure Data Lake Store.
 
-- Linguagens: [U-SQL](/azure/data-lake-analytics/data-lake-analytics-u-sql-get-started) (inclusive extensões Python, R e C#).
--  Integra-se com: Azure Data Lake Store, blobs do Armazenamento do Azure, Banco de Dados SQL do Azure e SQL Data Warehouse.
+- Linguagens: [U-SQL](/azure/data-lake-analytics/data-lake-analytics-u-sql-get-started) (inclusive as extensões Python, R e C#).
+- Integra-se com: Azure Data Lake Store, blobs do Armazenamento do Azure, Banco de Dados SQL do Azure e SQL Data Warehouse.
 - O modelo de preços é por trabalho.
 
 ### <a name="hdinsight"></a>HDInsight
@@ -38,21 +38,21 @@ O HDInsight é um serviço gerenciado do Hadoop. Use-o para implantar e gerencia
 - Autenticação Kerberos com o Active Directory, controle de acesso baseado no Apache Ranger
 - Fornece controle total do cluster do Hadoop
 
-### <a name="azure-databricks"></a>Azure Databricks 
+### <a name="azure-databricks"></a>Azure Databricks
 
-O [Azure Databricks](/azure/azure-databricks/) é uma plataforma de análise baseada no Apache Spark. Você pode imaginá-la como o “Spark como um serviço”. É a maneira mais fácil de usar o Spark na plataforma do Azure.  
+O [Azure Databricks](/azure/azure-databricks/) é uma plataforma de análise baseada no Apache Spark. Você pode imaginá-la como o “Spark como um serviço”. É a maneira mais fácil de usar o Spark na plataforma do Azure.
 
 - Linguagens: R, Python, Java, Scala, Spark SQL
 - Horas de início, término automático e dimensionamento automático rápidos do cluster.
 - Gerencia o cluster Spark para você.
 - Integração interna com o Armazenamento de Blobs do Azure, Azure Data Lake Storage (ADLS), Data Warehouse do Azure SQL DW (SQL) e outros serviços. Confira [Fontes de Dados](https://docs.azuredatabricks.net/spark/latest/data-sources/index.html).
 - Autenticação do usuário com o Azure Active Directory.
-- [Blocos de notas](https://docs.azuredatabricks.net/user-guide/notebooks/index.html) baseados na Web para colaboração e exploração de dados. 
+- [Blocos de notas](https://docs.azuredatabricks.net/user-guide/notebooks/index.html) baseados na Web para colaboração e exploração de dados.
 - Tem suporte para [clusters habilitados para GPU](https://docs.azuredatabricks.net/user-guide/clusters/gpu.html)
 
-### <a name="azure-distributed-data-engineering-toolkit"></a>Kit de ferramentas de engenharia de dados distribuídos do Azure 
+### <a name="azure-distributed-data-engineering-toolkit"></a>Kit de ferramentas de engenharia de dados distribuídos do Azure
 
-O [Kit de ferramentas de engenharia de dados distribuídos](https://github.com/azure/aztk) (AZTK) é uma ferramenta para o provisionamento sob demanda do Spark em clusters do Docker no Azure. 
+O [Kit de ferramentas de engenharia de dados distribuídos](https://github.com/azure/aztk) (AZTK) é uma ferramenta para o provisionamento sob demanda do Spark em clusters do Docker no Azure.
 
 O AZTK não é um serviço do Azure. Trata-se de uma ferramenta do lado do cliente com uma interface de SDK da CLI e do Python, criada no Lote do Azure. Essa opção oferece mais controle sobre a infraestrutura ao implantar um cluster do Spark.
 
@@ -75,13 +75,15 @@ Para restringir as opções, comece respondendo a estas perguntas:
 
 ## <a name="capability-matrix"></a>Matriz de funcionalidades
 
-As tabelas a seguir resumem as principais diferenças em funcionalidades. 
+As tabelas a seguir resumem as principais diferenças em funcionalidades.
 
 ### <a name="general-capabilities"></a>Funcionalidades gerais
 
+<!-- markdownlint-disable MD033 -->
+
 | | Análise Azure Data Lake | SQL Data Warehouse do Azure | HDInsight | Azure Databricks |
 | --- | --- | --- | --- | --- | --- |
-| É um serviço gerenciado | SIM | SIM | Sim <sup>1</sup> | SIM | 
+| É um serviço gerenciado | SIM | SIM | Sim <sup>1</sup> | SIM |
 | Armazenamento de dados relacionais | SIM | sim | Não | Não  |
 | Modelo de preços | Por trabalho em lotes | Por hora de cluster | Por hora de cluster | Unidade do Databricks<sup>2</sup> + hora de cluster |
 
@@ -102,6 +104,8 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 | Segurança em nível de linha | Não  | Não | Não  | Sim <sup>1</sup> | Sim <sup>1</sup> | Não  |
 | Dá suporte a firewalls | SIM | sim | SIM | Sim <sup>2</sup> | Sim <sup>2</sup> | Não  |
 | Mascaramento de dados dinâmicos | Não  | Não | Não  | Sim <sup>1</sup> | Sim <sup>1</sup> | Não  |
+
+<!-- markdownlint-enable MD033 -->
 
 [1] Exige o uso de um [cluster HDInsight ingressado no domínio](/azure/hdinsight/domain-joined/apache-domain-joined-introduction).
 

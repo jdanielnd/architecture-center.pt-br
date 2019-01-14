@@ -3,12 +3,12 @@ title: ETL (extrair, transformar e carregar)
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: 6f56da72bd7a93ecd40b0be2a19e93d9062038fb
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: b23e1ab35f278bd8e1b203cd0026ee356be022dc
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52901534"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113426"
 ---
 # <a name="extract-transform-and-load-etl"></a>ETL (extrair, transformar e carregar)
 
@@ -16,7 +16,7 @@ Um problema comum que as organizações enfrentam é como coletar dados de vári
 
 Várias ferramentas, serviços e processos foram desenvolvidos ao longo dos anos para ajudar a solucionar esses desafios. Não importa o processo utilizado, há uma necessidade comum de coordenar o trabalho e aplicar um nível de transformação de dados ao pipeline de dados. As seções a seguir destacam os métodos comuns usados para executar essas tarefas.
 
-## <a name="extract-transform-and-load-etl"></a>ETL (extrair, transformar e carregar)
+## <a name="extract-transform-and-load-etl-process"></a>Processo de extração, transformação e carregamento (ETL)
 
 O ETL (extração, transformação e carregamento) é um pipeline de dados usado para coletar dados de várias fontes, transformar os dados de acordo com as regras de negócio e carregá-los em um armazenamento de dados de destino. O trabalho de transformação no ETL ocorre em um mecanismo especializado e, geralmente, envolve o uso de tabelas de preparo para armazenar os dados temporariamente enquanto eles são transformados e, por fim, carregados em seu destino.
 
@@ -27,9 +27,11 @@ A transformação de dados ocorrida geralmente envolve diversas operações, com
 Com frequência, as três fases de ETL são executadas em paralelo para economizar tempo. Por exemplo, enquanto os dados estão sendo extraídos, um processo de transformação pode trabalhar nos dados já recebidos e prepará-los o para carregamento e um processo de carregamento pode começar a trabalhar com os dados preparados, em vez de aguardar a conclusão de todo o processo de extração.
 
 Serviço do Azure relevante:
+
 - [Azure Data Factory v2](https://azure.microsoft.com/services/data-factory/)
 
 Outras ferramentas:
+
 - [SQL Server Integration Services (SSIS)](/sql/integration-services/sql-server-integration-services)
 
 ## <a name="extract-load-and-transform-elt"></a>ELT (extração, carregamento e transformação)
@@ -40,11 +42,11 @@ O ELT (extração, carregamento e transformação) difere do ETL somente no loca
 
 Os casos típicos de uso do ELT se enquadram no âmbito do Big Data. Por exemplo, você pode começar com a extração de todos os dados de origem em arquivos simples em um armazenamento escalonável, como o HDFS (sistema de arquivos distribuído do Hadoop) ou o Azure Data Lake Store. Tecnologias, como o Spark, Hive ou PolyBase, podem então ser usadas para consultar os dados de origem. O ponto-chave do ELT é que o armazenamento de dados usado para executar a transformação é o mesmo armazenamento de dados no qual os dados são, em última análise, consumidos. Esse armazenamento de dados lê diretamente do armazenamento escalonável, em vez de carregar os dados em seu próprio armazenamento proprietário. Essa abordagem ignora a etapa de cópia de dados presente no ETL, que pode ser uma operação demorada para conjuntos grandes de dados.
 
-Na prática, o armazenamento de dados de destino é um [data warehouse](./data-warehousing.md) que usa um cluster Hadoop (usando o Hive ou o Spark) ou um SQL Data Warehouse. Em geral, um esquema é sobreposto sobre os dados de arquivo simples no momento da consulta e armazenado como uma tabela, permitindo que os dados sejam consultados como qualquer outra tabela no armazenamento de dados. Elas são conhecidas como tabelas externas porque os dados não residem no armazenamento gerenciado pelo próprio armazenamento de dados, mas em algum armazenamento escalonável externo. 
+Na prática, o armazenamento de dados de destino é um [data warehouse](./data-warehousing.md) que usa um cluster Hadoop (usando o Hive ou o Spark) ou um SQL Data Warehouse. Em geral, um esquema é sobreposto sobre os dados de arquivo simples no momento da consulta e armazenado como uma tabela, permitindo que os dados sejam consultados como qualquer outra tabela no armazenamento de dados. Elas são conhecidas como tabelas externas porque os dados não residem no armazenamento gerenciado pelo próprio armazenamento de dados, mas em algum armazenamento escalonável externo.
 
 O armazenamento de dados somente gerencia o esquema dos dados e aplica o esquema na leitura. Por exemplo, um cluster Hadoop que usa o Hive descreverá uma tabela do Hive em que a fonte de dados é efetivamente um caminho para um conjunto de arquivos no HDFS. No SQL Data Warehouse, o PolyBase pode obter o mesmo resultado &mdash; criando uma tabela com os dados armazenados externamente ao próprio banco de dados. Quando os dados de origem são carregados, os dados presentes nas tabelas externas podem ser processados usando as funcionalidades do armazenamento de dados. Em cenários de Big Data, isso significa que o armazenamento de dados tem a capacidade de MPP (processamento paralelo maciço), que divide os dados em partes menores e distribui o processamento das partes entre vários computadores em paralelo.
 
-Normalmente, a fase final do pipeline ELT é transformar os dados de origem em um formato final que é mais eficiente para os tipos de consultas que precisam de suporte. Por exemplo, os dados podem ser particionados. Além disso, o ELT pode usar formatos de armazenamento otimizados como o Parquet, que armazena dados orientados por linha em uma forma de coluna e fornece indexação otimizada. 
+Normalmente, a fase final do pipeline ELT é transformar os dados de origem em um formato final que é mais eficiente para os tipos de consultas que precisam de suporte. Por exemplo, os dados podem ser particionados. Além disso, o ELT pode usar formatos de armazenamento otimizados como o Parquet, que armazena dados orientados por linha em uma forma de coluna e fornece indexação otimizada.
 
 Serviço do Azure relevante:
 
@@ -68,9 +70,11 @@ Os fluxos de controle executam fluxos de dados como uma tarefa. Em uma tarefa de
 No diagrama acima, há várias tarefas dentro do fluxo de controle, cada uma sendo uma tarefa de fluxo de dados. Uma das tarefas é aninhada em um contêiner. Os contêineres podem ser usados para fornecer estrutura às tarefas, fornecendo uma unidade de trabalho. Um exemplo disso são elementos de repetição em uma coleção, como arquivos em uma pasta ou instruções de banco de dados.
 
 Serviço do Azure relevante:
+
 - [Azure Data Factory v2](https://azure.microsoft.com/services/data-factory/)
 
 Outras ferramentas:
+
 - [SQL Server Integration Services (SSIS)](/sql/integration-services/sql-server-integration-services)
 
 ## <a name="technology-choices"></a>Opções de tecnologia

@@ -1,20 +1,23 @@
 ---
 title: Padrão de bulkhead
-description: Isole os elementos de um aplicativo em pools para que, se um falhar, os outros continuarão a funcionar
+titleSuffix: Cloud Design Patterns
+description: Isole os elementos de um aplicativo em pools para que, se um falhar, os outros continuarão a funcionar.
+keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: 9917870e1dcbed87aaa41e051f1622ad4950456a
-ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
+ms.custom: seodec18
+ms.openlocfilehash: 0a2ae4789d3c1653405a59ef8cb4f6171a8abc81
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/16/2018
-ms.locfileid: "31012698"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54112185"
 ---
 # <a name="bulkhead-pattern"></a>Padrão de bulkhead
 
 Isole os elementos de um aplicativo em pools para que, se um falhar, os outros continuarão a funcionar.
 
-Esse padrão é denominado *Bulkhead* (tabique) porque é parecido com as partições seccionadas do casco de um navio. Se o casco de um navio for comprometido, somente a seção danificada se encherá de água, impedindo que o navio afunde. 
+Esse padrão é denominado *Bulkhead* (tabique) porque é parecido com as partições seccionadas do casco de um navio. Se o casco de um navio for comprometido, somente a seção danificada se encherá de água, impedindo que o navio afunde.
 
 ## <a name="context-and-problem"></a>Contexto e problema
 
@@ -34,16 +37,16 @@ Os benefícios desse padrão incluem:
 
 - Isolar os consumidores e os serviços para que não haja falhas em cascata. Um problema que afeta um consumidor ou um serviço pode ser isolado em seu próprio bulkhead, impedindo que a solução inteira falhe.
 - Permitir que você preserve algumas funcionalidades em caso de falha de serviço. Outros serviços e recursos do aplicativo continuarão a funcionar.
-- Permitir que você implante os serviços que oferecem uma qualidade de serviço diferente para aplicativos de consumo. Um pool de consumidor de alta prioridade pode ser configurado para usar serviços de alta prioridade. 
+- Permitir que você implante os serviços que oferecem uma qualidade de serviço diferente para aplicativos de consumo. Um pool de consumidor de alta prioridade pode ser configurado para usar serviços de alta prioridade.
 
 O diagrama a seguir mostra bulkheads estruturados em torno de pools de conexão que chamam serviços individuais. Se o Serviço A falhar ou causar algum outro problema, o pool de conexão será isolado, assim, somente as cargas de trabalho que usem o pool de threads atribuído ao Serviço A serão afetadas. Cargas de trabalho que usam os Serviços B e C não são afetadas e podem continuar trabalhando sem interrupções.
 
-![](./_images/bulkhead-1.png) 
+![Primeiro diagrama do padrão de Bulkhead](./_images/bulkhead-1.png)
 
 O diagrama seguinte mostra vários clientes chamando um único serviço. Cada cliente é atribuído a uma instância de serviço separada. O Cliente 1 fez solicitações demais e sobrecarregou sua instância. Uma vez que cada instância de serviço é isolada de outras, os outros clientes podem continuar fazendo chamadas.
 
-![](./_images/bulkhead-2.png)
-     
+![Primeiro diagrama do padrão de Bulkhead](./_images/bulkhead-2.png)
+
 ## <a name="issues-and-considerations"></a>Problemas e considerações
 
 - Defina partições em torno de requisitos comerciais e técnicos do aplicativo.
@@ -92,11 +95,10 @@ spec:
 
 ## <a name="related-guidance"></a>Diretrizes relacionadas
 
-- [Padrão de interruptor de circuito](./circuit-breaker.md)
 - [Projeto de aplicativos resilientes do Azure](../resiliency/index.md)
+- [Padrão de interruptor de circuito](./circuit-breaker.md)
 - [Padrão de repetição](./retry.md)
 - [Padrão de limitação](./throttling.md)
-
 
 <!-- links -->
 

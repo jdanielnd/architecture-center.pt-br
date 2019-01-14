@@ -1,21 +1,23 @@
 ---
 title: Estilo de arquitetura de microsserviços
-description: Descreve benefícios, desafios e melhores práticas para arquiteturas de N camadas no Azure
+titleSuffix: Azure Application Architecture Guide
+description: Descreve os benefícios, desafios e melhores práticas para arquiteturas de microsserviços no Azure.
 author: MikeWasson
 ms.date: 11/13/2018
-ms.openlocfilehash: 4e5d50f829323829c953977257e690354566ebf6
-ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
+ms.custom: seojan19
+ms.openlocfilehash: fb9f97b41306a2f1aa6cfc6c1639c152a7e556b6
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/26/2018
-ms.locfileid: "52295524"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54111216"
 ---
 # <a name="microservices-architecture-style"></a>Estilo de arquitetura de microsserviços
 
-Uma arquitetura de microsserviços consiste em uma coleção de pequenos serviços autônomos. Cada serviço é independente e deve implementar uma única funcionalidade comercial. 
+Uma arquitetura de microsserviços consiste em uma coleção de pequenos serviços autônomos. Cada serviço é independente e deve implementar uma única funcionalidade comercial.
 
-![](./images/microservices-logical.svg)
- 
+![Diagrama lógico do estilo de arquitetura de microsserviços](./images/microservices-logical.svg)
+
 Em alguns aspectos, microsserviços são a evolução natural das arquiteturas orientada a serviços (SOA), mas há diferenças entre microsserviços e SOA. Aqui estão algumas características que definem um microsserviço:
 
 - Em uma arquitetura de microsserviços, os serviços são pequenos, independentes e fracamente acoplados.
@@ -32,17 +34,17 @@ Em alguns aspectos, microsserviços são a evolução natural das arquiteturas o
 
 Além para os próprios serviços, alguns outros componentes aparecem em uma arquitetura de microsserviços típica:
 
-**Gerenciamento**. O componente de gerenciamento é responsável por colocar serviços em nós, identificar falhas, rebalancear serviços entre nós e assim por diante.  
+**Gerenciamento**. O componente de gerenciamento é responsável por colocar serviços em nós, identificar falhas, rebalancear serviços entre nós e assim por diante.
 
-**Descoberta de Serviço**.  Mantém uma lista de serviços e em quais nós eles estão localizados. Habilita a pesquisa de serviço para localizar o ponto de extremidade para um serviço. 
+**Descoberta de Serviço**. Mantém uma lista de serviços e em quais nós eles estão localizados. Habilita a pesquisa de serviço para localizar o ponto de extremidade para um serviço.
 
-**Gateway de API**. O gateway de API é o ponto de entrada para os clientes. Os clientes não chamam serviços diretamente. Em vez disso, eles chamam o gateway de API, que encaminha a chamada para os serviços apropriados no back-end. O gateway de API pode agregar as respostas de vários serviços e retornar a resposta agregada. 
+**Gateway de API**. O gateway de API é o ponto de entrada para os clientes. Os clientes não chamam serviços diretamente. Em vez disso, eles chamam o gateway de API, que encaminha a chamada para os serviços apropriados no back-end. O gateway de API pode agregar as respostas de vários serviços e retornar a resposta agregada.
 
 As vantagens de usar um gateway de API incluem:
 
 - Desacoplar os clientes dos serviços. Os serviços podem ter controle de versão ou ser refatorado sem necessidade de atualizar todos os clientes.
 
--  Os serviços podem usar protocolos de mensagens que não sejam amigáveis à Web, como AMQP.
+- Os serviços podem usar protocolos de mensagens que não sejam amigáveis à Web, como AMQP.
 
 - O Gateway de API pode executar outras funções abrangentes, como autenticação, registro em log, terminação SSL e balanceamento de carga.
 
@@ -58,18 +60,17 @@ Considere esse estilo de arquitetura para:
 
 - Uma organização que consista em pequenas equipes de desenvolvimento.
 
-
-## <a name="benefits"></a>Benefícios 
+## <a name="benefits"></a>Benefícios
 
 - **Implantações independentes**. Você pode atualizar um serviço sem reimplantar o aplicativo inteiro e, em seguida, reverter ou efetuar roll forward de uma atualização se algo der errado. Correções de bugs e liberações de recurso são mais fáceis de gerenciar e menos arriscadas.
 
-- **Desenvolvimento independente**. Uma única equipe de desenvolvimento pode criar, testar e implantar um serviço. O resultado é inovação contínua e um ritmo mais rápido de liberação. 
+- **Desenvolvimento independente**. Uma única equipe de desenvolvimento pode criar, testar e implantar um serviço. O resultado é inovação contínua e um ritmo mais rápido de liberação.
 
 - **Equipes pequenas e focadas**. As equipes podem se concentrar em um serviço. O escopo menor de cada serviço torna a base de código mais fácil de entender e é mais fácil para novos membros da equipe fazerem a expansão.
 
 - **Isolamento de falha**. Se um serviço falhar, ele não derrubará o aplicativo inteiro. No entanto, isso não significa que você obtém resiliência gratuitamente. Você ainda precisa seguir as melhores práticas de resiliência e padrões de design. Consulte [Desenvolvimento de aplicativos resilientes para o Azure][resiliency-overview].
 
-- **Pilhas de tecnologia mistas**. As equipes podem escolher a tecnologia mais adequada para seu serviço. 
+- **Pilhas de tecnologia mistas**. As equipes podem escolher a tecnologia mais adequada para seu serviço.
 
 - **Dimensionamento granular**. Os serviços podem ser dimensionados de maneira independente. Ao mesmo tempo, a densidade mais alta de serviços por VM significa que os recursos de VM são totalmente usados. Usando restrições de posicionamento, um serviço pode corresponder a um perfil de VM (alta utilização da CPU e de memória e assim por diante).
 
@@ -93,11 +94,11 @@ Considere esse estilo de arquitetura para:
 
 ## <a name="best-practices"></a>Práticas recomendadas
 
-- Modele os serviços em torno de domínio da empresa. 
+- Modele os serviços em torno de domínio da empresa.
 
-- Descentralize tudo. Equipes individuais são responsáveis por projetar e criar serviços. Evite compartilhar esquemas de dados ou códigos. 
+- Descentralize tudo. Equipes individuais são responsáveis por projetar e criar serviços. Evite compartilhar esquemas de dados ou códigos.
 
-- O armazenamento de dados deve ser privado para o serviço que é o proprietário dos dados. Use o melhor armazenamento para cada serviço e tipo de dados. 
+- O armazenamento de dados deve ser privado para o serviço que é o proprietário dos dados. Use o melhor armazenamento para cada serviço e tipo de dados.
 
 - Os serviços comunicam-se por meio de APIs bem projetadas. Evite o vazamento de detalhes da implementação. As APIs devem modelar o domínio, não a implementação interna do serviço.
 
@@ -107,7 +108,7 @@ Considere esse estilo de arquitetura para:
 
 - Mantenha o conhecimento de domínio fora do gateway. O gateway deve tratar e rotear solicitações de cliente sem qualquer conhecimento das regras de negócios ou da lógica do domínio. Caso contrário, o gateway se tornará uma dependência e poderá causar um acoplamento entre serviços.
 
-- Os serviços devem ter um acoplamento flexível e alta coesão funcional. Funções que provavelmente mudarão juntas devem ser empacotadas e implantadas juntas. Se residirem em serviços separados, esses serviços acabarão sendo fortemente acoplados, porque uma alteração em um serviço exigirá atualizar outro. Uma comunicação excessivamente prolixa entre dois serviços pode ser um sintoma de acoplamento forte e coesão baixa. 
+- Os serviços devem ter um acoplamento flexível e alta coesão funcional. Funções que provavelmente mudarão juntas devem ser empacotadas e implantadas juntas. Se residirem em serviços separados, esses serviços acabarão sendo fortemente acoplados, porque uma alteração em um serviço exigirá atualizar outro. Uma comunicação excessivamente prolixa entre dois serviços pode ser um sintoma de acoplamento forte e coesão baixa.
 
 - Isole falhas. Use estratégias de resiliência para impedir que falhas em um serviço distribuam-se em cascata. Consulte [Padrões de resiliência][resiliency-patterns] e [Design de aplicativos resilientes][resiliency-overview].
 
@@ -115,11 +116,7 @@ Considere esse estilo de arquitetura para:
 
 Para obter orientações detalhadas sobre como criar uma arquitetura de microsserviços no Azure, consulte [Projetar, criar e operar microsserviços no Azure](../../microservices/index.md).
 
-
 <!-- links -->
 
 [resiliency-overview]: ../../resiliency/index.md
 [resiliency-patterns]: ../../patterns/category/resiliency.md
-
-
-

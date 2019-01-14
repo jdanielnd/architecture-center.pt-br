@@ -1,19 +1,17 @@
 ---
-title: Limitação
+title: Padrão de limitação
+titleSuffix: Cloud Design Patterns
 description: Controle o consumo de recursos usados por uma instância de um aplicativo, um locatário individual ou todo o serviço.
 keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- availability
-- performance-scalability
-ms.openlocfilehash: 29156fc72f40a952dd53adcb20ffa7c3d0af79b4
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.custom: seodec18
+ms.openlocfilehash: 9babe6b3c81b0846e83dfef98bbd76a89661d911
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24541250"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54010655"
 ---
 # <a name="throttling-pattern"></a>Padrão de limitação
 
@@ -37,14 +35,13 @@ O sistema pode implementar várias estratégias de limitação, incluindo:
 
 - Desabilitar ou comprometer a funcionalidade de serviços não essenciais selecionados de modo que os serviços essenciais possam ser executados sem impedimentos com recursos suficientes. Por exemplo, se o aplicativo estiver transmitindo por streaming saída de vídeo, ele poderá mudar para uma resolução mais baixa.
 
-- Usando nivelamento para suavizar o volume de atividade (essa abordagem é abordada em mais detalhes por [Padrão de nivelamento de carga baseado em fila](queue-based-load-leveling.md)). Em um ambiente multilocatário, essa abordagem reduzirá o desempenho de cada locatário. Se o sistema precisar dar suporte a uma combinação de locatários com diferentes SLAs, o trabalho para locatários de alto valor poderá ser executado imediatamente. Solicitações para outros locatários poderão ser retidas e manipuladas quando a lista de pendências diminuir. O [padrão de Fila de Prioridade][] pode ser usado para implementar essa abordagem.
+- Usando nivelamento para suavizar o volume de atividade (essa abordagem é abordada em mais detalhes por [Padrão de nivelamento de carga baseado em fila](./queue-based-load-leveling.md)). Em um ambiente multilocatário, essa abordagem reduzirá o desempenho de cada locatário. Se o sistema precisar dar suporte a uma combinação de locatários com diferentes SLAs, o trabalho para locatários de alto valor poderá ser executado imediatamente. Solicitações para outros locatários poderão ser retidas e manipuladas quando a lista de pendências diminuir. O padrão de Fila de Prioridade][] pode ser usado para implementar essa abordagem.
 
 - Adiar de operações sendo executadas em nome de locatários ou de aplicativos de menor prioridade. Essas operações podem ser suspensas ou limitadas, sendo gerada uma exceção para informar o locatário de que o sistema está ocupado e a operação deverá ser repetida mais tarde.
 
 A figura mostra um gráfico de área para o uso de recursos (uma combinação de memória, CPU, largura de banda e outros fatores) em relação ao tempo para aplicativos que estão usando três recursos. Um recurso é uma área de funcionalidade, como um componente que executa um conjunto específico de tarefas, um trecho de código que executa um cálculo complexo ou um elemento que fornece um serviço como um cache na memória. Esses recursos são rotulados como A, B e C.
 
 ![Figura 1 – Gráfico mostrando o uso de recursos em relação ao tempo para aplicativos executados em nome de três usuários](./_images/throttling-resource-utilization.png)
-
 
 > A área imediatamente abaixo da linha para um recurso indica os recursos usados por aplicativos quando eles invocam esse recurso. Por exemplo, a área abaixo da linha para o Recurso A mostra os recursos usados por aplicativos que estão usando o Recurso A e a área entre as linhas para o Recurso A e o Recurso B indica os recursos usados por aplicativos que estão invocando o Recurso B. Agregar as áreas para cada recurso mostra o uso total de recursos do sistema.
 
@@ -56,12 +53,11 @@ A figura a seguir mostra um gráfico de área do uso geral de recursos por todos
 
 ![Figura 2 – Gráfico mostrando os efeitos de combinar limitação com dimensionamento automático](./_images/throttling-autoscaling.png)
 
-
 No tempo T1, o limite especificando um limite flexível de utilização de recursos é atingido. Neste ponto, o sistema pode começar a aumentar. No entanto, se os recursos novos não ficarem disponíveis rápido o suficiente, os recursos existentes poderão ser esgotados e o sistema poderá falhar. Para evitar que isso ocorra, o sistema será temporariamente limitado, conforme descrito anteriormente. Quando o dimensionamento automático for concluído e recursos adicionais estiverem disponíveis, a limitação poderá ser reduzida.
 
 ## <a name="issues-and-considerations"></a>Problemas e considerações
 
-Você deve considerar os seguintes pontos ao decidir como implementar esse padrão:
+Os seguintes pontos devem ser considerados ao decidir como implementar esse padrão:
 
 - A limitação de um aplicativo e a estratégia a ser usada, é uma decisão de arquitetura que afeta todo o projeto de um sistema. A limitação deve ser considerada no início do processo de design do aplicativo, porque não é fácil adicioná-la depois que um sistema tiver sido implementado.
 
@@ -93,14 +89,12 @@ Para evitar que os usuários de um locatário afetam a capacidade de resposta e 
 
 ![Figura 3 – Implementar limitação em um aplicativo multilocatário](./_images/throttling-multi-tenant.png)
 
-
 ## <a name="related-patterns-and-guidance"></a>Diretrizes e padrões relacionados
 
 Os padrões e diretrizes a seguir também podem ser relevantes ao implementar esse padrão:
+
 - [Diretrizes sobre Instrumentação e Telemetria](https://msdn.microsoft.com/library/dn589775.aspx). A limitação depende da coleta de informações sobre o quanto um serviço está sendo usado. Descreve como gerar e capturar informações de monitoramento personalizadas.
 - [Diretrizes de Medição de Serviço](https://msdn.microsoft.com/library/dn589796.aspx). Descreve como medir o uso de serviços para compreender como eles são usados. Essa informação pode ser útil para determinar como limitar um serviço.
 - [Diretrizes de dimensionamento automático](https://msdn.microsoft.com/library/dn589774.aspx). A limitação pode ser usada como uma medida temporária enquanto um sistema é dimensionado automaticamente ou para eliminar a necessidade de dimensionamento automático de um sistema. Contém informações sobre estratégias de dimensionamento automático.
-- [Padrão de nivelamento de carga baseado em fila](queue-based-load-leveling.md). O nivelamento de carga baseado em fila é um mecanismo comumente usado para implementar a limitação. Uma fila pode agir como um buffer que ajuda a estabilizar a taxa em que as solicitações enviadas por um aplicativo são entregues a um serviço.
-- [padrão de Fila de Prioridade][]. Um sistema pode usar o enfileiramento prioritário como parte da sua estratégia de limitação para manter o desempenho de aplicativos críticos ou de maior valor, ao mesmo tempo reduzindo o desempenho de aplicativos menos importantes.
-
-[padrão de Fila de Prioridade]: priority-queue.md
+- [Padrão de nivelamento de carga baseado em fila](./queue-based-load-leveling.md). O nivelamento de carga baseado em fila é um mecanismo comumente usado para implementar a limitação. Uma fila pode agir como um buffer que ajuda a estabilizar a taxa em que as solicitações enviadas por um aplicativo são entregues a um serviço.
+- [Padrão de fila de prioridade](./priority-queue.md). Um sistema pode usar o enfileiramento prioritário como parte da sua estratégia de limitação para manter o desempenho de aplicativos críticos ou de maior valor, ao mesmo tempo reduzindo o desempenho de aplicativos menos importantes.

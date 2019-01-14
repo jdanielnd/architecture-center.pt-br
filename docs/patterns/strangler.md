@@ -1,18 +1,21 @@
 ---
 title: Padrão do Estrangulador
+titleSuffix: Cloud Design Patterns
 description: Migre incrementalmente um sistema herdado substituindo gradualmente partes específicas de funcionalidade por serviços e aplicativos novos.
+keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: 0bf0b76a69f947419da83edd894a04dbea02371b
-ms.sourcegitcommit: 2ae794de13c45cf24ad60d4f4dbb193c25944eff
+ms.custom: seodec18
+ms.openlocfilehash: 7d7c58c97537537ae9f2f96b7ecf1b437fc258b4
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50001874"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54010199"
 ---
 # <a name="strangler-pattern"></a>Padrão do Estrangulador
 
-Migre incrementalmente um sistema herdado substituindo gradualmente partes específicas de funcionalidade por serviços e aplicativos novos. Como os recursos do sistema herdado são substituídos, o novo sistema acaba substituindo todos os recursos do sistema antigo, estrangulando o sistema antigo e permitindo que você o encerre. 
+Migre incrementalmente um sistema herdado substituindo gradualmente partes específicas de funcionalidade por serviços e aplicativos novos. Como os recursos do sistema herdado são substituídos, o novo sistema acaba substituindo todos os recursos do sistema antigo, estrangulando o sistema antigo e permitindo que você o encerre.
 
 ## <a name="context-and-problem"></a>Contexto e problema
 
@@ -24,7 +27,7 @@ Substituir completamente um sistema complexo pode ser uma tarefa muito grande. G
 
 Substitua incrementalmente partes específicas da funcionalidade por novos serviços e aplicativos. Crie uma fachada que intercepte solicitações para o sistema herdado de back-end. A fachada encaminha essas solicitações para o aplicativo herdado ou para os novos serviços. Os recursos existentes podem ser migrados para o novo sistema gradualmente e os consumidores podem continuar usando a mesma interface, sem que estejam cientes de que qualquer migração ocorreu.
 
-![](./_images/strangler.png)  
+![Diagrama do padrão do Estrangulador](./_images/strangler.png)
 
 Esse padrão ajuda a minimizar o risco da migração e distribui o esforço de desenvolvimento ao longo do tempo. Com a fachada roteando com segurança os usuários para o aplicativo correto, você pode adicionar funcionalidade ao novo sistema em qualquer velocidade que desejar, enquanto garante que o aplicativo herdado continua a funcionar. Ao longo do tempo, conforme os recursos são migrados para o novo sistema, o sistema herdado acaba sendo “estrangulado" e não é mais necessário. Quando esse processo for concluído, o sistema herdado com segurança poderá ser descontinuado.
 
@@ -48,9 +51,3 @@ Esse padrão pode não ser adequado:
 ## <a name="related-guidance"></a>Diretrizes relacionadas
 
 - Postagem de blog de Martin Fowler em [StranglerApplication](https://www.martinfowler.com/bliki/StranglerApplication.html)
-- [Padrão de camada anticorrupção](./anti-corruption-layer.md)
-- [Padrão de roteamento de gateway](./gateway-routing.md)
-
-
- 
-

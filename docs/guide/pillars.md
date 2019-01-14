@@ -1,18 +1,20 @@
 ---
 title: Pilares da qualidade de software
+titleSuffix: Azure Application Architecture Guide
 description: Descreve os cinco pilares de qualidade de software, escalabilidade, disponibilidade, resiliência, gerenciamento e segurança.
 author: MikeWasson
 ms.date: 08/30/2018
-ms.openlocfilehash: dce87aba849c61750416f277bcc5558c400c1f25
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.custom: seojan19
+ms.openlocfilehash: 2f013063afea89e3e322aa6f36484f6df50210be
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43326149"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113936"
 ---
-# <a name="pillars-of-software-quality"></a>Pilares da qualidade de software 
+# <a name="pillars-of-software-quality"></a>Pilares da qualidade de software
 
-Um aplicativo em nuvem bem-sucedido se concentrará nestes cinco pilares da qualidade de software: escalabilidade, disponibilidade, resiliência, gerenciamento e segurança.
+Um aplicativo em nuvem bem-sucedido se concentrará nesses cinco pilares de qualidade de software: Escalabilidade, disponibilidade, resiliência, gerenciamento e segurança.
 
 | Pilar | DESCRIÇÃO |
 |--------|-------------|
@@ -24,17 +26,17 @@ Um aplicativo em nuvem bem-sucedido se concentrará nestes cinco pilares da qual
 
 ## <a name="scalability"></a>Escalabilidade
 
-Escalabilidade é a capacidade de um sistema de lidar com aumentos de carga. Há duas maneiras principais de um aplicativo ser dimensionado. Dimensionamento vertical (escalar *verticalmente*) significa aumentar a capacidade de um recurso, por exemplo, usando um tamanho maior de VM. Dimensionamento horizontal (escalar *horizontalmente*) é adicionar novas instâncias de um recurso, como VMs ou réplicas de banco de dados. 
+Escalabilidade é a capacidade de um sistema de lidar com aumentos de carga. Há duas maneiras principais de um aplicativo ser dimensionado. Dimensionamento vertical (escalar *verticalmente*) significa aumentar a capacidade de um recurso, por exemplo, usando um tamanho maior de VM. Dimensionamento horizontal (escalar *horizontalmente*) é adicionar novas instâncias de um recurso, como VMs ou réplicas de banco de dados.
 
 O dimensionamento horizontal tem vantagens significativas sobre o dimensionamento vertical:
 
 - Verdadeira escala de nuvem. Os aplicativos podem ser desenvolvidos para executarem em centenas ou milhares de nós, atingindo escalas que não são possíveis em um único nó.
 - A escala horizontal é elástica. Você poderá adicionar mais instâncias se a carga aumentar ou removê-las durante períodos mais tranquilos.
-- A escala horizontal pode ser acionada automaticamente, seja conforme uma agenda ou em resposta a mudanças na carga. 
-- A escala horizontal pode ser mais barata do que a escala vertical. Executar várias VMs pequenas pode custar menos do que uma única VM grande. 
+- A escala horizontal pode ser acionada automaticamente, seja conforme uma agenda ou em resposta a mudanças na carga.
+- A escala horizontal pode ser mais barata do que a escala vertical. Executar várias VMs pequenas pode custar menos do que uma única VM grande.
 - O dimensionamento horizontal também pode melhorar a resiliência ao adicionar redundância. Se uma instância ficar inativa, o aplicativo continuará em execução.
 
-Uma vantagem da escala vertical é que você pode fazer isso sem fazer nenhuma alteração ao aplicativo. Porém, em algum momento, você encontrará um limite em que não poderá mais escalar verticalmente. Nesse ponto, qualquer escala adicional deverá ser horizontal. 
+Uma vantagem da escala vertical é que você pode fazer isso sem fazer nenhuma alteração ao aplicativo. Porém, em algum momento, você encontrará um limite em que não poderá mais escalar verticalmente. Nesse ponto, qualquer escala adicional deverá ser horizontal.
 
 A escala horizontal deve ser criada no sistema. Por exemplo, você pode aumentar as VMs colocando-as atrás de um balanceador de carga. Porém, cada VM no pool deve ser capaz de lidar com quaisquer solicitações do cliente, portanto, o aplicativo deve ser sem estado ou armazenar o estado externamente (digamos, em um cache distribuído). Serviços PaaS gerenciados geralmente têm escala horizontal e escala dimensionamento automático integrados. A facilidade de dimensionar esses serviços é uma grande vantagem de usar os serviços de PaaS.
 
@@ -51,9 +53,9 @@ Use a [Lista de verificação de escalabilidade][scalability-checklist] para exa
 
 ## <a name="availability"></a>Disponibilidade
 
-A disponibilidade é a proporção de tempo em que o sistema está funcional e em execução. Geralmente é medida como um percentual do tempo de atividade. Erros de aplicativo, problemas de infraestrutura e carga do sistema podem reduzir a disponibilidade. 
+A disponibilidade é a proporção de tempo em que o sistema está funcional e em execução. Geralmente é medida como um percentual do tempo de atividade. Erros de aplicativo, problemas de infraestrutura e carga do sistema podem reduzir a disponibilidade.
 
-Um aplicativo em nuvem deve ter um SLO (objetivo de nível de serviço) que defina claramente a disponibilidade esperada e como a disponibilidade é medida. Ao definir a disponibilidade, observe o caminho crítico. O front-end Web pode ser capaz de fazer solicitações de cliente, mas se todas as transações falham porque ele não consegue se conectar ao banco de dados, o aplicativo não está disponível para os usuários. 
+Um aplicativo em nuvem deve ter um SLO (objetivo de nível de serviço) que defina claramente a disponibilidade esperada e como a disponibilidade é medida. Ao definir a disponibilidade, observe o caminho crítico. O front-end Web pode ser capaz de fazer solicitações de cliente, mas se todas as transações falham porque ele não consegue se conectar ao banco de dados, o aplicativo não está disponível para os usuários.
 
 A disponibilidade normalmente é descrita em termos de "9s" &mdash; por exemplo, "quatro 9s" significa 99,99% de tempo de atividade. A tabela a seguir mostra o tempo de inatividade potencial cumulativo em diferentes níveis de disponibilidade.
 
@@ -69,7 +71,7 @@ Observe que 99% de tempo de atividade poderia equivaler a quase 2 horas de inter
 
 No Azure, o SLA (Contrato de Nível de Serviço) descreve os compromissos da Microsoft com relação ao tempo de atividade e à conectividade. Se o SLA para um serviço específico for de 99,95%, isso significa que você deverá esperar que o serviço esteja disponível 99,95% do tempo.
 
-Os aplicativos frequentemente dependem de vários serviços. Em geral, a probabilidade de qualquer serviço sofrer tempo de inatividade é independente. Por exemplo, suponha que seu aplicativo dependa de dois serviços, cada um com um SLA de 99,9%. O SLA de composição para ambos os serviços é de 99,9% &times; 99,9% &asymp; 99,8% ou um pouco menos que cada serviço por si só. 
+Os aplicativos frequentemente dependem de vários serviços. Em geral, a probabilidade de qualquer serviço sofrer tempo de inatividade é independente. Por exemplo, suponha que seu aplicativo dependa de dois serviços, cada um com um SLA de 99,9%. O SLA de composição para ambos os serviços é de 99,9% &times; 99,9% &asymp; 99,8% ou um pouco menos que cada serviço por si só.
 
 Use a [Lista de verificação de disponibilidade][availability-checklist] para examinar o seu design de um ponto de vista de disponibilidade.
 
@@ -85,11 +87,11 @@ Resiliência é a capacidade de um sistema de se recuperar de falhas e continuar
 No desenvolvimento de aplicativos tradicionais, o foco era em como reduzir o MTBF (tempo médio entre falhas). Era feito um esforço para impedir que o sistema falhasse. Em computação em nuvem, uma mentalidade diferente é necessária devido a vários fatores:
 
 - Sistemas distribuídos são complexos e uma falha em um ponto potencialmente pode se disseminar em cascata por todo o sistema.
-- Os custos para ambientes em nuvem são mantidos baixos com o uso de hardware de mercadoria, portanto falhas ocasionais de hardware devem ser esperadas. 
-- Aplicativos geralmente dependem de serviços externos, que podem ficar temporariamente indisponíveis ou limitar usuários de alto volume. 
+- Os custos para ambientes em nuvem são mantidos baixos com o uso de hardware de mercadoria, portanto falhas ocasionais de hardware devem ser esperadas.
+- Aplicativos geralmente dependem de serviços externos, que podem ficar temporariamente indisponíveis ou limitar usuários de alto volume.
 - Os usuários atuais esperam que um aplicativo esteja disponível 24/7 sem nunca ficar offline.
 
-Todos esses fatores significam que os aplicativos de nuvem devem ser criados para esperar falhas ocasionais e recuperarem-se delas. O Azure tem muitos recursos de resiliência já incorporados à plataforma. Por exemplo, 
+Todos esses fatores significam que os aplicativos de nuvem devem ser criados para esperar falhas ocasionais e recuperarem-se delas. O Azure tem muitos recursos de resiliência já incorporados à plataforma. Por exemplo: 
 
 - Armazenamento do Azure, Banco de Dados SQL e Cosmos DB oferecem replicação de dados interna, tanto dentro de uma região quanto entre regiões.
 - Os Azure Managed Disks são colocados automaticamente em unidades de escala de armazenamento diferentes para limitar os efeitos das falhas de hardware.
@@ -117,7 +119,7 @@ Monitoramento e diagnóstico são cruciais. Os aplicativos em nuvem são executa
 
 O processo de monitoramento e diagnóstico tem várias fases distintas:
 
-- Instrumentação. Gerar dados brutos, de logs de aplicativo, logs de servidor Web, diagnóstico interno à plataforma Azure e outras fontes.
+- Instrumentação. Gerar dados brutos, de logs de aplicativo, logs de servidor Web, diagnóstico interno na plataforma Azure e outras fontes.
 - Coleta e armazenamento. Consolidar os dados em um único lugar.
 - Análise e diagnóstico. Para solucionar problemas e verificar a integridade geral.
 - Visualização e alertas. Usar dados de telemetria para detectar tendências ou alertar a equipe de operações.
@@ -127,13 +129,13 @@ Use a [Lista de verificação de DevOps][devops-checklist] para examinar o desig
 ### <a name="management-and-devops-guidance"></a>Diretriz de gerenciamento e DevOps
 
 - [Padrões de design para gerenciamento e monitoramento][management-patterns]
-- Melhores práticas: [monitoramento e diagnóstico][monitoring]
+- Melhores práticas: [Monitoramento e diagnósticos][monitoring]
 
 ## <a name="security"></a>Segurança
 
 Você deve pensar sobre a segurança em todo o ciclo de vida de um aplicativo, do design e implementação até a implantação e as operações. A plataforma do Azure fornece proteções contra uma variedade de ameaças, como ataques de DDoS e invasão da rede. Porém, você ainda precisa incluir segurança em seu aplicativo e em seus processos de DevOps.
 
-Aqui estão algumas áreas amplas de segurança a serem consideradas. 
+Aqui estão algumas áreas amplas de segurança a serem consideradas.
 
 ### <a name="identity-management"></a>Gerenciamento de identidades
 
@@ -141,29 +143,28 @@ Considere usar o Azure AD (Azure Active Directory) para autenticar e autorizar u
 
 Se você quiser integrar um ambiente do Active Directory local a uma rede do Azure, várias abordagens são possíveis, dependendo dos seus requisitos. Para obter mais informações, consulte nossas arquiteturas de referência de [Gerenciamento de Identidade][identity-ref-arch].
 
-### <a name="protecting-your-infrastructure"></a>Proteger sua infraestrutura 
+### <a name="protecting-your-infrastructure"></a>Proteger sua infraestrutura
 
-Controle o acesso aos recursos do Azure que você implanta. Cada assinatura do Azure tem uma [relação de confiança][ad-subscriptions] com um locatário do Azure AD. Use RBAC ([Controle de Acesso Baseado em Função][rbac]) para conceder as permissões corretas para recursos do Azure a usuários em sua organização. Conceda o acesso atribuindo a função RBAC a usuários ou grupos em um determinado escopo. O escopo pode ser uma assinatura, um grupo de recursos ou um único recurso. Faça a [auditoria][resource-manager-auditing] de todas as alterações de infraestrutura. 
+Controle o acesso aos recursos do Azure que você implanta. Cada assinatura do Azure tem uma [relação de confiança][ad-subscriptions] com um locatário do Azure AD.
+Use RBAC ([Controle de Acesso Baseado em Função][rbac]) para conceder as permissões corretas para recursos do Azure a usuários em sua organização. Conceda o acesso atribuindo a função RBAC a usuários ou grupos em um determinado escopo. O escopo pode ser uma assinatura, um grupo de recursos ou um único recurso. Faça a [auditoria][resource-manager-auditing] de todas as alterações de infraestrutura.
 
 ### <a name="application-security"></a>Segurança de aplicativo
 
-Em geral, as melhores práticas de segurança para desenvolvimento de aplicativos ainda se aplicam na nuvem. Isso inclui itens como usar SSL em todos os lugares, proteger contra ataques CSRF e XSS, prevenir ataques de injeção de SQL e assim por diante. 
+Em geral, as melhores práticas de segurança para desenvolvimento de aplicativos ainda se aplicam na nuvem. Isso inclui itens como usar SSL em todos os lugares, proteger contra ataques CSRF e XSS, prevenir ataques de injeção de SQL e assim por diante.
 
 Aplicativos de nuvem geralmente usam serviços gerenciados que têm chaves de acesso. Nunca faça o check-in deles no controle do código-fonte. É recomendável armazenar segredos do aplicativo no Azure Key Vault.
 
 ### <a name="data-sovereignty-and-encryption"></a>Criptografia e soberania de dados
 
-Seus dados devem permanecer na zona geopolíticas correta ao usar o Azure altamente disponível. O armazenamento com replicação geográfica do Azure usa o conceito de uma [região emparelhada][paired-region] na mesma região geopolítica. 
+Seus dados devem permanecer na zona geopolíticas correta ao usar o Azure altamente disponível. O armazenamento com replicação geográfica do Azure usa o conceito de uma [região emparelhada][paired-region] na mesma região geopolítica.
 
 Use o Key Vault para proteger segredos e chaves de criptografia. Ao usar o Key Vault, você pode criptografar chaves e segredos usando as chaves protegidas por HSMs (módulos de segurança de hardware). Muitos serviços de banco de dados e armazenamento do Azure dão suporte para criptografia de dados em repouso, incluindo [Armazenamento do Azure][storage-encryption], [Banco de Dados SQL do Azure][sql-db-encryption], [SQL Data Warehouse do Azure][data-warehouse-encryption] e [Cosmos DB][cosmosdb-encryption].
 
 ### <a name="security-resources"></a>Recursos de segurança
 
-- A [Central de Segurança do Azure][security-center] fornece monitoramento de segurança e gerenciamento de políticas integrados em suas assinaturas do Azure. 
+- A [Central de Segurança do Azure][security-center] fornece monitoramento de segurança e gerenciamento de políticas integrados em suas assinaturas do Azure.
 - [Documentação de segurança do Azure][security-documentation]
 - [Central de Confiabilidade da Microsoft][trust-center]
-
-
 
 <!-- links -->
 
@@ -183,14 +184,12 @@ Use o Key Vault para proteger segredos e chaves de criptografia. Ao usar o Key V
 [sql-db-encryption]: /azure/sql-database/sql-database-always-encrypted-azure-key-vault
 [storage-encryption]: /azure/storage/storage-service-encryption
 [trust-center]: https://azure.microsoft.com/support/trust-center/
- 
 
 <!-- patterns -->
 [availability-patterns]: ../patterns/category/availability.md
 [management-patterns]: ../patterns/category/management-monitoring.md
 [resiliency-patterns]: ../patterns/category/resiliency.md
 [scalability-patterns]: ../patterns/category/performance-scalability.md
-
 
 <!-- practices -->
 [autoscale]: ../best-practices/auto-scaling.md
@@ -201,7 +200,6 @@ Use o Key Vault para proteger segredos e chaves de criptografia. Ao usar o Key V
 [monitoring]: ../best-practices/monitoring.md
 [retry-service-specific]: ../best-practices/retry-service-specific.md
 [transient-fault-handling]: ../best-practices/transient-faults.md
-
 
 <!-- checklist -->
 [availability-checklist]: ../checklist/availability.md

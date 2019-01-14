@@ -1,14 +1,17 @@
 ---
 title: Padrão de roteamento de gateway
+titleSuffix: Cloud Design Patterns
 description: Faça o roteamento de solicitações para vários serviços usando um único ponto de extremidade.
+keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: ea0bc4d31b745043a7ac3afb277dfc46d87ff109
-ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
+ms.custom: seodec18
+ms.openlocfilehash: 4db98038f582e0315a743a55d46013d2eda187e3
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 06/11/2018
-ms.locfileid: "35252593"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54010470"
 ---
 # <a name="gateway-routing-pattern"></a>Padrão de roteamento de gateway
 
@@ -26,8 +29,8 @@ Com esse padrão, o aplicativo cliente só precisa conhecer e se comunicar com u
 
 Um gateway também permite abstrair os serviços de back-end dos clientes, permitindo que você mantenha as chamadas do cliente simples ao mesmo tempo que permite alterações nos serviços de back-end por trás do gateway. Chamadas de cliente podem ser roteadas para qualquer serviço ou os serviços precisam controlar o comportamento esperado do cliente, permitindo que você adicione, divida e reorganize serviços por trás do gateway sem alterar o cliente.
 
-![](./_images/gateway-routing.png)
- 
+![Diagrama do padrão de roteamento de gateway](./_images/gateway-routing.png)
+
 Esse padrão também pode ajudar com a implantação ao permitir que você gerencie como as atualizações são distribuídas aos usuários. Quando uma nova versão do seu serviço é implantada, ela pode ser implantada em paralelo com a versão existente. O roteamento permite controlar qual versão do serviço é apresentada aos clientes, dando a você a flexibilidade para usar várias estratégias de versão, seja ela incremental, paralela ou de distribuições completas das atualizações. Quaisquer problemas descobertos depois que o novo serviço for implantado podem ser revertidos rapidamente por meio da alteração de uma configuração no gateway e sem afetar os clientes.
 
 ## <a name="issues-and-considerations"></a>Problemas e considerações
@@ -51,7 +54,7 @@ Esse padrão pode não ser adequado quando você tiver um aplicativo simples que
 
 Ao usar o Nginx como o roteador, a seguir há um arquivo de configuração de exemplo simples de um servidor que encaminha solicitações para aplicativos que residem em diferentes diretórios virtuais para diferentes computadores no back-end.
 
-```
+```console
 server {
     listen 80;
     server_name domain.com;
@@ -75,6 +78,3 @@ server {
 - [Padrão de back-ends para front-ends](./backends-for-frontends.md)
 - [Padrão de agregação de gateway](./gateway-aggregation.md)
 - [Padrão de descarregamento de gateway](./gateway-offloading.md)
-
-
-

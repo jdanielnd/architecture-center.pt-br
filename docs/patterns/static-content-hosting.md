@@ -1,24 +1,19 @@
 ---
-title: Hospedagem de Conteúdo Estático
+title: Padrão de Hospedagem de Conteúdo Estático
+titleSuffix: Cloud Design Patterns
 description: Implante conteúdo estático em um serviço de armazenamento baseado em nuvem que pode enviá-lo diretamente para o cliente.
 keywords: padrão de design
 author: dragon119
-ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- data-management
-- design-implementation
-- performance-scalability
-ms.openlocfilehash: 450d0c4c08098c1ba48e4c0dac3d058a46e3709b
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.date: 01/04/2019
+ms.custom: seodec18
+ms.openlocfilehash: cf4f65e935a01e4d84b3cc82b5779edb729bd80e
+ms.sourcegitcommit: 036cd03c39f941567e0de4bae87f4e2aa8c84cf8
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428203"
+ms.lasthandoff: 01/05/2019
+ms.locfileid: "54058175"
 ---
 # <a name="static-content-hosting-pattern"></a>Padrão de Hospedagem de Conteúdo Estático
-
-[!INCLUDE [header](../_includes/header.md)]
 
 Implante conteúdo estático em um serviço de armazenamento baseado em nuvem que pode enviá-lo diretamente para o cliente. Isso pode reduzir a necessidade de instâncias de computação potencialmente caras.
 
@@ -26,11 +21,11 @@ Implante conteúdo estático em um serviço de armazenamento baseado em nuvem qu
 
 Aplicativos Web geralmente incluem alguns elementos de conteúdo estático. Este conteúdo estático pode incluir páginas HTML e outros recursos como imagens e documentos que estão disponíveis para o cliente, como parte de uma página HTML (tal como imagens embutidas, folhas de estilo e arquivos JavaScript do lado do cliente) ou como downloads separados (como documentos PDF).
 
-Embora os servidores Web estejam bem ajustados para otimizar as solicitações por meio da execução de código de página dinâmica e cache de saída eficientes, eles ainda precisarão lidar com as solicitações para baixar conteúdo estático. Isso consome ciclos de processamento que muitas vezes poderiam ser melhor usados em outros locais.
+Embora os servidores Web sejam otimizados para renderização dinâmica e cache de saída, eles ainda precisarão lidar com solicitações para fazer o download de conteúdo estático. Isso consome ciclos de processamento que muitas vezes poderiam ser melhor usados em outros locais.
 
 ## <a name="solution"></a>Solução
 
-Na maioria dos ambientes de hospedagem em nuvem, é possível minimizar a necessidade de instâncias de computação (por exemplo, usar uma instância menor ou menos instâncias) colocando algumas das páginas estáticas e recursos de um aplicativo em um serviço de armazenamento. O custo do armazenamento hospedado em nuvem normalmente é muito menor que o de instâncias de computação.
+Na maioria dos ambientes de hospedagem em nuvem, você pode colocar alguns dos recursos e páginas estáticas do aplicativo em um serviço de armazenamento. O serviço de armazenamento pode atender solicitações para esses recursos, reduzindo a carga nos recursos de computação que lidam com outras solicitações da Web. O custo do armazenamento hospedado em nuvem normalmente é muito menor que o de instâncias de computação.
 
 Ao hospedar algumas partes de um aplicativo em um serviço de armazenamento, as principais considerações estão relacionadas à implantação do aplicativo e à proteção de recursos que não devem estar disponíveis para os usuários anônimos.
 
@@ -44,11 +39,13 @@ Considere os seguintes pontos ao decidir como implementar esse padrão:
 
 - Geralmente, as contas de armazenamento são replicados geograficamente por padrão para oferecer resiliência contra eventos que podem afetar um data center. Isso significa que o endereço IP pode mudar, mas a URL permanecerá a mesma.
 
-- Quando parte do conteúdo está localizado em uma conta de armazenamento e outras partes do conteúdo estão em uma instância de computação hospedada, é mais difícil de implantar um aplicativo e atualizá-lo. Pode ser necessário executar implantações separadas e controlar a versão do aplicativo e do conteúdo para gerenciá-la mais facilmente &mdash; especialmente quando o conteúdo estático inclui arquivos de script ou componentes de interface do usuário. No entanto, se apenas recursos estáticos devem ser atualizados, eles podem simplesmente ser carregados para a conta de armazenamento sem precisar reimplantar o pacote de aplicativos.
+- Quando parte do conteúdo está localizado em uma conta de armazenamento e outras partes do conteúdo estão em uma instância de computação hospedada, é mais difícil implantar e atualizar o aplicativo. Pode ser necessário executar implantações separadas e controlar a versão do aplicativo e do conteúdo para gerenciá-la mais facilmente &mdash; especialmente quando o conteúdo estático inclui arquivos de script ou componentes de interface do usuário. No entanto, se apenas recursos estáticos devem ser atualizados, eles podem simplesmente ser carregados para a conta de armazenamento sem precisar reimplantar o pacote de aplicativos.
 
 - Os serviços de armazenamento podem não dar suporte ao uso de nomes de domínio personalizados. Nesse caso é necessário especificar a URL completa dos recursos nos links porque eles estarão em um domínio diferente do conteúdo gerado dinamicamente que contém os links.
 
-- Os contêineres de armazenamento devem ser configurados para acesso de leitura público, mas é essencial garantir que eles não estejam configurados para acesso de gravação público para impedir que os usuários possam carregar o conteúdo. Considere usar uma chave de manobrista ou token para controlar o acesso aos recursos que não devem estar disponíveis anonimamente &mdash; consulte o [Padrão de Valet Key](valet-key.md) para obter mais informações.
+- Os contêineres de armazenamento devem ser configurados para acesso de leitura público, mas é essencial garantir que eles não estejam configurados para acesso de gravação público para impedir que os usuários possam carregar o conteúdo.
+
+- Considere usar uma chave limitada ou token para controlar o acesso aos recursos que não devem estar disponíveis anonimamente. Confira o [padrão de Chave Limitada](./valet-key.md) para ver mais informações.
 
 ## <a name="when-to-use-this-pattern"></a>Quando usar esse padrão
 
@@ -72,30 +69,15 @@ Esse padrão pode não ser útil nas seguintes situações:
 
 ## <a name="example"></a>Exemplo
 
-O conteúdo estático localizado no armazenamento de Blobs do Azure pode ser acessado diretamente por um navegador da Web. O Azure fornece uma interface baseada em HTTP para o armazenamento que pode ser exposto publicamente para os clientes. Por exemplo, o conteúdo em um contêiner de armazenamento de Blobs do Azure é exposto usando uma URL com o seguinte formato:
+O Armazenamento do Azure dá suporte ao fornecimento de conteúdo estático diretamente de um contêiner de armazenamento. Os arquivos são atendidos por meio de solicitações de acesso anônimo. Por padrão, os arquivos têm uma URL em um subdomínio `core.windows.net`, como `https://contoso.z4.web.core.windows.net/image.png`. Você pode configurar um nome de domínio personalizado e usar a CDN do Azure para acessar os arquivos por HTTPS. Para mais informações, confira [Hospedagem de site estático no Armazenamento do Azure](/azure/storage/blobs/storage-blob-static-website).
 
-`https://[ storage-account-name ].blob.core.windows.net/[ container-name ]/[ file-name ]`
+![Distribuição de partes estáticas de um aplicativo diretamente de um serviço de armazenamento](./_images/static-content-hosting-pattern.png)
 
+A hospedagem de site estático torna os arquivos disponíveis para acesso anônimo. Se precisar controlar quem pode acessar os arquivos, você pode armazenar arquivos no armazenamento de blogs do Azure e, em seguida, gerar [assinaturas de acesso compartilhado](/azure/storage/common/storage-dotnet-shared-access-signature-part-1) para limitar o acesso.
 
-Ao carregar o conteúdo, é necessário criar um ou mais contêineres de blob para conter os arquivos e documentos. Observe que a permissão padrão para um novo contêiner é Privado e você deve alterar isso para Público para permitir que os clientes acessem o conteúdo. Se for necessário proteger o conteúdo do acesso anônimo, você poderá implementar o [padrão de Chave de Manobrista](valet-key.md) para que os usuários precisem apresentar um token válido para baixar os recursos.
+Os links nas páginas distribuídas para o cliente devem especificar a URL completa do recurso. Se o recurso estiver protegido por uma chave limitada, como uma assinatura de acesso compartilhado do Azure, essa assinatura deverá ser incluída na URL.
 
-> Os [Conceitos do Serviço Blob](https://msdn.microsoft.com/library/azure/dd179376.aspx) trazem informações sobre o armazenamento de blobs e as maneiras para acessá-los e usá-los.
-
-Os links em cada página especificam a URL do recurso e o cliente irá acessá-la diretamente do serviço de armazenamento. A figura ilustra a distribuição de partes estáticas de um aplicativo diretamente de um serviço de armazenamento.
-
-![Figura 1 – Distribuição de partes estáticas de um aplicativo diretamente de um serviço de armazenamento](./_images/static-content-hosting-pattern.png)
-
-
-Os links nas páginas distribuídas para o cliente devem especificar a URL completa do contêiner e recursos de blobs. Por exemplo, uma página que contém um link para uma imagem em um contêiner público pode conter o seguinte HTML.
-
-```html
-<img src="https://mystorageaccount.blob.core.windows.net/myresources/image1.png"
-     alt="My image" />
-```
-
-> Se os recursos forem protegidos usando uma chave de manobrista, como uma assinatura de acesso compartilhado do Azure, essa assinatura deverá ser incluída nas URLs nos links.
-
-Uma solução chamada StaticContentHosting que demonstra o uso do armazenamento externo para recursos estáticos está disponível no [GitHub](https://github.com/mspnp/cloud-design-patterns/tree/master/static-content-hosting). O projeto StaticContentHosting.Cloud contém arquivos de configuração que especificam a conta de armazenamento e o contêiner que retém o conteúdo estático.
+Um aplicativo de exemplo que demonstra o uso do armazenamento externo para recursos estáticos está disponível no [GitHub][sample-app]. Este exemplo usa arquivos de configuração que especificam a conta de armazenamento e o contêiner que retém o conteúdo estático.
 
 ```xml
 <Setting name="StaticContent.StorageConnectionString"
@@ -167,6 +149,8 @@ O arquivo Index.cshtml na pasta Views\Home contém um elemento de imagem que usa
 
 ## <a name="related-patterns-and-guidance"></a>Diretrizes e padrões relacionados
 
-- Um exemplo que demonstra esse padrão está disponível em [GitHub](https://github.com/mspnp/cloud-design-patterns/tree/master/static-content-hosting).
-- [Padrão de Chave de Manobrista](valet-key.md). Se os recursos de destino não devem estar disponíveis para usuários anônimos, é necessário implementar segurança no repositório que contém o conteúdo estático. Descreve como usar um token ou chave que fornece aos clientes acesso direto e restrito a determinado recurso ou serviço, tal como o serviço de armazenamento hospedado na nuvem.
-- [Conceitos do Serviço Blob](https://msdn.microsoft.com/library/azure/dd179376.aspx)
+- [Exemplo de hospedagem de conteúdo estático][sample-app]. Um aplicativo de exemplo que demonstra esse padrão.
+- [Padrão de Chave de Manobrista](./valet-key.md). Se os recursos de destino não estiverem disponíveis para usuários anônimos, use esse padrão para restringir o acesso direto.
+- [Aplicativo Web sem servidor no Azure](../reference-architectures/serverless/web-app.md). Uma arquitetura de referência que usa a hospedagem de site estático com o Azure Functions para implementar um aplicativo Web sem servidor.
+
+[sample-app]: https://github.com/mspnp/cloud-design-patterns/tree/master/static-content-hosting

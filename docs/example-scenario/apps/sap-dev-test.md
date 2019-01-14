@@ -3,14 +3,14 @@ title: Ambientes de desenvolvimento/teste para cargas de trabalho do SAP
 titleSuffix: Azure Example Scenarios
 description: Crie um ambiente de desenvolvimento/teste para cargas de trabalho do SAP.
 author: AndrewDibbins
-ms.date: 7/11/18
+ms.date: 07/11/2018
 ms.custom: fasttrack
-ms.openlocfilehash: 3f6c828e8757a3f82ad6972a8f21cd2fed629162
-ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
+ms.openlocfilehash: 9f9e8ec971373e4309703800c200ba2c62fe9a66
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/20/2018
-ms.locfileid: "53643961"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54111012"
 ---
 # <a name="devtest-environments-for-sap-workloads-on-azure"></a>Ambientes de desenvolvimento/teste para cargas de trabalho do SAP no Azure
 
@@ -31,12 +31,12 @@ Outros casos de uso relevantes incluem:
 
 ## <a name="architecture"></a>Arquitetura
 
-![Diagrama de arquitetura para ambientes de desenvolvimento/teste para cargas de trabalho do SAP](media/architecture-sap-dev-test.png)
+![Diagrama de arquitetura para ambientes de desenvolvimento/teste para cargas de trabalho do SAP](./media/architecture-sap-dev-test.png)
 
 Este cenário demonstra o provisionamento de um único banco de dados do sistema do SAP e o servidor de aplicativos SAP em uma única máquina virtual. O fluxo de dados neste cenário ocorre da seguinte forma:
 
 1. Os clientes usam a interface do usuário do SAP ou outras ferramentas de cliente (Excel, um navegador da Web ou outro aplicativo Web) para acessar o sistema SAP com base no Azure.
-2. A conectividade é fornecida por meio do uso do ExpressRoute estabelecido. A conexão do ExpressRoute é terminada no Azure no gateway do ExpressRoute. O tráfego de rede é roteado pelo gateway do ExpressRoute para a sub-rede do gateway e desta para a sub-rede spoke da camada de aplicativo (confira o [padrão hub-spoke][hub-spoke]) e por um Gateway de Segurança de Rede até a máquina virtual do aplicativo SAP.
+2. A conectividade é fornecida por meio do uso do ExpressRoute estabelecido. A conexão do ExpressRoute é terminada no Azure no gateway do ExpressRoute. O tráfego de rede é roteado pelo gateway do ExpressRoute para a sub-rede do gateway e desta para a sub-rede spoke da camada de aplicativo (confira a [topologia de rede hub-spoke][hub-spoke]) e por um Gateway de Segurança de Rede até a máquina virtual do aplicativo SAP.
 3. Os servidores de gerenciamento de identidade oferecem serviços de autenticação.
 4. A caixa de atalhos oferece recursos de gerenciamento local.
 
@@ -52,7 +52,7 @@ Este cenário demonstra o provisionamento de um único banco de dados do sistema
 
 ### <a name="availability"></a>Disponibilidade
 
- A Microsoft oferece um contrato de nível de serviço (SLA) para instância de VM individuais. Para saber mais informações sobre o contrato de nível de serviço do Microsoft Azure para máquinas virtuais consulte [SLA para máquinas virtuais](https://azure.microsoft.com/support/legal/sla/virtual-machines)
+A Microsoft oferece um contrato de nível de serviço (SLA) para instância de VM individuais. Para saber mais informações sobre o contrato de nível de serviço do Microsoft Azure para máquinas virtuais consulte [SLA para máquinas virtuais](https://azure.microsoft.com/support/legal/sla/virtual-machines)
 
 ### <a name="scalability"></a>Escalabilidade
 

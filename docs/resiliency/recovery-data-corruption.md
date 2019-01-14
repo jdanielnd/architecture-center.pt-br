@@ -1,16 +1,16 @@
 ---
 title: Recuperação de dados corrompidos ou exclusão acidental
-description: Artigo com noções básicas sobre como recuperar dados corrompidos ou de exclusão acidental e como criar aplicativos resilientes, altamente disponíveis, com tolerância a falhas, bem como planejamento de recuperação de desastres
+description: Noções básicas sobre como recuperar dados corrompidos ou de exclusão acidental e como criar aplicativos resilientes, altamente disponíveis, com tolerância a falhas, bem como planejamento de recuperação de desastres.
 author: MikeWasson
 ms.date: 11/11/2018
-ms.openlocfilehash: 1f3dd448ac6172727481c437fb8a113f25d83464
-ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
+ms.openlocfilehash: 40379f32c6af47002e897c28392816fa1578502a
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/02/2018
-ms.locfileid: "50916253"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54111250"
 ---
-# <a name="recover-from-data-corruption-or-accidental-deletion"></a>Recuperação de dados corrompidos ou exclusão acidental 
+# <a name="recover-from-data-corruption-or-accidental-deletion"></a>Recuperação de dados corrompidos ou exclusão acidental
 
 Parte de um plano robusto da continuidade de negócios é ter um plano, caso os dados sejam corrompidos ou excluídos acidentalmente. Veja a seguir informações sobre recuperação depois que dados forem corrompidos ou excluídos acidentalmente devido a erros do aplicativo ou do operador.
 
@@ -20,7 +20,7 @@ Para proteger as Máquinas Virtuais do Azure (VMs) de erros de aplicativo ou exc
 
 ## <a name="storage"></a>Armazenamento
 
-O Armazenamento do Azure fornece resiliência de dados por meio de réplicas automatizadas. No entanto, isso não impede que o código do aplicativo ou os usuários corrompam dados, seja acidental ou maliciosamente. Manter a fidelidade dos dados no caso de erro do usuário ou aplicativo requer técnicas mais avançadas, como copiar os dados para um local de armazenamento secundário com um log de auditoria. 
+O Armazenamento do Azure fornece resiliência de dados por meio de réplicas automatizadas. No entanto, isso não impede que o código do aplicativo ou os usuários corrompam dados, seja acidental ou maliciosamente. Manter a fidelidade dos dados no caso de erro do usuário ou aplicativo requer técnicas mais avançadas, como copiar os dados para um local de armazenamento secundário com um log de auditoria.
 
 - **Blobs de blocos**. Crie um instantâneo pontual de cada blob de blocos. Para obter mais informações, consulte [Criar um instantâneo de um blob](/rest/api/storageservices/creating-a-snapshot-of-a-blob). Para cada instantâneo, você é cobrado apenas pelo armazenamento necessário para armazenar as diferenças no blob desde o último estado do instantâneo. Os instantâneos são dependentes da existência do blob original nos quais se baseiam, portanto, uma operação de cópia para outro blob ou até mesmo outra conta de armazenamento é aconselhável. Isso garante que os dados de backup estejam adequadamente protegidos contra exclusão acidental. É possível usar [AzCopy](/azure/storage/common/storage-use-azcopy) ou [Azure PowerShell](/azure/storage/common/storage-powershell-guide-full) para copiar os blobs para outra conta de armazenamento.
 
@@ -30,7 +30,7 @@ O Armazenamento do Azure fornece resiliência de dados por meio de réplicas aut
 
 ## <a name="database"></a>Banco de dados
 
-### <a name="azure-sql-database"></a>Banco de Dados SQL do Azure 
+### <a name="azure-sql-database"></a>Banco de Dados SQL do Azure
 
 O Banco de Dados SQL executa automaticamente uma combinação de backups de banco de dados semanais, backups de bancos de dados diferenciais por hora e backups de logs de transação a cada cinco a dez minutos para proteger sua empresa contra a perda de dados. Use a restauração pontual para restaurar um banco de dados para um momento anterior. Para obter mais informações, consulte:
 
@@ -46,11 +46,10 @@ Para o SQL Server em execução em VMs, há duas opções: backups tradicionais 
 
 O Azure Cosmos DB faz backups automaticamente em intervalos regulares. Os backups são armazenados separadamente em outro serviço de armazenamento, e esses backups são replicados globalmente para resiliência contra desastres regionais. Caso exclua seu banco de dados ou coleção acidentalmente, é possível criar um tíquete de suporte ou ligar para o suporte do Azure a fim de restaurar os dados usando o último backup automático. Para obter mais informações, consulte [Backup e restauração online automáticos com o Azure Cosmos DB](/azure/cosmos-db/online-backup-and-restore).
 
-### <a name="azure-database-for-mysql-azure-database-for-postresql"></a>Banco de Dados do Azure para MySQL, Banco de Dados do Azure para PostreSQL
+### <a name="azure-database-for-mysql-azure-database-for-postgresql"></a>Banco de Dados do Azure para MySQL, Banco de Dados do Azure para PostgreSQL
 
-Ao usar o Banco de Dados do Azure para MySQL ou o Banco de Dados para PostreSQL, o serviço banco de dados faz um backup do serviço automaticamente a cada cinco minutos. Com esse recurso de backup automático você pode restaurar o servidor e todos os seus bancos de dados em um novo servidor em um ponto anterior no tempo. Para obter mais informações, consulte:
+Ao usar o Banco de Dados do Azure para MySQL ou o Banco de Dados do Azure para PostgreSQL, o serviço banco de dados faz um backup do serviço automaticamente a cada cinco minutos. Com esse recurso de backup automático você pode restaurar o servidor e todos os seus bancos de dados em um novo servidor em um ponto anterior no tempo. Para obter mais informações, consulte:
 
 - [Como fazer backup e restaurar um servidor no Banco de Dados do Azure para MySQL usando o portal do Azure](/azure/mysql/howto-restore-server-portal)
 
 - [Como fazer backup e restaurar um servidor no Banco de Dados do Azure para PostgreSQL usando o portal do Azure](/azure/postgresql/howto-restore-server-portal)
-

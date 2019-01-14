@@ -1,17 +1,17 @@
 ---
 title: Inscrição e integração de locatário em aplicativos multilocatário
-description: Como integrar locatários em um aplicativo multilocatário
+description: Como integrar locatários em um aplicativo multilocatário.
 author: MikeWasson
 ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: claims
 pnp.series.next: app-roles
-ms.openlocfilehash: 541a4dd9abb2168eef4a60a0ec99e1e7c06049b5
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: d112cb65e3cd8bae7b273a974bf8e5d2b04aff8a
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902469"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54112712"
 ---
 # <a name="tenant-sign-up-and-onboarding"></a>Inscrição e integração de locatário
 
@@ -25,6 +25,7 @@ Há várias razões para implementar um processo de inscrição:
 * Executar a instalação avulsa por locatário que venha a ser necessária para seu aplicativo.
 
 ## <a name="admin-consent-and-azure-ad-permissions"></a>Consentimento do administrador e permissões do Azure AD
+
 Para autenticar com o Azure AD, o aplicativo precisa acessar o diretório do usuário. O aplicativo precisa, no mínimo, de permissão para ler o perfil do usuário. Na primeira vez que um usuário fizer logon, o Azure AD mostrará uma página de consentimento que lista as permissões que estão sendo solicitadas. Ao clicar em **Aceitar**, o usuário concederá permissão para o aplicativo.
 
 Por padrão, o consentimento é concedido baseado em cada usuário. Todos os usuários que entrarem verão a página de consentimento. No entanto, o Azure AD também dá suporte ao *consentimento do administrador*, que permite a um administrador do AD dar consentimentos em nome de toda a organização.
@@ -39,9 +40,10 @@ Somente um administrador do AD pode dar consentimento de administrador, já que 
 
 ![Erro de consentimento](./images/consent-error.png)
 
-Se o aplicativo exigir permissões adicionais em um momento posterior, o cliente precisará se inscrever novamente e concordar com as permissões atualizadas.  
+Se o aplicativo exigir permissões adicionais em um momento posterior, o cliente precisará se inscrever novamente e concordar com as permissões atualizadas.
 
 ## <a name="implementing-tenant-sign-up"></a>Implementando a inscrição de locatário
+
 Para o aplicativo [Tailspin Surveys][Tailspin], definimos diversos requisitos para o processo de inscrição:
 
 * Um locatário deve se inscrever antes dos usuários poderem entrar.
@@ -58,7 +60,7 @@ Quando um usuário anônimo visita o aplicativo Surveys, o usuário vê dois bot
 
 Esses botões invocam ações na classe `AccountController`.
 
-A ação `SignIn` retorna um **ChallegeResult**, que faz com que o middleware OpenID Connect redirecione para o ponto de extremidade de autenticação. Essa é a maneira padrão de disparar a autenticação no ASP.NET Core.  
+A ação `SignIn` retorna um **ChallegeResult**, que faz com que o middleware OpenID Connect redirecione para o ponto de extremidade de autenticação. Essa é a maneira padrão de disparar a autenticação no ASP.NET Core.
 
 ```csharp
 [AllowAnonymous]
@@ -92,7 +94,7 @@ public IActionResult SignUp()
 
 Como `SignIn`, a ação `SignUp` também retorna um `ChallengeResult`. Mas, dessa vez, vamos adicionar uma parte das informações de estado às `AuthenticationProperties` in the `ChallengeResult`:
 
-* inscrição: um sinalizador booliano indicando que o usuário iniciou o processo de inscrição.
+* inscrever-se: um sinalizador booliano indicando que o usuário iniciou o processo de inscrição.
 
 As informações de estado em `AuthenticationProperties` são adicionadas ao parâmetro [state] do OpenID Connect, que vai e volta durante o fluxo de autenticação.
 
@@ -101,11 +103,16 @@ As informações de estado em `AuthenticationProperties` são adicionadas ao par
 Depois que o usuário é autenticado no Azure AD e é redirecionado ao aplicativo, o tíquete de autenticação contém o estado. Estamos usando isso para fazer com que o valor "inscrição" persista durante todo o fluxo de autenticação.
 
 ## <a name="adding-the-admin-consent-prompt"></a>Adicionando a solicitação de consentimento do administrador
+
 No Azure AD, o fluxo de consentimento do administrador é disparado com a adição de um parâmetro "prompt" à cadeia de caracteres de consulta na solicitação de autenticação:
+
+<!-- markdownlint-disable MD040 -->
 
 ```
 /authorize?prompt=admin_consent&...
 ```
+
+<!-- markdownlint-enable MD040 -->
 
 O aplicativo Surveys adiciona o prompt durante o evento `RedirectToAuthenticationEndpoint` . Esse evento é chamado momentos antes do middleware redirecionar para o ponto de extremidade de autenticação.
 
@@ -122,7 +129,7 @@ public override Task RedirectToAuthenticationEndpoint(RedirectContext context)
 }
 ```
 
-A definição de` ProtocolMessage.Prompt` ordena ao middleware que adicione o parâmetro "prompt" à solicitação de autenticação.
+A definição de `ProtocolMessage.Prompt` ordena ao middleware que adicione o parâmetro "prompt" à solicitação de autenticação.
 
 Observe que o prompt é necessário somente durante a inscrição. O logon normal não deve incluí-lo. Para distinguir entre eles, verificamos o valor `signup` no estado de autenticação. O seguinte método de extensão verifica essa condição:
 
@@ -143,7 +150,8 @@ internal static bool IsSigningUp(this BaseControlContext context)
     bool isSigningUp;
     if (!bool.TryParse(signupValue, out isSigningUp))
     {
-        // The value for signup is not a valid boolean, throw                
+        // The value for signup is not a valid boolean, throw
+
         throw new InvalidOperationException($"'{signupValue}' is an invalid boolean value");
     }
 
@@ -152,6 +160,7 @@ internal static bool IsSigningUp(this BaseControlContext context)
 ```
 
 ## <a name="registering-a-tenant"></a>Registrando um locatário
+
 O aplicativo Surveys armazena algumas informações sobre cada locatário e usuário no banco de dados do aplicativo.
 
 ![Tabela de locatário](./images/tenant-table.png)
@@ -255,7 +264,8 @@ Veja um resumo de todo o fluxo de inscrição no aplicativo Surveys:
 
 [**Avançar**][app roles]
 
-<!-- Links -->
+<!-- links -->
+
 [app roles]: app-roles.md
 [Tailspin]: tailspin.md
 

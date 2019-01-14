@@ -1,14 +1,14 @@
 ---
 title: Usar um objeto como um parâmetro em um modelo do Azure Resource Manager
-description: Descreve como estender a funcionalidade dos modelos do Azure Resource Manager para usar objetos como parâmetros
+description: Descreve como estender a funcionalidade dos modelos do Azure Resource Manager para usar objetos como parâmetros.
 author: petertay
 ms.date: 10/30/2018
-ms.openlocfilehash: c1955823b3474efa0abea1d9634add5f13d02eda
-ms.sourcegitcommit: e9eb2b895037da0633ef3ccebdea2fcce047620f
+ms.openlocfilehash: f0826d8ed1ce446d295ebdacc66d8b0bef0b0dec
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/30/2018
-ms.locfileid: "50251882"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54111199"
 ---
 # <a name="use-an-object-as-a-parameter-in-an-azure-resource-manager-template"></a>Usar um objeto como um parâmetro em um modelo do Azure Resource Manager
 
@@ -24,10 +24,11 @@ Vamos dar uma olhada em um exemplo que implanta um recurso de rede virtual. Prim
     "VNetSettings":{"type":"object"}
 },
 ```
+
 Em seguida, vamos fornecer valores para o objeto `VNetSettings`:
 
 > [!NOTE]
-> Para saber como fornecer valores de parâmetro durante a implantação, veja a seção **Parâmetros** do artigo [Noções básicas sobre a estrutura e a sintaxe dos modelos do Azure Resource Manager][azure-resource-manager-authoring-templates]. 
+> Para saber como fornecer valores de parâmetro durante a implantação, veja a seção **Parâmetros** do artigo [Noções básicas sobre a estrutura e a sintaxe dos modelos do Azure Resource Manager][azure-resource-manager-authoring-templates].
 
 ```json
 "parameters":{
@@ -91,9 +92,10 @@ Agora vamos dar uma olhada no restante do nosso modelo para ver como o objeto `V
     }
   ]
 ```
-Os valores de nosso objeto `VNetSettings` são aplicadas para as propriedades solicitadas por nossos recursos de rede virtual usando a função `parameters()` com ambos os índices de matriz do `[]` e o operador ponto. Essa abordagem funcionará se você simplesmente quiser aplicar estaticamente os valores do objeto do parâmetro ao recurso. No entanto, se você deseja atribuir uma matriz de valores de propriedade dinamicamente durante a implantação usar um [loop de cópia][azure-resource-manager-create-multiple-instances]. Para usar um loop de cópia, você fornece uma matriz JSON dos valores de propriedade de recurso e o loop de cópia aplica dinamicamente os valores às propriedades do recurso. 
 
-Há um problema do qual você deve estar ciente caso use a abordagem dinâmica. Para demonstrar o problema, vamos dar uma olhada em uma matriz típica de valores de propriedade. Neste exemplo, os valores das nossas propriedades são armazenados em uma variável. Observe que temos duas matrizes aqui&mdash;uma chamada `firstProperty` e outra chamada `secondProperty`. 
+Os valores de nosso objeto `VNetSettings` são aplicadas para as propriedades solicitadas por nossos recursos de rede virtual usando a função `parameters()` com ambos os índices de matriz do `[]` e o operador ponto. Essa abordagem funcionará se você simplesmente quiser aplicar estaticamente os valores do objeto do parâmetro ao recurso. No entanto, se você deseja atribuir uma matriz de valores de propriedade dinamicamente durante a implantação usar um [loop de cópia][azure-resource-manager-create-multiple-instances]. Para usar um loop de cópia, você fornece uma matriz JSON dos valores de propriedade de recurso e o loop de cópia aplica dinamicamente os valores às propriedades do recurso.
+
+Há um problema do qual você deve estar ciente caso use a abordagem dinâmica. Para demonstrar o problema, vamos dar uma olhada em uma matriz típica de valores de propriedade. Neste exemplo, os valores das nossas propriedades são armazenados em uma variável. Observe que temos duas matrizes aqui&mdash;uma chamada `firstProperty` e outra chamada `secondProperty`.
 
 ```json
 "variables": {
@@ -166,9 +168,9 @@ Você notou o terceiro elemento na matriz? A propriedade `number` está ausente,
 
 ## <a name="using-a-property-object-in-a-copy-loop"></a>Uso de um objeto de propriedade em um loop de cópia
 
-Essa abordagem é ainda mais útil quando combinada a [serial copy loop][azure-resource-manager-create-multiple], principalmente para implantar os recursos filhos. 
+Essa abordagem é ainda mais útil quando combinada a [serial copy loop][azure-resource-manager-create-multiple], principalmente para implantar os recursos filhos.
 
-Para demonstrar isso, vamos dar uma olhada em um modelo que implante um [grupo de segurança de rede (NSG)][nsg] com duas regras de segurança. 
+Para demonstrar isso, vamos dar uma olhada em um modelo que implante um [grupo de segurança de rede (NSG)][nsg] com duas regras de segurança.
 
 Primeiro, vamos dar uma olhada no nosso parâmetros. Quando examinamos nosso modelo, veremos que definimos um parâmetro denominado `networkSecurityGroupsSettings`, que inclui uma matriz chamada `securityRules`. Essa matriz contém dois objetos JSON que especificam um número de configurações para uma regra de segurança.
 
@@ -176,7 +178,7 @@ Primeiro, vamos dar uma olhada no nosso parâmetros. Quando examinamos nosso mod
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
-    "parameters":{ 
+    "parameters":{
       "networkSecurityGroupsSettings": {
       "value": {
           "securityRules": [
@@ -249,7 +251,7 @@ Agora vamos dar uma olhada no nosso modelo. Nosso primeiro recurso chamado `NSG1
                 "resources": [],
                 "outputs": {}
             }
-        }       
+        }
     },
     {
         "apiVersion": "2015-01-01",
@@ -292,12 +294,12 @@ Agora vamos dar uma olhada no nosso modelo. Nosso primeiro recurso chamado `NSG1
           }
         }
     }
-  ],          
+  ],
   "outputs": {}
 }
 ```
 
-Vamos examinar mais detalhadamente como podemos especificar os valores de propriedade no recurso filho `securityRules`. Todas as nossas propriedades são referenciadas usando a função `parameter()` e, em seguida, use o operador ponto para fazer referência à nossa matriz `securityRules` indexada pelo valor atual da iteração. Por fim, usamos outro operador de ponto para fazer referência ao nome do objeto. 
+Vamos examinar mais detalhadamente como podemos especificar os valores de propriedade no recurso filho `securityRules`. Todas as nossas propriedades são referenciadas usando a função `parameter()` e, em seguida, use o operador ponto para fazer referência à nossa matriz `securityRules` indexada pelo valor atual da iteração. Por fim, usamos outro operador de ponto para fazer referência ao nome do objeto.
 
 ## <a name="try-the-template"></a>Experimentar o modelo
 
@@ -316,8 +318,8 @@ az group deployment create -g <resource-group-name> \
 
 - Saiba como criar um modelo que itera por meio de uma matriz de objetos e os transforma em um esquema JSON. Confira [Implementar um transformador de propriedade e um coletor em um modelo do Azure Resource Manager](./collector.md)
 
-
 <!-- links -->
+
 [azure-resource-manager-authoring-templates]: /azure/azure-resource-manager/resource-group-authoring-templates
 [azure-resource-manager-create-template]: /azure/azure-resource-manager/resource-manager-create-first-template
 [azure-resource-manager-create-multiple-instances]: /azure/azure-resource-manager/resource-group-create-multiple

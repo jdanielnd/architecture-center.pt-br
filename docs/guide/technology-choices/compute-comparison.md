@@ -1,20 +1,24 @@
 ---
 title: Critérios para escolher um serviço de computação do Azure
-description: Compare os serviços de computação do Azure entre diversos eixos
+titleSuffix: Azure Application Architecture Guide
+description: Compare os serviços de computação do Azure entre diversos eixos.
 author: MikeWasson
 ms.date: 08/08/2018
-ms.openlocfilehash: dbd5314c4c77e83f5b45ef0b49e83860479c8f92
-ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
+ms.custom: seojan19
+ms.openlocfilehash: 4874e68d6ac1b9bac2bc1e4d2ac3c8c2f1a428d6
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/02/2018
-ms.locfileid: "50916356"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54112236"
 ---
 # <a name="criteria-for-choosing-an-azure-compute-service"></a>Critérios para escolher um serviço de computação do Azure
 
 O termo *computação* refere-se ao modelo de hospedagem para os recursos de computação em que seus aplicativos são executados. As tabelas a seguir comparam os serviços de computação do Azure entre diversos eixos. Consulte estas tabelas ao selecionar uma opção de computação para seu aplicativo.
 
 ## <a name="hosting-model"></a>Modelo de hospedagem
+
+<!-- markdownlint-disable MD033 -->
 
 | Critérios | Máquinas Virtuais | Serviço de Aplicativo | Service Fabric | Funções do Azure | Serviço de Kubernetes do Azure | Instâncias de Contêiner | Lote do Azure |
 |----------|-----------------|-------------|----------------|-----------------|-------------------------|----------------|-------------|
@@ -47,8 +51,7 @@ Observações
 Observações
 
 1. <span id="note1b">As opções incluem o IIS Express para ASP.NET ou node.js (iisnode); servidor Web PHP; Kit de Ferramentas do Azure para IntelliJ, Kit de Ferramentas do Azure para Eclipse. O Serviço de Aplicativo também dá suporte para depuração remota de aplicativo Web implantado.</span>
-2. <span id="note2b">Consulte [Provedores, regiões, versões de API e esquemas do Resource Manager][resource-manager-supported-services].</span> 
-
+2. <span id="note2b">Consulte [Provedores, regiões, versões de API e esquemas do Resource Manager][resource-manager-supported-services].</span>
 
 ## <a name="scalability"></a>Escalabilidade
 
@@ -67,7 +70,7 @@ Observações
 | Critérios | Máquinas Virtuais | Serviço de Aplicativo | Service Fabric | Funções do Azure | Serviço de Kubernetes do Azure | Instâncias de Contêiner | Lote do Azure |
 |----------|-----------------|-------------|----------------|-----------------|-------------------------|----------------|-------------|
 | Contrato de Nível de Serviço | [SLA para Máquinas Virtuais][sla-vm] | [SLA para Serviço de Aplicativo][sla-app-service] | [SLA para Service Fabric][sla-sf] | [SLA para Functions][sla-functions] | [SLA para AKS][sla-acs] | [SLA para as Instâncias de Contêiner](https://azure.microsoft.com/support/legal/sla/container-instances/) | [SLA para o Lote do Azure][sla-batch] |
-| Failover de várias regiões | Gerenciador de tráfego | Gerenciador de tráfego | Gerenciador de tráfego, Cluster de Várias Regiões | Sem suporte  | Gerenciador de tráfego | Sem suporte | Sem suporte |
+| Failover de várias regiões | Gerenciador de tráfego | Gerenciador de tráfego | Gerenciador de tráfego, Cluster de Várias Regiões | Sem suporte | Gerenciador de tráfego | Sem suporte | Sem suporte |
 
 ## <a name="other"></a>Outros
 
@@ -76,6 +79,8 @@ Observações
 | SSL | Configurado na VM | Com suporte | Com suporte  | Com suporte | [Controlador de entrada](/azure/aks/ingress) | Usar contêiner [sidecar](../../patterns/sidecar.md) | Com suporte |
 | Custo | [Windows][cost-windows-vm], [Linux][cost-linux-vm] | [Preços do Serviço de Aplicativo][cost-app-service] | [Preços do Service Fabric][cost-service-fabric] | [Preços do Azure Functions][cost-functions] | [Preços do AKS][cost-acs] | [Preço das Instâncias de Contêiner](https://azure.microsoft.com/pricing/details/container-instances/) | [Preço do Lote do Azure][cost-batch]
 | Estilos de arquitetura adequados | [N camadas][n-tier], [Big compute] [ big-compute] (HPC) | [Trabalhado de Fila da Web][w-q-w], [N Camadas][n-tier] | [Microsserviços][microservices], [arquitetura orientada a eventos][event-driven] | [Microsserviços][microservices], [arquitetura orientada a eventos][event-driven] | [Microsserviços][microservices], [arquitetura orientada a eventos][event-driven] | [Microsserviços][microservices], automação de tarefas, trabalhos em lotes  | [Big compute][big-compute] (HPC) |
+
+<!-- markdownlint-enable MD033 -->
 
 [cost-linux-vm]: https://azure.microsoft.com/pricing/details/virtual-machines/linux/
 [cost-windows-vm]: https://azure.microsoft.com/pricing/details/virtual-machines/windows/

@@ -3,18 +3,18 @@ title: Processamento em tempo real
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: ccd098ab0d5393231eeb26eb1c56c52cdcb78fbe
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 75b52ae9bf7419b451084bb1a1eaf0984258433c
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52901602"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113902"
 ---
 # <a name="real-time-processing"></a>Processamento em tempo real
 
 O processamento em tempo real lida com fluxos de dados que são capturados em tempo real e processados com latência mínima para gerar relatórios em tempo real (ou quase em tempo real) ou respostas automatizadas. Por exemplo, uma solução de monitoramento de tráfego em tempo real pode usar dados de sensor para detectar grandes volumes de tráfego. Esses dados podem ser usados para atualizar um mapa dinamicamente para mostrar o congestionamento ou iniciar automaticamente faixas de ocupação alta ou outros sistemas de gerenciamento de tráfego.
 
-![](./images/real-time-pipeline.png)
+![Diagrama de um pipeline de processamento em tempo real](./images/real-time-pipeline.png)
 
 O processamento em tempo real é definido como o processamento de fluxo não associado de dados de entrada, com requisitos de latência muito curta para o processamento &mdash; medido em milissegundos ou segundos. Normalmente, esses dados de entrada são recebidos em um formato não estruturado ou semiestruturado, como JSON, e têm os mesmos requisitos de processamento do [processamento em lotes](./batch-processing.md), mas com tempos de retorno mais curtos para dar suporte ao consumo em tempo real.
 
@@ -32,9 +32,9 @@ Uma arquitetura de processamento em tempo real contém os componentes lógicos a
 
 - **Processamento de fluxo.** Depois de capturar mensagens em tempo real, a solução precisa processá-las filtrando, agregando e preparando os dados para análise.
 
-- **Armazenamento de dados analíticos.** Muitas soluções de Big Data foram projetadas para preparar dados para análise e então fornecer os dados processados em um formato estruturado que pode ser consultado com ferramentas analíticas. 
+- **Armazenamento de dados analíticos.** Muitas soluções de Big Data foram projetadas para preparar dados para análise e então fornecer os dados processados em um formato estruturado que pode ser consultado com ferramentas analíticas.
 
-- **Análise e relatórios.** A meta da maioria das soluções de Big Data é gerar insights sobre os dados por meio de análise e relatórios. 
+- **Análise e relatórios.** A meta da maioria das soluções de Big Data é gerar insights sobre os dados por meio de análise e relatórios.
 
 ## <a name="technology-choices"></a>Opções de tecnologia
 

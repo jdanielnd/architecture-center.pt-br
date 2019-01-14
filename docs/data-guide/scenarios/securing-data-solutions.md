@@ -3,12 +3,12 @@ title: Protegendo soluções de dados
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: 453897d1dde205ec8eb094df06ec66da43f7de7b
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 47e3be2afd14d980b98ac9659f7f1e5a4df3403f
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52901636"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54110868"
 ---
 # <a name="securing-data-solutions"></a>Protegendo soluções de dados
 
@@ -16,9 +16,9 @@ Para muitos, tornar os dados acessíveis na nuvem, especialmente ao realizar a t
 
 ## <a name="challenges"></a>Desafios
 
-* Centralizar o monitoramento e a análise de eventos de segurança armazenados em vários logs.
-* Implementar o gerenciamento de criptografia e autorização em aplicativos e serviços.
-* Garantir que o gerenciamento centralizado de identidade funciona em todos os componentes da solução, sejam locais ou na nuvem.
+- Centralizar o monitoramento e a análise de eventos de segurança armazenados em vários logs.
+- Implementar o gerenciamento de criptografia e autorização em aplicativos e serviços.
+- Garantir que o gerenciamento centralizado de identidade funciona em todos os componentes da solução, sejam locais ou na nuvem.
 
 ## <a name="data-protection"></a>Proteção de dados
 
@@ -26,8 +26,8 @@ A primeira etapa para a proteção de informações é identificar o que protege
 
 Depois que os dados que você precisa proteger forem identificados, considere como você protegerá os dados *em repouso* e os dados *em trânsito*.
 
-* **Dados em repouso**: dados que existem estaticamente em uma mídia física, seja magnética ou óptica, local ou na nuvem.
-* **Dados em trânsito**: dados no momento de sua transferência entre componentes, locais ou programas, como pela rede, em um barramento de serviço (do local para a nuvem e vice-versa) ou durante um processo de entrada/saída.
+- **Dados em repouso**: dados que existem estaticamente em uma mídia física, seja magnética ou óptica, no local ou na nuvem.
+- **Dados em trânsito**: dados no momento de sua transferência entre componentes, locais ou programas, como pela rede, em um barramento de serviço (do local para a nuvem e vice-versa) ou durante um processo de entrada/saída.
 
 Para saber mais sobre como proteger seus dados em repouso ou em trânsito, consulte [Melhores práticas de segurança de dados e criptografia do Azure](/azure/security/azure-security-data-encryption-best-practices).
 
@@ -35,14 +35,14 @@ Para saber mais sobre como proteger seus dados em repouso ou em trânsito, consu
 
 Um aspecto central da proteção dos dados na nuvem é uma combinação de gerenciamento de identidade e controle de acesso. Considerando a variedade e o tipo de serviços de nuvem, bem como a crescente popularidade da [nuvem híbrida](../scenarios/hybrid-on-premises-and-cloud.md), há várias práticas fundamentais que você deve seguir quando se trata de identidade e controle de acesso:
 
-* Centralizar o gerenciamento de identidade.
-* Habilitar o SSO (Logon Único).
-* Implantar o gerenciamento de senhas.
-* Impor o MFA (autenticação multifator) para usuários.
-* Usar o RBAC (controle de acesso baseado em função).
-* Políticas de Acesso Condicional devem ser configuradas, o que aprimora o conceito clássico de identidade do usuário com propriedades adicionais relacionadas ao local do usuário, tipo de dispositivo, nível de patch e assim por diante.
-* Controlar os locais em que os recursos são criados usando o gerenciador de recursos.
-* Monitorar ativamente as atividades suspeitas
+- Centralizar o gerenciamento de identidade.
+- Habilitar o SSO (Logon Único).
+- Implantar o gerenciamento de senhas.
+- Impor o MFA (autenticação multifator) para usuários.
+- Usar o RBAC (controle de acesso baseado em função).
+- Políticas de Acesso Condicional devem ser configuradas, o que aprimora o conceito clássico de identidade do usuário com propriedades adicionais relacionadas ao local do usuário, tipo de dispositivo, nível de patch e assim por diante.
+- Controlar os locais em que os recursos são criados usando o gerenciador de recursos.
+- Monitorar ativamente as atividades suspeitas
 
 Para obter mais informações, consulte [Melhores práticas do Azure Identity Management e segurança de controle de acesso](/azure/security/azure-security-identity-management-best-practices).
 
@@ -52,17 +52,15 @@ Além do monitoramento de identidade e acesso mencionado anteriormente, os servi
 
 Para obter mais informações, consulte [Log e auditoria do Azure](/azure/security/azure-log-audit).
 
-
-
 ## <a name="securing-data-solutions-in-azure"></a>Protegendo soluções de dados no Azure
 
 ### <a name="encryption"></a>Criptografia
 
-**Máquinas virtuais**. Use o [Azure Disk Encryption](/azure/security/azure-security-disk-encryption) para criptografar os discos anexados em VMs Windows ou Linux. Essa solução é integrada ao [Azure Key Vault](/azure/key-vault/) para controlar e gerenciar as chaves de criptografia de disco e os segredos. 
+**Máquinas virtuais**. Use o [Azure Disk Encryption](/azure/security/azure-security-disk-encryption) para criptografar os discos anexados em VMs Windows ou Linux. Essa solução é integrada ao [Azure Key Vault](/azure/key-vault/) para controlar e gerenciar as chaves de criptografia de disco e os segredos.
 
 **Armazenamento do Azure**. Use a [Criptografia de Serviço do Armazenamento do Azure](/azure/storage/common/storage-service-encryption) para criptografar dados em repouso automaticamente no Armazenamento do Azure. A criptografia, a descriptografia e o gerenciamento de chaves são totalmente transparentes para os usuários. Os dados também podem ser protegidos em trânsito por meio da criptografia do lado do cliente com o Azure Key Vault. Para obter mais informações, consulte [Criptografia do lado do cliente e Azure Key Vault para o Armazenamento do Microsoft Azure](/azure/storage/common/storage-client-side-encryption).
 
-**Banco de Dados SQL** e **SQL Data Warehouse do Azure**. Use a [TDE](/sql/relational-databases/security/encryption/transparent-data-encryption-azure-sql) (Transparent Data Encryption) para realizar a criptografia e descriptografia em tempo real de bancos de dados, backups associados e arquivos de log de transações, sem a necessidade de nenhuma alteração nos aplicativos. O Banco de Dados SQL também pode usar o [Always Encrypted](/azure/sql-database/sql-database-always-encrypted-azure-key-vault) para ajudar a proteger dados confidenciais em repouso no servidor, durante a movimentação entre o cliente e o servidor e enquanto os dados estiverem em uso. Use o Azure Key Vault para armazenar as chaves de criptografia do Always Encrypted. 
+**Banco de Dados SQL** e **SQL Data Warehouse do Azure**. Use a [TDE](/sql/relational-databases/security/encryption/transparent-data-encryption-azure-sql) (Transparent Data Encryption) para realizar a criptografia e descriptografia em tempo real de bancos de dados, backups associados e arquivos de log de transações, sem a necessidade de nenhuma alteração nos aplicativos. O Banco de Dados SQL também pode usar o [Always Encrypted](/azure/sql-database/sql-database-always-encrypted-azure-key-vault) para ajudar a proteger dados confidenciais em repouso no servidor, durante a movimentação entre o cliente e o servidor e enquanto os dados estiverem em uso. Use o Azure Key Vault para armazenar as chaves de criptografia do Always Encrypted.
 
 ### <a name="rights-management"></a>Gerenciamento de direitos
 
@@ -72,7 +70,7 @@ O [Azure Rights Management](/information-protection/understand-explore/what-is-a
 
 Use o [RBAC](/azure/active-directory/role-based-access-control-what-is) (Controle de Acesso Baseado em Função) para restringir o acesso aos recursos do Azure com base em funções de usuário. Caso esteja usando o Active Directory local, [sincronize com o Azure AD](/azure/active-directory/active-directory-hybrid-identity-design-considerations-directory-sync-requirements) para fornecer aos usuários uma identidade de nuvem com base em suas respectivas identidades locais.
 
-Use o [Acesso condicional no Azure Active Directory](/azure/active-directory/active-directory-conditional-access-azure-portal) para impor controles de acesso a aplicativos em seu ambiente de acordo com condições específicas. Por exemplo, a declaração da política pode assumir o seguinte formato: _Quando prestadores de serviço tentarem acessar nossos aplicativos de nuvem em redes não confiáveis, bloquear o acesso_. 
+Use o [Acesso condicional no Azure Active Directory](/azure/active-directory/active-directory-conditional-access-azure-portal) para impor controles de acesso a aplicativos em seu ambiente de acordo com condições específicas. Por exemplo, a declaração da política pode assumir a forma de: _Quando prestadores de serviço estiverem tentando acessar nossos aplicativos de nuvem de redes que não sejam confiáveis, bloqueie o acesso._
 
 O [Azure AD Privileged Identity Management](/azure/active-directory/active-directory-privileged-identity-management-configure) pode ajudá-lo a gerenciar, controlar e monitorar os usuários e quais tipos de tarefas eles estão executando com seus privilégios de administrador. Essa é uma etapa importante para limitar quem em sua organização pode executar operações privilegiadas em aplicativos do Azure AD, Azure, Office 365 ou SaaS, bem como monitorar suas atividades.
 
@@ -80,7 +78,7 @@ O [Azure AD Privileged Identity Management](/azure/active-directory/active-direc
 
 Para proteger dados em trânsito, sempre use SSL/TLS durante a troca de dados em locais diferentes. Às vezes, você precisa isolar todo o canal de comunicação entre as infraestruturas local e de nuvem usando uma VPN (rede virtual privada) ou o [ExpressRoute](/azure/expressroute/). Para obter mais informações, consulte [Estendendo soluções de dados locais para a nuvem](../scenarios/hybrid-on-premises-and-cloud.md).
 
-Use [NSGs](/azure/virtual-network/virtual-networks-nsg) (grupos de segurança de rede) para reduzir o número de vetores de ataque potenciais. Um grupo de segurança de rede contém uma lista de regras de segurança que permitem ou negam o tráfego de rede de entrada ou saída com base no endereço IP de origem ou destino, na porta e no protocolo. 
+Use [NSGs](/azure/virtual-network/virtual-networks-nsg) (grupos de segurança de rede) para reduzir o número de vetores de ataque potenciais. Um grupo de segurança de rede contém uma lista de regras de segurança que permitem ou negam o tráfego de rede de entrada ou saída com base no endereço IP de origem ou destino, na porta e no protocolo.
 
 Use [pontos de extremidade de serviço da Rede Virtual](/azure/virtual-network/virtual-network-service-endpoints-overview) para proteger os recursos do SQL do Azure ou Armazenamento do Azure, de modo que apenas o tráfego da rede virtual possa acessar esses recursos.
 
@@ -90,10 +88,8 @@ Para obter mais informações, consulte [Segurança de rede do Azure](/azure/sec
 
 ### <a name="monitoring"></a>Monitoramento
 
-A [Central de Segurança do Azure](/azure/security-center/security-center-intro) coleta, analisa e integra automaticamente os dados de log de seus recursos do Azure, da rede e das soluções de parceiros conectadas, como soluções de firewall, a fim de detectar ameaças reais e reduzir os falsos positivos. 
+A [Central de Segurança do Azure](/azure/security-center/security-center-intro) coleta, analisa e integra automaticamente os dados de log de seus recursos do Azure, da rede e das soluções de parceiros conectadas, como soluções de firewall, a fim de detectar ameaças reais e reduzir os falsos positivos.
 
 O [Log Analytics](/azure/log-analytics/log-analytics-overview) fornece acesso centralizado aos logs e ajuda você a analisar os dados e criar alertas personalizados.
 
 A [Detecção de Ameaças do Banco de Dados SQL do Azure](/azure/sql-database/sql-database-threat-detection) detecta atividades anômalas, indicando tentativas incomuns e potencialmente prejudiciais de acessar ou explorar bancos de dados. Os agentes de segurança ou outros administradores designados podem receber uma notificação imediata sobre atividades suspeitas do banco de dados conforme elas ocorrem. Cada notificação fornece detalhes da atividade suspeita e recomenda como investigar e minimizar a ameaça.
-
-

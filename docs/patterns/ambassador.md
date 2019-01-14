@@ -1,14 +1,17 @@
 ---
 title: Padrão embaixador
+titleSuffix: Cloud Design Patterns
 description: Crie serviços auxiliares que enviam solicitações de rede em nome de um consumidor de serviço ou aplicativo.
+keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: 6c545619aab6a5817e55854350e3769834df27cd
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.custom: seodec18
+ms.openlocfilehash: f03bfa0b45494ac1428aeee5cc6c413d5607ba79
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24540786"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54009773"
 ---
 # <a name="ambassador-pattern"></a>Padrão embaixador
 
@@ -18,7 +21,7 @@ Esse padrão pode ser útil para descarregar tarefas comuns de conectividade do 
 
 ## <a name="context-and-problem"></a>Contexto e problema
 
-Aplicativos baseados em nuvem resilientes exigem recursos como [quebra circuito][circuit-breaker], roteamento, medição e monitoramento, além da capacidade de fazer atualizações de configuração relacionadas à rede. Pode ser difícil ou impossível atualizar aplicativos herdados ou bibliotecas de código existente para adicionar esses recursos, pois o código não será mais mantido ou não poderá ser facilmente modificado pela equipe de desenvolvimento.
+Aplicativos baseados em nuvem resilientes exigem recursos como [interrupção de circuito](./circuit-breaker.md), roteamento, medição e monitoramento, além da capacidade de fazer atualizações de configuração relacionadas à rede. Pode ser difícil ou impossível atualizar aplicativos herdados ou bibliotecas de código existente para adicionar esses recursos, pois o código não será mais mantido ou não poderá ser facilmente modificado pela equipe de desenvolvimento.
 
 Chamadas de rede também podem exigir configuração significativa para conexão, autenticação e autorização. Se essas chamadas forem usadas em vários aplicativos, criados usando vários idiomas e estruturas, as chamadas deverão ser configuradas para cada uma dessas instâncias. Além disso, funcionalidade de segurança de rede poderá precisar ser gerenciada por uma equipe central na sua organização. Com uma base de código grande, pode ser arriscado para essa equipe atualizar código de aplicativo com a qual não esteja familiarizada.
 
@@ -26,11 +29,11 @@ Chamadas de rede também podem exigir configuração significativa para conexão
 
 Coloque estruturas e bibliotecas de cliente em um processo externo que atue como proxy entre seus aplicativos e serviços externos. Implante o proxy no mesmo ambiente de host que seu aplicativo para permitir o controle sobre roteamento, resiliência e recursos de segurança, além de evitar quaisquer restrições de acesso relacionadas ao host. Você também pode usar o padrão de embaixador para padronizar e estender a instrumentação. O proxy pode monitorar métricas de desempenho, como latência ou uso de recursos, e esse monitoramento acontece no mesmo ambiente de host que o aplicativo.
 
-![](./_images/ambassador.png)
+![Diagrama do padrão Embaixador](./_images/ambassador.png)
 
 Os recursos que são descarregados para o embaixador podem ser gerenciados de maneira independente do aplicativo. Você pode atualizar e modificar o embaixador sem afetar a funcionalidade herdada do aplicativo. Ele também permite equipes especializadas separadas implementar e manter os recursos de segurança, rede ou autenticação movidos para o embaixador.
 
-Os serviços do embaixador podem ser implantados como um [sidecar][sidecar] para acompanhar o ciclo de vida de um aplicativo ou serviço consumidor. Como alternativa, se um embaixador for compartilhado por vários processos separados em um host em comum, ele poderá ser implantado como um daemon ou o serviço Windows. Se o serviço consumidor estiver em contêineres, o embaixador deverá ser criado como um contêiner separado no mesmo host, com os links apropriados configurados para comunicação.
+Os serviços do embaixador podem ser implantados como um [sidecar](./sidecar.md) para acompanhar o ciclo de vida de um aplicativo ou serviço de consumidor. Como alternativa, se um embaixador for compartilhado por vários processos separados em um host em comum, ele poderá ser implantado como um daemon ou o serviço Windows. Se o serviço consumidor estiver em contêineres, o embaixador deverá ser criado como um contêiner separado no mesmo host, com os links apropriados configurados para comunicação.
 
 ## <a name="issues-and-considerations"></a>Problemas e considerações
 
@@ -58,7 +61,7 @@ Esse padrão pode não ser adequado:
 
 O diagrama a seguir mostra um aplicativo fazendo uma solicitação para um serviço remoto por meio de um proxy embaixador. O embaixador possibilita roteamento, interrupção de circuito e registro em log. Ele chama o serviço remoto e, em seguida, retorna a resposta ao aplicativo cliente:
 
-![](./_images/ambassador-example.png) 
+![Exemplo de um padrão Embaixador](./_images/ambassador-example.png)
 
 ## <a name="related-guidance"></a>Diretrizes relacionadas
 
@@ -66,6 +69,4 @@ O diagrama a seguir mostra um aplicativo fazendo uma solicitação para um servi
 
 <!-- links -->
 
-[circuit-breaker]: ./circuit-breaker.md
 [resiliency-patterns]: ./category/resiliency.md
-[sidecar]: ./sidecar.md

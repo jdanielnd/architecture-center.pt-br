@@ -1,18 +1,17 @@
 ---
-title: Retry
+title: Padrão de repetição
+titleSuffix: Cloud Design Patterns
 description: Permita que um aplicativo trate falhas previstas e temporárias quando tentar se conectar a um serviço ou recurso de rede ao repetir de forma transparente uma operação que falhou anteriormente.
 keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- resiliency
-ms.openlocfilehash: 73fdcbcc2bd75593a4c8e33dc2259c90593e14db
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+ms.custom: seodec18
+ms.openlocfilehash: 44a9c7e188bcf76a5f6904879c2121d50397da6c
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/23/2018
-ms.locfileid: "29478248"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011504"
 ---
 # <a name="retry-pattern"></a>Padrão de repetição
 
@@ -36,7 +35,7 @@ Se um aplicativo detectar uma falha ao tentar enviar uma solicitação para um s
 
 - **Tentar novamente**. Se a falha específica relatada é incomum ou rara, ela pode ter sido causada por circunstâncias incomuns, como um pacote de rede se tornar corrompido enquanto estava sendo transmitido. Nesse caso, o aplicativo pode repetir a solicitação com falha novamente imediatamente porque é improvável que a mesma falha se repita e a solicitação provavelmente será bem-sucedida.
 
-- **Tentar novamente após atraso.** Se a falha é causada por uma ou mais falhas comuns de conectividade ou ocupado, a rede ou o serviço podem precisar de um breve período enquanto os problemas de conectividade são corrigidos ou a lista de pendências de trabalho é limpa. O aplicativo deve esperar por um tempo adequado antes de tentar executar novamente a solicitação.
+- **Tentar novamente após atraso**. Se a falha é causada por uma ou mais falhas comuns de conectividade ou ocupado, a rede ou o serviço podem precisar de um breve período enquanto os problemas de conectividade são corrigidos ou a lista de pendências de trabalho é limpa. O aplicativo deve esperar por um tempo adequado antes de tentar executar novamente a solicitação.
 
 Para falhas transitórias mais comuns, o período entre as repetições deve ser escolhido para distribuir solicitações de várias instâncias do aplicativo de maneira mais uniforme possível. Isso reduz a chance de um serviço ocupado continuar a ser sobrecarregado. Se muitas instâncias de um aplicativo sobrecarregam continuamente um serviço com solicitações de novas tentativas, demorará mais para o serviço se recuperar.
 
@@ -60,7 +59,7 @@ A política de repetição deve ser ajustada para atender aos requisitos de neg�
 
 Uma política de repetição agressiva com atraso mínimo entre as tentativas e um grande número de repetições poderia prejudicar ainda mais um serviço ocupado executado no limite da capacidade ou próximo desse limite. Essa política de repetição também poderá afetar a capacidade de resposta do aplicativo se ele tentar continuamente executar uma operação com falha.
 
-Se uma solicitação ainda falhar após um número significativo de tentativas, é melhor para o aplicativo evitar que outras solicitações sejam enviadas para o mesmo recurso e simplesmente relatar uma falha imediatamente. Quando o período expirar, o aplicativo pode tentar permitir uma ou mais solicitações para ver se elas são bem-sucedidas. Para obter mais detalhes sobre essa estratégia, consulte o [Padrão de disjuntor](circuit-breaker.md).
+Se uma solicitação ainda falhar após um número significativo de tentativas, é melhor para o aplicativo evitar que outras solicitações sejam enviadas para o mesmo recurso e simplesmente relatar uma falha imediatamente. Quando o período expirar, o aplicativo pode tentar permitir uma ou mais solicitações para ver se elas são bem-sucedidas. Para obter mais detalhes sobre essa estratégia, consulte o [Padrão de disjuntor](./circuit-breaker.md).
 
 Considere se a operação é idempotente. Nesse caso, tentar novamente é inerentemente seguro. Caso contrário, as repetições podem fazer com que a operação seja executada mais de uma vez, com efeitos colaterais imprevistos. Por exemplo, um serviço pode receber a solicitação, processá-la com êxito, mas falha ao enviar uma resposta. Nesse ponto, a lógica de repetição pode reenviar a solicitação, supondo que a primeira solicitação não foi recebida.
 
@@ -74,7 +73,7 @@ Implemente a lógica de repetição somente onde o contexto completo de uma oper
 
 É importante registrar todas as falhas de conectividade que causam uma tentativa para que os problemas subjacentes com o aplicativo, serviços ou recursos que possam ser identificados.
 
-Investigue as falhas que têm mais probabilidade de ocorrer para um serviço ou um recurso para descobrir se elas provavelmente serão de longa duração ou terminal. Se elas forem, é melhor tratar a falha como uma exceção. O aplicativo pode relatar ou registrar a exceção e, em seguida, tentar continuar com a invocação de um serviço alternativo (se houver) ou oferecer funcionalidade degradada. Para obter mais informações sobre como detectar e tratar falhas de longa duração, consulte o [Padrão de disjuntor](circuit-breaker.md).
+Investigue as falhas que têm mais probabilidade de ocorrer para um serviço ou um recurso para descobrir se elas provavelmente serão de longa duração ou terminal. Se elas forem, é melhor tratar a falha como uma exceção. O aplicativo pode relatar ou registrar a exceção e, em seguida, tentar continuar com a invocação de um serviço alternativo (se houver) ou oferecer funcionalidade degradada. Para obter mais informações sobre como detectar e tratar falhas de longa duração, consulte o [Padrão de disjuntor](./circuit-breaker.md).
 
 ## <a name="when-to-use-this-pattern"></a>Quando usar esse padrão
 
@@ -120,7 +119,7 @@ public async Task OperationWithBasicRetryAsync()
       // long to wait, based on the retry strategy.
       if (currentRetry > this.retryCount || !IsTransient(ex))
       {
-        // If this isn't a transient error or we shouldn't retry, 
+        // If this isn't a transient error or we shouldn't retry,
         // rethrow the exception.
         throw;
       }
@@ -173,6 +172,6 @@ private bool IsTransient(Exception ex)
 
 ## <a name="related-patterns-and-guidance"></a>Diretrizes e padrões relacionados
 
-- [Padrão de disjuntor](circuit-breaker.md). O Padrão de repetição é útil para tratar falhas transitórias. Se espera-se que uma falha seja mais duradoura, pode ser mais apropriado implementar o Padrão de disjuntor. O Padrão de repetição também pode ser usado junto com um disjuntor para fornecer uma abordagem abrangente para tratar falhas.
+- [Padrão de disjuntor](./circuit-breaker.md). O Padrão de repetição é útil para tratar falhas transitórias. Se espera-se que uma falha seja mais duradoura, pode ser mais apropriado implementar o Padrão de disjuntor. O Padrão de repetição também pode ser usado junto com um disjuntor para fornecer uma abordagem abrangente para tratar falhas.
 - [Diretrizes de repetição para serviços específicos](https://docs.microsoft.com/azure/architecture/best-practices/retry-service-specific)
 - [Resiliência de Conexão](https://docs.microsoft.com/ef/core/miscellaneous/connection-resiliency)

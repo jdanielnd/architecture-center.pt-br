@@ -1,14 +1,17 @@
 ---
 title: Padrão de agregação de gateway
+titleSuffix: Cloud Design Patterns
 description: Use um gateway para agregar várias solicitações individuais em uma única solicitação.
+keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: f59c8b8b02c6db28024d13621b782997e63a4e9e
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.custom: seodec18
+ms.openlocfilehash: 8d929b1b3937d8f9ef50c1b08e8aea0b5c1f92c1
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24541266"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54009450"
 ---
 # <a name="gateway-aggregation-pattern"></a>Padrão de agregação de gateway
 
@@ -16,11 +19,11 @@ Use um gateway para agregar várias solicitações individuais em uma única sol
 
 ## <a name="context-and-problem"></a>Contexto e problema
 
-Para executar uma única tarefa, um cliente talvez precise fazer várias chamadas a vários serviços de back-end. Um aplicativo que depende de muitos serviços para executar uma tarefa deve gastar recursos em cada solicitação. Quando qualquer novo serviço ou recurso é adicionado ao aplicativo, solicitações adicionais são necessárias, além de aumentar os requisitos de recursos e chamadas de rede. Esse excesso de conversa entre um cliente e um back-end pode afetar negativamente o desempenho e a escala do aplicativo.  Arquiteturas de microsserviço tornaram esse problema mais comum, uma vez que aplicativos baseados em torno de muitos serviços menores naturalmente têm uma quantidade maior de chamadas entre serviços. 
+Para executar uma única tarefa, um cliente talvez precise fazer várias chamadas a vários serviços de back-end. Um aplicativo que depende de muitos serviços para executar uma tarefa deve gastar recursos em cada solicitação. Quando qualquer novo serviço ou recurso é adicionado ao aplicativo, solicitações adicionais são necessárias, além de aumentar os requisitos de recursos e chamadas de rede. Esse excesso de conversa entre um cliente e um back-end pode afetar negativamente o desempenho e a escala do aplicativo.  Arquiteturas de microsserviço tornaram esse problema mais comum, uma vez que aplicativos baseados em torno de muitos serviços menores naturalmente têm uma quantidade maior de chamadas entre serviços.
 
 No diagrama a seguir, o cliente envia solicitações a cada serviço (1,2,3). Cada serviço processa a solicitação e envia a resposta de volta ao aplicativo (4,5,6). Em uma rede celular com latência normalmente alta, usar solicitações individuais dessa maneira é ineficiente e pode resultar em interrupção da conectividade ou em solicitações incompletas. Embora cada solicitação possa ser executada em paralelo, o aplicativo deve enviar, aguardar e processar dados para cada solicitação, tudo em conexões separadas, aumentando a possibilidade de falha.
 
-![](./_images/gateway-aggregation-problem.png) 
+![Diagrama de problema para o padrão de agregação de Gateway](./_images/gateway-aggregation-problem.png)
 
 ## <a name="solution"></a>Solução
 
@@ -30,7 +33,7 @@ Esse padrão pode reduzir o número de solicitações que o aplicativo faz a ser
 
 No diagrama a seguir, o aplicativo envia uma solicitação para o gateway (1). A solicitação contém um pacote de solicitações adicionais. O gateway as decompõe e processa cada solicitação enviando-a ao serviço em questão (2). Cada serviço retorna uma resposta ao gateway (3). O gateway combina as respostas de cada serviço e envia a resposta ao aplicativo (4). O aplicativo faz uma única solicitação e recebe apenas uma única resposta do gateway.
 
-![](./_images/gateway-aggregation.png)
+![Diagrama de solução para o padrão de agregação de Gateway](./_images/gateway-aggregation.png)
 
 ## <a name="issues-and-considerations"></a>Problemas e considerações
 

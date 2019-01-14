@@ -5,12 +5,12 @@ description: Implementar uma arquitetura de rede site a site segura que abranja 
 author: telmosampaio
 ms.date: 10/22/2017
 ms.custom: seodec18
-ms.openlocfilehash: 8e9de168fe2969159f62ce84a19f4b21fd1cb538
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.openlocfilehash: 1308f85f2f6d05b86e22f2558d89f164d076d182
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53120383"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54112780"
 ---
 # <a name="connect-an-on-premises-network-to-azure-using-expressroute"></a>Conectar uma rede local ao Azure usando o ExpressRoute
 
@@ -207,8 +207,7 @@ Você poderá configurar a alta disponibilidade para a conexão do Azure de mane
 
 - Conecte a VNet a vários circuitos do ExpressRoute fornecidos por diferentes provedores de serviço. Essa estratégia fornece funcionalidades adicionais de recuperação de desastre e alta disponibilidade.
 
-- Configure uma VPN site a site como um caminho de failover para o ExpressRoute. Para obter mais informações sobre essa opção, consulte [Conectar uma rede local ao Azure usando o ExpressRoute com failover de VPN][highly-available-network-architecture].
- Essa opção só se aplica ao emparelhamento privado. Para serviços do Azure e o Office 365, a Internet é o único caminho de failover.
+- Configure uma VPN site a site como um caminho de failover para o ExpressRoute. Para obter mais informações sobre essa opção, consulte [Conectar uma rede local ao Azure usando o ExpressRoute com failover de VPN][highly-available-network-architecture]. Essa opção só se aplica ao emparelhamento privado. Para serviços do Azure e o Office 365, a Internet é o único caminho de failover.
 
 ## <a name="manageability-considerations"></a>Considerações sobre capacidade de gerenciamento
 
@@ -224,7 +223,7 @@ Para maximizar a segurança, adicione dispositivos de segurança de rede entre a
 
 ![[2]][2]
 
-Para fins de auditoria ou a conformidade, pode ser necessário impedir o acesso direto de componentes em execução na VNet à Internet e implementar [túnel forçado][forced-tuneling]. Nessa situação, o tráfego de Internet deve ser redirecionado por meio de um proxy executado localmente, de modo que possa ser auditado. O proxy pode ser configurado para bloquear a saída de tráfego não autorizado e filtrar tráfego de entrada potencialmente mal-intencionado.
+Para fins de auditoria ou a conformidade, pode ser necessário impedir o acesso direto de componentes em execução na VNet à Internet e implementar [túnel forçado][forced-tunneling]. Nessa situação, o tráfego de Internet deve ser redirecionado por meio de um proxy executado localmente, de modo que possa ser auditado. O proxy pode ser configurado para bloquear a saída de tráfego não autorizado e filtrar tráfego de entrada potencialmente mal-intencionado.
 
 ![[3]][3]
 
@@ -270,7 +269,7 @@ Para implantar a solução, execute as etapas a seguir.
 
 <!-- links -->
 
-[forced-tuneling]: ../dmz/secure-vnet-hybrid.md
+[forced-tunneling]: ../dmz/secure-vnet-hybrid.md
 [highly-available-network-architecture]: ./expressroute-vpn-failover.md
 
 [expressroute-technical-overview]: /azure/expressroute/expressroute-introduction
@@ -286,8 +285,8 @@ Para implantar a solução, execute as etapas a seguir.
 [azurect]: https://github.com/Azure/NetworkMonitoring/tree/master/AzureCT
 [visio-download]: https://archcenter.blob.core.windows.net/cdn/hybrid-network-architectures.vsdx
 [er-circuit-parameters]: https://github.com/mspnp/reference-architectures/tree/master/hybrid-networking/expressroute/parameters/expressRouteCircuit.parameters.json
-[azure-powershell-download]: https://azure.microsoft.com/documentation/articles/powershell-install-configure/
-[azure-cli]: https://azure.microsoft.com/documentation/articles/xplat-cli-install/
+[azure-powershell-download]: /powershell/azure/overview
+[azure-cli]: /cli/azure/install-azure-cli
 
 [0]: ./images/expressroute.png "Arquitetura de rede híbrida usando o Azure ExpressRoute"
 [1]: ../_images/guidance-hybrid-network-expressroute/figure2.png "Usando roteadores redundantes com circuitos primários e secundários do ExpressRoute"

@@ -5,12 +5,12 @@ description: Implante um aplicativo em máquinas virtuais do Azure em várias re
 author: MikeWasson
 ms.date: 07/19/2018
 ms.custom: seodec18
-ms.openlocfilehash: 84da8aaef7e552beff1f06befbaa2e50a3ac3d8b
-ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
+ms.openlocfilehash: 5eef936dded1829ee561ce1b13df4fb147694dc7
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/20/2018
-ms.locfileid: "53643690"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54111981"
 ---
 # <a name="run-an-n-tier-application-in-multiple-azure-regions-for-high-availability"></a>Executar aplicativo de N camadas em várias regiões do Azure para ter alta disponibilidade
 
@@ -67,7 +67,7 @@ No entanto, verifique se ambas as regiões dão suporte a todos os serviços do 
 Considere os seguintes pontos ao configurar o Gerenciador de Tráfego:
 
 - **Roteamento**. O Gerenciador de Tráfego dá suporte a vários [algoritmos de roteamento][tm-routing]. Para o cenário descrito neste artigo, use roteamento *prioritário* (anteriormente chamado de roteamento de *failover*). Com essa configuração, o Gerenciador de Tráfego envia todas as solicitações para a região primária, a menos que ela fique inacessível. Nesse ponto, ele automaticamente faz failover para a região secundária. Consulte [Configurar o método de roteamento de failover][tm-configure-failover].
-- **Investigação de integridade**. O Gerenciador de Tráfego usa uma [investigação][tm-monitoring] HTTP (ou HTTPS) para monitorar a disponibilidade de cada região. A investigação verifica uma resposta HTTP 200 para um caminho de URL especificado. Como uma prática recomendada, crie um ponto de extremidade que relata a integridade geral do aplicativo e use esse ponto de extremidade para a investigação de integridade. Caso contrário, a investigação pode relatar um ponto de extremidade íntegro quando partes essenciais do aplicativo estão falhando na verdade. Para obter mais informações, consulte o [Padrão de monitoramento de ponto de extremidade de integridade][health-endpoint-monitoring-pattern].
+- **Investigação de integridade**. O Gerenciador de Tráfego usa uma [investigação][tm-monitoring] HTTP (ou HTTPS) para monitorar a disponibilidade de cada região. A investigação verifica uma resposta HTTP 200 para um caminho de URL especificado. Como uma prática recomendada, crie um ponto de extremidade que relata a integridade geral do aplicativo e use esse ponto de extremidade para a investigação de integridade. Caso contrário, a investigação pode relatar um ponto de extremidade íntegro quando partes essenciais do aplicativo estão falhando na verdade. Para obter mais informações, confira [Padrão de monitoramento de ponto de extremidade de integridade][health-endpoint-monitoring-pattern].
 
 Quando o Gerenciador de Tráfego faz failover, há um período em que os clientes não podem acessar o aplicativo. A duração é afetada pelos seguintes fatores:
 
@@ -172,7 +172,7 @@ Talvez seja melhor examinar os seguintes [cenários de exemplo do Azure](/azure/
 [hybrid-vpn]: ../hybrid-networking/vpn.md
 [azure-dns]: /azure/dns/dns-overview
 [azure-sla]: https://azure.microsoft.com/support/legal/sla/
-[azure-sql-db]: https://azure.microsoft.com/documentation/services/sql-database/
+[azure-sql-db]: /azure/sql-database/
 [health-endpoint-monitoring-pattern]: https://msdn.microsoft.com/library/dn589789.aspx
 [azure-cli]: /cli/azure/
 [regional-pairs]: /azure/best-practices-availability-paired-regions

@@ -5,12 +5,12 @@ description: Diretrizes sobre caching para melhorar o desempenho e a escalabilid
 author: dragon119
 ms.date: 05/24/2017
 ms.custom: seodec18
-ms.openlocfilehash: b7f720b9e08b0316f9967a19e1b93069aa04e55f
-ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
+ms.openlocfilehash: da676ba3037f5c232ea97b9cb41488c7c2202476
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53307462"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113103"
 ---
 # <a name="caching"></a>Cache
 
@@ -476,9 +476,9 @@ var customer1 = cache.Wait(task1);
 var customer2 = cache.Wait(task2);
 ```
 
-Para obter informações adicionais sobre como escrever aplicativos clientes que possam acessar o Cache Redis do Azure, veja a [documentação do Cache Redis do Azure](https://azure.microsoft.com/documentation/services/cache/). Mais informações também estão disponíveis em [StackExchange.Redis](https://github.com/StackExchange/StackExchange.Redis/blob/master/Docs/Basics.md).
+Para obter informações adicionais sobre como escrever aplicativos cliente que possam acessar o Cache Redis do Azure, veja a [documentação do Cache Redis do Azure](/azure/azure-cache-for-redis/). Mais informações também estão disponíveis em [StackExchange.Redis](https://github.com/StackExchange/StackExchange.Redis/blob/master/Docs/Basics.md).
 
-A página [Pipelines e multiplexadores](https://stackexchange.github.io/StackExchange.Redis/PipelinesMultiplexers) no mesmo site fornece mais informações sobre operações assíncronas e pipeline com Redis e a biblioteca do StackExchange. 
+A página [Pipelines e multiplexadores](https://stackexchange.github.io/StackExchange.Redis/PipelinesMultiplexers) no mesmo site fornece mais informações sobre operações assíncronas e pipeline com Redis e a biblioteca do StackExchange.
 
 ## <a name="using-redis-caching"></a>Como usar o caching do Redis
 
@@ -898,7 +898,7 @@ Os padrões a seguir também podem ser relevantes para seu cenário ao implement
 
 ## <a name="more-information"></a>Mais informações
 
-- [Documentação do Cache Redis do Azure](https://azure.microsoft.com/documentation/services/cache/) 
+- [Documentação do Cache Redis do Azure](/azure/azure-cache-for-redis/)
 - [Perguntas frequentes sobre Cache Redis do Azure](/azure/redis-cache/cache-faq)
 - [Padrão assíncrono baseado em tarefa](/dotnet/standard/asynchronous-programming-patterns/task-based-asynchronous-pattern-tap)
 - [Documentação de Redis](https://redis.io/documentation)

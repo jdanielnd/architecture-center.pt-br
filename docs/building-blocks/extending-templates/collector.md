@@ -1,14 +1,14 @@
 ---
 title: Implementar um transformador de propriedade e um coletor em um modelo do Azure Resource Manager
-description: Descreve como implementar um transformador de propriedade e um coletor em um modelo do Azure Resource Manager
+description: Descreve como implementar um transformador de propriedade e um coletor em um modelo do Azure Resource Manager.
 author: petertay
 ms.date: 10/30/2018
-ms.openlocfilehash: ad5b3a71f516ec12fee311e25c43f434f9f306ed
-ms.sourcegitcommit: e9eb2b895037da0633ef3ccebdea2fcce047620f
+ms.openlocfilehash: 1a6a01ee513609132d8522a79ccb81b7938651b5
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 10/30/2018
-ms.locfileid: "50251780"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113800"
 ---
 # <a name="implement-a-property-transformer-and-collector-in-an-azure-resource-manager-template"></a>Implementar um transformador de propriedade e um coletor em um modelo do Azure Resource Manager
 
@@ -24,12 +24,14 @@ Vamos dar uma olhada em como é possível implementar um coletor de propriedade 
 ![arquitetura do coletor de propriedade e do transformador](../_images/collector-transformer.png)
 
 Nosso **modelo de chamada** inclui dois recursos:
-* um link de modelo que invoca nosso **modelo de coletor**.
-* o recurso NSG para implantar.
+
+- um link de modelo que invoca nosso **modelo de coletor**.
+- O recurso NSG para implantar.
 
 Nosso **modelo de coletor** inclui dois recursos:
-* um recurso de **âncora**.
-* um link de modelo que invoca o modelo de transformação em um loop de cópia.
+
+- um recurso de **âncora**.
+- Um link de modelo que invoca o modelo de transformação em um loop de cópia.
 
 Nosso **modelo de transformação** inclui um único recurso: um modelo vazio com uma variável que transforma nosso JSON `source` no esquema JSON esperado por nosso recurso NSG no **modelo principal**.
 
@@ -41,7 +43,7 @@ Usaremos nosso objeto de parâmetro `securityRules` de [objetos como parâmetros
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
-    "parameters":{ 
+    "parameters": {
       "networkSecurityGroupsSettings": {
       "value": {
           "securityRules": [
@@ -80,9 +82,10 @@ Vamos examinar nosso **modelo de transformação**.
 
 ## <a name="transform-template"></a>Modelo de Transformação
 
-Nosso **modelo de transformação** inclui dois parâmetros que são passados do **modelo de coletor**: 
-* `source` é um objeto que recebe um dos objetos de valor de propriedade da matriz de propriedade. Em nosso exemplo, cada objeto da matriz de `"securityRules"` será transmitido um de cada vez.
-* `state` é uma matriz que recebe os resultados concatenados de todas as transformações anteriores. Esta é a coleção do JSON transformado.
+Nosso **modelo de transformação** inclui dois parâmetros que são passados do **modelo de coletor**:
+
+- `source` é um objeto que recebe um dos objetos de valor de propriedade da matriz de propriedade. Em nosso exemplo, cada objeto da matriz de `"securityRules"` será transmitido um de cada vez.
+- `state` é uma matriz que recebe os resultados concatenados de todas as transformações anteriores. Esta é a coleção do JSON transformado.
 
 Nossos parâmetros têm esta aparência:
 
@@ -115,7 +118,7 @@ Nosso modelo também define uma variável denominada `instance`. Ele executa a t
             "destinationAddressPrefix": "[parameters('source').destinationAddressPrefix]",
             "access": "[parameters('source').access]",
             "priority": "[parameters('source').priority]",
-            "direction": "[parameters('source').direction]"            
+            "direction": "[parameters('source').direction]"
         }
       }
     ]
@@ -139,9 +142,10 @@ Em seguida, vamos dar uma olhada no nosso **modelo de coletor** para ver como el
 ## <a name="collector-template"></a>Modelo de coletor
 
 Nosso **modelo de coletor** inclui três parâmetros:
-* `source` é nossa matriz de objetos de parâmetro completa. Ele é passado pelo **modelo de chamada**. Ele tem o mesmo nome que o parâmetro `source` no nosso **modelo de transformação**, mas há uma diferença importante que você já deve ter notado: essa é a matriz completa, mas nós só passamos um elemento dessa matriz para o **modelo de transformação** por vez.
-* `transformTemplateUri` é o URI do nosso **modelo de transformação**. Nós o estamos definindo como um parâmetro aqui para a reutilização do modelo.
-* `state` é uma matriz inicialmente vazia que podemos passar para o nosso **modelo de transformação**. Quando o loop de cópia for concluído, ele armazenará a coleção de objetos de parâmetro transformados.
+
+- `source` é nossa matriz de objetos de parâmetro completa. Ele é passado pelo **modelo de chamada**. Ele tem o mesmo nome que o parâmetro `source` no nosso **modelo de transformação**, mas há uma diferença importante que você já deve ter notado: essa é a matriz completa, mas nós só passamos um elemento dessa matriz para o **modelo de transformação** por vez.
+- `transformTemplateUri` é o URI do nosso **modelo de transformação**. Nós o estamos definindo como um parâmetro aqui para a reutilização do modelo.
+- `state` é uma matriz inicialmente vazia que podemos passar para o nosso **modelo de transformação**. Quando o loop de cópia for concluído, ele armazenará a coleção de objetos de parâmetro transformados.
 
 Nossos parâmetros têm esta aparência:
 
@@ -153,7 +157,7 @@ Nossos parâmetros têm esta aparência:
       "type": "array",
       "defaultValue": [ ]
     }
-``` 
+```
 
 Em seguida, definimos uma variável chamada `count`. Seu valor é o comprimento da matriz de objetos de parâmetro `source`:
 
@@ -166,8 +170,9 @@ Em seguida, definimos uma variável chamada `count`. Seu valor é o comprimento 
 Como você pode suspeitar, nós o usamos para o número de iterações em nosso loop de cópia.
 
 Agora vamos dar uma olhada em nossos recursos. Definimos dois recursos:
-* `loop-0` é o recurso com base em zero para o loop de cópia.
-* `loop-` é concatenado com o resultado da função `copyIndex(1)` para gerar um nome exclusivo baseado em iteração para nosso recurso, começando com `1`.
+
+- `loop-0` é o recurso com base em zero para o loop de cópia.
+- `loop-` é concatenado com o resultado da função `copyIndex(1)` para gerar um nome exclusivo baseado em iteração para nosso recurso, começando com `1`.
 
 Nossos recursos têm esta aparência:
 
@@ -231,6 +236,7 @@ Por fim, o `output` de nosso modelo retorna o `output` da última iteração de 
     }
   }
 ```
+
 Pode parecer contraintuitivo retornar o `output` da última iteração de nosso **modelo de transformação** para nosso **modelo de chamada** porque ele apareceu quando estávamos armazenando-o em nosso parâmetro `source`. No entanto, lembre-se de que é a última iteração do nosso **modelo de transformação** que contém a matriz completa de objetos de propriedade transformados e que é o que queremos retornar.
 
 Por fim, vamos dar uma olhada em como chamar o **modelo de coletor** do nosso **modelo de chamada**.
@@ -277,8 +283,9 @@ Como se esperaria, esse é o URI para o **modelo de coletor** que será usado pe
 ```
 
 Passamos dois parâmetros para o **modelo de coletor**:
-* `source` é a nossa matriz de objetos de propriedade. Em nosso exemplo, ele é nosso parâmetro `networkSecurityGroupsSettings`.
-* `transformTemplateUri` é a variável que acabamos de definir com o URI do nosso **modelo de coletor**.
+
+- `source` é a nossa matriz de objetos de propriedade. Em nosso exemplo, ele é nosso parâmetro `networkSecurityGroupsSettings`.
+- `transformTemplateUri` é a variável que acabamos de definir com o URI do nosso **modelo de coletor**.
 
 Por fim, nosso recurso `Microsoft.Network/networkSecurityGroups` atribui diretamente o `output` do `collector` vinculado o recurso de modelo para sua propriedade `securityRules`:
 

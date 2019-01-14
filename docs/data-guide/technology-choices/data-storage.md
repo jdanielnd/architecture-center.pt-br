@@ -3,27 +3,31 @@ title: Escolhendo uma tecnologia de armazenamento de dados
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: c97249228ca45a7a17822b6dd55acad6360c6f6b
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 9fe28249b51083bb588808770aba9ac7d48d560e
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902639"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113154"
 ---
 # <a name="choosing-a-big-data-storage-technology-in-azure"></a>Escolhendo uma tecnologia de armazenamento de Big Data no Azure
 
 Este tópico compara as opções de armazenamento de dados para soluções de Big Data &mdash; especificamente, o armazenamento de dados para ingestão de dados em massa e processamento em lotes, em detrimento dos [armazenamentos de dados analíticos](./analytical-data-stores.md) ou da [ingestão de streaming em tempo real](./real-time-ingestion.md).
 
+<!-- markdownlint-disable MD026 -->
+
 ## <a name="what-are-your-options-when-choosing-data-storage-in-azure"></a>Quais são as opções disponíveis ao escolher um armazenamento de dados no Azure?
 
-Há várias opções para a ingestão de dados no Azure, dependendo de suas necessidades:
+<!-- markdownlint-enable MD026 -->
 
-**Armazenamento de arquivos**
+Há várias opções para a ingestão de dados no Azure, dependendo de suas necessidades.
+
+**Armazenamento de Arquivos**
 
 - [Blobs do Armazenamento do Azure](/azure/storage/blobs/storage-blobs-introduction)
 - [Repositório Azure Data Lake](/azure/data-lake-store/)
 
-**Bancos de dados NoSQL**
+**Bancos de dados NoSQL:**
 
 - [Azure Cosmos DB](/azure/cosmos-db/)
 - [HBase no HDInsight](https://hbase.apache.org/)
@@ -34,7 +38,7 @@ O Armazenamento do Azure é um serviço de armazenamento gerenciado altamente di
 
 Há vários serviços do Armazenamento do Azure que podem ser usados para armazenar dados. A opção mais flexível para armazenar blobs de uma variedade de fontes de dados é o [armazenamento de Blobs](/azure/storage/blobs/storage-blobs-introduction). Blobs são basicamente arquivos. Eles armazenam imagens, documentos, arquivos HTML, VHDs (discos rígidos virtuais), Big Data como logs, backups de banco de dados &mdash; praticamente qualquer coisa. Blobs são armazenados em contêineres, que são semelhantes às pastas. Um contêiner fornece um agrupamento de um conjunto de blobs. Uma conta de armazenamento pode conter um número ilimitado de contêineres e um contêiner pode armazenar um número ilimitado de blobs.
 
-O Armazenamento do Azure é uma boa escolha para soluções de Big Data e análise, devido à sua flexibilidade, alta disponibilidade e baixo custo. Ele fornece camadas de armazenamento frio, quente e de arquivos para diferentes casos de uso. Para obter mais informações, consulte [Armazenamento de Blobs do Azure: camadas de armazenamento quente, frio e de arquivos](/azure/storage/blobs/storage-blob-storage-tiers).
+O Armazenamento do Azure é uma boa escolha para soluções de Big Data e análise, devido à sua flexibilidade, alta disponibilidade e baixo custo. Ele fornece camadas de armazenamento frio, quente e de arquivos para diferentes casos de uso. Para obter mais informações, confira [Armazenamento de Blobs do Azure: Camadas de armazenamento de arquivos, frequente, esporádico](/azure/storage/blobs/storage-blob-storage-tiers).
 
 O armazenamento de Blobs do Azure pode ser acessado por meio do Hadoop (disponível no HDInsight). O HDInsight pode usar um contêiner de blobs no Armazenamento do Azure como o sistema de arquivos padrão para o cluster. Por meio de uma interface HDFS (Sistema de Arquivos Distribuído Hadoop) fornecida por um driver WASB, o conjunto completo de componentes no HDInsight pode operar diretamente sobre os dados estruturados ou não estruturados armazenados como blobs. O armazenamento de Blobs do Azure também pode ser acessado por meio do SQL Data Warehouse do Azure usando seu recurso PolyBase.
 
@@ -59,7 +63,7 @@ Acoplado com o Azure Data Lake Analytics, o Data Lake Store foi especificamente 
 
 O [Azure Cosmos DB](/azure/cosmos-db/) é o banco de dados multimodelo globalmente distribuído da Microsoft. O Cosmos DB garante latências de milissegundo de um dígito no 99º percentil em qualquer parte do mundo, oferece vários modelos de consistência bem definidos para ajustar o desempenho e garante alta disponibilidade com funcionalidades de hospedagem múltipla.
 
-O Azure Cosmos DB é independente de esquema. Ele indexa todos os dados automaticamente, sem a necessidade de lidar com o gerenciamento de esquema e de índice. Também é multimodelo, dando suporte nativo a modelos de dados de documentos, de chave-valor, de grafos e de família de colunas. 
+O Azure Cosmos DB é independente de esquema. Ele indexa todos os dados automaticamente, sem a necessidade de lidar com o gerenciamento de esquema e de índice. Também é multimodelo, dando suporte nativo a modelos de dados de documentos, de chave-valor, de grafos e de família de colunas.
 
 Recursos do Azure Cosmos DB:
 
@@ -119,4 +123,3 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 | Integração nativa com o Azure Functions |                        [Sim](/azure/cosmos-db/serverless-computing-database)                        |                                                                     Não                                                                      |
 |   Distribuição global automática    |                          [Sim](/azure/cosmos-db/distribute-data-globally)                           | Não [A replicação de cluster HBase pode ser configurada](/azure/hdinsight/hbase/apache-hbase-replication) em regiões com consistência eventual |
 |           Modelo de preços            | RUs (unidades de solicitação) elasticamente escalonáveis cobradas por segundo, conforme necessário, armazenamento elasticamente escalonável |                              Preços por minuto do cluster HDInsight (dimensionamento horizontal de nós), armazenamento                               |
-

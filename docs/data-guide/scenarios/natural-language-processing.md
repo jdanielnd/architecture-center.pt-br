@@ -3,30 +3,30 @@ title: Processamento de idioma natural
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: 32f2a5e3a0baddc765fb36ccc42fe2626faa5eba
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 373afbabec78dd1ec30b6d07bca9d5da62b5d6e3
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52901432"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54110468"
 ---
 # <a name="natural-language-processing"></a>Processamento de idioma natural
 
 O NLP (processamento de idioma natural) é usado para tarefas, como análise de sentimento, detecção de tópico, detecção de idioma, extração de frases-chave e categorização de documentos.
 
-![](./images/nlp-pipeline.png)
+![Diagrama de um pipeline de processamento de idioma natural](./images/nlp-pipeline.png)
 
 ## <a name="when-to-use-this-solution"></a>Quando usar esta solução
 
-O NLP pode ser usado para classificar documentos, como a rotulagem de documentos como confidenciais ou spam. O resultado do NLP pode ser usado para processamento ou pesquisa posteriores. Outro uso do NLP é resumir o texto identificando as entidades presentes no documento. Essas entidades também podem ser usadas para marcar documentos com palavras-chave, o que permite a pesquisa e recuperação com base no conteúdo. As entidades podem ser combinadas em tópicos, com resumos que descrevem os tópicos importantes presentes em cada documento. Os tópicos detectados podem ser usados para categorizar os documentos para navegação ou enumerar documentos relacionados, considerando um tópico selecionado. Outro uso do NLP é pontuar um texto em relação ao sentimento, a fim de avaliar o caráter positivo ou negativo de um documento. Essas abordagens usam muitas técnicas do processamento de idioma natural, como: 
+O NLP pode ser usado para classificar documentos, como a rotulagem de documentos como confidenciais ou spam. O resultado do NLP pode ser usado para processamento ou pesquisa posteriores. Outro uso do NLP é resumir o texto identificando as entidades presentes no documento. Essas entidades também podem ser usadas para marcar documentos com palavras-chave, o que permite a pesquisa e recuperação com base no conteúdo. As entidades podem ser combinadas em tópicos, com resumos que descrevem os tópicos importantes presentes em cada documento. Os tópicos detectados podem ser usados para categorizar os documentos para navegação ou enumerar documentos relacionados, considerando um tópico selecionado. Outro uso do NLP é pontuar um texto em relação ao sentimento, a fim de avaliar o caráter positivo ou negativo de um documento. Essas abordagens usam muitas técnicas do processamento de idioma natural, como:
 
 - **Gerador de token**. Divisão do texto em palavras ou frases.
-- **Lematização**. Normalização de palavras, de modo que diferentes formas sejam mapeadas para a palavra canônica com o mesmo significado. Por exemplo, "correndo" e "correu" mapeados para "correr". 
+- **Lematização**. Normalização de palavras, de modo que diferentes formas sejam mapeadas para a palavra canônica com o mesmo significado. Por exemplo, "correndo" e "correu" mapeados para "correr".
 - **Extração de entidade**. Identificação de sujeitos no texto.
 - **Detecção de parte do discurso**. Identificação do texto como um verbo, substantivo, particípio, sintagma verbal e assim por diante.
 - **Detecção de limites de sentenças**. Detecção de frases completas em parágrafos de texto.
 
-Ao usar o NLP para extrair informações e insights de um texto de forma livre, o ponto de partida costuma ser os documentos brutos armazenados no armazenamento de objetos, como o Armazenamento do Azure ou o Azure Data Lake Store. 
+Ao usar o NLP para extrair informações e insights de um texto de forma livre, o ponto de partida costuma ser os documentos brutos armazenados no armazenamento de objetos, como o Armazenamento do Azure ou o Azure Data Lake Store.
 
 ## <a name="challenges"></a>Desafios
 

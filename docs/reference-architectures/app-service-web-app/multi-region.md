@@ -5,12 +5,12 @@ description: Arquitetura recomendada para um aplicativo Web altamente disponíve
 author: MikeWasson
 ms.date: 10/25/2018
 ms.custom: seodec18
-ms.openlocfilehash: 61ee7220dbc37140ff1598de78f89aaef8a3e922
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.openlocfilehash: 04ba786ea16aa3245a8f0b7fcafeacc60ac447c2
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53119839"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113324"
 ---
 # <a name="run-a-web-application-in-multiple-azure-regions-for-high-availability"></a>Executar um aplicativo Web em várias regiões do Azure para ter alta disponibilidade
 
@@ -65,7 +65,7 @@ Considere a possibilidade de colocar a região primária, a região secundária 
 
 Como uma prática recomendada, crie um ponto de extremidade de investigação de integridade que relata a integridade geral do aplicativo e use esse ponto de extremidade para a investigação de integridade. O ponto de extremidade deve verificar dependências críticas, como aplicativos do Serviço de Aplicativo, a fila de armazenamento e o Banco de Dados SQL. Caso contrário, a investigação pode relatar um ponto de extremidade íntegro quando partes essenciais do aplicativo estão falhando na verdade.
 
-Por outro lado, não use a investigação de integridade para verificar os serviços de baixa prioridade. Por exemplo, se um serviço de email ficar inativo, o aplicativo poderá mudar para um segundo provedor ou apenas enviar emails mais tarde. Essa não é uma prioridade alta o suficiente para fazer failover no aplicativo. Para obter mais informações, consulte o [Padrão de monitoramento de ponto de extremidade de integridade][health-endpoint-monitoring-pattern].
+Por outro lado, não use a investigação de integridade para verificar os serviços de baixa prioridade. Por exemplo, se um serviço de email ficar inativo, o aplicativo poderá mudar para um segundo provedor ou apenas enviar emails mais tarde. Essa não é uma prioridade alta o suficiente para fazer failover no aplicativo. Para obter mais informações, confira o [Padrão de monitoramento de ponto de extremidade de integridade][health-endpoint-monitoring-pattern].
 
 ### <a name="sql-database"></a>Banco de dados SQL
 
@@ -147,7 +147,7 @@ Se o banco de dados primário falhar, realize um failover manual para o banco de
 
 <!-- links -->
 
-[azure-sql-db]: https://azure.microsoft.com/documentation/services/sql-database/
+[azure-sql-db]: /azure/sql-database/
 [azure-dns]: /azure/dns/dns-overview
 [cosmosdb-geo]: /azure/cosmos-db/distribute-data-globally
 [guidance-web-apps-scalability]: ./scalable-web-app.md

@@ -1,25 +1,19 @@
 ---
-title: Nivelamento de Carga Baseado em Fila
+title: Padrão de nivelamento de carga baseado em fila
+titleSuffix: Cloud Design Patterns
 description: Use uma fila que funcione como um buffer entre uma tarefa e um serviço que ela invoca para simplificar cargas pesadas intermitentes.
 keywords: padrão de design
 author: dragon119
-ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- messaging
-- availability
-- performance-scalability
-- resiliency
-ms.openlocfilehash: 99b226511fe14bffdab3cdcf65d4e6cffe89bba6
-ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
+ms.date: 01/02/2019
+ms.custom: seodec18
+ms.openlocfilehash: bb519fa52fcb6472733b6e52d7332d470eda8349
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/08/2017
-ms.locfileid: "26359312"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011541"
 ---
 # <a name="queue-based-load-leveling-pattern"></a>Padrão de nivelamento de carga baseado em fila
-
-[!INCLUDE [header](../_includes/header.md)]
 
 Use uma fila que funcione como um buffer entre uma tarefa e um serviço que ela invoca para simplificar sobrecargas intermitentes que podem causar falha no serviço ou a fazer a tarefa atingir o tempo limite. Isso pode ajudar a minimizar o impacto dos picos de demanda sobre a disponibilidade e a capacidade de resposta para a tarefa e o serviço.
 
@@ -63,20 +57,26 @@ Esse padrão não é útil se o aplicativo esperar uma resposta do serviço com 
 
 ## <a name="example"></a>Exemplo
 
-Uma função Web do Microsoft Azure armazena dados usando um serviço de armazenamento separado. Se um grande número de instâncias da função web é executado simultaneamente, é possível que o serviço de armazenamento não consiga responder às solicitações com rapidez suficiente para impedir que essas solicitações atinjam o tempo limite ou falhem. Esta figura realça um serviço que está sendo sobrecarregado com um grande número de solicitações simultâneas de instâncias de uma função web.
+Um aplicativo Web grava dados em um repositório de dados externo. Se um grande número de instâncias do aplicativo Web for executado simultaneamente, talvez o armazenamento de dados não consiga responder às solicitações rápido o suficiente, fazendo com que o tempo das solicitações expire, seja limitado ou falhe. O diagrama a seguir mostra um repositório de dados que está sendo sobrecarregado com um grande número de solicitações simultâneas de instâncias de um aplicativo.
 
-![Figura 2 – Um serviço que está sendo sobrecarregado com um grande número de solicitações simultâneas de instâncias de uma função web](./_images/queue-based-load-leveling-overwhelmed.png)
+![Figura 2 - Um serviço que está sendo sobrecarregado com um grande número de solicitações simultâneas de instâncias de um aplicativo Web](./_images/queue-based-load-leveling-overwhelmed.png)
+
+Para resolver isso, é possível usar uma fila para nivelar a carga entre as instâncias do aplicativo e o repositório de dados. Um aplicativo do Azure Functions lê as mensagens da fila e executa as solicitações de leitura/gravação para o armazenamento de dados. A lógica do aplicativo no aplicativo de funções pode controlar a taxa em que ele transmite solicitações ao repositório de dados para impedir que o serviço de armazenamento seja sobrecarregado. (Caso contrário, o aplicativo de funções apenas reintroduzirá o mesmo problema no back-end.)
+
+![Figura 3 - Como usar uma fila e um aplicativo de funções para nivelar a carga](./_images/queue-based-load-leveling-function.png)
 
 
-Para resolver esse problema, use uma fila para nivelar a carga entre as instâncias de função web e o serviço de armazenamento. No entanto, o serviço de armazenamento é projetado para aceitar solicitações síncronas e não pode ser facilmente modificado para ler mensagens e gerenciar a taxa de transferência. Você pode introduzir uma função de trabalho para atuar como um serviço de proxy que recebe as solicitações da fila e as encaminha ao serviço de armazenamento. A lógica do aplicativo na função de trabalho pode controlar a taxa em que ele transmite solicitações ao serviço de armazenamento para impedir que o serviço de armazenamento seja sobrecarregado. Esta figura ilustra o uso de uma fila e uma função de trabalho para nivelar a carga entre as instâncias de função web e o serviço.
-
-![Figura 3 – Usar uma fila e uma função de trabalho para redistribuir a carga entre as instâncias da função web e o serviço](./_images/queue-based-load-leveling-worker-role.png)
 
 ## <a name="related-patterns-and-guidance"></a>Diretrizes e padrões relacionados
 
 Os padrões e diretrizes a seguir também podem ser relevantes ao implementar esse padrão:
 
 - [Prévia de mensagens assíncronas](https://msdn.microsoft.com/library/dn589781.aspx). Filas de mensagens são inerentemente assíncronas. Talvez seja necessário recriar a lógica do aplicativo em uma tarefa se ela tiver sido adaptada de se comunicar diretamente com um serviço para usar uma fila de mensagens. Da mesma forma, talvez seja necessário refatorar um serviço para aceitar solicitações de uma fila de mensagens. Como alternativa, talvez seja possível implementar um serviço de proxy, conforme descrito no exemplo.
-- [Padrão de consumidores concorrentes](competing-consumers.md). Talvez seja possível executar várias instâncias de um serviço, cada uma agindo como um consumidor de mensagem da fila nivelamento de carga. Você pode usar essa abordagem para ajustar a taxa à qual as mensagens são recebidas e passadas para um serviço.
-- [Padrão de limitação](throttling.md). Uma maneira simples de implementar a limitação com um serviço é usar o nivelamento de carga baseado em fila e encaminhar todas as solicitações para um serviço por meio de uma fila de mensagens. O serviço pode processar solicitações a uma taxa que garanta que os recursos exigidos pelo serviço não sejam esgotados e para reduzir a quantidade de contenção que poderia ocorrer.
-- [Conceitos do serviço Fila](https://msdn.microsoft.com/library/azure/dd179353.aspx). Informações sobre como escolher um mecanismo de mensagens e enfileiramento em aplicativos do Azure.
+
+- [Padrão de consumidores concorrentes](./competing-consumers.md). Talvez seja possível executar várias instâncias de um serviço, cada uma agindo como um consumidor de mensagem da fila nivelamento de carga. Você pode usar essa abordagem para ajustar a taxa à qual as mensagens são recebidas e passadas para um serviço.
+
+- [Padrão de limitação](./throttling.md). Uma maneira simples de implementar a limitação com um serviço é usar o nivelamento de carga baseado em fila e encaminhar todas as solicitações para um serviço por meio de uma fila de mensagens. O serviço pode processar solicitações a uma taxa que garanta que os recursos exigidos pelo serviço não sejam esgotados e para reduzir a quantidade de contenção que poderia ocorrer.
+
+- [Escolha entre os serviços de mensagens do Azure](/azure/event-grid/compare-messaging-services). Informações sobre como escolher um mecanismo de mensagens e enfileiramento em aplicativos do Azure.
+
+- [Melhore a escalabilidade em um aplicativo Web do Azure](../reference-architectures/app-service-web-app/scalable-web-app.md). Essa arquitetura de referência inclui o nivelamento de carga baseado em fila como parte da arquitetura.

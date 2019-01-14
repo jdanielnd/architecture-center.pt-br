@@ -1,17 +1,17 @@
 ---
 title: Armazenar em cache tokens de acesso em um aplicativo multilocatário
-description: Colocação em cache de tokens de acesso usados para chamar uma API Web de back-end
+description: Colocação em cache de tokens de acesso usados para chamar uma API Web de back-end.
 author: MikeWasson
 ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: web-api
 pnp.series.next: adfs
-ms.openlocfilehash: 950b638e629ad97e24b05e781da844bc110bad91
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 0cf4b3c3b9187759522b4530c94268ce8d7baa86
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52901704"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54110945"
 ---
 # <a name="cache-access-tokens"></a>Armazenar tokens de acesso em cache
 
@@ -41,14 +41,14 @@ No aplicativo Tailspin Surveys, a classe `DistributedTokenCache` implementa o ca
 O repositório de backup é particionado pelo usuário. Para cada solicitação HTTP, os tokens de usuário são lidos no armazenamento de backup e carregados no dicionário `TokenCache` . Se o Redis é usado como repositório de backup, cada instância de servidor em um farm de servidores lê e grava no mesmo cache e essa abordagem pode ser expandida para muitos usuários.
 
 ## <a name="encrypting-cached-tokens"></a>Criptografar tokens em cache
+
 Tokens são dados confidenciais, pois concedem acesso aos recursos do usuário. (Além disso, ao contrário de uma senha de usuário, você não pode apenas armazenar um hash do token.) Portanto, é essencial proteger os tokens para que não sejam comprometidos. O cache Redis com suporte do Redis é protegido por senha, mas se alguém obtiver a senha, poderá obter todos os tokens de acesso armazenados em cache. Por esse motivo, o `DistributedTokenCache` criptografa tudo o que grava no repositório de backup. A criptografia é feita usando as APIs de [proteção de dados][data-protection] do ASP.NET Core.
 
 > [!NOTE]
 > Se você implantar em Sites do Azure, será feito um backup das chaves de criptografia no armazenamento de rede e sincronizadas em todos os computadores (consulte [Gerenciamento e tempo de vida da chave][key-management]). Por padrão, as chaves não são criptografadas durante a execução em sites do Azure Web, mas você pode [habilitar a criptografia usando um certificado X.509][x509-cert-encryption].
-> 
-> 
 
 ## <a name="distributedtokencache-implementation"></a>Implementação do DistributedTokenCache
+
 A classe `DistributedTokenCache` deriva da classe [TokenCache][tokencache-class] ADAL.
 
 No construtor, a classe `DistributedTokenCache` cria uma chave para o usuário atual e carrega o cache a partir do armazenamento de backup:

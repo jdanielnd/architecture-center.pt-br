@@ -1,14 +1,16 @@
 ---
 title: Critérios para escolher um armazenamento de dados
-description: Visão geral das opções de computação do Azure
+titleSuffix: Azure Application Architecture Guide
+description: Visão geral das opções de computação do Azure.
 author: MikeWasson
 ms.date: 06/01/2018
-ms.openlocfilehash: f8996cdeb937a28b3f3056da3921a3f89dd36b1a
-ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
+ms.custom: seojan19
+ms.openlocfilehash: 156df11d74d033d40d943c60e8e41d4920a24175
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/02/2018
-ms.locfileid: "50916423"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54114310"
 ---
 # <a name="criteria-for-choosing-a-data-store"></a>Critérios para escolher um armazenamento de dados
 
@@ -21,46 +23,68 @@ Para iniciar a comparação, reúna o máximo possível das informações a segu
 ### <a name="functional-requirements"></a>Requisitos funcionais
 
 - **Formato de dados**. Quais tipos de dados você pretende armazenar? Tipos comuns incluem dados transacionais, objetos JSON, telemetria, índices de pesquisa ou arquivos simples.
+
 - **Tamanho dos dados**. Qual será o tamanho das entidades que você precisa armazenar? Essas entidades precisam ser mantidas como um único documento ou podem ser divididas em vários documentos, tabelas, coleções e assim por diante?
-- **Escala e a estrutura**. Qual é o volume geral da capacidade de armazenamento necessária? Você pretende particionar os dados? 
-- **Relações entre os dados**. Seus dados precisarão dar suporte a relações um para muitos ou muitos para muitos? São relações em si são uma parte importante dos dados? Você precisará ingressar ou combinar os dados de dentro do mesmo conjunto de dados ou de conjuntos de dados externos? 
+
+- **Escala e a estrutura**. Qual é o volume geral da capacidade de armazenamento necessária? Você pretende particionar os dados?
+
+- **Relações entre os dados**. Seus dados precisarão dar suporte a relações um para muitos ou muitos para muitos? São relações em si são uma parte importante dos dados? Você precisará ingressar ou combinar os dados de dentro do mesmo conjunto de dados ou de conjuntos de dados externos?
+
 - **Modelo de consistência**. O quão é importante que as atualizações realizadas em um nó apareçam em outros nós antes de permitir alterações adicionais? É possível aceitar consistência eventual? Você precisa de garantias de ACID para transações?
+
 - **Flexibilidade do esquema**. Quais tipos de esquemas serão aplicadas aos seus dados? Você usará um esquema fixo, uma abordagem de esquema na gravação ou de esquema na leitura?
+
 - **Simultaneidade**. Qual tipo de mecanismo de simultaneidade você deseja usar para atualizar e sincronizar os dados? O aplicativo executará muitas atualizações que poderiam entrar em conflito. Nesse caso, é possível exigir o bloqueio de registros e o controle de simultaneidade pessimista. Como alternativa, você pode dar suporte a controles de simultaneidade otimista? Nesse caso, é simples o suficiente controlar a simultaneidade baseada em carimbo de data/hora ou você precisa de funcionalidade adicional de controle de simultaneidade de várias versões?
+
 - **Movimentação de dados**. Sua solução precisará executar tarefas ETL para mover os dados para outros armazenamentos ou data warehouses?
+
 - **Ciclo de vida dos dados**. A gravação dos ocorre uma vez, com muitas leituras? Eles podem ser movidos para o armazenamento frequente ou esporádico?
+
 - **Outros recursos com suporte**. Você precisa de algum outro recurso específico, como validação de esquema, agregação, indexação, pesquisa de texto completo, MapReduce ou outras funcionalidades de consulta?
 
 ### <a name="non-functional-requirements"></a>Requisitos não funcionais
 
 - **Desempenho e escalabilidade**. Quais são seus requisitos de desempenho de dados? Você tem requisitos específicos para as taxas de ingestão de dados e taxas de processamento de dados? Quais são os tempos de resposta aceitáveis para consulta e agregação dos dados depois de ingeridos? Até que tamanho você precisará aumentar o armazenamento de dados? Sua carga de trabalho tem leituras ou gravações mais frequentes?
-- **Confiabilidade**. A qual SLA geral você precisa dar suporte? Qual nível de tolerância a falhas você precisa fornecer para os consumidores dos dados? De quais tipos de funcionalidades de backup e restauração você precisa? 
-- **Replicação**. Os dados precisarão ser distribuído entre várias réplicas ou regiões? De quais tipos de funcionalidades de replicação de dados você precisa? 
-- **Limites**. Os limites de um armazenamento de dados específico dará suporte aos seus requisitos de escala, número de conexões e taxa de transferência? 
+
+- **Confiabilidade**. A qual SLA geral você precisa dar suporte? Qual nível de tolerância a falhas você precisa fornecer para os consumidores dos dados? De quais tipos de funcionalidades de backup e restauração você precisa?
+
+- **Replicação**. Os dados precisarão ser distribuído entre várias réplicas ou regiões? De quais tipos de funcionalidades de replicação de dados você precisa?
+
+- **Limites**. Os limites de um armazenamento de dados específico dará suporte aos seus requisitos de escala, número de conexões e taxa de transferência?
 
 ### <a name="management-and-cost"></a>Gerenciamento e o custo
 
 - **Serviço gerenciado**. Quando possível, use um serviço de dados gerenciados, a menos que você precise de funcionalidades específicas encontradas somente em um armazenamento de dados hospedado por IaaS.
+
 - **Disponibilidade de região**. Para serviços gerenciais, o serviço está disponível em todas as regiões do Azure? Sua solução precisa ser hospedada em determinadas regiões do Azure?
+
 - **Portabilidade**. Seus dados precisarão ser migrados para o local, datacenters externos ou outros ambientes de hospedagem em nuvem?
+
 - **Licenciamento**. Você tem preferência pelo tipo de licença proprietária em comparação a OSS? Há outras restrições externas sobre o tipo de licença que você pode usar?
+
 - **Custo geral**. Qual é o custo geral de usar o serviço na sua solução? Quantas instâncias você precisará executar para dar suporte aos seus requisitos de tempo de atividade e taxa de transferência? Considere os custos das operações neste cálculo. Um motivo para preferir serviços gerenciados é a redução dos custos operacionais.
+
 - **Economia de custos**. Você pode particionar seus dados para armazená-los de forma mais econômica? Por exemplo, você pode mover grandes objetos para fora de um banco de dados relacional caro e para um repositório de objetos?
 
 ### <a name="security"></a>Segurança
 
 - **Segurança**. Qual tipo de criptografia é necessária? Você precisa de criptografia em repouso? Qual mecanismo de autenticação você deseja usar para se conectar aos seus dados?
+
 - **Auditoria**. Qual tipo de log de auditoria você precisa gerar?
+
 - **Requisitos de rede**. Você precisa restringir ou gerenciar o acesso aos dados de outros recursos de rede? Os dados precisam ser acessíveis somente de dentro do ambiente do Azure? Os dados precisam ser acessíveis de endereços IP ou sub-redes específicas? Eles precisam ser acessíveis de aplicativos ou serviços hospedados localmente ou de outros datacenters externos?
 
 ### <a name="devops"></a>DevOps
 
 - **Conjunto de qualificações**. Há determinadas linguagens de programação, sistemas operacionais ou outras tecnologias que sua equipe tem experiência específica em usar? Há outras com as quais seria difícil sua equipe trabalhar?
+
 - **Clientes** Há suporte de cliente adequado para suas linguagens de desenvolvimento?
 
 As seções a seguir comparam vários modelos de armazenamento de dados com relação ao perfil de carga de trabalho, tipos de dados e casos de uso de exemplo.
 
 ## <a name="relational-database-management-systems-rdbms"></a>RDBMS
+
+<!-- markdownlint-disable MD033 -->
 
 <table>
 <tr><td><strong>Carga de trabalho</strong></td>
@@ -305,7 +329,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
     <td>
         <ul>
             <li>Análise de dados</li>
-            <li>Enterprise BI   </li>
+            <li>Enterprise BI</li>
         </ul>
     </td>
 </tr>
@@ -324,7 +348,6 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
     </td>
 </tr>
 </table>
-
 
 ## <a name="time-series-databases"></a>Bancos de dados de séries temporais
 
@@ -424,3 +447,5 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
     </td>
 </tr>
 </table>
+
+<!-- markdownlint-enable MD033 -->

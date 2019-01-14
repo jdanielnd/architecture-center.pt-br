@@ -1,17 +1,14 @@
 ---
 title: Sobre o aplicativo Tailspin Surveys
-description: Visão geral do aplicativo Tailspin Surveys
+description: Uma visão geral do aplicativo Tailspin Surveys.
 author: MikeWasson
 ms.date: 07/21/2017
-pnp.series.title: Manage Identity in Multitenant Applications
-pnp.series.prev: index
-pnp.series.next: authenticate
-ms.openlocfilehash: a1c357bd1b5306d1255c66aaea96d86be55e7b77
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 95e170c584b8ec5694be69e595b7791c1bcdfdc0
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902061"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54111454"
 ---
 # <a name="the-tailspin-scenario"></a>O cenário da Tailspin
 
@@ -25,10 +22,9 @@ A Tailspin é uma empresa fictícia que está desenvolvendo um aplicativo SaaS c
 
 > [!NOTE]
 > Para começar a usar o aplicativo, confira [Executar o aplicativo Surveys].
-> 
-> 
 
 ## <a name="users-can-create-edit-and-view-surveys"></a>Os usuários podem criar, editar e publicar pesquisas
+
 Um usuário autenticado pode exibir todas as pesquisas que criou, ou com as quais tem direitos de colaborador, e criar novas pesquisas. Observe que o usuário é conectado com sua identidade organizacional, `bob@contoso.com`.
 
 ![Aplicativo de pesquisas](./images/surveys-screenshot.png)
@@ -42,7 +38,8 @@ Os usuários também podem exibir as pesquisas criadas por outros usuários no m
 ![Pesquisas de locatário](./images/tenant-surveys.png)
 
 ## <a name="survey-owners-can-invite-contributors"></a>Os proprietários das pesquisas podem convidar colaboradores
-Quando um usuário cria uma pesquisa, ele ou ela pode convidar outras pessoas para ser colaboradores da pesquisa. Os colaboradores podem editar a pesquisa, mas não podem excluí-la ou publicá-la.  
+
+Quando um usuário cria uma pesquisa, ele ou ela pode convidar outras pessoas para ser colaboradores da pesquisa. Os colaboradores podem editar a pesquisa, mas não podem excluí-la ou publicá-la.
 
 ![Adicionar colaborador](./images/add-contributor.png)
 
@@ -55,6 +52,7 @@ Quando Beatriz fizer logon, ela verá a pesquisa listada em “Pesquisas com as 
 Observe que Beatriz entra em seu próprio locatário, não como uma convidada do locatário da Contoso. Alice tem permissões de colaboradora apenas para essa pesquisa &mdash; ela não pode exibir outros pesquisas do locatário Contoso.
 
 ## <a name="architecture"></a>Arquitetura
+
 O aplicativo Surveys consiste em um front-end da Web e um back-end de API da Web. Ambos são implementados usando o [ASP.NET Core].
 
 O aplicativo Web usa o Azure AD (Azure Active Directory) para autenticar usuários. Ele também chama o Azure AD para obter tokens de acesso do OAuth 2 para a API Web. Tokens de acesso são armazenados no Cache Redis do Azure. O cache permite que várias instâncias compartilhem o mesmo cache de token (por exemplo, em um farm de servidores).
@@ -63,7 +61,7 @@ O aplicativo Web usa o Azure AD (Azure Active Directory) para autenticar usuári
 
 [**Avançar**][authentication]
 
-<!-- Links -->
+<!-- links -->
 
 [authentication]: authenticate.md
 

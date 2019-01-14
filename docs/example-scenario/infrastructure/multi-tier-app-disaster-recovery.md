@@ -1,16 +1,16 @@
 ---
 title: Aplicativo Web de várias camadas criado para HA/DR
 titleSuffix: Azure Example Scenarios
-description: Criar um aplicativo Web de várias camadas projetado para alta disponibilidade e recuperação de desastres no Azure usando máquinas virtuais do Azure, conjuntos de disponibilidade, zonas de disponibilidade, Azure Site Recovery e Gerenciador de Tráfego do Azure
+description: Crie um aplicativo Web de várias camadas projetado para alta disponibilidade e recuperação de desastres no Azure usando máquinas virtuais do Azure, conjuntos de disponibilidade, zonas de disponibilidade, Azure Site Recovery e Gerenciador de Tráfego do Azure.
 author: sujayt
 ms.date: 11/16/2018
 ms.custom: product-team
-ms.openlocfilehash: baa468697b4a72975e3b192efc9bdf1861a0c0da
-ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
+ms.openlocfilehash: d2b466cc691c02ea3c5fb6ff72d91865d33c3378
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/20/2018
-ms.locfileid: "53644029"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54114089"
 ---
 # <a name="multitier-web-application-built-for-high-availability-and-disaster-recovery-on-azure"></a>Aplicativo Web de várias camadas criado para alta disponibilidade e recuperação de desastres no Azure
 

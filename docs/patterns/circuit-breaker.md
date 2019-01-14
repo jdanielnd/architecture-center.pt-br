@@ -1,18 +1,17 @@
 ---
-title: Disjuntor
+title: Padrão de Disjuntor
+titleSuffix: Cloud Design Patterns
 description: Trate as falhas que possam consumir uma quantidade variável de tempo para serem corrigidas ao se conectar a um serviço ou recurso remoto.
 keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- resiliency
-ms.openlocfilehash: 5a9c8254bf62488b46517ee3582c2323e206df8a
-ms.sourcegitcommit: e9d9e214529edd0dc78df5bda29615b8fafd0e56
+ms.custom: seodec18
+ms.openlocfilehash: 56c90fcb23fd68b0d1b545db90adeab3272705c2
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 06/28/2018
-ms.locfileid: "37090944"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54009756"
 ---
 # <a name="circuit-breaker-pattern"></a>Padrão de Disjuntor
 
@@ -68,7 +67,7 @@ Os seguintes pontos devem ser considerados ao decidir como implementar esse padr
 
 **Capacidade de recuperação**. Você deve configurar o disjuntor para coincidir com o padrão de probabilidade de recuperação da operação sendo protegida. Por exemplo, se o disjuntor permanece no estado **Aberto** por um longo período, ele pode gerar exceções mesmo se o motivo da falha foi resolvido. De forma semelhante, um disjuntor pode flutuar e reduzir os tempos de resposta dos aplicativos se mudar do estado **Aberto** para o estado **Entreaberto** muito rapidamente.
 
-**Teste de operações com falha**. No estado **Aberto**, em vez de usar um temporizador para determinar quando mudar para o estado **Entreaberto**, um disjuntor pode executar ping periodicamente no serviço remoto ou no recurso para determinar se ele fica disponível novamente. Esse ping pode assumir a forma de uma tentativa de invocar uma operação que falhou anteriormente ou pode usar uma operação especial fornecida pelo serviço remoto especificamente para testar a integridade do serviço, conforme descrito pelo [Padrão de monitoramento do ponto de extremidade de integridade](health-endpoint-monitoring.md).
+**Teste de operações com falha**. No estado **Aberto**, em vez de usar um temporizador para determinar quando mudar para o estado **Entreaberto**, um disjuntor pode executar ping periodicamente no serviço remoto ou no recurso para determinar se ele fica disponível novamente. Esse ping pode assumir a forma de uma tentativa de invocar uma operação que falhou anteriormente ou pode usar uma operação especial fornecida pelo serviço remoto especificamente para testar a integridade do serviço, conforme descrito pelo [Padrão de monitoramento do ponto de extremidade de integridade](./health-endpoint-monitoring.md).
 
 **Substituição manual**. Em um sistema em que o tempo de recuperação de uma operação com falha é extremamente variável, é útil fornecer uma opção de reinício manual que permita ao administrador fechar um disjuntor (e reiniciar o contador de falhas). De modo semelhante, um administrador poderá forçar um disjuntor a entrar no estado **Aberto** (e reiniciar o temporizador de tempo limite) se a operação protegida pelo disjuntor estiver temporariamente não disponível.
 
@@ -284,9 +283,6 @@ catch (Exception ex)
 
 Os seguintes padrões também serão úteis ao implementar este padrão:
 
-- [Padrão de repetição][retry-pattern]. Descreve como um aplicativo pode tratar falhas previstas e temporárias quando tentar se conectar a um serviço ou recurso de rede repetindo de forma transparente uma operação que falhou anteriormente.
+- [Padrão de repetição](./retry.md). Descreve como um aplicativo pode tratar falhas previstas e temporárias quando tentar se conectar a um serviço ou recurso de rede repetindo de forma transparente uma operação que falhou anteriormente.
 
-- [Padrão de monitoramento do ponto de extremidade de integridade](health-endpoint-monitoring.md). Um disjuntor pode testar a integridade de um serviço enviando uma solicitação para um ponto de extremidade exposto pelo serviço. O serviço deve retornar informações indicando seu status.
-
-
-[retry-pattern]: ./retry.md
+- [Padrão de monitoramento do ponto de extremidade de integridade](./health-endpoint-monitoring.md). Um disjuntor pode testar a integridade de um serviço enviando uma solicitação para um ponto de extremidade exposto pelo serviço. O serviço deve retornar informações indicando seu status.

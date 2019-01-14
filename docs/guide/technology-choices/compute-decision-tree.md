@@ -1,21 +1,23 @@
 ---
 title: Árvore de decisão para serviços de computação do Azure
-description: Um fluxograma para selecionar um serviço de computação
+titleSuffix: Azure Application Architecture Guide
+description: Um fluxograma para selecionar um serviço de computação.
 author: MikeWasson
 ms.date: 11/03/2018
-ms.openlocfilehash: cb074272b8d00a71223d8c5755ef8cde3a3f2592
-ms.sourcegitcommit: 225251ee2dd669432a9c9abe3aa8cd84d9e020b7
+ms.custom: seojan19
+ms.openlocfilehash: 905b9956c9dcddddb21a87ea588af0ad5160ae2a
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/04/2018
-ms.locfileid: "50981973"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54114072"
 ---
 # <a name="decision-tree-for-azure-compute-services"></a>Árvore de decisão para serviços de computação do Azure
 
-O Azure oferece várias maneiras de hospedar o código do seu aplicativo. O termo *computação* refere-se ao modelo de hospedagem para os recursos de computação em que seu aplicativo é executado. O fluxograma a seguir o ajudará a escolher um serviço de computação para o aplicativo. O fluxograma orienta você por um conjunto de critérios de decisão essenciais que geram uma recomendação. 
+O Azure oferece várias maneiras de hospedar o código do seu aplicativo. O termo *computação* refere-se ao modelo de hospedagem para os recursos de computação em que seu aplicativo é executado. O fluxograma a seguir o ajudará a escolher um serviço de computação para o aplicativo. O fluxograma orienta você por um conjunto de critérios de decisão essenciais que geram uma recomendação.
 
 **Trate esse fluxograma como um ponto de partida.** Cada aplicativo tem requisitos exclusivos e, portanto use a recomendação como um ponto de partida. Em seguida, execute uma avaliação mais detalhada, observando aspectos como:
- 
+
 - Conjunto de recursos
 - [Limites de serviço](/azure/azure-subscription-service-limits)
 - [Custo](https://azure.microsoft.com/pricing/)
@@ -26,11 +28,11 @@ O Azure oferece várias maneiras de hospedar o código do seu aplicativo. O term
 
 Se o aplicativo tem várias cargas de trabalho, avalie cada carga de trabalho separadamente. Uma solução completa pode incorporar dois ou mais serviços de computação.
 
-Para obter mais informações sobre as opções de hospedagem de contêineres no Azure, consulte https://azure.microsoft.com/overview/containers/.
+Para obter mais informações sobre as opções de hospedagem de contêineres no Azure, confira [Contêineres do Azure](https://azure.microsoft.com/overview/containers/).
 
 ## <a name="flowchart"></a>Fluxograma
 
-![](../images/compute-decision-tree.svg)
+![Árvore de decisão para serviços de computação do Azure](../images/compute-decision-tree.svg)
 
 ## <a name="definitions"></a>Definições
 

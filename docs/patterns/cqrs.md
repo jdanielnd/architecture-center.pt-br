@@ -1,20 +1,17 @@
 ---
-title: CQRS
+title: Padrão CQRS (Segregação de Responsabilidade de Consulta e Comando)
+titleSuffix: Cloud Design Patterns
 description: Separar as operações que leem dados de operações que atualizam dados usando interfaces separadas.
 keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- data-management
-- design-implementation
-- performance-scalability
-ms.openlocfilehash: de9530f7dd55c0ce5460cd3b58ab9f216c9b5c8c
-ms.sourcegitcommit: fb22348f917a76e30a6c090fcd4a18decba0b398
+ms.custom: seodec18
+ms.openlocfilehash: 320f6cd51a44b3a6732d8395f0a5e1db8f9f5774
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/16/2018
-ms.locfileid: "53450863"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54010368"
 ---
 # <a name="command-and-query-responsibility-segregation-cqrs-pattern"></a>Padrão CQRS (Segregação de Responsabilidade de Consulta e Comando)
 
@@ -56,7 +53,7 @@ O repositório de leitura pode ser uma réplica somente para leitura do reposit�
 
 A separação dos repositórios de gravação e leitura também permite que cada um seja dimensionado adequadamente para corresponder à carga. Por exemplo, os repositórios de leitura normalmente encontram uma carga muito maior do que os repositórios de gravação.
 
-Quando o modelo leitura/consulta contém dados desnormalizados (consulte [Padrão de Exibição Materializada](materialized-view.md)), o desempenho é maximizado ao ler dados para cada uma das exibições em um aplicativo ou ao consultar os dados no sistema.
+Quando o modelo leitura/consulta contém dados desnormalizados (consulte [Padrão de Exibição Materializada](./materialized-view.md)), o desempenho é maximizado ao ler dados para cada uma das exibições em um aplicativo ou ao consultar os dados no sistema.
 
 ## <a name="issues-and-considerations"></a>Problemas e considerações
 
@@ -96,7 +93,7 @@ Esse padrão não é recomendado nas seguintes situações:
 
 ## <a name="event-sourcing-and-cqrs"></a>Fornecimento de evento e CQRS
 
-O padrão CQRS é frequentemente utilizado juntamente com o padrão de Fornecimento de Evento. Os sistemas baseados em CQRS utilizam modelos de dados de gravação e leitura separados, cada um adaptado a tarefas relevantes e, muitas vezes, localizado em repositórios separados fisicamente. Quando utilizado com o padrão [Fornecimento de Evento](event-sourcing.md), o repositório de eventos é o modelo de gravação e é a fonte oficial de informações. O modelo de leitura de um sistema baseado em CQRS fornece exibições materializadas dos dados, geralmente como exibições altamente desnormalizadas. Essas exibições são adaptadas às interfaces e aos requisitos de exibição do aplicativo, o que ajuda a maximizar tanto o desempenho de consulta como exibição.
+O padrão CQRS é frequentemente utilizado juntamente com o padrão de Fornecimento de Evento. Os sistemas baseados em CQRS utilizam modelos de dados de gravação e leitura separados, cada um adaptado a tarefas relevantes e, muitas vezes, localizado em repositórios separados fisicamente. Quando utilizado com o padrão [Fornecimento de Evento](./event-sourcing.md), o repositório de eventos é o modelo de gravação e é a fonte oficial de informações. O modelo de leitura de um sistema baseado em CQRS fornece exibições materializadas dos dados, geralmente como exibições altamente desnormalizadas. Essas exibições são adaptadas às interfaces e aos requisitos de exibição do aplicativo, o que ajuda a maximizar tanto o desempenho de consulta como exibição.
 
 Utilizando o stream de eventos como o repositório de gravação, em vez dos dados reais em um ponto no tempo, evita conflitos de atualização em um único agregado e maximiza o desempenho e a escalabilidade. Os eventos podem ser utilizados para gerar de maneira assíncrona exibições materializadas dos dados que são utilizadas para preencher o repositório de leitura.
 
@@ -242,9 +239,9 @@ Os seguintes padrões e diretrizes serão úteis ao implementar esse padrão:
 
 - [Diretrizes de Particionamento de Dados](https://msdn.microsoft.com/library/dn589795.aspx). Descreve como os repositórios de dados de gravação e leitura usados no padrão CQRS podem ser divididos em partições que podem ser gerenciadas e acessadas separadamente para melhorar a escalabilidade, reduzir a contenção e otimizar o desempenho.
 
-- [Padrão de Fornecimento de Evento](event-sourcing.md). Descreve detalhadamente como o Fornecimento de Eventos pode ser utilizado com o padrão CQRS para simplificar tarefas em domínios complexos, ao mesmo tempo em que melhora o desempenho, a escalabilidade e capacidade de resposta. Além disso, como fornecer consistência para dados transacionais, ao mesmo tempo que mantém trilhas de auditoria completas e histórico que podem permitir ações de compensação.
+- [Padrão de Fornecimento do Evento](./event-sourcing.md). Descreve detalhadamente como o Fornecimento de Eventos pode ser utilizado com o padrão CQRS para simplificar tarefas em domínios complexos, ao mesmo tempo em que melhora o desempenho, a escalabilidade e capacidade de resposta. Além disso, como fornecer consistência para dados transacionais, ao mesmo tempo que mantém trilhas de auditoria completas e histórico que podem permitir ações de compensação.
 
-- [Padrão de Exibição Materializada](materialized-view.md). O modelo de leitura de uma implementação CQRS pode conter exibições materializadas dos dados do modelo de gravação, ou o modelo de leitura pode ser utilizado para gerar exibições materializadas.
+- [Padrão de Exibição Materializada](./materialized-view.md). O modelo de leitura de uma implementação CQRS pode conter exibições materializadas dos dados do modelo de gravação, ou o modelo de leitura pode ser utilizado para gerar exibições materializadas.
 
 - Guia de padrões e práticas [Recurso CQRS](https://aka.ms/cqrs). Mais especificamente, [Apresentando o padrão de segregação de responsabilidade da consulta de comando](https://msdn.microsoft.com/library/jj591573.aspx) explora o padrão e quando ele é útil, e [Epílogo: lições aprendidas](https://msdn.microsoft.com/library/jj591568.aspx) ajuda você a entender alguns dos problemas que surgem ao usar esse padrão.
 

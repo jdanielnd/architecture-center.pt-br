@@ -1,17 +1,17 @@
 ---
 title: Proteger uma API Web de back-end em um aplicativo multilocatário
-description: Como proteger uma API Web de back-end
+description: Como proteger uma API Web de back-end.
 author: MikeWasson
 ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: authorize
 pnp.series.next: token-cache
-ms.openlocfilehash: e738eb94b5978efa4e7a4bebcc72daa7968ac904
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 517bdbb6e1a1063db9337b63905e2ff5f4bdd4d4
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52901585"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54114021"
 ---
 # <a name="secure-a-backend-web-api"></a>Proteger uma API Web de back-end
 
@@ -19,13 +19,13 @@ ms.locfileid: "52901585"
 
 O aplicativo [Tailspin Surveys] usa uma API Web de back-end para gerenciar operações CRUD em pesquisas. Por exemplo, quando um usuário clica em "Minhas Pesquisas", o aplicativo Web envia uma solicitação HTTP para a API Web:
 
-```
+```http
 GET /users/{userId}/surveys
 ```
 
 A API Web retorna um objeto JSON:
 
-```
+```http
 {
   "Published":[],
   "Own":[
@@ -40,8 +40,6 @@ A API Web não permite solicitações anônimas, portanto, o aplicativo Web deve
 
 > [!NOTE]
 > Esse é um cenário de servidor a servidor. O aplicativo não faz chamadas AJAX à API a partir do cliente de navegador.
-> 
-> 
 
 Há duas abordagens principais que você pode usar:
 
@@ -50,7 +48,7 @@ Há duas abordagens principais que você pode usar:
 
 O aplicativo Tailspin implementa a identidade de usuário delegado. Aqui estão as diferenças principais:
 
-**Identidade de usuário delegado**
+**Identidade de usuário delegado:**
 
 * O token de portador enviado para a API Web contém a identidade do usuário.
 * A API Web toma decisões de autorização baseadas na identidade do usuário.
@@ -58,7 +56,7 @@ O aplicativo Tailspin implementa a identidade de usuário delegado. Aqui estão 
 * Normalmente, o aplicativo Web ainda toma algumas decisões de autorização que afetam a interface do usuário, como mostrar ou ocultar elementos da interface do usuário.
 * A API Web pode vir a ser usada por clientes não confiáveis, como um aplicativo JavaScript ou um aplicativo cliente nativo.
 
-**Identidade do aplicativo**
+**Identidade do aplicativo:**
 
 * A API Web não obtém informações sobre o usuário.
 * A API Web não pode executar autorizações baseadas na identidade do usuário. Todas as decisões de autorização são feitas pelo aplicativo Web.  
@@ -75,23 +73,25 @@ O restante deste artigo pressupõe que o aplicativo esteja se autenticando com o
 ![Obtendo o token de acesso](./images/access-token.png)
 
 ## <a name="register-the-web-api-in-azure-ad"></a>Registrar a API Web no Azure AD
+
 Para que o Azure AD emita um token de portador para a API Web, serão necessárias algumas configurações.
 
 1. Registre a API Web no Azure AD.
 
 2. Adicione a ID do cliente do aplicativo Web ao manifesto de aplicativo da API Web na propriedade `knownClientApplications` . Confira [Atualizar os manifestos do aplicativo].
 
-3. Conceda permissão de aplicativo Web para chamar a API Web. No Portal de Gerenciamento do Azure, você pode definir dois tipos de permissões: "Permissões de Aplicativo" para a identidade de aplicativo (fluxo da credencial de cliente) ou "Permissões Delegadas" para a identidade de usuário delegado.
-   
+3. Conceda permissão de aplicativo Web para chamar a API Web. No Portal de Gerenciamento do Azure, você pode definir dois tipos de permissões: "Permissões de Aplicativo" para a identidade do aplicativo (fluxo da credencial de cliente) ou "Permissões Delegadas" para a identidade do usuário delegado.
+
    ![Permissões delegadas](./images/delegated-permissions.png)
 
 ## <a name="getting-an-access-token"></a>Obtendo um token de acesso
+
 Antes de chamar a API Web, o aplicativo Web obtém um token de acesso do Azure AD. Em um aplicativo .NET, use a [Biblioteca de Autenticação do Azure AD (ADAL) para .NET][ADAL].
 
 No fluxo de código de autorização OAuth 2, o aplicativo troca um código de autorização por um token de acesso. O código a seguir usa ADAL para obter o token de acesso. Esse código é chamado durante o evento `AuthorizationCodeReceived` .
 
 ```csharp
-// The OpenID Connect middleware sends this event when it gets the authorization code.   
+// The OpenID Connect middleware sends this event when it gets the authorization code.
 public override async Task AuthorizationCodeReceived(AuthorizationCodeReceivedContext context)
 {
     string authorizationCode = context.ProtocolMessage.Code;
@@ -127,9 +127,10 @@ var result = await authContext.AcquireTokenSilentAsync(resourceID, credential, n
 em que `userId` é a ID de objeto do usuário, encontrada na declaração `http://schemas.microsoft.com/identity/claims/objectidentifier`.
 
 ## <a name="using-the-access-token-to-call-the-web-api"></a>Usando o token de acesso para chamar a API Web
+
 Quando já tiver o token, envie-o no cabeçalho Autorização das solicitações HTTP à API Web.
 
-```
+```http
 Authorization: Bearer xxxxxxxxxx
 ```
 
@@ -155,6 +156,7 @@ public static async Task<HttpResponseMessage> SendRequestWithBearerTokenAsync(th
 ```
 
 ## <a name="authenticating-in-the-web-api"></a>Autenticando na API Web
+
 A API Web precisa autenticar o token de portador. No ASP.NET Core, você pode usar o pacote [Microsoft.AspNet.Authentication.JwtBearer][JwtBearer]. Esse pacote fornece o middleware que permite ao aplicativo receber tokens de portador do OpenID Connect.
 
 Registre o middleware na classe `Startup` de sua API Web.
@@ -172,7 +174,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, Applicat
         },
         Events= new SurveysJwtBearerEvents(loggerFactory.CreateLogger<SurveysJwtBearerEvents>())
     });
-    
+
     // ...
 }
 ```
@@ -183,6 +185,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, Applicat
 * **Eventos** é uma classe que deriva de **JwtBearerEvents**.
 
 ### <a name="issuer-validation"></a>Validação do emissor
+
 Valide o emissor do token no evento **JwtBearerEvents.TokenValidated**. O emissor é enviado na declaração "iss".
 
 No aplicativo Surveys, a Web API não trata da [inscrição de locatários]. Portanto, ela apenas verifica se o emissor já está no banco de dados do aplicativo. Se não estiver, ela gerará uma exceção que causará uma falha na autenticação.
@@ -221,7 +224,8 @@ public override async Task TokenValidated(TokenValidatedContext context)
 Como mostra este exemplo, você também pode usar o evento **TokenValidated** para modificar as declarações. Lembre-se de que as declarações são fornecidas diretamente do Azure AD. Se o aplicativo Web modificar as declarações que obtém, essas alterações não aparecerão no token portador que a API Web recebe. Para obter mais informações, consulte [Transformações de declarações][claims-transformation].
 
 ## <a name="authorization"></a>Autorização
-Para obter uma discussão geral sobre autorização, consulte [Autorização baseada em função e baseada em recursos][Authorization]. 
+
+Para obter uma discussão geral sobre autorização, consulte [Autorização baseada em função e baseada em recursos][Authorization].
 
 O middleware JwtBearer manipula as respostas de autorização. Por exemplo, para restringir uma ação do controlador para usuários autenticados, use o atributo **[Autorizar]** e especifique **JwtBearerDefaults.AuthenticationScheme** como o esquema de autenticação:
 
@@ -248,18 +252,18 @@ public void ConfigureServices(IServiceCollection services)
             policy =>
             {
                 policy.AddRequirements(new SurveyCreatorRequirement());
-                policy.RequireAuthenticatedUser(); // Adds DenyAnonymousAuthorizationRequirement 
+                policy.RequireAuthenticatedUser(); // Adds DenyAnonymousAuthorizationRequirement
                 policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
             });
         options.AddPolicy(PolicyNames.RequireSurveyAdmin,
             policy =>
             {
                 policy.AddRequirements(new SurveyAdminRequirement());
-                policy.RequireAuthenticatedUser(); // Adds DenyAnonymousAuthorizationRequirement 
+                policy.RequireAuthenticatedUser(); // Adds DenyAnonymousAuthorizationRequirement
                 policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
             });
     });
-    
+
     // ...
 }
 ```

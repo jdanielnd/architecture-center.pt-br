@@ -5,12 +5,12 @@ description: Recomendações para nomear máquinas virtuais, contas de armazenam
 author: telmosampaio
 ms.date: 10/19/2018
 ms.custom: seodec18
-ms.openlocfilehash: 4f934102acea24e8e1070ed6a25d63927f0bd252
-ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
+ms.openlocfilehash: f0349b5db7eb15037bd92567eaf917b5d044daa0
+ms.sourcegitcommit: 036cd03c39f941567e0de4bae87f4e2aa8c84cf8
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53307071"
+ms.lasthandoff: 01/05/2019
+ms.locfileid: "54058192"
 ---
 # <a name="naming-conventions-for-azure-resources"></a>Convenções de nomenclatura para recursos do Azure
 
@@ -62,7 +62,7 @@ Os afixos podem se referir a diversos aspectos que descrevam os recursos em ques
 | --- | --- | --- |
 | Ambiente |dev, prod, QA |Identifica o ambiente do recurso |
 | Local padrão |uw (Oeste dos EUA), ue (Leste dos EUA) |Identifica a região na qual o recurso foi implantado |
-| Instância |01, 02 |Para recursos com mais de uma instância nomeada (servidores Web etc.). |
+| Instância |1, 2,... |Para recursos com mais de uma instância nomeada, como VMs ou NICs. |
 | Produto ou serviço |propriedade serviço |Identifica o produto, o aplicativo ou o serviço que recebe suporte do recurso |
 | Função |sql, web, messaging |Identifica a função do recurso associado |
 
@@ -175,7 +175,7 @@ Há dois casos de uso primário para contas de armazenamento: backup de discos p
 
 É possível configurar um nome de domínio personalizado para acessar dados de blob em sua Conta de Armazenamento do Microsoft Azure. O ponto de extremidade padrão para o serviço Blob é `https://<name>.blob.core.windows.net`.
 
-Porém, se você mapear um domínio personalizado (como www.contoso.com) para o ponto de extremidade do blob de sua conta de armazenamento, também poderá acessar dados do blob em sua conta de armazenamento usando esse domínio. Por exemplo, com um nome de domínio personalizado, `https://mystorage.blob.core.windows.net/mycontainer/myblob` pode ser acessada como `https://www.contoso.com/mycontainer/myblob`.
+Porém, se você mapear um domínio personalizado (como `www.contoso.com`) para o ponto de extremidade do blob de sua conta de armazenamento, também poderá acessar dados do blob em sua conta de armazenamento usando esse domínio. Por exemplo, com um nome de domínio personalizado, `https://mystorage.blob.core.windows.net/mycontainer/myblob` pode ser acessada como `https://www.contoso.com/mycontainer/myblob`.
 
 Para obter mais informações sobre como configurar esse recurso, confira [Configurar um nome de domínio personalizado para seu ponto de extremidade de Armazenamento de Blobs](/azure/storage/storage-custom-domain-name/).
 

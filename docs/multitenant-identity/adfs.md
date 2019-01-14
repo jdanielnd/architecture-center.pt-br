@@ -1,23 +1,24 @@
 ---
 title: Federar com o AD FS de um cliente
-description: Como federar com o AD FS de um cliente em um aplicativo multilocatário
+description: Como federar com o AD FS de um cliente em um aplicativo multilocatário.
 author: MikeWasson
 ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: token-cache
 pnp.series.next: client-assertion
-ms.openlocfilehash: fec10ca0e067b3b51bf9dba70d66ceb12423787d
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 27fad1aab8d359346353cc031a2e8d8746294818
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902690"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113545"
 ---
 # <a name="federate-with-a-customers-ad-fs"></a>Federar com o AD FS de um cliente
 
 Este artigo descreve como um aplicativo SaaS multilocatário pode oferecer suporte à autenticação por meio do AD FS (Serviços de Federação do Active Directory) para federar com o AD FS de um cliente.
 
 ## <a name="overview"></a>Visão geral
+
 O Azure AD (Azure Active Directory) facilita a entrada de usuários a partir de locatários do Azure AD, incluindo clientes do Office365 e do Dynamics CRM Online. Mas e quanto aos clientes que usam o Active Directory local em uma intranet corporativa?
 
 Uma opção seria esses clientes sincronizarem o AD local com o Azure AD, usando o [Azure AD Connect]. No entanto, talvez alguns clientes não consigam usar essa abordagem devido à política de TI corporativa ou por outros motivos. Nesse caso, outra opção é a federação por meio do AD FS (Serviços de Federação do Active Directory).
@@ -38,22 +39,24 @@ Há três funções principais na relação de confiança:
 
 > [!NOTE]
 > Neste artigo, supomos que o aplicativo use OpenID Connect como o protocolo de autenticação. Outra opção é usar o WS-Federation.
-> 
+>
 > Para o OpenID Connect, o provedor de SaaS deve usar o AD FS 2016, em execução no Windows Server 2016. O AD FS 3.0 não oferece suporte para o OpenID Connect.
-> 
+>
 > O ASP.NET Core não inclui suporte nativo para a especificação Web Services Federation.
-> 
-> 
+>
+>
 
 Para obter um exemplo do uso da especificação Web Services Federation com ASP.NET 4, veja o [exemplo active-directory-dotnet-webapp-wsfederation][active-directory-dotnet-webapp-wsfederation].
 
 ## <a name="authentication-flow"></a>Fluxo de autenticação
+
 1. Quando o usuário clicar em "entrar", o aplicativo será redirecionado para um ponto de extremidade do OpenID Connect sobre o AD FS do provedor de SaaS.
 2. O usuário insere seu nome de usuário da organização ("`alice@corp.contoso.com`"). O AD FS usa a descoberta de realm inicial para redirecionar o AD FS do cliente, no qual o usuário insere suas credenciais.
 3. O AD FS do cliente envia declarações de usuário para o AD FS do provedor de SaaS, usando o WF-Federation (ou SAML).
 4. Fluxo de declarações do AD FS para o aplicativo, usando o OpenID Connect. Isso exige uma transição de protocolo do WS-Federation.
 
 ## <a name="limitations"></a>Limitações
+
 Por padrão, o aplicativo de terceira parte recebe apenas um conjunto fixo de declarações disponíveis no id_token, mostrado na tabela a seguir. Com o AD FS 2016, você pode personalizar o id_token em cenários de OpenID Connect. Para saber mais, veja [Tokens de ID personalizados do AD FS](/windows-server/identity/ad-fs/development/customize-id-token-ad-fs-2016).
 
 | Declaração | DESCRIÇÃO |
@@ -72,12 +75,11 @@ Por padrão, o aplicativo de terceira parte recebe apenas um conjunto fixo de de
 
 > [!NOTE]
 > A declaração "iss" contém o AD FS do parceiro (normalmente, essa declaração identificará o provedor de SaaS como o emissor). Ela não identifica AD FS do cliente. Você pode encontrar o domínio do cliente como parte do UPN.
-> 
-> 
 
 O restante deste artigo descreve como configurar a relação de confiança entre o RP (o aplicativo) e o parceiro de conta (o cliente).
 
 ## <a name="ad-fs-deployment"></a>Implantação do AD FS
+
 O provedor de SaaS pode implantar o AD FS no local ou em VMs do Azure. É importante seguir estas diretrizes para obter segurança e disponibilidade:
 
 * Implante pelo menos dois servidores do AD FS e dois servidores proxy do AD FS para atingir a melhor disponibilidade do serviço AD FS.
@@ -87,13 +89,15 @@ O provedor de SaaS pode implantar o AD FS no local ou em VMs do Azure. É import
 Para configurar uma topologia semelhante no Azure é preciso usar redes virtuais, NSGs, VMs do azure e conjuntos de disponibilidade. Para obter mais detalhes, confira [Diretrizes para implantar o Active Directory do Windows Server em máquinas virtuais do Azure][active-directory-on-azure].
 
 ## <a name="configure-openid-connect-authentication-with-ad-fs"></a>Configurar a autenticação do OpenID Connect com o AD FS
-O provedor de SaaS deve habilitar o OpenID Connect entre o aplicativo e do AD FS. Para fazer isso, adicione um grupo de aplicativos ao AD FS.  Você pode encontrar instruções detalhadas nesta [postagem do blog], em " Setting up a Web App for OpenId Connect sign in AD FS". 
+
+O provedor de SaaS deve habilitar o OpenID Connect entre o aplicativo e do AD FS. Para fazer isso, adicione um grupo de aplicativos ao AD FS.  Você pode encontrar instruções detalhadas nesta [postagem do blog], em " Setting up a Web App for OpenId Connect sign in AD FS".
 
 Em seguida, configure o middleware OpenID Connect. O ponto de extremidade de metadados é `https://domain/adfs/.well-known/openid-configuration`, no qual o domínio é o domínio do AD FS do provedor de SaaS.
 
 Normalmente, você pode combinar esse a outros pontos de extremidade do OpenID Connect (por exemplo, AAD). Você precisará de dois botões de entrada diferentes, ou alguma outra maneira para diferenciá-los, para que o usuário seja enviado ao ponto de extremidade de autenticação correto.
 
 ## <a name="configure-the-ad-fs-resource-partner"></a>Configurar o parceiro de recursos do AD FS
+
 O provedor de SaaS deve fazer o seguinte para cada cliente que deseja se conectar via ADFS:
 
 1. Adicionar uma relação de confiança do provedor de declarações.
@@ -103,6 +107,7 @@ O provedor de SaaS deve fazer o seguinte para cada cliente que deseja se conecta
 Veja as etapas com mais detalhes.
 
 ### <a name="add-the-claims-provider-trust"></a>Adicionar a relação de confiança do provedor de declarações
+
 1. No Gerenciador do Servidor, clique em **Ferramentas** e depois selecione **Gerenciamento do AD FS**.
 2. Na árvore de console, em **AD FS**, clique com botão direito do mouse em **Confianças do Provedor de Declarações**. Selecione **Adicionar a Relação de Confiança do Provedor de Declarações**.
 3. Clique em **Iniciar** para iniciar o assistente.
@@ -110,6 +115,7 @@ Veja as etapas com mais detalhes.
 5. Conclua o assistente usando as opções padrão.
 
 ### <a name="edit-claims-rules"></a>Editar regras de declarações
+
 1. Clique com o botão direito do mouse na relação de confiança de provedor de declarações recém-adicionada e selecione **Editar Regras de Declarações**.
 2. Clique em **Adicionar Regra**.
 3. Selecione "Passar ou Filtrar uma Declaração de Entrada" e clique em **Avançar**.
@@ -123,9 +129,10 @@ Veja as etapas com mais detalhes.
 9. Clique em **OK** para concluir o assistente.
 
 ### <a name="enable-home-realm-discovery"></a>Habilitar a descoberta de realm inicial
+
 Execute o seguinte script do PowerShell:
 
-```
+```powershell
 Set-ADFSClaimsProviderTrust -TargetName "name" -OrganizationalAccountSuffix @("suffix")
 ```
 
@@ -134,12 +141,14 @@ onde "name" é o nome amigável da relação de confiança do provedor de declar
 Com essa configuração, os usuários finais podem digitar sua conta institucional e o AD FS selecionará automaticamente o provedor de declarações correspondente. Confira [Personalizando as páginas de entrada do AD FS], na seção "Configurar o Provedor de Identidade para usar determinados sufixos de email".
 
 ## <a name="configure-the-ad-fs-account-partner"></a>Configurar o Parceiro de Conta do AD FS
+
 Os cliente deve fazer o seguinte:
 
 1. Adicionar uma relação de confiança da RP (terceira parte confiável)
 2. Adiciona regras de declarações.
 
 ### <a name="add-the-rp-trust"></a>Adicionar a relação de confiança da RP
+
 1. No Gerenciador do Servidor, clique em **Ferramentas** e depois selecione **Gerenciamento do AD FS**.
 2. Na árvore de console, em **AD FS**, clique com o botão direito do mouse em **Confianças da Terceira Parte Confiável**. Selecione **Adicionar Relação de Confiança de Terceira Parte Confiável**.
 3. Selecione **Com Reconhecimento de Declarações** e clique em **Iniciar**.
@@ -152,6 +161,7 @@ Os cliente deve fazer o seguinte:
 8. Clique em **Avançar** para concluir o assistente.
 
 ### <a name="add-claims-rules"></a>Adicionar regras de declarações
+
 1. Clique com o botão direito do mouse na terceira parte confiável recém-adicionada e selecione **Editar Política de Emissão de Declaração**.
 2. Clique em **Adicionar Regra**.
 3. Selecione "Enviar Atributos do LDAP como Declarações" e clique em **Avançar**.
@@ -167,19 +177,19 @@ Os cliente deve fazer o seguinte:
 9. Selecione “Enviar Declarações Usando uma Regra Personalizada” e clique em **Avançar**.
 10. Insira um nome para a regra, como “Tipo de Declaração de Ancoragem”.
 11. Em **Regra personalizada**, insira o seguinte:
-    
-    ```
+
+    ```console
     EXISTS([Type == "http://schemas.microsoft.com/ws/2014/01/identity/claims/anchorclaimtype"])=>
     issue (Type = "http://schemas.microsoft.com/ws/2014/01/identity/claims/anchorclaimtype",
           Value = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn");
     ```
-    
+
     Essa regra emite uma declaração de tipo `anchorclaimtype`. A declaração informa a terceira parte confiável para usar o UPN como a ID imutável. do usuário.
 12. Clique em **Concluir**.
 13. Clique em **OK** para concluir o assistente.
 
+<!-- links -->
 
-<!-- Links -->
 [Azure AD Connect]: /azure/active-directory/hybrid/whatis-hybrid-identity
 [confiança de federação]: https://technet.microsoft.com/library/cc770993(v=ws.11).aspx
 [parceiro de conta]: https://technet.microsoft.com/library/cc731141(v=ws.11).aspx
