@@ -4,12 +4,12 @@ description: Arquitetura recomendada para aplicativos de IoT no Azure usando os 
 titleSuffix: Azure Reference Architectures
 author: MikeWasson
 ms.date: 01/09/2019
-ms.openlocfilehash: bde507527262a722219edba534275fb7ab499069
-ms.sourcegitcommit: 7d9efe716e8c9e99f3fafa9d0213d48c23d9713d
+ms.openlocfilehash: c0aa1771abc99b1f17f1e553c9626e50a386f34c
+ms.sourcegitcommit: d5ea427c25f9f7799cc859b99f328739ca2d8c1c
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/09/2019
-ms.locfileid: "54166004"
+ms.lasthandoff: 01/15/2019
+ms.locfileid: "54307681"
 ---
 # <a name="azure-iot-reference-architecture"></a>Arquitetura de referência de IoT do Azure
 
@@ -35,7 +35,7 @@ Essa arquitetura é formada pelos componentes a seguir. Alguns aplicativos não 
 
 **Dispositivos IoT**. Os dispositivos podem se registrar com segurança na nuvem e podem se conectar à nuvem para enviar e receber dados. Alguns dispositivos podem ser **dispositivos de borda** que executam algum processamento de dados no próprio dispositivo ou em um gateway de campo. É recomendável o uso do [Azure IoT Edge](/azure/iot-edge/) para o processamento de borda.
 
-**Gateway de Nuvem**. Um gateway de nuvem fornece um hub de nuvem para que os dispositivos se conectem com segurança à nuvem e enviem dados. Ele também fornece gerenciamento de dispositivos, recursos, incluindo o comando e o controle de dispositivos. Para o gateway de nuvem, recomendamos o [Hub IoT](/azure/iot-hub/). O Hub IoT é um serviço de nuvem hospedado que recebe eventos dos dispositivos, atuando como uma mensagem dividida entre os dispositivos e os serviços de back-end. O Hub IoT fornece conectividade segura, ingestão de eventos, comunicação bidirecional e gerenciamento de dispositivos.
+**Gateway de Nuvem**. Um gateway de nuvem fornece um hub de nuvem para que os dispositivos se conectem com segurança à nuvem e enviem dados. Ele também fornece gerenciamento de dispositivos, recursos, incluindo o comando e o controle de dispositivos. Para o gateway de nuvem, recomendamos o [Hub IoT](/azure/iot-hub/). O Hub IoT é um serviço de nuvem hospedado que recebe eventos dos dispositivos, atuando como um agente de mensagem entre os dispositivos e os serviços de back-end. O Hub IoT fornece conectividade segura, ingestão de eventos, comunicação bidirecional e gerenciamento de dispositivos.
 
 **Provisionamento de dispositivos**. Para registrar e conectar grandes conjuntos de dispositivos, é recomendável usar o [Serviço de Provisionamento de Dispositivos no Hub IoT](/azure/iot-dps/) (DPS). O DPS permite que você atribua e registre dispositivos em pontos de extremidade específicos do Hub IoT do Azure em escala.
 
