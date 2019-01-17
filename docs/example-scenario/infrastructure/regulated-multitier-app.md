@@ -5,12 +5,12 @@ description: Crie um aplicativo Web seguro e de várias camadas com o Windows Se
 author: iainfoulds
 ms.date: 12/06/2018
 ms.custom: seodec18
-ms.openlocfilehash: 2c5f77f265c10388f42138e7d3f6da9e3ead1cd8
-ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
+ms.openlocfilehash: c5c1d4468df72edd989f2ab8f303781b26d50017
+ms.sourcegitcommit: 71ee0859e19fe58416b4c0056d67f2f34dd9ca0a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/20/2018
-ms.locfileid: "53643526"
+ms.lasthandoff: 01/11/2019
+ms.locfileid: "54211981"
 ---
 # <a name="building-secure-web-applications-with-windows-virtual-machines-on-azure"></a>Como compilar aplicativos Web seguros com máquinas virtuais do Windows no Azure
 
@@ -97,7 +97,7 @@ Para implantar a infraestrutura básica para esse cenário com um modelo do Azur
 
 <!-- markdownlint-disable MD033 -->
 
-1. Selecione o botão **Implantar no Azure**:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Fsolution-architectures%2Fmaster%2Finfrastructure%2Fregulated-multitier-app%2Fazuredeploy.json" target="_blank"><img src="https://azuredeploy.net/deploybutton.png"/></a>
+1. Selecione o botão **Implantar no Azure**:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Fsolution-architectures%2Fmaster%2Finfrastructure%2Fregulated-multitier-app.json" target="_blank"><img src="https://azuredeploy.net/deploybutton.png"/></a>
 2. Aguarde até que a implantação de modelo seja aberta no portal do Azure e conclua as seguintes etapas:
    - Escolha **Criar novo** grupo de recursos e insira um nome como *myWindowsscenario* na caixa de texto.
    - Selecione uma região na caixa suspensa **Local**.
