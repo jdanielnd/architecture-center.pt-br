@@ -5,14 +5,16 @@ layout: LandingPage
 ms.topic: landing-page
 ms.date: 09/28/2018
 google-site-verification: b-xRLveOzJ9oSOh37wgRTRB2lMOoFY8HiHf9_0DIawE
-ms.openlocfilehash: 7d619b2e0c7029a729874131ce32040ab6332011
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.openlocfilehash: c5141cbcdf848197dec214056b80620eec855402
+ms.sourcegitcommit: 95131d1011def26fb629731d42a4e8d4d49b3540
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54111913"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "54372806"
 ---
 # <a name="azure-architecture-center"></a>Centro de Arquitetura do Azure
+
+<!-- markdownlint-disable MD033 -->
 
 <!-- main panel -->
 <ul class="panelContent cardsC">
@@ -361,4 +363,22 @@ ms.locfileid: "54111913"
         </div>
         </a>
     </li>
-</ul>   
+    <li>
+        <a href="/learn/modules/n-tier-architecture/">
+        <div class="cardSize">
+            <div class="cardPadding">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="/learn/achievements/n-tier-architecture.svg" alt="" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>Tour pelo estilo de arquitetura de N camadas</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </a>
+    </li>
+</ul>
