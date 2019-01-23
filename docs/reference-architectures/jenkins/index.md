@@ -4,13 +4,16 @@ titleSuffix: Azure Reference Architectures
 description: Arquitetura recomendada que mostra como implantar e operar um servidor Jenkins escalonável, de nível corporativo, no Azure protegido com o logon único (SSO).
 author: njray
 ms.date: 04/30/2018
+ms.topic: reference-architecture
+ms.service: architecture-center
+ms.subservice: reference-architecture
 ms.custom: seodec18
-ms.openlocfilehash: 3500e05631ad34af0abc8e0f7a3e2b4919157746
-ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
+ms.openlocfilehash: 2717b3b11f0315b698d43d067b30472481ffa527
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/04/2019
-ms.locfileid: "54011337"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54483421"
 ---
 # <a name="run-a-jenkins-server-on-azure"></a>Executar um servidor Jenkins no Azure
 
