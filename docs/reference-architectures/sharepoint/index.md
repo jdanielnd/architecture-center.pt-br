@@ -4,14 +4,12 @@ titleSuffix: Azure Reference Architectures
 description: Arquitetura recomendada para implantar um farm do SharePoint Server 2016 de alta disponibilidade no Azure.
 author: njray
 ms.date: 07/26/2018
+ms.topic: reference-architecture
+ms.service: architecture-center
+ms.subservice: reference-architecture
 ms.custom: seodec18
-ms.openlocfilehash: 6cc8255f95cb4944ff3ef138ad5edf2e5bbea4b4
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
-ms.translationtype: HT
-ms.contentlocale: pt-BR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53120094"
 ---
+
 # <a name="run-a-highly-available-sharepoint-server-2016-farm-in-azure"></a>Executar um farm do SharePoint Server 2016 de alta disponibilidade no Azure
 
 Essa arquitetura de referência mostra práticas comprovadas para implantar um farm do SharePoint Server 2016 de alta disponibilidade no Azure, usando a topologia de MinRole e grupos de disponibilidade Always On do SQL Server. O farm do SharePoint é implantado em uma rede virtual protegida sem nenhuma presença ou ponto de extremidade para a Internet. [**Implantar esta solução**](#deploy-the-solution).
@@ -123,7 +121,7 @@ Para obter mais informações sobre essas recomendações, consulte [Contas de s
 
 Essa arquitetura de referência implanta um farm do SharePoint Server 2016 que pode ser usado como um [ambiente híbrido do SharePoint][sharepoint-hybrid] &mdash; ou seja, estendendo o SharePoint Server 2016 para o Office 365 SharePoint Online. Se você tiver um Servidor do Office Online, consulte [Suporte para Aplicativos Web do Office e Servidor Online do Office no Azure][office-web-apps].
 
-Os aplicativos de serviço padrão nesta implantação foram projetados para oferecer suporte a cargas de trabalho híbridas. Todas as cargas de trabalho híbridas do SharePoint Server 2016 e Office 365 podem ser implantadas para este farm sem alterações na infraestrutura do SharePoint, com uma exceção: O aplicativo de serviço de pesquisa de nuvem híbrida não deve ser implantado em servidores que hospedam uma topologia de pesquisa existente. Portanto, uma ou mais VMs com base em função de pesquisa devem ser adicionadas ao farm para oferecer suporte a esse cenário híbrido.
+Os aplicativos de serviço padrão nesta implantação foram projetados para oferecer suporte a cargas de trabalho híbridas. Todas as cargas de trabalho híbridas do SharePoint Server 2016 e do Office 365 podem ser implantadas neste farm sem alterações na infraestrutura do SharePoint, com uma exceção: O Aplicativo de Serviço de Pesquisa Híbrido de Nuvem não deve ser implantado em servidores que hospedam uma topologia de pesquisa existente. Portanto, uma ou mais VMs com base em função de pesquisa devem ser adicionadas ao farm para oferecer suporte a esse cenário híbrido.
 
 ### <a name="sql-server-always-on-availability-groups"></a>Grupos de Disponibilidade Always On do SQL Server
 
@@ -147,7 +145,7 @@ Observe que o SharePoint Server 2016 não oferece suporte ao uso de conjuntos de
 
 Essa arquitetura de referência oferece suporte à alta disponibilidade em uma região do Azure, porque cada função possui pelo menos duas VMs implantadas em um conjunto de disponibilidade.
 
-Para proteger-se contra uma falha regional, crie um farm de recuperação de desastres separado em uma região do Azure diferente. Seus objetivos de tempo de recuperação (RTOs) e objetivos de ponto de recuperação (RPOs) determinarão os requisitos de configuração. Para obter detalhes, consulte [Escolher uma estratégia de recuperação de desastres para o SharePoint 2016][sharepoint-dr]. A região secundária deve ser uma *região emparelhada* com a região principal. No caso de uma interrupção ampla, é priorizada a recuperação de uma região de cada par. Para saber mais, consulte [Continuidade dos negócios e recuperação de desastres (BCDR): Regiões Emparelhadas do Azure][paired-regions].
+Para proteger-se contra uma falha regional, crie um farm de recuperação de desastres separado em uma região do Azure diferente. Seus objetivos de tempo de recuperação (RTOs) e objetivos de ponto de recuperação (RPOs) determinarão os requisitos de configuração. Para obter detalhes, consulte [Escolher uma estratégia de recuperação de desastres para o SharePoint 2016][sharepoint-dr]. A região secundária deve ser uma *região emparelhada* com a região principal. No caso de uma interrupção ampla, é priorizada a recuperação de uma região de cada par. Para saber mais, confira [Continuidade dos negócios e recuperação de desastres (BCDR): Regiões Combinadas do Azure][paired-regions].
 
 ## <a name="manageability-considerations"></a>Considerações sobre capacidade de gerenciamento
 

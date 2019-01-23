@@ -1,3 +1,11 @@
+---
+ms.openlocfilehash: dfc4af0a5be29b32d90cc4a05715fd3e2f71427b
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.translationtype: HT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54488657"
+---
 
 ## <a name="ai-scenarios"></a>Cenários de IA
 
@@ -13,7 +21,7 @@
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Chatbot de conversação para reservas de hotel no Azure</h3>
+                        <h3>Chatbot de conversação para reservas de hotel</h3>
                         <p>Crie um chatbot de conversação para aplicativos de comércio com o Serviço de Bot do Azure.</p>
                     </div>
                 </div>
@@ -32,8 +40,27 @@
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Classificação de imagens para acionamento de seguro no Azure</h3>
+                        <h3>Classificação de imagens para acionamento de seguro</h3>
                         <p>Crie o processamento de imagens em seus aplicativos do Azure.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</li>
+<li style="display: flex; flex-direction: column;">
+    <a href="./ai/movie-recommendations.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
+            <div class="cardPadding" style="display: flex;">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="./ai/media/architecture-movie-recommender.png" height="140px" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>Recomendações de filmes no Azure</h3>
+                        <p>Use o aprendizado de máquina para automatizar recomendações de filmes, produtos ou qualquer outro item usando o aprendizado de máquina e as DSVM (Máquinas Virtuais de Ciência de Dados) do Azure para treinar um modelo no Azure.</p>
                     </div>
                 </div>
             </div>
@@ -57,7 +84,7 @@
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Migrando um aplicativo Web herdado para uma arquitetura baseada em API no Azure</h3>
+                        <h3>Migrando um aplicativo Web para uma arquitetura baseada em API</h3>
                         <p>Use o Gerenciamento de API do Azure para modernizar um aplicativo Web herdado.</p>
                     </div>
                 </div>
@@ -76,7 +103,7 @@
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Relação de confiança descentralizada entre bancos no Azure</h3>
+                        <h3>Relação de confiança descentralizada entre bancos</h3>
                         <p>Estabeleça um ambiente confiável para comunicação e compartilhamento de informações sem recorrer a um banco de dados centralizado.</p>
                     </div>
                 </div>
@@ -133,7 +160,7 @@
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Front-end de comércio eletrônico no Azure</h3>
+                        <h3>Front-end de comércio eletrônico</h3>
                         <p>Hospede um site de comércio eletrônico no Azure.</p>
                     </div>
                 </div>
@@ -171,7 +198,7 @@
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Um serviço de engenharia auxiliada por computador no Azure</h3>
+                        <h3>Um serviço de engenharia auxiliada por computador</h3>
                         <p>Fornece uma plataforma de software como um serviço (SaaS) para a engenharia auxiliada por computador (CAE) no Azure.</p>
                     </div>
                 </div>
@@ -190,7 +217,7 @@
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Ambientes de desenvolvimento/teste para cargas de trabalho do SAP no Azure</h3>
+                        <h3>Ambientes de desenvolvimento/teste para cargas de trabalho do SAP</h3>
                         <p>Crie um ambiente de desenvolvimento/teste para cargas de trabalho do SAP.</p>
                     </div>
                 </div>
@@ -209,7 +236,7 @@
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Executar cargas de trabalho de produção do SAP usando um banco de dados Oracle no Azure</h3>
+                        <h3>Executar cargas de trabalho de produção do SAP usando um Oracle Database</h3>
                         <p>Execute uma implantação de produção do SAP no Azure usando um banco de dados Oracle.</p>
                     </div>
                 </div>
@@ -272,7 +299,7 @@
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Processamento de pedidos escalonável no Azure</h3>
+                        <h3>Processamento de pedidos escalonável</h3>
                         <p>Crie um pipeline de processamento de pedidos altamente escalonável usando o Azure Cosmos DB.</p>
                     </div>
                 </div>
@@ -291,7 +318,7 @@
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Detecção de fraude em tempo real no Azure</h3>
+                        <h3>Detecção de fraude em tempo real</h3>
                         <p>Detecte atividades fraudulentas em tempo real usando os Hubs de Eventos do Azure e o Stream Analytics.</p>
                     </div>
                 </div>
@@ -311,7 +338,7 @@
                     </div>
                     <div class="cardText">
                         <h3>ETL Híbrido com SSIS local existente e Azure Data Factory</h3>
-                        <p>ETL Híbrido com implantações SSIS (SQL Server Integration Services) locais existentes e Azure Data Factory</p>
+                        <p>ETL Híbrido com implantações SSIS (SQL Server Integration Services) locais existentes e Azure Data Factory.</p>
                     </div>
                 </div>
             </div>
@@ -354,7 +381,7 @@
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Executar simulações da dinâmica dos fluidos computacional (CFD) no Azure</h3>
+                        <h3>Executando simulações da CFD</h3>
                         <p>Execute a dinâmica dos fluidos computacional (CFD) no Azure.</p>
                     </div>
                 </div>
@@ -392,8 +419,8 @@
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Aplicativo Web de várias camadas criado para alta disponibilidade e recuperação de desastres no Azure</h3>
-                        <p>Criar um aplicativo Web de várias camadas projetado para alta disponibilidade e recuperação de desastres no Azure usando máquinas virtuais do Azure, conjuntos de disponibilidade, zonas de disponibilidade, Azure Site Recovery e Gerenciador de Tráfego do Azure</p>
+                        <h3>Aplicativo Web de várias camadas criado para HA/DR</h3>
+                        <p>Crie um aplicativo Web de várias camadas projetado para alta disponibilidade e recuperação de desastres no Azure usando máquinas virtuais do Azure, conjuntos de disponibilidade, zonas de disponibilidade, Azure Site Recovery e Gerenciador de Tráfego do Azure.</p>
                     </div>
                 </div>
             </div>
@@ -411,7 +438,7 @@
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Como criar aplicativos Web seguros com máquinas virtuais do Windows no Azure</h3>
+                        <h3>Compilando aplicativos Web seguros com VMs do Windows</h3>
                         <p>Crie um aplicativo Web seguro e de várias camadas com o Windows Server no Azure usando conjuntos de dimensionamento, o Gateway de Aplicativo e balanceadores de carga.</p>
                     </div>
                 </div>
@@ -430,7 +457,7 @@
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Usar o Service Fabric para decompor aplicativos monolíticos</h3>
+                        <h3>Usando o Service Fabric para decompor aplicativos</h3>
                         <p>Decomponha um grande aplicativo monolítico em microsserviços.</p>
                     </div>
                 </div>
@@ -449,7 +476,7 @@
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Renderização de vídeo em 3D no Azure</h3>
+                        <h3>Renderização de vídeo 3D</h3>
                         <p>Execute cargas de trabalho de HPC nativas no Azure usando o serviço de Lote do Azure.</p>
                     </div>
                 </div>
@@ -468,7 +495,7 @@
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Sites altamente escalonáveis e seguros do WordPress no Azure</h3>
+                        <h3>Sites altamente escalonáveis e seguros do WordPress</h3>
                         <p>Crie um site do WordPress altamente escalonável e seguro para eventos de mídia.</p>
                     </div>
                 </div>
