@@ -3,13 +3,11 @@ title: Datacenter Virtual do Azure
 description: Recursos para o Datacenter Virtual do Microsoft Azure
 keywords: Azure
 layout: LandingPage
-ms.openlocfilehash: 5b5b6f58911e39ae1296722194b58c601b9baea8
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
-ms.translationtype: HT
-ms.contentlocale: pt-BR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428084"
+ms.topic: landing-page
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
 ---
+
 # <a name="azure-virtual-datacenter-and-the-enterprise-control-plane"></a>Datacenter Virtual do Azure e o Plano de controle empresarial
 
 O Datacenter Virtual do Azure é uma abordagem para aproveitar ao máximo os recursos da plataforma de nuvem do Azure, respeitando simultaneamente suas políticas de segurança e de rede existentes. Ao implantar cargas de trabalho da empresa na nuvem, as organizações de TI e as unidades de negócios devem equilibrar a governança com a agilidade do desenvolvedor. O Datacenter Virtual do Azure fornece modelos para alcançar esse equilíbrio com ênfase na governança.
@@ -19,28 +17,28 @@ O Datacenter Virtual do Azure é uma abordagem para aproveitar ao máximo os rec
 <tr>
     <td style="width: 64px; vertical-align: middle;"><a href="https://aka.ms/VDC/Concepts"><img src="../_images/virtual-datacenter.svg" alt="Virtual Datacenter eBook" /></a></td>
     <td>
-        <h3><a href="https://aka.ms/VDC/Concepts">Datacenter Virtual do Azure: conceitos</a></h3>
+        <h3><a href="https://aka.ms/VDC/Concepts">Datacenter Virtual do Azure: Conceitos</a></h3>
         <p>Esse livro eletrônico mostra como implantar cargas de trabalho empresariais na plataforma de nuvem do Azure, respeitando simultaneamente suas políticas de segurança e de rede existentes.</p>
     </td>
 </tr>
 <tr>
     <td style="width: 64px; vertical-align: middle;"><a href="/azure/networking/networking-virtual-datacenter"><img src="./images/vdc-network.png" alt="Network Perspective" /></a></td>
     <td>
-        <h3><a href="networking-virtual-datacenter.md">Datacenter Virtual do Azure: uma perspectiva de rede</a></h3>
+        <h3><a href="networking-virtual-datacenter.md">Datacenter Virtual do Azure: Uma perspectiva de rede</a></h3>
         <p>Este artigo online apresenta uma visão geral de padrões e designs de rede que podem ser usados para resolver as preocupações de desempenho, escala e segurança da arquitetura que muitos clientes têm quando pensam em uma transição em massa para a nuvem.</p>
     </td>
 </tr>
 <tr>
     <td style="width: 64px; vertical-align: middle;"><a href="https://aka.ms/VDC/Lift"><img src="./images/vdc-lift-and-shift.png" alt="Lift and Shift Guide" /></a></td>
     <td>
-        <h3><a href="https://aka.ms/VDC/Lift">Datacenter Virtual do Azure: guia de deslocamento e comparação</a></h3>
+        <h3><a href="https://aka.ms/VDC/Lift">Datacenter Virtual do Azure: Guia de Lift-and-Shift </a></h3>
         <p>Esse white paper descreve o processo que a equipe de TI empresarial e tomadores de decisão podem usar para identificar e planejar a migração de aplicativos e servidores para o Azure usando o método de deslocamento e comparação, minimizando custos de desenvolvimento adicionais enquanto otimiza as opções de hospedagem de nuvem.</p>
     </td>
 </tr>
 <tr>
     <td style="width: 64px; vertical-align: middle;"><a href="https://aka.ms/VDC/Deck"><img src="./images/vdc-deck.png" alt="Presentation Deck" /></a></td>
     <td>
-        <h3><a href="https://aka.ms/VDC/Deck">Datacenter Virtual do Azure: baralho de apresentação</a></h3>
+        <h3><a href="https://aka.ms/VDC/Deck">Datacenter Virtual do Azure: Conjunto de slides para apresentação </a></h3>
         <p>Esse baralho de apresentação explora as diretrizes e ferramentas do Datacenter Virtual do Azure. Ele aborda metas do Datacenter Virtual (VDC), drivers de cliente, regiões do Azure, elementos de uma automação do VDC, VDCs industrializados e confiáveis do Azure e termina com um plano de ação sobre a orientação de CIO. Também são fornecidas informações de suporte e treinamento.</p>
     </td>
 </tr>
