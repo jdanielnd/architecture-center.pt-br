@@ -5,12 +5,12 @@ description: Implemente uma topologia de rede hub-spoke com serviços compartilh
 author: telmosampaio
 ms.date: 10/09/2018
 ms.custom: seodec18
-ms.openlocfilehash: 2ed76e467fd3f65664afa35b6247c83c3f6ce078
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.openlocfilehash: 9de1cd22b32614c332f64cf282ddc1be8090bf7a
+ms.sourcegitcommit: 71ee0859e19fe58416b4c0056d67f2f34dd9ca0a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54112219"
+ms.lasthandoff: 01/11/2019
+ms.locfileid: "54211964"
 ---
 # <a name="implement-a-hub-spoke-network-topology-with-shared-services-in-azure"></a>Implementar uma topologia de rede hub-spoke com serviços compartilhados no Azure
 
@@ -100,7 +100,7 @@ Uma implantação para essa arquitetura está disponível no [GitHub][ref-arch-r
 - hub-vnet-rg
 - onprem-vnet-rg
 - spoke1-vnet-rg
-- spoke2-vent-rg
+- spoke2-vnet-rg
 
 Os arquivos de parâmetros de modelo se referem a esses nomes e, portanto, se você alterá-los, atualize os arquivos de parâmetros para que correspondam.
 
