@@ -3,12 +3,15 @@ title: Processamento em lotes
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: 50e50ae121fda7ceb9dd298b8a072bd7cc4053d9
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
+ms.openlocfilehash: 6483b600e657cf0325fc63a645621ccf6c404bb4
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54114174"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54481976"
 ---
 # <a name="batch-processing"></a>Processamento em lotes
 

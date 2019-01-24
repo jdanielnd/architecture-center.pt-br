@@ -3,12 +3,16 @@ title: Considerações de dados para microsserviços
 description: Considerações de dados para microsserviços.
 author: MikeWasson
 ms.date: 10/23/2018
-ms.openlocfilehash: 05214e3a9e4568b0d5437862c825579410ad4fa9
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: reference-architecture
+ms.custom: microservices
+ms.openlocfilehash: c2090ec2cbb37db87e87c0e91e6e6ee8314c14a4
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54110502"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54488368"
 ---
 # <a name="designing-microservices-data-considerations"></a>Como criar microsserviços: Considerações de dados
 

@@ -4,13 +4,16 @@ titleSuffix: Azure Reference Architectures
 description: Práticas comprovadas para executar o SAP S/4HANA em um ambiente Linux no Azure com alta disponibilidade.
 author: lbrader
 ms.date: 05/11/2018
-ms.custom: seodec18
-ms.openlocfilehash: 9eb73ddaf5b1cb815f037f46c7e187f61d126876
-ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
+ms.topic: reference-architecture
+ms.service: architecture-center
+ms.subservice: reference-architecture
+ms.custom: seodec18, SAP, Linux
+ms.openlocfilehash: 519dac655065d53df5c918b55bda06ce8751c012
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/20/2018
-ms.locfileid: "53644165"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54485733"
 ---
 # <a name="sap-s4hana-for-linux-virtual-machines-on-azure"></a>SAP S/4HANA para máquinas virtuais com Linux no Azure
 

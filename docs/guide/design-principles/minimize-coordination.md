@@ -4,13 +4,16 @@ titleSuffix: Azure Application Architecture Guide
 description: Minimize a coordenação entre os serviços de aplicativos para atingir a escalabilidade.
 author: MikeWasson
 ms.date: 08/30/2018
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: reference-architecture
 ms.custom: seojan19
-ms.openlocfilehash: ec1a7a3de2be4954b07a87b774f8ae7c2bd1f736
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.openlocfilehash: e124e6720b909bafc74a4c074454ec0a3ec30c59
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54113086"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54488572"
 ---
 # <a name="minimize-coordination"></a>Minimizar a coordenação
 

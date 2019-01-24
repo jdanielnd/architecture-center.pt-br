@@ -3,12 +3,16 @@ title: Registro em log e monitoramento em microsserviços
 description: Registro em log e monitoramento em microsserviços
 author: MikeWasson
 ms.date: 10/23/2018
-ms.openlocfilehash: 6fe7c9477ac65f98dfc106dc05a82dc2a2c56266
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: reference-architecture
+ms.custom: microservices
+ms.openlocfilehash: d8263306db4f4c93157ac1d120094338570b4b86
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54113613"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54482197"
 ---
 # <a name="designing-microservices-logging-and-monitoring"></a>Como criar microsserviços: Log e monitoramento
 

@@ -5,13 +5,16 @@ description: Isole os elementos de um aplicativo em pools para que, se um falhar
 keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
+ms.topic: design-pattern
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 0a2ae4789d3c1653405a59ef8cb4f6171a8abc81
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.openlocfilehash: 1ad646f5c8f4b329b0d0e9a29c83e86848b13ab0
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54112185"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54488334"
 ---
 # <a name="bulkhead-pattern"></a>Padrão de bulkhead
 

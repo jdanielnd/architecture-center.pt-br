@@ -4,13 +4,16 @@ titleSuffix: Azure Example Scenarios
 description: Use o Gerenciamento de API do Azure para modernizar um aplicativo Web herdado.
 author: begim
 ms.date: 09/13/2018
+ms.topic: example-scenario
+ms.service: architecture-center
+ms.subservice: example-scenario
 ms.custom: fasttrack
-ms.openlocfilehash: 257b9bb5c69afb00917f8934585c1164f909feb6
-ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
+ms.openlocfilehash: c7ddc8e8b5e41768745cf08aede27dc21e2b1a2c
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/20/2018
-ms.locfileid: "53643476"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54485852"
 ---
 # <a name="migrating-a-legacy-web-application-to-an-api-based-architecture-on-azure"></a>Migrando um aplicativo Web herdado para uma arquitetura baseada em API no Azure
 

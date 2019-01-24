@@ -3,13 +3,16 @@ title: Monitoramento de aplicativo Web no Azure
 description: Monitore um aplicativo Web hospedado no Serviço de Aplicativo do Azure.
 author: adamboeglin
 ms.date: 12/12/2018
+ms.topic: reference-architecture
+ms.service: architecture-center
+ms.subservice: reference-architecture
 ms.custom: azcat
-ms.openlocfilehash: 2333ab0884e37354dc00113c8c40b6184fdf6ff1
-ms.sourcegitcommit: 8d951fd7e9534054b160be48a1881ae0857561ef
+ms.openlocfilehash: 5219d08fce5cf09b075b6d7adfb73970e007ded4
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/13/2018
-ms.locfileid: "53329481"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54487926"
 ---
 # <a name="web-application-monitoring-on-azure"></a>Monitoramento de aplicativo Web no Azure
 
@@ -43,25 +46,25 @@ Esse cenário usa um ambiente do Azure gerenciado para hospedar um aplicativo e 
 ### <a name="components"></a>Componentes
 
 - O [Serviço de Aplicativo do Azure](/azure/app-service/) é um serviço de PaaS para compilar e hospedar aplicativos em máquinas virtuais gerenciadas. As infraestruturas de computação subjacentes em que os aplicativos são executados são gerenciadas para você. O Serviço de Aplicativo fornece monitoramento de cotas de uso de recursos e métricas de aplicativo, registro em log de informações de diagnóstico e alertas com base nas métricas. Melhor ainda, você pode usar o Application Insights para criar [testes de disponibilidade][availability-tests] para testar o aplicativo em diferentes regiões.
-- O [Application Insights][application-insights] é um serviço de gerenciamento de desempenho de aplicativo (APM) extensível para desenvolvedores e dá suporte a várias plataformas. Ele monitora o aplicativo, detecta anomalias de aplicativo, como falhas e desempenho ruim, e envia a telemetria ao portal do Azure. O Application Insights também pode ser usado para registro em log, rastreamento distribuído e métricas de aplicativo personalizadas.
-- O [Azure Monitor][azure-monitor] fornece logs e [métricas de infraestrutura de nível básico][metrics] para a maioria dos serviços do Azure. Você pode interagir com as métricas de diversas maneiras, incluindo criar gráficos delas no portal do Azure, acessá-las por meio da API REST ou consultá-las usando o PowerShell ou a CLI. O Azure Monitor também oferece seus dados diretamente no [Log Analytics e outros serviços], em que você pode consultá-los e combiná-los com dados de outras fontes no local ou na nuvem.
+- O [Application Insights][application-insights] é um serviço de gerenciamento de desempenho de aplicativo (APM) extensível para desenvolvedores e dá suporte a várias plataformas. Ele monitora o aplicativo, detecta anomalias do aplicativo como falhas e baixo desempenho, e envia a telemetria ao portal do Azure. O Application Insights também pode ser usado para registro em log, rastreamento distribuído e métricas de aplicativo personalizadas.
+- O [Azure Monitor][azure-monitor] fornece logs e [métricas de infraestrutura de nível básico][metrics] para a maioria dos serviços do Azure. Você pode interagir com as métricas de diversas maneiras, que incluem a criação de gráficos no portal do Azure, o acesso por meio da API REST ou as consultas por meio do PowerShell ou da CLI. O Azure Monitor também oferece seus dados diretamente no [Log Analytics e outros serviços], em que você pode consultá-los e combiná-los com dados de outras fontes no local ou na nuvem.
 - O [Log Analytics][log-analytics] ajuda a correlacionar os dados de uso e desempenho coletados pelo Application Insights com dados de configuração e desempenho nos recursos do Azure que dão suporte ao aplicativo. Este cenário usa o [agente do Azure Log Analytics][Azure Log Analytics agent] para enviar por push logs de auditoria do SQL Server para o Log Analytics. Você pode escrever consultas e exibir dados na folha do Log Analytics no portal do Azure.
 
 ## <a name="considerations"></a>Considerações
 
-Uma prática recomendada é adicionar o Application Insights ao código durante o desenvolvimento usando [SDKs do Application Insights][Application Insights SDKs] e personalizar por aplicativo. Esses SDKs de software livre estão disponíveis para a maioria das estruturas de aplicativo. Para enriquecer e controlar os dados coletados, incorpore o uso de ambos os SDKs para implantações de produção e teste em seu processo de desenvolvimento. O principal requisito é que o aplicativo tenha uma linha de visão direta ou indireta para o ponto de extremidade de ingestão do Applications Insights hospedado com um endereço voltado para a Internet. Você pode então adicionar telemetria ou enriquecer uma coleção de telemetria existente.
+Uma prática recomendada é adicionar o Application Insights ao código durante o desenvolvimento usando [SDKs do Application Insights][Application Insights SDKs] e personalizar por aplicativo. Esses SDKs de software livre estão disponíveis para a maioria das estruturas de aplicativo. Para enriquecer e controlar os dados coletados, incorpore ao seu processo de desenvolvimento o uso dos SDKs tanto para testes como para implantações na produção. O principal requisito é que o aplicativo tenha uma linha de visão direta ou indireta para o ponto de extremidade de ingestão do Applications Insights hospedado com um endereço na Internet. Você pode então adicionar telemetria ou enriquecer uma coleção de telemetria existente.
 
 O monitoramento de tempo de execução é outra maneira fácil de começar. A telemetria coletada deve ser controlada por meio de arquivos de configuração. Por exemplo, você pode incluir métodos de tempo de execução que habilitam ferramentas como o [Application Insights Status Monitor][Application Insights Status Monitor] para implantar os SDKs na pasta correta e adicionar as configurações corretas para começar o monitoramento.
 
-Como o Application Insights, o Log Analytics fornece ferramentas para [analisar dados em fontes][analyzing data across sources], criar consultas complexas e [enviar alertas proativos][sending proactive alerts] nas condições especificadas. Você também pode exibir a telemetria no [portal do Azure][the Azure portal]. O Log Analytics agrega valor aos serviços de monitoramento existentes, como o [Azure Monitor][azure-monitor], e também pode monitorar ambientes locais.
+Como o Application Insights, o Log Analytics fornece ferramentas para [analisar dados em diversas fontes][analyzing data across sources], criar consultas complexas e [enviar alertas proativos][sending proactive alerts] nas condições especificadas. Você também pode exibir a telemetria no [portal do Azure][the Azure portal]. O Log Analytics agrega valor aos serviços de monitoramento existentes, como o [Azure Monitor][azure-monitor], e também pode monitorar ambientes locais.
 
-O Application Insights e o Log Analytics usam a [Linguagem de Consulta do Azure Log Analytics][Azure Log Analytics Query Language]. Você também pode usar [consultas de recursos cruzados](https://azure.microsoft.com/blog/query-across-resources) para analisar a telemetria coletada pelo Application Insights e pelo Log Analytics em uma única consulta.
+O Application Insights e o Log Analytics usam a [Linguagem de Consulta do Azure Log Analytics][Azure Log Analytics Query Language]. Use também as [consultas em diferentes recursos](https://azure.microsoft.com/blog/query-across-resources) para analisar a telemetria coletada pelo Application Insights e pelo Log Analytics em uma única consulta.
 
-O Azure Monitor, o Application Insights e o Log Analytics enviam [alertas](/azure/monitoring-and-diagnostics/monitoring-overview-alerts). Por exemplo, o Azure Monitor alerta sobre métricas de nível de plataforma, como a utilização de CPU, enquanto o Application Insights alerta sobre métricas de nível de aplicativo, como tempo de resposta do servidor. O Azure Monitor alerta sobre novos eventos no Log de Atividades do Azure, enquanto o Log Analytics pode emitir alertas sobre dados de métricas ou eventos para os serviços configurados para usá-lo. [Alertas unificados no Azure Monitor](/azure/monitoring-and-diagnostics/monitoring-overview-unified-alerts) é uma nova experiência de alertas unificados no Azure que usa uma taxonomia diferente.
+O Azure Monitor, o Application Insights e o Log Analytics enviam [alertas](/azure/monitoring-and-diagnostics/monitoring-overview-alerts). Por exemplo, o Azure Monitor alerta sobre as métricas da plataforma, como utilização da CPU, enquanto o Application Insights alerta sobre as métricas do aplicativo, como o tempo de resposta do servidor. O Azure Monitor alerta sobre novos eventos no Log de Atividades do Azure, enquanto o Log Analytics pode emitir alertas sobre métricas ou dados de eventos para os serviços que estiverem configurados para usá-lo. [Alertas unificados no Azure Monitor](/azure/monitoring-and-diagnostics/monitoring-overview-unified-alerts) é uma nova experiência de alertas unificados no Azure que usa uma taxonomia diferente.
 
 ### <a name="alternatives"></a>Alternativas
 
-Este artigo descreve opções de monitoramento convenientemente disponíveis com recursos populares, mas você tem muitas opções, incluindo a opção de criar seus próprios mecanismos de registro em log. Uma prática recomendada é adicionar os serviços de monitoramento conforme você compila as camadas em uma solução. Aqui estão algumas possíveis extensões e alternativas:
+Este artigo descreve opções de monitoramento convenientemente disponíveis com recursos desejáveis. Você tem várias opções, incluindo a opção de criar seus próprios mecanismos de registro em log. Uma prática recomendada é adicionar os serviços de monitoramento conforme você compila as camadas em uma solução. Aqui estão algumas possíveis extensões e alternativas:
 
 - Consolide as métricas do Azure Monitor e do Application Insights no Grafana usando o [Azure Monitor Data Source para Grafana][Azure Monitor Data Source For Grafana].
 - O [Data Dog][data-dog] tem um conector para o Azure Monitor
@@ -71,7 +74,7 @@ Este artigo descreve opções de monitoramento convenientemente disponíveis com
 
 ### <a name="scalability-and-availability"></a>Escalabilidade e disponibilidade
 
-Esse cenário se concentra em soluções de PaaS para o monitoramento, em grande parte porque elas lidam de forma conveniente com a disponibilidade e a escalabilidade para você e contam com SLAs (contratos de nível de serviço). Por exemplo, os Serviços de Aplicativos fornecem um [SLA][SLA] com garantia de disponibilidade.
+Esse cenário se concentra nas soluções de PaaS para o monitoramento, em grande parte porque elas administram a disponibilidade e a escalabilidade e contam com o suporte de SLAs (contratos de nível de serviço). Por exemplo, os Serviços de Aplicativos fornecem um [SLA][SLA] com garantia de disponibilidade.
 
 O Application Insights tem [limites][app-insights-limits] para o número de solicitações que podem ser processadas por segundo. Se exceder o limite de solicitação, você poderá enfrentar a limitação de mensagens. Para evitar limitação, implemente [filtragem][message-filtering] ou [amostragem][message-sampling] para reduzir a taxa de dados
 
@@ -83,7 +86,7 @@ Os requisitos de conformidade e informações confidenciais afetam a coleta, a r
 
 As seguintes considerações de segurança também podem ser aplicáveis:
 
-- Desenvolva um plano para lidar com informações pessoais, se os desenvolvedores têm permissão para coletar seus próprios dados ou enriquecer a telemetria existente.
+- Se os desenvolvedores tiverem permissão para coletar seus próprios dados ou para enriquecer a telemetria existente, desenvolva um plano para administrar as informações pessoais.
 - Considere a possibilidade de retenção de dados. Por exemplo, o Application Insights retém dados de telemetria por 90 dias. Arquive dados que você deseja acessar por períodos mais longos usando o Microsoft Power BI, a Exportação Contínua ou a API REST. As taxas de armazenamento se aplicam.
 - Limite o acesso aos recursos do Azure para controlar o acesso a dados e quem pode exibir a telemetria de um aplicativo específico. Para ajudar a bloquear o acesso ao monitoramento de telemetria, confira [Recursos, funções e controle de acesso no Application Insights][Resources, roles, and access control in Application Insights].
 - Considere a possibilidade de controlar o acesso de leitura/gravação no código do aplicativo para impedir que usuários adicionem marcadores de versão ou marca que limitam a ingestão de dados do aplicativo. Com o Application Insights, não há controle sobre itens de dados individuais quando eles são enviados a um recurso. Portanto, se um usuário tem acesso a alguns dados, tem acesso a todos os dados em um recurso individual.

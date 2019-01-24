@@ -3,13 +3,16 @@ title: Compilar uma API de recomendação em tempo real no Azure
 description: Use o aprendizado de máquina para automatizar recomendações usando o Azure Databricks e as DSVM (Máquinas Virtuais de Ciência de Dados) do Azure para treinar um modelo no Azure.
 author: njray
 ms.date: 12/12/2018
+ms.topic: reference-architecture
+ms.service: architecture-center
+ms.subservice: reference-architecture
 ms.custom: azcat-ai
-ms.openlocfilehash: ca9d854f0e29ae769f5a86648b94cce7a2fd146e
-ms.sourcegitcommit: fb22348f917a76e30a6c090fcd4a18decba0b398
+ms.openlocfilehash: 8fa15c82275f18af78d1f42ec1750ab9b28119fb
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/16/2018
-ms.locfileid: "53450812"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54487096"
 ---
 # <a name="build-a-real-time-recommendation-api-on-azure"></a>Compilar uma API de recomendação em tempo real no Azure
 

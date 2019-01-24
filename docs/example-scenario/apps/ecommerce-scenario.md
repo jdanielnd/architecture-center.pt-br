@@ -4,13 +4,16 @@ titleSuffix: Azure Example Scenarios
 description: Hospede um site de comércio eletrônico no Azure.
 author: masonch
 ms.date: 07/13/2018
+ms.topic: example-scenario
+ms.service: architecture-center
+ms.subservice: example-scenario
 ms.custom: fasttrack
-ms.openlocfilehash: f07c21b8eb9d812b9831abe8f2e4f6d131893df2
-ms.sourcegitcommit: 7d9efe716e8c9e99f3fafa9d0213d48c23d9713d
+ms.openlocfilehash: 6ba4d98055258ca10b1ac06df217196a8a0151f5
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/09/2019
-ms.locfileid: "54160801"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54483914"
 ---
 # <a name="an-e-commerce-front-end-on-azure"></a>Um front-end de comércio eletrônico no Azure
 

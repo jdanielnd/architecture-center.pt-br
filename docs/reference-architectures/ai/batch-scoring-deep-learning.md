@@ -4,13 +4,16 @@ titleSuffix: Azure Reference Architectures
 description: Essa arquitetura de referência mostra como aplicar a transferência de estilo neural a um vídeo usando a IA do Lote do Azure.
 author: jiata
 ms.date: 10/02/2018
+ms.topic: reference-architecture
+ms.service: architecture-center
+ms.subservice: reference-architecture
 ms.custom: azcat-ai
-ms.openlocfilehash: 0396903a39d00a4131df65872a63f4b3fde8dce7
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.openlocfilehash: 26a83b3f75b2e7e9ec4a8a99ab8b4d8f1b1ef4d7
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53119873"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54488555"
 ---
 # <a name="batch-scoring-on-azure-for-deep-learning-models"></a>Pontuação em lote para modelos de aprendizado profundo do Azure
 
@@ -49,7 +52,7 @@ Essa arquitetura é formada pelos componentes a seguir.
 
 ### <a name="trigger--scheduling"></a>Gatilho/agendamento
 
-**[Aplicativo Lógico do Azure][logic-apps]** é usado para disparar o fluxo de trabalho. Quando o Aplicativo Lógico detecta que um blob foi adicionado ao contêiner, ele dispara o processo da IA do Lote. O Aplicativo Lógico é ótimo para esta arquitetura de referência porque é uma maneira fácil de detectar alterações no armazenamento de blobs e fornece um processo fácil para alterar o gatilho.
+**[Aplicativos Lógicos do Azure][logic-apps]** são usados para disparar o fluxo de trabalho. Quando o Aplicativo Lógico detecta que um blob foi adicionado ao contêiner, ele dispara o processo da IA do Lote. O Aplicativo Lógico é ótimo para esta arquitetura de referência porque é uma maneira fácil de detectar alterações no armazenamento de blobs e fornece um processo fácil para alterar o gatilho.
 
 **[As Instâncias de Contêiner do Azure][container-instances]** é usado para executar os scripts de Python que criam os trabalhos da IA do Lote. A execução desses scripts dentro de um contêiner do Docker é uma maneira conveniente de executá-los sob demanda. Para essa arquitetura, usamos as Instâncias de Contêiner porque não há um conector de Aplicativo Lógico pré-criados para ela, o que permite que o Aplicativo Lógico dispare o trabalho da IA do Lote. As Instâncias de Contêiner podem ativar rapidamente os processos sem estado.
 

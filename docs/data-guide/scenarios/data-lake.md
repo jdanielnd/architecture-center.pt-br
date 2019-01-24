@@ -1,3 +1,18 @@
+---
+title: Data lakes
+description: ''
+author: zoinerTejada
+ms.date: 02/12/2018
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
+ms.openlocfilehash: d433867886ce0afc219fcc9f35eb7f8b3ce6bee1
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.translationtype: HT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54484696"
+---
 # <a name="data-lakes"></a>Data lakes
 
 Um data lake é um repositório de armazenamento que contém uma grande quantidade de dados em seu formato nativo e bruto. Os repositórios Data lake são otimizados para dimensionamento para terabytes e petabytes de dados. Normalmente, os dados vêm de várias fontes heterogêneas e podem ser estruturados, semi-estruturados ou não estruturados. A ideia com um data lake é armazenar tudo em seu estado original, não transformado. Essa abordagem é diferente de um [data warehouse](../relational-data/data-warehousing.md) tradicional, que transforma e processa os dados no momento da ingestão.

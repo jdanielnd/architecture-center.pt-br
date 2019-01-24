@@ -4,12 +4,16 @@ titleSuffix: Azure Example Scenarios
 description: Use dispositivos de IoT e de análise de dados para fornecer gerenciamento e operação abrangentes de projetos de construção.
 author: alexbuckgit
 ms.date: 08/29/2018
-ms.openlocfilehash: 6c997a4f3396fe7ba04f68f8521fd7a006937a27
-ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
+ms.topic: example-scenario
+ms.service: architecture-center
+ms.subservice: example-scenario
+ms.custom: IoT, data-analytics
+ms.openlocfilehash: dba67dfa7eb480a892229a9bc57d5c5f7ee21017
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/20/2018
-ms.locfileid: "53643876"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54488147"
 ---
 # <a name="iot-and-data-analytics-in-the-construction-industry"></a>Análise de dados e de IoT no setor da construção
 

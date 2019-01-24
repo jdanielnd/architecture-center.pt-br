@@ -5,13 +5,16 @@ description: Consolidar várias tarefas ou operações em uma única unidade de 
 keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
+ms.topic: design-pattern
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 0f787537fb97f52ad69df7f0784b7fca3c45d7d1
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.openlocfilehash: 4cd9b7f02ba3b2a9766a2493353da6b6488ba8a2
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54111471"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54485325"
 ---
 # <a name="compute-resource-consolidation-pattern"></a>Padrão de consolidação de recursos de computação
 

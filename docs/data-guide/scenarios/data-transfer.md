@@ -3,12 +3,15 @@ title: Escolhendo uma tecnologia de transferência de dados
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: 1cb763ade2aa263d07a59cc6bfc29d59bec7af19
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
+ms.openlocfilehash: c58d06813e3a500c6bb1b6c7889e65f401be6c33
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54113035"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54484526"
 ---
 # <a name="transferring-data-to-and-from-azure"></a>Transferindo dados bidirecionalmente no Azure
 
@@ -134,7 +137,7 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 | --- | --- | --- | --- |
 | Otimizado para Big Data | Não  | Não  | sim |
 | Copiar para o banco de dados relacional | Não  | Não  | sim |
-| Copiar para o banco de dados relacional | Não  | Não  | sim |
+| Copiar do banco de dados relacional | Não  | Não  | sim |
 | Copiar para o armazenamento de Blobs | sim | Não  | sim |
 | Copiar do armazenamento de Blobs | sim | Não  | sim |
 | Copiar para o Data Lake Store | Não  | Não  | sim |

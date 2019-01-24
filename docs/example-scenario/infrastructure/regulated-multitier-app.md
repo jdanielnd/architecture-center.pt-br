@@ -4,13 +4,16 @@ titleSuffix: Azure Example Scenarios
 description: Crie um aplicativo Web seguro e de várias camadas com o Windows Server no Azure usando conjuntos de dimensionamento, o Gateway de Aplicativo e balanceadores de carga.
 author: iainfoulds
 ms.date: 12/06/2018
-ms.custom: seodec18
-ms.openlocfilehash: c5c1d4468df72edd989f2ab8f303781b26d50017
-ms.sourcegitcommit: 71ee0859e19fe58416b4c0056d67f2f34dd9ca0a
+ms.topic: example-scenario
+ms.service: architecture-center
+ms.subservice: example-scenario
+ms.custom: seodec18, Windows
+ms.openlocfilehash: 12c7b4749507d4b96e5ce43f98739885c8133e7e
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/11/2019
-ms.locfileid: "54211981"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54485529"
 ---
 # <a name="building-secure-web-applications-with-windows-virtual-machines-on-azure"></a>Como compilar aplicativos Web seguros com máquinas virtuais do Windows no Azure
 

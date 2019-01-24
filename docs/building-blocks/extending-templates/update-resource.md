@@ -3,12 +3,15 @@ title: Atualizar um recurso em um modelo do Azure Resource Manager
 description: Descreve como estender a funcionalidade dos modelos do Azure Resource Manager para atualizar um recurso.
 author: petertay
 ms.date: 10/31/2018
-ms.openlocfilehash: 927826283163b2ae45575035168d6238de98dc00
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.topic: article
+ms.service: architecture-center
+ms.subservice: reference-architecture
+ms.openlocfilehash: de76e69e94917bbbe94c0f87fda2cdbe415181dc
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54113409"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54487129"
 ---
 # <a name="update-a-resource-in-an-azure-resource-manager-template"></a>Atualizar um recurso em um modelo do Azure Resource Manager
 

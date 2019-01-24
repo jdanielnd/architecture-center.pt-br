@@ -5,13 +5,16 @@ description: Use uma fila que funcione como um buffer entre uma tarefa e um serv
 keywords: padrão de design
 author: dragon119
 ms.date: 01/02/2019
+ms.topic: design-pattern
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: bb519fa52fcb6472733b6e52d7332d470eda8349
-ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
+ms.openlocfilehash: c736afced1b0478e8eb1a2694acc4d6a6f0c62fc
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/04/2019
-ms.locfileid: "54011541"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54483489"
 ---
 # <a name="queue-based-load-leveling-pattern"></a>Padrão de nivelamento de carga baseado em fila
 

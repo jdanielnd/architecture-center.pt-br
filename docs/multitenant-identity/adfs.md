@@ -3,15 +3,18 @@ title: Federar com o AD FS de um cliente
 description: Como federar com o AD FS de um cliente em um aplicativo multilocatário.
 author: MikeWasson
 ms.date: 07/21/2017
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: reference-architecture
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: token-cache
 pnp.series.next: client-assertion
-ms.openlocfilehash: 27fad1aab8d359346353cc031a2e8d8746294818
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.openlocfilehash: 82b39d77f1ee9af4063c4715a4688ef4b69bc477
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54113545"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54487842"
 ---
 # <a name="federate-with-a-customers-ad-fs"></a>Federar com o AD FS de um cliente
 

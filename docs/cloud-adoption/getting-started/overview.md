@@ -1,50 +1,53 @@
 ---
-title: 'Adoção do Enterprise Cloud: Introdução'
-description: Descreve uma visão geral da primeira fase da transformação digital de uma empresa na adoção de tecnologias de nuvem do Azure
+title: 'Adoção da Nuvem Empresarial: Introdução'
+description: Descreve uma visão geral da primeira fase da transformação digital de uma empresa ao adotar tecnologias de nuvem do Azure
 author: petertaylor9999
 ms.date: 09/10/2018
-ms.openlocfilehash: b51e834a56f4d9818ca9475f959c3f888bae20bc
-ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.openlocfilehash: 027757c76008da092e0d7ab65b072259a04b3cad
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/11/2018
-ms.locfileid: "44389265"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54488079"
 ---
-# <a name="enterprise-cloud-adoption-getting-started"></a>Adoção do Enterprise Cloud: Introdução 
+# <a name="enterprise-cloud-adoption-getting-started"></a>Adoção da Nuvem Empresarial: Introdução 
 
-A **transformação digital** para a computação em nuvem representa uma mudança da operação local para a operação na nuvem. Essa mudança inclui novas maneiras de fazer negócios — por exemplo, a transformação digital muda de despesas de capital para software e hardware do data center para operar as despesas de uso de recursos de nuvem. 
+A **transformação digital** para a computação em nuvem representa uma mudança da operação local para a operação na nuvem. Essa mudança inclui novas maneiras de fazer negócios — por exemplo, a transformação digital muda de despesas de capital com software e hardware do data center para despesas operacionais com o uso dos recursos de nuvem. 
 
 ## <a name="digital-transformation-process"></a>Transformação digital: processo
 
-Para ter êxito na adoção da nuvem, uma empresa deve preparar a organização, o pessoal e os processos para estarem prontos para a transformação digital. Toda estrutura organizacional empresarial é diferente, portanto, não há uma abordagem única para a preparação da organização. Este documento descreve as etapas de alto nível que sua empresa pode tomar para se preparar. Sua organização terá de passar um tempo desenvolvendo um plano detalhado para realizar cada uma das etapas listadas.
+Para obter êxito na adoção da nuvem, uma empresa deve preparar a organização, o pessoal e os processos para a transformação digital. Toda estrutura organizacional empresarial é diferente, portanto, não há uma abordagem única para a preparação da organização. Este documento descreve as etapas de alto nível que sua empresa pode seguir para se preparar. Sua organização terá de passar um tempo desenvolvendo um plano detalhado para realizar cada uma das etapas listadas.
 
 O processo de alto nível para a transformação digital inclui:
 
 1. Criar uma equipe de estratégia de nuvem. Essa equipe é responsável por comandar a transformação digital. Nesse estágio, também é importante formar uma equipe de governança e uma equipe de segurança para a transformação digital.
 2. Os membros da equipe de estratégia de nuvem aprendem o que há de novo e diferente sobre tecnologias de nuvem.  
 3. A equipe de estratégia de nuvem prepara a empresa, criando o caso comercial para a transformação digital — enumera todas as lacunas atuais na estratégia de negócios e determina as soluções de alto nível para eliminá-las.
-4. Alinhar as soluções de alto nível com grupos de negócios. Identifique os stakeholders em cada grupo comercial para possuir o design e implementação para cada solução.
+4. Alinhar as soluções de alto nível com grupos de negócios. Em cada grupo comercial, identifique os stakeholders que serão responsáveis pelo design e implementação para cada solução.
 5. Modifique as funções, habilidades e processos existentes para incluir funções, habilidades e processos de nuvem.  
 <!--6. Develop processes for operating in the cloud to make solutions more robust in terms of availability, resiliency, and security. 
 7. Optimize solutions for performance, scalability, and cost efficiency.-->
 
 ## <a name="step-1-create-a-cloud-strategy-team"></a>Etapa 1: criar uma equipe de estratégia de nuvem
 
-A primeira etapa no processo de transformação digital da sua empresa é envolver líderes de negócios de toda a organização para criar uma CST (equipe de estratégia de nuvem). Essa equipe é composta por líderes de negócios de finanças, infraestrutura de TI e os grupos de aplicativos. Essas equipes podem ajudar na análise de nuvem e na fase de experimentação.
+A primeira etapa no processo de transformação digital da sua empresa é envolver líderes de negócios de toda a organização para criar uma CST (equipe de estratégia de nuvem). Essa equipe é composta por líderes de negócios do departamento financeiro, da infraestrutura de TI e de grupos de aplicativos. Essas equipes podem ajudar na análise de nuvem e na fase de experimentação.
 
-Por exemplo, uma equipe de estratégia de nuvem pode ser conduzida pela CST e ser composta por membros da equipe de arquitetura empresarial, finanças de TI, tecnólogos seniores de vários grupos de aplicativos de TI (RH, finanças e assim por diante) e líderes da infraestrutura, segurança, e as equipes de rede.  
+Por exemplo, uma equipe de estratégia de nuvem pode ser conduzida pelo Diretor de Tecnologia (CTO) e ser composta por membros da equipe de arquitetura empresarial, do departamento financeiro de TI, de tecnólogos seniores de vários grupos de aplicativos de TI (RH, finanças e assim por diante) e por líderes das equipes de infraestrutura, segurança, e rede.  
 
-Também é importante formar duas outras equipes de alto nível: uma equipe de governança e uma equipe de segurança. Essas equipes são responsáveis por projetar e implementar a auditoria em andamento de políticas de segurança e governança da empresa. A equipe de governança requer membros que tenham trabalhado com proteção de ativos, gerenciamento de custos, política de grupo e tópicos relacionados. A equipe de segurança requer membros que estejam familiarizados com os padrões de segurança atuais do setor, assim como com os requisitos de segurança da empresa.
+Também é importante formar duas outras equipes de alto nível: uma equipe de governança e uma equipe de segurança. Essas equipes são responsáveis pelo design, implementação e manutenção de auditorias das políticas de segurança e governança da empresa. A equipe de governança requer membros que tenham trabalhado com proteção de ativos, gerenciamento de custos, política de grupo e tópicos relacionados. A equipe de segurança requer membros que estejam familiarizados com os padrões de segurança atuais do setor, assim como com os requisitos de segurança da empresa.
 
 ![Equipe de estratégia de nuvem, com as equipes de segurança e governança](../_images/getting-started-overview-1.png)
 
 A equipe de governança é responsável por projetar e implementar o modelo de governança da empresa na nuvem, bem como implantar e manter os ativos de infraestrutura compartilhada que fazem parte da transformação digital. Esses ativos incluem o hardware, software e recursos da nuvem necessários para conectar a rede local à rede virtual na nuvem.
 
-A equipe de segurança é responsável por projetar e implementar a política de segurança da empresa na nuvem, trabalhando de perto com a equipe de governança. A equipe de segurança possui a extensão do limite de segurança da rede local para incluir a rede virtual na nuvem. Isso pode assumir a forma de possuir e manter os firewalls de entrada e saídas da rede virtual da nuvem, além de garantir que as ferramentas e a política evitem a implantação de recursos não autorizados.
+A equipe de segurança é responsável por projetar e implementar a política de segurança da empresa na nuvem, trabalhando de perto com a equipe de governança. A equipe de segurança é responsável pela extensão do limite de segurança da rede local, que inclui a rede virtual na nuvem. Isso pode significar a responsabilidade e manutenção dos firewalls de entrada e saída da rede virtual da nuvem, além de garantir que as ferramentas e políticas evitem a implantação de recursos não autorizados.
 
 ## <a name="step-2-learn-whats-new-in-the-cloud"></a>Etapa 2: saber o que há de novo na nuvem
  
-A próxima etapa no processo de transformação digital da sua empresa é para os membros da equipe de estratégia de nuvem saberem mais sobre como a tecnologia de nuvem mudará a maneira como a empresa faz negócios. Trata-se da preparação e do planejamento para as mudanças do seu negócio, pessoas e tecnologia. Isso é importante para que os membros da equipe de estratégia de nuvem reconheçam o que há de novo e de diferente na nuvem em comparação aos locais.
+Na próxima etapa do processo de transformação digital da sua empresa, os membros da equipe de estratégia de nuvem deverão aprender como a tecnologia de nuvem mudará a maneira como a empresa faz negócios. Trata-se da preparação e do planejamento para as mudanças na empresa, no pessoal e na tecnologia. Isso é importante para que os membros da equipe de estratégia de nuvem reconheçam o que há de novo e de diferente na nuvem em comparação às infraestruturas locais.
 
 ![As equipes de segurança, governança e estratégia de nuvem aprendem as melhores práticas para operar na nuvem.](../_images/getting-started-overview-2.png)
 
@@ -54,7 +57,7 @@ Para o aprendizado avançado, a equipe de governança deve revisar os conceitos 
 
 ## <a name="step-3-identify-gaps-in-business-strategy"></a>Etapa 3: identificar lacunas na estratégia de negócios
 
-A próxima etapa é para a equipe de estratégia de nuvem enumerar os problemas de negócios que exigem uma solução de transformação digital. Por exemplo, uma empresa pode ter um data center local existente com hardware com fim de vida útil e que exige substituição. Em outro exemplo, uma empresa pode estar enfrentando dificuldades com o tempo de colocação no mercado para novos recursos e serviços e pode estar atrasada relação à competição. Essas lacunas representam as *metas* da transformação digital da sua empresa.
+A próxima etapa é a especificação dos problemas de negócios que exigem uma solução de transformação digital, pela equipe de estratégia de nuvem. Por exemplo, uma empresa pode ter um data center local existente com hardware com fim de vida útil e que exige substituição. Em outro exemplo, uma empresa pode estar enfrentando dificuldades com o tempo de lançamento no mercado para novos recursos e serviços e pode estar atrasada em relação à concorrência. Essas lacunas representam as *metas* da transformação digital da sua empresa.
 
 As lacunas na estratégia de negócios podem ser classificadas nas seguintes categorias:
 

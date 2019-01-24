@@ -5,15 +5,17 @@ description: Arquitetura recomendada para implementação de um padrão de integ
 services: logic-apps
 author: mattfarm
 ms.reviewer: jonfan, estfan, LADocs
-ms.topic: article
+ms.topic: reference-architecture
 ms.date: 12/03/2018
+ms.service: architecture-center
+ms.subservice: reference-architecture
 ms.custom: integration-services
-ms.openlocfilehash: 36419706714b8516a309cf634649a4b44a9bc136
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.openlocfilehash: 76e422ead7e53c582a9d64ab1da643c3990749d6
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53120196"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54488385"
 ---
 # <a name="basic-enterprise-integration-on-azure"></a>Integração empresarial básica no Azure
 
@@ -29,7 +31,7 @@ A arquitetura tem os seguintes componentes:
 
 - **Sistemas de back-end**. No lado direito do diagrama estão os vários sistemas de back-end que a empresa implantou ou dos quais ela depende. Podem incluir sistemas de SaaS, outros serviços do Azure ou serviços da Web que expõem pontos de extremidade REST ou SOAP.
 
-- **Aplicativo Lógico do Azure**. Os [Aplicativos Lógicos][logic-apps] são uma plataforma sem servidor para compilar fluxos de trabalho corporativos que integram aplicativos, dados e serviços. Nessa arquitetura, os aplicativos lógicos são disparados por solicitações HTTP. Você também pode aninhar fluxos de trabalho para uma orquestração mais complexa. Os Aplicativos Lógicos usam [conectores][logic-apps-connectors] para integração com serviços usados normalmente. Os Aplicativos Lógicos oferecem centenas de conectores, e você também pode criar conectores personalizados.
+- **Aplicativos Lógicos do Azure**. Os [Aplicativos Lógicos][logic-apps] são uma plataforma sem servidor para compilar fluxos de trabalho corporativos que integram aplicativos, dados e serviços. Nessa arquitetura, os aplicativos lógicos são disparados por solicitações HTTP. Você também pode aninhar fluxos de trabalho para uma orquestração mais complexa. Os Aplicativos Lógicos usam [conectores][logic-apps-connectors] para integração com serviços usados normalmente. Os Aplicativos Lógicos oferecem centenas de conectores, e você também pode criar conectores personalizados.
 
 - **Gerenciamento de API do Azure**. O [Gerenciamento de API][apim] é um serviço gerenciado para publicação de catálogos de APIs HTTP, para promover a reutilização e a capacidade de descoberta. O Gerenciamento de API é formado por dois componentes relacionados:
 
