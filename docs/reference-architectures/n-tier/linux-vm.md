@@ -4,13 +4,16 @@ titleSuffix: Azure Reference Architectures
 description: Melhores práticas para execução de uma máquina virtual do Linux no Azure.
 author: telmosampaio
 ms.date: 12/13/2018
+ms.topic: reference-architecture
+ms.service: architecture-center
+ms.subservice: reference-architecture
 ms.custom: seodec18
-ms.openlocfilehash: 2989cd812c7a3ac6c9e7b8fbf23639b2a95d0b41
-ms.sourcegitcommit: 032f402482762f4e674aeebbc122ad18dfba11eb
+ms.openlocfilehash: ec71e35bec0fa9fad604456130f8596fcf127ebb
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/14/2018
-ms.locfileid: "53396429"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54485648"
 ---
 # <a name="run-a-linux-virtual-machine-on-azure"></a>Executar uma máquina virtual com Linux no Azure
 
@@ -101,7 +104,7 @@ Todos os NSGs contêm um conjunto de [regras padrão][nsg-default-rules], inclui
 
 Use a [Central de Segurança do Azure][security-center] para obter uma exibição central do estado da segurança de seus recursos do Azure. A Central de Segurança monitora problemas de segurança potenciais e fornece uma visão abrangente da integridade de segurança de sua implantação. A Central de Segurança é configurada por assinatura do Azure. Habilite a coleta de dados de segurança conforme descrito em [Integrar a assinatura do Azure à Central de Segurança Standard][security-center-get-started]. Depois que a coleta de dados for habilitada, a Central de Segurança examinará automaticamente todas as VMs criadas nessa assinatura.
 
-**Gerenciamento de patch**. Se for habilitada, a Central de Segurança verificará se quaisquer atualizações críticas e de segurança estão ausentes. Use as [configurações de Política de Grupo][group-policy] na VM para habilitar atualizações automáticas do sistema.
+**Gerenciamento de patch**. Se for habilitada, a Central de Segurança verificará se quaisquer atualizações críticas e de segurança estão ausentes. Use as [Configurações da Política de Grupo][group-policy] na VM para habilitar as atualizações automáticas do sistema.
 
 **Antimalware**.  Se for habilitada, a Central de Segurança verificará se o software antimalware está instalado. Você também pode usar a Central de Segurança para instalar o software antimalware por meio do Portal do Azure.
 
@@ -130,6 +133,7 @@ Use a [Central de Segurança do Azure][security-center] para obter uma exibiçã
 [disk-encryption]: /azure/security/azure-security-disk-encryption
 [enable-monitoring]: /azure/monitoring-and-diagnostics/insights-how-to-use-diagnostics
 [fqdn]: /azure/virtual-machines/virtual-machines-linux-portal-create-fqdn
+[group-policy]: /windows-server/administration/windows-server-update-services/deploy/4-configure-group-policy-settings-for-automatic-updates
 [iostat]: https://en.wikipedia.org/wiki/Iostat
 [manage-vm-availability]: /azure/virtual-machines/virtual-machines-linux-manage-availability
 [managed-disks]: /azure/storage/storage-managed-disks-overview
