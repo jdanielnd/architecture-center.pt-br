@@ -3,64 +3,67 @@ title: Inscrição e integração de locatário em aplicativos multilocatário
 description: Como integrar locatários em um aplicativo multilocatário.
 author: MikeWasson
 ms.date: 07/21/2017
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: reference-architecture
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: claims
 pnp.series.next: app-roles
-ms.openlocfilehash: d112cb65e3cd8bae7b273a974bf8e5d2b04aff8a
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.openlocfilehash: a1ec441b731ba7f2166f9115452b052ec944444f
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54112712"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54488402"
 ---
-# <a name="tenant-sign-up-and-onboarding"></a><span data-ttu-id="4413b-103">Inscrição e integração de locatário</span><span class="sxs-lookup"><span data-stu-id="4413b-103">Tenant sign-up and onboarding</span></span>
+# <a name="tenant-sign-up-and-onboarding"></a><span data-ttu-id="065d3-103">Inscrição e integração de locatário</span><span class="sxs-lookup"><span data-stu-id="065d3-103">Tenant sign-up and onboarding</span></span>
 
-<span data-ttu-id="4413b-104">[Código de exemplo do ![GitHub](../_images/github.png)][sample application]</span><span class="sxs-lookup"><span data-stu-id="4413b-104">[![GitHub](../_images/github.png) Sample code][sample application]</span></span>
+<span data-ttu-id="065d3-104">[Código de exemplo do ![GitHub](../_images/github.png)][sample application]</span><span class="sxs-lookup"><span data-stu-id="065d3-104">[![GitHub](../_images/github.png) Sample code][sample application]</span></span>
 
-<span data-ttu-id="4413b-105">Este artigo descreve como implementar um processo de *inscrição* em um aplicativo multilocatário que permite que um cliente inscreva sua organização para seu aplicativo.</span><span class="sxs-lookup"><span data-stu-id="4413b-105">This article describes how to implement a *sign-up* process in a multi-tenant application, which allows a customer to sign up their organization for your application.</span></span>
-<span data-ttu-id="4413b-106">Há várias razões para implementar um processo de inscrição:</span><span class="sxs-lookup"><span data-stu-id="4413b-106">There are several reasons to implement a sign-up process:</span></span>
+<span data-ttu-id="065d3-105">Este artigo descreve como implementar um processo de *inscrição* em um aplicativo multilocatário que permite que um cliente inscreva sua organização para seu aplicativo.</span><span class="sxs-lookup"><span data-stu-id="065d3-105">This article describes how to implement a *sign-up* process in a multi-tenant application, which allows a customer to sign up their organization for your application.</span></span>
+<span data-ttu-id="065d3-106">Há várias razões para implementar um processo de inscrição:</span><span class="sxs-lookup"><span data-stu-id="065d3-106">There are several reasons to implement a sign-up process:</span></span>
 
-* <span data-ttu-id="4413b-107">Permitir que um administrador do AD autorize o uso do aplicativo por toda a organização do cliente.</span><span class="sxs-lookup"><span data-stu-id="4413b-107">Allow an AD admin to consent for the customer's entire organization to use the application.</span></span>
-* <span data-ttu-id="4413b-108">Cobrar o pagamento por cartão de crédito ou coletar outras informações do cliente.</span><span class="sxs-lookup"><span data-stu-id="4413b-108">Collect credit card payment or other customer information.</span></span>
-* <span data-ttu-id="4413b-109">Executar a instalação avulsa por locatário que venha a ser necessária para seu aplicativo.</span><span class="sxs-lookup"><span data-stu-id="4413b-109">Perform any one-time per-tenant setup needed by your application.</span></span>
+* <span data-ttu-id="065d3-107">Permitir que um administrador do AD autorize o uso do aplicativo por toda a organização do cliente.</span><span class="sxs-lookup"><span data-stu-id="065d3-107">Allow an AD admin to consent for the customer's entire organization to use the application.</span></span>
+* <span data-ttu-id="065d3-108">Cobrar o pagamento por cartão de crédito ou coletar outras informações do cliente.</span><span class="sxs-lookup"><span data-stu-id="065d3-108">Collect credit card payment or other customer information.</span></span>
+* <span data-ttu-id="065d3-109">Executar a instalação avulsa por locatário que venha a ser necessária para seu aplicativo.</span><span class="sxs-lookup"><span data-stu-id="065d3-109">Perform any one-time per-tenant setup needed by your application.</span></span>
 
-## <a name="admin-consent-and-azure-ad-permissions"></a><span data-ttu-id="4413b-110">Consentimento do administrador e permissões do Azure AD</span><span class="sxs-lookup"><span data-stu-id="4413b-110">Admin consent and Azure AD permissions</span></span>
+## <a name="admin-consent-and-azure-ad-permissions"></a><span data-ttu-id="065d3-110">Consentimento do administrador e permissões do Azure AD</span><span class="sxs-lookup"><span data-stu-id="065d3-110">Admin consent and Azure AD permissions</span></span>
 
-<span data-ttu-id="4413b-111">Para autenticar com o Azure AD, o aplicativo precisa acessar o diretório do usuário.</span><span class="sxs-lookup"><span data-stu-id="4413b-111">In order to authenticate with Azure AD, an application needs access to the user's directory.</span></span> <span data-ttu-id="4413b-112">O aplicativo precisa, no mínimo, de permissão para ler o perfil do usuário.</span><span class="sxs-lookup"><span data-stu-id="4413b-112">At a minimum, the application needs permission to read the user's profile.</span></span> <span data-ttu-id="4413b-113">Na primeira vez que um usuário fizer logon, o Azure AD mostrará uma página de consentimento que lista as permissões que estão sendo solicitadas.</span><span class="sxs-lookup"><span data-stu-id="4413b-113">The first time that a user signs in, Azure AD shows a consent page that lists the permissions being requested.</span></span> <span data-ttu-id="4413b-114">Ao clicar em **Aceitar**, o usuário concederá permissão para o aplicativo.</span><span class="sxs-lookup"><span data-stu-id="4413b-114">By clicking **Accept**, the user grants permission to the application.</span></span>
+<span data-ttu-id="065d3-111">Para autenticar com o Azure AD, o aplicativo precisa acessar o diretório do usuário.</span><span class="sxs-lookup"><span data-stu-id="065d3-111">In order to authenticate with Azure AD, an application needs access to the user's directory.</span></span> <span data-ttu-id="065d3-112">O aplicativo precisa, no mínimo, de permissão para ler o perfil do usuário.</span><span class="sxs-lookup"><span data-stu-id="065d3-112">At a minimum, the application needs permission to read the user's profile.</span></span> <span data-ttu-id="065d3-113">Na primeira vez que um usuário fizer logon, o Azure AD mostrará uma página de consentimento que lista as permissões que estão sendo solicitadas.</span><span class="sxs-lookup"><span data-stu-id="065d3-113">The first time that a user signs in, Azure AD shows a consent page that lists the permissions being requested.</span></span> <span data-ttu-id="065d3-114">Ao clicar em **Aceitar**, o usuário concederá permissão para o aplicativo.</span><span class="sxs-lookup"><span data-stu-id="065d3-114">By clicking **Accept**, the user grants permission to the application.</span></span>
 
-<span data-ttu-id="4413b-115">Por padrão, o consentimento é concedido baseado em cada usuário.</span><span class="sxs-lookup"><span data-stu-id="4413b-115">By default, consent is granted on a per-user basis.</span></span> <span data-ttu-id="4413b-116">Todos os usuários que entrarem verão a página de consentimento.</span><span class="sxs-lookup"><span data-stu-id="4413b-116">Every user who signs in sees the consent page.</span></span> <span data-ttu-id="4413b-117">No entanto, o Azure AD também dá suporte ao *consentimento do administrador*, que permite a um administrador do AD dar consentimentos em nome de toda a organização.</span><span class="sxs-lookup"><span data-stu-id="4413b-117">However, Azure AD also supports  *admin consent*, which allows an AD administrator to consent for an entire organization.</span></span>
+<span data-ttu-id="065d3-115">Por padrão, o consentimento é concedido baseado em cada usuário.</span><span class="sxs-lookup"><span data-stu-id="065d3-115">By default, consent is granted on a per-user basis.</span></span> <span data-ttu-id="065d3-116">Todos os usuários que entrarem verão a página de consentimento.</span><span class="sxs-lookup"><span data-stu-id="065d3-116">Every user who signs in sees the consent page.</span></span> <span data-ttu-id="065d3-117">No entanto, o Azure AD também dá suporte ao *consentimento do administrador*, que permite a um administrador do AD dar consentimentos em nome de toda a organização.</span><span class="sxs-lookup"><span data-stu-id="065d3-117">However, Azure AD also supports  *admin consent*, which allows an AD administrator to consent for an entire organization.</span></span>
 
-<span data-ttu-id="4413b-118">Quando o fluxo de consentimento do administrador é usado, a página de autorização informa que o administrador do AD está concedendo a permissão em nome do locatário inteiro:</span><span class="sxs-lookup"><span data-stu-id="4413b-118">When the admin consent flow is used, the consent page states that the AD admin is granting permission on behalf of the entire tenant:</span></span>
+<span data-ttu-id="065d3-118">Quando o fluxo de consentimento do administrador é usado, a página de autorização informa que o administrador do AD está concedendo a permissão em nome do locatário inteiro:</span><span class="sxs-lookup"><span data-stu-id="065d3-118">When the admin consent flow is used, the consent page states that the AD admin is granting permission on behalf of the entire tenant:</span></span>
 
 ![Solicitação de consentimento do administrador](./images/admin-consent.png)
 
-<span data-ttu-id="4413b-120">Depois que o administrador clica em **Aceitar**, outros usuários no mesmo locatário podem entrar e o Azure AD ignorará a tela de consentimento.</span><span class="sxs-lookup"><span data-stu-id="4413b-120">After the admin clicks **Accept**, other users within the same tenant can sign in, and Azure AD will skip the consent screen.</span></span>
+<span data-ttu-id="065d3-120">Depois que o administrador clica em **Aceitar**, outros usuários no mesmo locatário podem entrar e o Azure AD ignorará a tela de consentimento.</span><span class="sxs-lookup"><span data-stu-id="065d3-120">After the admin clicks **Accept**, other users within the same tenant can sign in, and Azure AD will skip the consent screen.</span></span>
 
-<span data-ttu-id="4413b-121">Somente um administrador do AD pode dar consentimento de administrador, já que ele concede permissão em nome de toda a organização.</span><span class="sxs-lookup"><span data-stu-id="4413b-121">Only an AD administrator can give admin consent, because it grants permission on behalf of the entire organization.</span></span> <span data-ttu-id="4413b-122">Se alguém que não for um administrador tentar autenticar com o fluxo de consentimento do administrador, o Azure AD exibirá um erro:</span><span class="sxs-lookup"><span data-stu-id="4413b-122">If a non-administrator tries to authenticate with the admin consent flow, Azure AD displays an error:</span></span>
+<span data-ttu-id="065d3-121">Somente um administrador do AD pode dar consentimento de administrador, já que ele concede permissão em nome de toda a organização.</span><span class="sxs-lookup"><span data-stu-id="065d3-121">Only an AD administrator can give admin consent, because it grants permission on behalf of the entire organization.</span></span> <span data-ttu-id="065d3-122">Se alguém que não for um administrador tentar autenticar com o fluxo de consentimento do administrador, o Azure AD exibirá um erro:</span><span class="sxs-lookup"><span data-stu-id="065d3-122">If a non-administrator tries to authenticate with the admin consent flow, Azure AD displays an error:</span></span>
 
 ![Erro de consentimento](./images/consent-error.png)
 
-<span data-ttu-id="4413b-124">Se o aplicativo exigir permissões adicionais em um momento posterior, o cliente precisará se inscrever novamente e concordar com as permissões atualizadas.</span><span class="sxs-lookup"><span data-stu-id="4413b-124">If the application requires additional permissions at a later point, the customer will need to sign up again and consent to the updated permissions.</span></span>
+<span data-ttu-id="065d3-124">Se o aplicativo exigir permissões adicionais em um momento posterior, o cliente precisará se inscrever novamente e concordar com as permissões atualizadas.</span><span class="sxs-lookup"><span data-stu-id="065d3-124">If the application requires additional permissions at a later point, the customer will need to sign up again and consent to the updated permissions.</span></span>
 
-## <a name="implementing-tenant-sign-up"></a><span data-ttu-id="4413b-125">Implementando a inscrição de locatário</span><span class="sxs-lookup"><span data-stu-id="4413b-125">Implementing tenant sign-up</span></span>
+## <a name="implementing-tenant-sign-up"></a><span data-ttu-id="065d3-125">Implementando a inscrição de locatário</span><span class="sxs-lookup"><span data-stu-id="065d3-125">Implementing tenant sign-up</span></span>
 
-<span data-ttu-id="4413b-126">Para o aplicativo [Tailspin Surveys][Tailspin], definimos diversos requisitos para o processo de inscrição:</span><span class="sxs-lookup"><span data-stu-id="4413b-126">For the [Tailspin Surveys][Tailspin] application,  we defined several requirements for the sign-up process:</span></span>
+<span data-ttu-id="065d3-126">Para o aplicativo [Tailspin Surveys][Tailspin], definimos diversos requisitos para o processo de inscrição:</span><span class="sxs-lookup"><span data-stu-id="065d3-126">For the [Tailspin Surveys][Tailspin] application,  we defined several requirements for the sign-up process:</span></span>
 
-* <span data-ttu-id="4413b-127">Um locatário deve se inscrever antes dos usuários poderem entrar.</span><span class="sxs-lookup"><span data-stu-id="4413b-127">A tenant must sign up before users can sign in.</span></span>
-* <span data-ttu-id="4413b-128">A inscrição usa o fluxo de consentimento do administrador.</span><span class="sxs-lookup"><span data-stu-id="4413b-128">Sign-up uses the admin consent flow.</span></span>
-* <span data-ttu-id="4413b-129">A inscrição adiciona o locatário do usuário ao banco de dados do aplicativo.</span><span class="sxs-lookup"><span data-stu-id="4413b-129">Sign-up adds the user's tenant to the application database.</span></span>
-* <span data-ttu-id="4413b-130">Depois que um locatário se inscreve, o aplicativo mostra uma página de integração.</span><span class="sxs-lookup"><span data-stu-id="4413b-130">After a tenant signs up, the application shows an onboarding page.</span></span>
+* <span data-ttu-id="065d3-127">Um locatário deve se inscrever antes dos usuários poderem entrar.</span><span class="sxs-lookup"><span data-stu-id="065d3-127">A tenant must sign up before users can sign in.</span></span>
+* <span data-ttu-id="065d3-128">A inscrição usa o fluxo de consentimento do administrador.</span><span class="sxs-lookup"><span data-stu-id="065d3-128">Sign-up uses the admin consent flow.</span></span>
+* <span data-ttu-id="065d3-129">A inscrição adiciona o locatário do usuário ao banco de dados do aplicativo.</span><span class="sxs-lookup"><span data-stu-id="065d3-129">Sign-up adds the user's tenant to the application database.</span></span>
+* <span data-ttu-id="065d3-130">Depois que um locatário se inscreve, o aplicativo mostra uma página de integração.</span><span class="sxs-lookup"><span data-stu-id="065d3-130">After a tenant signs up, the application shows an onboarding page.</span></span>
 
-<span data-ttu-id="4413b-131">Nesta seção, vamos examinar nossa implementação do processo de inscrição.</span><span class="sxs-lookup"><span data-stu-id="4413b-131">In this section, we'll walk through our implementation of the sign-up process.</span></span>
-<span data-ttu-id="4413b-132">É importante entender que "inscrição" versus "logon" é um conceito de aplicativo.</span><span class="sxs-lookup"><span data-stu-id="4413b-132">It's important to understand that "sign up" versus "sign in" is an application concept.</span></span> <span data-ttu-id="4413b-133">Durante o fluxo de autenticação, o Azure AD não tem como saber se o usuário está no processo de inscrição.</span><span class="sxs-lookup"><span data-stu-id="4413b-133">During the authentication flow, Azure AD does not inherently know whether the user is in process of signing up.</span></span> <span data-ttu-id="4413b-134">Cabe ao aplicativo controlar o contexto.</span><span class="sxs-lookup"><span data-stu-id="4413b-134">It's up to the application to keep track of the context.</span></span>
+<span data-ttu-id="065d3-131">Nesta seção, vamos examinar nossa implementação do processo de inscrição.</span><span class="sxs-lookup"><span data-stu-id="065d3-131">In this section, we'll walk through our implementation of the sign-up process.</span></span>
+<span data-ttu-id="065d3-132">É importante entender que "inscrição" versus "logon" é um conceito de aplicativo.</span><span class="sxs-lookup"><span data-stu-id="065d3-132">It's important to understand that "sign up" versus "sign in" is an application concept.</span></span> <span data-ttu-id="065d3-133">Durante o fluxo de autenticação, o Azure AD não tem como saber se o usuário está no processo de inscrição.</span><span class="sxs-lookup"><span data-stu-id="065d3-133">During the authentication flow, Azure AD does not inherently know whether the user is in process of signing up.</span></span> <span data-ttu-id="065d3-134">Cabe ao aplicativo controlar o contexto.</span><span class="sxs-lookup"><span data-stu-id="065d3-134">It's up to the application to keep track of the context.</span></span>
 
-<span data-ttu-id="4413b-135">Quando um usuário anônimo visita o aplicativo Surveys, o usuário vê dois botões, um para entrar e um para "registrar sua empresa" (inscrever-se).</span><span class="sxs-lookup"><span data-stu-id="4413b-135">When an anonymous user visits the Surveys application, the user is shown two buttons, one to sign in, and one to "enroll your company" (sign up).</span></span>
+<span data-ttu-id="065d3-135">Quando um usuário anônimo visita o aplicativo Surveys, o usuário vê dois botões, um para entrar e um para "registrar sua empresa" (inscrever-se).</span><span class="sxs-lookup"><span data-stu-id="065d3-135">When an anonymous user visits the Surveys application, the user is shown two buttons, one to sign in, and one to "enroll your company" (sign up).</span></span>
 
 ![Página de inscrição do aplicativo](./images/sign-up-page.png)
 
-<span data-ttu-id="4413b-137">Esses botões invocam ações na classe `AccountController`.</span><span class="sxs-lookup"><span data-stu-id="4413b-137">These buttons invoke actions in the `AccountController` class.</span></span>
+<span data-ttu-id="065d3-137">Esses botões invocam ações na classe `AccountController`.</span><span class="sxs-lookup"><span data-stu-id="065d3-137">These buttons invoke actions in the `AccountController` class.</span></span>
 
-<span data-ttu-id="4413b-138">A ação `SignIn` retorna um **ChallegeResult**, que faz com que o middleware OpenID Connect redirecione para o ponto de extremidade de autenticação.</span><span class="sxs-lookup"><span data-stu-id="4413b-138">The `SignIn` action returns a **ChallegeResult**, which causes the OpenID Connect middleware to redirect to the authentication endpoint.</span></span> <span data-ttu-id="4413b-139">Essa é a maneira padrão de disparar a autenticação no ASP.NET Core.</span><span class="sxs-lookup"><span data-stu-id="4413b-139">This is the default way to trigger authentication in ASP.NET Core.</span></span>
+<span data-ttu-id="065d3-138">A ação `SignIn` retorna um **ChallegeResult**, que faz com que o middleware OpenID Connect redirecione para o ponto de extremidade de autenticação.</span><span class="sxs-lookup"><span data-stu-id="065d3-138">The `SignIn` action returns a **ChallegeResult**, which causes the OpenID Connect middleware to redirect to the authentication endpoint.</span></span> <span data-ttu-id="065d3-139">Essa é a maneira padrão de disparar a autenticação no ASP.NET Core.</span><span class="sxs-lookup"><span data-stu-id="065d3-139">This is the default way to trigger authentication in ASP.NET Core.</span></span>
 
 ```csharp
 [AllowAnonymous]
@@ -76,7 +79,7 @@ public IActionResult SignIn()
 }
 ```
 
-<span data-ttu-id="4413b-140">Agora compare a ação `SignUp` :</span><span class="sxs-lookup"><span data-stu-id="4413b-140">Now compare the `SignUp` action:</span></span>
+<span data-ttu-id="065d3-140">Agora compare a ação `SignUp` :</span><span class="sxs-lookup"><span data-stu-id="065d3-140">Now compare the `SignUp` action:</span></span>
 
 ```csharp
 [AllowAnonymous]
@@ -92,19 +95,19 @@ public IActionResult SignUp()
 }
 ```
 
-<span data-ttu-id="4413b-141">Como `SignIn`, a ação `SignUp` também retorna um `ChallengeResult`.</span><span class="sxs-lookup"><span data-stu-id="4413b-141">Like `SignIn`, the `SignUp` action also returns a `ChallengeResult`.</span></span> <span data-ttu-id="4413b-142">Mas, dessa vez, vamos adicionar uma parte das informações de estado às `AuthenticationProperties` in the `ChallengeResult`:</span><span class="sxs-lookup"><span data-stu-id="4413b-142">But this time, we add a piece of state information to the `AuthenticationProperties` in the `ChallengeResult`:</span></span>
+<span data-ttu-id="065d3-141">Como `SignIn`, a ação `SignUp` também retorna um `ChallengeResult`.</span><span class="sxs-lookup"><span data-stu-id="065d3-141">Like `SignIn`, the `SignUp` action also returns a `ChallengeResult`.</span></span> <span data-ttu-id="065d3-142">Mas, dessa vez, vamos adicionar uma parte das informações de estado às `AuthenticationProperties` in the `ChallengeResult`:</span><span class="sxs-lookup"><span data-stu-id="065d3-142">But this time, we add a piece of state information to the `AuthenticationProperties` in the `ChallengeResult`:</span></span>
 
-* <span data-ttu-id="4413b-143">inscrever-se: um sinalizador booliano indicando que o usuário iniciou o processo de inscrição.</span><span class="sxs-lookup"><span data-stu-id="4413b-143">signup: A Boolean flag, indicating that the user has started the sign-up process.</span></span>
+* <span data-ttu-id="065d3-143">inscrever-se: um sinalizador booliano indicando que o usuário iniciou o processo de inscrição.</span><span class="sxs-lookup"><span data-stu-id="065d3-143">signup: A Boolean flag, indicating that the user has started the sign-up process.</span></span>
 
-<span data-ttu-id="4413b-144">As informações de estado em `AuthenticationProperties` são adicionadas ao parâmetro [state] do OpenID Connect, que vai e volta durante o fluxo de autenticação.</span><span class="sxs-lookup"><span data-stu-id="4413b-144">The state information in `AuthenticationProperties` gets added to the OpenID Connect [state] parameter, which round trips during the authentication flow.</span></span>
+<span data-ttu-id="065d3-144">As informações de estado em `AuthenticationProperties` são adicionadas ao parâmetro [state] do OpenID Connect, que vai e volta durante o fluxo de autenticação.</span><span class="sxs-lookup"><span data-stu-id="065d3-144">The state information in `AuthenticationProperties` gets added to the OpenID Connect [state] parameter, which round trips during the authentication flow.</span></span>
 
 ![Parâmetro de estado](./images/state-parameter.png)
 
-<span data-ttu-id="4413b-146">Depois que o usuário é autenticado no Azure AD e é redirecionado ao aplicativo, o tíquete de autenticação contém o estado.</span><span class="sxs-lookup"><span data-stu-id="4413b-146">After the user authenticates in Azure AD and gets redirected back to the application, the authentication ticket contains the state.</span></span> <span data-ttu-id="4413b-147">Estamos usando isso para fazer com que o valor "inscrição" persista durante todo o fluxo de autenticação.</span><span class="sxs-lookup"><span data-stu-id="4413b-147">We are using this fact to make sure the "signup" value persists across the entire authentication flow.</span></span>
+<span data-ttu-id="065d3-146">Depois que o usuário é autenticado no Azure AD e é redirecionado ao aplicativo, o tíquete de autenticação contém o estado.</span><span class="sxs-lookup"><span data-stu-id="065d3-146">After the user authenticates in Azure AD and gets redirected back to the application, the authentication ticket contains the state.</span></span> <span data-ttu-id="065d3-147">Estamos usando isso para fazer com que o valor "inscrição" persista durante todo o fluxo de autenticação.</span><span class="sxs-lookup"><span data-stu-id="065d3-147">We are using this fact to make sure the "signup" value persists across the entire authentication flow.</span></span>
 
-## <a name="adding-the-admin-consent-prompt"></a><span data-ttu-id="4413b-148">Adicionando a solicitação de consentimento do administrador</span><span class="sxs-lookup"><span data-stu-id="4413b-148">Adding the admin consent prompt</span></span>
+## <a name="adding-the-admin-consent-prompt"></a><span data-ttu-id="065d3-148">Adicionando a solicitação de consentimento do administrador</span><span class="sxs-lookup"><span data-stu-id="065d3-148">Adding the admin consent prompt</span></span>
 
-<span data-ttu-id="4413b-149">No Azure AD, o fluxo de consentimento do administrador é disparado com a adição de um parâmetro "prompt" à cadeia de caracteres de consulta na solicitação de autenticação:</span><span class="sxs-lookup"><span data-stu-id="4413b-149">In Azure AD, the admin consent flow is triggered by adding a "prompt" parameter to the query string in the authentication request:</span></span>
+<span data-ttu-id="065d3-149">No Azure AD, o fluxo de consentimento do administrador é disparado com a adição de um parâmetro "prompt" à cadeia de caracteres de consulta na solicitação de autenticação:</span><span class="sxs-lookup"><span data-stu-id="065d3-149">In Azure AD, the admin consent flow is triggered by adding a "prompt" parameter to the query string in the authentication request:</span></span>
 
 <!-- markdownlint-disable MD040 -->
 
@@ -114,7 +117,7 @@ public IActionResult SignUp()
 
 <!-- markdownlint-enable MD040 -->
 
-<span data-ttu-id="4413b-150">O aplicativo Surveys adiciona o prompt durante o evento `RedirectToAuthenticationEndpoint` .</span><span class="sxs-lookup"><span data-stu-id="4413b-150">The Surveys application adds the prompt during the `RedirectToAuthenticationEndpoint` event.</span></span> <span data-ttu-id="4413b-151">Esse evento é chamado momentos antes do middleware redirecionar para o ponto de extremidade de autenticação.</span><span class="sxs-lookup"><span data-stu-id="4413b-151">This event is called right before the middleware redirects to the authentication endpoint.</span></span>
+<span data-ttu-id="065d3-150">O aplicativo Surveys adiciona o prompt durante o evento `RedirectToAuthenticationEndpoint` .</span><span class="sxs-lookup"><span data-stu-id="065d3-150">The Surveys application adds the prompt during the `RedirectToAuthenticationEndpoint` event.</span></span> <span data-ttu-id="065d3-151">Esse evento é chamado momentos antes do middleware redirecionar para o ponto de extremidade de autenticação.</span><span class="sxs-lookup"><span data-stu-id="065d3-151">This event is called right before the middleware redirects to the authentication endpoint.</span></span>
 
 ```csharp
 public override Task RedirectToAuthenticationEndpoint(RedirectContext context)
@@ -129,9 +132,9 @@ public override Task RedirectToAuthenticationEndpoint(RedirectContext context)
 }
 ```
 
-<span data-ttu-id="4413b-152">A definição de `ProtocolMessage.Prompt` ordena ao middleware que adicione o parâmetro "prompt" à solicitação de autenticação.</span><span class="sxs-lookup"><span data-stu-id="4413b-152">Setting `ProtocolMessage.Prompt` tells the middleware to add the "prompt" parameter to the authentication request.</span></span>
+<span data-ttu-id="065d3-152">A definição de `ProtocolMessage.Prompt` ordena ao middleware que adicione o parâmetro "prompt" à solicitação de autenticação.</span><span class="sxs-lookup"><span data-stu-id="065d3-152">Setting `ProtocolMessage.Prompt` tells the middleware to add the "prompt" parameter to the authentication request.</span></span>
 
-<span data-ttu-id="4413b-153">Observe que o prompt é necessário somente durante a inscrição.</span><span class="sxs-lookup"><span data-stu-id="4413b-153">Note that the prompt is only needed during sign-up.</span></span> <span data-ttu-id="4413b-154">O logon normal não deve incluí-lo.</span><span class="sxs-lookup"><span data-stu-id="4413b-154">Regular sign-in should not include it.</span></span> <span data-ttu-id="4413b-155">Para distinguir entre eles, verificamos o valor `signup` no estado de autenticação.</span><span class="sxs-lookup"><span data-stu-id="4413b-155">To distinguish between them, we check for the `signup` value in the authentication state.</span></span> <span data-ttu-id="4413b-156">O seguinte método de extensão verifica essa condição:</span><span class="sxs-lookup"><span data-stu-id="4413b-156">The following extension method checks for this condition:</span></span>
+<span data-ttu-id="065d3-153">Observe que o prompt é necessário somente durante a inscrição.</span><span class="sxs-lookup"><span data-stu-id="065d3-153">Note that the prompt is only needed during sign-up.</span></span> <span data-ttu-id="065d3-154">O logon normal não deve incluí-lo.</span><span class="sxs-lookup"><span data-stu-id="065d3-154">Regular sign-in should not include it.</span></span> <span data-ttu-id="065d3-155">Para distinguir entre eles, verificamos o valor `signup` no estado de autenticação.</span><span class="sxs-lookup"><span data-stu-id="065d3-155">To distinguish between them, we check for the `signup` value in the authentication state.</span></span> <span data-ttu-id="065d3-156">O seguinte método de extensão verifica essa condição:</span><span class="sxs-lookup"><span data-stu-id="065d3-156">The following extension method checks for this condition:</span></span>
 
 ```csharp
 internal static bool IsSigningUp(this BaseControlContext context)
@@ -159,17 +162,17 @@ internal static bool IsSigningUp(this BaseControlContext context)
 }
 ```
 
-## <a name="registering-a-tenant"></a><span data-ttu-id="4413b-157">Registrando um locatário</span><span class="sxs-lookup"><span data-stu-id="4413b-157">Registering a tenant</span></span>
+## <a name="registering-a-tenant"></a><span data-ttu-id="065d3-157">Registrando um locatário</span><span class="sxs-lookup"><span data-stu-id="065d3-157">Registering a tenant</span></span>
 
-<span data-ttu-id="4413b-158">O aplicativo Surveys armazena algumas informações sobre cada locatário e usuário no banco de dados do aplicativo.</span><span class="sxs-lookup"><span data-stu-id="4413b-158">The Surveys application stores some information about each tenant and user in the application database.</span></span>
+<span data-ttu-id="065d3-158">O aplicativo Surveys armazena algumas informações sobre cada locatário e usuário no banco de dados do aplicativo.</span><span class="sxs-lookup"><span data-stu-id="065d3-158">The Surveys application stores some information about each tenant and user in the application database.</span></span>
 
 ![Tabela de locatário](./images/tenant-table.png)
 
-<span data-ttu-id="4413b-160">Na tabela Locatário, IssuerValue é o valor da declaração do emissor do locatário.</span><span class="sxs-lookup"><span data-stu-id="4413b-160">In the Tenant table, IssuerValue is the value of the issuer claim for the tenant.</span></span> <span data-ttu-id="4413b-161">Para o Azure AD, ele é o `https://sts.windows.net/<tentantID>` e fornece um valor exclusivo por locatário.</span><span class="sxs-lookup"><span data-stu-id="4413b-161">For Azure AD, this is `https://sts.windows.net/<tentantID>` and gives a unique value per tenant.</span></span>
+<span data-ttu-id="065d3-160">Na tabela Locatário, IssuerValue é o valor da declaração do emissor do locatário.</span><span class="sxs-lookup"><span data-stu-id="065d3-160">In the Tenant table, IssuerValue is the value of the issuer claim for the tenant.</span></span> <span data-ttu-id="065d3-161">Para o Azure AD, ele é o `https://sts.windows.net/<tentantID>` e fornece um valor exclusivo por locatário.</span><span class="sxs-lookup"><span data-stu-id="065d3-161">For Azure AD, this is `https://sts.windows.net/<tentantID>` and gives a unique value per tenant.</span></span>
 
-<span data-ttu-id="4413b-162">Quando um novo locatário se inscreve, o aplicativo Surveys grava um registro de locatário no banco de dados.</span><span class="sxs-lookup"><span data-stu-id="4413b-162">When a new tenant signs up, the Surveys application writes a tenant record to the database.</span></span> <span data-ttu-id="4413b-163">Isso acontece dentro do evento `AuthenticationValidated`.</span><span class="sxs-lookup"><span data-stu-id="4413b-163">This happens inside the `AuthenticationValidated` event.</span></span> <span data-ttu-id="4413b-164">Não faça isso antes desse evento, pois o token de ID não será validado ainda, portanto, você não pode confiar nos valores de declaração.</span><span class="sxs-lookup"><span data-stu-id="4413b-164">(Don't do it before this event, because the ID token won't be validated yet, so you can't trust the claim values.</span></span> <span data-ttu-id="4413b-165">Consulte [Autenticação].</span><span class="sxs-lookup"><span data-stu-id="4413b-165">See [Authentication].</span></span>
+<span data-ttu-id="065d3-162">Quando um novo locatário se inscreve, o aplicativo Surveys grava um registro de locatário no banco de dados.</span><span class="sxs-lookup"><span data-stu-id="065d3-162">When a new tenant signs up, the Surveys application writes a tenant record to the database.</span></span> <span data-ttu-id="065d3-163">Isso acontece dentro do evento `AuthenticationValidated`.</span><span class="sxs-lookup"><span data-stu-id="065d3-163">This happens inside the `AuthenticationValidated` event.</span></span> <span data-ttu-id="065d3-164">Não faça isso antes desse evento, pois o token de ID não será validado ainda, portanto, você não pode confiar nos valores de declaração.</span><span class="sxs-lookup"><span data-stu-id="065d3-164">(Don't do it before this event, because the ID token won't be validated yet, so you can't trust the claim values.</span></span> <span data-ttu-id="065d3-165">Consulte [Autenticação].</span><span class="sxs-lookup"><span data-stu-id="065d3-165">See [Authentication].</span></span>
 
-<span data-ttu-id="4413b-166">Veja o código relevante do aplicativo Surveys:</span><span class="sxs-lookup"><span data-stu-id="4413b-166">Here is the relevant code from the Surveys application:</span></span>
+<span data-ttu-id="065d3-166">Veja o código relevante do aplicativo Surveys:</span><span class="sxs-lookup"><span data-stu-id="065d3-166">Here is the relevant code from the Surveys application:</span></span>
 
 ```csharp
 public override async Task TokenValidated(TokenValidatedContext context)
@@ -212,17 +215,17 @@ public override async Task TokenValidated(TokenValidatedContext context)
 }
 ```
 
-<span data-ttu-id="4413b-167">O código faz o seguinte:</span><span class="sxs-lookup"><span data-stu-id="4413b-167">This code does the following:</span></span>
+<span data-ttu-id="065d3-167">O código faz o seguinte:</span><span class="sxs-lookup"><span data-stu-id="065d3-167">This code does the following:</span></span>
 
-1. <span data-ttu-id="4413b-168">Verifique se o valor do emissor do locatário já está no banco de dados.</span><span class="sxs-lookup"><span data-stu-id="4413b-168">Check if the tenant's issuer value is already in the database.</span></span> <span data-ttu-id="4413b-169">Se o locatário não se inscreveu, `FindByIssuerValueAsync` retorna null.</span><span class="sxs-lookup"><span data-stu-id="4413b-169">If the tenant has not signed up, `FindByIssuerValueAsync` returns null.</span></span>
-2. <span data-ttu-id="4413b-170">Se o usuário estiver se inscrevendo:</span><span class="sxs-lookup"><span data-stu-id="4413b-170">If the user is signing up:</span></span>
-   1. <span data-ttu-id="4413b-171">Adicione o locatário ao banco de dados (`SignUpTenantAsync`).</span><span class="sxs-lookup"><span data-stu-id="4413b-171">Add the tenant to the database (`SignUpTenantAsync`).</span></span>
-   2. <span data-ttu-id="4413b-172">Adicione o usuário autenticado ao banco de dados (`CreateOrUpdateUserAsync`).</span><span class="sxs-lookup"><span data-stu-id="4413b-172">Add the authenticated user to the database (`CreateOrUpdateUserAsync`).</span></span>
-3. <span data-ttu-id="4413b-173">Caso contrário, siga o fluxo de entrada normal:</span><span class="sxs-lookup"><span data-stu-id="4413b-173">Otherwise complete the normal sign-in flow:</span></span>
-   1. <span data-ttu-id="4413b-174">Se o emissor do locatário não foi encontrado no banco de dados, isso significa que o locatário não está registrado e o cliente precisa se inscrever.</span><span class="sxs-lookup"><span data-stu-id="4413b-174">If the tenant's issuer was not found in the database, it means the tenant is not registered, and the customer needs to sign up.</span></span> <span data-ttu-id="4413b-175">Nesse caso, lance uma exceção para causar uma falha na autenticação.</span><span class="sxs-lookup"><span data-stu-id="4413b-175">In that case, throw an exception to cause the authentication to fail.</span></span>
-   2. <span data-ttu-id="4413b-176">Caso contrário, crie um registro de banco de dados para o usuário, se já não houver um (`CreateOrUpdateUserAsync`).</span><span class="sxs-lookup"><span data-stu-id="4413b-176">Otherwise, create a database record for this user, if there isn't one already (`CreateOrUpdateUserAsync`).</span></span>
+1. <span data-ttu-id="065d3-168">Verifique se o valor do emissor do locatário já está no banco de dados.</span><span class="sxs-lookup"><span data-stu-id="065d3-168">Check if the tenant's issuer value is already in the database.</span></span> <span data-ttu-id="065d3-169">Se o locatário não se inscreveu, `FindByIssuerValueAsync` retorna null.</span><span class="sxs-lookup"><span data-stu-id="065d3-169">If the tenant has not signed up, `FindByIssuerValueAsync` returns null.</span></span>
+2. <span data-ttu-id="065d3-170">Se o usuário estiver se inscrevendo:</span><span class="sxs-lookup"><span data-stu-id="065d3-170">If the user is signing up:</span></span>
+   1. <span data-ttu-id="065d3-171">Adicione o locatário ao banco de dados (`SignUpTenantAsync`).</span><span class="sxs-lookup"><span data-stu-id="065d3-171">Add the tenant to the database (`SignUpTenantAsync`).</span></span>
+   2. <span data-ttu-id="065d3-172">Adicione o usuário autenticado ao banco de dados (`CreateOrUpdateUserAsync`).</span><span class="sxs-lookup"><span data-stu-id="065d3-172">Add the authenticated user to the database (`CreateOrUpdateUserAsync`).</span></span>
+3. <span data-ttu-id="065d3-173">Caso contrário, siga o fluxo de entrada normal:</span><span class="sxs-lookup"><span data-stu-id="065d3-173">Otherwise complete the normal sign-in flow:</span></span>
+   1. <span data-ttu-id="065d3-174">Se o emissor do locatário não foi encontrado no banco de dados, isso significa que o locatário não está registrado e o cliente precisa se inscrever.</span><span class="sxs-lookup"><span data-stu-id="065d3-174">If the tenant's issuer was not found in the database, it means the tenant is not registered, and the customer needs to sign up.</span></span> <span data-ttu-id="065d3-175">Nesse caso, lance uma exceção para causar uma falha na autenticação.</span><span class="sxs-lookup"><span data-stu-id="065d3-175">In that case, throw an exception to cause the authentication to fail.</span></span>
+   2. <span data-ttu-id="065d3-176">Caso contrário, crie um registro de banco de dados para o usuário, se já não houver um (`CreateOrUpdateUserAsync`).</span><span class="sxs-lookup"><span data-stu-id="065d3-176">Otherwise, create a database record for this user, if there isn't one already (`CreateOrUpdateUserAsync`).</span></span>
 
-<span data-ttu-id="4413b-177">Aqui está o método `SignUpTenantAsync` que adiciona o locatário ao banco de dados.</span><span class="sxs-lookup"><span data-stu-id="4413b-177">Here is the `SignUpTenantAsync` method that adds the tenant to the database.</span></span>
+<span data-ttu-id="065d3-177">Aqui está o método `SignUpTenantAsync` que adiciona o locatário ao banco de dados.</span><span class="sxs-lookup"><span data-stu-id="065d3-177">Here is the `SignUpTenantAsync` method that adds the tenant to the database.</span></span>
 
 ```csharp
 private async Task<Tenant> SignUpTenantAsync(BaseControlContext context, TenantManager tenantManager)
@@ -253,16 +256,16 @@ private async Task<Tenant> SignUpTenantAsync(BaseControlContext context, TenantM
 }
 ```
 
-<span data-ttu-id="4413b-178">Veja um resumo de todo o fluxo de inscrição no aplicativo Surveys:</span><span class="sxs-lookup"><span data-stu-id="4413b-178">Here is a summary of the entire sign-up flow in the Surveys application:</span></span>
+<span data-ttu-id="065d3-178">Veja um resumo de todo o fluxo de inscrição no aplicativo Surveys:</span><span class="sxs-lookup"><span data-stu-id="065d3-178">Here is a summary of the entire sign-up flow in the Surveys application:</span></span>
 
-1. <span data-ttu-id="4413b-179">O usuário clica no botão **Inscrever-se** .</span><span class="sxs-lookup"><span data-stu-id="4413b-179">The user clicks the **Sign Up** button.</span></span>
-2. <span data-ttu-id="4413b-180">A ação `AccountController.SignUp` retorna um resultado de desafio.</span><span class="sxs-lookup"><span data-stu-id="4413b-180">The `AccountController.SignUp` action returns a challege result.</span></span>  <span data-ttu-id="4413b-181">O estado da autenticação inclui o valor "inscrição".</span><span class="sxs-lookup"><span data-stu-id="4413b-181">The authentication state includes "signup" value.</span></span>
-3. <span data-ttu-id="4413b-182">No evento `RedirectToAuthenticationEndpoint`, adicione o prompt `admin_consent`.</span><span class="sxs-lookup"><span data-stu-id="4413b-182">In the `RedirectToAuthenticationEndpoint` event, add the `admin_consent` prompt.</span></span>
-4. <span data-ttu-id="4413b-183">O middleware OpenID Connect redireciona para o Azure AD e o usuário é autenticado.</span><span class="sxs-lookup"><span data-stu-id="4413b-183">The OpenID Connect middleware redirects to Azure AD and the user authenticates.</span></span>
-5. <span data-ttu-id="4413b-184">No evento `AuthenticationValidated` , procure o estado "inscrição".</span><span class="sxs-lookup"><span data-stu-id="4413b-184">In the `AuthenticationValidated` event, look for the "signup" state.</span></span>
-6. <span data-ttu-id="4413b-185">Adicione o locatário ao banco de dados.</span><span class="sxs-lookup"><span data-stu-id="4413b-185">Add the tenant to the database.</span></span>
+1. <span data-ttu-id="065d3-179">O usuário clica no botão **Inscrever-se** .</span><span class="sxs-lookup"><span data-stu-id="065d3-179">The user clicks the **Sign Up** button.</span></span>
+2. <span data-ttu-id="065d3-180">A ação `AccountController.SignUp` retorna um resultado de desafio.</span><span class="sxs-lookup"><span data-stu-id="065d3-180">The `AccountController.SignUp` action returns a challege result.</span></span>  <span data-ttu-id="065d3-181">O estado da autenticação inclui o valor "inscrição".</span><span class="sxs-lookup"><span data-stu-id="065d3-181">The authentication state includes "signup" value.</span></span>
+3. <span data-ttu-id="065d3-182">No evento `RedirectToAuthenticationEndpoint`, adicione o prompt `admin_consent`.</span><span class="sxs-lookup"><span data-stu-id="065d3-182">In the `RedirectToAuthenticationEndpoint` event, add the `admin_consent` prompt.</span></span>
+4. <span data-ttu-id="065d3-183">O middleware OpenID Connect redireciona para o Azure AD e o usuário é autenticado.</span><span class="sxs-lookup"><span data-stu-id="065d3-183">The OpenID Connect middleware redirects to Azure AD and the user authenticates.</span></span>
+5. <span data-ttu-id="065d3-184">No evento `AuthenticationValidated` , procure o estado "inscrição".</span><span class="sxs-lookup"><span data-stu-id="065d3-184">In the `AuthenticationValidated` event, look for the "signup" state.</span></span>
+6. <span data-ttu-id="065d3-185">Adicione o locatário ao banco de dados.</span><span class="sxs-lookup"><span data-stu-id="065d3-185">Add the tenant to the database.</span></span>
 
-<span data-ttu-id="4413b-186">[**Avançar**][app roles]</span><span class="sxs-lookup"><span data-stu-id="4413b-186">[**Next**][app roles]</span></span>
+<span data-ttu-id="065d3-186">[**Avançar**][app roles]</span><span class="sxs-lookup"><span data-stu-id="065d3-186">[**Next**][app roles]</span></span>
 
 <!-- links -->
 

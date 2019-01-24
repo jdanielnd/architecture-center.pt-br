@@ -3,41 +3,44 @@ title: Implementar um transformador de propriedade e um coletor em um modelo do 
 description: Descreve como implementar um transformador de propriedade e um coletor em um modelo do Azure Resource Manager.
 author: petertay
 ms.date: 10/30/2018
-ms.openlocfilehash: 1a6a01ee513609132d8522a79ccb81b7938651b5
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.topic: article
+ms.service: architecture-center
+ms.subservice: reference-architecture
+ms.openlocfilehash: 5dc910b8577e27059761db417e6350cd38cdf2b8
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54113800"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54484713"
 ---
-# <a name="implement-a-property-transformer-and-collector-in-an-azure-resource-manager-template"></a><span data-ttu-id="61e98-103">Implementar um transformador de propriedade e um coletor em um modelo do Azure Resource Manager</span><span class="sxs-lookup"><span data-stu-id="61e98-103">Implement a property transformer and collector in an Azure Resource Manager template</span></span>
+# <a name="implement-a-property-transformer-and-collector-in-an-azure-resource-manager-template"></a><span data-ttu-id="13e28-103">Implementar um transformador de propriedade e um coletor em um modelo do Azure Resource Manager</span><span class="sxs-lookup"><span data-stu-id="13e28-103">Implement a property transformer and collector in an Azure Resource Manager template</span></span>
 
-<span data-ttu-id="61e98-104">Em [usar um objeto como um parâmetro em um modelo do Azure Resource Manager][objects-as-parameters], você aprendeu como armazenar valores de propriedade de recurso em um objeto e então aplicá-los a um recurso durante a implantação.</span><span class="sxs-lookup"><span data-stu-id="61e98-104">In [use an object as a parameter in an Azure Resource Manager template][objects-as-parameters], you learned how to store resource property values in an object and apply them to a resource during deployment.</span></span> <span data-ttu-id="61e98-105">Embora essa seja uma maneira muito útil para gerenciar os parâmetros, ainda exige que você mapear as propriedades do objeto para propriedades de recursos sempre que você pode usá-lo em seu modelo.</span><span class="sxs-lookup"><span data-stu-id="61e98-105">While this is a very useful way to manage your parameters, it still requires you to map the object's properties to resource properties each time you use it in your template.</span></span>
+<span data-ttu-id="13e28-104">Em [usar um objeto como um parâmetro em um modelo do Azure Resource Manager][objects-as-parameters], você aprendeu como armazenar valores de propriedade de recurso em um objeto e então aplicá-los a um recurso durante a implantação.</span><span class="sxs-lookup"><span data-stu-id="13e28-104">In [use an object as a parameter in an Azure Resource Manager template][objects-as-parameters], you learned how to store resource property values in an object and apply them to a resource during deployment.</span></span> <span data-ttu-id="13e28-105">Embora essa seja uma maneira muito útil para gerenciar os parâmetros, ainda exige que você mapear as propriedades do objeto para propriedades de recursos sempre que você pode usá-lo em seu modelo.</span><span class="sxs-lookup"><span data-stu-id="13e28-105">While this is a very useful way to manage your parameters, it still requires you to map the object's properties to resource properties each time you use it in your template.</span></span>
 
-<span data-ttu-id="61e98-106">Para resolver esse problema, você pode implementar um modelo de transformação e um coletor de propriedade que itere sua matriz de objeto e a transforme no esquema JSON esperado pelo recurso.</span><span class="sxs-lookup"><span data-stu-id="61e98-106">To work around this, you can implement a property transform and collector template that iterates your object array and transforms it into the JSON schema expected by the resource.</span></span>
+<span data-ttu-id="13e28-106">Para resolver esse problema, você pode implementar um modelo de transformação e um coletor de propriedade que itere sua matriz de objeto e a transforme no esquema JSON esperado pelo recurso.</span><span class="sxs-lookup"><span data-stu-id="13e28-106">To work around this, you can implement a property transform and collector template that iterates your object array and transforms it into the JSON schema expected by the resource.</span></span>
 
 > [!IMPORTANT]
-> <span data-ttu-id="61e98-107">Essa abordagem requer que você tenha uma compreensão profunda dos modelos e das funções do Resource Manager.</span><span class="sxs-lookup"><span data-stu-id="61e98-107">This approach requires that you have a deep understanding of Resource Manager templates and functions.</span></span>
+> <span data-ttu-id="13e28-107">Essa abordagem requer que você tenha uma compreensão profunda dos modelos e das funções do Resource Manager.</span><span class="sxs-lookup"><span data-stu-id="13e28-107">This approach requires that you have a deep understanding of Resource Manager templates and functions.</span></span>
 
-<span data-ttu-id="61e98-108">Vamos dar uma olhada em como é possível implementar um coletor de propriedade e um transformador com um exemplo que implanta um [grupo de segurança de rede (NSG)][nsg].</span><span class="sxs-lookup"><span data-stu-id="61e98-108">Let's take a look at how we can implement a property collector and transformer with an example that deploys a [network security group (NSG)][nsg].</span></span> <span data-ttu-id="61e98-109">O diagrama a seguir mostra a relação entre os nossos modelos e nossos recursos dentro desses modelos:</span><span class="sxs-lookup"><span data-stu-id="61e98-109">The diagram below shows the relationship between our templates and our resources within those templates:</span></span>
+<span data-ttu-id="13e28-108">Vamos dar uma olhada em como é possível implementar um coletor de propriedade e um transformador com um exemplo que implanta um [grupo de segurança de rede (NSG)][nsg].</span><span class="sxs-lookup"><span data-stu-id="13e28-108">Let's take a look at how we can implement a property collector and transformer with an example that deploys a [network security group (NSG)][nsg].</span></span> <span data-ttu-id="13e28-109">O diagrama a seguir mostra a relação entre os nossos modelos e nossos recursos dentro desses modelos:</span><span class="sxs-lookup"><span data-stu-id="13e28-109">The diagram below shows the relationship between our templates and our resources within those templates:</span></span>
 
 ![arquitetura do coletor de propriedade e do transformador](../_images/collector-transformer.png)
 
-<span data-ttu-id="61e98-111">Nosso **modelo de chamada** inclui dois recursos:</span><span class="sxs-lookup"><span data-stu-id="61e98-111">Our **calling template** includes two resources:</span></span>
+<span data-ttu-id="13e28-111">Nosso **modelo de chamada** inclui dois recursos:</span><span class="sxs-lookup"><span data-stu-id="13e28-111">Our **calling template** includes two resources:</span></span>
 
-- <span data-ttu-id="61e98-112">um link de modelo que invoca nosso **modelo de coletor**.</span><span class="sxs-lookup"><span data-stu-id="61e98-112">A template link that invokes our **collector template**.</span></span>
-- <span data-ttu-id="61e98-113">O recurso NSG para implantar.</span><span class="sxs-lookup"><span data-stu-id="61e98-113">The NSG resource to deploy.</span></span>
+- <span data-ttu-id="13e28-112">um link de modelo que invoca nosso **modelo de coletor**.</span><span class="sxs-lookup"><span data-stu-id="13e28-112">A template link that invokes our **collector template**.</span></span>
+- <span data-ttu-id="13e28-113">O recurso NSG para implantar.</span><span class="sxs-lookup"><span data-stu-id="13e28-113">The NSG resource to deploy.</span></span>
 
-<span data-ttu-id="61e98-114">Nosso **modelo de coletor** inclui dois recursos:</span><span class="sxs-lookup"><span data-stu-id="61e98-114">Our **collector template** includes two resources:</span></span>
+<span data-ttu-id="13e28-114">Nosso **modelo de coletor** inclui dois recursos:</span><span class="sxs-lookup"><span data-stu-id="13e28-114">Our **collector template** includes two resources:</span></span>
 
-- <span data-ttu-id="61e98-115">um recurso de **âncora**.</span><span class="sxs-lookup"><span data-stu-id="61e98-115">An **anchor** resource.</span></span>
-- <span data-ttu-id="61e98-116">Um link de modelo que invoca o modelo de transformação em um loop de cópia.</span><span class="sxs-lookup"><span data-stu-id="61e98-116">A template link that invokes the transform template in a copy loop.</span></span>
+- <span data-ttu-id="13e28-115">um recurso de **âncora**.</span><span class="sxs-lookup"><span data-stu-id="13e28-115">An **anchor** resource.</span></span>
+- <span data-ttu-id="13e28-116">Um link de modelo que invoca o modelo de transformação em um loop de cópia.</span><span class="sxs-lookup"><span data-stu-id="13e28-116">A template link that invokes the transform template in a copy loop.</span></span>
 
-<span data-ttu-id="61e98-117">Nosso **modelo de transformação** inclui um único recurso: um modelo vazio com uma variável que transforma nosso JSON `source` no esquema JSON esperado por nosso recurso NSG no **modelo principal**.</span><span class="sxs-lookup"><span data-stu-id="61e98-117">Our **transform template** includes a single resource: an empty template with a variable that transforms our `source` JSON to the JSON schema expected by our NSG resource in the **main template**.</span></span>
+<span data-ttu-id="13e28-117">Nosso **modelo de transformação** inclui um único recurso: um modelo vazio com uma variável que transforma nosso JSON `source` no esquema JSON esperado por nosso recurso NSG no **modelo principal**.</span><span class="sxs-lookup"><span data-stu-id="13e28-117">Our **transform template** includes a single resource: an empty template with a variable that transforms our `source` JSON to the JSON schema expected by our NSG resource in the **main template**.</span></span>
 
-## <a name="parameter-object"></a><span data-ttu-id="61e98-118">Objeto de parâmetro</span><span class="sxs-lookup"><span data-stu-id="61e98-118">Parameter object</span></span>
+## <a name="parameter-object"></a><span data-ttu-id="13e28-118">Objeto de parâmetro</span><span class="sxs-lookup"><span data-stu-id="13e28-118">Parameter object</span></span>
 
-<span data-ttu-id="61e98-119">Usaremos nosso objeto de parâmetro `securityRules` de [objetos como parâmetros][objects-as-parameters].</span><span class="sxs-lookup"><span data-stu-id="61e98-119">We'll be using our `securityRules` parameter object from [objects as parameters][objects-as-parameters].</span></span> <span data-ttu-id="61e98-120">Nosso **modelo de transformação** transformará cada objeto na matriz de `securityRules` no esquema JSON esperado pelo recurso NSG em nosso **modelo de chamada**.</span><span class="sxs-lookup"><span data-stu-id="61e98-120">Our **transform template** will transform each object in the `securityRules` array into the JSON schema expected by the NSG resource in our **calling template**.</span></span>
+<span data-ttu-id="13e28-119">Usaremos nosso objeto de parâmetro `securityRules` de [objetos como parâmetros][objects-as-parameters].</span><span class="sxs-lookup"><span data-stu-id="13e28-119">We'll be using our `securityRules` parameter object from [objects as parameters][objects-as-parameters].</span></span> <span data-ttu-id="13e28-120">Nosso **modelo de transformação** transformará cada objeto na matriz de `securityRules` no esquema JSON esperado pelo recurso NSG em nosso **modelo de chamada**.</span><span class="sxs-lookup"><span data-stu-id="13e28-120">Our **transform template** will transform each object in the `securityRules` array into the JSON schema expected by the NSG resource in our **calling template**.</span></span>
 
 ```json
 {
@@ -78,16 +81,16 @@ ms.locfileid: "54113800"
   }
 ```
 
-<span data-ttu-id="61e98-121">Vamos examinar nosso **modelo de transformação**.</span><span class="sxs-lookup"><span data-stu-id="61e98-121">Let's look at our **transform template** first.</span></span>
+<span data-ttu-id="13e28-121">Vamos examinar nosso **modelo de transformação**.</span><span class="sxs-lookup"><span data-stu-id="13e28-121">Let's look at our **transform template** first.</span></span>
 
-## <a name="transform-template"></a><span data-ttu-id="61e98-122">Modelo de Transformação</span><span class="sxs-lookup"><span data-stu-id="61e98-122">Transform template</span></span>
+## <a name="transform-template"></a><span data-ttu-id="13e28-122">Modelo de Transformação</span><span class="sxs-lookup"><span data-stu-id="13e28-122">Transform template</span></span>
 
-<span data-ttu-id="61e98-123">Nosso **modelo de transformação** inclui dois parâmetros que são passados do **modelo de coletor**:</span><span class="sxs-lookup"><span data-stu-id="61e98-123">Our **transform template** includes two parameters that are passed from the **collector template**:</span></span>
+<span data-ttu-id="13e28-123">Nosso **modelo de transformação** inclui dois parâmetros que são passados do **modelo de coletor**:</span><span class="sxs-lookup"><span data-stu-id="13e28-123">Our **transform template** includes two parameters that are passed from the **collector template**:</span></span>
 
-- <span data-ttu-id="61e98-124">`source` é um objeto que recebe um dos objetos de valor de propriedade da matriz de propriedade.</span><span class="sxs-lookup"><span data-stu-id="61e98-124">`source` is an object that receives one of the property value objects from the property array.</span></span> <span data-ttu-id="61e98-125">Em nosso exemplo, cada objeto da matriz de `"securityRules"` será transmitido um de cada vez.</span><span class="sxs-lookup"><span data-stu-id="61e98-125">In our example, each object from the `"securityRules"` array will be passed in one at a time.</span></span>
-- <span data-ttu-id="61e98-126">`state` é uma matriz que recebe os resultados concatenados de todas as transformações anteriores.</span><span class="sxs-lookup"><span data-stu-id="61e98-126">`state` is an array that receives the concatenated results of all the previous transforms.</span></span> <span data-ttu-id="61e98-127">Esta é a coleção do JSON transformado.</span><span class="sxs-lookup"><span data-stu-id="61e98-127">This is the collection of transformed JSON.</span></span>
+- <span data-ttu-id="13e28-124">`source` é um objeto que recebe um dos objetos de valor de propriedade da matriz de propriedade.</span><span class="sxs-lookup"><span data-stu-id="13e28-124">`source` is an object that receives one of the property value objects from the property array.</span></span> <span data-ttu-id="13e28-125">Em nosso exemplo, cada objeto da matriz de `"securityRules"` será transmitido um de cada vez.</span><span class="sxs-lookup"><span data-stu-id="13e28-125">In our example, each object from the `"securityRules"` array will be passed in one at a time.</span></span>
+- <span data-ttu-id="13e28-126">`state` é uma matriz que recebe os resultados concatenados de todas as transformações anteriores.</span><span class="sxs-lookup"><span data-stu-id="13e28-126">`state` is an array that receives the concatenated results of all the previous transforms.</span></span> <span data-ttu-id="13e28-127">Esta é a coleção do JSON transformado.</span><span class="sxs-lookup"><span data-stu-id="13e28-127">This is the collection of transformed JSON.</span></span>
 
-<span data-ttu-id="61e98-128">Nossos parâmetros têm esta aparência:</span><span class="sxs-lookup"><span data-stu-id="61e98-128">Our parameters look like this:</span></span>
+<span data-ttu-id="13e28-128">Nossos parâmetros têm esta aparência:</span><span class="sxs-lookup"><span data-stu-id="13e28-128">Our parameters look like this:</span></span>
 
 ```json
 {
@@ -102,7 +105,7 @@ ms.locfileid: "54113800"
   },
 ```
 
-<span data-ttu-id="61e98-129">Nosso modelo também define uma variável denominada `instance`.</span><span class="sxs-lookup"><span data-stu-id="61e98-129">Our template also defines a variable named `instance`.</span></span> <span data-ttu-id="61e98-130">Ele executa a transformação real do nosso objeto `source` para o esquema JSON necessário:</span><span class="sxs-lookup"><span data-stu-id="61e98-130">It performs the actual transform of our `source` object into the required JSON schema:</span></span>
+<span data-ttu-id="13e28-129">Nosso modelo também define uma variável denominada `instance`.</span><span class="sxs-lookup"><span data-stu-id="13e28-129">Our template also defines a variable named `instance`.</span></span> <span data-ttu-id="13e28-130">Ele executa a transformação real do nosso objeto `source` para o esquema JSON necessário:</span><span class="sxs-lookup"><span data-stu-id="13e28-130">It performs the actual transform of our `source` object into the required JSON schema:</span></span>
 
 ```json
   "variables": {
@@ -126,7 +129,7 @@ ms.locfileid: "54113800"
   },
 ```
 
-<span data-ttu-id="61e98-131">Por fim, o `output` de nosso modelo concatena as transformações coletadas de nosso parâmetro `state` com a transformação atual executada pelo nossa variável `instance`:</span><span class="sxs-lookup"><span data-stu-id="61e98-131">Finally, the `output` of our template concatenates the collected transforms of our `state` parameter with the current transform performed by our `instance` variable:</span></span>
+<span data-ttu-id="13e28-131">Por fim, o `output` de nosso modelo concatena as transformações coletadas de nosso parâmetro `state` com a transformação atual executada pelo nossa variável `instance`:</span><span class="sxs-lookup"><span data-stu-id="13e28-131">Finally, the `output` of our template concatenates the collected transforms of our `state` parameter with the current transform performed by our `instance` variable:</span></span>
 
 ```json
     "resources": [],
@@ -137,17 +140,17 @@ ms.locfileid: "54113800"
     }
 ```
 
-<span data-ttu-id="61e98-132">Em seguida, vamos dar uma olhada no nosso **modelo de coletor** para ver como ele passa os valores de parâmetro.</span><span class="sxs-lookup"><span data-stu-id="61e98-132">Next, let's take a look at our **collector template** to see how it passes in our parameter values.</span></span>
+<span data-ttu-id="13e28-132">Em seguida, vamos dar uma olhada no nosso **modelo de coletor** para ver como ele passa os valores de parâmetro.</span><span class="sxs-lookup"><span data-stu-id="13e28-132">Next, let's take a look at our **collector template** to see how it passes in our parameter values.</span></span>
 
-## <a name="collector-template"></a><span data-ttu-id="61e98-133">Modelo de coletor</span><span class="sxs-lookup"><span data-stu-id="61e98-133">Collector template</span></span>
+## <a name="collector-template"></a><span data-ttu-id="13e28-133">Modelo de coletor</span><span class="sxs-lookup"><span data-stu-id="13e28-133">Collector template</span></span>
 
-<span data-ttu-id="61e98-134">Nosso **modelo de coletor** inclui três parâmetros:</span><span class="sxs-lookup"><span data-stu-id="61e98-134">Our **collector template** includes three parameters:</span></span>
+<span data-ttu-id="13e28-134">Nosso **modelo de coletor** inclui três parâmetros:</span><span class="sxs-lookup"><span data-stu-id="13e28-134">Our **collector template** includes three parameters:</span></span>
 
-- <span data-ttu-id="61e98-135">`source` é nossa matriz de objetos de parâmetro completa.</span><span class="sxs-lookup"><span data-stu-id="61e98-135">`source` is our complete parameter object array.</span></span> <span data-ttu-id="61e98-136">Ele é passado pelo **modelo de chamada**.</span><span class="sxs-lookup"><span data-stu-id="61e98-136">It's passed in by the **calling template**.</span></span> <span data-ttu-id="61e98-137">Ele tem o mesmo nome que o parâmetro `source` no nosso **modelo de transformação**, mas há uma diferença importante que você já deve ter notado: essa é a matriz completa, mas nós só passamos um elemento dessa matriz para o **modelo de transformação** por vez.</span><span class="sxs-lookup"><span data-stu-id="61e98-137">This has the same name as the `source` parameter in our **transform template** but there is one key difference that you may have already noticed: this is the complete array, but we only pass one element of this array to the **transform template** at a time.</span></span>
-- <span data-ttu-id="61e98-138">`transformTemplateUri` é o URI do nosso **modelo de transformação**.</span><span class="sxs-lookup"><span data-stu-id="61e98-138">`transformTemplateUri` is the URI of our **transform template**.</span></span> <span data-ttu-id="61e98-139">Nós o estamos definindo como um parâmetro aqui para a reutilização do modelo.</span><span class="sxs-lookup"><span data-stu-id="61e98-139">We're defining it as a parameter here for template reusability.</span></span>
-- <span data-ttu-id="61e98-140">`state` é uma matriz inicialmente vazia que podemos passar para o nosso **modelo de transformação**.</span><span class="sxs-lookup"><span data-stu-id="61e98-140">`state` is an initially empty array that we pass to our **transform template**.</span></span> <span data-ttu-id="61e98-141">Quando o loop de cópia for concluído, ele armazenará a coleção de objetos de parâmetro transformados.</span><span class="sxs-lookup"><span data-stu-id="61e98-141">It stores the collection of transformed parameter objects when the copy loop is complete.</span></span>
+- <span data-ttu-id="13e28-135">`source` é nossa matriz de objetos de parâmetro completa.</span><span class="sxs-lookup"><span data-stu-id="13e28-135">`source` is our complete parameter object array.</span></span> <span data-ttu-id="13e28-136">Ele é passado pelo **modelo de chamada**.</span><span class="sxs-lookup"><span data-stu-id="13e28-136">It's passed in by the **calling template**.</span></span> <span data-ttu-id="13e28-137">Ele tem o mesmo nome que o parâmetro `source` no nosso **modelo de transformação**, mas há uma diferença importante que você já deve ter notado: essa é a matriz completa, mas nós só passamos um elemento dessa matriz para o **modelo de transformação** por vez.</span><span class="sxs-lookup"><span data-stu-id="13e28-137">This has the same name as the `source` parameter in our **transform template** but there is one key difference that you may have already noticed: this is the complete array, but we only pass one element of this array to the **transform template** at a time.</span></span>
+- <span data-ttu-id="13e28-138">`transformTemplateUri` é o URI do nosso **modelo de transformação**.</span><span class="sxs-lookup"><span data-stu-id="13e28-138">`transformTemplateUri` is the URI of our **transform template**.</span></span> <span data-ttu-id="13e28-139">Nós o estamos definindo como um parâmetro aqui para a reutilização do modelo.</span><span class="sxs-lookup"><span data-stu-id="13e28-139">We're defining it as a parameter here for template reusability.</span></span>
+- <span data-ttu-id="13e28-140">`state` é uma matriz inicialmente vazia que podemos passar para o nosso **modelo de transformação**.</span><span class="sxs-lookup"><span data-stu-id="13e28-140">`state` is an initially empty array that we pass to our **transform template**.</span></span> <span data-ttu-id="13e28-141">Quando o loop de cópia for concluído, ele armazenará a coleção de objetos de parâmetro transformados.</span><span class="sxs-lookup"><span data-stu-id="13e28-141">It stores the collection of transformed parameter objects when the copy loop is complete.</span></span>
 
-<span data-ttu-id="61e98-142">Nossos parâmetros têm esta aparência:</span><span class="sxs-lookup"><span data-stu-id="61e98-142">Our parameters look like this:</span></span>
+<span data-ttu-id="13e28-142">Nossos parâmetros têm esta aparência:</span><span class="sxs-lookup"><span data-stu-id="13e28-142">Our parameters look like this:</span></span>
 
 ```json
   "parameters": {
@@ -159,7 +162,7 @@ ms.locfileid: "54113800"
     }
 ```
 
-<span data-ttu-id="61e98-143">Em seguida, definimos uma variável chamada `count`.</span><span class="sxs-lookup"><span data-stu-id="61e98-143">Next, we define a variable named `count`.</span></span> <span data-ttu-id="61e98-144">Seu valor é o comprimento da matriz de objetos de parâmetro `source`:</span><span class="sxs-lookup"><span data-stu-id="61e98-144">Its value is the length of the `source` parameter object array:</span></span>
+<span data-ttu-id="13e28-143">Em seguida, definimos uma variável chamada `count`.</span><span class="sxs-lookup"><span data-stu-id="13e28-143">Next, we define a variable named `count`.</span></span> <span data-ttu-id="13e28-144">Seu valor é o comprimento da matriz de objetos de parâmetro `source`:</span><span class="sxs-lookup"><span data-stu-id="13e28-144">Its value is the length of the `source` parameter object array:</span></span>
 
 ```json
   "variables": {
@@ -167,14 +170,14 @@ ms.locfileid: "54113800"
   },
 ```
 
-<span data-ttu-id="61e98-145">Como você pode suspeitar, nós o usamos para o número de iterações em nosso loop de cópia.</span><span class="sxs-lookup"><span data-stu-id="61e98-145">As you might suspect, we use it for the number of iterations in our copy loop.</span></span>
+<span data-ttu-id="13e28-145">Como você pode suspeitar, nós o usamos para o número de iterações em nosso loop de cópia.</span><span class="sxs-lookup"><span data-stu-id="13e28-145">As you might suspect, we use it for the number of iterations in our copy loop.</span></span>
 
-<span data-ttu-id="61e98-146">Agora vamos dar uma olhada em nossos recursos.</span><span class="sxs-lookup"><span data-stu-id="61e98-146">Now let's take a look at our resources.</span></span> <span data-ttu-id="61e98-147">Definimos dois recursos:</span><span class="sxs-lookup"><span data-stu-id="61e98-147">We define two resources:</span></span>
+<span data-ttu-id="13e28-146">Agora vamos dar uma olhada em nossos recursos.</span><span class="sxs-lookup"><span data-stu-id="13e28-146">Now let's take a look at our resources.</span></span> <span data-ttu-id="13e28-147">Definimos dois recursos:</span><span class="sxs-lookup"><span data-stu-id="13e28-147">We define two resources:</span></span>
 
-- <span data-ttu-id="61e98-148">`loop-0` é o recurso com base em zero para o loop de cópia.</span><span class="sxs-lookup"><span data-stu-id="61e98-148">`loop-0` is the zero-based resource for our copy loop.</span></span>
-- <span data-ttu-id="61e98-149">`loop-` é concatenado com o resultado da função `copyIndex(1)` para gerar um nome exclusivo baseado em iteração para nosso recurso, começando com `1`.</span><span class="sxs-lookup"><span data-stu-id="61e98-149">`loop-` is concatenated with the result of the `copyIndex(1)` function to generate a unique iteration-based name for our resource, starting with `1`.</span></span>
+- <span data-ttu-id="13e28-148">`loop-0` é o recurso com base em zero para o loop de cópia.</span><span class="sxs-lookup"><span data-stu-id="13e28-148">`loop-0` is the zero-based resource for our copy loop.</span></span>
+- <span data-ttu-id="13e28-149">`loop-` é concatenado com o resultado da função `copyIndex(1)` para gerar um nome exclusivo baseado em iteração para nosso recurso, começando com `1`.</span><span class="sxs-lookup"><span data-stu-id="13e28-149">`loop-` is concatenated with the result of the `copyIndex(1)` function to generate a unique iteration-based name for our resource, starting with `1`.</span></span>
 
-<span data-ttu-id="61e98-150">Nossos recursos têm esta aparência:</span><span class="sxs-lookup"><span data-stu-id="61e98-150">Our resources look like this:</span></span>
+<span data-ttu-id="13e28-150">Nossos recursos têm esta aparência:</span><span class="sxs-lookup"><span data-stu-id="13e28-150">Our resources look like this:</span></span>
 
 ```json
   "resources": [
@@ -224,9 +227,9 @@ ms.locfileid: "54113800"
   ],
 ```
 
-<span data-ttu-id="61e98-151">Vamos examinar mais detalhadamente os parâmetros que estamos passando para nosso **modelo de transformação** no modelo aninhado.</span><span class="sxs-lookup"><span data-stu-id="61e98-151">Let's take a closer look at the parameters we're passing to our **transform template** in the nested template.</span></span> <span data-ttu-id="61e98-152">Você se lembra de que nosso parâmetro `source` passa o objeto atual na matriz de objetos de parâmetro `source`.</span><span class="sxs-lookup"><span data-stu-id="61e98-152">Recall from earlier that our `source` parameter passes the current object in the `source` parameter object array.</span></span> <span data-ttu-id="61e98-153">O parâmetro `state` é onde ocorre a coleção, pois obtém a saída da iteração anterior do nosso loop de cópia&mdash;observe que a função `reference()` usa a função `copyIndex()` sem nenhum parâmetro para fazer referência a `name` de nosso objeto de modelo vinculado anterior&mdash;e passa a iteração atual.</span><span class="sxs-lookup"><span data-stu-id="61e98-153">The `state` parameter is where the collection happens, because it takes the output of the previous iteration of our copy loop&mdash;notice that the `reference()` function uses the `copyIndex()` function with no parameter to reference the `name` of our previous linked template object&mdash;and passes it to the current iteration.</span></span>
+<span data-ttu-id="13e28-151">Vamos examinar mais detalhadamente os parâmetros que estamos passando para nosso **modelo de transformação** no modelo aninhado.</span><span class="sxs-lookup"><span data-stu-id="13e28-151">Let's take a closer look at the parameters we're passing to our **transform template** in the nested template.</span></span> <span data-ttu-id="13e28-152">Você se lembra de que nosso parâmetro `source` passa o objeto atual na matriz de objetos de parâmetro `source`.</span><span class="sxs-lookup"><span data-stu-id="13e28-152">Recall from earlier that our `source` parameter passes the current object in the `source` parameter object array.</span></span> <span data-ttu-id="13e28-153">O parâmetro `state` é onde ocorre a coleção, pois obtém a saída da iteração anterior do nosso loop de cópia&mdash;observe que a função `reference()` usa a função `copyIndex()` sem nenhum parâmetro para fazer referência a `name` de nosso objeto de modelo vinculado anterior&mdash;e passa a iteração atual.</span><span class="sxs-lookup"><span data-stu-id="13e28-153">The `state` parameter is where the collection happens, because it takes the output of the previous iteration of our copy loop&mdash;notice that the `reference()` function uses the `copyIndex()` function with no parameter to reference the `name` of our previous linked template object&mdash;and passes it to the current iteration.</span></span>
 
-<span data-ttu-id="61e98-154">Por fim, o `output` de nosso modelo retorna o `output` da última iteração de nosso **modelo de transformação**:</span><span class="sxs-lookup"><span data-stu-id="61e98-154">Finally, the `output` of our template returns the `output` of the last iteration of our **transform template**:</span></span>
+<span data-ttu-id="13e28-154">Por fim, o `output` de nosso modelo retorna o `output` da última iteração de nosso **modelo de transformação**:</span><span class="sxs-lookup"><span data-stu-id="13e28-154">Finally, the `output` of our template returns the `output` of the last iteration of our **transform template**:</span></span>
 
 ```json
   "outputs": {
@@ -237,13 +240,13 @@ ms.locfileid: "54113800"
   }
 ```
 
-<span data-ttu-id="61e98-155">Pode parecer contraintuitivo retornar o `output` da última iteração de nosso **modelo de transformação** para nosso **modelo de chamada** porque ele apareceu quando estávamos armazenando-o em nosso parâmetro `source`.</span><span class="sxs-lookup"><span data-stu-id="61e98-155">It may seem counterintuitive to return the `output` of the last iteration of our **transform template** to our **calling template** because it appeared we were storing it in our `source` parameter.</span></span> <span data-ttu-id="61e98-156">No entanto, lembre-se de que é a última iteração do nosso **modelo de transformação** que contém a matriz completa de objetos de propriedade transformados e que é o que queremos retornar.</span><span class="sxs-lookup"><span data-stu-id="61e98-156">However, remember that it's the last iteration of our **transform template** that holds the complete array of transformed property objects, and that's what we want to return.</span></span>
+<span data-ttu-id="13e28-155">Pode parecer contraintuitivo retornar o `output` da última iteração de nosso **modelo de transformação** para nosso **modelo de chamada** porque ele apareceu quando estávamos armazenando-o em nosso parâmetro `source`.</span><span class="sxs-lookup"><span data-stu-id="13e28-155">It may seem counterintuitive to return the `output` of the last iteration of our **transform template** to our **calling template** because it appeared we were storing it in our `source` parameter.</span></span> <span data-ttu-id="13e28-156">No entanto, lembre-se de que é a última iteração do nosso **modelo de transformação** que contém a matriz completa de objetos de propriedade transformados e que é o que queremos retornar.</span><span class="sxs-lookup"><span data-stu-id="13e28-156">However, remember that it's the last iteration of our **transform template** that holds the complete array of transformed property objects, and that's what we want to return.</span></span>
 
-<span data-ttu-id="61e98-157">Por fim, vamos dar uma olhada em como chamar o **modelo de coletor** do nosso **modelo de chamada**.</span><span class="sxs-lookup"><span data-stu-id="61e98-157">Finally, let's take a look at how to call the **collector template** from our **calling template**.</span></span>
+<span data-ttu-id="13e28-157">Por fim, vamos dar uma olhada em como chamar o **modelo de coletor** do nosso **modelo de chamada**.</span><span class="sxs-lookup"><span data-stu-id="13e28-157">Finally, let's take a look at how to call the **collector template** from our **calling template**.</span></span>
 
-## <a name="calling-template"></a><span data-ttu-id="61e98-158">Modelo de chamada</span><span class="sxs-lookup"><span data-stu-id="61e98-158">Calling template</span></span>
+## <a name="calling-template"></a><span data-ttu-id="13e28-158">Modelo de chamada</span><span class="sxs-lookup"><span data-stu-id="13e28-158">Calling template</span></span>
 
-<span data-ttu-id="61e98-159">Nosso **modelo de chamada** define um parâmetro único chamado `networkSecurityGroupsSettings`:</span><span class="sxs-lookup"><span data-stu-id="61e98-159">Our **calling template** defines a single parameter named `networkSecurityGroupsSettings`:</span></span>
+<span data-ttu-id="13e28-159">Nosso **modelo de chamada** define um parâmetro único chamado `networkSecurityGroupsSettings`:</span><span class="sxs-lookup"><span data-stu-id="13e28-159">Our **calling template** defines a single parameter named `networkSecurityGroupsSettings`:</span></span>
 
 ```json
 ...
@@ -253,7 +256,7 @@ ms.locfileid: "54113800"
     }
 ```
 
-<span data-ttu-id="61e98-160">Em seguida, nosso modelo define uma variável denominada `collectorTemplateUri`:</span><span class="sxs-lookup"><span data-stu-id="61e98-160">Next, our template defines a single variable named `collectorTemplateUri`:</span></span>
+<span data-ttu-id="13e28-160">Em seguida, nosso modelo define uma variável denominada `collectorTemplateUri`:</span><span class="sxs-lookup"><span data-stu-id="13e28-160">Next, our template defines a single variable named `collectorTemplateUri`:</span></span>
 
 ```json
 "variables": {
@@ -261,7 +264,7 @@ ms.locfileid: "54113800"
   }
 ```
 
-<span data-ttu-id="61e98-161">Como se esperaria, esse é o URI para o **modelo de coletor** que será usado pelo nosso recurso de modelo vinculado:</span><span class="sxs-lookup"><span data-stu-id="61e98-161">As you would expect, this is the URI for the **collector template** that will be used by our linked template resource:</span></span>
+<span data-ttu-id="13e28-161">Como se esperaria, esse é o URI para o **modelo de coletor** que será usado pelo nosso recurso de modelo vinculado:</span><span class="sxs-lookup"><span data-stu-id="13e28-161">As you would expect, this is the URI for the **collector template** that will be used by our linked template resource:</span></span>
 
 ```json
 {
@@ -282,12 +285,12 @@ ms.locfileid: "54113800"
 }
 ```
 
-<span data-ttu-id="61e98-162">Passamos dois parâmetros para o **modelo de coletor**:</span><span class="sxs-lookup"><span data-stu-id="61e98-162">We pass two parameters to the **collector template**:</span></span>
+<span data-ttu-id="13e28-162">Passamos dois parâmetros para o **modelo de coletor**:</span><span class="sxs-lookup"><span data-stu-id="13e28-162">We pass two parameters to the **collector template**:</span></span>
 
-- <span data-ttu-id="61e98-163">`source` é a nossa matriz de objetos de propriedade.</span><span class="sxs-lookup"><span data-stu-id="61e98-163">`source` is our property object array.</span></span> <span data-ttu-id="61e98-164">Em nosso exemplo, ele é nosso parâmetro `networkSecurityGroupsSettings`.</span><span class="sxs-lookup"><span data-stu-id="61e98-164">In our example, it's our `networkSecurityGroupsSettings` parameter.</span></span>
-- <span data-ttu-id="61e98-165">`transformTemplateUri` é a variável que acabamos de definir com o URI do nosso **modelo de coletor**.</span><span class="sxs-lookup"><span data-stu-id="61e98-165">`transformTemplateUri` is the variable we just defined with the URI of our **collector template**.</span></span>
+- <span data-ttu-id="13e28-163">`source` é a nossa matriz de objetos de propriedade.</span><span class="sxs-lookup"><span data-stu-id="13e28-163">`source` is our property object array.</span></span> <span data-ttu-id="13e28-164">Em nosso exemplo, ele é nosso parâmetro `networkSecurityGroupsSettings`.</span><span class="sxs-lookup"><span data-stu-id="13e28-164">In our example, it's our `networkSecurityGroupsSettings` parameter.</span></span>
+- <span data-ttu-id="13e28-165">`transformTemplateUri` é a variável que acabamos de definir com o URI do nosso **modelo de coletor**.</span><span class="sxs-lookup"><span data-stu-id="13e28-165">`transformTemplateUri` is the variable we just defined with the URI of our **collector template**.</span></span>
 
-<span data-ttu-id="61e98-166">Por fim, nosso recurso `Microsoft.Network/networkSecurityGroups` atribui diretamente o `output` do `collector` vinculado o recurso de modelo para sua propriedade `securityRules`:</span><span class="sxs-lookup"><span data-stu-id="61e98-166">Finally, our `Microsoft.Network/networkSecurityGroups` resource directly assigns the `output` of the `collector` linked template resource to its `securityRules` property:</span></span>
+<span data-ttu-id="13e28-166">Por fim, nosso recurso `Microsoft.Network/networkSecurityGroups` atribui diretamente o `output` do `collector` vinculado o recurso de modelo para sua propriedade `securityRules`:</span><span class="sxs-lookup"><span data-stu-id="13e28-166">Finally, our `Microsoft.Network/networkSecurityGroups` resource directly assigns the `output` of the `collector` linked template resource to its `securityRules` property:</span></span>
 
 ```json
     {
@@ -309,9 +312,9 @@ ms.locfileid: "54113800"
   }
 ```
 
-## <a name="try-the-template"></a><span data-ttu-id="61e98-167">Experimentar o modelo</span><span class="sxs-lookup"><span data-stu-id="61e98-167">Try the template</span></span>
+## <a name="try-the-template"></a><span data-ttu-id="13e28-167">Experimentar o modelo</span><span class="sxs-lookup"><span data-stu-id="13e28-167">Try the template</span></span>
 
-<span data-ttu-id="61e98-168">Um modelo de exemplo está disponível no [GitHub][github].</span><span class="sxs-lookup"><span data-stu-id="61e98-168">An example template is available on [GitHub][github].</span></span> <span data-ttu-id="61e98-169">Para implantar o modelo, clone o repositório e execute os seguintes comandos da [CLI do Azure][cli]:</span><span class="sxs-lookup"><span data-stu-id="61e98-169">To deploy the template, clone the repo and run the following [Azure CLI][cli] commands:</span></span>
+<span data-ttu-id="13e28-168">Um modelo de exemplo está disponível no [GitHub][github].</span><span class="sxs-lookup"><span data-stu-id="13e28-168">An example template is available on [GitHub][github].</span></span> <span data-ttu-id="13e28-169">Para implantar o modelo, clone o repositório e execute os seguintes comandos da [CLI do Azure][cli]:</span><span class="sxs-lookup"><span data-stu-id="13e28-169">To deploy the template, clone the repo and run the following [Azure CLI][cli] commands:</span></span>
 
 ```bash
 git clone https://github.com/mspnp/template-examples.git
