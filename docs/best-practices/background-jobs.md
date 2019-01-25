@@ -38,7 +38,7 @@ Os trabalhos em segundo plano normalmente incluem um ou mais dos seguintes tipos
 Os trabalhos em segundo plano podem ser iniciados de diversas maneiras. Eles se encaixam em uma destas categorias:
 
 - [**Gatilhos acionados por eventos**](#event-driven-triggers). A tarefa é iniciada em resposta a um evento, normalmente uma ação executada por um usuário ou uma etapa em um fluxo de trabalho.
-- [**Gatilhos acionados por agendamentos**](#schedule-driven-triggers). A tarefa é invocada em um agendamento com base em um temporizador. Pode de tratar de um agendamento recorrente ou de uma invocação única especificada para um momento posterior.
+- [**Gatilhos acionados por agendamentos**](#schedule-driven-triggers). A tarefa é invocada em um agendamento com base em um temporizador. Pode se tratar de um agendamento recorrente ou de uma invocação única especificada para um momento posterior.
 
 ### <a name="event-driven-triggers"></a>Gatilhos acionados por eventos
 
