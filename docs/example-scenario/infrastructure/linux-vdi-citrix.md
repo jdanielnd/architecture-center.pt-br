@@ -4,13 +4,16 @@ titleSuffix: Azure Example Scenarios
 description: Crie um ambiente de VDI para áreas de trabalho do Linux usando o Citrix no Azure.
 author: miguelangelopereira
 ms.date: 09/12/2018
-ms.custom: fasttrack
-ms.openlocfilehash: af1cf01cb8b118e829c3870b636018aa5181b180
-ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
+ms.topic: example-scenario
+ms.service: architecture-center
+ms.subservice: example-scenario
+ms.custom: fasttrack, Linux
+ms.openlocfilehash: a6fe0b7e53c83c7b932c39f910257a1e7d24834f
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/20/2018
-ms.locfileid: "53643910"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54481224"
 ---
 # <a name="linux-virtual-desktops-with-citrix"></a>Áreas de trabalho virtuais do Linux com o Citrix
 
@@ -90,7 +93,7 @@ Nesse cenário, são usados os seguintes SKUs:
 - Esta solução de exemplo é projetada para fornecer alta disponibilidade a todas as funções, exceto para o servidor de licenciamento. Como o ambiente continua a funcionar durante um período de cortesia de 30 dias, se o servidor de licença estiver offline, nenhuma redundância adicional é necessária nesse servidor.
 - Todos os servidores que fornecem funções semelhantes devem ser implantados nos [Conjuntos de Disponibilidade](/azure/virtual-machines/windows/manage-availability#configure-multiple-virtual-machines-in-an-availability-set-for-redundancy).
 - Este cenário de exemplo não inclui recursos de Recuperação de Desastre. O [Azure Site Recovery](/azure/site-recovery/site-recovery-overview) poderia ser um bom complemento para esse projeto.
-- Considere implantar instâncias de VM neste cenário entre [Zonas de Disponibilidade](/azure/availability-zones/az-overview). Cada zona de disponibilidade é composta de um ou mais datacenters equipados com energia, resfriamento e rede independentes. Cada região habilitada tem, no mínimo, três zonas de disponibilidade. Essa distribuição de instâncias de VM em zonas fornece alta disponibilidade para as camadas de aplicativo. Para obter mais informações, confira [O que são Zonas de Disponibilidade no Azure?][azureaz-docs]. Você também pode [implantar Gateways de VPN e de ExpressRoute nas Zonas de Disponibilidade do Azure](/azure/vpn-gateway/about-zone-redundant-vnet-gateways).
+- Considere implantar instâncias de VM neste cenário entre [Zonas de Disponibilidade](/azure/availability-zones/az-overview). Cada zona de disponibilidade é composta de um ou mais datacenters equipados com energia, resfriamento e rede independentes. Cada região habilitada tem, no mínimo, três zonas de disponibilidade. Essa distribuição de instâncias de VM em zonas fornece alta disponibilidade para as camadas de aplicativo. Para obter mais informações, consulte [O que são Zonas de Disponibilidade no Azure?](/azure/availability-zones/az-overview) Você também pode [implantar Gateways de VPN e de ExpressRoute nas Zonas de Disponibilidade do Azure](/azure/vpn-gateway/about-zone-redundant-vnet-gateways).
 - Para uma solução de gerenciamento de implantação de produção deve ser implementada como [backup](/azure/backup/backup-introduction-to-azure-backup), [monitoramento](/azure/monitoring-and-diagnostics/monitoring-overview) e [gerenciamento de atualizações](/azure/automation/automation-update-management).
 - Esta solução de exemplo deve funcionar com aproximadamente 250 usuários simultâneos (aproximadamente 50 a 60 por servidor VDA) com uso misto. Mas isso dependerá muito dos tipos de aplicativos que estão sendo usados. Para uso em produção, um rigoroso teste de carga deve ser executado.
 

@@ -1,14 +1,17 @@
 ---
-title: 'Adoção do Enterprise Cloud: Conceitos básicos operacionais'
+title: 'Adoção da Nuvem Empresarial: Conceitos básicos operacionais'
 description: Orientação sobre os conceitos básicos operacionais
 author: petertaylor9999
 ms.date: 09/20/2018
-ms.openlocfilehash: d5f4c6529e92be387465a6ab9dca55267c584c11
-ms.sourcegitcommit: b7e521ba317f4fcd3253c80ac0c0a355eaaa56c5
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.openlocfilehash: 26867e3ecce738f18c5a03ff41754281229851f4
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/21/2018
-ms.locfileid: "46534021"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54481118"
 ---
 # <a name="establishing-an-operational-fitness-review"></a>Estabelecer uma análise de adequação operacional
 
@@ -104,7 +107,7 @@ Os detalhes do processo e a reunião devem ser adaptados para atender às suas n
 ## <a name="recommended-resources"></a>Recursos recomendados
 
 - [Pilares de qualidade do software](../../guide/pillars.md).
-Esta seção do guia de Arquitetura de aplicativo do Azure descreve os cinco pilares de qualidade do software: escalabilidade, disponibilidade, resiliência, gerenciamento e segurança.
+Esta seção do guia de Arquitetura de aplicativo do Azure descreve os cinco pilares de qualidade do software: Escalabilidade, disponibilidade, resiliência, gerenciamento e segurança.
 - [Dez princípios de design para aplicativos do Azure](../../guide/design-principles/index.md).
 Esta seção do guia de Arquitetura de Aplicativo do Azure aborda um conjunto de princípios de design para tornar seu aplicativo mais escalonável, resiliente e gerenciável.
 - [Projetar aplicativos resilientes para o Azure](../../resiliency/index.md).

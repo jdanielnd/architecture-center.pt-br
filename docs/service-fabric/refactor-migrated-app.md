@@ -3,12 +3,15 @@ title: Refatorar um Aplicativo Azure Service Fabric migrado a partir dos Serviç
 description: Como refatorar um Aplicativo do Azure Service Fabric existente migrado a partir dos Serviços de Nuvem do Azure
 author: petertay
 ms.date: 02/02/2018
-ms.openlocfilehash: 14ecaf81a07c72296e8db300df371e9a0c990434
-ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: reference-architecture
+ms.openlocfilehash: 1fd6bb5df18b46c8df3719fd107dd53a18dfd4ff
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/02/2018
-ms.locfileid: "50916457"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54487280"
 ---
 # <a name="refactor-an-azure-service-fabric-application-migrated-from-azure-cloud-services"></a>Refatorar um Aplicativo Azure Service Fabric migrado a partir dos Serviços de Nuvem do Azure
 
@@ -91,7 +94,7 @@ Observe que as operações para persistir com os itens removidos da fila de um R
 
 Cada serviço do aplicativo Surveys se comunica usando uma API RESTful Web. As APIs RESTful oferecem os seguintes benefícios:
 * Facilidade de uso: cada serviço é criado usando o ASP.NET Core MVC, que oferece suporte nativo à criação de APIs Web.
-* Segurança: embora não sejam todos os serviços que exijam o protocolo SSL, a Tailspin pode exigir que todos os serviços façam isso. 
+* Segurança: Embora não sejam todos os serviços que exijam o protocolo SSL, a Tailspin pode exigir que todos os serviços façam isso. 
 * Controle de versão: os clientes podem ser gravados e testados em relação a uma versão específica de uma API Web.
 
 Os serviços do aplicativo Surveys fazem uso do [proxy reverso][reverse-proxy] implementado pelo Service Fabric. O proxy reverso é um serviço executado em cada nó do cluster do Service Fabric e fornece resolução do ponto de extremidade e repetição automática e lida com outros tipos de falhas de conexão. Para usar o proxy reverso, cada chamada de API RESTful a um serviço específico é feita usando uma porta de proxy reverso predefinida.  Por exemplo, se a porta de proxy reverso foi definida como **19081**, uma chamada ao *Tailspin.SurveyAnswerService* pode ser feita da seguinte maneira:

@@ -4,17 +4,20 @@ titleSuffix: Azure Reference Architectures
 description: Execute máquinas virtuais com Linux para uma arquitetura de N camadas com Apache Cassandra no Microsoft Azure.
 author: MikeWasson
 ms.date: 11/12/2018
+ms.topic: reference-architecture
+ms.service: architecture-center
+ms.subservice: reference-architecture
 ms.custom: seodec18
-ms.openlocfilehash: bbd1029fe17b5d88d54246127c5d8983a573b012
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.openlocfilehash: 6c9a2b4fe513c959e537f705beb1c024b54c7b50
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53120152"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54485441"
 ---
 # <a name="linux-n-tier-application-in-azure-with-apache-cassandra"></a>Aplicativo Linux de N camadas no Azure com Apache Cassandra
 
-Essa arquitetura de referência mostra como implantar VMs (máquinas virtuais) e uma rede virtual configurada para um aplicativo de N camadas usando o Apache Cassandra no Linux para a camada de dados. [**Implantar esta solução**](#deploy-the-solution).
+Essa arquitetura de referência mostra como implantar VMs (máquinas virtuais) e uma rede virtual configurada para um aplicativo de [N camadas](../../guide/architecture-styles/n-tier.md) usando o Apache Cassandra no Linux para a camada de dados. [**Implantar esta solução**](#deploy-the-solution).
 
 ![Arquitetura de N camadas usando o Microsoft Azure](./images/n-tier-cassandra.png)
 
@@ -164,6 +167,10 @@ Para implantar as VMs do Linux para uma arquitetura de referência de aplicativo
    ```
 
 Para obter mais informações sobre a implantação dessa arquitetura de referência de exemplo utilizando blocos de construção Blocos de Construção do Azure, visite o repositório [GitHub][git].
+
+## <a name="next-steps"></a>Próximas etapas
+
+- [Módulo do Microsoft Learn: Tour pelo estilo de arquitetura de N camadas](/learn/modules/n-tier-architecture/)
 
 <!-- links -->
 

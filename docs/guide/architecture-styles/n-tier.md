@@ -4,13 +4,16 @@ titleSuffix: Azure Application Architecture Guide
 description: Descreve os benefícios, os desafios e as melhores práticas para arquiteturas de N camadas no Azure
 author: MikeWasson
 ms.date: 08/30/2018
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: reference-architecture
 ms.custom: seojan19
-ms.openlocfilehash: 4e8aae0032d20df05e1b16a47fda4afa720ed0d9
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.openlocfilehash: d7b94d56831a6b9172a9091f0e4f7fa63a8881f1
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54110298"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54481483"
 ---
 # <a name="n-tier-architecture-style"></a>Estilo de arquitetura de N camadas
 
@@ -81,10 +84,11 @@ As camadas Web e comercial não têm estado. Qualquer VM pode lidar com qualquer
 
 NSGs (grupos de segurança de rede) restringem o acesso a cada camada. Por exemplo, a camada de banco de dados só permite o acesso da camada comercial.
 
-Para obter mais detalhes e um modelo implantável do Resource Manager, consulte as arquiteturas de referência a seguir:
+Para obter mais informações sobre como executar aplicativos de N camadas no Azure:
 
 - [Executar VMs do Windows para um aplicativo de N camadas][n-tier-windows]
-- [Executar VMs do Linux para um aplicativo de N camadas][n-tier-linux]
+- [Aplicativo de N camadas do Windows no Azure com SQL Server][n-tier-linux]
+- [Módulo do Microsoft Learn: Tour pelo estilo de arquitetura de N camadas](/learn/modules/n-tier-architecture/)
 
 ### <a name="additional-considerations"></a>Considerações adicionais
 

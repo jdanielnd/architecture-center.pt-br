@@ -1,16 +1,19 @@
 ---
-title: 'Adoção do Enterprise Cloud: design de governança no Azure para várias equipes'
+title: 'Adoção da Nuvem Empresarial: Design de governança no Azure para várias equipes'
 description: Diretrizes para configurar controles de governança do Azure para vários ambientes de várias equipes e várias cargas de trabalho
 author: petertaylor9999
 ms.date: 09/10/2018
-ms.openlocfilehash: ac2a63ad6ced1039290dc0bf5132b0d87a2c79cf
-ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.openlocfilehash: de2bfeee7d098984a35f56f9e794e6a37933a3bd
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 09/11/2018
-ms.locfileid: "44389410"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54488419"
 ---
-# <a name="enterprise-cloud-adoption-governance-design-for-multiple-teams"></a>Adoção do Enterprise Cloud: design de governança para várias equipes
+# <a name="enterprise-cloud-adoption-governance-design-for-multiple-teams"></a>Adoção da Nuvem Empresarial: Design de governança para várias equipes
 
 A meta deste guia é ajudar você a aprender o processo para criar um modelo de controle de recursos no Azure para dar suporte a múltiplas equipes, múltiplas cargas de trabalho e múltiplos ambientes.  Nós irá examinar um conjunto de requisitos de governança hipotético e passar por várias implementações de exemplo que atendem a esses requisitos.
 

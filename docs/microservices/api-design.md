@@ -3,12 +3,16 @@ title: Design de API
 description: Criando APIs para microsserviços
 author: MikeWasson
 ms.date: 10/23/2018
-ms.openlocfilehash: 80e8e081384a7806880878ae95fbdbc2bb6cc440
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: reference-architecture
+ms.custom: microservices
+ms.openlocfilehash: 01f774773b2d2a653e52c9ee961f12c5b9fc833a
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54111029"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54485971"
 ---
 # <a name="designing-microservices-api-design"></a>Como criar microsserviços: Design de API
 
@@ -95,7 +99,7 @@ Esses tipos de práticas recomendadas de codificação são particularmente impo
 
 Outro exemplo é o padrão Repositório, que garante que outras partes do aplicativo não façam leituras ou gravações diretas no armazenamento de dados:
 
-!Diagrama de um Repositório do Drone[](./images/repository.png)
+![Diagrama de um Repositório do Drone](./images/repository.png)
 
 Em uma arquitetura de microsserviços, no entanto, os serviços não compartilham a mesma base de código, nem os repositórios de dados. Em vez disso, eles se comunicam por meio de APIs. Considere o caso em que o serviço Agendador solicita informações sobre um drone do serviço Drone. O serviço Drone tem seu modelo interno de drone expresso através de código. Mas o Agendador não o vê. Em vez disso, ele recupera uma *representação* da entidade &mdash; do drone, talvez um objeto JSON em uma resposta de HTTP.
 

@@ -4,17 +4,23 @@ titleSuffix: Azure Reference Architectures
 description: Implemente uma topologia de rede hub-spoke com serviços compartilhados no Azure.
 author: telmosampaio
 ms.date: 10/09/2018
-ms.custom: seodec18
-ms.openlocfilehash: 9de1cd22b32614c332f64cf282ddc1be8090bf7a
-ms.sourcegitcommit: 71ee0859e19fe58416b4c0056d67f2f34dd9ca0a
+ms.topic: reference-architecture
+ms.service: architecture-center
+ms.subservice: reference-architecture
+ms.custom: seodec18, networking
+ms.openlocfilehash: dd7632c3a84f6a0cee5d8b35e6a943ab8c52caf8
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/11/2019
-ms.locfileid: "54211964"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54488300"
 ---
 # <a name="implement-a-hub-spoke-network-topology-with-shared-services-in-azure"></a>Implementar uma topologia de rede hub-spoke com serviços compartilhados no Azure
 
 Essa arquitetura de referência se baseia na arquitetura de referência do [hub-spoke] [ guidance-hub-spoke] para incluir serviços compartilhados no hub que pode ser consumido por todos os spokes. Como uma primeira etapa para migrar um datacenter para a nuvem, e criando um [datacenter virtual], os primeiros serviços que você precisa compartilhar são identidade e segurança. Esta arquitetura de referência mostra como estender seus serviços do Active Directory de seu datacenter local para o do Azure e como adicionar uma NVA (solução de virtualização de rede), que pode agir como um firewall, em uma topologia hub-spoke.  [**Implantar esta solução**](#deploy-the-solution).
+
+> [!NOTE]
+> Este cenário também pode ser obtido usando o [Firewall do Azure](/azure/firewall/), um serviço de segurança de rede baseado em nuvem.
 
 ![Topologia de serviços compartilhados no Azure](./images/shared-services.png)
 

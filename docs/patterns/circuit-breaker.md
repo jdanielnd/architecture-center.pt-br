@@ -5,13 +5,16 @@ description: Trate as falhas que possam consumir uma quantidade variável de tem
 keywords: padrão de design
 author: dragon119
 ms.date: 06/23/2017
+ms.topic: design-pattern
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 56c90fcb23fd68b0d1b545db90adeab3272705c2
-ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
+ms.openlocfilehash: 7cc84b3c14ea277aa82643f3141f0693ec702a49
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/04/2019
-ms.locfileid: "54009756"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54485597"
 ---
 # <a name="circuit-breaker-pattern"></a>Padrão de Disjuntor
 
@@ -19,7 +22,7 @@ Trate as falhas que possam consumir uma quantidade variável de tempo para serem
 
 ## <a name="context-and-problem"></a>Contexto e problema
 
-Em um ambiente distribuído, as chamadas a serviços e recursos remotos podem falhar devido a falhas transitórias, como conexões de rede lentas, tempos limite esgotados ou recursos excessivamente confirmados ou temporariamente não disponíveis. Essas falhas geralmente são corrigidas automaticamente após um breve período de tempo e um aplicativo de nuvem robusto deve estar preparado para tratá-los usando uma estratégia, como o [Padrão de repetição][retry-pattern].
+Em um ambiente distribuído, as chamadas a serviços e recursos remotos podem falhar devido a falhas transitórias, como conexões de rede lentas, tempos limite esgotados ou recursos excessivamente confirmados ou temporariamente não disponíveis. Essas falhas geralmente são corrigidas automaticamente após um breve período de tempo e um aplicativo de nuvem robusto deve estar preparado para tratá-las usando uma estratégia, como o [Padrão de repetição](./retry.md).
 
 No entanto, também pode haver situações em que as falhas ocorrem devido a eventos inesperados e que podem demorar muito mais para serem corrigidos. Essas falhas podem variar de gravidade de uma perda parcial de conectividade até a falha completa de um serviço. Nessas situações, pode ser inútil para um aplicativo tentar repetir continuamente uma operação em que o êxito seja improvável. Em vez disso, o aplicativo deve aceitar rapidamente a falha na operação e tratá-la adequadamente.
 

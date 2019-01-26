@@ -3,12 +3,15 @@ title: Migrar um aplicativo dos Serviços de Nuvem do Azure para o Azure Service
 description: Como migrar um aplicativo dos Serviços de Nuvem do Azure para o Azure Service Fabric.
 author: MikeWasson
 ms.date: 04/11/2018
-ms.openlocfilehash: a1b4e005b2dab67d8107f4002468e1d7622ae342
-ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: reference-architecture
+ms.openlocfilehash: e2b89fa51abdb7be6124ded6e64889b5b54854a4
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 11/02/2018
-ms.locfileid: "50916440"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54487892"
 ---
 # <a name="migrate-an-azure-cloud-services-application-to-azure-service-fabric"></a>Migrar um aplicativo dos Serviços de Nuvem do Azure para o Azure Service Fabric 
 
@@ -101,7 +104,7 @@ O aplicativo consiste em duas funções web e uma função de trabalho.
 
 - A função web **Tailspin.Web.Survey.Public** hospeda um site ASP.NET no qual as pessoas podem obter as pesquisas que clientes da Tailspin publicam. 
 
-- A função de trabalho **Tailspin.Workers.Survey** realiza processamento em segundo plano. As funções web colocam itens de trabalho em uma fila e, em seguida, a função de trabalho processa os itens. Duas tarefas em segundo plano são definidas: exportar respostas da pesquisa para o banco de dados SQL do Azure e calcular estatísticas referentes às respostas de pesquisa.
+- A função de trabalho **Tailspin.Workers.Survey** realiza processamento em segundo plano. As funções web colocam itens de trabalho em uma fila e, em seguida, a função de trabalho processa os itens. Duas tarefas em segundo plano são definidas: Exportar respostas da pesquisa para o banco de dados SQL do Azure e calcular estatísticas referentes às respostas de pesquisa.
 
 Além dos Serviços de Nuvem, o aplicativo de pesquisas usa alguns outros serviços do Azure:
 
