@@ -9,12 +9,12 @@ ms.topic: design-pattern
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: f9f33421f3e1030e2477379970082f5c45690390
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 0bbe8177abe708cf41c1b5a8d117c05fd280c948
+ms.sourcegitcommit: 3b15d65e7c35a19506e562c444343f8467b6a073
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54486833"
+ms.lasthandoff: 01/25/2019
+ms.locfileid: "54908589"
 ---
 # <a name="throttling-pattern"></a>Padrão de limitação
 
@@ -38,7 +38,7 @@ O sistema pode implementar várias estratégias de limitação, incluindo:
 
 - Desabilitar ou comprometer a funcionalidade de serviços não essenciais selecionados de modo que os serviços essenciais possam ser executados sem impedimentos com recursos suficientes. Por exemplo, se o aplicativo estiver transmitindo por streaming saída de vídeo, ele poderá mudar para uma resolução mais baixa.
 
-- Usando nivelamento para suavizar o volume de atividade (essa abordagem é abordada em mais detalhes por [Padrão de nivelamento de carga baseado em fila](./queue-based-load-leveling.md)). Em um ambiente multilocatário, essa abordagem reduzirá o desempenho de cada locatário. Se o sistema precisar dar suporte a uma combinação de locatários com diferentes SLAs, o trabalho para locatários de alto valor poderá ser executado imediatamente. Solicitações para outros locatários poderão ser retidas e manipuladas quando a lista de pendências diminuir. O padrão de Fila de Prioridade][] pode ser usado para implementar essa abordagem.
+- Usando nivelamento para suavizar o volume de atividade (essa abordagem é abordada em mais detalhes por [Padrão de nivelamento de carga baseado em fila](./queue-based-load-leveling.md)). Em um ambiente multilocatário, essa abordagem reduzirá o desempenho de cada locatário. Se o sistema precisar dar suporte a uma combinação de locatários com diferentes SLAs, o trabalho para locatários de alto valor poderá ser executado imediatamente. Solicitações para outros locatários poderão ser retidas e manipuladas quando a lista de pendências diminuir. O [padrão de Fila de Prioridade](./priority-queue.md) pode ser usado para implementar essa abordagem.
 
 - Adiar de operações sendo executadas em nome de locatários ou de aplicativos de menor prioridade. Essas operações podem ser suspensas ou limitadas, sendo gerada uma exceção para informar o locatário de que o sistema está ocupado e a operação deverá ser repetida mais tarde.
 

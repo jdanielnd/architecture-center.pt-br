@@ -7,12 +7,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat-ai, AI
-ms.openlocfilehash: a291821860a8e503ba4c6173ac6d8fd449d6ebf3
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 1ca6cf385ddd3be56e247a3439e737c114a88dcb
+ms.sourcegitcommit: 40f3561cc94f721eca50d33f2d75dc974cb6f92b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54485359"
+ms.lasthandoff: 01/29/2019
+ms.locfileid: "55147273"
 ---
 # <a name="batch-scoring-of-python-models-on-azure"></a>Pontuação em lote de modelos Python no Azure
 
@@ -33,6 +33,9 @@ Essa arquitetura é formada pelos seguintes componentes:
 [Azure Stream Analytics][stream-analytics]. Um mecanismo de processamento de eventos. Um trabalho do Stream Analytics lê os fluxos de dados do hub de eventos e executa o processamento de fluxo.
 
 [IA do Lote do Azure][batch-ai]. Esse mecanismo de computação distribuída é usado para treinar e testar modelos de machine learning e de inteligência artificial em larga escala no Azure. A IA do Lote cria máquinas virtuais sob demanda com uma opção de dimensionamento automático, em que cada nó no cluster do IA do Lote executa um trabalho de pontuação para um sensor específico. O  [script][python-script] de pontuação em Python é executado em contêineres do Docker que são criados em cada nó do cluster, onde ele lê os dados de sensor relevantes, gera previsões e as armazena no Armazenamento de Blobs.
+
+> [!NOTE]
+> Os serviços de IA do Lote do Azure serão desativados em março de 2019 e seu treinamento em escala, assim como suas funcionalidades de pontuação, já estão disponíveis no [Serviço do Azure Machine Learning][amls]. Essa arquitetura de referência será atualizada em breve para uso de Machine Learning, que oferece um destino de computação gerenciada chamado [Computação do Machine Learning do Azure][aml-compute] para treinamento, implantação e pontuação de modelos de aprendizado de máquina.
 
 [Armazenamento de Blobs do Azure][storage]. Os contêineres de blob são usados para armazenar os modelos pré-treinados, os dados e as previsões de saída. Os modelos são carregados no Armazenamento de Blobs no notebook [create\_resources.ipynb] [ create-resources]. Esses modelos de [SVM de classe única][one-class-svm] são treinados com dados que representam valores de sensores diferentes em dispositivos diferentes. A solução pressupõe que os valores de dados foram agregados em um intervalo fixo de tempo.
 
@@ -94,6 +97,8 @@ Há uma implantação de referência para essa arquitetura disponível no [GitHu
 
 [acr]: /azure/container-registry/container-registry-intro
 [ai]: /azure/application-insights/app-insights-overview
+[aml-compute]: /azure/machine-learning/service/how-to-set-up-training-targets#amlcompute
+[amls]: /azure/machine-learning/service/overview-what-is-azure-ml
 [automatic-scaling]: /azure/batch/batch-automatic-scaling
 [azure-files]: /azure/storage/files/storage-files-introduction
 [batch-ai]: /azure/batch-ai/

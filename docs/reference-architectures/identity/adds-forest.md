@@ -11,12 +11,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18, identity
-ms.openlocfilehash: 5be463856b858ab75a2e402d6690f8240ebf9af6
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: bf62544028741d500e9c4172d4ac0206c95cb919
+ms.sourcegitcommit: 40f3561cc94f721eca50d33f2d75dc974cb6f92b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54480752"
+ms.lasthandoff: 01/29/2019
+ms.locfileid: "55147307"
 ---
 # <a name="create-an-active-directory-domain-services-ad-ds-resource-forest-in-azure"></a>Criar uma floresta de recursos do AD DS (Active Directory Domain Services) no Azure
 
@@ -137,7 +137,7 @@ Uma implantação para essa arquitetura está disponível no [GitHub][github]. O
 3. Execute o comando a seguir e aguarde a conclusão da implantação.
 
     ```bash
-    azbb -s <subscription_id> -g <resource group> -l <location> -p onoprem.json --deploy
+    azbb -s <subscription_id> -g <resource group> -l <location> -p azure.json --deploy
     ```
 
    Implante no mesmo grupo de recursos da VNET local.

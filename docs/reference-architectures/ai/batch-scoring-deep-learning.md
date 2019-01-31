@@ -8,12 +8,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat-ai
-ms.openlocfilehash: 26a83b3f75b2e7e9ec4a8a99ab8b4d8f1b1ef4d7
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 27975b42179e87f4520186778610159943a93090
+ms.sourcegitcommit: 40f3561cc94f721eca50d33f2d75dc974cb6f92b
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54488555"
+ms.lasthandoff: 01/29/2019
+ms.locfileid: "55147239"
 ---
 # <a name="batch-scoring-on-azure-for-deep-learning-models"></a>Pontuação em lote para modelos de aprendizado profundo do Azure
 
@@ -45,6 +45,9 @@ Essa arquitetura é formada pelos componentes a seguir.
 ### <a name="compute"></a>Computação
 
 **[IA do Lote do Azure][batch-ai]** é usada para executar o algoritmo de transferência de estilo neural. A IA do Lote dá suporte a cargas de trabalho de aprendizado profundo fornecendo ambientes em contêineres que são pré-configurados para estruturas de aprendizado profundo, em VMs habilitadas para GPU. A IA do Lote também pode conectar o cluster de computação ao Armazenamento de Blobs.
+
+> [!NOTE]
+> Os serviços de IA do Lote do Azure serão desativados em março de 2019 e seu treinamento em escala, assim como suas funcionalidades de pontuação, já estão disponíveis no [Serviço do Azure Machine Learning][amls]. Essa arquitetura de referência será atualizada em breve para uso de Machine Learning, que oferece um destino de computação gerenciada chamado [Computação do Machine Learning do Azure][aml-compute] para treinamento, implantação e pontuação de modelos de aprendizado de máquina.
 
 ### <a name="storage"></a>Armazenamento
 
@@ -149,6 +152,8 @@ Para implantar essa arquitetura de referência, execute as etapas descritas no [
 
 <!-- links -->
 
+[aml-compute]: /azure/machine-learning/service/how-to-set-up-training-targets#amlcompute
+[amls]: /azure/machine-learning/service/overview-what-is-azure-ml
 [azcopy]: /azure/storage/common/storage-use-azcopy-linux
 [batch-ai]: /azure/batch-ai/
 [blobfuse]: https://github.com/Azure/azure-storage-fuse
