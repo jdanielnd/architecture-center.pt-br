@@ -10,12 +10,12 @@ ms.subservice: enterprise-cloud-adoption
 ms.custom: virtual-network
 ms.date: 11/28/2018
 ms.author: jonor
-ms.openlocfilehash: 1f61996d231f3bf0cc2c550f4d3e119116bb7bc0
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: a997a0f03da63bc1432f61f3299e7c6794278e5e
+ms.sourcegitcommit: 3b15d65e7c35a19506e562c444343f8467b6a073
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54488640"
+ms.lasthandoff: 01/25/2019
+ms.locfileid: "54908539"
 ---
 # <a name="azure-virtual-datacenter-a-network-perspective"></a>Datacenter virtual do Azure: uma perspectiva de rede
 
@@ -261,12 +261,6 @@ O Azure Load Balancer também pode investigar a integridade de várias instânci
 O [**AFD**][AFD] (Azure Front Door) é a Plataforma de Aceleração de Aplicativos Web, o Balanceador de Carga HTTP Global, a Proteção de Aplicativos e a Rede de Distribuição de Conteúdo altamente disponíveis e escalonáveis da Microsoft. Em execução em mais de 100 locais com a Rede Global Edge da Microsoft, o AFD permite compilar, operar e escalar horizontalmente seu aplicativo Web dinâmico e o conteúdo estático. O AFD oferece a seu aplicativo desempenho do usuário final de alto nível, automação de manutenção de carimbo/regional unificada, automação de BCDR, informações unificadas de cliente/usuário, insights de serviço e caching. A plataforma oferece SLAs de desempenho, confiabilidade e suporte, certificações de conformidade e práticas de segurança auditáveis desenvolvidas, operadas e com suporte nativo pelo Azure.
 
 [**Gateway de Aplicativo**][AppGW] O Gateway de Aplicativo do Microsoft Azure é uma solução de virtualização dedicada que fornece o ADC (controlador de entrega de aplicativos) como um serviço, oferecendo vários recursos de balanceamento de carga de camada 7 para o aplicativo. Ele permite que você otimize a produtividade do Web farm descarregando a terminação SSL com uso intensivo de CPU para o Gateway de Aplicativo. Ele também fornece outros recursos de roteamento de camada 7, incluindo distribuição round robin do tráfego de entrada, afinidade de sessão, roteamento com base no caminho de URL e a capacidade de hospedar vários sites por trás de um único Gateway de Aplicativo baseado em cookie. Um WAF (firewall do aplicativo Web) também é fornecido como parte da SKU do WAF do gateway de aplicativo. Essa SKU oferece proteção para aplicativos Web contra explorações e vulnerabilidades comuns da Web. O Gateway de Aplicativo pode ser configurado como um gateway voltado para a Internet, um gateway apenas interno ou uma combinação de ambos. 
-
-O [**Gateway de Aplicativo**][AppGW] é uma solução de virtualização dedicada que fornece o ADC (controlador de entrega de aplicativos) como serviço, oferecendo várias funcionalidades de balanceamento de carga de camada 7 para o aplicativo. Você pode otimizar a produtividade do Web farm descarregando a terminação SSL com uso intensivo de CPU para a instância do Gateway de Aplicativo. Ele também fornece outros recursos de roteamento de camada 7, incluindo os seguintes exemplos: 
-* Distribuição round robin do tráfego de entrada. 
-* Afinidade de sessão baseada em cookie. 
-* Visão geral do roteamento baseado em caminho de URL. 
-* A capacidade de hospedar vários sites subjacentes em uma única instância do Gateway de Aplicativo. Um firewall do aplicativo Web (WAF) também é fornecido como parte da SKU do WAF do Gateway de Aplicativo. Essa SKU oferece proteção para aplicativos Web contra explorações e vulnerabilidades comuns da Web. O Gateway de Aplicativo pode ser configurado como um gateway voltado para a Internet, um gateway apenas interno ou uma combinação de ambos. 
 
 [**IPs Públicos**][PIP]. Com alguns recursos do Azure, você pode associar pontos de extremidade de serviço a um endereço IP público para que seu recurso possa ser acessado pela Internet. Esse ponto de extremidade usa a conversão de endereços de rede (NAT) para rotear o tráfego para a porta e o endereço internos na rede virtual do Azure. Esse caminho é a principal rota para que o tráfego externo passe para dentro da rede virtual. Você pode configurar endereços IP públicos para determinar qual tráfego é passado para dentro e como e onde ele é convertido para a rede virtual.
 
