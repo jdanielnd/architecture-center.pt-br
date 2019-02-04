@@ -3,21 +3,21 @@ title: Pontuação em tempo real dos modelos do Python
 titleSuffix: Azure Reference Architectures
 description: Essa arquitetura de referência mostra como implantar modelos de Python como serviços Web no Azure para fazer previsões em tempo real.
 author: msalvaris
-ms.date: 11/09/2018
+ms.date: 01/28/2019
 ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat-ai
-ms.openlocfilehash: 135e86b447684efd9f54340eda4b6bf6e4c35bbb
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: ba2d9a295e5a231f0ffca9e3cf2d53ace4deddfe
+ms.sourcegitcommit: 1ee873aaf40010eb2a38314ac56974bc9e227736
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54487671"
+ms.lasthandoff: 01/28/2019
+ms.locfileid: "55141026"
 ---
 # <a name="real-time-scoring-of-python-scikit-learn-and-deep-learning-models-on-azure"></a>Pontuação em tempo real de Python Scikit-Learn e modelos de aprendizado profundo (deep learning) no Azure
 
-Essa arquitetura de referência mostra como implantar modelos de Python como serviços Web para fazer previsões em tempo real. Dois cenários são abordados: implantar modelos de Python normais e os requisitos específicos de implantação de modelos de aprendizado profundo. Ambos os cenários usam a arquitetura mostrada.
+Esta arquitetura de referência mostra como implantar modelos em Python como serviços Web para fazer previsões em tempo real usando o Serviço do Azure Machine Learning. Dois cenários são abordados: implantar modelos de Python normais e os requisitos específicos de implantação de modelos de aprendizado profundo. Ambos os cenários usam a arquitetura mostrada.
 
 Duas implementações de referência para essa arquitetura estão disponíveis no GitHub, uma para [modelos normais de Python][github-python] e outro para [modelos de aprendizado profundo][github-dl].
 
@@ -33,13 +33,13 @@ Esse cenário usa um subconjunto dos dados de pergunta do Stack Overflow que inc
 
 O fluxo de aplicativo para essa arquitetura é o seguinte:
 
-1. O cliente envia uma solicitação HTTP POST com os dados codificados da pergunta.
-
-2. O aplicativo Flask extrai a pergunta da solicitação.
-
-3. A questão é enviada para o modelo de pipeline de scikit-learn para personalização e pontuação.
-
-4. As perguntas mais frequentes correspondentes às suas pontuações são redirecionadas para um objeto JSON e retornadas ao cliente.
+1. O modelo treinado é registrado no Registro de modelo de machine learning.
+2. O Serviço do Machine Learning cria uma imagem do Docker que inclui o modelo e o script de pontuação.
+3. O Machine Learning implanta a imagem de pontuação no AKS (Serviço de Kubernetes do Azure) como um serviço Web.
+4. O cliente envia uma solicitação HTTP POST com os dados codificados da pergunta.
+5. O serviço Web criado pelo Machine Learning extrai a pergunta da solicitação.
+6. A questão é enviada para o modelo de pipeline de Scikit-learn para personalização e pontuação. 
+7. As perguntas frequentes correspondentes, com suas pontuações, são retornadas ao cliente.
 
 Aqui está uma captura de tela do aplicativo de exemplo que consome os resultados:
 
@@ -53,25 +53,24 @@ Esse cenário usa um modelo ResNet-152 pré-treinado no conjunto de dados ImageN
 
 O fluxo do aplicativo para o modelo de aprendizado profundo é o seguinte:
 
-1. O cliente envia uma solicitação HTTP POST com os dados de imagem codificados.
-
-2. O aplicativo Flask extrai a imagem da solicitação.
-
-3. A imagem é pré-processada e enviada para o modelo de pontuação.
-
-4. O resultado da pontuação é redirecionado para um objeto JSON e retornado ao cliente.
+1. O modelo de aprendizado profundo é registrado no Registro de modelo de machine learning.
+2. O Serviço do Machine Learning cria uma imagem do Docker que inclui o modelo e o script de pontuação.
+3. O Machine Learning implanta a imagem de pontuação no AKS (Serviço de Kubernetes do Azure) como um serviço Web.
+4. O cliente envia uma solicitação HTTP POST com os dados de imagem codificados.
+5. O serviço Web criado pelo Machine Learning processa os dados de imagem previamente e os envia ao modelo para pontuação. 
+6. As categorias previstas, com suas pontuações, são retornadas ao cliente.
 
 ## <a name="architecture"></a>Arquitetura
 
 Essa arquitetura é formada pelos componentes a seguir.
 
+O **[Serviço do Azure Machine Learning][aml]** é um serviço de nuvem usado para treinar, implantar, automatizar e gerenciar modelos de aprendizado de máquina, tudo na ampla escala que a nuvem oferece. Ele é usado nesta arquitetura para gerenciar a implantação de modelos e a autenticação, o roteamento e o balanceamento de carga do serviço Web.
+
 **[Máquina virtual][vm]** (VM). A VM é mostrada como um exemplo de um dispositivo &mdash; local ou na nuvem &mdash; que pode enviar uma solicitação HTTP.
 
 O **[Serviço de Kubernetes do Azure][aks]** (AKS) é usado para implantar o aplicativo em um cluster Kubernetes. O AKS simplifica a implantação e as operações do Kubernetes. O cluster pode ser configurado usando VMs somente de CPU para modelos de Python normais ou VMs habilitadas para GPU para modelos de aprendizado profundo.
 
-**[Balanceador de carga][lb]**. Um balanceador de carga provisionado pelo AKS é usado para expor o serviço externamente. O tráfego do balanceador de carga é direcionado para os pods de back-end.
-
-O **[Docker Hub][docker]** é usado para armazenar a imagem do Docker que é implantada no cluster Kubernetes. O Docker Hub foi escolhido para essa arquitetura por ser fácil de usar e ser o repositório de imagens padrão para usuários do Docker. O [Registro de Contêiner do Azure][acr] também pode ser usado para essa arquitetura.
+O **[Registro de Contêiner do Azure][acr]** permite o armazenamento de imagens para todos os tipos de implantações de contêiner do Docker, incluindo DC/OS, Docker Swarm e Kubernetes. As imagens de pontuação são implantadas como contêineres no Serviço de Kubernetes do Azure e usadas para executar o script de pontuação. A imagem usada aqui é criada pelo Machine Learning a partir do modelo treinado e do script de pontuação e, em seguida, enviada por push para o Registro de Contêiner do Azure.
 
 ## <a name="performance-considerations"></a>Considerações sobre o desempenho
 
@@ -83,7 +82,7 @@ Você pode usar as CPUs para essa arquitetura em qualquer cenário, mas para mod
 
 ## <a name="scalability-considerations"></a>Considerações sobre escalabilidade
 
-Para modelos de Python normais, em que o cluster do AKS é provisionado com VMs de CPU, tome cuidado quando [aumentar o número de pods][manually-scale-pods]. O objetivo é utilizar totalmente o cluster. O dimensionamento depende das solicitações de CPU e dos limites definidos para os pods. O Kubernetes dá suporte ao [dimensionamento automático][autoscale-pods] de pods para ajustar o número de pods em uma implantação, dependendo da utilização da CPU ou de outras métricas selecionadas. O [dimensionador automático de cluster][autoscaler] (em versão prévia) faz isso colocando em escala seus nós de agente com base em pods pendentes.
+Para modelos de Python normais, em que o cluster do AKS é provisionado com VMs de CPU, tome cuidado quando [aumentar o número de pods][manually-scale-pods]. O objetivo é utilizar totalmente o cluster. O dimensionamento depende das solicitações de CPU e dos limites definidos para os pods. O Machine Learning por Kubernetes também dá suporte ao [dimensionamento automático de pod] [ autoscale-pods] com base na utilização da CPU ou em outras métricas. O [dimensionador automático de cluster][autoscaler] (em versão prévia) pode dimensionar nós de agente com base em pods pendentes.
 
 Para cenários de aprendizado profundo, usando as máquinas virtuais habilitadas para GPU, os limites de recursos nos pods fazem com que uma GPU seja atribuída a um pod. Dependendo do tipo de VM usado, você deve [dimensionar os nós do cluster][scale-cluster] para atender à demanda para o serviço. Você pode fazer isso facilmente usando a CLI do Azure e o kubectl.
 
@@ -117,7 +116,7 @@ Use o [RBAC][rbac] para controlar o acesso aos recursos do Azure que você impla
 
 **Autenticação**. Essa solução não restringe o acesso aos pontos de extremidade. Para implantar a arquitetura em uma configuração empresarial, proteja os pontos de extremidade por meio de chaves de API e adicione alguma forma de autenticação do usuário para o aplicativo cliente.
 
-**Registro de contêiner**. Essa solução usa um registro público para armazenar a imagem do Docker. O código do qual o aplicativo depende, bem como o modelo, estão contidos dentro dessa imagem. Aplicativos empresariais devem usar um registro privado para ajudar na proteção contra a execução de código mal-intencionado e para ajudar a impedir que as informações dentro do contêiner sejam comprometidas.
+**Registro de contêiner**. Essa solução usa o Registro de Contêiner do Azure para armazenar a imagem do Docker. O código do qual o aplicativo depende, bem como o modelo, estão contidos dentro dessa imagem. Aplicativos empresariais devem usar um registro privado para ajudar na proteção contra a execução de código mal-intencionado e para ajudar a impedir que as informações dentro do contêiner sejam comprometidas.
 
 **Proteção contra DDoS**. Considere habilitar a [Proteção contra DDoS Standard][ddos]. Embora a proteção contra DDoS básica seja habilitada como parte da plataforma Azure, a Proteção contra DDoS Standard fornece funcionalidades de mitigação ajustadas especificamente para os recursos da rede virtual do Azure.
 
@@ -140,15 +139,14 @@ Para implantar essa arquitetura de referência, execute as etapas descritas no r
 [autoscale-pods]: /azure/aks/tutorial-kubernetes-scale#autoscale-pods
 [azcopy]: /azure/storage/common/storage-use-azcopy-linux
 [ddos]: /azure/virtual-network/ddos-protection-overview
-[docker]: https://hub.docker.com/
 [get-started]: /azure/security-center/security-center-get-started
-[github-python]: https://github.com/Azure/MLAKSDeployment
-[github-dl]: https://github.com/Microsoft/AKSDeploymentTutorial
+[github-python]: https://github.com/Microsoft/MLAKSDeployAML
+[github-dl]: https://github.com/Microsoft/AKSDeploymentTutorial_AML
 [gpus-vs-cpus]: https://azure.microsoft.com/en-us/blog/gpus-vs-cpus-for-deployment-of-deep-learning-models/
 [https-ingress]: /azure/aks/ingress-tls
 [ingress-controller]: https://kubernetes.io/docs/concepts/services-networking/ingress/
 [kubectl]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
-[lb]: /azure/load-balancer/load-balancer-overview
+[aml]: /azure/machine-learning/service/overview-what-is-azure-ml
 [manually-scale-pods]: /azure/aks/tutorial-kubernetes-scale#manually-scale-pods
 [monitor-containers]: /azure/monitoring/monitoring-container-insights-overview
 [permissões]: /azure/aks/concepts-identity
