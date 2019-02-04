@@ -10,12 +10,12 @@ ms.subservice: enterprise-cloud-adoption
 ms.custom: virtual-network
 ms.date: 11/28/2018
 ms.author: jonor
-ms.openlocfilehash: a997a0f03da63bc1432f61f3299e7c6794278e5e
-ms.sourcegitcommit: 3b15d65e7c35a19506e562c444343f8467b6a073
+ms.openlocfilehash: 484f41f64b676b08ae8adb4ba082f9bff75a6a54
+ms.sourcegitcommit: 14226018a058e199523106199be9c07f6a3f8592
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/25/2019
-ms.locfileid: "54908539"
+ms.lasthandoff: 01/31/2019
+ms.locfileid: "55483106"
 ---
 # <a name="azure-virtual-datacenter-a-network-perspective"></a>Datacenter virtual do Azure: uma perspectiva de rede
 
@@ -391,7 +391,9 @@ Os seguintes recursos foram discutidos neste documento. Siga os links para saber
 
  - Explore o [Emparelhamento de VNet][VNetPeering], a tecnologia de base para os designs de hub e spoke do VDC
  - Implemente o [Azure AD][AAD] para começar a usar a exploração de [RBAC][RBAC]
- - Desenvolva um modelo de gerenciamento de assinaturas e recursos e um modelo de RBAC para atender à estrutura, aos requisitos e às políticas da sua organização. A atividade mais importante é o planejamento. Tanto quanto possível, planeje reorganizações, fusões, novas linhas de produto etc. <!--Image References-->
+ - Desenvolva um modelo de gerenciamento de assinaturas e recursos e um modelo de RBAC para atender à estrutura, aos requisitos e às políticas da sua organização. A atividade mais importante é o planejamento. Tanto quanto possível, planeje reorganizações, fusões, novas linhas de produto etc.
+
+<!--Image References-->
 [0]: ./images/networking-redundant-equipment.png "Exemplos de sobreposição de componente" 
 [1]: ./images/networking-vdc-high-level.png "Exemplo de alto nível do VDC de hub e spoke"
 [2]: ./images/networking-hub-spokes-cluster.png "Cluster de hubs e spokes"
