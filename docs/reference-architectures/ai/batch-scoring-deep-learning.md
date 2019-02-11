@@ -1,25 +1,25 @@
 ---
 title: Pontuação em lote para modelos de aprendizado profundo
 titleSuffix: Azure Reference Architectures
-description: Essa arquitetura de referência mostra como aplicar a transferência de estilo neural a um vídeo usando a IA do Lote do Azure.
+description: Essa arquitetura de referência mostra como aplicar a transferência de estilo neural a um vídeo usando o Azure Machine Learning.
 author: jiata
 ms.date: 10/02/2018
 ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat-ai
-ms.openlocfilehash: 27975b42179e87f4520186778610159943a93090
-ms.sourcegitcommit: 40f3561cc94f721eca50d33f2d75dc974cb6f92b
+ms.openlocfilehash: 3fc0b85380b6b46f7a52382e0184490104ead5a3
+ms.sourcegitcommit: eee3a35dd5a5a2f0dc117fa1c30f16d6db213ba2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/29/2019
-ms.locfileid: "55147239"
+ms.lasthandoff: 02/06/2019
+ms.locfileid: "55782040"
 ---
 # <a name="batch-scoring-on-azure-for-deep-learning-models"></a>Pontuação em lote para modelos de aprendizado profundo do Azure
 
-Essa arquitetura de referência mostra como aplicar a transferência de estilo neural a um vídeo usando a IA do Lote do Azure. A *Transferência de estilo* é uma técnica de aprendizado profundo que compõe uma imagem existente no estilo de outra imagem. Essa arquitetura pode ser generalizada para qualquer cenário que usa a pontuação do lote com aprendizado profundo. [**Implantar esta solução**](#deploy-the-solution).
+Essa arquitetura de referência mostra como aplicar a transferência de estilo neural a um vídeo usando o Azure Machine Learning. A *Transferência de estilo* é uma técnica de aprendizado profundo que compõe uma imagem existente no estilo de outra imagem. Essa arquitetura pode ser generalizada para qualquer cenário que usa a pontuação do lote com aprendizado profundo. [**Implantar esta solução**](#deploy-the-solution).
 
-![Diagrama da arquitetura para modelos de aprendizado profundo usando a IA do Lote do Azure](./_images/batch-ai-deep-learning.png)
+![Diagrama da arquitetura para modelos de aprendizado profundo usando o Azure Machine Learning](./_images/aml-scoring-deep-learning.png)
 
 **Cenário**: uma organização de mídia tem um vídeo cujo estilo ela quer alterar para procurar uma pintura específica. A organização quer ser capaz de aplicar esse estilo a todos os quadros do vídeo em tempo hábil e de uma forma automatizada. Para saber mais sobre os algoritmos de transferência de estilo neural, consulte [Transferência de estilo de imagem usando redes neurais convolucionais neurais][image-style-transfer] (PDF).
 
@@ -27,16 +27,14 @@ Essa arquitetura de referência mostra como aplicar a transferência de estilo n
 |--------|--------|---------|
 | <img src="https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/style_image.jpg" width="300"> | [<img src="https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/input_video_image_0.jpg" width="300" height="300">](https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/input_video.mp4 "Vídeo de entrada") *clique para ver o vídeo* | [<img src="https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/output_video_image_0.jpg" width="300" height="300">](https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/output_video.mp4 "Vídeo de saída") *clique para ver o vídeo* |
 
-Essa arquitetura de referência foi projetada para cargas de trabalho que são disparadas pela presença da nova mídia no Armazenamento do Azure. O processamento envolve as seguintes etapas:
+Essa arquitetura de referência foi projetada para cargas de trabalho que são disparadas pela presença da nova mídia no Armazenamento do Azure.
 
-1. Carregue uma imagem de estilo específica (como uma pintura do Van Gogh) e um script de transferência de estilo no Armazenamento de Blobs.
-1. Crie um cluster de dimensionamento automático da IA do Lote que esteja pronto para começar a fazer o trabalho.
-1. Divida o arquivo de vídeo em quadros individuais e carregue-os no Armazenamento de Blobs.
-1. Após o upload de todos os quadros, carregue um arquivo de gatilho no Armazenamento de Blobs.
-1. Esse arquivo dispara um Aplicativo Lógico que cria um contêiner em execução em Instâncias de Contêiner do Azure.
-1. O contêiner executa um script que cria os trabalhos de IA do Lote. Cada trabalho aplica a transferência de estilo neural em paralelo em todos os nós do cluster da IA do Lote.
-1. Após a geração das imagens, elas são salvas no Armazenamento de Blobs.
-1. Faça o download dos quadros gerados e insira as imagens de volta em um vídeo.
+O processamento envolve as seguintes etapas:
+
+1. Carregar um arquivo de vídeo no armazenamento.
+1. O arquivo de vídeo dispara um Aplicativo Lógico que envia uma solicitação para o pipeline de ponto de extremidade publicado do Azure Machine Learning.
+1. O pipeline processa o vídeo, aplica a transferência de estilo com o MPI e faz o pós-processamento do vídeo.
+1. A saída é salva novamente no armazenamento de blobs depois que o pipeline é concluído.
 
 ## <a name="architecture"></a>Arquitetura
 
@@ -44,33 +42,25 @@ Essa arquitetura é formada pelos componentes a seguir.
 
 ### <a name="compute"></a>Computação
 
-**[IA do Lote do Azure][batch-ai]** é usada para executar o algoritmo de transferência de estilo neural. A IA do Lote dá suporte a cargas de trabalho de aprendizado profundo fornecendo ambientes em contêineres que são pré-configurados para estruturas de aprendizado profundo, em VMs habilitadas para GPU. A IA do Lote também pode conectar o cluster de computação ao Armazenamento de Blobs.
-
-> [!NOTE]
-> Os serviços de IA do Lote do Azure serão desativados em março de 2019 e seu treinamento em escala, assim como suas funcionalidades de pontuação, já estão disponíveis no [Serviço do Azure Machine Learning][amls]. Essa arquitetura de referência será atualizada em breve para uso de Machine Learning, que oferece um destino de computação gerenciada chamado [Computação do Machine Learning do Azure][aml-compute] para treinamento, implantação e pontuação de modelos de aprendizado de máquina.
+**[O Serviço Azure Machine Learning][amls]** utiliza pipelines do Azure Machine Learning para criar sequências de computação reproduzíveis e fáceis de gerenciar. Ele também oferece um destino de computação gerenciado (no qual um cálculo de pipeline pode ser executado) chamado [Computação do Azure Machine Learning][aml-compute] para treinamento, implantação e pontuação de modelos de machine learning. 
 
 ### <a name="storage"></a>Armazenamento
 
-**[Armazenamento de Blobs][blob-storage]** é usado para armazenar todas as imagens (imagens de entrada, imagens de estilo e imagens de saída) bem como todos os logs gerados na IA do Lote. O Armazenamento de Blobs se integra à IA do Lote por meio do [blobfuse][blobfuse], um sistema de arquivos virtual de software livre que é apoiado pelo Armazenamento de Blobs. O Armazenamento de Blobs também é muito econômico para o desempenho exigido por essa carga de trabalho.
+O **[armazenamento de Blobs][blob-storage]** é usado para armazenar todas as imagens (imagens de entrada, imagens de estilo e imagens de saída). O Serviço Azure Machine Learning integra-se com o armazenamento de blobs para que os usuários não precisem mover manualmente os dados entre as plataformas de computação e o armazenamento de blobs. O Armazenamento de Blobs também é muito econômico para o desempenho exigido por essa carga de trabalho.
 
 ### <a name="trigger--scheduling"></a>Gatilho/agendamento
 
-**[Aplicativos Lógicos do Azure][logic-apps]** são usados para disparar o fluxo de trabalho. Quando o Aplicativo Lógico detecta que um blob foi adicionado ao contêiner, ele dispara o processo da IA do Lote. O Aplicativo Lógico é ótimo para esta arquitetura de referência porque é uma maneira fácil de detectar alterações no armazenamento de blobs e fornece um processo fácil para alterar o gatilho.
+**[Aplicativos Lógicos do Azure][logic-apps]** são usados para disparar o fluxo de trabalho. Quando o Aplicativo Lógico detecta que um blob foi adicionado ao contêiner, ele dispara o pipeline do Azure Machine Learning. O Aplicativo Lógico é ótimo para esta arquitetura de referência porque é uma maneira fácil de detectar alterações no armazenamento de blobs e fornece um processo fácil para alterar o gatilho.
 
-**[As Instâncias de Contêiner do Azure][container-instances]** é usado para executar os scripts de Python que criam os trabalhos da IA do Lote. A execução desses scripts dentro de um contêiner do Docker é uma maneira conveniente de executá-los sob demanda. Para essa arquitetura, usamos as Instâncias de Contêiner porque não há um conector de Aplicativo Lógico pré-criados para ela, o que permite que o Aplicativo Lógico dispare o trabalho da IA do Lote. As Instâncias de Contêiner podem ativar rapidamente os processos sem estado.
+### <a name="preprocessing-and-postprocessing-our-data"></a>Pré-processamento e pós-processamento de nossos dados
 
-**[DockerHub][dockerhub]** é usado para armazenar a imagem do Docker usada pelas Instâncias de Contêiner para executar o processo de criação do trabalho. O DockerHub foi escolhido para essa arquitetura por ser fácil de usar e ser o repositório de imagens padrão para usuários do Docker. O [Registro de Contêiner do Azure][container-registry] também pode ser usado.
+Essa arquitetura de referência usa filmagens de um orangotango em uma árvore. Você pode fazer o download das filmagens [aqui][source-video].
 
-### <a name="data-preparation"></a>Preparação dos dados
-
-Essa arquitetura de referência usa filmagens de um orangotango em uma árvore. Baixe a filmagem [aqui][source-video] e processe-a no fluxo de trabalho executando estas etapas:
-
-1. Use o [AzCopy][azcopy] para baixar o vídeo do blob público.
-2. Use [FFmpeg][ffmpeg] para extrair o arquivo de áudio, para que possa ser inseri-lo de volta posteriormente no vídeo de saída.
-3. Use o FFmpeg para dividir o vídeo em quadros individuais. Os quadros serão processados de forma independente, em paralelo.
-4. Use o AzCopy para copiar os quadros individuais em seu contêiner de blob.
-
-Nesse estágio, a filmagem está em um formato que pode ser usado para transferência de estilo neural.
+1. Use [FFmpeg][ffmpeg] para extrair o arquivo de áudio das filmagens em vídeo para poder inseri-lo de volta posteriormente no vídeo de saída.
+1. Use o FFmpeg para dividir o vídeo em quadros individuais. Os quadros serão processados de forma independente, em paralelo.
+1. Neste ponto, podemos aplicar a transferência de estilo neural para cada quadro individual em paralelo.
+1. Quando cada quadro tiver sido processado, é preciso usar o FFmpeg para juntar os quadros novamente.
+1. E, por último, anexe o arquivo de áudio novamente às filmagens reconstituídas.
 
 ## <a name="performance-considerations"></a>Considerações sobre o desempenho
 
@@ -86,13 +76,9 @@ Ao executar um processo de transferência de estilo como um trabalho em lotes, s
 
 Para essa carga de trabalho, essas duas opções terão um desempenho comparável. Usar menos VMs com mais GPUs por VM pode ajudar a reduzir a movimentação de dados. No entanto, o volume de dados por trabalho para essa carga de trabalho não é muito grande, portanto, você não observará muita limitação por Armazenamento de Blobs.
 
-### <a name="images-batch-size-per-batch-ai-job"></a>Tamanho do lote de imagens por trabalho de IA do Lote
+### <a name="mpi-step"></a>Etapa de MPI 
 
-Outro parâmetro deve ser configurado é o número de imagens a serem processadas por um trabalho da IA do Lote. Por um lado, convém garantir que o trabalho seja distribuído amplamente pelos nós e, se um trabalho falhar, não será necessário repetir muitas imagens. Isso indica ter vários trabalhos da IA do Lote e, portanto, menos imagens para processar por trabalho. Por outro lado, se poucas imagens forem processadas por trabalho, o tempo de configuração/inicialização ficará aumentará desproporcionalmente. Defina o número de trabalhos igual ao número máximo de nós no cluster. Essa opção proporcionará o melhor desempenho, supondo que nenhum trabalho falhe, pois minimiza o custo de configuração/inicialização. No entanto, se um trabalho falhar, talvez seja necessário reprocessar uma grande quantidade de imagens.
-
-### <a name="file-servers"></a>Servidores de arquivos
-
-Ao usar a IA do Lote, você pode escolher várias opções de armazenamento, dependendo da taxa de transferência necessária para o seu cenário. Para cargas de trabalho que precisam de uma taxa de transferência baixa, usar o Armazenamento de Blobs (por meio do blobfuse) deve ser suficiente. Como alternativa, a IA do Lote também dá suporte a um Servidor de Arquivos da IA do Lote, um NFS gerenciado de nó único, que pode ser montado automaticamente em nós de cluster para fornecer um local de armazenamento de acesso centralizado para os trabalhos. Na maioria dos casos, somente um servidor de arquivos é necessário em um espaço de trabalho e você pode separar os dados de seus trabalhos de treinamento em diretórios diferentes. Se o NFS de nó único não for adequado para suas cargas de trabalho, a IA do Lote dá suporte a outras opções de armazenamento, incluindo o Arquivos do Azure ou soluções personalizadas como um sistema de arquivos Gluster ou Lustre.
+Ao criar o pipeline no Azure Machine Learning, uma das etapas usadas para executar a computação paralela é a etapa de MPI. A etapa de MPI ajudará a dividir os dados uniformemente entre os nós disponíveis. A etapa de MPI não será executada até que todos os nós solicitados estejam prontos. Se um nó falhar, ou for esvaziado previamente (se for uma máquina virtual de baixa prioridade), a etapa de MPI precisará ser executada novamente. 
 
 ## <a name="security-considerations"></a>Considerações de segurança
 
@@ -106,9 +92,9 @@ Para cenários com os dados mais confidenciais, verifique se todas as chaves de 
 
 Essa arquitetura de referência usa transferência de estilo como um exemplo de um processo de pontuação do lote. Para cenários com dados mais confidenciais, os dados no armazenamento devem ser criptografados em repouso. Sempre que os dados são movidos de um local para o próximo, use SSL para proteger a transferência de dados. Para saber mais, confira o [Guia de segurança de Armazenamento do Azure][storage-security].
 
-### <a name="securing-data-in-a-virtual-network"></a>Proteção dos dados em uma rede virtual
+### <a name="securing-your-computation-in-a-virtual-network"></a>Proteger seu cálculo em uma rede virtual
 
-Ao implantar o cluster da IA do Lote, você pode configurar seu cluster para provisionamento dentro de uma sub-rede de uma rede virtual. Isso permite que os nós de computação no cluster se comuniquem com segurança com outras máquinas virtuais, ou até mesmo com uma rede local. Você também pode usar [pontos de extremidade de serviço][service-endpoints] com o armazenamento de blobs para conceder acesso de uma rede virtual ou usar um NFS de nó único dentro da VNET com a IA do Lote para garantir que os dados estejam sempre protegidos.
+Ao implantar o cluster de computação do Machine Learning, você pode configurar seu cluster para provisionamento dentro de uma sub-rede de uma [rede virtual][virtual-network]. Isso permite que os nós de computação no cluster se comuniquem com segurança com outras máquinas virtuais. 
 
 ### <a name="protecting-against-malicious-activity"></a>Proteção contra atividades mal-intencionadas
 
@@ -120,52 +106,52 @@ Em cenários com vários usuários, proteja os dados confidenciais contra ativid
 
 ## <a name="monitoring-and-logging"></a>Monitoramento e registro em log
 
-### <a name="monitoring-batch-ai-jobs"></a>Monitoramento de trabalhos da IA do Lote
+### <a name="monitoring-batch-jobs"></a>Monitoramento de trabalhos do Lote
 
 Durante a execução do seu trabalho, é importante monitorar o progresso e certificar-se de que as coisas estão funcionando conforme o esperado. No entanto, pode ser um desafio monitorar um cluster de nós ativos.
 
-Para ter uma ideia do estado geral do cluster, vá até a folha de IA do Lote do Portal do Azure para inspecionar o estado dos nós no cluster. Se um nó estiver inativo ou se um trabalho falhar, os logs de erro serão salvos no armazenamento de blobs e também poderão ser acessados na folha Trabalhos no portal do Azure.
+Para ter uma ideia do estado geral do cluster, vá até a folha de Machine Learning do Portal do Azure para inspecionar o estado dos nós no cluster. Se um nó estiver inativo ou se um trabalho falhar, os logs de erro serão salvos no armazenamento de blobs e também poderão ser acessados no portal do Azure.
 
-É possível melhorar ainda mais o monitoramento conectando os logs ao Application Insights ou executando processos separados para sondar o estado do cluster de IA do Lote e seus trabalhos.
+É possível melhorar ainda mais o monitoramento conectando os logs ao Application Insights ou executando processos separados para sondar o estado do cluster e seus trabalhos.
 
-### <a name="logging-in-batch-ai"></a>Registro em log na IA do Lote
+### <a name="logging-with-azure-machine-learning"></a>Registrar em log com o Azure Machine Learning
 
-A IA do Lote registrará automaticamente todos os stdout/stderr para a conta de armazenamento de blob associada. O uso de uma ferramenta de navegação de armazenamento, como o Gerenciador de Armazenamento, fornecerá uma experiência muito mais fácil para navegação em arquivos de log.
-
-As etapas de implantação para essa arquitetura de referência também mostra como configurar um sistema mais simples de registro em log, de modo que todos os logs em diferentes trabalhos são salvos no mesmo diretório em seu contêiner de blob, conforme mostrado abaixo. Use esses logs para monitorar quanto tempo demora para processar cada imagem e cada trabalho. Isso lhe dará uma ideia melhor de como otimizar ainda mais o processo.
-
-![Captura de tela de registro em log para a IA do Lote do Azure](./_images/batch-ai-logging.png)
+O Azure Machine Learning registrará automaticamente todos os stdout/stderr na conta de armazenamento de blob associada. Salvo indicação em contrário, seu Workspace do Azure Machine Learning provisionará automaticamente uma conta de armazenamento e despejará os logs nela. Também é possível usar uma ferramenta de navegação de armazenamento, como o Gerenciador de Armazenamento, que fornecerá uma experiência muito mais fácil para navegação em arquivos de log.
 
 ## <a name="cost-considerations"></a>Considerações de custo
 
 Em comparação com os componentes de armazenamento e agendamento, os recursos de computação usados nesta arquitetura de referência dominam em termos de custos. Um dos principais desafios é paralelizar com eficiência o trabalho em um cluster de computadores habilitados para GPU.
 
-O tamanho do cluster da IA do Lote pode aumentar e diminuir automaticamente dependendo dos trabalhos na fila. Você pode habilitar o dimensionamento automático com a IA do Lote escolhendo entre duas maneiras. Você pode isso programaticamente, que pode ser configurado no arquivo `.env` que faz parte das [etapas de implantação][deployment], ou você pode alterar a fórmula de dimensionamento diretamente no portal após a criação do cluster.
+O tamanho do cluster de Computação do Machine Learning pode aumentar e diminuir automaticamente dependendo dos trabalhos na fila. Você pode habilitar o dimensionamento automático por meio de programação, definindo os números mínimo e máximo de nós.
 
-Para o trabalho que não exige processamento imediato, configure a fórmula de dimensionamento automático, para que o estado padrão (mínimo) seja um cluster sem nós. Com essa configuração, o cluster começa com zero nós e só pode ser escalado verticalmente quando detecta os trabalhos na fila. Se o processo de pontuação do lote acontecer apenas algumas vezes por dia, essa configuração permitirá uma economia considerável.
+Para o trabalho que não exige processamento imediato, configure o dimensionamento automático para que o estado padrão (mínimo) seja um cluster sem nós. Com essa configuração, o cluster começa com zero nós e só pode ser escalado verticalmente quando detecta os trabalhos na fila. Se o processo de pontuação do lote acontecer apenas algumas vezes por dia, essa configuração permitirá uma economia considerável.
 
 Talvez o dimensionamento automático não seja apropriado para trabalhos em lote que aconteçam muito próximos uns dos outros. O tempo de ativação e desativação de um cluster também incorre em um custo, portanto, se uma carga de trabalho do lote começar apenas alguns minutos após o término do trabalho anterior, talvez seja mais econômico manter o cluster em execução entre os trabalhos.
+
+A Computação do Machine Learning também oferece suporte a máquinas virtuais de baixa prioridade. Isso permite executar a computação em máquinas virtuais com desconto, com a ressalva de que elas podem ser previamente esvaziadas a qualquer momento. As máquinas virtuais de baixa prioridade são ideais para cargas de trabalho de pontuação de lote não críticas.
 
 ## <a name="deploy-the-solution"></a>Implantar a solução
 
 Para implantar essa arquitetura de referência, execute as etapas descritas no [repositório do GitHub][deployment].
+
+> [!NOTE]
+> Também é possível implantar uma arquitetura de pontuação de lote para modelos de aprendizado profundo usando o Serviço de Kubernetes do Azure. Execute as etapas descritas neste [Repositório do GitHub][deployment2].
+
 
 <!-- links -->
 
 [aml-compute]: /azure/machine-learning/service/how-to-set-up-training-targets#amlcompute
 [amls]: /azure/machine-learning/service/overview-what-is-azure-ml
 [azcopy]: /azure/storage/common/storage-use-azcopy-linux
-[batch-ai]: /azure/batch-ai/
-[blobfuse]: https://github.com/Azure/azure-storage-fuse
 [blob-storage]: /azure/storage/blobs/storage-blobs-introduction
 [container-instances]: /azure/container-instances/
 [container-registry]: /azure/container-registry/
-[deployment]: https://github.com/Azure/batch-scoring-for-dl-models
-[dockerhub]: https://hub.docker.com/
+[deployment]: https://github.com/Azure/Batch-Scoring-Deep-Learning-Models-With-AML
+[deployment2]: https://github.com/Azure/Batch-Scoring-Deep-Learning-Models-With-AKS
 [ffmpeg]: https://www.ffmpeg.org/
 [image-style-transfer]: https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf
 [logic-apps]: /azure/logic-apps/
-[service-endpoints]: /azure/storage/common/storage-network-security?toc=%2fazure%2fvirtual-network%2ftoc.json#grant-access-from-a-virtual-network
 [source-video]: https://happypathspublic.blob.core.windows.net/videos/orangutan.mp4
 [storage-security]: /azure/storage/common/storage-security-guide
 [vm-sizes-gpu]: /azure/virtual-machines/windows/sizes-gpu
+[virtual-network]: /azure/machine-learning/service/how-to-enable-virtual-network

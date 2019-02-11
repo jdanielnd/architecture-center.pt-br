@@ -8,12 +8,12 @@ ms.topic: best-practice
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: a5fbe72e81a169fd4b29e07e037bb7f8928e0c45
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 9f14b47a9659ad0b7451d106168f4d7b5a6ab0c7
+ms.sourcegitcommit: eee3a35dd5a5a2f0dc117fa1c30f16d6db213ba2
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54482368"
+ms.lasthandoff: 02/06/2019
+ms.locfileid: "55782074"
 ---
 # <a name="naming-conventions-for-azure-resources"></a>Convenções de nomenclatura para recursos do Azure
 
@@ -83,7 +83,7 @@ Em geral, evite usar caracteres especiais (`-` ou `_`) como o primeiro ou últim
 | --- | --- | --- | --- | --- | --- | --- |
 |Grupo de recursos |Assinatura |1-90 |Não diferencia maiúsculas de minúsculas |Alfanumérico, sublinhado, parênteses, hífen, um período (exceto no final) e caracteres Unicode que correspondem ao regex documentado [aqui](/rest/api/resources/resourcegroups/createorupdate). |`<service short name>-<environment>-rg` |`profx-prod-rg` |
 |Conjunto de disponibilidade |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, sublinhado e hífen |`<service-short-name>-<context>-as` |`profx-sql-as` |
-|Marca |Entidade associada |512 (nome), 256 (valor) |Não diferencia maiúsculas de minúsculas |Alfanumérico |`"key" : "value"` |`"department" : "Central IT"` |
+|Marca |Entidade associada |512 (nome), 256 (valor) |Não diferencia maiúsculas de minúsculas |Caracteres alfanuméricos, especiais, exceto `<`, `>`, `%`, `&`, `\`, `?`, `/`. Confira as limitações [aqui](/azure/azure-resource-manager/resource-group-using-tags). |`"key" : "value"` |`"department" : "Central IT"` |
 
 ### <a name="compute"></a>Computação
 
