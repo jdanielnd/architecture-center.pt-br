@@ -5,12 +5,12 @@ layout: LandingPage
 ms.topic: landing-page
 ms.date: 09/28/2018
 google-site-verification: b-xRLveOzJ9oSOh37wgRTRB2lMOoFY8HiHf9_0DIawE
-ms.openlocfilehash: f690d95c78becbf16f02f913983533513d2f7c01
-ms.sourcegitcommit: 14226018a058e199523106199be9c07f6a3f8592
+ms.openlocfilehash: 3c48ba77b7f97c6047f5d1441a22f2bd79ee0a3e
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/31/2019
-ms.locfileid: "55483072"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55898282"
 ---
 # <a name="azure-architecture-center"></a>Centro de Arquitetura do Azure
 
@@ -58,8 +58,8 @@ ms.locfileid: "55483072"
                     <div class="card">
                         <img src="_images/cloud-adoption.svg" alt="" />
                         <div class="cardText">
-                            <h3>Adoção de Nuvem do Enterprise</h3>
-                            <p>Este guia descreve um processo para criar uma estratégia de adoção da nuvem de toda a organização. Ele se concentra na preparação da organização, governança e infraestrutura.</p>
+                            <h3>Microsoft Cloud Adoption Framework for Azure</h3>
+                            <p>Um processo para a criação de uma estratégia de adoção de nuvem em toda a organização, concentrando-se em políticas, governança e infraestrutura.</p>
                         </div>
                     </div>
                 </div>
