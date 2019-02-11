@@ -7,12 +7,12 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: microservices
-ms.openlocfilehash: ffd42679d0e04c2283cd78b8b03d7b5c695578be
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 90a6550264e5afd1fc2eda79eeff6557dc7c4163
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54481942"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55897713"
 ---
 # <a name="designing-building-and-operating-microservices-on-azure"></a>Projetar, criar e operar microsserviços no Azure
 
@@ -61,7 +61,7 @@ Se utilizados corretamente, microsserviços podem fornecer vários benefícios �
 
 - **Escalabilidade**. Uma arquitetura de microsserviços permite que cada microsserviço seja dimensionado independentemente dos outros. Isso permite que você expanda subsistemas que exigem mais recursos, sem necessidade de expandir o aplicativo inteiro. Se você implantar serviços dentro de contêineres, você também poderá empacotar uma maior densidade de microsserviços em um único host, o que permitirá uma utilização de recursos mais eficiente.
 
-- **Isolamento de dados**. É muito mais fácil executar atualizações de esquema, porque apenas um único microsserviço é afetado. Em um aplicativo monolítico, atualizações de esquema podem se tornar muito difíceis porque todas as diferentes partes do aplicativo podem tocar os mesmos dados, o que torna a realização de qualquer alteração no esquema algo arriscado.
+- **Isolamento de dados**. É muito mais fácil executar atualizações de esquema, porque apenas um microsserviço é afetado. Em um aplicativo monolítico, atualizações de esquema podem se tornar muito difíceis porque todas as diferentes partes do aplicativo podem tocar os mesmos dados, o que torna a realização de qualquer alteração no esquema algo arriscado.
 
 ## <a name="no-free-lunch"></a>Nenhum bônus
 

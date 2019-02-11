@@ -7,12 +7,12 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-design-principles
 ms.custom: resiliency
-ms.openlocfilehash: ba3637ce90b793425b1238ee0d99d36a936da6ca
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 1cca2bd39339ba671ee8a298f2ded73d3e252c32
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54488589"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55897772"
 ---
 # <a name="designing-resilient-applications-for-azure"></a>Desenvolvimento de aplicativos resilientes para o Azure
 
@@ -182,12 +182,12 @@ Para obter mais informações sobre o processo FMA, com as recomendações espec
 | --- | --- |
 | O serviço está indisponível |HTTP 5xx |
 | Limitação |HTTP 429 (Número Excessivo de Solicitações) |
-| Autenticação |HTTP 401 (Não Autorizado) |
+| Authentication |HTTP 401 (Não Autorizado) |
 | Resposta lenta |Tempo limite da solicitação atingido |
 
 ### <a name="redundancy-and-designing-for-failure"></a>Redundância e a criação pensando em falha
 
-Falhas podem variar quanto ao escopo do seu impacto. Algumas falhas de hardware, como um disco com falha, podem afetar um único computador host. Um comutador de rede com falha pode afetar um rack de servidor inteiro. Menos comuns são falhas que interrompem um data center inteiro, tais como uma perda de energia em um data center. Raramente, toda uma região pode se tornar não disponível.
+Falhas podem variar quanto ao escopo do seu impacto. Algumas falhas de hardware, como um disco com falha, podem afetar um único computador host. Um comutador de rede com falha pode afetar um rack de servidor inteiro. Menos comumente, vemos falhas que interrompem um data center inteiro, tais como uma queda de energia em um data center. Raramente, toda uma região pode se tornar não disponível.
 
 Uma das principais maneiras de se tornar um aplicativo resiliente é por meio de redundância. Mas você precisa planejar essa redundância ao projetar o aplicativo. Além disso, o nível de redundância necessário depende de suas necessidades de negócios &mdash; nem todo aplicativo precisa de redundância entre regiões para se proteger contra uma interrupção regional. Em geral, há um equilíbrio entre mais redundância e confiabilidade em relação a maiores custo e complexidade.  
 
