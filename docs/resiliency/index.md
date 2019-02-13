@@ -7,12 +7,12 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-design-principles
 ms.custom: resiliency
-ms.openlocfilehash: 1cca2bd39339ba671ee8a298f2ded73d3e252c32
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.openlocfilehash: 7fd0e1bd42266b5e5718be4519352d99b58c0584
+ms.sourcegitcommit: 644c2692a80e89648a80ea249fd17a3b17dc0818
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55897772"
+ms.lasthandoff: 02/11/2019
+ms.locfileid: "55987148"
 ---
 # <a name="designing-resilient-applications-for-azure"></a>Desenvolvimento de aplicativos resilientes para o Azure
 
@@ -103,7 +103,7 @@ O [SLA (Contrato de Nível de Serviço)][sla] descreve os compromissos da Micros
 > [!NOTE]
 > O SLA do Azure também inclui provisões para se obter um crédito de serviço se o SLA não for atendido, além de definições específicas de "disponibilidade" para cada serviço. Esse aspecto do SLA atua como uma política de imposição.
 
-Você deve definir seus próprios SLAs de destino para cada carga de trabalho em sua solução. Um SLA possibilita avaliar se a arquitetura atende aos requisitos de negócios. Por exemplo, se uma carga de trabalho requer tempo de disponibilidade de 99,99%, mas depende de um serviço com um SLA de 99,9%, o serviço não poderá ser um ponto único de falha no sistema. Uma solução é ter um caminho de fallback no caso de falha do serviço ou tomar outras medidas para recuperar uma falha nesse serviço.
+Você deve definir seus próprios SLAs de destino para cada carga de trabalho em sua solução. Um SLA possibilita avaliar se a arquitetura atende aos requisitos de negócios. Execute um exercício de mapeamento de dependências para identificar dependências internas e externas, como o Active Directory ou serviços de terceiros, como um provedor de pagamento ou um serviço de mensagens de email. Preste atenção especificamente às dependências externas que podem ser ponto único de falha ou causar gargalos durante um evento. Por exemplo, se uma carga de trabalho requer tempo de disponibilidade de 99,99%, mas depende de um serviço com um SLA de 99,9%, o serviço não poderá ser um ponto único de falha no sistema. Uma solução é ter um caminho de fallback no caso de falha do serviço ou tomar outras medidas para recuperar uma falha nesse serviço.
 
 A tabela a seguir mostra o tempo de inatividade cumulativo em potencial para vários níveis de SLA.
 
@@ -209,6 +209,8 @@ Se você estiver planejando usar as Zonas de Disponibilidade em sua implantaçã
 
 Quando você cria um aplicativo de várias regiões, leve em consideração que a latência de rede entre diferentes regiões é maior do que a obtida em uma região. Por exemplo, se você estiver replicando de um banco de dados para habilitar o failover, use a replicação síncrona de dados dentro de uma região, mas a replicação assíncrona de dados entre regiões.
 
+Ao selecionar as regiões emparelhadas, verifique se ambas exigiram serviços do Azure. Para obter uma lista de serviços por região, consulte [Produtos disponíveis por região](https://azure.microsoft.com/global-infrastructure/services/). Também é essencial selecionar a topologia de implantação correta para recuperação de desastre, especialmente se RPO/RTO são curtos. Para garantir que a região de failover tenha capacidade suficiente para dar suporte a sua carga de trabalho, selecione uma topologia ativa/passiva (réplica completa) ou uma topologia ativa/ativa. Lembre-se de que essas topologias de implantação podem aumentar a complexidade e o custo, já que os recursos na região secundária são pré-provisionados e podem ficar ociosos. Para obter mais informações, consulte [Topologias de implantação para recuperação de desastre][deployment-topologies]
+
 | &nbsp; | Conjunto de disponibilidade | Zona de disponibilidade | Azure Site Recovery/Região emparelhada |
 |--------|------------------|-------------------|---------------|
 | Escopo da falha | Rack | Datacenter | Região |
@@ -258,7 +260,7 @@ Os aplicativos podem enfrentar picos repentinos no tráfego e sobrecarregar o se
 
 **Isole os recursos críticos**. Às vezes, as falhas em um subsistema podem ocorrer em cascata, causando falhas em outras partes do aplicativo. Isso pode acontecer se uma falha impedir que alguns recursos, como threads ou soquetes, sejam liberados em tempo hábil, exaurindo recursos.
 
-Para evitar isso, você pode particionar um sistema em grupos isolados, para que a falha de uma partição não paralise todo o sistema. Essa técnica também é conhecida como padrão de Bulkhead.
+Para evitar isso, você pode particionar um sistema em grupos isolados, para que a falha de uma partição não paralise todo o sistema. Essa técnica também é conhecida como [padrão de Bulkhead][bulkhead-pattern].
 
 Exemplos:
 
@@ -303,9 +305,9 @@ Quando um aplicativo é implantado para produção, as atualizações são uma p
 
 O ponto fundamental é que implantações manuais são propensas a erro. Por isso, é recomendável um processo idempotente automatizado, que você pode executar sob demanda e, caso haja alguma falha, executar novamente.
 
-- Use modelos do Azure Resource Manager para automatizar o provisionamento de recursos do Azure.
-- Use o [Azure Automation Desired State Configuration][dsc] (DSC) para configurar VMs.
-- Use um processo de implantação automática para o código do aplicativo.
+* Para automatizar o provisionamento de recursos do Azure, você pode usar [Terraform][terraform], [Ansible][ansible], [Chef][chef], [Puppet][puppet], [PowerShell][powershell], [CLI][cli] ou [modelos do Azure Resource Manager][template-deployment]
+* Use o [Azure Automation Desired State Configuration][dsc] (DSC) para configurar VMs. Para VMs Linux, você pode usar o [Cloud-init][cloud-init].
+* Você pode automatizar a implantação de aplicativos usando o [Azure DevOps Services][azure-devops-services] ou o [Jenkins][jenkins].
 
 Dois conceitos relacionados à implantação resiliente são: *infraestrutura como código* e *infraestrutura imutável*.
 
@@ -314,25 +316,24 @@ Dois conceitos relacionados à implantação resiliente são: *infraestrutura co
 
 Outra questão é como lançar uma atualização do aplicativo. Recomendamos técnicas como as chamadas implantações “blue-green” e versões “canário”, que enviam atualizações de forma altamente controlada, visando a minimizar os possíveis impactos de uma implantação incorreta.
 
-- A [Implantação “blue-green”][blue-green] é uma técnica em que a atualização é implantada em um ambiente de produção à parte do aplicativo ao vivo. Após validar a implantação, alterne o roteamento de tráfego para a versão atualizada. Por exemplo, o recurso Aplicativos Web do Serviço de Aplicativo do Azure permite isso com slots de preparo.
+- A [Implantação “blue-green”][blue-green] é uma técnica em que a atualização é implantada em um ambiente de produção à parte do aplicativo ao vivo. Após validar a implantação, alterne o roteamento de tráfego para a versão atualizada. Por exemplo, o recurso Aplicativos Web do Serviço de Aplicativo do Azure permite isso com [slots de preparo][staging-slots].
 - As [versões “canário”][canary-release] são semelhantes às implantações “blue-green”. Em vez de alternar todo o tráfego para a versão atualizada, lança-se a atualização para uma pequena porcentagem de usuários encaminhando uma parte do tráfego para a nova implantação. Se houver problemas, interrompe-se o processo volta-se à implantação anterior. Se tudo correr bem, encaminha-se mais uma parte do tráfego para a nova versão, até atingir 100%.
 
-Qualquer que seja a abordagem, certifique-se de poder reverter para a última implantação íntegra, caso a nova versão não funcione. Além disso, se houver erros, os logs de aplicativo devem indicar a versão causadora do erro.
+Qualquer que seja a abordagem, certifique-se de poder reverter para a última implantação íntegra, caso a nova versão não funcione. Tenha também uma estratégia para reverter as alterações do banco de dados e quaisquer outras alterações nos serviços dependentes. Se ocorrerem erros, os logs do aplicativo deverão indicar qual versão causou o erro.
 
 ## <a name="monitor-to-detect-failures"></a>Monitorar para detectar falhas
+O monitoramento é essencial para garantir a resiliência. Se algo falhar, você precisa saber o que falhou, e também ter informações sobre a causa da falha. 
 
-O monitoramento e o diagnóstico são cruciais para garantir a resiliência. Se algo falhar, você precisa saber o que falhou, e também ter informações sobre a causa da falha.
+O monitoramento de um sistema distribuído em larga escala representa um desafio significativo. Pense em um aplicativo executado em algumas dezenas de VMs; &mdash;não é prático fazer logon em cada uma delas e examinar seus arquivos de log para tentar solucionar um problema. Além disso, o número de instâncias de VMs provavelmente não são VMs adicionadas e removidas com a expansão e retração do aplicativo e, ocasionalmente, uma instância pode falhar e precisar ser provisionada novamente. Além disso, um aplicativo de nuvem típico pode usar vários armazenamentos de dados (armazenamento do Azure, Banco de Dados SQL, Cosmos DB, cache Redis) e uma única ação do usuário pode abranger vários subsistemas. 
 
-O monitoramento de um sistema distribuído em larga escala representa um desafio significativo. Pense em um aplicativo executado em algumas dezenas de VMs; &mdash;não é prático fazer logon em cada uma delas e examinar seus arquivos de log para tentar solucionar um problema. Além disso, o número de instâncias de VM provavelmente não é estático. As VMs são adicionadas e removidas com a expansão e retração do aplicativo, e, ocasionalmente, uma instância pode falhar e precisar ser provisionada novamente. Além disso, um aplicativo de nuvem típico pode usar vários armazenamentos de dados (armazenamento do Azure, Banco de Dados SQL, Cosmos DB, cache Redis) e uma única ação do usuário pode abranger vários subsistemas.
-
-Pode-se considerar o processo de monitoramento e diagnóstico como um pipeline com várias etapas distintas:
+Você pode pensar no processo de monitoramento como um pipeline com vários estágios distintos:
 
 ![SLA composto](./images/monitoring.png)
 
-- **Instrumentação**. Os dados brutos para monitoramento e diagnóstico vêm de várias fontes, inclusive logs de aplicativo e de servidor Web, contadores de desempenho do sistema operacional, logs de banco de dados e diagnósticos incorporados à plataforma Azure. A maioria dos serviços do Azure tem um recurso de diagnóstico que pode ser usado para determinar a causa dos problemas.
-- **Coleta e armazenamento**. Dados de instrumentação brutos podem ser mantidos em vários locais e com vários formatos (por exemplo, logs de rastreamento de aplicativo e do IIS, contadores de desempenho). Essas fontes diferentes são coletadas, consolidadas e colocadas em um armazenamento confiável.
-- **Análise e diagnóstico**. Após os dados serem consolidados, eles podem ser analisados para solucionar problemas e fornecer uma visão geral da integridade do aplicativo.
-- **Visualização e alertas**. Neste estágio, os dados de telemetria são apresentados de forma que um operador pode notar rapidamente problemas ou tendências. Exemplo: inclusão de painéis ou alertas por email.  
+* **Instrumentação**. Os dados brutos para monitoramento são provenientes de várias fontes, incluindo [logs dos aplicativos](/azure/application-insights/app-insights-overview?toc=/azure/azure-monitor/toc.json), [métricas de desempenho de sistemas operacionais](/azure/azure-monitor/platform/agents-overview), [recursos do Azure](/azure/monitoring-and-diagnostics/monitoring-supported-metrics?toc=/azure/azure-monitor/toc.json), [assinaturas do Azure](/azure/service-health/service-health-overview) e [locatários do Azure](/azure/active-directory/reports-monitoring/howto-integrate-activity-logs-with-log-analytics). A maioria dos serviços do Azure expõe [métricas](/azure/azure-monitor/platform/data-collection) que você pode configurar para analisar e determinar a causa dos problemas.
+* **Coleta e armazenamento**. Dados de instrumentação brutos podem ser mantidos em vários locais e com vários formatos (por exemplo, logs de rastreamento de aplicativo e do IIS, contadores de desempenho). Essas fontes diferentes são coletadas, consolidadas e colocadas em armazenamentos de dados confiáveis, como Application Insights, métricas do Azure Monitor, Integridade do Serviço, contas de armazenamento e Log Analytics.
+* **Análise e diagnóstico**. Após os dados serem consolidados nesses armazenamentos de dados diferentes, eles podem ser analisados para solucionar problemas e fornecer uma visão geral da integridade do aplicativo. Geralmente, você pode pesquisar pelos dados no Application Insights e no Log Analytics usando [consultas do Kusto](/azure/log-analytics/log-analytics-queries). O Assistente do Azure fornece recomendações com foco em [resiliência](/azure/advisor/advisor-high-availability-recommendations) e [otimização](/azure/advisor/advisor-performance-recommendations). 
+* **Visualização e alertas**. Neste estágio, os dados de telemetria são apresentados de forma que um operador pode notar rapidamente problemas ou tendências. Exemplos incluem painéis ou alertas por email. Com os [painéis do Azure](/azure/azure-portal/azure-portal-dashboards), você pode criar uma exibição de painel único dos gráficos de monitoramento originários do Application Insights, do Log Analytics, das métricas do Azure Monitor e da integridade do serviço. Com os [alertas do Azure Monitor](/azure/monitoring-and-diagnostics/monitoring-overview-alerts?toc=/azure/azure-monitor/toc.json), você pode criar alertas sobre a integridade do recurso e do serviço.
 
 Monitoramento não é o mesmo que detecção de falha. Por exemplo, seu aplicativo pode detectar um erro transitório e tentar novamente, sem que haja qualquer inatividade. Mas ele deve registrar essa operação de repetição, para que se possa monitorar a taxa de erros e ter uma visão geral da integridade do aplicativo.
 
@@ -347,19 +348,17 @@ Os logs de aplicativo são uma fonte importante de dados de diagnóstico. Alguma
 Para obter mais informações sobre monitoramento e diagnóstico, consulte [Diretrizes de monitoramento e diagnóstico][monitoring-guidance].
 
 ## <a name="respond-to-failures"></a>Responder a falhas
-
 As seções anteriores se concentraram em estratégias de recuperação automatizada, que são essenciais para a alta disponibilidade. No entanto, às vezes, a intervenção manual, é necessária.
 
-- **Alertas**. Monitore seu aplicativo, observando sinais de aviso que podem exigir intervenção proativa. Por exemplo, se você vir que o Banco de Dados SQL ou o Cosmos DB limitam repetidamente o seu aplicativo, talvez seja preciso aumentar a capacidade do banco de dados ou otimizar suas consultas. Neste exemplo, mesmo que o aplicativo consiga manipular esses erros de limitação de forma transparente, sua telemetria deve gerar um alerta, para que você possa acompanhar.  
-- **Failover manual**. Alguns sistemas não conseguem executar failover automaticamente, e ele deve ser manual. Para máquinas virtuais do Azure configuradas com o [Azure Site Recovery][site-recovery], você pode [realizar failover][site-recovery-failover] e recuperar suas máquinas virtuais em outra região numa questão de minutos.
-- **Testes de preparação operacional**. Se o seu aplicativo executar failover para uma região secundária, você deve executar um teste de preparação operacional antes do failback para a região principal. Esse teste deve verificar se a região principal está íntegra e pronta para receber o tráfego.
-- **Verificação de consistência de dados**. Se houver falha em um armazenamento de dados, pode haver inconsistências de dados quando o armazenamento voltar a ser disponibilizado, especialmente se os dados tiverem sido replicados.
-- **Restauração com base em backup**. Por exemplo, se o Banco de Dados SQL sofrer uma interrupção regional, você pode fazer uma restauração geográfica do banco de dados com base no backup mais recente.
+* **Alertas**. Monitore seu aplicativo, observando sinais de aviso que podem exigir intervenção proativa. Por exemplo, se você vir que o Banco de Dados SQL ou o Cosmos DB limitam repetidamente o seu aplicativo, talvez seja preciso aumentar a capacidade do banco de dados ou otimizar suas consultas. Neste exemplo, mesmo que o aplicativo consiga manipular esses erros de limitação de forma transparente, sua telemetria deve gerar um alerta, para que você possa acompanhar. É recomendável configurar alertas nas métricas de recursos do Azure e nos logs de diagnóstico em relação aos limites de serviços e de cotas. Recomendamos configurar alertas sobre métricas, pois eles são de baixa latência em comparação com os logs de diagnóstico. Além disso, o Azure pode fornecer um status de integridade pronto para uso por meio da [integridade do recurso](https://docs.microsoft.com/en-us/azure/service-health/resource-health-checks-resource-types), o que pode ajudar a diagnosticar a limitação dos serviços do Azure.    
+* **Failover**. Configure uma estratégia de recuperação de desastre no seu aplicativo. A estratégia apropriada dependerá dos seus SLAs. Para mais cenários, uma implementação ativa-passiva é suficiente. Para obter mais informações, consulte [Topologias de implantação para recuperação de desastre ](./disaster-recovery-azure-applications.md#deployment-topologies-for-disaster-recovery). A maioria dos serviços do Azure permite failover manual ou automatizado. Por exemplo, em um aplicativo IaaS, use o [Azure Site Recovery](/azure/site-recovery/azure-to-azure-architecture) para as camadas Web e lógica e [Grupos de Disponibilidade SQL AlwaysOn](/azure/virtual-machines/windows/sql/virtual-machines-windows-portal-sql-availability-group-dr) para a camada do banco de dados. O [Gerenciador de Tráfego](https://docs.microsoft.com/en-us/azure/traffic-manager/traffic-manager-overview) fornece failover automatizado entre regiões.
+* **Testes de preparação operacional**. Realize um teste de prontidão operacional para failover na região secundária e failback para a região primária. Muitos serviços do Azure são compatíveis com failover manual ou failover de teste para exercícios de recuperação de desastre. Como alternativa, você pode desligar ou remover serviços para simular uma interrupção.
+* **Verificação de consistência de dados**. Se houver falha em um armazenamento de dados, pode haver inconsistências de dados quando o armazenamento voltar a ser disponibilizado, especialmente se os dados tiverem sido replicados. Para serviços do Azure que fornecem replicação entre regiões, analise o RTO e o RPO para entender a perda de dados esperada em uma falha. Analise os SLAs dos serviços do Azure para saber se o failover entre regiões pode ser iniciado manualmente ou pela Microsoft. Para alguns serviços, a Microsoft decide quando executar o failover. A Microsoft pode priorizar a recuperação de dados na região primária, somente fazendo failover para uma região secundária se os dados na região primária forem considerados irrecuperáveis. Por exemplo, [armazenamento com redundância geográfica](/azure/storage/common/storage-redundancy-grs) e [Key Vault](/azure/key-vault/key-vault-disaster-recovery-guidance) seguem este modelo.
+* **Restauração com base em backup**. Em alguns cenários, a restauração de backup só será possível dentro da mesma região. Esse é o caso para [Backup de VMs do Azure](/azure/backup/backup-azure-vms-first-look-arm). Outros serviços do Azure fornecem backups replicados geograficamente, como [Réplicas Geográficas do Cache Redis](/azure/redis-cache/cache-how-to-geo-replication). O objetivo dos backups é proteger contra exclusão acidental ou corrupção de dados, restaurando o aplicativo para uma versão funcional no início do tempo. Portanto, embora os backups possam servir como uma solução de recuperação de desastre em alguns casos, o inverso nem sempre é verdadeiro: A recuperação de desastres não protege você contra exclusão acidental ou corrupção de dados.  
 
-Documente e teste seu plano de recuperação de desastres. Avalie o impacto das falhas de aplicativos sobre os negócios. Automatize o processo tanto quanto possível, e documente todas as etapas manuais, como failover manual ou restauração de dados com base em backups. Teste regularmente seu processo de recuperação de desastres, para validar e aprimorar o plano.
+Documente e teste seu plano de recuperação de desastres. Avalie o impacto das falhas de aplicativos sobre os negócios. Automatize o processo tanto quanto possível, e documente todas as etapas manuais, como failover manual ou restauração de dados com base em backups. Teste regularmente seu processo de recuperação de desastres, para validar e aprimorar o plano. Configure alertas para os serviços do Azure consumidos pelo seu aplicativo.
 
 ## <a name="summary"></a>Resumo
-
 Este artigo discutiu a resiliência sob uma perspectiva holística, enfatizando alguns dos desafios exclusivos da nuvem. Eles incluem a natureza distribuída de computação em nuvem, o uso de hardware de mercadoria e a presença de falhas de rede temporárias.
 
 Estes são os principais pontos a serem lembrados neste artigo:
@@ -374,12 +373,12 @@ Estes são os principais pontos a serem lembrados neste artigo:
 
 [blue-green]: https://martinfowler.com/bliki/BlueGreenDeployment.html
 [canary-release]: https://martinfowler.com/bliki/CanaryRelease.html
-[circuit-breaker-pattern]: https://msdn.microsoft.com/library/dn589784.aspx
-[compensating-transaction-pattern]: https://msdn.microsoft.com/library/dn589804.aspx
+[circuit-breaker-pattern]: ../patterns/circuit-breaker.md
+[compensating-transaction-pattern]: ../patterns/compensating-transaction.md
 [containers]: https://en.wikipedia.org/wiki/Operating-system-level_virtualization
 [dsc]: /azure/automation/automation-dsc-overview
 [contingency-planning-guide]: https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-34r1.pdf
-[fma]: failure-mode-analysis.md
+[fma]: ./failure-mode-analysis.md
 [hystrix]: https://medium.com/netflix-techblog/introducing-hystrix-for-resilience-engineering-13531c1ab362
 [jmeter]: https://jmeter.apache.org/
 [load-leveling-pattern]: ../patterns/queue-based-load-leveling.md
@@ -394,6 +393,19 @@ Estes são os principais pontos a serem lembrados neste artigo:
 [tm]: https://azure.microsoft.com/services/traffic-manager/
 [tm-failover]: /azure/traffic-manager/traffic-manager-monitoring
 [tm-sla]: https://azure.microsoft.com/support/legal/sla/traffic-manager
-[site-recovery]:/azure/site-recovery/azure-to-azure-quickstart/
-[site-recovery-test-failover]:/azure/site-recovery/azure-to-azure-tutorial-dr-drill/
-[site-recovery-failover]:/azure/site-recovery/azure-to-azure-tutorial-failover-failback/
+[site-recovery]: /azure/site-recovery/azure-to-azure-quickstart/
+[site-recovery-test-failover]: /azure/site-recovery/azure-to-azure-tutorial-dr-drill/
+[site-recovery-failover]: /azure/site-recovery/azure-to-azure-tutorial-failover-failback/
+[deployment-topologies]: ./disaster-recovery-azure-applications.md#deployment-topologies-for-disaster-recovery
+[bulkhead-pattern]: ../patterns/bulkhead.md
+[terraform]: /azure/virtual-machines/windows/infrastructure-automation#terraform
+[ansible]: /azure/virtual-machines/windows/infrastructure-automation#ansible
+[chef]: /azure/virtual-machines/windows/infrastructure-automation#chef
+[puppet]: /azure/virtual-machines/windows/infrastructure-automation#puppet
+[template-deployment]: /azure/azure-resource-manager/resource-group-overview#template-deployment
+[cloud-init]: /azure/virtual-machines/windows/infrastructure-automation#cloud-init
+[azure-devops-services]: /azure/virtual-machines/windows/infrastructure-automation#azure-devops-services
+[jenkins]: /azure/virtual-machines/windows/infrastructure-automation#jenkins
+[staging-slots]: /azure/app-service/deploy-staging-slots
+[powershell]: /powershell/azure/overview
+[cli]: /cli/azure
