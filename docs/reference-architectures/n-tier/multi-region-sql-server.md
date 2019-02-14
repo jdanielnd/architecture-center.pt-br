@@ -8,12 +8,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18
-ms.openlocfilehash: 384634acb8690c64f75eabbfebc5f1de414f6da2
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 9fce082a0e762e25981929f6fa8685033017f3eb
+ms.sourcegitcommit: f4ed242dff8b204cfd8ebebb7778f356a19f5923
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54484611"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "56224174"
 ---
 # <a name="run-an-n-tier-application-in-multiple-azure-regions-for-high-availability"></a>Executar aplicativo de N camadas em várias regiões do Azure para ter alta disponibilidade
 
@@ -119,7 +119,7 @@ Para configurar o grupo de disponibilidade:
     ```
 
 - Crie um cluster WSFC ([Clustering de Failover do Windows Server][wsfc]) que inclui as instâncias do SQL Server em ambas as regiões.
-- Crie um único Grupo de Disponibilidade Always On do SQL Server que inclui instâncias do SQL Server em ambas as regiões primária e secundária. Consulte [Estendendo o Grupo de Disponibilidade Always On para o Datacenter Remoto do Azure (PowerShell)](https://blogs.msdn.microsoft.com/sqlcat/2014/09/22/extending-alwayson-availability-group-to-remote-azure-datacenter-powershell/) para ver as etapas.
+- Crie um único Grupo de Disponibilidade Always On do SQL Server que inclui instâncias do SQL Server em ambas as regiões primária e secundária. Consulte [Estendendo o Grupo de Disponibilidade Always On para o Datacenter Remoto do Azure (PowerShell)](https://techcommunity.microsoft.com/t5/DataCAT/Extending-AlwaysOn-Availability-Group-to-Remote-Azure-Datacenter/ba-p/305217) para ver as etapas.
 
   - Coloque a réplica primária na região primária.
   - Coloque uma ou mais réplicas secundárias na região primária. Configure-as para usar a confirmação síncrona com failover automático.

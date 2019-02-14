@@ -9,12 +9,12 @@ ms.topic: design-pattern
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: bb2aa5a7ae6d7a33eac33dce4588380ec82a0df7
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: c4b423b2031699210d5917f12a4c14df0f4a694c
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54488164"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55898265"
 ---
 # <a name="cache-aside-pattern"></a>Padrão Cache-Aside
 
@@ -125,7 +125,7 @@ public async Task<MyEntity> GetMyEntityAsync(int id)
 }
 ```
 
-> Os exemplos usam o Cache Redis para acessar o armazenamento e recuperar as informações do cache. Para obter mais informações, confira [Como usar o Cache Redis do Microsoft Azure](https://docs.microsoft.com/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache) e [Como criar um aplicativo Web com o Cache Redis](https://docs.microsoft.com/azure/redis-cache/cache-web-app-howto)
+> Os exemplos usam o Cache Redis para acessar o armazenamento e recuperar as informações do cache. Para obter mais informações, confira [Como usar o Cache Redis do Microsoft Azure](/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache) e [Como criar um aplicativo Web com o Cache Redis](/azure/redis-cache/cache-web-app-howto)
 
 O método `UpdateEntityAsync` mostrado a seguir demonstra como invalidar um objeto no cache quando o valor é alterado pelo aplicativo. O código atualiza o armazenamento de dados original e, em seguida, remove o item do cache.
 
@@ -150,6 +150,6 @@ public async Task UpdateEntityAsync(MyEntity entity)
 
 As informações a seguir também podem ser relevantes ao implementar esse padrão:
 
-- [Diretrizes de cache](https://docs.microsoft.com/azure/architecture/best-practices/caching). Fornece informações adicionais sobre como você pode armazenar dados em cache em uma solução de nuvem, e os problemas que você deve considerar ao implementar um cache.
+- [Diretrizes de cache](/azure/architecture/best-practices/caching). Fornece informações adicionais sobre como você pode armazenar dados em cache em uma solução de nuvem, e os problemas que você deve considerar ao implementar um cache.
 
 - [Primer de Consistência de Dados](https://msdn.microsoft.com/library/dn589800.aspx). Os aplicativos de nuvem geralmente usam dados distribuídos entre armazenamentos de dados. Gerenciar e manter a consistência dos dados nesse ambiente são um aspecto crítico do sistema, especialmente a simultaneidade e os problemas de disponibilidade que podem surgir. Este primer descreve problemas sobre a consistência entre dados distribuídos e resume como um aplicativo pode implementar a consistência eventual para manter a disponibilidade dos dados.

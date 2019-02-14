@@ -7,12 +7,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: microservices
-ms.openlocfilehash: f3b637d61c929e5523ea5409426f3d7a72096dfa
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: ac7ab8b8dd154999a05dc531e41b0994f66ddf10
+ms.sourcegitcommit: 700a4f6ce61b1ebe68e227fc57443e49282e35aa
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54484118"
+ms.lasthandoff: 02/07/2019
+ms.locfileid: "55887396"
 ---
 # <a name="microservices-architecture-on-azure-kubernetes-service-aks"></a>Arquitetura de microsserviços no AKS (Serviço de Kubernetes do Azure)
 
@@ -360,7 +360,7 @@ Supondo que essa compilação seja bem-sucedida, ela disparará um processo de i
 
 1. Executa `helm upgrade` para implantar o gráfico do Helm em um ambiente de QA.
 1. Um aprovador confirma a aprovação antes que o pacote seja movido para a produção. Confira [Controle de implantação de versão usando aprovações](/azure/devops/pipelines/release/approvals/approvals).
-1. Marca novamente a imagem do Docker com o namespace de produção no Registro de Contêiner do Azure. Por exemplo, se a marca atual for `myrepo.azurecr.io/delivery:v1.0.2`, a marca de produção será `reponame.azurecr.io/prod/delivery:v1.0.2`.
+1. Marca novamente a imagem do Docker com o namespace de produção no Registro de Contêiner do Azure. Por exemplo, se a marca atual for `myrepo.azurecr.io/delivery:v1.0.2`, a marca de produção será `myrepo.azurecr.io/prod/delivery:v1.0.2`.
 1. Executa `helm upgrade` para implantar o gráfico do Helm no ambiente de produção.
 
 ![Fluxo de trabalho de CI/CD](./_images/aks-cicd-3.png)

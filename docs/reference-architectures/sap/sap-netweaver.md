@@ -8,12 +8,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18, SAP, Windows
-ms.openlocfilehash: 1167a65786c3df946ebaed3e52e4ed4033f50fd5
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: e866727a40551b60e74fc26878a15a5a48e69cf6
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54486396"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55897619"
 ---
 # <a name="deploy-sap-netweaver-windows-for-anydb-on-azure-virtual-machines"></a>Implantar o SAP NetWeaver (Windows) para AnyDB em máquinas virtuais do Azure
 
@@ -91,7 +91,7 @@ Implantações tradicionais locais da SAP implementam vários NICs (Cartões de 
 
 Essa arquitetura subdivide o espaço de endereço da rede virtual em sub-redes. Essa arquitetura de referência se concentra principalmente na sub-rede da camada de aplicativo. Cada sub-rede pode ser associada a um NSG que define as políticas de acesso para a sub-rede. Coloque os servidores de aplicativos em uma sub-rede separada para poder protegê-los mais facilmente por meio do gerenciamento das políticas de segurança de sub-rede, não dos servidores individuais.
 
-Quando um NSG está associado a uma sub-rede, ele se aplica a todos os servidores dentro dessa sub-rede. Para saber mais sobre como usar os NSGs para um controle refinado sobre os servidores em uma sub-rede, veja [Filtrar o tráfego de rede com os grupos de segurança de rede](https://azure.microsoft.com/en-us/blog/multiple-vm-nics-and-network-virtual-appliances-in-azure/).
+Quando um NSG está associado a uma sub-rede, ele se aplica a todos os servidores dentro dessa sub-rede. Para saber mais sobre como usar os NSGs para um controle refinado sobre os servidores em uma sub-rede, veja [Filtrar o tráfego de rede com os grupos de segurança de rede](https://azure.microsoft.com/blog/multiple-vm-nics-and-network-virtual-appliances-in-azure).
 
 ### <a name="load-balancers"></a>Balanceadores de carga
 
