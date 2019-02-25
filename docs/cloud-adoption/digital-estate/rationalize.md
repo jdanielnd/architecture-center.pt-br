@@ -1,20 +1,21 @@
 ---
-title: Racionalizar a propriedade digital
-titleSuffix: Enterprise Cloud Adoption
-description: Um processo para avaliar os ativos digitais e encontrar a melhor maneira de hospedá-los na nuvem.
+title: 'CAF: Racionalizar a propriedade digital'
+titleSuffix: Microsoft Cloud Adoption Framework for Azure
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.custom: governance
+description: Avalie os ativos digitais para determinar a melhor maneira de hospedá-los na nuvem.
 author: BrianBlanchard
 ms.date: 12/10/2018
 ms.topic: guide
-ms.service: architecture-center
-ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: 2002b5273aed4aef2d283f23f83aa08d1d6f5c95
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 02189c9edcbfea0a55fe69a53bf610e85470a4d0
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54485716"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55897191"
 ---
-# <a name="enterprise-cloud-adoption-rationalize-the-digital-estate"></a>Adoção do Enterprise Cloud: Racionalizar a propriedade digital
+# <a name="rationalize-the-digital-estate"></a>Racionalizar a propriedade digital
 
 A racionalização de nuvem é o processo de avaliação de ativos para determinar a melhor abordagem para hospedá-los na nuvem. Quando uma [abordagem](approach.md) é estabelecida e um [inventário](inventory.md) é levantado, a racionalização de nuvem pode ser realizada. Os [5 Rs de racionalização](5-rs-of-rationalization.md) discutem as opções mais comuns de racionalização.
 
@@ -50,7 +51,7 @@ Pouquíssimas organizações investem o tempo, a energia e as despesas necessár
 
 Em uma Transformação de Nuvem, o inventário se correlaciona diretamente com os custos operacionais. São necessários dados de inventário precisos para o planejamento adequado. Infelizmente, as opções de verificação do ambiente atuais podem atrasar as decisões por semanas ou meses, para verificar e catalogar todo o inventário. Felizmente, existem alguns truques para acelerar a coleta de dados.
 
-A verificação baseada em agente é o atraso citado com mais frequência. Os dados robustos necessários para uma racionalização tradicional geralmente dependem de dados que só podem ser coletados com um agente em execução em cada ativo. Essa dependência dos agentes geralmente reduz o progresso, já que ela pode exigir interações com funções de administração, operações e segurança.
+A verificação baseada em agente é o atraso citado com mais frequência. Os dados robustos necessários para uma racionalização tradicional geralmente dependem de dados que só podem ser coletados com um agente em execução em cada ativo. Essa dependência de agentes geralmente retarda o progresso, pois pode exigir feedback das funções de segurança, operações e administração.
 
 Em um processo de racionalização incremental, uma solução sem agente pode ser usada para uma descoberta inicial para acelerar as decisões iniciais. Dependendo do nível de complexidade do ambiente, ainda poderá ser necessário usar uma solução baseada em agente, mas ele pode ser removido do caminho crítico da alteração comercial.
 
@@ -112,7 +113,7 @@ A primeira carga de trabalho é normalmente implantada em um ambiente experiment
 
 ### <a name="qualitative-analysis"></a>Análise qualitativa
 
-As equipes de Adoção de Nuvem e Estratégia de Nuvem podem trabalhar juntas para analisar essa pequena carga de trabalho. Isso cria uma oportunidade controlada para criar e testar os critérios de análise qualitativa. A população menor cria a oportunidade de fazer uma pesquisa com os usuários afetados, para concluir uma análise qualitativa detalhada em uma semana ou menos. Para ver os fatores de análise qualitativa comuns, consulte o destino de racionalização específico nos [5 Rs da racionalização](5-rs-of-rationalization.md).
+As equipes de Estratégia de Nuvem e Adoção de Nuvem podem trabalhar em conjunto para analisar essa pequena carga de trabalho. Isso cria uma oportunidade controlada para criar e testar os critérios de análise qualitativa. A população menor cria uma oportunidade para pesquisar os usuários afetados para concluir uma análise qualitativa detalhada em uma semana ou menos. Para ver os fatores de análise qualitativa comuns, consulte o destino de racionalização específico nos [5 Rs da racionalização](5-rs-of-rationalization.md).
 
 ### <a name="migration"></a>Migração
 
@@ -122,9 +123,9 @@ Paralelamente à racionalização contínua, a equipe de Adoção de Nuvem pode 
 - Definir os serviços principais (e padrões do Azure) necessários para a visão a longo prazo.
 - Entender melhor como as operações possam ter que evoluir mais tarde na transformação.
 - Entender os riscos inerentes aos negócios e a tolerância dos negócios em relação a esses riscos.
-- Estabelecer uma linha de base ou produto minimamente viável (MVP) para governança com base na tolerância dos negócios a riscos
+- Estabeleça uma linha de base ou um MVP (produto viável mínimo) para governança baseada na tolerância de risco empresarial.
 
-## <a name="release-planning"></a>Planejamento de lançamento
+## <a name="release-planning"></a>Planejamento de liberação
 
 Enquanto a equipe de Adoção de Nuvem está executando a migração ou a implementação da primeira carga de trabalho, a equipe de Estratégia de Nuvem pode começar a priorizar os aplicativos/cargas de trabalho restantes.
 
@@ -154,7 +155,7 @@ Em alguns casos, o modelo financeiro pode ser muito rígido para gerar uma decis
 
 ## <a name="next-steps"></a>Próximas etapas
 
-A saída de um esforço de racionalização é uma lista de pendências priorizada de todos os ativos afetados pela transformação escolhida. Essa lista de pendências agora está pronta para servir como base para modelos de custo dos serviços de nuvem.
+A saída de um esforço de racionalização é uma lista de pendências priorizada de todos os ativos que serão afetados pela transformação escolhida. Essa lista de pendências agora está pronta para servir como base para modelos de custo dos serviços de nuvem.
 
 > [!div class="nextstepaction"]
 > [Alinhar modelos de custo com a propriedade digital](calculate.md)

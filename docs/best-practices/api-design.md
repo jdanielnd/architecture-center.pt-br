@@ -8,12 +8,12 @@ ms.topic: best-practice
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 2c4a76ea3a9acdeb1141a1274f6926667c67c81b
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: b15b97de2042a0e213192dd586ffdcc4c51b1f11
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54484101"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55897976"
 ---
 # <a name="api-design"></a>Design de API
 
@@ -21,7 +21,7 @@ Aplicativos Web mais modernos expõem APIs que os clientes podem usar para inter
 
 - **Independência de plataforma**. Qualquer cliente deve ser capaz de chamar a API, independentemente de como a API está implementada internamente. Isso requer o uso de protocolos padrão e ter um mecanismo pelo qual o cliente e o serviço Web pode concordar com o formato dos dados a serem trocados.
 
-- **Evolução do serviço**. A API da Web deve ser capaz de evoluir e adicionar funcionalidade independentemente de aplicativos cliente. À medida que a API evolui, aplicativos cliente existentes devem continuar a funcionar sem modificação. Todas as funcionalidades devem ser detectáveis, para que os aplicativos cliente possam utilizá-las plenamente.
+- **Evolução do serviço**. A API da Web deve ser capaz de evoluir e adicionar funcionalidade independentemente de aplicativos cliente. À medida que a API evolui, aplicativos cliente existentes devem continuar a funcionar sem modificação. Todas as funcionalidades devem ser detectáveis para que os aplicativos cliente possam utilizá-las plenamente.
 
 Essas diretrizes descrevem questões que você deve considerar ao criar uma API da Web.
 
@@ -446,7 +446,7 @@ Essa abordagem tem a vantagem de semântica que o mesmo recurso é sempre recupe
 
 ### <a name="header-versioning"></a>Controle de versão de cabeçalho
 
-Em vez de acrescentar o número de versão como um parâmetro de cadeia de consulta, você pode implementar um cabeçalho personalizado que indica a versão do recurso. Essa abordagem requer que o aplicativo cliente adicione o cabeçalho apropriado a quaisquer solicitações, embora o código que processa a solicitação do cliente possa usar um valor padrão (versão 1) se o cabeçalho da versão for omitido. Os exemplos a seguir utilizam um cabeçalho personalizado chamado *Custom-Header*. O valor desse cabeçalho indica a versão da API da Web.
+Em vez de acrescentar o número de versão como um parâmetro de cadeia de consulta, você pode implementar um cabeçalho personalizado que indica a versão do recurso. Essa abordagem requer que o aplicativo cliente adicione o cabeçalho apropriado a quaisquer solicitações, embora o código que processa a solicitação do cliente possa usar um valor padrão (versão 1) se o cabeçalho da versão for omitido. Os exemplos a seguir utilizam um cabeçalho personalizado nomeado *Cabeçalho Personalizado*. O valor desse cabeçalho indica a versão da API da Web.
 
 Versão 1:
 
