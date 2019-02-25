@@ -1,0 +1,45 @@
+---
+title: 'CAF: Redes definidas pelo software - DMZ de Nuvem'
+titleSuffix: Microsoft Cloud Adoption Framework for Azure
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.custom: governance
+ms.date: 02/11/2019
+description: Essa arquitetura de rede permite acesso limitado entre as redes locais e baseadas em nuvem
+author: rotycenh
+ms.openlocfilehash: a192541dcfb0f3d713f4139a2ab0541d0c7202db
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.translationtype: HT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55900276"
+---
+# <a name="software-defined-networks-cloud-dmz"></a><span data-ttu-id="76946-103">Redes definidas pelo software: DMZ de nuvem</span><span class="sxs-lookup"><span data-stu-id="76946-103">Software Defined Networks: Cloud DMZ</span></span>
+
+<span data-ttu-id="76946-104">A arquitetura de rede da DMZ de Nuvem permite acesso limitado entre redes locais e baseadas em nuvem, usando uma VPN (rede privada virtual) para conectar as redes.</span><span class="sxs-lookup"><span data-stu-id="76946-104">The Cloud DMZ network architecture allows limited access between your on-premises and cloud-based networks, using a virtual private network (VPN) to connect the networks.</span></span> <span data-ttu-id="76946-105">Uma DMZ é implantada na nuvem para proteger o acesso à rede local a partir de recursos baseados em nuvem.</span><span class="sxs-lookup"><span data-stu-id="76946-105">A DMZ is deployed in the cloud to secure access to the on-premises network from cloud-based resources.</span></span>
+
+![Proteger arquitetura de rede híbrida](../../../reference-architectures/dmz/images/dmz-private.png)
+
+<span data-ttu-id="76946-107">Essa arquitetura foi projetada para dar suporte a cenários em que a organização deseja iniciar a integração de cargas de trabalho baseadas em nuvem com cargas de trabalho locais, mas pode não ter políticas de segurança em nuvem totalmente desenvolvidas ou adquirido uma conexão WAN dedicada segura entre os dois ambientes.</span><span class="sxs-lookup"><span data-stu-id="76946-107">This architecture is designed to support scenarios where your organization wants to start integrating cloud-based workloads with on-premises workloads but may not have fully matured cloud security policies or acquired a secure dedicated WAN connection between the two environments.</span></span> <span data-ttu-id="76946-108">Como resultado, as redes em nuvem devem ser tratadas como uma zona desmilitarizada para garantir que os serviços locais sejam seguros.</span><span class="sxs-lookup"><span data-stu-id="76946-108">As a result, cloud networks should be treated like a demilitarized zone to ensure on-premises services are secure.</span></span>
+
+<span data-ttu-id="76946-109">A DMZ implanta NVAs (dispositivos virtuais de rede) para implementar a funcionalidade de segurança como firewalls e inspeção de pacotes.</span><span class="sxs-lookup"><span data-stu-id="76946-109">The DMZ deploys network virtual appliances (NVAs) to implement security functionality such as firewalls and packet inspection.</span></span> <span data-ttu-id="76946-110">O tráfego que passa entre aplicativos ou serviços locais e baseados em nuvem deve passar pela DMZ onde pode ser auditado.</span><span class="sxs-lookup"><span data-stu-id="76946-110">Traffic passing between on-premises and cloud-based applications or services must pass through the DMZ where it can be audited.</span></span> <span data-ttu-id="76946-111">As conexões VPN e as regras que determinam qual tráfego é permitido pela rede DMZ são estritamente controladas pelas equipes de segurança de TI.</span><span class="sxs-lookup"><span data-stu-id="76946-111">VPN connections and the rules determining what traffic is allowed through the DMZ network are strictly controlled by IT security teams.</span></span>
+
+## <a name="cloud-dmz-assumptions"></a><span data-ttu-id="76946-112">Suposições sobre a DMZ de Nuvem</span><span class="sxs-lookup"><span data-stu-id="76946-112">Cloud DMZ assumptions</span></span>
+
+<span data-ttu-id="76946-113">A implantação de uma DMZ de Nuvem supõe o seguinte:</span><span class="sxs-lookup"><span data-stu-id="76946-113">Deploying a Cloud DMZ assumes the following:</span></span>
+
+- <span data-ttu-id="76946-114">As equipes de segurança não alinharam totalmente as exigências e políticas de segurança locais e baseadas em nuvem.</span><span class="sxs-lookup"><span data-stu-id="76946-114">Your security teams have not fully aligned on-premises and cloud-based security requirements and policies.</span></span>
+- <span data-ttu-id="76946-115">As cargas de trabalho baseadas em nuvem exigem acesso limitado a serviços hospedados nas redes locais ou de terceiros, ou os usuários ou aplicativos no ambiente local precisam de acesso limitado a recursos hospedados em nuvem.</span><span class="sxs-lookup"><span data-stu-id="76946-115">Your cloud-based workloads require limited access to services hosted on your on-premises or third-party networks, or your users or applications in your on-premises environment need limited access to cloud-hosted resources.</span></span>
+- <span data-ttu-id="76946-116">A implementação de uma conexão VPN entre as redes locais e o provedor de nuvem não é impedida pela política corporativa, requisitos regulamentares ou problemas de compatibilidade técnica.</span><span class="sxs-lookup"><span data-stu-id="76946-116">Implementing a VPN connection between your on-premises networks and cloud provider is not prevented by corporate policy, regulatory requirements, or technical compatibility issues.</span></span>
+- <span data-ttu-id="76946-117">As cargas de trabalho não exigem várias assinaturas para ignorar limites de recursos de assinatura, ou envolvem várias assinaturas mas não requerem gerenciamento central de conectividade ou serviços compartilhados usados por recursos distribuídos por várias assinaturas.</span><span class="sxs-lookup"><span data-stu-id="76946-117">Your workloads either do not require multiple subscriptions to bypass subscription resource limits, or they involve multiple subscriptions but don't require central management of connectivity or shared services used by resources spread across multiple subscriptions.</span></span>
+
+<span data-ttu-id="76946-118">A equipe de Adoção da Nuvem deverá considerar os seguintes problemas ao analisar a implementação de uma arquitetura de rede virtual de DMZ de Nuvem:</span><span class="sxs-lookup"><span data-stu-id="76946-118">Your Cloud Adoption team should consider the following issues when looking at implementing a Cloud DMZ virtual networking architecture:</span></span>
+
+- <span data-ttu-id="76946-119">Conectar redes locais com redes em nuvem aumenta a complexidade dos requisitos de segurança.</span><span class="sxs-lookup"><span data-stu-id="76946-119">Connecting on-premises networks with cloud networks increases the complexity of your security requirements.</span></span> <span data-ttu-id="76946-120">Embora a conexão entre as redes em nuvem e o ambiente local esteja garantida, ainda será necessário garantir que os recursos da nuvem estejam seguros.</span><span class="sxs-lookup"><span data-stu-id="76946-120">Even though the connection between cloud networks and the on-premises environment are secured, you still need to ensure cloud resources are secured.</span></span>
+- <span data-ttu-id="76946-121">A arquitetura de DMZ de Nuvem normalmente é utilizada como um ponto de partida, enquanto a conectividade é mais protegida e a política de segurança é alinhada entre as redes locais e na nuvem, permitindo uma adoção mais ampla de uma arquitetura de rede híbrida em grande escala.</span><span class="sxs-lookup"><span data-stu-id="76946-121">The Cloud DMZ architecture is commonly used as a stepping stone while connectivity is further secured and security policy aligned between on-premises and cloud networks, allowing a broader adoption of a full-scale hybrid networking architecture.</span></span>
+
+## <a name="learn-more"></a><span data-ttu-id="76946-122">Saiba mais</span><span class="sxs-lookup"><span data-stu-id="76946-122">Learn more</span></span>
+
+<span data-ttu-id="76946-123">Consulte o seguinte para obter mais informações sobre a implementação de uma DMZ de Nuvem na plataforma do Azure.</span><span class="sxs-lookup"><span data-stu-id="76946-123">See the following for more information about the implementing a Cloud DMZ in the Azure platform.</span></span>
+
+- <span data-ttu-id="76946-124">[Implementar uma DMZ entre o Azure e o datacenter local](../../../reference-architectures/dmz/secure-vnet-hybrid.md).</span><span class="sxs-lookup"><span data-stu-id="76946-124">[Implement a DMZ between Azure and your on-premises datacenter](../../../reference-architectures/dmz/secure-vnet-hybrid.md).</span></span> <span data-ttu-id="76946-125">Este artigo descreve como implementar uma arquitetura de rede híbrida segura no Azure.</span><span class="sxs-lookup"><span data-stu-id="76946-125">This article discusses how to implement a secure hybrid network architecture in Azure.</span></span>
