@@ -1,0 +1,44 @@
+---
+title: 'Migração de mainframe: Mitos e fatos'
+description: Migre aplicativos de ambientes de mainframe no Azure, uma infraestrutura escalonável, altamente disponível e comprovada para sistemas que atualmente executam em mainframes.
+author: njray
+ms.date: 12/27/2018
+ms.openlocfilehash: bcad01ec044d2d802b055e328a9496aae7b33311
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.translationtype: HT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55900236"
+---
+# <a name="mainframe-myths-and-facts"></a><span data-ttu-id="88a7b-103">Mitos e fatos a respeito de mainframe</span><span class="sxs-lookup"><span data-stu-id="88a7b-103">Mainframe myths and facts</span></span>
+
+<span data-ttu-id="88a7b-104">Os mainframes aparecem proeminentemente na história da computação e permanecem viáveis para cargas de trabalho altamente específicas.</span><span class="sxs-lookup"><span data-stu-id="88a7b-104">Mainframes figure prominently in the history of computing and remain viable for highly specific workloads.</span></span> <span data-ttu-id="88a7b-105">A maioria das pessoas concorda que mainframes são uma plataforma comprovada com procedimentos operacionais de longo prazo que os tornam ambientes confiáveis e robustos.</span><span class="sxs-lookup"><span data-stu-id="88a7b-105">Most agree that mainframes are a proven platform with long-established operating procedures that make them reliable, robust environments.</span></span> <span data-ttu-id="88a7b-106">O software é executado com base no uso, medido em milhões de instruções por segundo (MIPS) e relatórios de uso extensivo estão disponíveis para retornos de cobrança.</span><span class="sxs-lookup"><span data-stu-id="88a7b-106">Software runs based on usage, measured in million instructions per second (MIPS), and extensive usage reports are available for charge backs.</span></span>
+
+<span data-ttu-id="88a7b-107">A confiabilidade, disponibilidade e capacidade de processamento de mainframes assumiram proporções quase míticas.</span><span class="sxs-lookup"><span data-stu-id="88a7b-107">The reliability, availability, and processing power of mainframes have taken on almost mythical proportions.</span></span> <span data-ttu-id="88a7b-108">Para avaliar as cargas de trabalho de mainframe que são mais adequadas para o Azure, primeiro você deseja distinguir os mitos da realidade.</span><span class="sxs-lookup"><span data-stu-id="88a7b-108">To evaluate the mainframe workloads that are most suitable for Azure, you first want to distinguish the myths from the reality.</span></span>
+
+## <a name="myth-mainframes-never-go-down-and-have-a-minimum-of-five-9s-of-availability"></a><span data-ttu-id="88a7b-109">Mito: Mainframes nunca ficam inativos e têm um mínimo de cinco 9s de disponibilidade</span><span class="sxs-lookup"><span data-stu-id="88a7b-109">Myth: Mainframes never go down and have a minimum of five 9s of availability</span></span>
+
+<span data-ttu-id="88a7b-110">Hardware de mainframe e sistemas operacionais são vistos como confiáveis e estáveis.</span><span class="sxs-lookup"><span data-stu-id="88a7b-110">Mainframe hardware and operating systems are viewed as reliable and stable.</span></span> <span data-ttu-id="88a7b-111">Mas, a realidade é que esse tempo de inatividade deve ser agendado para manutenção e reinicializações (conhecidas como cargas iniciais de programa ou IPLS).</span><span class="sxs-lookup"><span data-stu-id="88a7b-111">But the reality is that downtime must be scheduled for maintenance and reboots (referred to as initial program loads or IPLs).</span></span> <span data-ttu-id="88a7b-112">Quando essas tarefas são consideradas, uma solução de mainframe geralmente tem o mais próximo de dois ou três 9s de disponibilidade, que é equivalente aos servidor avançados com base em Intel.</span><span class="sxs-lookup"><span data-stu-id="88a7b-112">When these tasks are considered, a mainframe solution often has closer to two or three 9s of availability, which is equivalent to that of high-end, Intel-based servers.</span></span>
+
+<span data-ttu-id="88a7b-113">Os mainframes também permanecem vulneráveis a desastres, assim como em outros servidores e exigem sistemas de alimentação ininterrupta (no-break) para lidar com esses tipos de falhas.</span><span class="sxs-lookup"><span data-stu-id="88a7b-113">Mainframes also remain as vulnerable to disasters as any other servers do, and require uninterruptible power supply (UPS) systems to handle these types of failures.</span></span>
+
+## <a name="myth-mainframes-have-limitless-scalability"></a><span data-ttu-id="88a7b-114">Mito: Mainframes têm escalabilidade ilimitada</span><span class="sxs-lookup"><span data-stu-id="88a7b-114">Myth: Mainframes have limitless scalability</span></span>
+
+<span data-ttu-id="88a7b-115">A escalabilidade de um mainframe depende da capacidade do seu software de sistema, como o sistema de controle de informações do cliente (CICS) e a capacidade de novas instâncias dos mecanismos de mainframe e armazenamento.</span><span class="sxs-lookup"><span data-stu-id="88a7b-115">A mainframe’s scalability depends on the capacity of its system software, such as the customer information control system (CICS), and the capacity of new instances of mainframe engines and storage.</span></span> <span data-ttu-id="88a7b-116">Algumas empresas de grandes porte que usam mainframes personalizaram sua CICS e de outra forma superaram a capacidade dos maiores mainframes disponíveis.</span><span class="sxs-lookup"><span data-stu-id="88a7b-116">Some large companies that use mainframes have customized their CICS for performance, and have otherwise outgrown the capability of the largest available mainframes.</span></span>
+
+## <a name="myth-intel-based-servers-are-not-as-powerful-as-mainframes"></a><span data-ttu-id="88a7b-117">Mito: Servidores baseados na Intel não são tão poderosos quanto mainframes</span><span class="sxs-lookup"><span data-stu-id="88a7b-117">Myth: Intel-based servers are not as powerful as mainframes</span></span>
+
+<span data-ttu-id="88a7b-118">Os novos sistemas baseados na Intel de núcleo denso têm tanta capacidade de computação quanto os mainframes.</span><span class="sxs-lookup"><span data-stu-id="88a7b-118">The new core-dense, Intel-based systems have as much compute capacity as mainframes.</span></span>
+
+## <a name="myth-the-cloud-cannot-accommodate-mission-critical-applications-for-large-companies-such-as-financial-institutions"></a><span data-ttu-id="88a7b-119">Mito: A nuvem não pode acomodar aplicativos de missão crítica para grandes empresas, como instituições financeiras</span><span class="sxs-lookup"><span data-stu-id="88a7b-119">Myth: The cloud cannot accommodate mission-critical applications for large companies, such as financial institutions</span></span>
+
+<span data-ttu-id="88a7b-120">Embora possa haver algumas instâncias isoladas onde não bastarão soluções de nuvem, isso é normalmente porque os algoritmos de aplicativo não podem ser distribuídos.</span><span class="sxs-lookup"><span data-stu-id="88a7b-120">Although there may be some isolated instances where cloud solutions fall short, it is usually becuase the application algorithms cannot be distributed.</span></span> <span data-ttu-id="88a7b-121">Alguns desses exemplos são as exceções, não a regra.</span><span class="sxs-lookup"><span data-stu-id="88a7b-121">These few examples are the exceptions, not the rule.</span></span>
+
+## <a name="summary"></a><span data-ttu-id="88a7b-122">Resumo</span><span class="sxs-lookup"><span data-stu-id="88a7b-122">Summary</span></span>
+
+<span data-ttu-id="88a7b-123">Por comparação, o Azure oferece uma plataforma alternativa que é capaz de entregar recursos e funcionalidade equivalente do mainframe e um custo muito inferior.</span><span class="sxs-lookup"><span data-stu-id="88a7b-123">By comparison, Azure offers  an alternative platform that is capable of delivering equivalent mainframe functionality and features, and at a much lower cost.</span></span> <span data-ttu-id="88a7b-124">Além disso, o custo total de propriedade (TCO) do modelo de custo controlado por uso com base em assinatura da nuvem, é muito menos dispendioso que computadores mainframe.</span><span class="sxs-lookup"><span data-stu-id="88a7b-124">In addition, the total cost of ownership (TCO) of the cloud’s subscription-based, usage-driven cost model is far less expensive than mainframe computers.</span></span>
+
+## <a name="next-steps"></a><span data-ttu-id="88a7b-125">Próximas etapas</span><span class="sxs-lookup"><span data-stu-id="88a7b-125">Next steps</span></span>
+
+> [!div class="nextstepaction"]
+> [<span data-ttu-id="88a7b-126">Fazer a transição dos mainframes para Azure</span><span class="sxs-lookup"><span data-stu-id="88a7b-126">Make the Switch from Mainframes to Azure</span></span>](migration-strategies.md)
