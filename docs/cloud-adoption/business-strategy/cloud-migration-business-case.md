@@ -1,20 +1,21 @@
 ---
-title: Criação de um caso de negócios de migração na nuvem
-titleSuffix: Enterprise Cloud Adoption
-description: Aspectos a se considerar ao criar uma justificativa comercial para a migração para a nuvem
+title: 'CAF: Criação de um caso de negócios de migração na nuvem'
+titleSuffix: Microsoft Cloud Adoption Framework for Azure
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.custom: governance
+description: Considerações ao criar uma justificativa comercial para a migração para a nuvem.
 author: BrianBlanchard
 ms.date: 12/10/2018
 ms.topic: guide
-ms.service: architecture-center
-ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: 8c27ce211f500ee2eec4f7775a7f68f214dba433
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 21c2b877a0f329711027f020fd0047479e8c7bfb
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54488317"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55898299"
 ---
-# <a name="enterprise-cloud-adoption-building-a-cloud-migration-business-case"></a>Adoção do Enterprise Cloud: Criação de um caso de negócios de migração na nuvem
+# <a name="build-a-business-justification-for-cloud-migration"></a>Criar uma justificativa de negócios para a migração de nuvem
 
 As migrações para a nuvem podem gerar retorno sobre o investimento (ROI) antecipado de iniciativas de transformação de nuvem. No entanto, o desenvolvimento de uma justificativa comercial clara com custos e retornos relevantes e tangíveis pode ser um processo complexo. Este artigo ajudará você a pensar sobre quais dados são necessários para criar um modelo financeiro que se alinhe com os resultados da migração para a nuvem. Primeiro, vamos eliminar alguns mitos sobre a migração para a nuvem, para que sua organização possa evitar alguns erros comuns.
 
@@ -26,7 +27,7 @@ As migrações para a nuvem podem gerar retorno sobre o investimento (ROI) antec
 
 **Mito: o espelhamento do meu ambiente local me ajudará a economizar dinheiro na nuvem.** Durante o planejamento da Propriedade Digital, não é incomum que os clientes detectem capacidade não usada de mais de 50% do ambiente provisionado. Se os ativos são provisionados na nuvem para corresponder ao provisionamento atual, ficará difícil perceber a economia de custos. Considere reduzir o tamanho dos ativos implantados para se alinhar com os padrões de uso, não com os padrões de provisionamento.
 
-**Mito: os custos com servidores fundamentam os casos comerciais a favor da migração para a nuvem.** Às vezes, isso é verdade. Para algumas empresas, é importante reduzir as despesas de capital contínuas relacionadas aos servidores. No entanto, isso depende de vários fatores. As empresas com um ciclo de atualização de hardware de 5&ndash; a 8&ndash;anos provavelmente não verão retornos rápidos sobre sua migração para a nuvem. As empresas com ciclos de atualização padronizados ou impostos podem zerar o custo rapidamente. Em ambos os casos, outras despesas podem ser gatilhos financeiros que justificam a migração. A seguir estão alguns exemplos de custos que normalmente são ignorados quando a análise é feita somente visualizando os servidores ou as VMs:
+**Mito: os custos com servidores fundamentam os casos comerciais a favor da migração para a nuvem.** Às vezes, isso é verdade. Para algumas empresas, é importante reduzir as despesas de capital contínuas relacionadas aos servidores. No entanto, isso depende de vários fatores. As empresas com um ciclo de atualização de hardware de cinco a oito anos provavelmente não verão retornos rápidos sobre sua migração para a nuvem. As empresas com ciclos de atualização padronizados ou impostos podem zerar o custo rapidamente. Em ambos os casos, outras despesas podem ser gatilhos financeiros que justificam a migração. A seguir estão alguns exemplos de custos que normalmente são ignorados quando a análise é feita somente visualizando os servidores ou as VMs:
 
 - Os custos de software com virtualização, servidores e middleware podem ser altos. Os provedores de nuvem eliminam alguns desses custos. Dois exemplos de um provedor de nuvem que reduz custos com virtualização são os programas [Benefícios Híbridos do Azure](https://azure.microsoft.com/pricing/hybrid-benefit/#services) e [Reservas](https://azure.microsoft.com/reservations/).
 - Prejuízo nos negócios devido a interrupções podem rapidamente ultrapassar os custos de hardware ou software. Se o datacenter atual está instável, trabalhe com a empresa para quantificar o impacto das interrupções em termos de custos de oportunidade ou de custos comerciais reais.
@@ -109,4 +110,4 @@ Se o ROI ainda estiver desalinhado, procure a ajuda de seu representante de vend
 ## <a name="next-steps"></a>Próximas etapas
 
 > [!div class="nextstepaction"]
-> [Criar um modelo financeiro para a transformação de nuvem](financial-models.md)
+> [Criar um modelo financeiro para a transformação de nuvem](./financial-models.md)

@@ -7,18 +7,18 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat-ai
-ms.openlocfilehash: 8fa15c82275f18af78d1f42ec1750ab9b28119fb
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: c4bfd6e92fc9c770a03a63355fc922d19ef27b7b
+ms.sourcegitcommit: f4ed242dff8b204cfd8ebebb7778f356a19f5923
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54487096"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "56224157"
 ---
 # <a name="build-a-real-time-recommendation-api-on-azure"></a>Compilar uma API de recomendação em tempo real no Azure
 
 Esta arquitetura de referência mostra como treinar um modelo de recomendação usando o Azure Databricks e implantá-lo como uma API usando o Azure Cosmos DB, o Azure Machine Learning e o AKS (Serviço de Kubernetes do Azure). Esta arquitetura pode ser adaptada para a maioria dos cenários de mecanismo de recomendação, incluindo recomendações de produtos, filmes e notícias.
 
-Há uma implantação de referência para essa arquitetura disponível no [GitHub](https://github.com/Microsoft/Recommenders/blob/master/notebooks/04_operationalize/als_movie_o16n.ipynb).
+Há uma implantação de referência para essa arquitetura disponível no [GitHub](https://github.com/Microsoft/Recommenders/blob/master/notebooks/05_operationalize/als_movie_o16n.ipynb).
 
 ![Arquitetura de um modelo de machine learning para treinamento de recomendações de filmes](./_images/recommenders-architecture.png)
 
@@ -132,6 +132,10 @@ Para implantar essa arquitetura, primeiro crie um ambiente do Azure Databricks p
 
 7. Execute o notebook Operacionalização de Filmes ALS para criar os recursos necessários para criar uma API de recomendação que fornece as 10 principais recomendações de filmes para determinado usuário.
 
+## <a name="related-architectures"></a>Arquiteturas relacionadas
+
+Também criamos uma arquitetura de referência que usa o Spark e Azure Databricks para executar os [processos de pontuação em lote agendados][batch-scoring]. Consulte essa arquitetura de referência para entender uma abordagem recomendada para gerar novas recomendações periodicamente.
+
 <!-- links -->
 [aci]: /azure/container-instances/container-instances-overview
 [aad]: /azure/active-directory-b2c/active-directory-b2c-overview
@@ -141,6 +145,7 @@ Para implantar essa arquitetura, primeiro crie um ambiente do Azure Databricks p
 [autoscaling]: https://docs.azuredatabricks.net/user-guide/clusters/sizing.html
 [autoscale]: https://docs.azuredatabricks.net/user-guide/clusters/sizing.html#autoscaling
 [availability]: /azure/architecture/checklist/availability
+[batch-scoring]: /azure/architecture/reference-architectures/ai/batch-scoring-databricks
 [blob]: /azure/storage/blobs/storage-blobs-introduction
 [blog]: https://blogs.technet.microsoft.com/machinelearning/2018/03/20/scaling-azure-container-service-cluster/
 [clusters]: https://docs.azuredatabricks.net/user-guide/clusters/configure.html
@@ -161,12 +166,12 @@ Para implantar essa arquitetura, primeiro crie um ambiente do Azure Databricks p
 [notebook]: https://github.com/Microsoft/Recommenders/notebooks/00_quick_start/als_pyspark_movielens.ipynb
 [partition-data]: /azure/cosmos-db/partition-data
 [redis]: /azure/redis-cache/cache-overview
-[regions]: https://azure.microsoft.com/en-us/global-infrastructure/services/?products=virtual-machines&regions=all
+[regions]: https://azure.microsoft.com/global-infrastructure/services/?products=virtual-machines&regions=all
 [resiliency]: /azure/architecture/resiliency/
 [ru]: /azure/cosmos-db/request-units
 [sec-docs]: /azure/security/
 [setup]: https://github.com/Microsoft/Recommenders/blob/master/SETUP.md%60
 [scale]: /azure/aks/tutorial-kubernetes-scale
-[sla]: https://azure.microsoft.com/en-us/support/legal/sla/virtual-machines/v1_8/
+[sla]: https://azure.microsoft.com/support/legal/sla/virtual-machines/v1_8/
 [vm-size]: /azure/virtual-machines/virtual-machines-linux-change-vm-size
 [workspace]: https://docs.azuredatabricks.net/getting-started/index.html

@@ -1,21 +1,23 @@
 ---
-title: 'Adoção da Nuvem Empresarial: Exemplos de resultados fiscais'
+title: 'CAF: Exemplos de resultados fiscais'
+titleSuffix: Microsoft Cloud Adoption Framework for Azure
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.custom: governance
 description: Exemplos de resultados fiscais
 author: BrianBlanchard
 ms.date: 10/10/2018
 ms.topic: guide
-ms.service: architecture-center
-ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: d502294121d9c11d504068ff622cba26fa76db04
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: c181133aa238bb631d844cd72a21165b85e47936
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54484918"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55897075"
 ---
-# <a name="enterprise-cloud-adoption-examples-of-fiscal-outcomes"></a>Adoção da Nuvem Empresarial: Exemplos de resultados fiscais
+# <a name="examples-of-fiscal-outcomes"></a>Exemplos de resultados fiscais
 
-Neste nível mais alto, as conversas Fiscais são compostas por três conceitos rudimentares:
+No nível mais alto, as conversas fiscais são compostas por três conceitos básicos:
 
 * Receita: Mais dinheiro entrará para a empresa como resultado das vendas de mercadorias ou serviços.
 * Custo: Menos dinheiro será gasto na criação, marketing, vendas ou entrega de mercadorias ou serviços.
@@ -26,27 +28,27 @@ O restante deste artigo explicará esses resultados fiscais no contexto de uma t
 > [!NOTE]
 > Os exemplos a seguir são hipotéticos e não devem ser vistos como uma garantia de retorno ao adotar qualquer estratégia de nuvem.
 
-# <a name="revenue-outcomes"></a>Resultados da receita
+## <a name="revenue-outcomes"></a>Resultados da receita
 
-## <a name="new-revenue-streams"></a>Novos fluxos de receita
+### <a name="new-revenue-streams"></a>Novos fluxos de receita
 
 A nuvem permite oportunidades de oferecer novos produtos aos clientes ou oferecer produtos existentes de uma nova maneira. Novos Fluxos de Receita são inovadores, empresariais e empolgantes para muitas pessoas do mundo dos negócios. Os novos fluxos de receita também estão sujeitos a falhas, e são vistos em muitas empresas como algo de alto risco. Quando são propostos pelo departamento de TI, a probabilidade de recusa é muito alta. Para adicionar credibilidade a esses resultados, firme uma parceria com um líder de negócios comprovadamente inovador. A validação do fluxo de receita no início do processo ajudará a evitar os obstáculos.
 
-* Exemplo: Uma empresa vende livros há mais de cem anos. Um funcionário da empresa percebe que o conteúdo pode ser entregue eletronicamente e cria um dispositivo que pode ser vendido na livraria, o qual permite que os mesmos livros sejam baixados diretamente, gerando $X em novas vendas de livros. 
+* Exemplo: Uma empresa vende livros há mais de cem anos. Um funcionário da empresa percebe que o conteúdo pode ser entregue eletronicamente e cria um dispositivo que pode ser vendido na livraria, o qual permite que os mesmos livros sejam baixados diretamente, gerando $X em novas vendas de livros.
 
-## <a name="revenue-increases"></a>A receita aumenta
+### <a name="revenue-increases"></a>A receita aumenta
 
 Com escala global e alcance digital, a nuvem permite que as empresas aumentem a receita de fluxos de receita existentes. Muitas vezes, esse tipo de resultado acontece graças a um alinhamento com a liderança de marketing ou de vendas.
 
 * Exemplo: Uma empresa que vende widgets poderia vender mais widgets se o pessoal de vendas tivesse a capacidade de acessar com segurança o catálogo digital e os níveis de estoque da empresa. Infelizmente, os dados estão apenas no sistema ERP da empresa, que só pode ser acessado por meio de um dispositivo conectado à rede. A criação de uma fachada do serviço para interação com o ERP, expondo o catálogo e os níveis de estoque não confidenciais a um aplicativo na nuvem, permitiria que o pessoal de vendas acessasse os dados necessários durante uma reunião com um cliente. Estender o AD usando o Azure AD e integrar o acesso baseado em função ao aplicativo permitiria que a empresa garantisse a segurança dos dados. Esse projeto simples pode afetar a receita de uma linha de produtos existente em X%.
 
-## <a name="profit-increases"></a>Aumento do lucro
+### <a name="profit-increases"></a>Aumento do lucro
 
 Raramente, um único esforço aumenta a receita e reduz os custos simultaneamente. No entanto, quando isso acontece, alinhe o demonstrativo do resultado de um ou mais resultados de receita com um ou mais resultados de custo para comunicar o resultado desejado.
 
-# <a name="cost-outcomes"></a>Resultados de custo
+## <a name="cost-outcomes"></a>Resultados de custo
 
-## <a name="cost-reduction"></a>Redução de custo
+### <a name="cost-reduction"></a>Redução de custo
 
 A computação em nuvem pode reduzir as despesas de capital (CapEx) relacionadas à compra de hardware e software, configuração de data centers, execução de datacenters locais etc... Os racks de servidores, a eletricidade permanente para proporcionar energia e resfriamento e especialistas de TI para gerenciar a infraestrutura aumentam rapidamente. Desligar um data center pode reduzir as despesas com CapEx. Isso é normalmente conhecido como "Saindo do negócio de data center". A redução de custos geralmente é medida em dólares no orçamento atual, o que pode abranger 1 a 5 anos, dependendo de como o CFO gerencia as finanças.
 
@@ -60,13 +62,13 @@ A Coverdell moderniza sua infraestrutura para gerar recordes de economias com o 
 "Ter acesso à pilha de tecnologia do Azure abre as portas para soluções escaláveis, fáceis de implementar e altamente disponíveis, além de econômicas. Isso permite que nossos arquitetos sejam muito mais criativos com as soluções que fornecem."
 Ryan Sorensen: Diretor de desenvolvimento de aplicativos e arquitetura empresarial da Coverdell
 
-## <a name="cost-avoidance"></a>Prevenção de custos
+### <a name="cost-avoidance"></a>Prevenção de custos
 
 O encerramento de data centers também pode fornecer a Prevenção de Custos, impedindo ciclos de atualização futuros. Um ciclo de atualização é o processo de aquisição de novos hardwares e softwares, a fim de substituir sistemas locais antigos. No Azure, o hardware e o sistema operacional são rotineiramente mantidos, corrigidos e atualizados sem custo adicional aos clientes. Isso permite que um diretor financeiro remova gastos futuros planejado das previsões financeiras de longo prazo. A prevenção do custo é medida em dólares. Ela difere de Redução de Custos no sentido de que se concentra, geralmente, em um orçamento futuro que ainda não foi totalmente aprovado.
 
 * Exemplo: O data center de uma empresa terá sua concessão renovada em seis meses. Esse data center está em serviço há oito anos. Há quatro anos, todos os servidores foram atualizados e virtualizados, custando à empresa $ milhões. No próximo ano, a empresa pretende atualizar novamente hardware e software. A migração dos ativos nesse data center, como parte de uma Transformação Operacional, criaria a prevenção de custos removendo a atualização planejada do orçamento previsto do próximo ano. Ela também poderia produzir uma redução de custos ao diminuir ou eliminar os custos de concessão de imóveis.
 
-## <a name="capex-vs-opex"></a>CapEx versus OpEx
+### <a name="capex-versus-opex"></a>CapEx versus OpEx
 
 Antes de discutir os Resultados de Custo, é importante entender as duas opções principais de custo: CapEx (Despesas de capital) e OpEx (Despesas operacionais).
 

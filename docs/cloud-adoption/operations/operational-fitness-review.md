@@ -1,17 +1,17 @@
 ---
-title: 'Adoção da Nuvem Empresarial: Conceitos básicos operacionais'
+title: 'CAF: Conceitos básicos operacionais'
 description: Orientação sobre os conceitos básicos operacionais
 author: petertaylor9999
 ms.date: 09/20/2018
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: 26867e3ecce738f18c5a03ff41754281229851f4
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: afecf380b1a75d006f6f2bc0cb0e5058cd3feffc
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54481118"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55897092"
 ---
 # <a name="establishing-an-operational-fitness-review"></a>Estabelecer uma análise de adequação operacional
 
@@ -49,7 +49,7 @@ Em um nível elevado, o processo conta com duas fases. Na fase de pré-requisito
 
 As etapas nesta fase destinam-se a capturar os requisitos necessários para conduzir uma análise regular dos serviços importantes.
 
-- **Identificar operações de negócios críticas**. Identificar as operações de negócio **críticas para a missão** da empresa. Operações de negócios são independentes de qualquer funcionalidade de serviço de suporte. Em outras palavras, as operações de negócios representam atividades reais que a empresa precisa realizar e são suportadas por um conjunto de serviços de TI. O termo _crítico para a missão_, ou como alternativa _comercialmente crítico_, refletirá um grave impacto nos negócios se a operação for impedida. Por exemplo, uma loja online pode oferecer operações de negócios, como “permitir que um cliente adicione um item a um carrinho de compras” ou “processar um pagamento com cartão de crédito”. Se qualquer uma dessas operações falhasse, o cliente não poderia concluir a transação e a empresa não conseguiria realizar as vendas.
+- **Identificar operações de negócios críticas**. Identificar as operações de negócio críticas para a missão da empresa. Operações de negócios são independentes de qualquer funcionalidade de serviço de suporte. Em outras palavras, as operações de negócios representam atividades reais que a empresa precisa realizar e são suportadas por um conjunto de serviços de TI. O termo **crítico para a missão** (ou **comercialmente crítico**), refletirá um grave impacto nos negócios se a operação for impedida. Por exemplo, uma loja online pode oferecer operações de negócios, como “permitir que um cliente adicione um item a um carrinho de compras” ou “processar um pagamento com cartão de crédito”. Se qualquer uma dessas operações falhasse, o cliente não poderia concluir a transação e a empresa não conseguiria realizar as vendas.
 
 - **Mapear operações para serviços**. Mapeie essas operações de negócios para os serviços que dão suporte a elas. No exemplo do carrinho de compras acima, vários serviços podem estar envolvidos: um serviço de gerenciamento de estoque de inventário, um serviço do carrinho de compras, entre outros. No exemplo do pagamento com cartão de crédito acima, um serviço de pagamento local pode interagir com um serviço de processamento de pagamento de terceiros.
 
@@ -65,8 +65,7 @@ O scorecard deve ser expresso em termos simples para facilitar uma discussão re
 
 A fase de análise do serviço é o núcleo do processo de análise de adequação operacional.
 
-- **Medir métricas de serviço**. Usando as métricas de scorecard, os serviços devem ser monitorados para garantir o cumprimento das expectativas dos negócios. Isso significa que o serviço de monitoramento é essencial. Se não conseguir monitorar um conjunto de serviços em relação aos requisitos não funcionais, as métricas de scorecard correspondentes devem ter a indicação na cor vermelha. Nesse caso, a primeira etapa de correção é implementar o monitoramento de serviço apropriado.
-Por exemplo, se a empresa espera que um serviço opere com 99,99% de disponibilidade, mas não há qualquer telemetria de produção em vigor para medir a disponibilidade, você deve presumir que não está cumprindo o requisito.
+- **Medir métricas de serviço**. Usando as métricas de scorecard, os serviços devem ser monitorados para garantir o cumprimento das expectativas dos negócios. Isso significa que o serviço de monitoramento é essencial. Se não conseguir monitorar um conjunto de serviços em relação aos requisitos não funcionais, as métricas de scorecard correspondentes devem ter a indicação na cor vermelha. Nesse caso, a primeira etapa de correção é implementar o monitoramento de serviço apropriado. Por exemplo, se a empresa espera que um serviço opere com 99,99% de disponibilidade, mas não há qualquer telemetria de produção em vigor para medir a disponibilidade, você deve presumir que não está cumprindo o requisito.
 
 - **Planejar uma correção**. Para cada operação de serviço com métricas que ficam abaixo do limite aceitável, determine o custo de corrigir o serviço para que a operação tenha uma métrica aceitável. Se o custo de corrigir o serviço for maior que a geração de receita esperada do serviço, então considere os custos não tangíveis, como a experiência do cliente. Por exemplo, se os clientes têm dificuldade para concluir um pedido com êxito usando o serviço, eles podem escolher um concorrente.
 
@@ -78,7 +77,7 @@ Esse processo for iterativo e o ideal é que sua empresa tenha uma equipe dedica
 
 A equipe de análise de adequação operacional é composta pelas seguintes funções:
 
-1. **Proprietário da empresa**. Essa função fornece conhecimento sobre a empresa para identificar e priorizar cada operação de negócios “crítica para a missão”. Essa função também compara o custo de mitigação ao impacto nos negócios e está por trás da decisão final em relação à correção.
+1. **Proprietário da empresa**. Essa função fornece conhecimento sobre a empresa para identificar e priorizar cada operação de negócios crítica para a missão. Essa função também compara o custo de mitigação ao impacto nos negócios e está por trás da decisão final em relação à correção.
 
 2. **Consultor dos negócios**. Essa função é responsável por dividir as operações de negócios em partes menores e mapear essas partes para serviços e infraestrutura locais e na nuvem. A função requer um conhecimento profundo da tecnologia associada a cada operação de negócios.
 
@@ -107,10 +106,10 @@ Os detalhes do processo e a reunião devem ser adaptados para atender às suas n
 ## <a name="recommended-resources"></a>Recursos recomendados
 
 - [Pilares de qualidade do software](../../guide/pillars.md).
-Esta seção do guia de Arquitetura de aplicativo do Azure descreve os cinco pilares de qualidade do software: Escalabilidade, disponibilidade, resiliência, gerenciamento e segurança.
+    Esta seção do guia de Arquitetura de aplicativo do Azure descreve os cinco pilares de qualidade do software: Escalabilidade, disponibilidade, resiliência, gerenciamento e segurança.
 - [Dez princípios de design para aplicativos do Azure](../../guide/design-principles/index.md).
-Esta seção do guia de Arquitetura de Aplicativo do Azure aborda um conjunto de princípios de design para tornar seu aplicativo mais escalonável, resiliente e gerenciável.
+    Esta seção do guia de Arquitetura de Aplicativo do Azure aborda um conjunto de princípios de design para tornar seu aplicativo mais escalonável, resiliente e gerenciável.
 - [Projetar aplicativos resilientes para o Azure](../../resiliency/index.md).
-Este guia começa com uma definição do termo resiliência e conceitos relacionados. Em seguida, descreve um processo para a obtenção de resiliência, usando uma abordagem estruturada sobre o tempo de vida de um aplicativo, desde o design e a implementação até a implantação e as operações.
+    Este guia começa com uma definição do termo resiliência e conceitos relacionados. Em seguida, descreve um processo para a obtenção de resiliência, usando uma abordagem estruturada sobre o tempo de vida de um aplicativo, desde o design e a implementação até a implantação e as operações.
 - [Padrões de design na nuvem](../../patterns/index.md).
-Esses padrões de design são úteis para equipes de engenharia ao criar aplicativos sobre os pilares de qualidade do software.
+    Esses padrões de design são úteis para equipes de engenharia ao criar aplicativos sobre os pilares de qualidade do software.

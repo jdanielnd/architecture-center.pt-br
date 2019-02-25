@@ -1,20 +1,21 @@
 ---
-title: Criar um modelo financeiro para a transformação de nuvem
-titleSuffix: Enterprise Cloud Adoption
-description: Como criar um modelo financeiro para a transformação de nuvem
+title: 'CAF: Criar um modelo financeiro para a transformação de nuvem'
+titleSuffix: Microsoft Cloud Adoption Framework for Azure
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.custom: governance
+description: Como criar um modelo financeiro para a transformação de nuvem.
 author: BrianBlanchard
 ms.date: 12/10/2018
 ms.topic: guide
-ms.service: architecture-center
-ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: d1a5cd0cefef4786a0f55592cad58451c3cae9c4
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 4fe9b178962bf2cd6a79233278c73085237772f0
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54482170"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55898197"
 ---
-# <a name="enterprise-cloud-adoption-how-to-create-a-financial-model-for-cloud-transformation"></a>Adoção da Nuvem Empresarial: Como criar um modelo financeiro para a transformação de nuvem
+# <a name="create-a-financial-model-for-cloud-transformation"></a>Criar um modelo financeiro para a transformação de nuvem
 
 A criação de um modelo financeiro que representa com precisão o valor comercial total de uma transformação de nuvem pode ser complicado. Modelos financeiros e justificativas de negócios tendem a variar de uma organização para outra. Este artigo estabelece algumas fórmulas e aponta alguns aspectos que não costumam ser percebidos durante a criação de um modelo financeiro.
 
@@ -97,3 +98,10 @@ Uma exceção é quando capacidade operacional é fornecida por um provedor de s
 As CapEx (despesas de capita) são um pouco diferentes das despesas operacionais. Em geral, essa categoria é orientada pela expansão do datacenter ou pelos ciclos de atualização. Um exemplo de uma expansão de datacenter seria um novo cluster de alto desempenho hospedar uma solução de Big Data ou um data warehouse, e geralmente cabe em uma categoria de CapEx. Os ciclos de atualização básicos são mais comuns. Algumas empresas têm ciclos de atualização de hardware rígidos, o que significa que ativos são desativados e substituídos em um ciclo regular (normalmente a cada 3, 5 ou 8 anos). Esses ciclos geralmente coincidem com os ciclos de arrendamento do ativo ou do ciclo de vida previsto do equipamento. Quando um ciclo de atualização é concluído, o departamento de TI desembolsa CapEx para adquirir novos equipamentos.
 
 Se um ciclo de atualização é aprovado e está no orçamento, a Transformação de Nuvem pode ajudar a eliminar esse custo. Se um ciclo de atualização é planejado, mas ainda não aprovado, a Transformação de Nuvem pode criar uma provisão de custo de CapEx. Ambos os cenários seriam adicionados ao delta de custo.
+
+## <a name="next-steps"></a>Próximas etapas
+
+Ler alguns exemplos de resultados fiscais no contexto de uma transformação de nuvem.
+
+> [!div class="nextstepaction"]
+> [Exemplos de resultados fiscais](./business-outcomes/fiscal-outcomes.md)

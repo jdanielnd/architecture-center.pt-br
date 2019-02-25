@@ -7,18 +7,20 @@ ms.author: rodend
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: cbf3aae20639d26a73aac07e1b66374af09fbb38
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 681944e082238f82cdea4dec2831bb507f4073ae
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54486192"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55898384"
 ---
 # <a name="examples-of-implementing-azure-enterprise-scaffold"></a>Exemplos de implementação de scaffold do Azure Enterprise
+
 Este artigo fornece exemplos de como uma empresa pode implementar as recomendações para um [scaffold do Azure Enterprise](azure-scaffold.md). Ele usa uma empresa fictícia chamada Contoso para ilustrar as melhores práticas para cenários comuns.
 
 ## <a name="background"></a>Segundo plano
-A Contoso é uma empresa global que fornece soluções de cadeia de fornecimento para clientes. Fornecem tudo a partir de um Software como um modelo de serviço para um modelo de pacote implantado no local.  Eles desenvolvem software em todo o mundo, com centros de desenvolvimento significativos na Índia, Estados Unidos e Canadá.
+
+A Contoso é uma empresa global que fornece soluções de cadeia de fornecimento para clientes. Fornecem tudo a partir de um Software como um modelo de serviço para um modelo de pacote implantado no local. Eles desenvolvem software em todo o mundo, com centros de desenvolvimento significativos na Índia, Estados Unidos e Canadá.
 
 A parte de ISV da empresa é dividida em várias unidades comerciais independentes que gerenciam produtos em um negócio significativo. Cada unidade de negócios tem seus próprios desenvolvedores, gerentes de produto e arquitetos.
 
@@ -32,9 +34,11 @@ As pessoas seguir são usadas neste tópico:
 A Contoso precisa compilar um aplicativo de linha de negócios e um aplicativo voltado ao cliente. Ele decidiu executar os aplicativos no Azure. Dave leu o artigo [governança de assinatura prescritiva](azure-scaffold.md) e agora está pronto para implementar as recomendações.
 
 ## <a name="scenario-1-line-of-business-application"></a>Cenário 1: aplicativo de linha de negócios
-A Contoso está criando um sistema de gerenciamento de código-fonte (BitBucket) para ser usado pelos desenvolvedores em todo o mundo.  O aplicativo usa a IaaS (infraestrutura como serviço) para hospedagem e consiste em servidores Web e um servidor de banco de dados. Os desenvolvedores acessam servidores em seus ambientes de desenvolvimento, mas eles não precisam acessar os servidores no Azure. O ETS da Contoso deseja permitir que o proprietário do aplicativo e a equipe gerenciem o aplicativo. O aplicativo só está disponível enquanto está na rede corporativa da Contoso. Dave precisa configurar a assinatura para este aplicativo. A assinatura também hospeda outros softwares relacionados ao desenvolvedor no futuro.  
 
-### <a name="naming-standards--resource-groups"></a>Padrões de nomenclatura e grupos de recursos
+A Contoso está criando um sistema de gerenciamento de código-fonte (BitBucket) para ser usado pelos desenvolvedores em todo o mundo.  O aplicativo usa a IaaS (infraestrutura como serviço) para hospedagem e consiste em servidores Web e um servidor de banco de dados. Os desenvolvedores acessam servidores em seus ambientes de desenvolvimento, mas eles não precisam acessar os servidores no Azure. O ETS da Contoso deseja permitir que o proprietário do aplicativo e a equipe gerenciem o aplicativo. O aplicativo só está disponível enquanto está na rede corporativa da Contoso. Dave precisa configurar a assinatura para este aplicativo. A assinatura também hospeda outros softwares relacionados ao desenvolvedor no futuro.
+
+### <a name="naming-standards-and-resource-groups"></a>Padrões de nomenclatura e grupos de recursos
+
 Dave cria uma assinatura para dar suporte a ferramentas de desenvolvedor que são comuns a todas as unidades de negócios. Dave precisa criar nomes significativos para os grupos de recursos e a assinatura (para o aplicativo e as redes). Ele cria a seguinte assinatura e grupos de recursos:
 
 | item | NOME | DESCRIÇÃO |
@@ -44,7 +48,8 @@ Dave cria uma assinatura para dar suporte a ferramentas de desenvolvedor que sã
 | Grupo de recursos |corenetworks-prod-rg |Contém a conexão de gateway site a site e redes virtuais |
 
 ### <a name="role-based-access-control"></a>Controle de acesso baseado em função
-Depois de criar sua assinatura, Dave deseja garantir que as equipes e proprietários do aplicativo apropriados possam acessar seus recursos. Dave reconhece que cada equipe tem requisitos diferentes. Ele utiliza os grupos que foram sincronizados do AD (Active Directory) local da Contoso com o Azure Active Directory e fornece o nível certo de acesso para as equipes.
+
+Depois de criar sua assinatura, Dave deseja garantir que as equipes e proprietários do aplicativo apropriados possam acessar seus recursos. Dave reconhece que cada equipe tem requisitos diferentes. Ele usa os grupos que foram sincronizados do AD (Active Directory) local da Contoso com o Azure Active Directory e fornece o nível certo de acesso para as equipes.
 
 Dave atribui as funções a seguir para a assinatura:
 
@@ -56,10 +61,11 @@ Dave atribui as funções a seguir para a assinatura:
 | *Função personalizada* |Proprietário do aplicativo |Dave cria uma função que concede a capacidade de modificar os recursos no grupo de recursos. Para obter mais informações, veja [Funções personalizadas no RBAC do Azure](/azure/role-based-access-control/custom-roles) |
 
 ### <a name="policies"></a>Políticas
+
 Dave tem os seguintes requisitos para o gerenciamento de recursos na assinatura:
 
 * Como as ferramentas de desenvolvimento dão suporte a desenvolvedores em todo o mundo, ele não quer impedir que usuários criem recursos em qualquer região. No entanto, ele precisa saber onde os recursos são criados.
-* Ele está preocupado com os custos. Portanto, ele deseja impedir que os proprietários do aplicativo criem máquinas virtuais desnecessariamente caras.  
+* Ele está preocupado com os custos. Portanto, ele deseja impedir que os proprietários do aplicativo criem máquinas virtuais desnecessariamente caras.
 * Como esse aplicativo serve os desenvolvedores em várias unidades de negócios, ele deseja marcar cada recurso com o proprietário do aplicativo e unidade de negócios. Usando essas marcas, o ETS pode cobrar as equipes apropriadas.
 
 Ele cria as seguintes [políticas do Azure](/azure/azure-policy/azure-policy-introduction):
@@ -73,6 +79,7 @@ Ele cria as seguintes [políticas do Azure](/azure/azure-policy/azure-policy-int
 | marcas |acrescentar |Acrescentar o nome de marca **BusinessUnit** e valor da marca **ETS** a todos os recursos |
 
 ### <a name="resource-tags"></a>Marcações de recursos
+
 Dave entende que ele precisa ter informações específicas sobre a lista para identificar o centro de custo para a implementação do BitBucket. Além disso, Dave quer saber todos os recursos que o ETS tem.
 
 Ele adiciona as seguintes [marcas](/azure/azure-resource-manager/resource-group-using-tags) aos recursos e grupos de recursos.
@@ -84,6 +91,7 @@ Ele adiciona as seguintes [marcas](/azure/azure-resource-manager/resource-group-
 | BusinessUnit |**ETS** (a unidade de negócios associada à assinatura) |
 
 ### <a name="core-network"></a>Rede principal
+
 A equipe de informações de segurança e gerenciamento de riscos da Contoso ETS examina o plano proposto por Dave de mover o aplicativo para o Azure. Eles querem garantir que o aplicativo não seja exposto à Internet.  Dave também tem aplicativos de desenvolvedor que, no futuro, serão movidos para o Azure. Esses aplicativos exigem interfaces públicas.  Para atender a esses requisitos, ele fornece redes virtuais internas e externas e um grupo de segurança de rede para restringir o acesso.
 
 Ele cria os seguintes recursos:
@@ -95,6 +103,7 @@ Ele cria os seguintes recursos:
 | Grupo de Segurança de Rede |bitbucket-nsg |Garante que a superfície de ataque dessa carga de trabalho seja minimizada, permitindo conexões apenas na porta 443 para a sub-rede em que o aplicativo reside (`bitbucket`) |
 
 ### <a name="resource-locks"></a>Bloqueios de recurso
+
 Dave reconhece que a conectividade da rede corporativa da Contoso para a rede virtual interna deve ser protegida de qualquer script errático ou exclusão acidental.
 
 Ele cria o seguinte [bloqueio de recurso](/azure/azure-resource-manager/resource-group-lock-resources):
@@ -104,17 +113,21 @@ Ele cria o seguinte [bloqueio de recurso](/azure/azure-resource-manager/resource
 | **CanNotDelete** |internal-vnet |Impede que os usuários excluam a rede virtual ou sub-redes, mas não impede a adição de novas sub-redes |
 
 ### <a name="azure-automation"></a>Automação do Azure
+
 Dave não tem nada a automatizar para este aplicativo. Embora ele tenha criado uma conta de automação do Azure, inicialmente ele não a usará.
 
 ### <a name="azure-security-center"></a>Central de Segurança do Azure
-Gerenciamento de serviços de TI da Contoso precisa identificar e lidar com as ameaças rapidamente. Eles também desejam compreender quais problemas podem existir.  
+
+Gerenciamento de serviços de TI da Contoso precisa identificar e lidar com as ameaças rapidamente. Eles também desejam compreender quais problemas podem existir.
 
 Para atender a esses requisitos, Dave habilita a [Central de Segurança do Azure](/azure/security-center/security-center-intro) e fornece acesso à função do Leitor de Segurança.
 
 ## <a name="scenario-2-customer-facing-app"></a>Cenário 2: aplicativo voltado ao cliente
+
 A liderança de negócios na unidade de negócios da cadeia de fornecedores identificou várias oportunidades para aumentar o envolvimento com clientes da Contoso usando um cartão de fidelidade. Equipe de Alice deve criar esse aplicativo e decide que o Azure aumenta sua capacidade de atender às necessidades de negócios. Alice trabalha com Dave de ETS para configurar duas assinaturas para desenvolvimento e operação desse aplicativo.
 
 ### <a name="azure-subscriptions"></a>Assinaturas do Azure
+
 Dave faz logon no Azure Enterprise Portal e vê que o departamento de cadeia de fornecedores já existe.  No entanto, como esse projeto é o primeiro projeto de desenvolvimento da equipe de cadeia de fornecedores no Azure, Dave reconhece a necessidade de uma nova conta para a equipe de desenvolvimento de Alice.  Ele cria a conta "P&D" para sua equipe e atribui acesso para Alice. Alice faz logon por meio do Portal do Azure e cria duas assinaturas: uma para conter os servidores de desenvolvimento e outra para conter os servidores de produção.  Ela segue os padrões de nomenclatura estabelecidos anteriormente ao criar as seguintes assinaturas:
 
 | Uso de assinaturas | NOME |
@@ -123,6 +136,7 @@ Dave faz logon no Azure Enterprise Portal e vê que o departamento de cadeia de 
 | Produção |Contoso SupplyChain Operações LoyaltyCard Produção |
 
 ### <a name="policies"></a>Políticas
+
 Dave e Alice discutem o aplicativo e identificam que esse aplicativo atende apenas aos clientes na região da América do Norte.  Alice e sua equipe planejam usar o ambiente de serviço de aplicativo do Azure e Azure SQL para criar o aplicativo. Talvez eles precisem criar máquinas virtuais durante o desenvolvimento.  Alice quer garantir que seus desenvolvedores tenham os recursos necessários para explorar e examinar os problemas sem efetuar pull no ETS.
 
 Para a **assinatura de desenvolvimento**, eles criam a seguinte política:
@@ -145,6 +159,7 @@ Para a **assinatura de produção**, eles criam as seguintes políticas:
 Eles não limitam o tipo de sku que um usuário pode criar em produção.
 
 ### <a name="resource-tags"></a>Marcações de recursos
+
 Dave entende que ele precisa ter informações específicas para identificar os grupos de negócios corretos para cobrança e propriedade. Ele define as marcas de recurso para recursos e grupos de recursos.
 
 | Nome da marca | Valor da marca |
@@ -154,7 +169,8 @@ Dave entende que ele precisa ter informações específicas para identificar os 
 | EnvironmentType |**Produção** (mesmo que a assinatura inclua **Produção** no nome, a inclusão dessa marca permite uma identificação fácil ao examinar os recursos no portal ou na fatura) |
 
 ### <a name="core-networks"></a>Redes principais
-A equipe de informações de segurança e gerenciamento de riscos da Contoso ETS examina o plano proposto por Dave de mover o aplicativo para o Azure. Eles querem garantir que o aplicativo de cartão de fidelidade seja isolado e protegido adequadamente em uma rede DMZ.  Para atender a esse requisito, Dave e Alice criam uma rede virtual externa e um grupo de segurança de rede para isolar o aplicativo do cartão de fidelidade da rede corporativa Contoso.  
+
+A equipe de informações de segurança e gerenciamento de riscos da Contoso ETS examina o plano proposto por Dave de mover o aplicativo para o Azure. Eles querem garantir que o aplicativo de cartão de fidelidade seja isolado e protegido adequadamente em uma rede DMZ.  Para atender a esse requisito, Dave e Alice criam uma rede virtual externa e um grupo de segurança de rede para isolar o aplicativo do cartão de fidelidade da rede corporativa Contoso.
 
 Para a **assinatura de desenvolvimento**, eles criam:
 
@@ -170,6 +186,7 @@ Para a **assinatura de produção**, eles criam:
 | Grupo de Segurança de Rede |loyaltycard-nsg |Garante que a superfície de ataque dessa carga de trabalho seja minimizada, permitindo somente a comunicação de entrada na porta TCP 443.  A Contoso também está investigando o uso de um Firewall do aplicativo Web para obter proteção adicional |
 
 ### <a name="resource-locks"></a>Bloqueios de recurso
+
 Dave e Alice confabulam e optam por adicionar bloqueios de recurso a alguns dos principais recursos do ambiente para evitar a exclusão acidental durante um envio de código por push errôneo.
 
 Eles criam o bloqueio a seguir:
@@ -179,14 +196,17 @@ Eles criam o bloqueio a seguir:
 | **CanNotDelete** |external-vnet |Para evitar que pessoas excluam as sub-redes ou rede virtual. O bloqueio não impede a adição de novas sub-redes |
 
 ### <a name="azure-automation"></a>Automação do Azure
+
 Alice e sua equipe de desenvolvimento têm runbooks abrangentes para gerenciar o ambiente para esse aplicativo. Os Runbooks permitem a adição ou exclusão de nós para o aplicativo e outras tarefas de DevOps.
 
 Para usar esses runbooks, elas habilitam a [Automação](/azure/automation/automation-intro).
 
 ### <a name="azure-security-center"></a>Central de Segurança do Azure
-Gerenciamento de serviços de TI da Contoso precisa identificar e lidar com as ameaças rapidamente. Eles também desejam compreender quais problemas podem existir.  
+
+Gerenciamento de serviços de TI da Contoso precisa identificar e lidar com as ameaças rapidamente. Eles também desejam compreender quais problemas podem existir.
 
 Para atender a esses requisitos, Dave habilita a Central de Segurança do Azure. Ele garante que a Central de Segurança do Azure esteja monitorando os recursos e fornece acesso às equipes de DevOps e segurança.
 
 ## <a name="next-steps"></a>Próximas etapas
+
 * Para aprender sobre como criar modelos do Resource Manager, veja [Melhores práticas para criar modelos do Azure Resource Manager](/azure/azure-resource-manager/resource-manager-template-best-practices).

@@ -1,20 +1,22 @@
 ---
-title: O que é uma propriedade digital?
-titleSuffix: Enterprise Cloud Adoption
-description: Explicação sobre o conceito de uma propriedade digital
+title: 'CAF: O que é uma propriedade digital?'
+titleSuffix: Microsoft Cloud Adoption Framework for Azure
+description: O que é uma propriedade digital?
 author: BrianBlanchard
 ms.date: 12/10/2018
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: ce21a2d72fcb630f5f197dbd6b87b16ef8f41435
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: d23bdbdd98226e8b9cdb9bbb5fefa5a918a498d8
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54481534"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55898418"
 ---
-# <a name="enterprise-cloud-adoption-what-is-a-digital-estate"></a>Adoção da Nuvem Empresarial: O que é uma propriedade digital?
+<!-- markdownlint-disable MD026 -->
+
+# <a name="caf-what-is-a-digital-estate"></a>CAF: O que é uma propriedade digital?
 
 Todas as empresas modernas têm alguma forma de propriedade digital. Assim como uma propriedade física, uma propriedade digital é uma referência abstrata a um número de ativos de propriedade tangíveis. Em uma propriedade digital, esses ativos são compostos por VMs (máquinas virtuais), servidores, aplicativos, dados e assim por diante. Essencialmente, uma propriedade digital é a coleção de ativos de TI que capacitam os processos de negócios e operações de suporte.
 
@@ -53,4 +55,4 @@ Modelos financeiros e listas de pendências de migração podem ser modificadas 
 Antes de o planejamento de propriedade digital poder começar, você deve determinar a abordagem a ser usada.
 
 > [!div class="nextstepaction"]
-> [Determine a abordagem da análise](approach.md)
+> [Abordagens para planejamento de propriedade digital](approach.md)

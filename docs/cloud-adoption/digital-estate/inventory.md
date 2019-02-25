@@ -1,32 +1,32 @@
 ---
-title: Coletar dados de inventário para uma propriedade digital
-titleSuffix: Enterprise Cloud Adoption
-description: Como criar um inventário para uma propriedade digital
+title: 'CAF: Coletar dados de inventário para uma propriedade digital'
+titleSuffix: Microsoft Cloud Adoption Framework for Azure
+description: Como coletar dados de inventário para um estado digital.
 author: BrianBlanchard
 ms.date: 12/10/2018
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: 5c2f270cf8de81c8a94d1f924f51611e657ed0ed
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 0c68ff1e5ff51395698d37fb9b59c7a76c9479b7
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54481789"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55897245"
 ---
-# <a name="enterprise-cloud-adoption-gather-inventory-data-for-a-digital-estate"></a>Adoção da Nuvem Empresarial: Coletar dados de inventário para uma propriedade digital
+# <a name="gather-inventory-data-for-a-digital-estate"></a>Coletar dados de inventário para uma propriedade digital
 
 Desenvolver um inventário é a primeira etapa no [Planejamento de propriedade digital](overview.md). Nesse processo, uma lista de ativos de TI que dão suporte a funções de negócios específicas seria coletada para análise e racionalização posterior. Este artigo pressupõe que uma abordagem de baixo para cima à análise é mais apropriada para necessidades de planejamento. Para saber mais, confira [Abordagens para planejamento de propriedade digital](./approach.md).
 
-## <a name="how-can-a-digital-estate-be-inventoried"></a>Como uma propriedade digital pode ser inserida no inventário?
+## <a name="take-inventory-of-a-digital-estate"></a>Faça o inventário de um espaço digital
 
 O inventário que dá suporte a uma propriedade digital muda dependendo da Transformação Digital desejada e a Jornada de Transformação correspondente.
 
-- Transformação operacional: Durante uma transformação operacional, geralmente aconselhamos a coleta do inventário de ferramentas de exame que possam criar uma lista centralizada de todas as VMs e servidores. Algumas ferramentas também podem criar mapeamentos de rede e dependências, o que ajudará a definir o alinhamento da carga de trabalho.
+- **Transformação operacional**. Durante uma transformação operacional, geralmente aconselhamos a coleta do inventário de ferramentas de exame que possam criar uma lista centralizada de todas as VMs e servidores. Algumas ferramentas também podem criar mapeamentos de rede e dependências, o que ajudará a definir o alinhamento da carga de trabalho.
 
-- Transformação incremental: O inventário para uma transformação incremental começa com o cliente. O mapeamento da experiência do cliente do início ao fim é um bom lugar para começar. O alinhamento mapeado para aplicativos, APIs, dados e outros ativos criará um inventário detalhado para análise.
+- **Transformação incremental.** O inventário para uma transformação incremental começa com o cliente. O mapeamento da experiência do cliente do início ao fim é um bom lugar para começar. O alinhamento mapeado para aplicativos, APIs, dados e outros ativos criará um inventário detalhado para análise.
 
-- Transformação Interruptiva: A transformação interruptiva se concentra no produto ou serviço. A partir daí, um inventário incluiria um mapeamento das oportunidades de interrupção do mercado e dos recursos necessários.
+- **Transformação Interruptiva.** A transformação interruptiva se concentra no produto ou serviço. A partir daí, um inventário incluiria um mapeamento das oportunidades de interrupção do mercado e dos recursos necessários.
 
 ## <a name="accuracy-and-completeness-of-an-inventory"></a>Precisão e integridade de um inventário
 

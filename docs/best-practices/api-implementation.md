@@ -8,12 +8,12 @@ ms.topic: best-practice
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: aa69746b59ddfff02381dd811caa9a7aa62d8b7b
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 9b6bef0fd803db5b488e93d246642d4e3681a94c
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54484798"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55897755"
 ---
 # <a name="api-implementation"></a>Implementação da API
 

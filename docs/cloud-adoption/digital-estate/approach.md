@@ -1,20 +1,21 @@
 ---
-title: Abordagens para planejamento de propriedade digital
-titleSuffix: Enterprise Cloud Adoption
+title: 'CAF: Abordagens para planejamento de propriedade digital'
+titleSuffix: Microsoft Cloud Adoption Framework for Azure
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.custom: governance
 description: Descreve algumas abordagens ao planejamento de propriedade digital
 author: BrianBlanchard
 ms.date: 12/10/2018
 ms.topic: guide
-ms.service: architecture-center
-ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: 59c9e208254eaa0e8beb365718ef59d0694094f3
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 8b6c680cf477ea188cbd263ecc04389d6daaed89
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54482214"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55898010"
 ---
-# <a name="enterprise-cloud-adoption-approaches-to-digital-estate-planning"></a>Adoção da Nuvem Empresarial: Abordagens para planejamento de propriedade digital
+# <a name="approaches-to-digital-estate-planning"></a>Abordagens para planejamento de propriedade digital
 
 O planejamento de propriedade digital pode assumir diversas formas, dependendo dos resultados desejados e do tamanho da propriedade existente. Também há um várias opções relacionadas à abordagem usada. É importante definir as expectativas com relação à abordagem logo no início dos ciclos de planejamento. Expectativas incertas geralmente resultam em atrasos associados a exercícios adicionais de coleta de inventário. Este artigo descreve três abordagens para análise.
 
@@ -36,7 +37,7 @@ A abordagem orientada por ativos fornece um plano com base nos ativos que dão s
 
 ## <a name="incremental-approach"></a>Abordagem incremental
 
-Assim como grande parte da estrutura de Adoção de Nuvem Empresarial, sugerimos uma abordagem incremental. No caso do planejamento de propriedade digital, isso é igual a um processo com várias fases, como mostramos a seguir:
+Como grande parte do CAF, uma abordagem adicional é altamente recomendável. No caso do planejamento de propriedade digital, isso é igual a um processo com várias fases, como mostramos a seguir:
 
 - Análise de custo inicial: Se a validação financeira for necessária, comece com uma abordagem controlada por ativos, descrita acima, para obter um cálculo de custo inicial de toda a propriedade digital, sem racionalização. Isso estabelece um parâmetro de comparação de pior cenário possível.
 

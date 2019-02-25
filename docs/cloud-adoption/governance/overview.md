@@ -1,27 +1,45 @@
 ---
-title: 'Adoção do Enterprise Cloud: visão geral de governança'
-description: Visão geral do conteúdo de governança para a adoção do Enterprise Cloud do Azure
-author: petertaylor9999
-ms.date: 09/10/2018
-ms.topic: guide
-ms.service: architecture-center
-ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: a30c834bb92bcdd47ea812d9e368fb0e93fe8623
-ms.sourcegitcommit: eee3a35dd5a5a2f0dc117fa1c30f16d6db213ba2
+title: 'CAF: Governança de nuvem'
+description: Introdução ao conteúdo de governança de nuvem
+author: BrianBlanchard
+ms.date: 2/11/2019
+ms.openlocfilehash: 8a9701677eec913788ca72f86444a3600e170d07
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/06/2019
-ms.locfileid: "55781989"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55897364"
 ---
-# <a name="enterprise-cloud-adoption-governance-overview"></a>Adoção da Nuvem Empresarial: Visão geral de governança
+# <a name="cloud-governance-in-the-microsoft-caf-for-azure"></a>Governança de nuvem no CAF para o Azure
 
-Esta seção da adoção do Enterprise Cloud do Azure o tópico de *governança*. Se você for novo no tópico de governança no Azure, você pode começar com [o que é governança de recursos de nuvem?](../getting-started/what-is-governance.md) e [gerenciamento de acesso a recursos no Azure](../getting-started/azure-resource-access.md) na seção de [introdução](../getting-started/overview.md).
+A nuvem cria novos paradigmas sobre as tecnologias que dão suporte ao negócio. Esses novos paradigmas também causam turnos na maneira como essas tecnologias são adotadas, gerenciadas e controladas. Quando datacenters inteiros podem ser destruídos e recriados com uma linha de código executado a partir de um processo autônomo, é preciso repensar as abordagens tradicionais. Isso é igualmente verdadeiro quando se trata de governança.
 
-Caso esteja familiarizado com o conceito de governança, esta seção aborda [design de governança para uma carga de trabalho simples](governance-single-team.md) e [design de governança para várias equipes e várias cargas de trabalho](governance-multiple-teams.md). Ambos os documentos incluem um guia de implementação.
+Para organizações com as políticas existentes que regem ambientes de TI locais, governança de nuvem deve completar essas políticas. No entanto, o nível de integração de política corporativa entre os locais e a nuvem irão variar, dependendo do amadurecimento da governança de nuvem e propriedade digital na nuvem. À medida que o estado da nuvem evolui ao longo do tempo, o mesmo ocorrerá com os processos e políticas de governança da nuvem.
+
+As orientações nesta seção de CAF foram projetadas para duas finalidades:
+
+* Fornecer percursos de informações valiosas dos clientes que representam as experiências comuns que os clientes encontram normalmente. Cada um desses riscos comercias encapsulados, políticas corporativas para mitigação de risco e diretriz de design para implementar soluções técnicas. Por necessidade, as diretrizes de design são específicas para o Azure. Todas as outras diretrizes nesses percursos puderam ser aplicadas como parte de uma abordagem de nuvem independente ou com várias nuvens.
+* Ajudar os leitores a criar soluções personalizadas de governança que podem atender a uma variedade de necessidades comerciais, incluindo a governança de várias nuvens públicas, por meio de obter orientações detalhadas sobre o desenvolvimento de políticas corporativas, processos e as ferramentas.
+
+Este conteúdo destina-se a equipe de Governança de Nuvem. Também é relevante para os arquitetos de nuvem que precisam desenvolver uma base sólida de governança de nuvem.
+
+## <a name="audience"></a>Público-alvo
+
+O conteúdo no CAF afeta os negócios, tecnologia e cultura das empresas. Esta seção de CAF irá interagir intensamente com as equipes de Segurança de TI,Governança de TI, finanças, líderes de linha de negócios, rede, identidade e adoção de nuvem. Há várias co-dependências nessas personas que exigem uma abordagem facilitadora pelos arquitetos de nuvem usando essa diretriz. A facilitação com essas equipes pode ser um esforço único, mas em alguns casos, isso resultará em interações recorrentes com outras personas.
+
+O arquiteto de nuvem serve como o líder de ideias e facilitador para reunir esses públicos. O conteúdo nesta coleção de guias foi projetado para ajudar o arquiteto de nuvem a facilitar a conversa certa, com o público correto, para orientar decisões necessárias. A transformação de negócios que é capacitada pela nuvem depende da função do arquiteto de nuvem para ajudar a guiar as decisões em toda a empresa e IT.
+
+**Especialização de arquiteto de nuvem nesta seção:** Cada seção de CAF representa outra especialização ou variante da função do Arquiteto de Nuvem. Esta seção de CAF destina-se a arquitetos de nuvem com paixão por redução ou eliminação de riscos técnicos. Muitos provedores de nuvem se referem a esses especialistas como responsáveis da nuvem. Preferimos guardiões de nuvem ou, coletivamente, a equipe de Governança de nuvem. Em cada jornada do cliente acionável, os artigos mostram como a composição e a função da equipe de governança de nuvem podem ser alteradas ao longo do tempo.
+
+## <a name="using-this-guide"></a>Usando este guia
+
+Para leitores que desejam seguir este guia do início ao fim, esse conteúdo ajudará a desenvolver uma estratégia de governança de nuvem robusta em paralelo à implementação de nuvem. A diretriz orienta o leitor na teoria e implementação de uma estratégia.
+
+Para um curso intensivo na teoria e acesso rápido a implementação do Azure, comece com a [Visão geral de Percursos de Governança Acionáveis](./journeys/overview.md). Por meio deste guia, o leitor pode começar pequeno e evoluir suas necessidades de governança em paralelo aos seus esforços de adoção de nuvem.
 
 ## <a name="next-steps"></a>Próximas etapas
 
-Depois de aprender a criar e implementar um modelo de governança no Azure, você pode seguir para aprender como implantar uma [infraestrutura](../infrastructure/basic-workload.md) para o Azure.
+Revisão dos percursos de governança acionáveis.
 
 > [!div class="nextstepaction"]
-> [Saiba mais sobre o acesso aos recursos para uma única equipe](governance-single-team.md)
+> [Percursos de governança acionáveis](./journeys/overview.md)

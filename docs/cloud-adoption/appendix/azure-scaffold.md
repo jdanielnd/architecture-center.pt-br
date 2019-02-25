@@ -7,12 +7,12 @@ ms.date: 9/22/2018
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: 883f32b1533261977aa274f64c78762c9e7b13f3
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 86ac3a1c696479279962a17b01c2df73fb5a9849
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54484407"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55898316"
 ---
 # <a name="azure-enterprise-scaffold-prescriptive-subscription-governance"></a>Andaime do Azure Enterprise: Governança de assinatura prescritiva
 
@@ -71,7 +71,7 @@ Os três padrões comuns para inscrições do Azure são:
 
 Embora cada um desses padrões tenha o seu lugar, o padrão de **unidade de negócios** está sendo cada vez mais adotado devido à sua flexibilidade na criação de um modelo de custo da organização e porque ele reflete o alcance de controle. O grupo de Engenharia e Operações Fundamentais da Microsoft criou um subconjunto do padrão de **unidade de negócios** que é muito eficaz, modelado como **Federal**, **Estadual** e **Local**. (Para obter mais informações, consulte [Organizar assinaturas e grupos de recursos na empresa](https://azure.microsoft.com/blog/organizing-subscriptions-and-resource-groups-within-the-enterprise/).)
 
-### <a name="management-groups"></a>Grupos de Gerenciamento
+### <a name="azure-management-groups"></a>Grupos de gerenciamento do Azure
 
 A Microsoft lançou recentemente uma nova maneira de modelar sua hierarquia: [Grupos de gerenciamento do Azure](/azure/azure-resource-manager/management-groups-overview). Os grupos de gerenciamento são muito mais flexíveis do que os departamentos e contas e podem ser aninhados em até seis níveis. Os grupos de gerenciamento permitem que você crie uma hierarquia separada da sua hierarquia de cobrança, exclusivamente para o gerenciamento eficiente de recursos. Os grupos de gerenciamento podem espelhar sua hierarquia de cobrança; e as empresas começam desse modo muitas vezes. No entanto, o poder dos grupos de gerenciamento surge quando você os utiliza para modelar a organização de modo que as assinaturas relacionadas &mdash; independentemente de onde elas estejam na hierarquia de cobrança, &mdash; sejam agrupadas e precisem de funções comuns atribuídas, assim como iniciativas e políticas. Alguns exemplos:
 
@@ -97,7 +97,7 @@ O Azure Resource Manager permite colocar recursos em grupos significativos para 
 Os grupos de recursos não podem ser aninhados e os recursos podem pertencer apenas a um grupo de recursos. Algumas ações podem agir em todos os recursos em um grupo de recursos. Por exemplo, a exclusão de um grupo de recursos remove todos os recursos do grupo de recursos. Assim como as assinaturas, existem padrões comuns durante a criação de grupos de recursos e eles vão variar de cargas de trabalho de “TI tradicional” a cargas de trabalho de “TI Agile”:
 
 * As cargas de trabalho de “TI Tradicional” são mais frequentemente agrupadas por itens no mesmo ciclo de vida, como um aplicativo. O agrupamento por aplicativo permite o gerenciamento individual de aplicativo.
-* As cargas de trabalho "TI da Agile" tendem a se concentrar nos aplicativos de nuvem voltados para o cliente. Os grupos de recursos muitas vezes refletem as camadas da implantação (como Camada da Web, Camada de Aplicativo) e o gerenciamento.
+* As cargas de trabalho "TI da Agile" tendem a se concentrar nos aplicativos de nuvem voltados para o cliente. Os grupos de recursos muitas vezes refletem as camadas da implantação (como camada da web, camada de aplicativo) e o gerenciamento.
 
 > [!NOTE]
 > Noções básicas sobre sua carga de trabalho ajudam a desenvolver uma estratégia de grupo de recursos. Esses padrões podem ser misturados e combinados. Por exemplo, um grupo de recursos de serviços compartilhados na mesma assinatura como grupos de recursos “Agile”.
@@ -108,16 +108,16 @@ O primeiro pilar do andaime é um padrão consistente de nomenclatura. Os padrõ
 
 > [!TIP]
 > Para convenções de nomenclatura:
-> * Analise e adote onde possível as [Orientações de padrões e práticas](https://docs.microsoft.com/en-us/azure/architecture/best-practices/naming-conventions). Essas diretrizes ajudam a decidir sobre um padrão de nomenclatura significativo e fornece exemplos abrangentes.
+> * Analise e adote onde possível as [Orientações de padrões e práticas](/azure/architecture/best-practices/naming-conventions). Essas diretrizes ajudam a decidir sobre um padrão de nomenclatura significativo e fornece exemplos abrangentes.
 > * Usar políticas do Resource Manager para ajudar a impor padrões de nomenclatura
 >
->Lembre-se de que é difícil alterar nomes mais tarde, portanto, alguns minutos agora evitarão problemas mais tarde.
+> Lembre-se de que é difícil alterar nomes mais tarde, portanto, alguns minutos agora evitarão problemas mais tarde.
 
 Concentre-se nos padrões de nomenclatura desses recursos que são mais comumente usados e pesquisados.  Por exemplo, todos os grupos de recursos devem seguir um padrão bem definido para maior clareza.
 
 ### <a name="resource-tags"></a>Marcações de recursos
 
-As marcas de recurso estão alinhadas diretamente com padrões de nomenclatura. Conforme recursos são adicionados às assinaturas, torna-se cada vez mais importante categorizá-los logicamente para fins operacionais, de gerenciamento e de cobrança. Para obter mais informações, veja [Usar marcas para organizar os recursos do Azure](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-using-tags).
+As marcas de recurso estão alinhadas diretamente com padrões de nomenclatura. Conforme recursos são adicionados às assinaturas, torna-se cada vez mais importante categorizá-los logicamente para fins operacionais, de gerenciamento e de cobrança. Para obter mais informações, veja [Usar marcas para organizar os recursos do Azure](/azure/azure-resource-manager/resource-group-using-tags).
 
 > [!IMPORTANT]
 > As marcas podem conter informações pessoais e podem estar enquadradas nos regulamentos do RGPD. Planeje cuidadosamente o gerenciamento de suas marcas. Se você estiver buscando informações gerais sobre o GDPR, confira a seção sobre GDPR do [Portal de Confiança do Serviço](https://servicetrust.microsoft.com/ViewPage/GDPRGetStarted).
@@ -132,7 +132,7 @@ O Azure Policy e as Iniciativas do Azure são ainda mais eficientes quando usada
 
 ### <a name="common-uses-of-resource-manager-policies"></a>Usos comuns das políticas do Resource Manager
 
-As políticas e iniciativas do Azure são uma poderosa ferramenta do kit de ferramentas do Azure. As políticas permitem às empresas fornecer controles para cargas de trabalho de “TI tradicional” que permitem a estabilidade necessária para aplicativos de LOB, permitindo também cargas de trabalho “Agile”; por exemplo, desenvolver aplicativos de cliente sem expor a empresa a riscos adicionais. Os padrões mais comuns que vemos para políticas são:
+As políticas e iniciativas do Azure são uma poderosa ferramenta do kit de ferramentas do Azure. As políticas permitem às empresas fornecer controles para cargas de trabalho de “TI tradicional” que permitem a estabilidade necessária para aplicativos de linha de negócios, permitindo também cargas de trabalho “Agile”; por exemplo, desenvolver aplicativos de cliente sem expor a empresa a riscos adicionais. Os padrões mais comuns que vemos para políticas são:
 
 * **Domínio geográfico de conformidade/dados**. O Azure tem uma lista crescente de regiões em todo o mundo. As empresas geralmente precisam garantir que recursos em um determinado escopo permaneçam em uma região geográfica para atender aos requisitos regulatórios.
 * **Evite expor publicamente os servidores**. O Azure Policy pode impedir a implantação de certos tipos de recursos. Um uso comum é criar uma política para negar a criação de um IP público dentro de um determinado escopo, evitando a exposição não intencional de um servidor à Internet.
@@ -142,7 +142,7 @@ As políticas e iniciativas do Azure são uma poderosa ferramenta do kit de ferr
 
 A introdução de iniciativas ofereceu às empresas uma maneira de agrupar as políticas de lógicas e controlá-las como um todo. Iniciativas também oferecem suporte à empresa para atender às necessidades das cargas de trabalho “Agile” e “tradicionais”. Temos visto usos muito criativos de iniciativas, mas geralmente vemos:
 
-* **Habilitar o monitoramento na Central de Segurança do Azure**. Essa é uma iniciativa de padrão no Azure Policy e um ótimo exemplo sobre o que são as iniciativas. Ela permite políticas que identificam os bancos de dados SQL não criptografados, vulnerabilidades relacionadas à VM e necessidades de segurança mais comuns.
+* **Habilitar o monitoramento na Central de Segurança do Azure**. Essa é uma iniciativa de padrão no Azure Policy e um ótimo exemplo sobre o que são as iniciativas. Ela permite políticas que identificam os bancos de dados SQL não criptografados, vulnerabilidades relacionadas à máquina virtual (VM) e necessidades de segurança mais comuns.
 * **Iniciativa específica regulatória**. As empresas geralmente agrupam políticas comuns em um requisito regulatório (como HIPAA) para que os controles e a conformidade a esses controles sejam acompanhados com eficiência.
 * **Tipos de recurso e SKUs**. Criar uma iniciativa que restrinja os tipos de recursos que podem ser implantados, bem como as SKUs que podem ser implantadas pode ajudar a controlar os custos e garantir que sua organização esteja implantando somente recursos para os quais sua equipe possui o conjunto de qualificações e procedimentos para dar suporte.
 
@@ -169,7 +169,7 @@ Ao implementar acesso baseado em função, o código a seguir é altamente recom
 
 * Controle o Administrador/Coadministrador de uma assinatura já que essas funções têm permissões abrangentes. Você só precisa adicionar o Proprietário da Assinatura como um Coadministrador caso ele precise gerenciar implantações clássicas do Azure.
 
-* Use Grupos de Gerenciamento para atribuir [funções](/azure/azure-resource-manager/management-groups-overview#management-group-access) entre várias assinaturas e reduzir a carga de gerenciá-las no nível da assinatura.
+* Use grupos de gerenciamento para atribuir [funções](/azure/azure-resource-manager/management-groups-overview#management-group-access) entre várias assinaturas e reduzir a carga de gerenciá-las no nível da assinatura.
 * Adicione usuários do Azure a um grupo (por exemplo, Proprietários do Aplicativo X) no Active Directory. Use o grupo sincronizado para fornecer aos membros do grupo os direitos apropriados para gerenciar o grupo de recursos que contém o aplicativo.
 * Siga o princípio de conceder o **privilégio mínimo** exigido para realizar o trabalho esperado.
 
@@ -201,16 +201,16 @@ O “Kit de Segurança do DevOps para Azure” (AzSK) é uma coleção de script
 * Permitir o desenvolvimento seguro
 * Integrar segurança para CI/CD
 * Garantia contínua
-* Alertas e monitoramento
+* Monitoramento e alertas
 * Governança de risco na nuvem
 
-![Kit de ferramentas do Azure DevOps](_images/Secure_DevOps_Kit_Azure.png)
+![Kit de ferramentas de DevOps seguro](_images/Secure_DevOps_Kit_Azure.png)
 
 O AzSK é um conjunto avançado de ferramentas, scripts e informações que são uma parte importante de um plano de governança completo do Azure e incorporar isso no seu andaime é crucial para dar suporte a suas metas de gerenciamento de riscos de organizações
 
 ### <a name="azure-update-management"></a>Gerenciamento de Atualizações do Azure
 
-Uma das principais tarefas que podem ser feitas para proteger o ambiente é garantir que os servidores tenham as atualizações mais recentes. Embora haja várias ferramentas para fazer isso, o Azure fornece a solução de [Gerenciamento de Atualizações do Azure](/azure/automation/automation-update-management) para tratar da identificação e da distribuição de patches críticos do sistema operacional.  Ele faz uso da Automação do Azure (que é abordado na seção [Automatizar](#automate) mais adiante neste guia.
+Uma das principais tarefas que podem ser feitas para proteger o ambiente é garantir que os servidores tenham as atualizações mais recentes. Embora haja várias ferramentas para fazer isso, o Azure fornece a solução de [Gerenciamento de Atualizações do Azure](/azure/automation/automation-update-management) para tratar da identificação e da distribuição de patches críticos do sistema operacional. Usa a Automação do Azure, abordada na seção [Automatizar](#automate) mais adiante neste guia.
 
 ## <a name="monitor-and-alerts"></a>Monitoramento e alertas
 
@@ -305,16 +305,16 @@ A automação é um trabalho em tempo integral e ele rapidamente se tornará uma
 
 ## <a name="templates-and-devops"></a>Modelos e DevOps
 
-Conforme realçado na seção Automação, sua meta como uma organização deve ser provisionar recursos por meio de scripts e modelos controlados por código-fonte e para minimizar a configuração interativa de seus ambientes. Essa abordagem de “infraestrutura como código”, juntamente com um processo de DevOps disciplinado para implantação contínua pode garantir a consistência e reduzir desvios em seus ambientes. Quase todos os recursos do Azure podem ser implantados por meio de [modelos JSON do Azure Resource Manager (ARM)](/azure/azure-resource-manager/resource-group-template-deploy) em conjunto com o PowerShell ou com a CLI da plataforma Azure e ferramentas como a Terraform da Hashicorp (que tem um suporte de primeira classe e é integrado ao Azure Cloud Shell).
+Conforme realçado na seção Automação, sua meta como uma organização deve ser provisionar recursos por meio de scripts e modelos controlados por código-fonte e para minimizar a configuração interativa de seus ambientes. Essa abordagem de “infraestrutura como código”, juntamente com um processo de DevOps disciplinado para implantação contínua pode garantir a consistência e reduzir desvios em seus ambientes. Quase todos os recursos do Azure podem ser implantados por meio de [modelos JSON do Azure Resource Manager](/azure/azure-resource-manager/resource-group-template-deploy) em conjunto com o PowerShell ou com a CLI da plataforma Azure e ferramentas como a Terraform da Hashicorp (que tem um suporte de primeira classe e é integrado ao Azure Cloud Shell).
 
-Artigos como [este](https://blogs.msdn.microsoft.com/mvpawardprogram/2018/05/01/azure-resource-manager/) oferecem uma ótima discussão sobre as melhores práticas e lições aprendidas na aplicação de uma abordagem de DevOps para modelos do ARM com a cadeia de ferramentas do [Azure DevOps](/azure/devops/user-guide/?view=vsts). Demore o tempo e faça o esforço necessários para desenvolver um conjunto principal de modelos específicos para os requisitos da sua organização e para desenvolver pipelines de entrega contínua com cadeias de ferramentas do DevOps (Azure DevOps, Jenkins, Bamboo, Teamcity, Concourse), especialmente para ambientes de produção e de QA. Há uma grande biblioteca de [modelos de início rápido do Azure](https://github.com/Azure/azure-quickstart-templates) no GitHub que você pode usar como ponto de partida para modelos, e você pode criar rapidamente os pipelines de entrega baseado em nuvem com o Azure DevOps.
+Artigos como [este](https://blogs.msdn.microsoft.com/mvpawardprogram/2018/05/01/azure-resource-manager/) oferecem uma ótima discussão sobre as melhores práticas e lições aprendidas na aplicação de uma abordagem do DevOps para os modelos do Azure Resource Manager com a cadeia de ferramentas do [Azure DevOps](/azure/devops/user-guide/?view=vsts). Demore o tempo e faça o esforço necessários para desenvolver um conjunto principal de modelos específicos para os requisitos da sua organização e para desenvolver pipelines de entrega contínua com cadeias de ferramentas do DevOps (como Azure DevOps, Jenkins, Bamboo, Teamcity, Concourse), especialmente para ambientes de produção e de QA. Há uma grande biblioteca de [modelos de início rápido do Azure](https://github.com/Azure/azure-quickstart-templates) no GitHub que você pode usar como ponto de partida para modelos, e você pode criar rapidamente os pipelines de entrega baseado em nuvem com o Azure DevOps.
 
 Como uma prática recomendada para assinaturas de produção ou de grupos de recursos, sua meta deve ser utilizar segurança RBAC para impedir usuários interativos por padrão, e utilizar os pipelines de entrega contínua automatizados com base em entidades de serviço para provisionar todos os recursos e fornecer todo o código do aplicativo. Nenhum administrador ou desenvolvedor deve tocar o Portal do Azure para configurar os recursos de forma interativa. Esse nível de DevOps exige um esforço concentrado e utiliza todos os conceitos de andaime do Azure e fornece um ambiente consistente e mais seguro que atenda às suas organizações para aumentar a escala.
 
 > [!TIP]
-> Ao projetar e desenvolver modelos complexos do ARM, use [modelos vinculados](/azure/azure-resource-manager/resource-group-linked-templates) para organizar e refatorar relacionamentos complexos de arquivos JSON monolíticos. Isso permitirá que você gerencie recursos individualmente e faça seus modelos mais legíveis, testáveis e reutilizáveis.
+> Ao projetar e desenvolver modelos complexos do Azure Resource Manager, use [modelos vinculados](/azure/azure-resource-manager/resource-group-linked-templates) para organizar e refatorar relacionamentos complexos de arquivos JSON monolíticos. Isso permitirá que você gerencie recursos individualmente e faça seus modelos mais legíveis, testáveis e reutilizáveis.
 
-O Azure é um provedor de nuvem de grande escala e, ao mudar sua organização do mundo de servidores locais para a nuvem, utilizar os mesmos conceitos que provedores de nuvem e aplicativos SaaS utilizam fornecerá a sua organização a capacidade de reagir às necessidades dos negócios de uma maneira muito mais eficiente.
+O Azure é um provedor de nuvem de hiperescala e, ao mudar sua organização do mundo de servidores locais para a nuvem, utilizar os mesmos conceitos que provedores de nuvem e aplicativos SaaS utilizam fornecerá a sua organização a capacidade de reagir às necessidades dos negócios de uma maneira muito mais eficiente.
 
 ## <a name="core-network"></a>Rede principal
 
@@ -324,14 +324,14 @@ O componente final do modelo de referência de andaime do Azure é essencial par
 * **Rotas definidas pelo usuário** permitem que você manipule a tabela de rotas em uma sub-rede, permitindo o envio de tráfego por meio de uma solução de virtualização de rede ou para um gateway remoto em uma rede virtual emparelhada.
 * **Emparelhamento de rede virtual** permite que você conecte duas ou mais redes virtuais do Azure sem nenhum problema, criando designs de hub-spoke ou redes de serviços compartilhados mais complexos.
 * **Pontos de extremidade de serviço**. No passado, os serviços de PaaS contavam com métodos diferentes para proteger o acesso aos recursos de suas redes virtuais. Pontos de extremidade de serviço permitem que você proteja o acesso aos serviços de PaaS habilitados APENAS de pontos de extremidade conectados, aumentando a segurança como um todo.
-* **Grupos de segurança** são um amplo conjunto de regras que fornecem a você a capacidade de permitir ou negar o tráfego de entrada e saída para/de recursos do Azure. [Grupos de Segurança](/azure/virtual-network/security-overview) consistem em regras de segurança, que podem ser aumentadas com **Marcas de Serviço** (que definem os serviços do Azure comuns como AzureKeyVault, Sql e outros) e **Grupos de Aplicativos** (que definem a estrutura do aplicativo, como servidores Web, AppServers e assim por diante)
+* **Grupos de segurança** são um amplo conjunto de regras que fornecem a você a capacidade de permitir ou negar o tráfego de entrada e saída para/de recursos do Azure. [Grupos de Segurança](/azure/virtual-network/security-overview) consistem em Regras de Segurança, que podem ser aumentadas com **Marcas de Serviço** (que definem os serviços do Azure comuns como AzureKeyVault, Banco de Dados SQL do Microsoft Azure e outros) e **Grupos de Aplicativos** (que definem a estrutura do aplicativo, como servidores Web ou servidores de aplicativo).
 
 > [!TIP]
-> Usar marcas de serviço e grupos de aplicativos em seus grupos de segurança de rede não apenas melhoram a legibilidade das regras, que é essencial para entender o impacto, mas também possibilita uma microssegmentação eficaz dentro de uma sub-rede maior, reduzindo a expansão e aumentando a flexibilidade.
+> Usar marcas de serviço e grupos de aplicativos em seus grupos de segurança de rede não apenas melhoram a legibilidade das regras, &mdash; que é essencial para entender o impacto, &mdash; mas também possibilita uma microssegmentação eficaz dentro de uma sub-rede maior, reduzindo a expansão e aumentando a flexibilidade.
 
 ### <a name="virtual-data-center"></a>Data Center Virtual
 
-O Azure fornece recursos internos e recursos de terceiros da nossa extensa rede de parceiros que permitem que você tenha uma postura eficaz em relação à segurança. Mais importante, a Microsoft fornece as melhores práticas e orientações com o [Azure Data Center Virtual](/azure/architecture/vdc/networking-virtual-datacenter). Ao mudar de uma única carga de trabalho para várias cargas de trabalho que utilizam recursos híbridos, as diretrizes de VDC fornecerão “receita” para possibilitar uma rede flexível, que aumentará conforme as suas cargas de trabalho no Azure crescem.  
+O Azure fornece recursos internos e recursos de terceiros da nossa extensa rede de parceiros que permitem que você tenha uma postura eficaz em relação à segurança. Mais importante, a Microsoft fornece as melhores práticas e orientações com o [Azure Data Center Virtual](/azure/architecture/vdc/networking-virtual-datacenter). Ao mudar de uma única carga de trabalho para várias cargas de trabalho que utilizam recursos híbridos, as diretrizes de VDC fornecerão “receita” para possibilitar uma rede flexível, que aumentará conforme as suas cargas de trabalho no Azure crescem.
 
 ## <a name="next-steps"></a>Próximas etapas
 
