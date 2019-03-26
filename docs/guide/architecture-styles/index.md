@@ -7,13 +7,8 @@ ms.topic: landing-page
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.date: 08/30/2018
-ms.openlocfilehash: 6895ffc9c73dac29c27e7d8df68550c94f68b10a
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
-ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54480650"
 ---
+
 # <a name="architecture-styles"></a>Estilos de arquitetura
 
 Um *estilo de arquitetura* é uma família de arquiteturas que compartilham características específicas. Por exemplo, [de N camadas][n-tier] é um estilo de arquitetura comum. Mais recentemente, as [arquiteturas de microsserviço][microservices] começaram a ganhar espaço. Estilos de arquitetura não exigem o uso de tecnologias específicas, mas algumas tecnologias são adequadas para determinadas arquiteturas. Por exemplo, os contêineres são uma opção natural para microsserviços.
