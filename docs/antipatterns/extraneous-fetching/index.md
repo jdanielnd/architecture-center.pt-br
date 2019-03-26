@@ -8,13 +8,8 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: c1172531b332854a6d4940c072b61cb3f6bcd7ba
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
-ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54488181"
 ---
+
 # <a name="extraneous-fetching-antipattern"></a>Antipadrão de busca externa
 
 Recuperar mais dados que o necessário para uma operação de negócios pode resultar em sobrecarga de E/S desnecessária e reduzir a capacidade de resposta.

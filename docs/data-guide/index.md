@@ -1,19 +1,14 @@
 ---
 title: Guia de arquitetura de dados do Azure
-description: ''
+description: null
 author: zoinerTejada
 ms.date: 02/12/2018
 layout: LandingPage
 ms.topic: landing-page
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
-ms.openlocfilehash: 5fb74c6323f8dc571d827eb9a4c65a6c87d0ae36
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
-ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54487994"
 ---
+
 # <a name="azure-data-architecture-guide"></a>Guia de arquitetura de dados do Azure
 
 Este guia apresenta uma abordagem estruturada para a criação de soluções centradas em dados no Microsoft Azure. Ele se baseia em práticas comprovadas obtidas em engajamentos com clientes.

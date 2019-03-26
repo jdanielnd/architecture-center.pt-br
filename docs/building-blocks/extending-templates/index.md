@@ -6,13 +6,8 @@ ms.date: 06/09/2017
 ms.topic: article
 ms.service: architecture-center
 ms.subservice: reference-architecture
-ms.openlocfilehash: 108d82066d9867682c246c4de802849e2e561cbc
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
-ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54486430"
 ---
+
 # <a name="extend-azure-resource-manager-template-functionality"></a>Estender a funcionalidade de modelo do Azure Resource Manager
 
 Em 2016, a equipe de práticas e diretrizes da Microsoft criou um conjunto de [blocos de construção de modelo](https://github.com/mspnp/template-building-blocks/wiki) do Azure Resource Manager com o objetivo de simplificar a implantação de recursos. Cada bloco de construção contém um conjunto de modelos predefinidos que implantar conjuntos de recursos especificados por arquivos de parâmetros separados.

@@ -8,13 +8,8 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: networking
-ms.openlocfilehash: 6172866b08197b0ca1cd3aabb3c14c01b4f06f9c
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
-ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54486821"
 ---
+
 # <a name="choose-a-solution-for-connecting-an-on-premises-network-to-azure"></a>Escolha uma solução para conectar uma rede local ao Azure
 
 Este artigo compara opções para conectar uma rede local a uma VNet (rede Virtual) do Azure. Para cada opção, existe uma arquitetura de referência mais detalhada disponível.

@@ -8,13 +8,8 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: e3d6fbb789e422af22ce54b0defd6bb73099f15a
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
-ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54487263"
 ---
+
 # <a name="monolithic-persistence-antipattern"></a>Antipadrão de persistência monolítica
 
 Colocar todos os dados de um aplicativo em um único armazenamento de dados pode prejudicar o desempenho, pois leva à contenção de recursos ou porque o armazenamento de dados não é uma boa opção para alguns dos dados.

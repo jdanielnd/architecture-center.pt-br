@@ -6,14 +6,9 @@ ms.date: 07/02/2018
 ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
-ms.custom: seodec18, identity
-ms.openlocfilehash: 706cb63a65ce521e72ebc41a997dc900afacaab9
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
-ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54483897"
+ms.custom: 'seodec18, identity'
 ---
+
 # <a name="choose-a-solution-for-integrating-on-premises-active-directory-with-azure"></a>Escolha uma solução para a integração do Active Directory local ao Azure
 
 Esta série mostra opções para integrar seu ambiente do AD (Active Directory) local a uma rede do Azure. Para cada opção, existe uma arquitetura de referência mais detalhada disponível.

@@ -4,13 +4,8 @@ description: Arquitetura recomendada para aplicativos de IoT no Azure usando os 
 titleSuffix: Azure Reference Architectures
 author: MikeWasson
 ms.date: 01/09/2019
-ms.openlocfilehash: 5a4b104044f3e64ffdce98e3952201d397d41f33
-ms.sourcegitcommit: 700a4f6ce61b1ebe68e227fc57443e49282e35aa
-ms.translationtype: HT
-ms.contentlocale: pt-BR
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "55887345"
 ---
+
 # <a name="azure-iot-reference-architecture"></a>Arquitetura de referência de IoT do Azure
 
 Essa arquitetura de referência mostra uma arquitetura recomendada para aplicativos de IoT no Azure usando os componentes do PaaS (plataforma como serviço).

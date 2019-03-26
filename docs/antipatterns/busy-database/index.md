@@ -8,13 +8,8 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 7d3fe47407eff7168dfd227a1dd1bd5917c7d431
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
-ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54487025"
 ---
+
 # <a name="busy-database-antipattern"></a>Antipadrão de Banco de Dados Ocupado
 
 O processamento de descarregamento para um servidor de banco de dados pode fazer com que ele gaste uma proporção significativa de tempo de execução do código, em vez de responder às solicitações para armazenar e recuperar dados.
