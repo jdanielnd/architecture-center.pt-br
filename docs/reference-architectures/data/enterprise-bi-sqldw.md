@@ -9,11 +9,11 @@ ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18
 ms.openlocfilehash: 14adb9de7f46c3196e893451859385d87212b375
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54482370"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58243857"
 ---
 # <a name="enterprise-bi-in-azure-with-sql-data-warehouse"></a>Enterprise BI no Azure com o SQL Data Warehouse
 
@@ -49,7 +49,7 @@ Atualmente, o Azure Analysis Services dá suporte a modelos tabulares, mas não 
 
 **Power BI**. O Power BI é um conjunto de ferramentas de análise de negócios para analisar dados a fim de obter informações comerciais. Nessa arquitetura, ele consulta o modelo semântico armazenado no Analysis Services.
 
-### <a name="authentication"></a>Autenticação
+### <a name="authentication"></a>Authentication
 
 O **Azure AD (Azure Active Directory)** autentica os usuários que se conectam ao servidor do Analysis Services por meio do Power BI.
 

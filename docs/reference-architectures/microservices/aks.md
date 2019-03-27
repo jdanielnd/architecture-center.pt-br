@@ -7,21 +7,18 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: microservices
-ms.openlocfilehash: ac7ab8b8dd154999a05dc531e41b0994f66ddf10
-ms.sourcegitcommit: 700a4f6ce61b1ebe68e227fc57443e49282e35aa
+ms.openlocfilehash: c8ce4c77666ab7b9c55e6f144d514fadc6b6ad73
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "55887396"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58246077"
 ---
 # <a name="microservices-architecture-on-azure-kubernetes-service-aks"></a>Arquitetura de microsserviços no AKS (Serviço de Kubernetes do Azure)
 
 Essa arquitetura de referência mostra um aplicativo de microsserviços implantado no AKS (Serviço de Kubernetes do Azure). Ele mostra uma configuração básica do AKS que pode ser o ponto de partida para a maioria das implantações. Opções mais avançadas, incluindo opções avançadas de rede, serão abordadas em uma arquitetura de referência separada.
 
 Este artigo pressupõe conhecimentos básicos de Kubernetes. O artigo se concentra principalmente na infraestrutura e nas considerações de DevOps na execução de uma arquitetura de microsserviços no AKS. Para obter orientação sobre como criar microsserviços de uma perspectiva de DDD (Design Controlado por Domínio), consulte [Projetando, compilando e operando microsserviços no Azure](/azure/architecture/microservices).
-
-> [!NOTE]
-> Estamos trabalhando em uma RI (implementação de referência) para acompanhar este artigo, que esperamos publicar no início de 2019. Este artigo será atualizado para incorporar outras melhores práticas dessa RI.
 
 ![Arquitetura de referência do AKS](./_images/aks.png)
 
@@ -310,7 +307,7 @@ Nesta seção, apresentamos um possível fluxo de trabalho de CI/CD com base nas
 - A equipe usa o [Azure Pipelines](/azure/devops/pipelines) para executar o processo de CI/CD.
 - A equipe usa [namespaces](/azure/container-registry/container-registry-best-practices#repository-namespaces) no Registro de Contêiner do Azure para isolar as imagens que foram aprovadas para a produção das imagens que ainda estão sendo testadas.
 
-Neste exemplo, um desenvolvedor está trabalhando em um microsserviço chamado Serviço de Entrega. (O nome vem da implementação de referência descrita [aqui](../../microservices/index.md#the-drone-delivery-application).) Ao desenvolver um novo recurso, o desenvolvedor coloca código em um branch de recursos.
+Neste exemplo, um desenvolvedor está trabalhando em um microsserviço chamado Serviço de Entrega. (O nome vem da implementação de referência descrita [aqui](../../microservices/design/index.md#scenario).) Ao desenvolver um novo recurso, o desenvolvedor coloca código em um branch de recursos.
 
 ![Fluxo de trabalho de CI/CD](./_images/aks-cicd-1.png)
 

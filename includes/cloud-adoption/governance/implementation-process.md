@@ -4,7 +4,7 @@
 
 As decisões a seguir procedem de equipes externas à equipe de Governança de Nuvem. A implementação de cada uma decorrerá dessas mesmas equipes. No entanto, a equipe de Governança de Nuvem é responsável por implementar uma solução para validar que essas implementações sejam aplicadas de forma consistente.
 
-### <a name="identity-baseline"></a>Linha de Base da Identidade
+### <a name="identity-baseline"></a>Linha de base de identidade
 
 A Linha de Base da Identidade é o ponto de partida fundamental para toda a governança. A identidade deverá ser estabelecida antes de tentar aplicar a governança. Em seguida, a estratégia de identidade estabelecida será aplicada pelas soluções de governança.
 Nesse percurso de governança, a equipe de Gerenciamento de Identidades implementa o padrão de **Sincronização de Diretório**:
@@ -36,7 +36,7 @@ Nessa perspectiva, é recomendável um padrão **Nativo de Nuvem** para criptogr
 - Nenhum requisito de governança foi definido relacionado ao uso de criptografia porque a atual política corporativa não permite dados protegidos ou críticos na nuvem.
 - Uma análise adicional será necessária antes de liberar dados protegidos ou cargas de trabalho críticas
 
-## <a name="policy-enforcement"></a>Imposição da política
+## <a name="policy-enforcement"></a>Aplicação de políticas
 
 A primeira decisão ser tomada em relação à Aceleração de Implantação é o padrão da imposição. Nessa abordagem, a equipe de governança decidiu implementar o padrão de **Imposição Automatizada**.
 

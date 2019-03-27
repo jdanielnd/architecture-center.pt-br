@@ -10,11 +10,11 @@ author: BrianBlanchard
 layout: LandingPage
 ms.topic: landing-page
 ms.openlocfilehash: 14569b8db68434ee30fa7bff7fba2da5fa537049
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900379"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58242027"
 ---
 # <a name="caf-identity-baseline-discipline-overview"></a>CAF: Visão geral da disciplina de Linha de Base de Identidade
 

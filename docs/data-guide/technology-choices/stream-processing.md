@@ -7,11 +7,11 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.openlocfilehash: 342e44d960682c72901a7482caaf328514eb73d8
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54486094"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58246297"
 ---
 # <a name="choosing-a-stream-processing-technology-in-azure"></a>Escolhendo uma tecnologia de processamento de fluxo no Azure
 
@@ -69,10 +69,10 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 
 | | Stream Analytics do Azure | HDInsight com Spark Streaming | Apache Spark no Azure Databricks | HDInsight com Storm | Funções do Azure | WebJobs no Serviço de Aplicativo do Azure |
 | --- | --- | --- | --- | --- | --- | --- |
-| Suporte a janelas internas/temporal | SIM | sim | sim | sim | Não | Não  |
+| Suporte a janelas internas/temporal | Sim | sim | sim | sim | Não | Não  |
 | Formatos de dados de entrada | Avro, JSON ou CSV, codificados em UTF-8 | Qualquer formato que usa um código personalizado | Qualquer formato que usa um código personalizado | Qualquer formato que usa um código personalizado | Qualquer formato que usa um código personalizado | Qualquer formato que usa um código personalizado |
 | Escalabilidade | [Partições de consulta](/azure/stream-analytics/stream-analytics-parallelization) | Limitado pelo tamanho do cluster | Limitado pela configuração de escala de cluster do Databricks | Limitado pelo tamanho do cluster | Até 200 instâncias de aplicativo de funções processadas em paralelo | Limitado pela capacidade do plano de serviço de aplicativo |
-| Suporte à chegada tardia e manipulação de eventos fora de ordem | SIM | sim | sim | sim | Não | Não  |
+| Suporte à chegada tardia e manipulação de eventos fora de ordem | Sim | sim | sim | sim | Não | Não  |
 
 Consulte também:
 

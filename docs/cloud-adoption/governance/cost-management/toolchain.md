@@ -8,11 +8,11 @@ ms.date: 02/11/2019
 description: Ferramentas de Gerenciamento de Custos no Azure
 author: BrianBlanchard
 ms.openlocfilehash: 58dfa604863f704fd9b9fbb8d0693447cecdaf84
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900231"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58246597"
 ---
 # <a name="cost-management-tools-in-azure"></a>Ferramentas de Gerenciamento de Custos no Azure
 

@@ -4,11 +4,11 @@ description: Migre aplicativos de ambientes de mainframe no Azure, uma infraestr
 author: njray
 ms.date: 12/27/2018
 ms.openlocfilehash: 41fc799f15500276ada1667121e5f1fce3413a3a
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900214"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58247257"
 ---
 # <a name="mainframe-migration-overview"></a>Visão geral da migração de mainframe
 

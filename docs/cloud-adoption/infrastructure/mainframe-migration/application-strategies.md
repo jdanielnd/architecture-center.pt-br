@@ -3,12 +3,12 @@ title: 'Migração de mainframe: Migração de aplicativos de mainframe'
 description: Migre aplicativos de ambientes de mainframe no Azure, uma infraestrutura escalonável, altamente disponível e comprovada para sistemas que atualmente executam em mainframes
 author: njray
 ms.date: 12/26/2018
-ms.openlocfilehash: dcae5077e26ab8ba9b08e0da71a5e69d0d9f62e3
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.openlocfilehash: 2a22eb038da693671ce309c76afcfc41946034f3
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900227"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58246387"
 ---
 # <a name="mainframe-application-migration"></a>Migração de aplicativos de mainframe
 
@@ -168,7 +168,7 @@ Migrar soluções de um mainframe para o Azure pode envolver uma migração *pre
 
 Um cenário comum é mover um aplicativo no Azure enquanto mantém os dados usados pelo aplicativo no mainframe. Software específico é usado para permitir que os aplicativos no Azure acessem dados de mainframe. Felizmente, uma ampla gama de soluções fornece integração entre o Azure e os ambientes existentes de mainframe, suporte para cenários híbridos e migração ao longo do tempo. Parceiros da Microsoft, fornecedores independentes de software e integradores de sistema podem ajudá-lo em seu percurso.
 
-Uma opção é o [Microsoft Host Integration Server](https://docs.microsoft.com/host-integration-server/) (HIS), uma solução que fornece a arquitetura distribuída de banco de dados relacional (DRDA) necessária para aplicativos no Azure para acessar dados no DB2 que permanece no mainframe. Outras opções para integração com o mainframe no Azure incluem soluções da IBM, Attunity, Codit, outros fornecedores e opções de software livre.
+Uma opção é o [Microsoft Host Integration Server](/host-integration-server) (HIS), uma solução que fornece a arquitetura distribuída de banco de dados relacional (DRDA) necessária para aplicativos no Azure para acessar dados no DB2 que permanece no mainframe. Outras opções para integração com o mainframe no Azure incluem soluções da IBM, Attunity, Codit, outros fornecedores e opções de software livre.
 
 ## <a name="partner-solutions"></a>Soluções de parceiros
 
@@ -188,4 +188,4 @@ Para saber mais, consulte os recursos a seguir:
 
 - [Implantar o IBM DB2 pureScale no Azure](https://azure.microsoft.com/resources/deploy-ibm-db2-purescale-on-azure)
 
-- [Documentação do Host Integration Server (HIS)](https://docs.microsoft.com/host-integration-server/)
+- [Documentação do Host Integration Server (HIS)](/host-integration-server)

@@ -1,14 +1,17 @@
 ---
 title: 'CAF: O que é a governança dos recursos da nuvem?'
+titleSuffix: Microsoft Cloud Adoption Framework for Azure
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.date: 02/11/2019
 description: Governança de recursos de nuvem de explicação no Azure
 author: petertaylor9999
-ms.date: 2/11/2019
-ms.openlocfilehash: ec8b0b04ac8a4782c215359cf907c3c092ae2f4d
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.openlocfilehash: 5d022e83a1c97a5e5af8208ec00339575bb88be1
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55897942"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58242117"
 ---
 <!-- markdownlint-disable MD026 -->
 
@@ -20,7 +23,11 @@ No entanto, enquanto irrestrito fornecendo acesso a recursos para desenvolvedore
 
 A solução para esse problema é a **governança** de acesso a recursos. Governança refere-se ao processo contínuo de gerenciamento, monitoramento e auditoria, o uso de recursos do Azure para atender as metas e requisitos da sua organização.
 
+<!-- markdownlint-disable MD034 -->
+
 > [!VIDEO https://www.microsoft.com/en-us/videoplayer/embed/RE2ii94]
+
+<!-- markdownlint-enable MD034 -->
 
 Essas metas e requisitos são exclusivos de cada organização e, portanto, não é possível ter uma abordagem única para governança. Em vez disso, o Azure implementa duas ferramentas de governança primária, **RBAC (controle de acesso baseado em função)** e **política de recursos**, e depende de cada organização criar seu modelo de governança usando essas ferramentas.
 

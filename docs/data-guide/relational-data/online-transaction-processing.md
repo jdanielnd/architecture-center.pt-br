@@ -7,11 +7,11 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.openlocfilehash: c6cc628977b438578f2d88d1928afcd75ddddbcd
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54481806"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58244947"
 ---
 # <a name="online-transaction-processing-oltp"></a>OLTP (processamento de transações online)
 
@@ -37,10 +37,10 @@ Os dados transacionais tendem a ter as seguintes características:
 | Esquema | Esquema na gravação, altamente imposto|
 | Consistência | Coerência forte, garantia de ACID |
 | Integridade | Alta integridade |
-| Usa transações | SIM |
+| Usa transações | Sim |
 | Estratégia de bloqueio | Pessimista ou otimista|
-| Atualizável | SIM |
-| Acrescentável | SIM |
+| Atualizável | Sim |
+| Acrescentável | Sim |
 | Carga de trabalho | Gravações intensas, leituras moderadas |
 | Indexação | Índices primários e secundários |
 | Tamanho do dado | De pequeno a médio |
@@ -104,7 +104,7 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 
 |                              | Banco de Dados SQL do Azure | SQL Server em uma máquina virtual do Azure | Banco de Dados do Azure para MySQL | Banco de Dados do Azure para PostgreSQL |
 |------------------------------|--------------------|----------------------------------------|--------------------------|-------------------------------|
-|      É um Serviço Gerenciado      |        SIM         |                   Não                    |           sim            |              SIM              |
+|      É um Serviço Gerenciado      |        Sim         |                   Não                    |           sim            |              Sim              |
 |       É executado na plataforma       |        N/D         |         Windows, Linux, Docker         |           N/D            |              N/D              |
 | Programação <sup>1</sup> |   T-SQL, .NET, R   |         T-SQL, .NET, R, Python         |  T-SQL, .NET, R, Python  |              SQL              |
 
@@ -117,39 +117,39 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 | | Banco de Dados SQL do Azure | SQL Server em uma máquina virtual do Azure| Banco de Dados do Azure para MySQL | Banco de Dados do Azure para PostgreSQL|
 | --- | --- | --- | --- | --- | --- |
 | Tamanho máximo da instância do banco de dados | [4 TB](/azure/sql-database/sql-database-resource-limits) | 256 TB | [1 TB](/azure/mysql/concepts-limits) | [1 TB](/azure/postgresql/concepts-limits) |
-| Dá suporte a pools de capacidade  | SIM | sim | Não | Não  |
+| Dá suporte a pools de capacidade  | Sim | sim | Não | Não  |
 | Dá suporte à expansão de clusters  | Não  | Sim | Não | Não  |
-| Escalabilidade dinâmica (escalar verticalmente)  | SIM | Não  | sim | SIM |
+| Escalabilidade dinâmica (escalar verticalmente)  | Sim | Não  | sim | Sim |
 
 ### <a name="analytic-workload-capabilities"></a>Funcionalidades de carga de trabalho analítica
 
 | | Banco de Dados SQL do Azure | SQL Server em uma máquina virtual do Azure| Banco de Dados do Azure para MySQL | Banco de Dados do Azure para PostgreSQL|
 | --- | --- | --- | --- | --- | --- |
-| Tabelas temporais | SIM | sim | Não | Não  |
-| Tabelas em memória (com otimização de memória) | SIM | sim | Não | Não  |
-| Suporte de columnstore | SIM | sim | Não | Não  |
-| Processamento de consulta adaptável | SIM | sim | Não | Não  |
+| Tabelas temporais | Sim | sim | Não | Não  |
+| Tabelas em memória (com otimização de memória) | Sim | sim | Não | Não  |
+| Suporte de columnstore | Sim | sim | Não | Não  |
+| Processamento de consulta adaptável | Sim | sim | Não | Não  |
 
 ### <a name="availability-capabilities"></a>Recursos de disponibilidade
 
 | | Banco de Dados SQL do Azure | SQL Server em uma máquina virtual do Azure| Banco de Dados do Azure para MySQL | Banco de Dados do Azure para PostgreSQL|
 | --- | --- | --- | --- | --- | --- |
-| Secundários legíveis | SIM | sim | Não | Não  |
-| Replicação geográfica | SIM | sim | Não | Não  |
-| Failover automático para o secundário | SIM | Não | Não | Não |
-| Restauração pontual | SIM | sim | sim | SIM |
+| Secundários legíveis | Sim | sim | Não | Não  |
+| Replicação geográfica | Sim | sim | Não | Não  |
+| Failover automático para o secundário | Sim | Não | Não | Não |
+| Restauração pontual | Sim | sim | sim | Sim |
 
 ### <a name="security-capabilities"></a>Funcionalidades de segurança
 
 |                                                                                                             | Banco de Dados SQL do Azure | SQL Server em uma máquina virtual do Azure | Banco de Dados do Azure para MySQL | Banco de Dados do Azure para PostgreSQL |
 |-------------------------------------------------------------------------------------------------------------|--------------------|----------------------------------------|--------------------------|-------------------------------|
-|                                             Segurança em nível de linha                                              |        SIM         |                  sim                   |           sim            |              SIM              |
-|                                                Mascaramento de dados                                                 |        SIM         |                  sim                   |            Não            |              Não                |
-|                                         Transparent Data Encryption                                         |        SIM         |                  sim                   |           sim            |              SIM              |
-|                                  Restringir o acesso a endereços IP específicos                                   |        SIM         |                  sim                   |           sim            |              SIM              |
-|                                  Restringir o acesso para permitir apenas o acesso da VNET                                  |        SIM         |                  sim                   |            Não            |              Não                |
-|                                    Autenticação do Azure Active Directory                                    |        SIM         |                  sim                   |            Não            |              Não                |
+|                                             Segurança em nível de linha                                              |        Sim         |                  sim                   |           sim            |              Sim              |
+|                                                Mascaramento de dados                                                 |        Sim         |                  sim                   |            Não            |              Não                |
+|                                         Transparent Data Encryption                                         |        Sim         |                  sim                   |           sim            |              Sim              |
+|                                  Restringir o acesso a endereços IP específicos                                   |        Sim         |                  sim                   |           sim            |              Sim              |
+|                                  Restringir o acesso para permitir apenas o acesso da VNET                                  |        Sim         |                  sim                   |            Não            |              Não                |
+|                                    Autenticação do Azure Active Directory                                    |        Sim         |                  sim                   |            Não            |              Não                |
 |                                       Autenticação do Active Directory                                       |         Não          |                  Sim                   |            Não            |              Não                |
-|                                         Autenticação multifator                                         |        SIM         |                  sim                   |            Não            |              Não                |
-| Dá suporte ao [Always Encrypted](/sql/relational-databases/security/encryption/always-encrypted-database-engine) |        SIM         |                  sim                   |           sim            |              Não                |
+|                                         Autenticação multifator                                         |        Sim         |                  sim                   |            Não            |              Não                |
+| Dá suporte ao [Always Encrypted](/sql/relational-databases/security/encryption/always-encrypted-database-engine) |        Sim         |                  sim                   |           sim            |              Não                |
 |                                                 IP Privado                                                  |         Não          |                  sim                   |           sim            |              Não                |

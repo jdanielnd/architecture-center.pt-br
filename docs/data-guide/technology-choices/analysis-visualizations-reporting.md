@@ -8,11 +8,11 @@ ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: data-analytics
 ms.openlocfilehash: 72b889e2fe0d862ab1ff280cea76c2880b0fadc4
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54481909"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58245947"
 ---
 # <a name="choosing-a-data-analytics-technology-in-azure"></a>Escolhendo uma tecnologia de análise de dados no Azure
 
@@ -89,16 +89,16 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 
 | | Power BI | Notebooks Jupyter | Zeppelin Notebooks | Microsoft Azure Notebooks |
 | --- | --- | --- | --- | --- |
-| Conectar-se a um cluster de Big Data para processamento avançado | SIM | sim | sim | Não  |
-| Serviço gerenciado | SIM | Sim <sup>1</sup> | Sim <sup>1</sup> | SIM |
-| Conectar-se a centenas de fontes de dados | SIM | Não | Não | Não  |
+| Conectar-se a um cluster de Big Data para processamento avançado | Sim | sim | sim | Não  |
+| Serviço gerenciado | Sim | Sim <sup>1</sup> | Sim <sup>1</sup> | Sim |
+| Conectar-se a centenas de fontes de dados | Sim | Não | Não | Não  |
 | Funcionalidades offline | Sim <sup>2</sup> | Não  | Não | Não  |
-| Funcionalidades de inserção | SIM | Não | Não | Não  |
-| Atualização automática de dados | SIM | Não | Não | Não  |
+| Funcionalidades de inserção | Sim | Não | Não | Não  |
+| Atualização automática de dados | Sim | Não | Não | Não  |
 | Acesso a vários pacotes de software livre | Não  | Sim <sup>3</sup> | Sim <sup>3</sup> | Sim <sup>4</sup> |
 | Opções de transformação/limpeza de dados | [Power Query](https://powerbi.microsoft.com/blog/getting-started-with-power-query-part-i/), R | 40 linguagens, incluindo Python, R, Julia e Scala | Mais de 20 interpretadores, incluindo Python, JDBC e R | Python, F#, R |
 | Preços | Gratuito para o Power BI Desktop (criação); consulte [Preços](https://powerbi.microsoft.com/pricing/) para obter as opções de hospedagem | Grátis | Grátis | Grátis |
-| Colaboração de multiusuário | [Sim](/power-bi/service-how-to-collaborate-distribute-dashboards-reports) | Sim (por meio de compartilhamento ou com um servidor de multiusuário como o [JupyterHub](https://github.com/jupyterhub/jupyterhub)) | SIM | Sim (por meio de compartilhamento) |
+| Colaboração de multiusuário | [Sim](/power-bi/service-how-to-collaborate-distribute-dashboards-reports) | Sim (por meio de compartilhamento ou com um servidor de multiusuário como o [JupyterHub](https://github.com/jupyterhub/jupyterhub)) | Sim | Sim (por meio de compartilhamento) |
 
 <!-- markdownlint-enable MD033 -->
 

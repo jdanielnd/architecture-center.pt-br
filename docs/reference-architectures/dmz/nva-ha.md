@@ -8,12 +8,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18, networking
-ms.openlocfilehash: a0973fad14bd9b4e81ec9940c83b8ebb31e9599b
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 18a8620d835488be7a3639e8fbde86f9f10f946c
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54486771"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58244987"
 ---
 # <a name="deploy-highly-available-network-virtual-appliances"></a>Implantar soluções de virtualização de rede altamente disponíveis
 
@@ -54,7 +54,7 @@ A figura a seguir mostra uma arquitetura de alta disponibilidade que implementa 
 A vantagem dessa arquitetura é que todas as NVAs estão ativas e, se uma falhar, o balanceador de carga direciona o tráfego de rede para a outra NVA. Ambas NVAs encaminham o tráfego para o balanceador de carga interno, portanto, desde que uma NVA esteja ativa, o tráfego continuará a fluir. As NVAs são necessárias para terminar o tráfego SSL destinado a VMs da camada da Web. Essas NVAs não podem ser estendidas para lidar com o tráfego local porque este requer outro conjunto dedicado de NVAs com suas próprias rotas de rede.
 
 > [!NOTE]
-> Essa arquitetura é usada nas arquiteturas de referência de [DMZ entre o Azure e seu datacenter local][dmz-on-prem] e de [DMZ entre o Azure e a Internet][dmz-internet]. Todas essas arquiteturas de referência incluem uma solução de implantação que você pode usar. Siga os links abaixo para obter mais informações.
+> Essa arquitetura é usada nas arquiteturas de referência de [DMZ entre o Azure e seu datacenter local][dmz-on-premises] e de [DMZ entre o Azure e a Internet][dmz-internet]. Todas essas arquiteturas de referência incluem uma solução de implantação que você pode usar. Siga os links abaixo para obter mais informações.
 
 ## <a name="egress-with-layer-7-nvas"></a>Saída com NVAs na camada 7
 
@@ -65,7 +65,7 @@ A arquitetura anterior pode ser expandida para fornecer uma DMZ de saída para s
 Nessa arquitetura, todo o tráfego originado no Azure é encaminhado para um balanceador de carga interno. O balanceador de carga distribui solicitações de saída entre um conjunto de NVAs. Essas NVAs direcionam o tráfego para a Internet usando os endereços IP públicos individuais.
 
 > [!NOTE]
-> Essa arquitetura é usada nas arquiteturas de referência de [DMZ entre o Azure e seu datacenter local][dmz-on-prem] e de [DMZ entre o Azure e a Internet][dmz-internet]. Todas essas arquiteturas de referência incluem uma solução de implantação que você pode usar. Siga os links abaixo para obter mais informações.
+> Essa arquitetura é usada nas arquiteturas de referência de [DMZ entre o Azure e seu datacenter local][dmz-on-premises] e de [DMZ entre o Azure e a Internet][dmz-internet]. Todas essas arquiteturas de referência incluem uma solução de implantação que você pode usar. Siga os links abaixo para obter mais informações.
 
 ## <a name="ingress-egress-with-layer-7-nvas"></a>Entrada-saída com NVAs na camada 7
 
@@ -118,14 +118,14 @@ Escolha o tipo de investigação que você deseja usar quando ao configurar o ap
 
 ## <a name="next-steps"></a>Próximas etapas
 
-- Saiba como [implementar uma DMZ entre o Azure e o datacenter local][dmz-on-prem] usando NVAs da camada 7.
+- Saiba como [implementar uma DMZ entre o Azure e o datacenter local][dmz-on-premises] usando NVAs da camada 7.
 - Saiba como [implementar uma DMZ entre o Azure e a Internet][dmz-internet] usando NVAs da camada 7.
 - [Solução de problemas de virtualização de rede no Azure](/azure/virtual-network/virtual-network-troubleshoot-nva)
 
 <!-- links -->
 
 [cloud-security]: /azure/best-practices-network-security
-[dmz-on-prem]: ./secure-vnet-hybrid.md
+[dmz-on-premises]: ./secure-vnet-hybrid.md
 [dmz-internet]: ./secure-vnet-dmz.md
 [egress-with-layer-7]: #egress-with-layer-7-nvas
 [ingress-with-layer-7]: #ingress-with-layer-7-nvas

@@ -8,11 +8,11 @@ ms.date: 02/11/2019
 description: Quais diretrizes de segurança a Microsoft fornece?
 author: BrianBlanchard
 ms.openlocfilehash: 845b02422e2df63425e29acdfd9b43b744934c9f
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900200"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58241927"
 ---
 <!-- markdownlint-disable MD026 -->
 
@@ -80,4 +80,4 @@ Tomar decisões de segurança eficazes não é fácil. Isso exige experiência e
 
 ## <a name="behavioral-analytics"></a>Análise comportamental
 
-A análise comportamental é uma técnica que analisa e compara dados em uma coleção de padrões conhecidos. No entanto, esses padrões não são assinaturas simples. Os padrões são determinados por meio de algoritmos complexos de aprendizado de máquina aplicados a conjuntos de dados massivos. Eles também são determinados pela análise cuidadosa de comportamentos mal-intencionados por analistas especialistas. A Central de Segurança do Azure pode usar a análise de comportamento para identificar recursos comprometidos baseado na análise dos logs de máquina virtual, dos logs de dispositivo de rede virtual, dos logs da malha, dos despejos de memória e de outras fontes.
+A análise de comportamento é uma técnica que analisa e compara dados em uma coleção de padrões conhecidos. No entanto, esses padrões não são assinaturas simples. Os padrões são determinados por meio de algoritmos complexos de aprendizado de máquina aplicados a conjuntos de dados massivos. Eles também são determinados pela análise cuidadosa de comportamentos mal-intencionados por analistas especialistas. A Central de Segurança do Azure pode usar a análise de comportamento para identificar recursos comprometidos baseado na análise dos logs de máquina virtual, dos logs de dispositivo de rede virtual, dos logs da malha, dos despejos de memória e de outras fontes.

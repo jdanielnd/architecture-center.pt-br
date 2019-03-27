@@ -8,11 +8,11 @@ ms.date: 02/11/2019
 description: Melhoria da disciplina de Consistência de recursos
 author: BrianBlanchard
 ms.openlocfilehash: bc81b894d46266c52291c53dba5532ab2ab6b860
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900207"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58241567"
 ---
 # <a name="resource-consistency-discipline-improvement"></a>Melhoria da disciplina de Consistência de recursos
 
@@ -52,7 +52,7 @@ Esta fase de maturidade de governança une os resultados de negócios e as estra
 
 ## <a name="build-and-pre-deployment"></a>Compilação e pré-implantação
 
-Diversos pré-requisitos técnicos e não técnicos são necessários para migrar um ambiente com sucesso. Esse processo se concentra nas decisões, na preparação e na infraestrutura central que ocorrem após uma migração.
+Diversos pré-requisitos técnicos e não técnicos são necessários para migrar com êxito um ambiente. Esse processo concentra-se nas decisões, na preparação e infraestrutura principal que procede a uma migração.
 
 **Atividades mínimas sugeridas:**
 

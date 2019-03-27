@@ -8,11 +8,11 @@ ms.date: 02/11/2019
 description: Discussão dos serviços de rede virtual nativa da nuvem
 author: rotycenh
 ms.openlocfilehash: e0ad6803f2ddc982ea0c42c59fdf2486e1710433
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900252"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58241131"
 ---
 # <a name="software-defined-networks-hub-and-spoke"></a>Redes Definidas por Software: Hub e Spoke
 

@@ -10,11 +10,11 @@ pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: adfs
 pnp.series.next: key-vault
 ms.openlocfilehash: a1ea65ca8f6b98932f0c42a1b029efeca4d50710
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54482418"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58248399"
 ---
 # <a name="use-client-assertion-to-get-access-tokens-from-azure-ad"></a>Usar a declaração do cliente para obter tokens de acesso do Azure AD
 

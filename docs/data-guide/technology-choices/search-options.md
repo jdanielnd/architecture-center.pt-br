@@ -7,11 +7,11 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.openlocfilehash: c0362ff3bc6c115399892d0f066650aaa96af2dd
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54486549"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58244047"
 ---
 # <a name="choosing-a-search-data-store-in-azure"></a>Escolhendo um armazenamento de dados de pesquisa no Azure
 
@@ -54,35 +54,35 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 
 | | Azure Search | Elasticsearch | HDInsight com Solr | Banco de dados SQL |
 | --- | --- | --- | --- | --- |
-| É um serviço gerenciado | SIM | Não  | sim | SIM |  
-| API REST | SIM | sim | sim | Não  |
+| É um serviço gerenciado | Sim | Não  | sim | Sim |  
+| API REST | Sim | sim | sim | Não  |
 | Programação | .NET | Java | Java | T-SQL |
-| Indexadores de documento para tipos de arquivo comuns (PDF, DOCX, TXT e assim por diante) | SIM | Não  | Sim | Não  |
+| Indexadores de documento para tipos de arquivo comuns (PDF, DOCX, TXT e assim por diante) | Sim | Não  | Sim | Não  |
 
 ### <a name="manageability-capabilities"></a>Funcionalidade de capacidade de gerenciamento
 
 | | Azure Search | Elasticsearch | HDInsight com Solr | Banco de dados SQL |
 | --- | --- | --- | --- | --- |
-| Esquema atualizável | Não  | sim | sim | SIM |
-| Dá suporte à expansão  | SIM | sim | sim | Não  |
+| Esquema atualizável | Não  | sim | sim | Sim |
+| Dá suporte à expansão  | Sim | sim | sim | Não  |
 
 ### <a name="analytic-workload-capabilities"></a>Funcionalidades de carga de trabalho analítica
 
 | | Azure Search | Elasticsearch | HDInsight com Solr | Banco de dados SQL |
 | --- | --- | --- | --- | --- |
-| Dá suporte à análise além da pesquisa de texto completo | Não  | sim | sim | SIM |
+| Dá suporte à análise além da pesquisa de texto completo | Não  | sim | sim | Sim |
 | Parte de uma pilha de análise de log | Não  | Sim (ELK) |  Não  | Não  |
-| Dá suporte à pesquisa semântica | Sim (encontrar apenas documentos semelhantes) | SIM | sim | SIM |
+| Dá suporte à pesquisa semântica | Sim (encontrar apenas documentos semelhantes) | Sim | sim | Sim |
 
 ### <a name="security-capabilities"></a>Funcionalidades de segurança
 
 | | Azure Search | Elasticsearch | HDInsight com Solr | Banco de dados SQL |
 | --- | --- | --- | --- | --- |
-| Segurança em nível de linha | Partial (exige que a consulta de aplicativo filtre por ID de grupo) | Partial (exige que a consulta de aplicativo filtre por ID de grupo) | SIM | SIM |
-| Transparent Data Encryption | Não  | Não | Não  | SIM |  
-| Restringir o acesso a endereços IP específicos | Não  | sim | sim | SIM |
-| Restringir o acesso para permitir apenas o acesso da rede virtual | Não  | sim | sim | SIM |  
-| Autenticação do Active Directory (autenticação integrada) | Não  | Não | Não  | SIM |
+| Segurança em nível de linha | Partial (exige que a consulta de aplicativo filtre por ID de grupo) | Partial (exige que a consulta de aplicativo filtre por ID de grupo) | Sim | Sim |
+| Transparent Data Encryption | Não  | Não | Não  | Sim |  
+| Restringir o acesso a endereços IP específicos | Não  | sim | sim | Sim |
+| Restringir o acesso para permitir apenas o acesso da rede virtual | Não  | sim | sim | Sim |  
+| Autenticação do Active Directory (autenticação integrada) | Não  | Não | Não  | Sim |
 
 ## <a name="see-also"></a>Consulte também
 

@@ -8,11 +8,11 @@ ms.date: 02/11/2019
 description: Percurso de governança de empresas de pequeno a médio porte
 author: BrianBlanchard
 ms.openlocfilehash: a3e078845038a12977e7be5affbf22708411069f
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900286"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58245157"
 ---
 # <a name="small-to-medium-enterprise-governance-journey"></a>Percurso de governança de empresas de pequeno a médio porte
 
@@ -63,7 +63,7 @@ Quando esse MVP tiver sido implantado, camadas adicionais de governança podem s
 
 ## <a name="what-does-this-best-practice-do"></a>O que faz essa prática recomendada?
 
-No MVP, nas práticas recomendadas e nas ferramentas da disciplina [Aceleração da implantação](../../deployment-acceleration/overview.md), são estabelecidas para rapidamente aplicar a política corporativa. Em particular, o MVP usa o Azure Blueprints, Azure Policy e grupos de gerenciamento do Azure para aplicar algumas políticas corporativas básicas, conforme definido na narrativa para esta empresa fictícia. Essas políticas corporativas são aplicadas usando modelos do Gerenciador de Recursos e as políticas do Azure para estabelecer uma linha de base muito pequena para identidade e segurança.
+No MVP, nas práticas recomendadas e nas ferramentas da disciplina [Aceleração de implantação](../../deployment-acceleration/overview.md), são estabelecidas para aplicar rapidamente a política corporativa. Em particular, o MVP usa o Azure Blueprints, Azure Policy e grupos de gerenciamento do Azure para aplicar algumas políticas corporativas básicas, conforme definido na narrativa para esta empresa fictícia. Essas políticas corporativas são aplicadas usando modelos do Gerenciador de Recursos e as políticas do Azure para estabelecer uma linha de base muito pequena para identidade e segurança.
 
 ![Exemplo de MVP de governança incremental](../../../_images/governance/governance-mvp.png)
 

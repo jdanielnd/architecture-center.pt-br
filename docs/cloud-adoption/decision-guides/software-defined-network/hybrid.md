@@ -8,11 +8,11 @@ ms.date: 02/11/2019
 description: Discussão sobre como as redes híbridas permitem que as redes virtuais em nuvem conectem-se a recursos locais
 author: rotycenh
 ms.openlocfilehash: 02d181db0ae9baef3b453b8623d212b624f6b16a
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900195"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58243357"
 ---
 # <a name="software-defined-networks-hybrid-network"></a>Redes Definidas pelo Software: Rede híbrida
 

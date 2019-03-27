@@ -7,11 +7,11 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.openlocfilehash: 76a101b76497ae2b2aacff973175bb0fe4703d9e
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54482435"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58245867"
 ---
 # <a name="choosing-a-data-pipeline-orchestration-technology-in-azure"></a>Escolhendo uma tecnologia de orquestração do pipeline de dados no Azure
 
@@ -47,8 +47,8 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 
 | | Fábrica de dados do Azure | SQL Server Integration Services (SSIS) | Oozie no HDInsight
 | --- | --- | --- | --- |
-| Gerenciada | SIM | Não  | SIM |
-| Baseado em nuvem | SIM | Não (local) | SIM |
+| Gerenciada | Sim | Não  | Sim |
+| Baseado em nuvem | Sim | Não (local) | Sim |
 | Pré-requisito | Assinatura do Azure | SQL Server  | Assinatura do Azure, cluster HDInsight |
 | Ferramentas de gerenciamento | Portal do Azure, PowerShell, CLI, SDK do .NET | SSMS, PowerShell | Shell do Bash, API REST do Oozie, interface do usuário da Web do Oozie |
 | Preços | Pagamento por uso | Licenciamento/pagamento de recursos | Nenhum custo adicional além da execução do cluster HDInsight |
@@ -57,22 +57,22 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 
 | | Fábrica de dados do Azure | SQL Server Integration Services (SSIS) | Oozie no HDInsight
 | --- | --- | --- | --- |
-| Copiar dados | SIM | sim | SIM |
-| Transformações personalizadas | SIM | SIM | Sim (trabalhos do MapReduce, Pig e Hive) |
-| Pontuação do Azure Machine Learning | SIM | Sim (com script) | Não  |
-| HDInsight sob demanda | SIM | Não | Não  |
-| Lote do Azure | SIM | Não | Não  |
-| Pig, Hive, MapReduce | SIM | Não  | SIM |
-| Spark | SIM | Não | Não  |
-| Executar o pacote SSIS | SIM | sim | Não  |
-| Controlar fluxo | SIM | sim | SIM |
-| Acesso a dados locais | SIM | sim | Não  |
+| Copiar dados | Sim | sim | Sim |
+| Transformações personalizadas | Sim | Sim | Sim (trabalhos do MapReduce, Pig e Hive) |
+| Pontuação do Azure Machine Learning | Sim | Sim (com script) | Não  |
+| HDInsight sob demanda | Sim | Não | Não  |
+| Lote do Azure | Sim | Não | Não  |
+| Pig, Hive, MapReduce | Sim | Não  | Sim |
+| Spark | Sim | Não | Não  |
+| Executar o pacote SSIS | Sim | sim | Não  |
+| Controlar fluxo | Sim | sim | Sim |
+| Acesso a dados locais | Sim | sim | Não  |
 
 ### <a name="scalability-capabilities"></a>Funcionalidades de escalabilidade
 
 | | Fábrica de dados do Azure | SQL Server Integration Services (SSIS) | Oozie no HDInsight
 | --- | --- | --- | --- |
-| Escalar verticalmente | SIM | Não | Não  |
-| Expansão | SIM | Não  | Sim (com a adição de nós de trabalho ao cluster) |
-| Otimizado para Big Data | SIM | Não  | SIM |
+| Escalar verticalmente | Sim | Não | Não  |
+| Expansão | Sim | Não  | Sim (com a adição de nós de trabalho ao cluster) |
+| Otimizado para Big Data | Sim | Não  | Sim |
 

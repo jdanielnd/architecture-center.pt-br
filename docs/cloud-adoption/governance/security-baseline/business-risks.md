@@ -4,15 +4,15 @@ titleSuffix: Microsoft Cloud Adoption Framework for Azure
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
 ms.custom: governance
-ms.date: 1/8/2019
+ms.date: 02/11/2019
 description: Motivações da linha de base de segurança e riscos de negócios
 author: BrianBlanchard
-ms.openlocfilehash: d57b79b37aa257d07df0168a7fee53ec8ecd1526
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.openlocfilehash: 8407ed358e5862e466176096ee6a82ad792027cb
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900183"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58247307"
 ---
 # <a name="security-baseline-motivations-and-business-risks"></a>Motivações da linha de base de segurança e riscos de negócios
 

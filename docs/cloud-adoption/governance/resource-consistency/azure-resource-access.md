@@ -1,22 +1,22 @@
 ---
-title: 'CAF: Gerenciamento de acesso de recurso no Azure'
+title: 'CAF: Gerenciamento de acesso aos recursos no Azure'
 titleSuffix: Microsoft Cloud Adoption Framework for Azure
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
 ms.custom: governance
 ms.date: 02/11/2019
-description: 'Explicação dos constructos de gerenciamento de acesso de recurso no Azure: Azure Resource Manager, assinaturas, grupos de recursos e recursos'
+description: 'Explicação dos constructos de gerenciamento de acesso de recursos no Azure: Azure Resource Manager, assinaturas, grupos de recursos e recursos'
 author: petertaylor9999
 ms.openlocfilehash: b98cdc94d6d3a37c1e65da1d4de35d5d9520d6eb
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900408"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58243197"
 ---
-# <a name="resource-access-management-in-azure"></a>Gerenciamento de acesso a recursos no Azure
+# <a name="resource-access-management-in-azure"></a>Gerenciamento de acesso aos recursos no Azure
 
-A [Governança de Nuvem](../overview.md) descreve as cinco disciplinas da Governança de Nuvem, dentre as quais inclui o Gerenciamento de Recursos.  [O que é governança de acesso de recurso](overview.md) explica como o gerenciamento de acesso de recurso se enquadra na disciplina de gerenciamento de recursos. Antes de prosseguir para aprender a criar um modelo de governança, é importante entender os controles de gerenciamento de acesso a recursos no Azure. A configuração desses controles de gerenciamento de acesso de recurso constitui a base do seu modelo de governança.
+A [Governança de Nuvem](../overview.md) descreve as cinco disciplinas da Governança de Nuvem, dentre as quais inclui o Gerenciamento de Recursos.  [O que é governança de acesso de recurso](overview.md) explica como o gerenciamento de acesso de recurso se enquadra na disciplina de gerenciamento de recursos. Antes de prosseguir para aprender a criar um modelo de governança, é importante entender os controles de gerenciamento de acesso a recursos no Azure. A configuração desses controles de gerenciamento de acesso a recursos constitui a base do seu modelo de governança.
 
 Comece examinando mais detalhadamente como os recursos são implantados no Azure.
 

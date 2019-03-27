@@ -7,11 +7,11 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.openlocfilehash: 70c18e1a5294b09bb156d2af06af7a32d33858da
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54485461"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58246177"
 ---
 # <a name="online-analytical-processing-olap"></a>OLAP (processamento analítico online)
 
@@ -133,13 +133,13 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 
 | | Azure Analysis Services | SQL Server Analysis Services | SQL Server com Índices Columnstore | Banco de dados SQL do Azure com Índices Columnstore |
 | --- | --- | --- | --- | --- |
-| É um serviço gerenciado | SIM | Não | Não  | SIM |
+| É um serviço gerenciado | Sim | Não | Não  | Sim |
 | Dá suporte a cubos multidimensionais | Não  | Sim | Não | Não  |
-| Dá suporte a modelos semânticos de tabela | SIM | sim | Não | Não  |
-| É integrado com facilidade a várias fontes de dados | SIM | SIM | Não <sup>1</sup> | Não <sup>1</sup> |
-| Dá suporte à análise em tempo real | Não  | Não  | sim | SIM |
-| Exige que o processo copie dados das origens | SIM | sim | Não | Não  |
-| Integração com o Azure AD | SIM | Não  | Não <sup>2</sup> | SIM |
+| Dá suporte a modelos semânticos de tabela | Sim | sim | Não | Não  |
+| É integrado com facilidade a várias fontes de dados | Sim | Sim | Não <sup>1</sup> | Não <sup>1</sup> |
+| Dá suporte à análise em tempo real | Não  | Não  | sim | Sim |
+| Exige que o processo copie dados das origens | Sim | sim | Não | Não  |
+| Integração com o Azure AD | Sim | Não  | Não <sup>2</sup> | Sim |
 
 <!-- markdownlint-enable MD033 -->
 
@@ -151,6 +151,6 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 
 |                                                  | Azure Analysis Services | SQL Server Analysis Services | SQL Server com Índices Columnstore | Banco de dados SQL do Azure com Índices Columnstore |
 |--------------------------------------------------|-------------------------|------------------------------|-------------------------------------|---------------------------------------------|
-| Servidores regionais redundantes para alta disponibilidade |           SIM           |              Não               |                 sim                 |                     SIM                     |
-|             Dá suporte à expansão da consulta             |           SIM           |              Não               |                 Sim                 |                     Não                       |
-|          Escalabilidade dinâmica (escalar verticalmente)          |           SIM           |              Não               |                 Sim                 |                     Não                       |
+| Servidores regionais redundantes para alta disponibilidade |           Sim           |              Não               |                 sim                 |                     Sim                     |
+|             Dá suporte à expansão da consulta             |           Sim           |              Não               |                 Sim                 |                     Não                       |
+|          Escalabilidade dinâmica (escalar verticalmente)          |           Sim           |              Não               |                 Sim                 |                     Não                       |

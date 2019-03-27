@@ -10,11 +10,11 @@ ms.subservice: example-scenario
 ms.custom: fasttrack, SAP
 social_image_url: /azure/architecture/example-scenario/apps/media/architecture-sap-dev-test.png
 ms.openlocfilehash: cd01639ab46fbe3c25c5a770ead13759da9a8c47
-ms.sourcegitcommit: 3b15d65e7c35a19506e562c444343f8467b6a073
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/25/2019
-ms.locfileid: "54908168"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58249601"
 ---
 # <a name="devtest-environments-for-sap-workloads-on-azure"></a>Ambientes de desenvolvimento/teste para cargas de trabalho do SAP no Azure
 

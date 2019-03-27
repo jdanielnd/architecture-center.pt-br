@@ -8,11 +8,11 @@ ms.date: 02/11/2019
 description: Discussão sobre redes definidas pelo software como um serviço principal em migrações do Azure
 author: rotycenh
 ms.openlocfilehash: d164ba488552715dc97719329ae9de3fcf5d83ed
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900349"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58243337"
 ---
 # <a name="caf-software-defined-network-decision-guide"></a>CAF: Guia de decisão de rede definida pelo software
 

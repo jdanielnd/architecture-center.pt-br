@@ -7,11 +7,11 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.openlocfilehash: 0aac064f30c384520a27d2e42b21c9243d5914b2
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54483455"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58244037"
 ---
 # <a name="choosing-a-big-data-storage-technology-in-azure"></a>Escolhendo uma tecnologia de armazenamento de Big Data no Azure
 
@@ -105,7 +105,7 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 | Finalidade | Armazenamento otimizado para cargas de trabalho de análise de big data |Repositório de objetos de finalidade geral para uma ampla variedade de cenários de armazenamento |
 | Casos de uso | Lote, análise de streaming e dados de aprendizado de máquina, como arquivos de log, dados de IoT, fluxos de cliques, conjuntos de dados grandes | Qualquer tipo de dados de texto ou binários, como back-end de aplicativo, dados de backup, armazenamento de mídia para streaming e dados de uso geral |
 | Estrutura | Sistema de arquivos hierárquico | Repositório de objetos com namespace simples |
-| Autenticação | Com base em [Identidades do Azure Active Directory](/azure/active-directory/active-directory-authentication-scenarios) | Com base em [Chaves de Acesso da Conta](/azure/storage/common/storage-create-storage-account#manage-your-storage-account) e [Chaves de Assinatura de Acesso Compartilhado](/azure/storage/common/storage-dotnet-shared-access-signature-part-1) dos segredos compartilhados e em [RBAC (Controle de Acesso Baseado em Função)](/azure/security/security-storage-overview) |
+| Authentication | Com base em [Identidades do Azure Active Directory](/azure/active-directory/active-directory-authentication-scenarios) | Com base em [Chaves de Acesso da Conta](/azure/storage/common/storage-create-storage-account#manage-your-storage-account) e [Chaves de Assinatura de Acesso Compartilhado](/azure/storage/common/storage-dotnet-shared-access-signature-part-1) dos segredos compartilhados e em [RBAC (Controle de Acesso Baseado em Função)](/azure/security/security-storage-overview) |
 | Protocolo de autenticação | OAuth 2.0. As chamadas precisam conter um JWT (Token Web JSON) válido emitido pelo Azure Active Directory | HMAC (código de autenticação de mensagem baseado em hash). As chamadas devem conter um hash SHA-256 codificado na Base64 em uma parte da solicitação HTTP. |
 | Autorização | ACLs (listas de controle de acesso) do POSIX. ACLs baseadas em identidades do Azure Active Directory podem ser definidas com nível de arquivo e pasta. | Para autorização no nível de conta, use [Chaves de Acesso da Conta](/azure/storage/common/storage-create-storage-account#manage-your-storage-account). Para autorização de conta, contêiner ou blob, use [Chaves de Assinatura de Acesso Compartilhado](/azure/storage/common/storage-dotnet-shared-access-signature-part-1). |
 | Auditoria | Disponível.  |Disponível |
@@ -120,8 +120,8 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 |                                    |                                           Azure Cosmos DB                                           |                                                             HBase no HDInsight                                                             |
 |------------------------------------|-----------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 |       Modelo de banco de dados primário       |                      Repositório de documentos, gráfico, repositório de chave-valor, repositório de coluna grande                      |                                                             Repositório de coluna grande                                                              |
-|         Índices secundários          |                                                 SIM                                                 |                                                                     Não                                                                      |
-|        Suporte à linguagem SQL        |                                                 SIM                                                 |                                     Sim (usando o driver JDBC [Phoenix](https://phoenix.apache.org/))                                      |
+|         Índices secundários          |                                                 Sim                                                 |                                                                     Não                                                                      |
+|        Suporte à linguagem SQL        |                                                 Sim                                                 |                                     Sim (usando o driver JDBC [Phoenix](https://phoenix.apache.org/))                                      |
 |            Consistência             |                   Forte, desatualização limitada, sessão, prefixo consistente, eventual                   |                                                                   Strong                                                                   |
 | Integração nativa com o Azure Functions |                        [Sim](/azure/cosmos-db/serverless-computing-database)                        |                                                                     Não                                                                      |
 |   Distribuição global automática    |                          [Sim](/azure/cosmos-db/distribute-data-globally)                           | Não [A replicação de cluster HBase pode ser configurada](/azure/hdinsight/hbase/apache-hbase-replication) em regiões com consistência eventual |

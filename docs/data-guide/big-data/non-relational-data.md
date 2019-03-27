@@ -7,11 +7,11 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.openlocfilehash: f1f8a9ddc0a728f6be4350edb361afd19901de20
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54483577"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58245957"
 ---
 # <a name="non-relational-data-and-nosql"></a>Dados não relacionais e NoSQL
 
@@ -158,8 +158,8 @@ Veja a seguir uma comparação dos requisitos de cada um dos armazenamentos de d
 | Padrão de acesso | Acesso aleatório | Agregações em dados altos/largos | Acesso aleatório | Acesso aleatório |
 | Indexação | Índices primários e secundários | Índices primários e secundários | Somente índice primário | Índices primários e secundários |
 | Forma dos dados | Documento | Tabela com famílias de colunas que contém colunas | Chave e valor | Gráfico que contém bordas e vértices |
-| Esparsos | SIM | sim | sim | Não  |
-| Largo (grande quantidade de colunas/atributos) | SIM | sim | Não | Não  |  
+| Esparsos | Sim | sim | sim | Não  |
+| Largo (grande quantidade de colunas/atributos) | Sim | sim | Não | Não  |  
 | Tamanho do dado | Pequeno (KBs) a médio (alguns MBs) | Médio (MBs) a grande (alguns GBs) | Pequeno (KBs) | Pequeno (KBs) |
 | Escala máxima geral | Muito grande (PBs) | Muito grande (PBs) | Muito grande (PBs) | Grande (TB) |
 
@@ -174,6 +174,6 @@ Veja a seguir uma comparação dos requisitos de cada um dos armazenamentos de d
 | Indexação | Índices primários e secundários | Somente índice primário | N/D |
 | Forma dos dados | Tabular | Blob e metadados | Documento |
 | Esparsos | Não  | N/D | Não  |
-| Largo (grande quantidade de colunas/atributos) |  Não  | sim | SIM |  
+| Largo (grande quantidade de colunas/atributos) |  Não  | sim | Sim |  
 | Tamanho do dado | Pequeno (KBs) | Grande (GBs) a muito grandes (TBs) | Pequeno (KBs) |
 | Escala máxima geral | Grande (alguns TBs)  | Muito grande (PBs) | Grande (alguns TBs) |

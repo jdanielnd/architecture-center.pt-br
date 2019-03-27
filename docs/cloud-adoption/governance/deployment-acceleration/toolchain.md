@@ -7,12 +7,12 @@ ms.subservice: enterprise-cloud-adoption
 ms.custom: governance
 ms.date: 02/11/2019
 author: BrianBlanchard
-ms.openlocfilehash: 8d2cae87b8a3a11bfde87aafc04d4d2ef55cbbe9
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.openlocfilehash: cd00f2fa132f5f177ccc12f61be8b5342b71197d
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900357"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58247417"
 ---
 # <a name="deployment-acceleration-tools-in-azure"></a>Ferramentas de Aceleração de implantação no Azure
 
@@ -22,7 +22,7 @@ Responsáveis da nuvem, guardiões da nuvem e arquitetos da nuvem com interesse 
 
 A seguir, é apresentada uma lista de ferramentas nativas do Azure que podem ajudar a amadurecer as políticas e os processos que dão suporte a essa disciplina de governança.
 
-|  |Azure Policy  |Grupos de Gerenciamento do Azure  |Modelos do Azure Resource Manager  |Azure Blueprints  | Gráfico de Recursos do Azure | Gerenciamento de Custos do Azure |
+|  | Azure Policy | Grupos de Gerenciamento do Azure | Modelos do Azure Resource Manager | Azure Blueprints | Gráfico de Recursos do Azure | Gerenciamento de Custos do Azure |
 |---------|---------|---------|---------|---------|---------|---------|
 |Implementar políticas corporativas     |Sim |Não  |Não  |Não | Não |Não  |
 |Mover políticas entre assinaturas     |Obrigatório |Sim  |Não  |Não | Não |Não  |

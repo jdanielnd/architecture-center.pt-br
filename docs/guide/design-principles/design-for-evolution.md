@@ -9,11 +9,11 @@ ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seojan19
 ms.openlocfilehash: 4a1ed92f70660f16c07b4b472c3ef358af4319c9
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54481738"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58245697"
 ---
 # <a name="design-for-evolution"></a>Design para evolução
 

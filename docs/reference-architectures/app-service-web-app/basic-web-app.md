@@ -9,11 +9,11 @@ ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18
 ms.openlocfilehash: 95f634284fe821386704174894a85a4dbca815f7
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54485070"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58248661"
 ---
 # <a name="run-a-basic-web-application-in-azure"></a>Executar aplicativo Web básico no Azure
 
@@ -194,7 +194,7 @@ Um aplicativo do Serviço de Aplicativo inclui um ponto de extremidade SSL em um
 
 Como prática recomendada de segurança, o aplicativo deve impor HTTPS redirecionando as solicitações HTTP. Você pode implementar isso dentro do aplicativo ou usar uma regra de reescrita de URL, conforme a descrição em [Habilitar HTTPS para um aplicativo no Serviço de Aplicativo do Azure][ssl-redirect].
 
-### <a name="authentication"></a>Autenticação
+### <a name="authentication"></a>Authentication
 
 Recomendamos a autenticação por meio de um IDP (provedor de identidade), como Azure AD, Facebook, Google ou Twitter. Use o OAuth 2 ou o OIDC (OpenID Connect) para o fluxo de autenticação. O Azure AD fornece a funcionalidade de gerenciar usuários e grupos, criar funções de aplicativo, integrar as identidades locais e consumir serviços de back-end, como o Office 365 e o Skype for Business.
 

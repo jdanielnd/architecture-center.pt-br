@@ -3,16 +3,15 @@ title: 'CAF: Como funciona o Azure?'
 titleSuffix: Microsoft Cloud Adoption Framework for Azure
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
-ms.custom: governance
 description: Explicação sobre o funcionamento interno do Azure
 author: petertaylor9999
-ms.date: 2/11/2019
-ms.openlocfilehash: 5ce9f0535584cbc45d757be5aa6f2fd64c7cc39f
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.date: 02/11/2019
+ms.openlocfilehash: 724d16a810865dd947a7ade34766818c8ea525a1
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55898061"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58245267"
 ---
 <!-- markdownlint-disable MD026 -->
 
@@ -20,7 +19,11 @@ ms.locfileid: "55898061"
 
 O Azure é a plataforma de nuvem pública da Microsoft. O Azure oferece uma grande coleção de serviços, incluindo PaaS (plataforma como serviço), IaaS (infraestrutura como serviço), DBaaS (banco de dados como serviço) e muitos outros. Mas o que exatamente é o Azure e como ele funciona?
 
+<!-- markdownlint-disable MD034 -->
+
 > [!VIDEO https://www.microsoft.com/en-us/videoplayer/embed/RE2ixGo]
+
+<!-- markdownlint-enable MD034 -->
 
 O Azure, como outras plataformas de nuvem, se baseia em uma tecnologia conhecida como **virtualização**. A maior parte do hardware do computador pode ser emulada em software, porque a maior parte dele é apenas um conjunto de instruções codificado de forma permanente ou semipermanente em silício. Usando uma camada de emulação que mapeia instruções de software para instruções de hardware, o hardware virtualizado pode ser executado em um software como se fosse o próprio hardware real.
 

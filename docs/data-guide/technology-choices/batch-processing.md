@@ -7,11 +7,11 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.openlocfilehash: 53f8b233b0e0c1ff83a72a04b2707caa528d6f6b
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54486447"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58248511"
 ---
 # <a name="choosing-a-batch-processing-technology-in-azure"></a>Escolhendo uma tecnologia de processamento em lotes no Azure
 
@@ -86,8 +86,8 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 
 | | Análise Azure Data Lake | SQL Data Warehouse do Azure | HDInsight | Azure Databricks |
 | --- | --- | --- | --- | --- | --- |
-| É um serviço gerenciado | SIM | SIM | Sim <sup>1</sup> | SIM |
-| Armazenamento de dados relacionais | SIM | sim | Não | Não  |
+| É um serviço gerenciado | Sim | Sim | Sim <sup>1</sup> | Sim |
+| Armazenamento de dados relacionais | Sim | sim | Não | Não  |
 | Modelo de preços | Por trabalho em lotes | Por hora de cluster | Por hora de cluster | Unidade do Databricks<sup>2</sup> + hora de cluster |
 
 [1] Com configuração manual e dimensionamento.
@@ -98,14 +98,14 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 
 | | Análise Azure Data Lake | SQL Data Warehouse | HDInsight com Spark | HDInsight com Hive | HDInsight com Hive LLAP | Azure Databricks |
 | --- | --- | --- | --- | --- | --- | --- |
-| Dimensionamento automático | Não  | Não | Não | Não | Não  | SIM |
+| Dimensionamento automático | Não  | Não | Não | Não | Não  | Sim |
 | Granularidade de expansão  | Por trabalho | Por cluster | Por cluster | Por cluster | Por cluster | Por cluster |
-| Cache em memória de dados | Não  | sim | sim | Não  | sim | SIM |
-| Consulta por meio de relational stores externos | SIM | Não  | Sim | Não | Não  | SIM |
-| Autenticação  | AD do Azure | SQL/Azure AD | Não  | Azure AD<sup>1</sup> | Azure AD<sup>1</sup> | AD do Azure |
-| Auditoria  | SIM | sim | Não  | Sim <sup>1</sup> | Sim <sup>1</sup> | SIM |
+| Cache em memória de dados | Não  | sim | sim | Não  | sim | Sim |
+| Consulta por meio de relational stores externos | Sim | Não  | Sim | Não | Não  | Sim |
+| Authentication  | AD do Azure | SQL/Azure AD | Não  | Azure AD<sup>1</sup> | Azure AD<sup>1</sup> | AD do Azure |
+| Auditoria  | Sim | sim | Não  | Sim <sup>1</sup> | Sim <sup>1</sup> | Sim |
 | Segurança em nível de linha | Não  | Não | Não  | Sim <sup>1</sup> | Sim <sup>1</sup> | Não  |
-| Dá suporte a firewalls | SIM | sim | SIM | Sim <sup>2</sup> | Sim <sup>2</sup> | Não  |
+| Dá suporte a firewalls | Sim | sim | Sim | Sim <sup>2</sup> | Sim <sup>2</sup> | Não  |
 | Mascaramento de dados dinâmicos | Não  | Não | Não  | Sim <sup>1</sup> | Sim <sup>1</sup> | Não  |
 
 <!-- markdownlint-enable MD033 -->

@@ -7,11 +7,11 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.openlocfilehash: d7ef704670aa78738098f08d7a81fb74fa5ad59a
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54485988"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58244187"
 ---
 # <a name="use-an-object-as-a-parameter-in-an-azure-resource-manager-template"></a>Usar um objeto como um parâmetro em um modelo do Azure Resource Manager
 
