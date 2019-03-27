@@ -9,34 +9,39 @@ ms.topic: design-pattern
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
+ms.openlocfilehash: 4229531366f1b0c3257384694cf4358da9e63177
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58241477"
 ---
-
-# <a name="cloud-design-patterns"></a><span data-ttu-id="97703-104">Padrões de design na nuvem</span><span class="sxs-lookup"><span data-stu-id="97703-104">Cloud Design Patterns</span></span>
+# <a name="cloud-design-patterns"></a><span data-ttu-id="fca5a-104">Padrões de design na nuvem</span><span class="sxs-lookup"><span data-stu-id="fca5a-104">Cloud Design Patterns</span></span>
 
 [!INCLUDE [header](../../_includes/header.md)]
 
-<span data-ttu-id="97703-105">Esses padrões de design são úteis para a criação de aplicativos confiáveis, dimensionáveis e seguros na nuvem.</span><span class="sxs-lookup"><span data-stu-id="97703-105">These design patterns are useful for building reliable, scalable, secure applications in the cloud.</span></span>
+<span data-ttu-id="fca5a-105">Esses padrões de design são úteis para a criação de aplicativos confiáveis, dimensionáveis e seguros na nuvem.</span><span class="sxs-lookup"><span data-stu-id="fca5a-105">These design patterns are useful for building reliable, scalable, secure applications in the cloud.</span></span>
 
-<span data-ttu-id="97703-106">Cada padrão descreve o problema ao qual o padrão se destina, as considerações para a aplicação do padrão e um exemplo com base no Microsoft Azure.</span><span class="sxs-lookup"><span data-stu-id="97703-106">Each pattern describes the problem that the pattern addresses, considerations for applying the pattern, and an example based on Microsoft Azure.</span></span> <span data-ttu-id="97703-107">A maioria dos padrões inclui exemplos de código ou snippets de código que mostram como implementar o padrão no Azure.</span><span class="sxs-lookup"><span data-stu-id="97703-107">Most of the patterns include code samples or snippets that show how to implement the pattern on Azure.</span></span> <span data-ttu-id="97703-108">No entanto, a maioria dos padrões é relevante para qualquer sistema distribuído, se hospedados no Azure ou em outras plataformas de nuvem.</span><span class="sxs-lookup"><span data-stu-id="97703-108">However, most of the patterns are relevant to any distributed system, whether hosted on Azure or on other cloud platforms.</span></span>
+<span data-ttu-id="fca5a-106">Cada padrão descreve o problema ao qual o padrão se destina, as considerações para a aplicação do padrão e um exemplo com base no Microsoft Azure.</span><span class="sxs-lookup"><span data-stu-id="fca5a-106">Each pattern describes the problem that the pattern addresses, considerations for applying the pattern, and an example based on Microsoft Azure.</span></span> <span data-ttu-id="fca5a-107">A maioria dos padrões inclui exemplos de código ou snippets de código que mostram como implementar o padrão no Azure.</span><span class="sxs-lookup"><span data-stu-id="fca5a-107">Most of the patterns include code samples or snippets that show how to implement the pattern on Azure.</span></span> <span data-ttu-id="fca5a-108">No entanto, a maioria dos padrões é relevante para qualquer sistema distribuído, se hospedados no Azure ou em outras plataformas de nuvem.</span><span class="sxs-lookup"><span data-stu-id="fca5a-108">However, most of the patterns are relevant to any distributed system, whether hosted on Azure or on other cloud platforms.</span></span>
 
-## <a name="problem-areas-in-the-cloud"></a><span data-ttu-id="97703-109">Áreas de problema na nuvem</span><span class="sxs-lookup"><span data-stu-id="97703-109">Problem areas in the cloud</span></span>
+## <a name="problem-areas-in-the-cloud"></a><span data-ttu-id="fca5a-109">Áreas de problema na nuvem</span><span class="sxs-lookup"><span data-stu-id="fca5a-109">Problem areas in the cloud</span></span>
 
 <!-- markdownlint-disable MD033 -->
 
 <ul id="categories" class="panel">
-<span data-ttu-id="97703-110">{%-categoria nas categorias %}</span><span class="sxs-lookup"><span data-stu-id="97703-110">{%- for category in categories %}</span></span>
+<span data-ttu-id="fca5a-110">{%-categoria nas categorias %}</span><span class="sxs-lookup"><span data-stu-id="fca5a-110">{%- for category in categories %}</span></span>
     <li>
-    <span data-ttu-id="97703-111">{% incluem 'cartão de categoria padrão' %}</span><span class="sxs-lookup"><span data-stu-id="97703-111">{% include 'pattern-category-card' %}</span></span>
+    <span data-ttu-id="fca5a-111">{% incluem 'cartão de categoria padrão' %}</span><span class="sxs-lookup"><span data-stu-id="fca5a-111">{% include 'pattern-category-card' %}</span></span>
     </li>
-<span data-ttu-id="97703-112">{%- endfor %}</span><span class="sxs-lookup"><span data-stu-id="97703-112">{%- endfor %}</span></span>
+<span data-ttu-id="fca5a-112">{%- endfor %}</span><span class="sxs-lookup"><span data-stu-id="fca5a-112">{%- endfor %}</span></span>
 </ul>
 
 <!-- markdownlint-enable MD033 -->
 
-## <a name="catalog-of-patterns"></a><span data-ttu-id="97703-113">Catálogo de padrões</span><span class="sxs-lookup"><span data-stu-id="97703-113">Catalog of patterns</span></span>
+## <a name="catalog-of-patterns"></a><span data-ttu-id="fca5a-113">Catálogo de padrões</span><span class="sxs-lookup"><span data-stu-id="fca5a-113">Catalog of patterns</span></span>
 
-| <span data-ttu-id="97703-114">Padrão</span><span class="sxs-lookup"><span data-stu-id="97703-114">Pattern</span></span> | <span data-ttu-id="97703-115">Resumo</span><span class="sxs-lookup"><span data-stu-id="97703-115">Summary</span></span> |
+| <span data-ttu-id="fca5a-114">Padrão</span><span class="sxs-lookup"><span data-stu-id="fca5a-114">Pattern</span></span> | <span data-ttu-id="fca5a-115">Resumo</span><span class="sxs-lookup"><span data-stu-id="fca5a-115">Summary</span></span> |
 |---------|---------|
 |         |         |
 
-<span data-ttu-id="97703-116">{%- for pattern in patterns %} | [{{ pattern.title }}](./{{ pattern.file }}) | {{ pattern.description }} | {%- endfor %}</span><span class="sxs-lookup"><span data-stu-id="97703-116">{%- for pattern in patterns %} | [{{ pattern.title }}](./{{ pattern.file }}) | {{ pattern.description }} | {%- endfor %}</span></span>
+<span data-ttu-id="fca5a-116">{%- for pattern in patterns %} | [{{ pattern.title }}](./{{ pattern.file }}) | {{ pattern.description }} | {%- endfor %}</span><span class="sxs-lookup"><span data-stu-id="fca5a-116">{%- for pattern in patterns %} | [{{ pattern.title }}](./{{ pattern.file }}) | {{ pattern.description }} | {%- endfor %}</span></span>
