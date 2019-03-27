@@ -8,11 +8,11 @@ ms.date: 02/11/2019
 description: Melhoria da disciplina de Linha de Base de Segurança
 author: BrianBlanchard
 ms.openlocfilehash: 28a971f56c9f8ada1d184bdc1cb3dbb9a17c3507
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900345"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58246447"
 ---
 # <a name="security-baseline-discipline-improvement"></a>Melhoria da disciplina de Linha de Base de Segurança
 
@@ -22,16 +22,16 @@ Este artigo descreve algumas tarefas potenciais em que sua empresa pode se envol
 
 ![Quatro fases de adoção](../../_images/adoption-phases.png)
 
-*Figura 1. Fases de adoção da abordagem incremental para governança de nuvem.*
+*Figura 1. Fases de adoção da abordagem incremental da governança de nuvem.*
 
-É impossível para qualquer pessoa documentar os requisitos a serem levados em consideração de todas as empresas. Portanto, este artigo descreve as atividades de exemplo potenciais e mínimas sugeridas para cada fase do processo de consolidação de governança. O objetivo inicial dessas atividades é ajudá-lo a criar um [MVP de Política](../journeys/overview.md#an-incremental-approach-to-cloud-governance) e estabelecer uma estrutura para a evolução da política incremental. A equipe de Governança de Nuvem precisará decidir quanto investir nessas atividades para melhorar os recursos de controle de Linha de Base de Segurança.
+É impossível para qualquer pessoa documentar os requisitos a serem levados em consideração de todas as empresas. Portanto, este artigo descreve as atividades de exemplo potenciais e mínimas sugeridas para cada fase do processo de amadurecimento da governança. O objetivo inicial dessas atividades é ajudá-lo a criar um [MVP de Política](../journeys/overview.md#an-incremental-approach-to-cloud-governance) e estabelecer uma estrutura para a evolução da política incremental. A equipe de Governança de Nuvem precisará decidir quanto investir nessas atividades para melhorar os recursos de controle de Linha de Base de Segurança.
 
 > [!CAUTION]
-> Nenhuma das atividades mínimas ou potenciais descritas neste artigo está alinhada a políticas corporativas específicas ou a requisitos de conformidade de terceiros. Essas diretrizes foram desenvolvidas para facilitar as conversas que conduzirão ao alinhamento de ambos os requisitos com um modelo de governança de nuvem.
+> Nenhuma das atividades mínimas ou potenciais descritas neste artigo está alinhada a políticas corporativas específicas ou a requisitos de conformidade de terceiros. Essas diretrizes foram projetadas para ajudar a facilitar as conversas que levarão ao alinhamento de ambos os requisitos com um modelo de governança de nuvem.
 
 ## <a name="planning-and-readiness"></a>Planejamento e preparação
 
-Essa fase de maturidade de governança preenche a lacuna entre os resultados de negócios e as estratégias acionáveis. Durante esse processo, a equipe de liderança define métricas específicas, mapeia essas métricas para a propriedade digital e começa a planejar o esforço geral de migração.
+Esta fase de maturidade de governança une os resultados de negócios e as estratégias realizáveis. Durante esse processo, a equipe de liderança define métricas específicas, mapeia essas métricas ao estado digital e começa a planejar o esforço global de migração.
 
 **Atividades mínimas sugeridas:**
 
@@ -76,7 +76,7 @@ Diversos pré-requisitos técnicos e não técnicos são necessários para migra
 
 ## <a name="adopt-and-migrate"></a>Adotar e migrar
 
-A migração é um processo incremental que concentra-se no movimento, teste e na adoção de aplicativos ou cargas de trabalho em uma propriedade digital existente.
+A migração é um processo incremental que se concentra no movimento, teste e adoção de aplicativos ou cargas de trabalho em um estado digital existente.
 
 **Atividades mínimas sugeridas:**
 
@@ -96,7 +96,7 @@ A migração é um processo incremental que concentra-se no movimento, teste e n
 
 ## <a name="operate-and-post-implementation"></a>Operar e pós-implementação
 
-Depois que a transformação for concluída, a governança e as operações deverão ser mantidas para o ciclo de vida natural de um aplicativo ou uma carga de trabalho. Essa fase de maturidade de governança concentra-se nas atividades que geralmente ocorrem depois que a solução é implementada e o ciclo de transformação começa a se estabilizar.
+Depois que a transformação for concluída, a governança e as operações devem ser mantidas para o ciclo de vida natural de um aplicativo ou uma carga de trabalho. Essa fase de maturidade de governança se concentra em atividades que normalmente ocorrem depois que a solução é implementada e que o ciclo de transformação começa a se estabilizar.
 
 **Atividades mínimas sugeridas:**
 

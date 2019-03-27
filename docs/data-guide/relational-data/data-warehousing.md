@@ -7,11 +7,11 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.openlocfilehash: 6679ff620ca9e64036c02fce38608de38c57df93
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54482163"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58246357"
 ---
 # <a name="data-warehousing-and-data-marts"></a>Data warehouse e data marts
 
@@ -130,13 +130,13 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 
 | | Banco de Dados SQL do Azure | SQL Server (VM) | SQL Data Warehouse | Apache Hive no HDInsight | Hive LLAP no HDInsight |
 | --- | --- | --- | --- | --- | --- | -- |
-| É um serviço gerenciado | SIM | Não  | SIM | Sim <sup>1</sup> | Sim <sup>1</sup> |
-| Exige a orquestração de dados (armazena uma cópia dos dados/dados históricos) | Não  | Não  | sim | sim | SIM |
-| É integrado com facilidade a várias fontes de dados | Não  | Não  | sim | sim | SIM |
-| Dá suporte à pausa de computação | Não  | Não  | SIM | Não <sup>2</sup> | Não <sup>2</sup> |
-| Armazenamento de dados relacionais | SIM | sim |  sim | Não | Não  |
-| Relatórios em tempo real | SIM | sim | Não | Não  | SIM |
-| Pontos de restauração de backup flexíveis | SIM | SIM | Não <sup>3</sup> | Sim <sup>4</sup> | Sim <sup>4</sup> |
+| É um serviço gerenciado | Sim | Não  | Sim | Sim <sup>1</sup> | Sim <sup>1</sup> |
+| Exige a orquestração de dados (armazena uma cópia dos dados/dados históricos) | Não  | Não  | sim | sim | Sim |
+| É integrado com facilidade a várias fontes de dados | Não  | Não  | sim | sim | Sim |
+| Dá suporte à pausa de computação | Não  | Não  | Sim | Não <sup>2</sup> | Não <sup>2</sup> |
+| Armazenamento de dados relacionais | Sim | sim |  sim | Não | Não  |
+| Relatórios em tempo real | Sim | sim | Não | Não  | Sim |
+| Pontos de restauração de backup flexíveis | Sim | Sim | Não <sup>3</sup> | Sim <sup>4</sup> | Sim <sup>4</sup> |
 | SMP/MPP | SMP | SMP | MPP | MPP | MPP |
 
 <!-- markdownlint-enable MD033 -->
@@ -155,10 +155,10 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 
 | | Banco de Dados SQL do Azure | SQL Server (VM) |  SQL Data Warehouse | Apache Hive no HDInsight | Hive LLAP no HDInsight |
 | --- | --- | --- | --- | --- | --- | -- |
-| Servidores regionais redundantes para alta disponibilidade  | SIM | sim | sim | Não | Não  |
-| Dá suporte à expansão da consulta (consultas distribuídas)  | Não  | Não  | sim | sim | SIM |
-| Dimensionamento dinâmico | SIM | Não  | Sim <sup>1</sup> | Não  | Não  |
-| Dá suporte ao cache em memória de dados | SIM |  sim | Não  | sim | SIM |
+| Servidores regionais redundantes para alta disponibilidade  | Sim | sim | sim | Não | Não  |
+| Dá suporte à expansão da consulta (consultas distribuídas)  | Não  | Não  | sim | sim | Sim |
+| Dimensionamento dinâmico | Sim | Não  | Sim <sup>1</sup> | Não  | Não  |
+| Dá suporte ao cache em memória de dados | Sim |  sim | Não  | sim | Sim |
 
 [1] O SQL Data Warehouse permite escalar ou reduzir verticalmente ajustando o número de DWUs (unidades de data warehouse). Consulte [Gerenciar o poder de computação no SQL Data Warehouse do Azure](/azure/sql-data-warehouse/sql-data-warehouse-manage-compute-overview).
 
@@ -170,13 +170,13 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 
 |                         |           Banco de Dados SQL do Azure            |  SQL Server em uma máquina virtual  | SQL Data Warehouse |   Apache Hive no HDInsight    |    Hive LLAP no HDInsight     |
 |-------------------------|-----------------------------------------|-----------------------------------|--------------------|-------------------------------|-------------------------------|
-|     Autenticação      | SQL/Azure AD (Azure Active Directory) | SQL/Azure AD/Active Directory |   SQL/Azure AD   | local/Azure AD <sup>1</sup> | local/Azure AD <sup>1</sup> |
-|      Autorização      |                   SIM                   |                sim                |        sim         |              SIM              |       Sim <sup>1</sup>        |
-|        Auditoria         |                   SIM                   |                sim                |        sim         |              SIM              |       Sim <sup>1</sup>        |
+|     Authentication      | SQL/Azure AD (Azure Active Directory) | SQL/Azure AD/Active Directory |   SQL/Azure AD   | local/Azure AD <sup>1</sup> | local/Azure AD <sup>1</sup> |
+|      Autorização      |                   Sim                   |                sim                |        sim         |              Sim              |       Sim <sup>1</sup>        |
+|        Auditoria         |                   Sim                   |                sim                |        sim         |              Sim              |       Sim <sup>1</sup>        |
 | Criptografia de dados em repouso |            Sim <sup>2</sup>             |         Sim <sup>2</sup>          |  Sim <sup>2</sup>  |       Sim <sup>2</sup>        |       Sim <sup>1</sup>        |
-|   Segurança em nível de linha    |                   SIM                   |                sim                |        sim         |              Não                |       Sim <sup>1</sup>        |
-|   Dá suporte a firewalls    |                   SIM                   |                sim                |        sim         |              SIM              |       Sim <sup>3</sup>        |
-|  Mascaramento de dados dinâmicos   |                   SIM                   |                sim                |        sim         |              Não                |       Sim <sup>1</sup>        |
+|   Segurança em nível de linha    |                   Sim                   |                sim                |        sim         |              Não                |       Sim <sup>1</sup>        |
+|   Dá suporte a firewalls    |                   Sim                   |                sim                |        sim         |              Sim              |       Sim <sup>3</sup>        |
+|  Mascaramento de dados dinâmicos   |                   Sim                   |                sim                |        sim         |              Não                |       Sim <sup>1</sup>        |
 
 <!-- markdownlint-enable MD033 -->
 
