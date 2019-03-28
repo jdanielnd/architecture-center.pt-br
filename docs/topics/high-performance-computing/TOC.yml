@@ -1,0 +1,139 @@
+items:
+- name: HPC (Computação de alto desempenho) no Azure
+  href: /azure/architecture/topics/high-performance-computing
+- name: Qual a diferença entre a HPC e a nuvem?
+  items:
+  - name: Estilo de arquitetura de computação intensa
+    href: /azure/architecture/guide/architecture-styles/big-compute?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+  - name: Práticas recomendadas de dimensionamento automático
+    href: /azure/architecture/best-practices/auto-scaling?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+- name: Infraestrutura
+  items:
+  - name: Exemplo de arquiteturas de HPC
+    items:
+    - name: Serviços de engenharia auxiliados por computador no Azure
+      href: /azure/architecture/example-scenario/apps/hpc-saas?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+    - name: CFD (Simulações de fluidodinâmica computacional) no Azure
+      href: /azure/architecture/example-scenario/infrastructure/hpc-cfd?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+    - name: Renderização de vídeo em 3D no Azure
+      href: /azure/architecture/example-scenario/infrastructure/video-rendering?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+  - name: Computação
+    items:
+    - name: Máquinas virtuais baseadas em CPU
+      items:
+      - name: VMs Linux
+        href: /azure/virtual-machines/linux/sizes-hpc?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+      - name: VMs Windows
+        href: /azure/virtual-machines/windows/sizes-hpc?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+      - name: Cotas de vCPU de máquina virtual
+        href: /azure/virtual-machines/linux/quotas?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+    - name: Máquinas virtuais habilitadas para GPU
+      items:
+      - name: VMs Linux
+        href: /azure/virtual-machines/linux/sizes-gpu?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+      - name: VMs Windows
+        href: /azure/virtual-machines/windows/sizes-gpu?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+  - name: Armazenamento
+    items:
+    - name: Máquinas virtuais otimizadas para armazenamento
+      href: /azure/virtual-machines/windows/sizes-storage?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+    - name: Armazenamento de blobs, tabelas e filas
+      href: /azure/storage/storage-introduction?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+    - name: Armazenamento de arquivos SMB do Azure
+      href: /azure/storage/files/storage-files-introduction?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+  - name: Rede
+    items:
+    - name: Instâncias compatíveis com RDMA
+      href: /azure/virtual-machines/windows/sizes-hpc?context=/azure/architecture/topics/high-performance-computing/context/hpc-context#rdma-capable-instances
+    - name: Rede Virtual
+      href: /azure/virtual-network/virtual-networks-overview?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+    - name: ExpressRoute
+      href: /azure/expressroute/expressroute-introduction?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+- name: Gerenciamento
+  items:
+  - name: Faça você mesmo
+    items:
+    - name: conjuntos de escala de máquina virtual
+      href: /azure/virtual-machine-scale-sets/overview?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+  - name: Intermitência híbrida e de nuvem
+    items:
+    - name: Opções para conectar uma rede local ao Azure
+      href: /azure/architecture/reference-architectures/hybrid-networking/?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+    - name: Conectar uma rede local ao Azure usando um Gateway de VPN
+      href: /azure/architecture/reference-architectures/hybrid-networking/vpn?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+    - name: Conectar uma rede local ao Azure usando o ExpressRoute
+      href: /azure/architecture/reference-architectures/hybrid-networking/expressroute?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+    - name: Conectar uma rede local ao Azure usando o ExpressRoute com failover de VPN
+      href: /azure/architecture/reference-architectures/hybrid-networking/expressroute-vpn-failover?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+  - name: Soluções do Marketplace
+    items:
+    - name: VM de Ciência de Dados do Azure para Windows e Linux
+      href: /azure/machine-learning/data-science-virtual-machine/overview?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+  - name: Lote do Azure
+    items:
+    - name: Lote do Azure
+      href: /azure/batch/batch-technical-overview?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+    - name: Introdução ao desenvolvimento com o Lote
+      href: /azure/batch/quick-run-dotnet?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+    - name: Usar VMs de baixa prioridade com o Lote
+      href: /azure/batch/batch-low-pri-vms?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+  - name: Azure CycleCloud
+    items:
+    - name: Azure CycleCloud
+      href: /azure/cyclecloud/?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+  - name: Gerenciadores de carga de trabalho
+    items:
+    - name: Pacote de HPC para Windows
+      href: /azure/virtual-machines/windows/hpcpack-cluster-options?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+    - name: Pacote de HPC para Linux
+      href: /azure/virtual-machines/linux/hpcpack-cluster-options?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+    - name: Contêineres
+      items:
+      - name: AKS (Serviço do Kubernetes do Azure)
+        href: /azure/aks/intro-kubernetes?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+      - name: Registro de Contêiner
+        href: /azure/container-registry/container-registry-intro?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+- name: Gerenciamento de custo
+  items:
+  - name: VMs de baixa prioridade
+    href: /azure/virtual-machine-scale-sets/virtual-machine-scale-sets-use-low-priority?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+- name: Segurança
+  items:
+  - name: Documentação de Segurança do Azure
+    href: /azure/security/azure-security?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+  - name: Implementar uma topologia de rede hub-spoke no Azure
+    href: /azure/architecture/reference-architectures/hybrid-networking/hub-spoke?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+  - name: Implementar uma topologia de rede hub-spoke com serviços compartilhados no Azure
+    href: /azure/architecture/reference-architectures/hybrid-networking/shared-services?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+- name: Aplicativos de HPC
+  items:
+  - name: Aplicativos de engenharia
+    items:
+    - name: Servidor de Computação Distribuída MATLAB
+      href: /azure/virtual-machines/windows/matlab-mdcs-cluster?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+  - name: Gráficos e renderização
+    items:
+    - name: Autodesk Maya, 3ds Max e Arnold
+      href: /azure/batch/batch-rendering-service?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+  - name: IA e deep learning
+    items:
+    - name: Kit de Ferramentas Cognitivas da Microsoft
+      href: /cognitive-toolkit/cntk-on-azure
+  - name: Provedores de MPI
+    items:
+    - name: Microsoft MPI
+      href: /message-passing-interface/microsoft-mpi
+- name: Visualização remota
+  items:
+  - name: Áreas de trabalho virtuais do Linux com o Citrix
+    href: /azure/architecture/example-scenario/infrastructure/linux-vdi-citrix?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+- name: Parâmetros de comparação de desempenho
+  items:
+  - name: Parâmetros de comparação de computação
+    href: /azure/virtual-machines/windows/compute-benchmark-scores?context=/azure/architecture/topics/high-performance-computing/context/hpc-context
+ms.openlocfilehash: 6934509e2019f342134327621606a0957dd38bb1
+ms.sourcegitcommit: 548374a0133f3caed3934fda6a380c76e6eaecea
+ms.translationtype: HT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 03/25/2019
+ms.locfileid: "58419981"

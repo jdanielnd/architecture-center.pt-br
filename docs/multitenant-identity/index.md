@@ -1,18 +1,13 @@
 ---
 title: Gerenciamento de Identidades para Aplicativos Multilocatários
-description: Práticas recomendadas para autenticação, autorização e gerenciamento de identidades em aplicativos multilocatários.
+description: 'Práticas recomendadas para autenticação, autorização e gerenciamento de identidades em aplicativos multilocatários.'
 author: MikeWasson
 ms.date: 07/21/2017
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
-ms.openlocfilehash: f8875612ad6b1a71fdb6f7a768078ae599eb70b5
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
-ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54480533"
 ---
+
 # <a name="manage-identity-in-multitenant-applications"></a>Gerenciar a identidade em aplicativos multilocatários
 
 Esta série de artigos descreve as práticas recomendadas para multilocação, ao usar o Azure AD para autenticação e gerenciamento de identidades.
@@ -74,7 +69,7 @@ Qualquer solicitação pode ser roteada para qualquer instância. Em conjunto, o
 
 Em um aplicativo multilocatário, você deve considerar os usuários no contexto de locatários.
 
-### <a name="authentication"></a>Autenticação
+### <a name="authentication"></a>Authentication
 
 - Os usuários entram no aplicativo com suas credenciais da organização. Eles não precisam criar novos perfis de usuário para o aplicativo.
 - Os usuários dentro da mesma organização fazem parte do mesmo locatário.
@@ -90,9 +85,7 @@ Em um aplicativo multilocatário, você deve considerar os usuários no contexto
 Neste guia, vamos examinar especificamente o uso do Azure AD para gerenciamento de identidades.
 
 - Supomos que o cliente armazene seus perfis de usuário no Azure AD (incluindo locatários do Office 365 e Dynamics CRM)
-- Os clientes com AD (Active Directory) local podem usar o [Azure AD Connect](/azure/active-directory/hybrid/whatis-hybrid-identity) para sincronizar seu AD local com o Azure AD.
-
-Se um cliente com o AD local não conseguir usar o Azure AD Connect (devido à política de TI corporativa ou por outros motivos), o provedor de SaaS poderá federar com o AD do cliente por meio do AD FS (Serviços de Federação do Active Directory). Essa opção é descrita em [Federar com o AD FS de um cliente](adfs.md).
+- Os clientes com Active Directory local podem usar o [Azure AD Connect](/azure/active-directory/hybrid/whatis-hybrid-identity) para sincronizar o Active Directory local com o Azure AD. Se um cliente com o Active Directory local não conseguir usar o Azure AD Connect (devido à política de TI corporativa ou por outros motivos), o provedor de SaaS poderá federar com o diretório do cliente por meio dos Serviços de Federação do Active Directory (AD FS). Essa opção é descrita em [Federar com o AD FS de um cliente](adfs.md).
 
 Este guia não considera outros aspectos da multilocação, como particionamento de dados, configuração por locatário e assim por diante.
 

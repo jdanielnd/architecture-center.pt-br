@@ -1,21 +1,16 @@
 ---
 title: Padrões de design na nuvem
 titleSuffix: Azure Architecture Center
-description: Padrões de design para a criação de aplicativos confiáveis, dimensionáveis e seguros na nuvem.
+description: 'Padrões de design para a criação de aplicativos confiáveis, dimensionáveis e seguros na nuvem.'
 keywords: Azure
 author: dragon119
-ms.date: 12/10/2018
+ms.date: 03/01/2018
 ms.topic: design-pattern
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 1f3a76a104f0157526db3cff338c2b8b08dd573c
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
-ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54488249"
 ---
+
 # <a name="cloud-design-patterns"></a>Padrões de design na nuvem
 
 Esses padrões de design são úteis para a criação de aplicativos confiáveis, dimensionáveis e seguros na nuvem.
@@ -94,11 +89,12 @@ Cada padrão descreve o problema ao qual o padrão se destina, as consideraçõe
 |         [Back-ends para Front-ends](./backends-for-frontends.md)         |                                                            Crie serviços de back-end separados a serem consumidos por aplicativos de front-end específico ou interfaces.                                                             |
 |                       [Bulkhead](./bulkhead.md)                       |                                                        Isole os elementos de um aplicativo em pools para que, se um falhar, os outros continuarão a funcionar.                                                        |
 |                    [Cache-Aside](./cache-aside.md)                    |                                                                                   Carregar dados sob demanda em um cache de um armazenamento de dados                                                                                    |
-|                [Disjuntor](./circuit-breaker.md)                |                                                     Trate as falhas que possam consumir uma quantidade variável de tempo em sua correção ao se conectar a um serviço ou recurso remoto.                                                     |
-|                           [CQRS](./cqrs.md)                           |                                                           Separar as operações que leem dados de operações que atualizam dados usando interfaces separadas.                                                            |
+|                [Disjuntor](./circuit-breaker.md)                |                                                     Trate as falhas que possam consumir uma quantidade variável de tempo para serem corrigidas ao se conectar a um serviço ou recurso remoto.                                                     |
+| [Verificação de declaração](./claim-check.md) | Divida uma mensagem grande em uma verificação de declaração e uma carga para evitar sobrecarregar um barramento de mensagem. |
 |       [Transação de Compensação](./compensating-transaction.md)       |                                                         Desfaça o trabalho executado por uma série de etapas, que juntas definem uma operação finalmente consistente.                                                         |
 |            [Consumidores Concorrentes](./competing-consumers.md)            |                                                            Habilite vários consumidores simultâneos processar as mensagens recebidas no mesmo canal de mensagens.                                                             |
 | [Consolidação de Recursos de Computação](./compute-resource-consolidation.md) |                                                                        Consolidar várias tarefas ou operações em uma única unidade de computação                                                                        |
+|                           [CQRS](./cqrs.md)                           |                                                           Separar as operações que leem dados de operações que atualizam dados usando interfaces separadas.                                                            |
 |                 [Fornecimento de Evento](./event-sourcing.md)                 |                                                      Use um repositório somente de acréscimo para registrar a série inteira de eventos que descrevem as ações realizadas nos dados em um domínio.                                                      |
 |   [Armazenamento de Configuração Externa](./external-configuration-store.md)   |                                                           Mova as informações de configuração para fora do pacote de implantação de aplicativo para um local centralizado.                                                           |
 |             [Identidade Federada](./federated-identity.md)             |                                                                                Delegar autenticação a um provedor de identidade externa.                                                                                |
