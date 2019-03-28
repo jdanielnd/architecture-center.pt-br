@@ -8,13 +8,8 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 61470b630f735c1d49ad9b4bfbec853b308630cf
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
-ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54481517"
 ---
+
 # <a name="busy-front-end-antipattern"></a>Antipadrão do front-end ocupado
 
 Executar um trabalho assíncrono em um grande número de threads em segundo plano pode enfraquecer outras tarefas de primeiro plano simultâneas de recursos, diminuindo os tempos de resposta a níveis inaceitáveis.
@@ -146,7 +141,7 @@ As seções a seguir aplicam essas etapas ao aplicativo de exemplo descrito ante
 
 ### <a name="identify-points-of-slowdown"></a>Identificar pontos de lentidão
 
-Instrumente cada método para acompanhar a duração e os recursos consumidos por cada solicitação. Depois monitore o aplicativo em produção. Isso pode fornecer uma visão geral de como solicitações concorrem umas com as outras. Durante períodos de estresse, solicitações lentas que consomem muitos recursos provavelmente afetarão outras operações, e esse comportamento pode ser observado fazendo o monitoramento do sistema e observando a diminuição no desempenho.
+Instrumente cada método para acompanhar a duração e os recursos consumidos por cada solicitação. Depois monitore o aplicativo em produção. Isso pode fornecer uma visão geral de como solicitações concorrem umas com as outras. Durante períodos de estresse, solicitações lentas que consomem muitos recursos provavelmente afetarão outras operações. Esse comportamento pode ser observado fazendo o monitoramento do sistema e observando a queda no desempenho.
 
 A imagem a seguir mostra um painel de monitoramento. (Usamos [AppDynamics] para nossos testes.) Inicialmente, o sistema tem carga leve. Em seguida, os usuários começam a solicitar o método GET `UserProfile`. O desempenho é razoavelmente bom até que outros usuários comecem a emitir solicitações para o método POST `WorkInFrontEnd`. Nesse ponto, os tempos de resposta aumentam consideravelmente (primeira seta). Os tempos de resposta só melhoram após a diminuição do volume de solicitações para o controlador `WorkInFrontEnd` (segunda seta).
 
