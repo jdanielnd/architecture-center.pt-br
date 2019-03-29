@@ -165,8 +165,8 @@ Compilar um sistema HPC do zero no Azure oferece uma quantidade significativa de
 
 1. Configurar seu próprio ambiente de cluster em máquinas virtuais do Azure ou [conjuntos de escala de máquina virtual](/azure/virtual-machine-scale-sets/overview?context=/azure/architecture/topics/high-performance-computing/context/hpc-context).
 2. Use modelos do Azure Resource Manager para implantar [gerenciadores de carga de trabalho](#workload-managers), infraestrutura, e [aplicativos](#hpc-applications) iniciais.
-3. Escolha [tamanhos de VM de GPU e HPC](#hpc-and-gpu-sizes) que incluem conexões de rede e de hardware especializados para cargas de trabalho MPI ou GPU.
-4. Adicione [armazenamento de alto desempenho](#hpc-storage) para cargas de trabalho com E/S alta.
+3. Escolha [tamanhos de VM](#compute) de GPU e HPC que incluem conexões de rede e hardware especializado para cargas de trabalho MPI ou GPU.
+4. Adicione [armazenamento de alto desempenho](#storage) para cargas de trabalho com E/S alta.
 
 ### <a name="hybrid-and-cloud-bursting"></a>Intermitência híbrida e de nuvem
 
@@ -231,7 +231,7 @@ Primeiramente, leia o artigo [Opções de conexão de uma rede local ao Azure](/
     </li>
 </ul>
 
-Quando a conectividade de rede é estabelecida com segurança, você pode começar a usar os recursos de computação na nuvem sob demanda com as funcionalidades de intermitência do seu atual [gerenciador de carga de trabalho](#workload-manager).
+Quando a conectividade de rede é estabelecida com segurança, você pode começar a usar os recursos de computação na nuvem sob demanda com as funcionalidades de intermitência do seu atual [gerenciador de carga de trabalho](#workload-managers).
 
 ### <a name="marketplace-solutions"></a>Soluções do Marketplace
 
