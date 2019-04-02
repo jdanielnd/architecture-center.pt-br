@@ -6,12 +6,12 @@ ms.subservice: enterprise-cloud-adoption
 ms.date: 02/11/2019
 description: Governança de recursos de nuvem de explicação no Azure
 author: petertaylor9999
-ms.openlocfilehash: 5d022e83a1c97a5e5af8208ec00339575bb88be1
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 602ac81f2b2201c77746df971d282582ceee23f7
+ms.sourcegitcommit: 9854bd27fb5cf92041bbfb743d43045cd3552a69
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58242117"
+ms.lasthandoff: 03/27/2019
+ms.locfileid: "58503189"
 ---
 <!-- markdownlint-disable MD026 -->
 
@@ -35,11 +35,11 @@ O RBAC define funções, e as funções definem os recursos para um usuário atr
 
 As políticas de recursos definem regras para a criação de recursos. Por exemplo, uma política de recursos pode limitar o SKU de uma VM para um tamanho pré-aprovado específico. Ou então, uma política de recursos pode impor a adição de uma marca com um centro de custo quando a solicitação é feita para criar o recurso.
 
-Ao configurar essas ferramentas, uma consideração importante é o balanceamento da governança versus agilidade organizacional. Ou seja, quanto mais restritiva a política de governança, menos ágeis se tornarão seus desenvolvedores e profissionais de TI. Isso ocorre porque uma política restritiva governança pode exigir mais etapas manuais, como exigir um desenvolvedor preencher um formulário ou enviar um email para uma pessoa da equipe de governança para criar manualmente um recurso. A equipe de governança possui recursos finitos e pode ficar acumulada, resultando em equipes de desenvolvimento improdutivos aguardando seus recursos para recursos desnecessários e criados acúmulo de custos enquanto esperam a ser excluído.
+Ao configurar essas ferramentas, uma consideração importante é o balanceamento da governança versus agilidade organizacional. Ou seja, quanto mais restritiva a política de governança, menos ágeis se tornarão seus desenvolvedores e profissionais de TI. Isso ocorre porque uma política de governança restritiva pode exigir mais etapas manuais, como exigir que um desenvolvedor preencher um formulário ou envie um email para uma pessoa da equipe de governança para criar manualmente um recurso. A equipe de governança tem recursos finitos e pode ficar acumulada, resultando em equipes de desenvolvimento improdutivos aguardando seus recursos para ser criados e desnecessários recursos acumular custos enquanto esperam a ser excluído.
 
 ## <a name="next-steps"></a>Próximas etapas
 
-Agora que você entende o conceito de governança de recursos de nuvem, saiba mais sobre como o acesso a recurso é gerenciado no Azure.
+Agora que você entende o conceito de governança de recursos de nuvem, saiba mais sobre como o acesso aos recursos é gerenciado no Azure.
 
 > [!div class="nextstepaction"]
 > [Saiba mais sobre o acesso de recursos no Azure](azure-resource-access.md)

@@ -8,12 +8,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18, networking
-ms.openlocfilehash: 4235e5d1bb3b202cff9f7c703f079651982aac59
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: dbd2a9a8fbb18586e7b255873a9a503117deabcd
+ms.sourcegitcommit: ea97ac004c38c6b456794c1a8eef29f8d2b77d50
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58246107"
+ms.lasthandoff: 03/26/2019
+ms.locfileid: "58489174"
 ---
 # <a name="implement-a-hub-spoke-network-topology-in-azure"></a>Implementar uma topologia de rede hub-spoke no Azure
 
@@ -101,12 +101,6 @@ Se você precisar de conectividade entre spokes, considere implementar uma NVA p
 ![[2]][2]
 
 Nesse cenário, você precisa configurar todas as conexões de emparelhamento para **permitir tráfego encaminhado**.
-
-### <a name="overcoming-vnet-peering-limits"></a>Superar os limites de emparelhamento VNet
-
-Não deixe de considerar a [limitação do número de emparelhamentos de VNet por VNet][vnet-peering-limit] no Azure. Se você precisar de mais spokes do que o permitido pelo limite, considere criar uma topologia hub-spoke-hub-spoke, na qual o primeiro nível de spokes também funciona como hubs. O diagrama a seguir mostra essa abordagem.
-
-![[3]][3]
 
 Além disso, considere quais serviços compartilhados no hub, para garantir que o hub seja dimensionado para um número maior de spokes. Por exemplo, se seu hub fornecer serviços de firewall, considere os limites de largura de banda da sua solução de firewall ao adicionar vários spokes. Pode ser útil mover alguns desses serviços compartilhados para um segundo nível de hubs.
 

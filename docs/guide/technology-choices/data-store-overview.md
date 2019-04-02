@@ -8,12 +8,12 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seojan19
-ms.openlocfilehash: 91a551025ae697d5828fc1e398b204d2901d17f6
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: c76b28fc53f36024867838e8ac36f256b242bf4a
+ms.sourcegitcommit: 548374a0133f3caed3934fda6a380c76e6eaecea
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58242017"
+ms.lasthandoff: 03/25/2019
+ms.locfileid: "58419947"
 ---
 # <a name="choose-the-right-data-store"></a>Escolher o armazenamento de dados correto
 
@@ -35,11 +35,13 @@ Um RDBMS geralmente fornece suporte para um modelo de esquema em gravação, ond
 
 Um RDBMS é muito útil quando garantias de coerência forte são importantes &mdash;, onde todas as alterações são atômicas e as transações sempre deixam os dados em um estado consistente. No entanto, as estruturas subjacentes não se prestam a escalar distribuindo armazenamento e processamento em computadores. Além disso, as informações armazenadas em um RDBMS devem ser colocadas em uma estrutura relacional, seguindo o processo de normalização. Embora esse processo seja bem compreendido, isso pode levar a ineficiências devido à necessidade de desmontar as entidades lógicas nas linhas em tabelas separadas e, depois, montar novamente os dados ao executar consultas.
 
-Serviço do Azure relevante:
+Serviços do Azure relevantes:
 
 - [Banco de dados SQL do Azure][sql-db]
 - [Banco de Dados do Azure para MySQL][mysql]
 - [Banco de Dados do Azure para PostgreSQL][postgres]
+- [Banco de dados do Azure para MariaDB][mariadb]
+
 
 ## <a name="keyvalue-stores"></a>Armazenamentos de valor/chave
 
@@ -112,6 +114,7 @@ Serviços do Azure relevantes:
 
 - [SQL Data Warehouse][sql-dw]
 - [Azure Data Lake][data-lake]
+- [Azure Data Explorer](https://azure.microsoft.com/services/data-explorer/)
 
 ## <a name="search-engine-databases"></a>Banco de dados de mecanismo de pesquisa  
 
@@ -152,6 +155,7 @@ Serviço do Azure relevante: [Armazenamento de Arquivos][file-storage]
 [hbase]: /azure/hdinsight/hdinsight-hbase-overview
 [mysql]: https://azure.microsoft.com/services/mysql/
 [postgres]: https://azure.microsoft.com/services/postgresql/
+[mariadb]: https://azure.microsoft.com/services/mariadb/
 [redis-cache]: https://azure.microsoft.com/services/cache/
 [search]: https://azure.microsoft.com/services/search/
 [sql-db]: https://azure.microsoft.com/services/sql-database

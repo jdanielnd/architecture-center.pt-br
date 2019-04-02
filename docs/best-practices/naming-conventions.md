@@ -8,12 +8,12 @@ ms.topic: best-practice
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 9f14b47a9659ad0b7451d106168f4d7b5a6ab0c7
-ms.sourcegitcommit: eee3a35dd5a5a2f0dc117fa1c30f16d6db213ba2
-ms.translationtype: HT
+ms.openlocfilehash: 87869d1b38d2b4a71cd5b604436e04deab993131
+ms.sourcegitcommit: 548374a0133f3caed3934fda6a380c76e6eaecea
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/06/2019
-ms.locfileid: "55782074"
+ms.lasthandoff: 03/25/2019
+ms.locfileid: "58420015"
 ---
 # <a name="naming-conventions-for-azure-resources"></a>Convenções de nomenclatura para recursos do Azure
 
@@ -84,6 +84,7 @@ Em geral, evite usar caracteres especiais (`-` ou `_`) como o primeiro ou últim
 |Grupo de recursos |Assinatura |1-90 |Não diferencia maiúsculas de minúsculas |Alfanumérico, sublinhado, parênteses, hífen, um período (exceto no final) e caracteres Unicode que correspondem ao regex documentado [aqui](/rest/api/resources/resourcegroups/createorupdate). |`<service short name>-<environment>-rg` |`profx-prod-rg` |
 |Conjunto de disponibilidade |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, sublinhado e hífen |`<service-short-name>-<context>-as` |`profx-sql-as` |
 |Marca |Entidade associada |512 (nome), 256 (valor) |Não diferencia maiúsculas de minúsculas |Caracteres alfanuméricos, especiais, exceto `<`, `>`, `%`, `&`, `\`, `?`, `/`. Confira as limitações [aqui](/azure/azure-resource-manager/resource-group-using-tags). |`"key" : "value"` |`"department" : "Central IT"` |
+|Aplicativo Web |Global |1-60 |Não diferencia maiúsculas de minúsculas |Alfanumérico e hífen |`<app_name>-<source-slot-name>` |`contoso-staging` |
 
 ### <a name="compute"></a>Computação
 
@@ -128,6 +129,12 @@ Em geral, evite usar caracteres especiais (`-` ou `_`) como o primeiro ou últim
 | Entidade | Escopo | Comprimento | Capitalização | Caracteres válidos | Padrão sugerido | Exemplo |
 | --- | --- | --- | --- | --- | --- | --- |
 |Registro de Contêiner | Global |5 a 50 |Não diferencia maiúsculas de minúsculas | Alfanumérico |`<service short name>registry` |`app1registry` |
+
+### <a name="service-bus"></a>Barramento de Serviço
+
+| Entidade | Escopo | Comprimento | Capitalização | Caracteres válidos | Padrão sugerido | Exemplo |
+| --- | --- | --- | --- | --- | --- | --- |
+|Namespace do Barramento de Serviço | Global |6-50 |Não diferencia maiúsculas de minúsculas | Alfanumérico, hífen, deve começar com leter; ver [aqui](/rest/api/servicebus/create-namespace) para obter detalhes. |`<service short name>-bus` |`app1-bus` |
 
 ## <a name="organize-resources-with-tags"></a>Organizar recursos com marcas
 

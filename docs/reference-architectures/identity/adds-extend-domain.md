@@ -8,12 +8,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18, identity
-ms.openlocfilehash: 931d247f088055286a2832b886992dca8565b6a7
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 67f23ae3676d0fb95ef484fa6dcb7a8bb92e0fa2
+ms.sourcegitcommit: 548374a0133f3caed3934fda6a380c76e6eaecea
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58244367"
+ms.lasthandoff: 03/25/2019
+ms.locfileid: "58419998"
 ---
 # <a name="extend-active-directory-domain-services-ad-ds-to-azure"></a>Estender o AD DS (Active Directory Domain Services) para o Azure
 
@@ -48,7 +48,7 @@ As seguintes recomendações aplicam-se à maioria dos cenários. Siga estas rec
 
 Determine seus requisitos de [tamanho da VM][vm-windows-sizes] com base no volume esperado de solicitações de autenticação. Use as especificações de computadores que hospedam o AD DS local como um ponto de partida e corresponda-as aos tamanhos de VM do Azure. Uma vez implantada, monitore a utilização e a escala ou redução vertical com base na carga real das VMs. Para obter mais informações sobre o dimensionamento de controladores de domínio do AD DS, consulte [Planejamento de capacidade para Active Directory Domain Services][capacity-planning-for-adds].
 
-Crie um disco de dados virtual separado para armazenar o banco de dados, logs e SYSVOL do Active Directory. Não armazene esses itens no mesmo disco do sistema operacional. Observe que, por padrão, os disco de dados que estão anexados a uma VM usam cache write-through. No entanto, essa forma de armazenamento em cache pode entrar em conflito com os requisitos do AD DS. Por esse motivo, defina a configuração de *Preferência de Cache do Host* no disco de dados para *Nenhum*. Para obter mais informações, confira [Diretrizes para implantar o Active Directory do Windows Server em máquinas virtuais do Azure][adds-data-disks].
+Crie um disco de dados virtual separado para armazenar o banco de dados, logs e SYSVOL do Active Directory. Não armazene esses itens no mesmo disco do sistema operacional. Observe que, por padrão, os disco de dados que estão anexados a uma VM usam cache write-through. No entanto, essa forma de armazenamento em cache pode entrar em conflito com os requisitos do AD DS. Por esse motivo, defina a configuração de *Preferência de Cache do Host* no disco de dados para *Nenhum*.
 
 Implante pelo menos duas VMs que executam o AD DS como controladores de domínio e adicione-as a um [conjunto de disponibilidade][availability-set].
 

@@ -11,12 +11,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18, identity
-ms.openlocfilehash: bf62544028741d500e9c4172d4ac0206c95cb919
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 5fe966f657782b41ec1926d0fd4bb83eb7a3c0fb
+ms.sourcegitcommit: 548374a0133f3caed3934fda6a380c76e6eaecea
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58241347"
+ms.lasthandoff: 03/25/2019
+ms.locfileid: "58420032"
 ---
 # <a name="create-an-active-directory-domain-services-ad-ds-resource-forest-in-azure"></a>Criar uma floresta de recursos do AD DS (Active Directory Domain Services) no Azure
 
@@ -44,10 +44,7 @@ A arquitetura tem os seguintes componentes.
 
 ## <a name="recommendations"></a>Recomendações
 
-Para obter recomendações específicas sobre a implementação do Active Directory no Azure, consulte os seguintes artigos:
-
-- [Extensão do AD DS (Active Directory Domain Services) para o Azure][adds-extend-domain].
-- [Diretrizes para implantar o Active Directory do Windows Server em máquinas virtuais do Azure][ad-azure-guidelines].
+Para obter recomendações específicas sobre a implementação do Active Directory no Azure, consulte [estendendo o diretório de serviços de domínio Active (AD DS) para o Azure][adds-extend-domain].
 
 ### <a name="trust"></a>Confiar
 
