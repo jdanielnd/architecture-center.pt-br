@@ -3,18 +3,20 @@ title: Use painéis para visualizar as métricas do Azure Databricks
 description: Como implantar um painel do Grafana para monitorar o desempenho no Azure Databricks
 author: petertaylor9999
 ms.date: 03/26/2019
-ms.openlocfilehash: dbc04b00a781dd20c3224b5a031a8d98ddadce94
-ms.sourcegitcommit: 9854bd27fb5cf92041bbfb743d43045cd3552a69
+ms.openlocfilehash: 36fcd93f6ca757e8e750d0fcbbdf0311c08560b0
+ms.sourcegitcommit: 1a3cc91530d56731029ea091db1f15d41ac056af
 ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/27/2019
-ms.locfileid: "58503366"
+ms.lasthandoff: 04/03/2019
+ms.locfileid: "58887821"
 ---
 # <a name="use-dashboards-to-visualize-azure-databricks-metrics"></a>Use painéis para visualizar as métricas do Azure Databricks
 
+Este artigo mostra como configurar um painel do Grafana para monitorar trabalhos do Azure Databricks para problemas de desempenho.
+
 [O Azure Databricks](/azure/azure-databricks/) é uma rápida, poderosa e de colaboração [Apache Spark](https://spark.apache.org/)– com base em serviço de análise que torna mais fácil desenvolver e implantar soluções de inteligência artificial (AI) e análise de big data rapidamente. O monitoramento é um componente crítico de operacionais de cargas de trabalho do Databricks do Azure em produção. A primeira etapa é reunir métricas em um espaço de trabalho para análise. No Azure, é a melhor solução para gerenciamento de dados de log [do Azure Monitor](/azure/azure-monitor/). O Azure Databricks não oferece suporte a enviar dados de log para o Azure monitor, mas uma [biblioteca para essa funcionalidade](https://github.com/mspnp/spark-monitoring) está disponível no [Github](https://github.com).
 
-Essa biblioteca ativa o log de métricas de serviço do Azure Databricks, bem como a estrutura do Apache Spark streaming métricas de consulta de evento. Depois de implantar com êxito essa biblioteca a um cluster do Azure Databricks, você pode implantar mais um conjunto de [do Azure Monitor](/azure/azure-monitor/) ou [Grafana](https://granfana.com) painéis que podem ser implantados como parte de sua produção ambiente. Este documento inclui uma discussão sobre os tipos comuns de problemas de desempenho e como identificá-los usando esses painéis.
+Essa biblioteca ativa o log de métricas de serviço do Azure Databricks, bem como a estrutura do Apache Spark streaming métricas de consulta de evento. Depois de implantar com êxito essa biblioteca a um cluster do Azure Databricks, você pode implantar mais um conjunto de [Grafana](https://granfana.com) painéis que podem ser implantados como parte de seu ambiente de produção.
 
 ![Captura de tela do painel](./_images/dashboard-screenshot.png)
 
@@ -188,6 +190,11 @@ Em seguida, é um conjunto de visualizações para o dashboard que mostram a pro
 ### <a name="shuffle-metrics"></a>Métricas de ordem aleatória
 
 O conjunto final de Mostrar visualizações de dados em ordem aleatória métricas associadas a uma consulta de streaming estruturada em todos os executores. Isso inclui a ordem aleatória de bytes de leitura, em ordem aleatória de bytes gravados, embaralhar memória e uso do disco em consultas em que o sistema de arquivos é usado.
+
+## <a name="next-steps"></a>Próximas etapas
+
+> [!div class="nextstepaction"]
+> [Solucionar problemas de gargalos de desempenho](./performance-troubleshooting.md)
 
 <!-- links -->
 
