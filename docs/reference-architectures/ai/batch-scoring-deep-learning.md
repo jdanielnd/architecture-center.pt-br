@@ -8,14 +8,14 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat-ai
-ms.openlocfilehash: 85d04f179b988fd5b00b361149f2170d13608e6d
-ms.sourcegitcommit: 700a4f6ce61b1ebe68e227fc57443e49282e35aa
-ms.translationtype: HT
+ms.openlocfilehash: a1c0701185c85f8e7bcbc183b32c4834529fc524
+ms.sourcegitcommit: 1a3cc91530d56731029ea091db1f15d41ac056af
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "55887379"
+ms.lasthandoff: 04/03/2019
+ms.locfileid: "58887855"
 ---
-# <a name="batch-scoring-on-azure-for-deep-learning-models"></a>Pontuação em lote para modelos de aprendizado profundo do Azure
+# <a name="batch-scoring-of-deep-learning-models-on-azure"></a>Lote de pontuação de modelos de aprendizado aprofundado no Azure
 
 Essa arquitetura de referência mostra como aplicar a transferência de estilo neural a um vídeo usando o Azure Machine Learning. A *Transferência de estilo* é uma técnica de aprendizado profundo que compõe uma imagem existente no estilo de outra imagem. Essa arquitetura pode ser generalizada para qualquer cenário que usa a pontuação do lote com aprendizado profundo. [**Implantar esta solução**](#deploy-the-solution).
 
@@ -23,9 +23,13 @@ Essa arquitetura de referência mostra como aplicar a transferência de estilo n
 
 **Cenário**: uma organização de mídia tem um vídeo cujo estilo ela quer alterar para procurar uma pintura específica. A organização quer ser capaz de aplicar esse estilo a todos os quadros do vídeo em tempo hábil e de uma forma automatizada. Para saber mais sobre os algoritmos de transferência de estilo neural, consulte [Transferência de estilo de imagem usando redes neurais convolucionais neurais][image-style-transfer] (PDF).
 
+<!-- markdownlint-disable MD033 -->
+
 | Imagem do estilo: | Vídeo de entrada/conteúdo: | Vídeo de saída: |
 |--------|--------|---------|
 | <img src="https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/style_image.jpg" width="300"> | [<img src="https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/input_video_image_0.jpg" width="300" height="300">](https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/input_video.mp4 "Vídeo de entrada") *clique para ver o vídeo* | [<img src="https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/output_video_image_0.jpg" width="300" height="300">](https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/output_video.mp4 "Vídeo de saída") *clique para ver o vídeo* |
+
+<!-- markdownlint-enable MD033 -->
 
 Essa arquitetura de referência foi projetada para cargas de trabalho que são disparadas pela presença da nova mídia no Armazenamento do Azure.
 
@@ -42,7 +46,7 @@ Essa arquitetura é formada pelos componentes a seguir.
 
 ### <a name="compute"></a>Computação
 
-**[O Serviço Azure Machine Learning][amls]** utiliza pipelines do Azure Machine Learning para criar sequências de computação reproduzíveis e fáceis de gerenciar. Ele também oferece um destino de computação gerenciado (no qual um cálculo de pipeline pode ser executado) chamado [Computação do Azure Machine Learning][aml-compute] para treinamento, implantação e pontuação de modelos de machine learning. 
+**[O Serviço Azure Machine Learning][amls]** utiliza pipelines do Azure Machine Learning para criar sequências de computação reproduzíveis e fáceis de gerenciar. Ele também oferece um destino de computação gerenciado (no qual um cálculo de pipeline pode ser executado) chamado [Computação do Azure Machine Learning][aml-compute] para treinamento, implantação e pontuação de modelos de machine learning.
 
 ### <a name="storage"></a>Armazenamento
 
@@ -64,21 +68,21 @@ Essa arquitetura de referência usa filmagens de um orangotango em uma árvore. 
 
 ## <a name="performance-considerations"></a>Considerações sobre o desempenho
 
-### <a name="gpu-vs-cpu"></a>GPU versus CPU
+### <a name="gpu-versus-cpu"></a>GPU em vez de CPU
 
 Para cargas de trabalho de aprendizado profundo, as GPUs geralmente superam bastante as CPUs, chegando até a exigir um cluster considerável de CPUs para obter um desempenho comparável. Embora seja uma opção usar apenas CPUs nessa arquitetura, as GPUs fornecerão um perfil de custo/desempenho muito melhor. Recomendamos o uso de VMs otimizadas para GPU mais recentes [série NCv3]vm-sizes-gpu.
 
 As GPUs não estão habilitadas por padrão em todas as regiões. Selecione uma região com GPUs habilitadas. Além disso, as assinaturas têm uma cota padrão de zero núcleos para VMs otimizadas para GPU. Eleve essa cota abrindo uma solicitação de suporte. Verifique se a sua assinatura tem cota suficiente para executar sua carga de trabalho.
 
-### <a name="parallelizing-across-vms-vs-cores"></a>Paralelização em VMs versus núcleos
+### <a name="parallelizing-across-vms-versus-cores"></a>Paralelização entre VMs em vez de núcleos
 
 Ao executar um processo de transferência de estilo como um trabalho em lotes, será necessário paralelizar entre VMs os trabalhos executadas principalmente em GPUs. Há duas abordagens possíveis: você pode criar um cluster maior usando VMs que têm uma única GPU, ou criar um cluster menor usando VMs com várias GPUs.
 
 Para essa carga de trabalho, essas duas opções terão um desempenho comparável. Usar menos VMs com mais GPUs por VM pode ajudar a reduzir a movimentação de dados. No entanto, o volume de dados por trabalho para essa carga de trabalho não é muito grande, portanto, você não observará muita limitação por Armazenamento de Blobs.
 
-### <a name="mpi-step"></a>Etapa de MPI 
+### <a name="mpi-step"></a>Etapa de MPI
 
-Ao criar o pipeline no Azure Machine Learning, uma das etapas usadas para executar a computação paralela é a etapa de MPI. A etapa de MPI ajudará a dividir os dados uniformemente entre os nós disponíveis. A etapa de MPI não será executada até que todos os nós solicitados estejam prontos. Se um nó falhar, ou for esvaziado previamente (se for uma máquina virtual de baixa prioridade), a etapa de MPI precisará ser executada novamente. 
+Ao criar o pipeline no Azure Machine Learning, uma das etapas usadas para executar a computação paralela é a etapa de MPI. A etapa de MPI ajudará a dividir os dados uniformemente entre os nós disponíveis. A etapa de MPI não será executada até que todos os nós solicitados estejam prontos. Se um nó falhar, ou for esvaziado previamente (se for uma máquina virtual de baixa prioridade), a etapa de MPI precisará ser executada novamente.
 
 ## <a name="security-considerations"></a>Considerações de segurança
 
@@ -94,7 +98,7 @@ Essa arquitetura de referência usa transferência de estilo como um exemplo de 
 
 ### <a name="securing-your-computation-in-a-virtual-network"></a>Proteger seu cálculo em uma rede virtual
 
-Ao implantar o cluster de computação do Machine Learning, você pode configurar seu cluster para provisionamento dentro de uma sub-rede de uma [rede virtual][virtual-network]. Isso permite que os nós de computação no cluster se comuniquem com segurança com outras máquinas virtuais. 
+Ao implantar o cluster de computação do Machine Learning, você pode configurar seu cluster para provisionamento dentro de uma sub-rede de uma [rede virtual][virtual-network]. Isso permite que os nós de computação no cluster se comuniquem com segurança com outras máquinas virtuais.
 
 ### <a name="protecting-against-malicious-activity"></a>Proteção contra atividades mal-intencionadas
 
@@ -136,7 +140,6 @@ Para implantar essa arquitetura de referência, execute as etapas descritas no [
 
 > [!NOTE]
 > Também é possível implantar uma arquitetura de pontuação de lote para modelos de aprendizado profundo usando o Serviço de Kubernetes do Azure. Execute as etapas descritas neste [Repositório do GitHub][deployment2].
-
 
 <!-- links -->
 

@@ -7,14 +7,14 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat-ai
-ms.openlocfilehash: 00bea3cae0c3d2f0fea2babd7b0157382cf9890a
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 5f3cc62c81c9ef9e5c3c27b1d66badd3e481c228
+ms.sourcegitcommit: 1a3cc91530d56731029ea091db1f15d41ac056af
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58248681"
+ms.lasthandoff: 04/03/2019
+ms.locfileid: "58887838"
 ---
-# <a name="real-time-scoring-of-r-machine-learning-models"></a>Pontuação em tempo real dos modelos do Machine Learning em R
+# <a name="real-time-scoring-of-r-machine-learning-models-on-azure"></a>Pontuação em tempo real dos modelos do Machine Learning em R no Azure
 
 Esta arquitetura de referência mostra como implementar um serviço de previsão em tempo real (síncrono) em R usando o Microsoft Machine Learning Server em execução no Serviço de Kubernetes do Azure (AKS). Essa arquitetura pretende ser genérica e adequada para qualquer modelo de previsão compilado em R que você queria implantar como um serviço em tempo real. **[Implante essa solução][github]**.
 
