@@ -8,8 +8,13 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
+ms.openlocfilehash: 7d3fe47407eff7168dfd227a1dd1bd5917c7d431
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58344845"
 ---
-
 # <a name="busy-database-antipattern"></a><span data-ttu-id="629b5-103">Antipadrão de Banco de Dados Ocupado</span><span class="sxs-lookup"><span data-stu-id="629b5-103">Busy Database antipattern</span></span>
 
 <span data-ttu-id="629b5-104">O processamento de descarregamento para um servidor de banco de dados pode fazer com que ele gaste uma proporção significativa de tempo de execução do código, em vez de responder às solicitações para armazenar e recuperar dados.</span><span class="sxs-lookup"><span data-stu-id="629b5-104">Offloading processing to a database server can cause it to spend a significant proportion of time running code, rather than responding to requests to store and retrieve data.</span></span>

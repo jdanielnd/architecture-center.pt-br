@@ -1,13 +1,18 @@
 ---
 title: Gerenciamento de Identidades para Aplicativos Multilocatários
-description: 'Práticas recomendadas para autenticação, autorização e gerenciamento de identidades em aplicativos multilocatários.'
+description: Práticas recomendadas para autenticação, autorização e gerenciamento de identidades em aplicativos multilocatários.
 author: MikeWasson
 ms.date: 07/21/2017
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
+ms.openlocfilehash: be906106fb12c381d57ad40ae22e748dcff9722f
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58346069"
 ---
-
 # <a name="manage-identity-in-multitenant-applications"></a><span data-ttu-id="de37d-103">Gerenciar a identidade em aplicativos multilocatários</span><span class="sxs-lookup"><span data-stu-id="de37d-103">Manage identity in multitenant applications</span></span>
 
 <span data-ttu-id="de37d-104">Esta série de artigos descreve as práticas recomendadas para multilocação, ao usar o Azure AD para autenticação e gerenciamento de identidades.</span><span class="sxs-lookup"><span data-stu-id="de37d-104">This series of articles describes best practices for multitenancy, when using Azure AD for authentication and identity management.</span></span>

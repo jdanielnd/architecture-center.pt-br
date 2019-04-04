@@ -8,8 +8,13 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
+ms.openlocfilehash: 1b53806b2939a7c44a8b48c9146d5e86c84d9e2e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58343553"
 ---
-
 # <a name="synchronous-io-antipattern"></a><span data-ttu-id="02a36-103">Antipadrão de E/S síncrona</span><span class="sxs-lookup"><span data-stu-id="02a36-103">Synchronous I/O antipattern</span></span>
 
 <span data-ttu-id="02a36-104">O bloqueio do thread de chamada durante a conclusão da E/S pode reduzir o desempenho e afetar a escalabilidade vertical.</span><span class="sxs-lookup"><span data-stu-id="02a36-104">Blocking the calling thread while I/O completes can reduce performance and affect vertical scalability.</span></span>

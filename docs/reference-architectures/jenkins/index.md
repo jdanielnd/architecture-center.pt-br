@@ -1,15 +1,20 @@
 ---
 title: Executar um servidor Jenkins no Azure
 titleSuffix: Azure Reference Architectures
-description: 'Arquitetura recomendada que mostra como implantar e operar um servidor Jenkins escalonável, de nível corporativo, no Azure protegido com o logon único (SSO).'
+description: Arquitetura recomendada que mostra como implantar e operar um servidor Jenkins escalonável, de nível corporativo, no Azure protegido com o logon único (SSO).
 author: njray
 ms.date: 04/30/2018
 ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18
+ms.openlocfilehash: 4b8d84ef6eedd93f1a3ec948e7c6d6e3d1c465fc
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58346018"
 ---
-
 # <a name="run-a-jenkins-server-on-azure"></a><span data-ttu-id="e1567-103">Executar um servidor Jenkins no Azure</span><span class="sxs-lookup"><span data-stu-id="e1567-103">Run a Jenkins server on Azure</span></span>
 
 <span data-ttu-id="e1567-104">Essa arquitetura de referência mostra como implantar e operar um servidor Jenkins escalonável, de nível corporativo, no Azure protegido com o logon único.</span><span class="sxs-lookup"><span data-stu-id="e1567-104">This reference architecture shows how to deploy and operate a scalable, enterprise-grade Jenkins server on Azure secured with single sign-on (SSO).</span></span> <span data-ttu-id="e1567-105">A arquitetura também usa o Azure Monitor para monitorar o estado do servidor Jenkins.</span><span class="sxs-lookup"><span data-stu-id="e1567-105">The architecture also uses Azure Monitor to monitor the state of the Jenkins server.</span></span> <span data-ttu-id="e1567-106">[**Implantar esta solução**](#deploy-the-solution).</span><span class="sxs-lookup"><span data-stu-id="e1567-106">[**Deploy this solution**](#deploy-the-solution).</span></span>

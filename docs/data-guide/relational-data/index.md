@@ -1,13 +1,18 @@
 ---
 title: Dados relacionais
-description: null
+description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
+ms.openlocfilehash: d68bddcb75e5c8f786a7739e85de2645a2c3d641
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58345406"
 ---
-
 # <a name="traditional-relational-database-solutions"></a><span data-ttu-id="3190c-102">Soluções tradicionais de banco de dados relacional</span><span class="sxs-lookup"><span data-stu-id="3190c-102">Traditional relational database solutions</span></span>
 
 <span data-ttu-id="3190c-103">Dados relacionais são dados modelados com o modelo relacional.</span><span class="sxs-lookup"><span data-stu-id="3190c-103">Relational data is data modeled using the relational model.</span></span> <span data-ttu-id="3190c-104">Nesse modelo, os dados são expressos como tuplas.</span><span class="sxs-lookup"><span data-stu-id="3190c-104">In this model, data is expressed as tuples.</span></span> <span data-ttu-id="3190c-105">Uma *tupla* é um conjunto de pares de atributo/valor.</span><span class="sxs-lookup"><span data-stu-id="3190c-105">A *tuple* is a set of attribute/value pairs.</span></span> <span data-ttu-id="3190c-106">Por exemplo, uma tupla pode ser (itemid = 5, orderid = 1, item = "Chair", amount = 200.00).</span><span class="sxs-lookup"><span data-stu-id="3190c-106">For example, a tuple might be (itemid = 5, orderid = 1, item = "Chair", amount = 200.00).</span></span> <span data-ttu-id="3190c-107">Um conjunto de tuplas que compartilham os mesmos atributos é chamado de uma *relação*.</span><span class="sxs-lookup"><span data-stu-id="3190c-107">A set of tuples that all share the same attributes is called a *relation*.</span></span>

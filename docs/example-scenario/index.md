@@ -7,12 +7,12 @@ layout: LandingPage
 ms.topic: landing-page
 ms.service: architecture-center
 ms.subservice: example-scenario
-ms.openlocfilehash: bb71f82bac2d37bf4aec9f8b12a2a83d302d9e88
-ms.sourcegitcommit: a05494afd63a5e74dee1ef85611341e4ec964126
+ms.openlocfilehash: ad29bb3c64b3276828c00fb05f10e0fa97967e47
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/12/2019
-ms.locfileid: "56157018"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58346545"
 ---
 # <a name="azure-example-scenarios"></a>Cenários de Exemplo do Azure
 
@@ -21,6 +21,8 @@ Os cenários de exemplo mostram como resolver os desafios comerciais ou técnico
 Em cada cenário, você encontrará um diagrama de arquitetura, fluxos de dados e detalhes sobre os componentes técnicos. Você também aprenderá sobre as considerações ao executar a solução nos fatores de custo e produção, e outras opções para resolver problemas semelhantes. Muitos cenários fornecem um modo de implantar facilmente a solução em sua própria assinatura do Azure.
 
 Ir para: [Cenários de IA](#ai-scenarios) | [Cenários de aplicativo](#application-scenarios) | [Cenários de dados](#data-scenarios) | [Cenários de infraestrutura](#infrastructure-scenarios)
+
+<!-- markdownlint-disable MD033 -->
 
 <ul class="panelContent cardsL">
     <li>

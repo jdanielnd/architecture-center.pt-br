@@ -8,8 +8,13 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
+ms.openlocfilehash: 5c3062c0a17de708ada83ba81dcb111e6b1f8440
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58343842"
 ---
-
 # <a name="no-caching-antipattern"></a><span data-ttu-id="e2f3c-103">Nenhum antipadrão de cache</span><span class="sxs-lookup"><span data-stu-id="e2f3c-103">No Caching antipattern</span></span>
 
 <span data-ttu-id="e2f3c-104">Em um aplicativo de nuvem que trata muitas solicitações simultâneas, buscar repetidamente os mesmos dados pode reduzir o desempenho e a escalabilidade.</span><span class="sxs-lookup"><span data-stu-id="e2f3c-104">In a cloud application that handles many concurrent requests, repeatedly fetching the same data can reduce performance and scalability.</span></span>

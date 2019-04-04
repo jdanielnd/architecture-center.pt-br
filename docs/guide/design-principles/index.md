@@ -8,8 +8,13 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seojan19
+ms.openlocfilehash: 8aab710ef6ffde493b80810750d2c0bc299ffaa6
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58344250"
 ---
-
 # <a name="ten-design-principles-for-azure-applications"></a><span data-ttu-id="a6620-103">Dez princípios de design para aplicativos do Azure</span><span class="sxs-lookup"><span data-stu-id="a6620-103">Ten design principles for Azure applications</span></span>
 
 <span data-ttu-id="a6620-104">Siga esses princípios de design para tornar seu aplicativo mais escalonável, flexível e gerenciável.</span><span class="sxs-lookup"><span data-stu-id="a6620-104">Follow these design principles to make your application more scalable, resilient, and manageable.</span></span>
