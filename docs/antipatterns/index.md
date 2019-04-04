@@ -8,8 +8,13 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
+ms.openlocfilehash: 212930368942728fc0be0c9b2af1a90293906b39
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58344828"
 ---
-
 # <a name="performance-antipatterns-for-cloud-applications"></a>Antipadrões de desempenho para aplicativos em nuvem
 
 Um *antipadrão desempenho* é uma prática comum que pode causar problemas de escalabilidade quando um aplicativo está sob pressão.

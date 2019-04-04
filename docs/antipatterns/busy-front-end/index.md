@@ -8,8 +8,13 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
+ms.openlocfilehash: f1ab728d68747856fb2586804d58d45c4ea4fcc1
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58344488"
 ---
-
 # <a name="busy-front-end-antipattern"></a>Antipadrão do front-end ocupado
 
 Executar um trabalho assíncrono em um grande número de threads em segundo plano pode enfraquecer outras tarefas de primeiro plano simultâneas de recursos, diminuindo os tempos de resposta a níveis inaceitáveis.

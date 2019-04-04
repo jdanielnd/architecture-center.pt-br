@@ -1,7 +1,7 @@
 ---
 title: Padrões de design na nuvem
 titleSuffix: Azure Architecture Center
-description: 'Padrões de design para a criação de aplicativos confiáveis, dimensionáveis e seguros na nuvem.'
+description: Padrões de design para a criação de aplicativos confiáveis, dimensionáveis e seguros na nuvem.
 keywords: Azure
 author: dragon119
 ms.date: 03/01/2018
@@ -9,8 +9,13 @@ ms.topic: design-pattern
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
+ms.openlocfilehash: c8fe971e031825632c2bb157bfd23e15f56520a3
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58343468"
 ---
-
 # <a name="cloud-design-patterns"></a>Padrões de design na nuvem
 
 Esses padrões de design são úteis para a criação de aplicativos confiáveis, dimensionáveis e seguros na nuvem.

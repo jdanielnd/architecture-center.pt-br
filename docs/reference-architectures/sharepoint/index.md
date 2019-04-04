@@ -8,8 +8,13 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18
+ms.openlocfilehash: 0cce207dedd0eb42e29a152b3bb84acc2dca323a
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58344981"
 ---
-
 # <a name="run-a-highly-available-sharepoint-server-2016-farm-in-azure"></a>Executar um farm do SharePoint Server 2016 de alta disponibilidade no Azure
 
 Essa arquitetura de referência mostra práticas comprovadas para implantar um farm do SharePoint Server 2016 de alta disponibilidade no Azure, usando a topologia de MinRole e grupos de disponibilidade Always On do SQL Server. O farm do SharePoint é implantado em uma rede virtual protegida sem nenhuma presença ou ponto de extremidade para a Internet. [**Implantar esta solução**](#deploy-the-solution).

@@ -8,8 +8,13 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
+ms.openlocfilehash: b21ef5f772eb4e2572833ab15085651ac3766a5e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58344318"
 ---
-
 # <a name="chatty-io-antipattern"></a>Antipadrão de E/S com ruídos
 
 O efeito cumulativo de um grande número de solicitações de E/S pode ter um impacto significativo no desempenho e capacidade de resposta.

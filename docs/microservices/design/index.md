@@ -7,8 +7,13 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: microservices
+ms.openlocfilehash: 15e9aa16c0e2cfccecbfb84d217c275cc99a66fd
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58344403"
 ---
-
 # <a name="designing-a-microservices-architecture"></a>Projetar uma arquitetura de microsserviços
 
 Microsserviços se tornaram um estilo popular de arquitetura para criar aplicativos de nuvem resilientes, altamente escalonáveis, implantáveis independentemente e capazes de evoluir rapidamente. No entanto, para serem mais do que apenas uma palavra de efeito, microsserviços exigem uma abordagem diferente para o design e criação de aplicativos.

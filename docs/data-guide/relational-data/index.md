@@ -1,13 +1,18 @@
 ---
 title: Dados relacionais
-description: null
+description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
+ms.openlocfilehash: d68bddcb75e5c8f786a7739e85de2645a2c3d641
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58345406"
 ---
-
 # <a name="traditional-relational-database-solutions"></a>Soluções tradicionais de banco de dados relacional
 
 Dados relacionais são dados modelados com o modelo relacional. Nesse modelo, os dados são expressos como tuplas. Uma *tupla* é um conjunto de pares de atributo/valor. Por exemplo, uma tupla pode ser (itemid = 5, orderid = 1, item = "Chair", amount = 200.00). Um conjunto de tuplas que compartilham os mesmos atributos é chamado de uma *relação*.
