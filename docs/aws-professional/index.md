@@ -1,16 +1,21 @@
 ---
 title: Azure para profissionais do AWS
 titleSuffix: Azure Architecture Center
-description: 'Entenda os conceitos básicos de contas, plataforma e serviços do Microsoft Azure. Conheça também as principais semelhanças e diferenças entre as plataformas AWS e Azure. Aproveite sua experiência com o AWS no Azure.'
-keywords: 'Especialistas em AWS, comparação com o Azure, comparação com o AWS, diferença entre azure e aws, azure e aws'
+description: Entenda os conceitos básicos de contas, plataforma e serviços do Microsoft Azure. Conheça também as principais semelhanças e diferenças entre as plataformas AWS e Azure. Aproveite sua experiência com o AWS no Azure.
+keywords: Especialistas em AWS, comparação com o Azure, comparação com o AWS, diferença entre azure e aws, azure e aws
 author: lbrader
 ms.date: 09/19/2018
 ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
+ms.openlocfilehash: c61758494435f61814953ab5ba48d8fed1e709ab
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.translationtype: HT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55897585"
 ---
-
 # <a name="azure-for-aws-professionals"></a>Azure para profissionais do AWS
 
 Este artigo ajuda os especialistas em AWS (Amazon Web Services) a compreender os conceitos básicos de contas, plataforma e serviços do Microsoft Azure. Aborda também as principais semelhanças e diferenças entre as plataformas AWS e Azure.
@@ -142,7 +147,7 @@ Uma [Zona de Disponibilidade](/azure/availability-zones/az-overview) é uma zona
 
 Para proteger um aplicativo contra uma interrupção regional, você pode implantar o aplicativo em várias regiões, usando o [Gerenciador de Tráfego do Azure][traffic-manager] para distribuir o tráfego de Internet para as diferentes regiões. Cada região do Azure é emparelhada com outra. Juntas, elas formam um [par regional][paired-regions]. Com a exceção do Sul do Brasil, pares regionais estão localizados na mesma região geográfica para atender aos requisitos de residência de dados para fins de jurisdição de imposição fiscal e legal.
 
-Diferentemente das Zonas de Disponibilidade, que, embora sejam datacenters fisicamente separados, podem estar em áreas geográficas relativamente próximas, as regiões emparelhadas ficam, em geral, distantes no mínimo 300 milhas (cerca de 480 km). Essa distância é para garantir que desastres em grande escala afetem somente uma das regiões do par. Os pares vizinhos podem ser definidos para sincronizar dados de serviços de armazenamento e de bancos de dados, e são configurados para que as atualizações de plataforma sejam distribuídas em apenas uma região do par de cada vez.
+Diferentemente das Zonas de Disponibilidade, que, embora sejam datacenters fisicamente separados, podem estar em áreas geográficas relativamente próximas, as regiões emparelhadas ficam, em geral, distantes no mínimo 300 milhas (cerca de 480 km). Isso visa a garantir que desastres em maior escala afetem somente uma das regiões do par. Os pares vizinhos podem ser definidos para sincronizar dados de serviços de armazenamento e de bancos de dados, e são configurados para que as atualizações de plataforma sejam distribuídas em apenas uma região do par de cada vez.
 
 O backup do [armazenamento com redundância geográfica](/azure/storage/common/storage-redundancy-grs) do Azure é feito automaticamente na região emparelhada apropriada. Em todos os outros recursos, criar uma solução totalmente redundante usando regiões emparelhadas significa gerar uma cópia completa da sua solução em ambas as regiões.
 
@@ -295,9 +300,9 @@ O Azure fornece conexões dedicadas site a site semelhantes por meio do seu serv
 
 O Azure fornece vários serviços de outro banco de dados relacional que serão o equivalente do Serviço de banco de dados relacional (RDS) do AWS.
 
-- [Banco de Dados SQL](/azure/sql-database/sql-database-technical-overview)
-- [Banco de Dados do Azure para MySQL](/azure/mysql/overview)
-- [Banco de Dados do Azure para PostgreSQL](/azure/postgresql/overview)
+- [Banco de Dados SQL](https://docs.microsoft.com/azure/sql-database/sql-database-technical-overview)
+- [Banco de Dados do Azure para MySQL](https://docs.microsoft.com/azure/mysql/overview)
+- [Banco de Dados do Azure para PostgreSQL](https://docs.microsoft.com/azure/postgresql/overview)
 
 Outros mecanismos de bancos de dados, como [SQL Server](https://azure.microsoft.com/services/virtual-machines/sql-server/), [Oracle](https://azure.microsoft.com/campaigns/oracle/) e [MySQL](https://azure.microsoft.com/documentation/articles/virtual-machines-windows-classic-mysql-2008r2/) podem ser implantados com a utilização de Instâncias de VM do Azure.
 

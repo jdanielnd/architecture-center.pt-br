@@ -8,8 +8,13 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
+ms.openlocfilehash: a2e42e35ae1b56b61c8f9f9ecb21ee104cd3222e
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.translationtype: HT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55898044"
 ---
-
 # <a name="improper-instantiation-antipattern"></a>Antipadrão de instanciação inadequada
 
 Criar continuamente novas instâncias de um objeto que deve ser criado somente uma vez e depois compartilhado pode prejudicar o desempenho.
