@@ -279,20 +279,26 @@ items:
     href: reference-architectures/index.md
   - name: AI
     items:
-    - name: Treinamento distribuído de modelos de aprendizado profundo
-      href: reference-architectures/ai/training-deep-learning.md
-    - name: Treinamento dos modelos scikit-learn de Python
-      href: reference-architectures/ai/training-python-models.md
-    - name: Pontuação em lote de modelos de aprendizado profundo
-      href: reference-architectures/ai/batch-scoring-deep-learning.md
-    - name: Pontuação em lote dos modelos de Python
-      href: reference-architectures/ai/batch-scoring-python.md
+    - name: Treinamento e pontuação de modelos de aprendizado profundo e do Python
+      items:
+      - name: Treinamento distribuído de modelos de aprendizado profundo
+        href: reference-architectures/ai/training-deep-learning.md
+      - name: Pontuação em lote de modelos de aprendizado profundo
+        href: reference-architectures/ai/batch-scoring-deep-learning.md
+      - name: Treinamento dos modelos scikit-learn de Python
+        href: reference-architectures/ai/training-python-models.md
+      - name: Pontuação em lote dos modelos de Python
+        href: reference-architectures/ai/batch-scoring-python.md
+      - name: Pontuação em tempo real do Python e modelos de aprendizado profundo
+        href: reference-architectures/ai/realtime-scoring-python.md
+    - name: Pontuação dos modelos do R
+      items:
+      - name: Pontuação em lote dos modelos do R
+        href: reference-architectures/ai/batch-scoring-R-models.md
+      - name: Pontuação em tempo real dos modelos do R
+        href: reference-architectures/ai/realtime-scoring-r.md
     - name: Pontuação em lote dos modelos do Spark no Azure Databricks
       href: reference-architectures/ai/batch-scoring-databricks.md
-    - name: Pontuação em tempo real do Python e modelos de aprendizado profundo
-      href: reference-architectures/ai/realtime-scoring-python.md
-    - name: Pontuação em tempo real dos modelos do Machine Learning em R
-      href: reference-architectures/ai/realtime-scoring-r.md
     - name: Bot conversacional
       href: reference-architectures/ai/conversational-bot.md
     - name: API de recomendação em tempo real
@@ -497,6 +503,8 @@ items:
           href: data-guide/technology-choices/natural-language-processing.md
         - name: Orquestração de pipeline
           href: data-guide/technology-choices/pipeline-orchestration-data-movement.md
+        - name: Guia do desenvolvedor de R para Azure
+          href: data-guide/technology-choices/r-developers-guide.md
         - name: Ingestão de mensagens em tempo real
           href: data-guide/technology-choices/real-time-ingestion.md
         - name: Armazenamentos de dados de pesquisa
@@ -567,6 +575,8 @@ items:
       href: databricks-monitoring/application-logs.md
     - name: Usar painéis para visualizar métricas do Databricks
       href: databricks-monitoring/dashboards.md
+    - name: Solucionar problemas de gargalos de desempenho
+      href: databricks-monitoring/performance-troubleshooting.md
 - name: Estrutura de verificação do design
   items:
   - name: Design para resiliência
@@ -861,9 +871,9 @@ items:
           href: cloud-adoption/decision-guides/software-defined-network/hub-spoke.md
       - name: Logs e relatórios
         href: cloud-adoption/decision-guides/log-and-report/overview.md
-ms.openlocfilehash: 861170224f9575dc5e45d993678bda482b0ed944
-ms.sourcegitcommit: 9854bd27fb5cf92041bbfb743d43045cd3552a69
+ms.openlocfilehash: 953c7cbdee185a88d8470199fb4ba92244adaa84
+ms.sourcegitcommit: 1a3cc91530d56731029ea091db1f15d41ac056af
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/27/2019
-ms.locfileid: "58503240"
+ms.lasthandoff: 04/03/2019
+ms.locfileid: "58887770"

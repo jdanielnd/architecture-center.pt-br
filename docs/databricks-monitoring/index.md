@@ -3,14 +3,14 @@ title: Monitorando o Azure Databricks com o Azure Monitor
 description: Uma biblioteca do Scala para habilitar o monitoramento do Azure Databricks no Azure Log Analytics
 author: petertaylor9999
 ms.date: 03/26/2019
-ms.openlocfilehash: 6d3d17b2e49919aea7bb08f59e19032c1c8bdafd
-ms.sourcegitcommit: 9854bd27fb5cf92041bbfb743d43045cd3552a69
+ms.openlocfilehash: 4544d3abc3264ec459a80ac1a61a912e6d30d6b2
+ms.sourcegitcommit: 1a3cc91530d56731029ea091db1f15d41ac056af
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/27/2019
-ms.locfileid: "58503257"
+ms.lasthandoff: 04/03/2019
+ms.locfileid: "58887685"
 ---
-# <a name="monitoring-azure-databricks-with-azure-monitor"></a>Monitorando o Azure Databricks com o Azure Monitor
+# <a name="monitoring-azure-databricks"></a>Monitorando o Azure Databricks
 
 [O Azure Databricks](/azure/azure-databricks/) é um serviço de análise rápido e poderoso com base no [Apache Spark](https://spark.apache.org/), que torna mais fácil desenvolver e implantar rapidamente soluções de IA (inteligência artificial) e análise de Big Data. Muitos usuários aproveitam a simplicidade de notebooks em suas soluções do Azure Databricks. Para usuários que requerem opções de computação mais robustas, o Azure Databricks dá suporte à execução distribuída de código de aplicativo personalizado.
 
@@ -19,7 +19,7 @@ O monitoramento é uma parte crítica de qualquer solução de nível de produç
 Os artigos a seguir mostram como enviar dados de monitoramento do Azure Databricks para o [Azure Monitor](/azure/azure-monitor/overview), a plataforma de dados de monitoramento do Azure. Você deve seguir estes artigos na ordem.
 
 1. [Configurar o Azure Databricks para enviar métricas para o Azure Monitor](./configure-cluster.md)
-1. [Enviar logs de aplicativo do Azure Databricks para o Azure Monitor](./application-logs.md)
+1. [Enviar logs do aplicativo do Azure Databricks para o Azure Monitor](./application-logs.md)
 1. [Usar painéis para visualizar métricas do Azure Databricks](./dashboards.md)
 
 A biblioteca de código que acompanha esses artigos estende a funcionalidade de monitoramento principal do Azure Databricks para enviar métricas, eventos e informações de log do Spark para o Azure Monitor.
