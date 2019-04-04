@@ -1,187 +1,102 @@
 ---
-title: Compilar microsserviços no Azure
-description: 'Projetar, compilar e operar arquiteturas de microsserviços no Azure'
-ms.date: 03/07/2019
-layout: LandingPage
-ms.topic: landing-page
+title: Projetar, criar e operar microsserviços no Azure com Kubernetes
+description: Projetar, criar e operar microsserviços no Azure.
+author: MikeWasson
+ms.date: 10/23/2018
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: reference-architecture
+ms.custom: microservices
+ms.openlocfilehash: 90a6550264e5afd1fc2eda79eeff6557dc7c4163
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.translationtype: HT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55897713"
 ---
+# <a name="designing-building-and-operating-microservices-on-azure"></a><span data-ttu-id="ceea4-103">Projetar, criar e operar microsserviços no Azure</span><span class="sxs-lookup"><span data-stu-id="ceea4-103">Designing, building, and operating microservices on Azure</span></span>
 
-# <a name="building-microservices-on-azure"></a>Compilar microsserviços no Azure
+![Diagrama de um serviço de entrega por drone](./images/drone.svg)
 
-<!-- markdownlint-disable MD033 -->
+<span data-ttu-id="ceea4-105">Microsserviços se tornaram um estilo popular de arquitetura para criar aplicativos de nuvem resilientes, altamente escalonáveis, implantáveis independentemente e capazes de evoluir rapidamente.</span><span class="sxs-lookup"><span data-stu-id="ceea4-105">Microservices have become a popular architectural style for building cloud applications that are resilient, highly scalable, independently deployable, and able to evolve quickly.</span></span> <span data-ttu-id="ceea4-106">No entanto, para serem mais do que apenas uma palavra de efeito, microsserviços exigem uma abordagem diferente para o design e criação de aplicativos.</span><span class="sxs-lookup"><span data-stu-id="ceea4-106">To be more than just a buzzword, however, microservices require a different approach to designing and building applications.</span></span>
 
-<img src="../_images/microservices.svg" style="float:left; margin-top:8px; margin-right:8px; max-width: 80px; max-height: 80px;"/>
+<span data-ttu-id="ceea4-107">Nesse conjunto de artigos, exploraremos como compilar e executar uma arquitetura de microsserviços no Azure.</span><span class="sxs-lookup"><span data-stu-id="ceea4-107">In this set of articles, we explore how to build and run a microservices architecture on Azure.</span></span> <span data-ttu-id="ceea4-108">Os tópicos incluem:</span><span class="sxs-lookup"><span data-stu-id="ceea4-108">Topics include:</span></span>
 
-Microsserviços são um estilo popular de arquitetura para compilar aplicativos resilientes, altamente escalonáveis, implantáveis independentemente e capazes de evoluir rapidamente. Mas, uma arquitetura de microsserviços bem-sucedida exige uma abordagem diferente ao projeto e à compilação de aplicativos.
+- <span data-ttu-id="ceea4-109">Usar o DDD (Design Controlado por Domínio) para criar uma arquitetura de microsserviços.</span><span class="sxs-lookup"><span data-stu-id="ceea4-109">Using Domain Driven Design (DDD) to design a microservices architecture.</span></span>
+- <span data-ttu-id="ceea4-110">Escolher as tecnologias do Azure certas para computação, armazenamento, mensagens e outros elementos de design.</span><span class="sxs-lookup"><span data-stu-id="ceea4-110">Choosing the right Azure technologies for compute, storage, messaging, and other elements of the design.</span></span>
+- <span data-ttu-id="ceea4-111">Noções básicas sobre padrões de design de microsserviços.</span><span class="sxs-lookup"><span data-stu-id="ceea4-111">Understanding microservices design patterns.</span></span>
+- <span data-ttu-id="ceea4-112">Criar visando desempenho, escalabilidade e resiliência.</span><span class="sxs-lookup"><span data-stu-id="ceea4-112">Designing for resiliency, scalability, and performance.</span></span>
+- <span data-ttu-id="ceea4-113">Criar um pipeline de CI/CD.</span><span class="sxs-lookup"><span data-stu-id="ceea4-113">Building a CI/CD pipeline.</span></span>
 
-<ul  class="panelContent cardsZ">
-<li style="display: flex; flex-direction: column;">
-    <a href="./introduction.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardText">
-                        <h3>O que são microsserviços?</h3>
-                        <p>Qual a diferença dos microsserviços em relação a outras arquiteturas e quando se deve usá-los?</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-<li style="display: flex; flex-direction: column;">
-    <a href="../guide/architecture-styles/microservices.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardText">
-                        <h3>Estilo de arquitetura de microsserviços</h3>
-                        <p>Visão geral de alto nível do estilo de arquitetura de microsserviços</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-</ul>
+<span data-ttu-id="ceea4-114">Durante todo esse processo, nos concentraremos em um cenário de ponta a ponta: um serviço de entrega por drones que permite que os clientes agendem pacotes a serem selecionados e fornecidos por meio de drones.</span><span class="sxs-lookup"><span data-stu-id="ceea4-114">Throughout, we focus on an end-to-end scenario: A drone delivery service that lets customers schedule packages to be picked up and delivered via drone.</span></span> <span data-ttu-id="ceea4-115">Você pode encontrar o código para nossa implementação de referência no GitHub</span><span class="sxs-lookup"><span data-stu-id="ceea4-115">You can find the code for our reference implementation on GitHub</span></span>
 
-## <a name="examples-of-microservices-architectures"></a>Exemplos de arquiteturas de microsserviços
+<span data-ttu-id="ceea4-116">[Implementação de referência do ![GitHub](../_images/github.png)][drone-ri]</span><span class="sxs-lookup"><span data-stu-id="ceea4-116">[![GitHub](../_images/github.png) Reference implementation][drone-ri]</span></span>
 
-<ul  class="panelContent cardsZ">
-<li style="display: flex; flex-direction: column;">
-    <a href="../example-scenario/infrastructure/service-fabric-microservices.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardText">
-                        <h3>Usar o Service Fabric para decompor aplicativos monolíticos</h3>
-                        <p>Uma abordagem iterativa à decomposição de um site do ASP.NET em microsserviços.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-<li style="display: flex; flex-direction: column;">
-    <a href="../example-scenario/data/ecommerce-order-processing.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardText">
-                        <h3>Processamento de pedidos escalonável no Azure</h3>
-                        <p>Processamento de pedidos usando um modelo de programação funcional implementado por meio de microsserviços.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-</ul>
+<span data-ttu-id="ceea4-117">Mas primeiro, vamos começar com os conceitos básicos.</span><span class="sxs-lookup"><span data-stu-id="ceea4-117">But first, let's start with fundamentals.</span></span> <span data-ttu-id="ceea4-118">O que são microsserviços e quais são os benefícios de adotar uma arquitetura de microsserviços?</span><span class="sxs-lookup"><span data-stu-id="ceea4-118">What are microservices, and what are the advantages of adopting a microservices architecture?</span></span>
 
-## <a name="build-a-microservices-application"></a>Compilar um aplicativo de microsserviços
+<!-- markdownlint-disable MD026 -->
 
-<ul  class="panelContent cardsZ">
-<li style="display: flex; flex-direction: column;">
-    <a href="./model/domain-analysis.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardText">
-                        <h3>Usar análise de domínio para microsserviços de modelo</h3>
-                        <p>Para evitar algumas armadilhas comuns ao projetar microsserviços, use a análise de domínio para definir os limites do microsserviço.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-<li style="display: flex; flex-direction: column;">
-    <a href="../reference-architectures/microservices/aks.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardText">
-                        <h3>Arquitetura de referência do Serviço de Kubernetes do Azure (AKS)</h3>
-                        <p>Essa arquitetura de referência mostra uma configuração básica do AKS que pode ser o ponto de partida da maioria das implantações.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-<li style="display: flex; flex-direction: column;">
-    <a href="../reference-architectures/microservices/service-fabric.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardText">
-                        <h3>Arquitetura de referência do Azure Service Fabric</h3>
-                        <p>Essa arquitetura de referência mostra a configuração recomendada que pode ser o ponto de partida da maioria das implantações.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-<li style="display: flex; flex-direction: column;">
-    <a href="./design/index.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardText">
-                        <h3>Projetar uma arquitetura de microsserviços</h3>
-                        <p>Esses artigos aprofundam seus conhecimentos sobre como compilar um aplicativo de microsserviços, com base em uma implementação de referência que usa o Serviço de Kubernetes do Azure (AKS).</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-<li style="display: flex; flex-direction: column;">
-    <a href="./design/patterns.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardText">
-                        <h3>Padrões de design</h3>
-                        <p>Um conjunto de padrões de design úteis dos microsserviços.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-</ul>
+## <a name="why-build-microservices"></a><span data-ttu-id="ceea4-119">Por que criar microsserviços?</span><span class="sxs-lookup"><span data-stu-id="ceea4-119">Why build microservices?</span></span>
 
-## <a name="operate-microservices-in-production"></a>Operar microsserviços na produção
+<!-- markdownlint-enable MD026 -->
 
-<ul  class="panelContent cardsZ">
-<li style="display: flex; flex-direction: column;">
-    <a href="./logging-monitoring.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardText">
-                        <h3>Log e monitoramento</h3>
-                        <p>A natureza distribuída das arquiteturas de microsserviços torna o log e o monitoramento especialmente críticos.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-<li style="display: flex; flex-direction: column;">
-    <a href="./ci-cd.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardText">
-                        <h3>Integração e implantação contínuas</h3>
-                        <p>CI/CD (integração contínua e entrega contínua) são fundamentais para se obter sucesso com os microsserviços.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-</ul>
+<span data-ttu-id="ceea4-120">Em um aplicativo de microsserviços, o aplicativo é composto de vários serviços pequenos e independentes.</span><span class="sxs-lookup"><span data-stu-id="ceea4-120">In a microservices architecture, the application is composed of small, independent services.</span></span> <span data-ttu-id="ceea4-121">Aqui estão algumas características que definem microsserviços:</span><span class="sxs-lookup"><span data-stu-id="ceea4-121">Here are some of the defining characteristics of microservices:</span></span>
+
+- <span data-ttu-id="ceea4-122">Cada microsserviço implementa um único recurso de negócios.</span><span class="sxs-lookup"><span data-stu-id="ceea4-122">Each microservice implements a single business capability.</span></span>
+- <span data-ttu-id="ceea4-123">Um microsserviço é suficientemente pequeno para que uma única equipe pequena de desenvolvedores possa escrever o código dele e mantê-lo.</span><span class="sxs-lookup"><span data-stu-id="ceea4-123">A microservice is small enough that a single small team of developers can write and maintain it.</span></span>
+- <span data-ttu-id="ceea4-124">Microsserviços são executados em processos separados, comunicando-se por meio de padrões de mensagens ou APIs bem definidas.</span><span class="sxs-lookup"><span data-stu-id="ceea4-124">Microservices run in separate processes, communicating through well-defined APIs or messaging patterns.</span></span>
+- <span data-ttu-id="ceea4-125">Microsserviços não compartilham armazenamentos de dados nem esquemas de dados.</span><span class="sxs-lookup"><span data-stu-id="ceea4-125">Microservices do not share data stores or data schemas.</span></span> <span data-ttu-id="ceea4-126">Cada microsserviço é responsável por gerenciar seus próprios dados.</span><span class="sxs-lookup"><span data-stu-id="ceea4-126">Each microservice is responsible for managing its own data.</span></span>
+- <span data-ttu-id="ceea4-127">Microsserviços têm bases de código separadas e não compartilham código-fonte.</span><span class="sxs-lookup"><span data-stu-id="ceea4-127">Microservices have separate code bases, and do not share source code.</span></span> <span data-ttu-id="ceea4-128">No entanto, eles podem usar bibliotecas de utilitários comuns.</span><span class="sxs-lookup"><span data-stu-id="ceea4-128">They may use common utility libraries, however.</span></span>
+- <span data-ttu-id="ceea4-129">Cada microsserviço pode ser implantado e atualizado de forma independente de outros serviços.</span><span class="sxs-lookup"><span data-stu-id="ceea4-129">Each microservice can be deployed and updated independently of other services.</span></span>
+
+<span data-ttu-id="ceea4-130">Se utilizados corretamente, microsserviços podem fornecer vários benefícios úteis:</span><span class="sxs-lookup"><span data-stu-id="ceea4-130">Done correctly, microservices can provide a number of useful benefits:</span></span>
+
+- <span data-ttu-id="ceea4-131">**Agilidade.**</span><span class="sxs-lookup"><span data-stu-id="ceea4-131">**Agility.**</span></span> <span data-ttu-id="ceea4-132">Já que os microsserviços são implantados de forma independente, é mais fácil gerenciar correções de bugs e lançamentos de recursos.</span><span class="sxs-lookup"><span data-stu-id="ceea4-132">Because microservices are deployed independently, it's easier to manage bug fixes and feature releases.</span></span> <span data-ttu-id="ceea4-133">Você poderá atualizar um serviço sem reimplantar o aplicativo inteiro e, em seguida, reverter uma atualização se algo der errado.</span><span class="sxs-lookup"><span data-stu-id="ceea4-133">You can update a service without redeploying the entire application, and roll back an update if something goes wrong.</span></span> <span data-ttu-id="ceea4-134">Em muitos aplicativos tradicionais, se um bug for encontrado em uma parte do aplicativo, ele poderá bloquear todo o processo de lançamento. Como resultado, novos recursos poderão ser mantidos em espera até uma correção de bug ser integrada, testada e publicada.</span><span class="sxs-lookup"><span data-stu-id="ceea4-134">In many traditional applications, if a bug is found in one part of the application, it can block the entire release process; as a result, new features may be held up waiting for a bug fix to be integrated, tested, and published.</span></span>
+
+- <span data-ttu-id="ceea4-135">**Código pequeno, equipes pequenas.**</span><span class="sxs-lookup"><span data-stu-id="ceea4-135">**Small code, small teams.**</span></span> <span data-ttu-id="ceea4-136">Um microsserviço deve ser pequeno o suficiente para que possa ser criado, testado e implantado por uma única equipe de recurso.</span><span class="sxs-lookup"><span data-stu-id="ceea4-136">A microservice should be small enough that a single feature team can build, test, and deploy it.</span></span> <span data-ttu-id="ceea4-137">Bases de código pequenas são mais fáceis de entender.</span><span class="sxs-lookup"><span data-stu-id="ceea4-137">Small code bases are easier to understand.</span></span> <span data-ttu-id="ceea4-138">Em um aplicativo monolítico grande, há uma tendência de que, ao longo do tempo, certas dependências de código fiquem entrelaçadas, fazendo com que, para adicionar um novo recurso, seja necessário alterar o código em vários lugares.</span><span class="sxs-lookup"><span data-stu-id="ceea4-138">In a large monolithic application, there is a tendency over time for code dependencies to become tangled, so that adding a new feature requires touching code in a lot of places.</span></span> <span data-ttu-id="ceea4-139">Não compartilhando código nem armazenamentos de dados, uma arquitetura de microsserviços minimiza as dependências, o que torna mais fácil adicionar novos recursos.</span><span class="sxs-lookup"><span data-stu-id="ceea4-139">By not sharing code or data stores, a microservices architecture minimizes dependencies, and that makes it easier to add new features.</span></span> <span data-ttu-id="ceea4-140">Tamanhos de equipe pequenos também promovem maior agilidade.</span><span class="sxs-lookup"><span data-stu-id="ceea4-140">Small team sizes also promote greater agility.</span></span> <span data-ttu-id="ceea4-141">A regra de "duas pizzas" diz que uma equipe deve ser suficientemente pequena para que duas pizzas possam alimentar a equipe.</span><span class="sxs-lookup"><span data-stu-id="ceea4-141">The "two-pizza rule" says that a team should be small enough that two pizzas can feed the team.</span></span> <span data-ttu-id="ceea4-142">É claro que não se trata de uma métrica exata e que depende dos apetites dos membros da equipe!</span><span class="sxs-lookup"><span data-stu-id="ceea4-142">Obviously that's not an exact metric and depends on team appetites!</span></span> <span data-ttu-id="ceea4-143">Mas o ponto é que grandes grupos costumam ser menos produtivos, porque a comunicação é mais lenta, a sobrecarga de gerenciamento aumenta e a agilidade diminui.</span><span class="sxs-lookup"><span data-stu-id="ceea4-143">But the point is that large groups tend be less productive, because communication is slower, management overhead goes up, and agility diminishes.</span></span>
+
+- <span data-ttu-id="ceea4-144">**Combinação de tecnologias**.</span><span class="sxs-lookup"><span data-stu-id="ceea4-144">**Mix of technologies**.</span></span> <span data-ttu-id="ceea4-145">Equipes podem escolher a tecnologia mais adequada para seu serviço, usando uma combinação de pilhas de tecnologia conforme apropriado.</span><span class="sxs-lookup"><span data-stu-id="ceea4-145">Teams can pick the technology that best fits their service, using a mix of technology stacks as appropriate.</span></span>
+
+- <span data-ttu-id="ceea4-146">**Resiliência**.</span><span class="sxs-lookup"><span data-stu-id="ceea4-146">**Resiliency**.</span></span> <span data-ttu-id="ceea4-147">Se um microsserviço individual se tornar não disponível, ele não interromperá o aplicativo inteiro, desde determinados microsserviços upstream sejam projetados para lidar com falhas corretamente (por exemplo, implementando a interrupção do circuito).</span><span class="sxs-lookup"><span data-stu-id="ceea4-147">If an individual microservice becomes unavailable, it won't disrupt the entire application, as long as any upstream microservices are designed to handle faults correctly (for example, by implementing circuit breaking).</span></span>
+
+- <span data-ttu-id="ceea4-148">**Escalabilidade**.</span><span class="sxs-lookup"><span data-stu-id="ceea4-148">**Scalability**.</span></span> <span data-ttu-id="ceea4-149">Uma arquitetura de microsserviços permite que cada microsserviço seja dimensionado independentemente dos outros.</span><span class="sxs-lookup"><span data-stu-id="ceea4-149">A microservices architecture allows each microservice to be scaled independently of the others.</span></span> <span data-ttu-id="ceea4-150">Isso permite que você expanda subsistemas que exigem mais recursos, sem necessidade de expandir o aplicativo inteiro.</span><span class="sxs-lookup"><span data-stu-id="ceea4-150">That lets you scale out subsystems that require more resources, without scaling out the entire application.</span></span> <span data-ttu-id="ceea4-151">Se você implantar serviços dentro de contêineres, você também poderá empacotar uma maior densidade de microsserviços em um único host, o que permitirá uma utilização de recursos mais eficiente.</span><span class="sxs-lookup"><span data-stu-id="ceea4-151">If you deploy services inside containers, you can also pack a higher density of microservices onto a single host, which allows for more efficient utilization of resources.</span></span>
+
+- <span data-ttu-id="ceea4-152">**Isolamento de dados**.</span><span class="sxs-lookup"><span data-stu-id="ceea4-152">**Data isolation**.</span></span> <span data-ttu-id="ceea4-153">É muito mais fácil executar atualizações de esquema, porque apenas um microsserviço é afetado.</span><span class="sxs-lookup"><span data-stu-id="ceea4-153">It is much easier to perform schema updates, because only a single microservice is affected.</span></span> <span data-ttu-id="ceea4-154">Em um aplicativo monolítico, atualizações de esquema podem se tornar muito difíceis porque todas as diferentes partes do aplicativo podem tocar os mesmos dados, o que torna a realização de qualquer alteração no esquema algo arriscado.</span><span class="sxs-lookup"><span data-stu-id="ceea4-154">In a monolithic application, schema updates can become very challenging, because different parts of the application may all touch the same data, making any alterations to the schema risky.</span></span>
+
+## <a name="no-free-lunch"></a><span data-ttu-id="ceea4-155">Nenhum bônus</span><span class="sxs-lookup"><span data-stu-id="ceea4-155">No free lunch</span></span>
+
+<span data-ttu-id="ceea4-156">Esses benefícios têm um ônus.</span><span class="sxs-lookup"><span data-stu-id="ceea4-156">These benefits don't come for free.</span></span> <span data-ttu-id="ceea4-157">Esta série de artigos foi criada para tratar de alguns dos desafios na criação de microsserviços flexíveis, escalonáveis e gerenciáveis.</span><span class="sxs-lookup"><span data-stu-id="ceea4-157">This series of articles is designed to address some of the challenges of building microservices that are resilient, scalable, and manageable.</span></span>
+
+- <span data-ttu-id="ceea4-158">**Limites de serviço**.</span><span class="sxs-lookup"><span data-stu-id="ceea4-158">**Service boundaries**.</span></span> <span data-ttu-id="ceea4-159">Quando você compila microsserviços, você precisa pensar cuidadosamente sobre o local certo no qual desenhar os limites entre os serviços.</span><span class="sxs-lookup"><span data-stu-id="ceea4-159">When you build microservices, you need to think carefully about where to draw the boundaries between services.</span></span> <span data-ttu-id="ceea4-160">Depois que os serviços são compilados e implantados em produção, pode ser difícil refatorar entre esses limites.</span><span class="sxs-lookup"><span data-stu-id="ceea4-160">Once services are built and deployed in production, it can be hard to refactor across those boundaries.</span></span> <span data-ttu-id="ceea4-161">Escolher os limites de serviços certos é um dos maiores desafios durante a criação de uma arquitetura de microsserviços.</span><span class="sxs-lookup"><span data-stu-id="ceea4-161">Choosing the right service boundaries is one of the biggest challenges when designing a microservices architecture.</span></span> <span data-ttu-id="ceea4-162">Qual deve ser o tamanho de cada serviço?</span><span class="sxs-lookup"><span data-stu-id="ceea4-162">How big should each service be?</span></span> <span data-ttu-id="ceea4-163">Quando a funcionalidade deve ser incluída em vários serviços e quando ela deve ficar dentro do mesmo serviço?</span><span class="sxs-lookup"><span data-stu-id="ceea4-163">When should functionality be factored across several services, and when should it be kept inside the same service?</span></span> <span data-ttu-id="ceea4-164">Este guia descreve uma abordagem que usa o design controlado por domínio para encontrar os limites de serviço.</span><span class="sxs-lookup"><span data-stu-id="ceea4-164">In this guide, we describe an approach that uses domain-driven design to find service boundaries.</span></span> <span data-ttu-id="ceea4-165">Ele começa com [análise de domínio](./domain-analysis.md) para localizar os contextos limitados e, em seguida, aplica um conjunto de [padrões de DDD tático](./microservice-boundaries.md) com base em requisitos funcionais e não funcionais.</span><span class="sxs-lookup"><span data-stu-id="ceea4-165">It starts with [Domain analysis](./domain-analysis.md) to find the bounded contexts, then applies a set of [tactical DDD patterns](./microservice-boundaries.md) based on functional and non-functional requirements.</span></span>
+
+- <span data-ttu-id="ceea4-166">**Integridade e consistência de dados**.</span><span class="sxs-lookup"><span data-stu-id="ceea4-166">**Data consistency and integrity**.</span></span> <span data-ttu-id="ceea4-167">Um princípio básico dos microsserviços é que cada serviço gerencia seus próprios dados.</span><span class="sxs-lookup"><span data-stu-id="ceea4-167">A basic principle of microservices is that each service manages its own data.</span></span> <span data-ttu-id="ceea4-168">Isso mantém os serviços separados, mas pode levar a desafios relacionados à integridade de dados ou à redundância.</span><span class="sxs-lookup"><span data-stu-id="ceea4-168">This keeps services decoupled, but can lead to challenges with data integrity or redundancy.</span></span> <span data-ttu-id="ceea4-169">Podemos explorar alguns desses problemas nas [Considerações de dados](./data-considerations.md).</span><span class="sxs-lookup"><span data-stu-id="ceea4-169">We explore some of these issues in the [Data considerations](./data-considerations.md).</span></span>
+
+- <span data-ttu-id="ceea4-170">**Latência e congestionamento de rede**.</span><span class="sxs-lookup"><span data-stu-id="ceea4-170">**Network congestion and latency**.</span></span> <span data-ttu-id="ceea4-171">O uso de muitos serviços granulares pequenos pode resultar em mais comunicação entre serviços e maior latência de ponta a ponta.</span><span class="sxs-lookup"><span data-stu-id="ceea4-171">The use of many small, granular services can result in more interservice communication and longer end-to-end latency.</span></span> <span data-ttu-id="ceea4-172">O capítulo [Comunicação entre serviços](./interservice-communication.md) descreve as considerações para mensagens entre serviços.</span><span class="sxs-lookup"><span data-stu-id="ceea4-172">The chapter [Interservice communication](./interservice-communication.md) describes considerations for messaging between services.</span></span> <span data-ttu-id="ceea4-173">Tanto a comunicação síncrona quanto a assíncrona têm um papel nas arquiteturas de microsserviços.</span><span class="sxs-lookup"><span data-stu-id="ceea4-173">Both synchronous and asynchronous communication have a place in microservices architectures.</span></span> <span data-ttu-id="ceea4-174">Um bom [design de API](./api-design.md) é importante para que os serviços permaneçam acoplados e possam ser independentemente implantados e atualizados.</span><span class="sxs-lookup"><span data-stu-id="ceea4-174">Good [API design](./api-design.md) is important so that services remain loosely coupled, and can be independently deployed and updated.</span></span>
+
+- <span data-ttu-id="ceea4-175">**Complexidade**.</span><span class="sxs-lookup"><span data-stu-id="ceea4-175">**Complexity**.</span></span> <span data-ttu-id="ceea4-176">Um aplicativo de microsserviço tem mais partes móveis.</span><span class="sxs-lookup"><span data-stu-id="ceea4-176">A microservices application has more moving parts.</span></span> <span data-ttu-id="ceea4-177">Cada serviço pode ser simples, mas os serviços precisam trabalhar juntos como um todo.</span><span class="sxs-lookup"><span data-stu-id="ceea4-177">Each service may be simple, but the services have to work together as a whole.</span></span> <span data-ttu-id="ceea4-178">Uma única operação de usuário pode envolver vários serviços.</span><span class="sxs-lookup"><span data-stu-id="ceea4-178">A single user operation may involve multiple services.</span></span> <span data-ttu-id="ceea4-179">No capítulo [Ingestão e fluxo de trabalho](./ingestion-workflow.md), podemos examinar algumas questões sobre ingestão de solicitações com alta taxa de transferência, a coordenação de um fluxo de trabalho e o tratamento de falhas.</span><span class="sxs-lookup"><span data-stu-id="ceea4-179">In the chapter [Ingestion and workflow](./ingestion-workflow.md), we examine some of the issues around ingesting requests at high throughput, coordinating a workflow, and handling failures.</span></span>
+
+- <span data-ttu-id="ceea4-180">**Comunicação entre clientes e o aplicativo.**</span><span class="sxs-lookup"><span data-stu-id="ceea4-180">**Communication between clients and the application.**</span></span>  <span data-ttu-id="ceea4-181">Quando você decompõe um aplicativo em vários serviços pequenos, como os clientes devem se comunicar com esses serviços?</span><span class="sxs-lookup"><span data-stu-id="ceea4-181">When you decompose an application into many small services, how should clients communicate with those services?</span></span> <span data-ttu-id="ceea4-182">Um cliente deve chamar cada serviço diretamente ou rotear solicitações por meio de um [gateway de API](./gateway.md)?</span><span class="sxs-lookup"><span data-stu-id="ceea4-182">Should a client call each individual service directly, or route requests through an [API Gateway](./gateway.md)?</span></span>
+
+- <span data-ttu-id="ceea4-183">**Monitoramento**.</span><span class="sxs-lookup"><span data-stu-id="ceea4-183">**Monitoring**.</span></span> <span data-ttu-id="ceea4-184">Monitorar um aplicativo distribuído pode ser muito mais difícil que um aplicativo monolítico, porque você precisa correlacionar a telemetria de vários serviços.</span><span class="sxs-lookup"><span data-stu-id="ceea4-184">Monitoring a distributed application can be a lot harder than a monolithic application, because you must correlate telemetry from multiple services.</span></span> <span data-ttu-id="ceea4-185">O capítulo [Monitoramento e registro em log](./logging-monitoring.md) aborda essas preocupações.</span><span class="sxs-lookup"><span data-stu-id="ceea4-185">The chapter [Logging and monitoring](./logging-monitoring.md) addresses these concerns.</span></span>
+
+- <span data-ttu-id="ceea4-186">**CI/CD (integração e entrega contínuas)**.</span><span class="sxs-lookup"><span data-stu-id="ceea4-186">**Continuous integration and delivery (CI/CD)**.</span></span> <span data-ttu-id="ceea4-187">Uma das principais metas dos microsserviços é a agilidade.</span><span class="sxs-lookup"><span data-stu-id="ceea4-187">One of the main goals of microservices is agility.</span></span> <span data-ttu-id="ceea4-188">Para fazer isso, você deve ter [CI/CD](./ci-cd.md) automatizada e robusta, para que você possa implantar serviços individuais em ambientes de teste e produção de forma rápida e confiável.</span><span class="sxs-lookup"><span data-stu-id="ceea4-188">To achieve this, you must have automated and robust [CI/CD](./ci-cd.md), so that you can quickly and reliably deploy individual services into test and production environments.</span></span>
+
+## <a name="the-drone-delivery-application"></a><span data-ttu-id="ceea4-189">O aplicativo de entrega por drone</span><span class="sxs-lookup"><span data-stu-id="ceea4-189">The Drone Delivery application</span></span>
+
+<span data-ttu-id="ceea4-190">Para explorar esses problemas e ilustrar algumas das práticas recomendadas para uma arquitetura de microsserviços, criamos uma implementação de referência que chamamos de aplicativo de Entrega por Drone.</span><span class="sxs-lookup"><span data-stu-id="ceea4-190">To explore these issues, and to illustrate some of the best practices for a microservices architecture, we created a reference implementation that we call the Drone Delivery application.</span></span> <span data-ttu-id="ceea4-191">Você pode encontrar a implementação de referência no [GitHub][drone-ri].</span><span class="sxs-lookup"><span data-stu-id="ceea4-191">You can find the reference implementation on [GitHub][drone-ri].</span></span>
+
+<span data-ttu-id="ceea4-192">A Fabrikam, Inc. está dando início a um serviço de entrega por drone.</span><span class="sxs-lookup"><span data-stu-id="ceea4-192">Fabrikam, Inc. is starting a drone delivery service.</span></span> <span data-ttu-id="ceea4-193">A empresa gerencia uma frota de aeronaves de tipo drone.</span><span class="sxs-lookup"><span data-stu-id="ceea4-193">The company manages a fleet of drone aircraft.</span></span> <span data-ttu-id="ceea4-194">Empresas registram-se no serviço e os usuários podem solicitar que um drone colete mercadorias para entrega.</span><span class="sxs-lookup"><span data-stu-id="ceea4-194">Businesses register with the service, and users can request a drone to pick up goods for delivery.</span></span> <span data-ttu-id="ceea4-195">Quando um cliente agenda uma coleta, um sistema de back-end atribui um drone ao usuário e notifica-o com um tempo de entrega previsto.</span><span class="sxs-lookup"><span data-stu-id="ceea4-195">When a customer schedules a pickup, a backend system assigns a drone and notifies the user with an estimated delivery time.</span></span> <span data-ttu-id="ceea4-196">Enquanto a entrega está em andamento, o cliente pode acompanhar a localização do drone, com um ETA atualizado continuamente.</span><span class="sxs-lookup"><span data-stu-id="ceea4-196">While the delivery is in progress, the customer can track the location of the drone, with a continuously updated ETA.</span></span>
+
+<span data-ttu-id="ceea4-197">Este cenário envolve um domínio bastante complicado.</span><span class="sxs-lookup"><span data-stu-id="ceea4-197">This scenario involves a fairly complicated domain.</span></span> <span data-ttu-id="ceea4-198">Algumas das preocupações de negócios incluem o agendamento drones, o acompanhamento de pacotes, o gerenciamento de contas de usuário e o armazenamento e análise de dados históricos.</span><span class="sxs-lookup"><span data-stu-id="ceea4-198">Some of the business concerns include scheduling drones, tracking packages, managing user accounts, and storing and analyzing historical data.</span></span> <span data-ttu-id="ceea4-199">Além disso, Fabrikam deseja se lançar no mercado rapidamente e, em seguida, iterar rapidamente, adicionando novas funcionalidades e capacidades.</span><span class="sxs-lookup"><span data-stu-id="ceea4-199">Moreover, Fabrikam wants to get to market quickly and then iterate quickly, adding new functionality and capabilities.</span></span> <span data-ttu-id="ceea4-200">O aplicativo deve operar em escala de nuvem, com um SLO (objetivo do nível de serviço) elevado.</span><span class="sxs-lookup"><span data-stu-id="ceea4-200">The application needs to operate at cloud scale, with a high service level objective (SLO).</span></span> <span data-ttu-id="ceea4-201">A Fabrikam também espera que diferentes partes do sistema tenham requisitos muito diferentes de armazenamento e consulta de dados.</span><span class="sxs-lookup"><span data-stu-id="ceea4-201">Fabrikam also expects that different parts of the system will have very different requirements for data storage and querying.</span></span> <span data-ttu-id="ceea4-202">Todas essas considerações levam Fabrikam para escolher uma arquitetura de microsserviços para o aplicativo de Entrega por Drone.</span><span class="sxs-lookup"><span data-stu-id="ceea4-202">All of these considerations lead Fabrikam to choose a microservices architecture for the Drone Delivery application.</span></span>
+
+> [!NOTE]
+> <span data-ttu-id="ceea4-203">Para obter ajuda na escolha entre uma arquitetura de microsserviços e outros estilos de arquitetura, consulte o [Guia de arquitetura de aplicativo do Azure](../guide/index.md).</span><span class="sxs-lookup"><span data-stu-id="ceea4-203">For help in choosing between a microservices architecture and other architectural styles, see the [Azure Application Architecture Guide](../guide/index.md).</span></span>
+
+<span data-ttu-id="ceea4-204">Nossa implementação de referência usa Kubernetes com o [AKS (Serviço de Kubernetes do Azure)](/azure/aks/).</span><span class="sxs-lookup"><span data-stu-id="ceea4-204">Our reference implementation uses Kubernetes with [Azure Kubernetes Service](/azure/aks/) (AKS).</span></span> <span data-ttu-id="ceea4-205">No entanto, muitas das decisões de arquitetura de alto nível e desafios se aplicarão a qualquer orquestrador de contêineres, incluindo o [Azure Service Fabric](/azure/service-fabric/).</span><span class="sxs-lookup"><span data-stu-id="ceea4-205">However, many of the high-level architectural decisions and challenges will apply to any container orchestrator, including [Azure Service Fabric](/azure/service-fabric/).</span></span>
+
+> [!div class="nextstepaction"]
+> [<span data-ttu-id="ceea4-206">Análise de domínio</span><span class="sxs-lookup"><span data-stu-id="ceea4-206">Domain analysis</span></span>](./domain-analysis.md)
+
+<!-- links -->
+
+[drone-ri]: https://github.com/mspnp/microservices-reference-implementation
