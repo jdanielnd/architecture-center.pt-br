@@ -4,15 +4,14 @@ titleSuffix: Microsoft Cloud Adoption Framework for Azure
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
 ms.custom: governance
-description: Descreve uma visão geral da primeira fase da transformação digital de uma empresa na adoção de tecnologias de nuvem do Azure.
-author: petertaylor9999
-ms.date: 2/11/2019
-ms.openlocfilehash: bfa325ded8c39915ad4d495b4309b700abd71cc2
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+description: Fornece uma visão geral da primeira fase da transformação digital de uma empresa na adoção de tecnologias de nuvem do Azure.
+ms.date: 02/11/2019
+ms.openlocfilehash: 29b02964b5f1cd09857a51c17cf94d6c64e05e88
+ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55898350"
+ms.lasthandoff: 04/08/2019
+ms.locfileid: "59068949"
 ---
 # <a name="getting-started-with-the-cloud-adoption-framework"></a>Introdução à Estrutura de Adoção de Nuvem
 
@@ -59,7 +58,7 @@ Para o aprendizado avançado, a equipe de governança deve revisar os conceitos 
 
 ## <a name="step-3-identify-gaps-in-business-strategy"></a>Etapa 3: Identificar lacunas na estratégia de negócios
 
-A próxima etapa é a especificação dos problemas de negócios que exigem uma solução de transformação digital, pela equipe de estratégia de nuvem. Por exemplo, uma empresa pode ter um data center local existente com hardware com fim de vida útil e que exige substituição. Em outro exemplo, uma empresa pode estar enfrentando dificuldades com o tempo de lançamento no mercado para novos recursos e serviços e pode estar atrasada em relação à concorrência. Essas lacunas representam as *metas* da transformação digital da sua empresa.
+A próxima etapa é a especificação dos problemas de negócios que exigem uma solução de transformação digital, pela equipe de estratégia de nuvem. Por exemplo, uma empresa pode ter um datacenter local existente com o hardware de fim da vida útil que exige a substituição. Em outro exemplo, uma empresa pode estar enfrentando dificuldades com o tempo de lançamento no mercado para novos recursos e serviços e pode estar atrasada em relação à concorrência. Essas lacunas representam as *metas* da transformação digital da sua empresa.
 
 As lacunas na estratégia de negócios podem ser classificadas nas seguintes categorias:
 
@@ -108,7 +107,7 @@ Os membros da equipe de TI podem se sentir ansiosos sobre suas funções e posi�
 Durante a transformação digital, cada equipe deve capturar quaisquer preocupações dos funcionários conforme elas surjam. Durante a captura de preocupações, identifique o seguinte:
 
 * O tipo de preocupação. Por exemplo, os trabalhadores podem ser resistentes às alterações em seus trabalhos que acompanham a transformação digital.
-* O impacto da preocupação se não for direcionado. Por exemplo, a resistência à transformação digital pode resultar em trabalhadores executando lentamente as mudanças necessárias.
+* O efeito se o problema não for resolvido. Por exemplo, a resistência à transformação digital pode resultar em trabalhadores executando lentamente as mudanças necessárias.
 * A área equipada para tratar da preocupação. Por exemplo, se os funcionários no departamento de TI estão relutantes em adquirir novas habilidades, a área de stakeholders da TI é a mais bem equipada para lidar com essa questão. Identificar a área pode ficar claro para algumas questões e, nesses casos, talvez seja necessário escalonar para liderança executiva.
 
 ### <a name="identify-gaps"></a>Identificar lacunas
@@ -134,4 +133,4 @@ Acompanhe essas dependências e anote os processos que oferecerão suporte a ele
 A transformação digital é um processo iterativo e, a cada iteração, as equipes envolvidas ficarão mais eficientes.
 
 > [!div class="nextstepaction"]
-> [Entenda como o Azure funciona](what-is-azure.md)
+> [Entender como funciona o Azure](what-is-azure.md)

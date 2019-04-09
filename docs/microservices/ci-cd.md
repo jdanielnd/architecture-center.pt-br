@@ -7,16 +7,16 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: microservices
-ms.openlocfilehash: 026d22bb9cfdcb69b1a12294410af748e7af5c39
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
+ms.openlocfilehash: 1a927beb23a2e45b509b2648a6bccce4c2ad242d
+ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54480786"
+ms.lasthandoff: 04/08/2019
+ms.locfileid: "59068966"
 ---
 # <a name="designing-microservices-continuous-integration"></a>Como criar microsserviços: Integração contínua
 
-CI/CD (integração contínua e entrega contínua) são um requisito fundamental para alcançar êxito com microsserviços. Sem um bom processo de CI/CD, você não obterá a agilidade que os microsserviços prometem. Alguns dos desafios de CI/CD para microsserviços são oriundos de se ter várias bases de código e ambientes de build heterogêneos para os diversos serviços. Este capítulo descreve os desafios e recomenda algumas abordagens para o problema.
+CI/CD (integração contínua e entrega contínua) são um requisito fundamental para alcançar êxito com microsserviços. Sem um bom processo de CI/CD, você não obterá a agilidade que os microsserviços prometem. Alguns dos desafios de CI/CD para microsserviços são oriundos de se ter várias bases de código e ambientes de build heterogêneos para os diversos serviços. Este artigo descreve os desafios e recomenda algumas abordagens para o problema.
 
 ![Diagrama de CI/CD para microsserviços](./images/ci-cd.png)
 
@@ -123,4 +123,4 @@ No espaço do consumidor, uma melhor experiência de usuário pode ter valor com
 
 Microsserviços são uma resposta a essa paisagem em mudança. Ao decompor um aplicativo monolítico em um grupo de serviços acoplados de forma flexível, podemos controlar o ciclo de versão de cada serviço e habilitar atualizações frequentes, sem tempo de inatividade nem alterações significativas. Os microsserviços também ajudam com a escalabilidade, o isolamento de falhas e a resiliência. Enquanto isso, plataformas de nuvem estão facilitando o build e a execução de microsserviços, com o provisionamento automatizado de recursos de computação, orquestradores de contêiner como um serviço e ambientes sem servidor controlados por eventos.
 
-Mas, como vimos, arquiteturas de microsserviços também enfrentam muitos desafios. Para ter êxito, você deve iniciar de um design sólido. Você deve pensar cuidadosamente ao analisar o domínio, escolher as tecnologias, modelar dados, projetar APIs e criar uma cultura de DevOps madura. Esperamos que este guia e que a [implementação de referência](https://github.com/mspnp/microservices-reference-implementation) que o acompanha tenham ajudado a iluminar a jornada.
+Mas, como vimos, arquiteturas de microsserviços também enfrentam muitos desafios. Para ter êxito, você deve iniciar de um design sólido. Você deve pensar cuidadosamente ao analisar o domínio, escolher as tecnologias, modelar dados, projetar APIs e criar uma cultura de DevOps madura. Esperamos que este guia e que a [implementação de referência](https://github.com/mspnp/microservices-reference-implementation/tree/v0.1.0-orig) que o acompanha tenham ajudado a iluminar a jornada.

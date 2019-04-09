@@ -1,18 +1,18 @@
 ---
-title: 'CAF: Grandes empresas – detalhes técnicos adicionais a respeito de um MPV de governança'
+title: 'CAF: Grandes empresas – práticas recomendadas explicada'
 titleSuffix: Microsoft Cloud Adoption Framework for Azure
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
 ms.custom: governance
 ms.date: 02/11/2019
-description: Grandes empresas – detalhes técnicos adicionais a respeito de um MPV de governança
+description: Grandes empresas – práticas recomendadas explicada
 author: BrianBlanchard
-ms.openlocfilehash: 50b0ae1ebb386d2f0b693a347d599ff29680a9cb
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: 2d52797f1c3541fab1c97d97d0438210d2e66f79
+ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900294"
+ms.lasthandoff: 04/08/2019
+ms.locfileid: "59068983"
 ---
 # <a name="large-enterprise-best-practice-explained"></a>Empresas de grande porte: Melhor prática explicada
 
@@ -38,7 +38,7 @@ Essa implementação também pode ser descrita usando uma lista de verificação
 
 1. Solicite decisões relacionadas às dependências básicas: Identidade, Rede e Criptografia.
 2. Determine o padrão a ser usado durante a imposição da política corporativa.
-3. Determine os padrões de governança apropriados para as disciplinas Consistência de Recursos, Marcação de Recursos e Registro em Log e Relatórios.
+3. Determine os padrões de governança apropriado para o recurso de consistência, marcação de recursos e disciplinas de registro em log e relatórios.
 4. Implemente as ferramentas de governança alinhadas ao padrão de imposição de política escolhido para aplicar as decisões dependentes e as decisões de governança.
 
 [!INCLUDE [implementation-process](../../../../../includes/cloud-adoption/governance/implementation-process.md)]
@@ -90,7 +90,7 @@ Algumas das instruções de política não podem ou não devem ser controladas p
 
 **Treinamento de engenharia**: A equipe de Governança de Nuvem oferece sessões de treinamento bimestrais além de ter criado dois vídeos para engenheiros. Ambos os recursos ajudam os engenheiros a acelerar rapidamente sobre a cultura de governança e as implantações executadas. A equipe está adicionando ativos de treinamento que mostram a diferença entre implantações em produção e de não produção, o que ajuda os engenheiros a entender como as novas políticas afetam a adoção. Isso garante consistência entre implantações, sem forçar estritamente a aderência.
 
-**Planejamento de implantação**: Antes de implantar qualquer ativo que contenha dados protegidos, a equipe de Governança de Nuvem será responsável por revisar os scripts de implantação para validar o alinhamento da governança. Equipes existentes com implantações aprovadas anteriormente serão auditadas usando ferramentas programáticas.
+**Planejamento de implantação**: Antes de implantar qualquer ativo que contém dados protegidos, a equipe de governança de nuvem será responsável por examinar os scripts de implantação para validar o alinhamento de governança. Equipes existentes com implantações aprovadas anteriormente serão auditadas usando ferramentas programáticas.
 
 **Auditoria mensal e relatórios**: A cada mês, a equipe de Governança de Nuvem executa uma auditoria de todas as implantações na nuvem para validar o alinhamento contínuo à política. Quando são encontrados desvios, eles são documentados e compartilhados com as equipes de adoção da nuvem. Quando a imposição não representa um risco de interrupção dos negócios ou de perda de dados, as políticas serão automaticamente aplicadas. No final da auditoria, a equipe de Governança de Nuvem compila um relatório para a equipe de Estratégia de Nuvem e para cada equipe de adoção da nuvem para comunicar a adesão, de forma geral, à política. O relatório também é armazenado para fins de auditoria e legais.
 
@@ -102,12 +102,12 @@ Se qualquer um dos padrões escolhidos nessa jornada de governança não se alin
 
 - [Padrões de criptografia](../../../decision-guides/encryption/overview.md)
 - [Padrões de identidade](../../../decision-guides/identity/overview.md)
-- [Padrões de registro em log e relatórios](../../../decision-guides/log-and-report/overview.md)
+- [Registro em log e padrões de emissão de relatórios](../../../decision-guides/log-and-report/overview.md)
 - [Padrões de imposição de política](../../../decision-guides/policy-enforcement/overview.md)
 - [Padrões de consistência de recursos](../../../decision-guides/resource-consistency/overview.md)
 - [Padrões de marcação de recursos](../../../decision-guides/resource-tagging/overview.md)
-- [Padrões de rede definida por software](../../../decision-guides/software-defined-network/overview.md)
-- [Padrões de design de assinatura](../../../decision-guides/subscriptions/overview.md)
+- [Padrões de rede definida pelo software](../../../decision-guides/software-defined-network/overview.md)
+- [Padrões de Design de assinatura](../../../decision-guides/subscriptions/overview.md)
 
 ## <a name="next-steps"></a>Próximas etapas
 

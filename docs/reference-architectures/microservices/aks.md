@@ -7,18 +7,20 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: microservices
-ms.openlocfilehash: c8ce4c77666ab7b9c55e6f144d514fadc6b6ad73
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 535c53faa810f74299e715a204e427c8919ce360
+ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58246077"
+ms.lasthandoff: 04/08/2019
+ms.locfileid: "59069017"
 ---
 # <a name="microservices-architecture-on-azure-kubernetes-service-aks"></a>Arquitetura de microsserviços no AKS (Serviço de Kubernetes do Azure)
 
-Essa arquitetura de referência mostra um aplicativo de microsserviços implantado no AKS (Serviço de Kubernetes do Azure). Ele mostra uma configuração básica do AKS que pode ser o ponto de partida para a maioria das implantações. Opções mais avançadas, incluindo opções avançadas de rede, serão abordadas em uma arquitetura de referência separada.
+Essa arquitetura de referência mostra um aplicativo de microsserviços implantado no AKS (Serviço de Kubernetes do Azure). Ele descreve uma configuração básica do AKS que pode ser o ponto de partida para a maioria das implantações. Este artigo pressupõe conhecimentos básicos de Kubernetes. O artigo se concentra principalmente na infraestrutura e nas considerações de DevOps na execução de uma arquitetura de microsserviços no AKS. Para obter orientação sobre como criar microsserviços, consulte [criação de microsserviços no Azure](../../microservices/index.md).
 
-Este artigo pressupõe conhecimentos básicos de Kubernetes. O artigo se concentra principalmente na infraestrutura e nas considerações de DevOps na execução de uma arquitetura de microsserviços no AKS. Para obter orientação sobre como criar microsserviços de uma perspectiva de DDD (Design Controlado por Domínio), consulte [Projetando, compilando e operando microsserviços no Azure](/azure/architecture/microservices).
+![Logotipo do GitHub](../../_images/github.png) uma implementação dessa arquitetura de referência está disponível no [GitHub](https://github.com/mspnp/microservices-reference-implementation).
+
+
 
 ![Arquitetura de referência do AKS](./_images/aks.png)
 
@@ -46,7 +48,7 @@ A arquitetura consiste nos componentes a seguir.
 
 **Azure Monitor**. O Azure Monitor coleta e armazena métricas e logs, inclusive a métrica de plataforma para os serviços do Azure na telemetria do aplicativo e da solução. Use esses dados para monitorar o aplicativo, configurar alertas e painéis e executar a análise da causa raiz de falhas. O Azure Monitor integra-se ao AKS para coletar métricas de controladores, nós e contêineres, bem como logs do contêiner e logs do nó mestre.
 
-## <a name="design-considerations"></a>Considerações sobre o design
+## <a name="design-considerations"></a>Considerações de design
 
 Essa arquitetura de referência se concentra em arquiteturas de microsserviços, embora muitas das práticas recomendadas serão aplicáveis a outras cargas de trabalho em execução no AKS.
 

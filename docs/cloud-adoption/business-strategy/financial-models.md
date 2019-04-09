@@ -8,12 +8,12 @@ description: Como criar um modelo financeiro para a transformação de nuvem.
 author: BrianBlanchard
 ms.date: 12/10/2018
 ms.topic: guide
-ms.openlocfilehash: 4fe9b178962bf2cd6a79233278c73085237772f0
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: 1f3ed8a84b84ba577ad5e5db8b1becd318dc04a3
+ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55898197"
+ms.lasthandoff: 04/08/2019
+ms.locfileid: "59068864"
 ---
 # <a name="create-a-financial-model-for-cloud-transformation"></a>Criar um modelo financeiro para a transformação de nuvem
 
@@ -26,7 +26,7 @@ ROI (retorno sobre o investimento) geralmente é um critério importante para os
 ![ROI (retorno sobre o investimento) é igual a (ganho com o investimento - custos do investimento)/custo do investimento](../_images/formula-roi.png)
 
 <!-- markdownlint-disable MD036 -->
-*ROI = (ganho com o investimento &minus; investimento inicial) / investimento inicial*
+<!--*ROI = (Gain from Investment &minus; Initial Investment) / Initial Investment*-->
 <!-- markdownlint-enable MD036 -->
 
 Nas próximas seções, vamos percorrer os dados necessários para calcular o investimento inicial e o ganho com o investimento (ganhos).
@@ -46,7 +46,7 @@ Para calcular os ganhos, são necessárias duas variáveis:
 ![Ganho com o investimento é igual a Deltas de Receita + Deltas de Custo](../_images/formula-gain-from-investment.png)
 
 <!-- markdownlint-disable MD036 -->
-*Ganho com o investimento = Deltas de Receita + Deltas de Custo*
+<!--*Gain from Investment = Revenue Deltas + Cost Deltas*-->
 <!-- markdownlint-enable MD036 -->
 
 Cada um deles está descrito abaixo.
@@ -75,7 +75,7 @@ Em alguns casos, os ativos desativados podem ser vendidos como uma fonte de rece
 
 As despesas recorrentes necessárias para operar os negócios são geralmente denominadas OpEx (despesas operacionais). OpEx é uma categoria muito ampla. Na maioria dos modelos de contabilidade, isso incluiria o licenciamento de software, as despesas de hospedagem, as contas de energia elétrica, os aluguéis de imóveis, as despesas de resfriamento, as equipes temporárias necessárias para operações, os aluguéis de equipamento, as peças de reposição, os contratos de manutenção e serviços de reparo, os serviços de BC/DR (Recuperação de Desastre/Continuidade dos Negócios) e várias outras despesas que não exigem a aprovação de despesas de capital.
 
-Esta categoria é uma das maiores áreas de ganhos ao se considerar uma Jornada de Transformação Operacional. Não vale gastar tempo colocando todas as hipóteses disso em uma lista exaustiva. Pergunte ao diretor financeiro ou ao departamento financeiro para ter certeza de que todos os custos operacionais foram levados em conta.
+Esta categoria é uma das maiores áreas de ganhos ao considerar uma transformação operacionais. Não vale gastar tempo colocando todas as hipóteses disso em uma lista exaustiva. Pergunte ao diretor financeiro ou ao departamento financeiro para ter certeza de que todos os custos operacionais foram levados em conta.
 
 ### <a name="cost-avoidance"></a>Prevenção de custos
 
@@ -95,7 +95,7 @@ Uma exceção é quando capacidade operacional é fornecida por um provedor de s
 
 ### <a name="capital-expense-reductions-or-avoidance"></a>Reduções de despesas de capital ou provisão
 
-As CapEx (despesas de capita) são um pouco diferentes das despesas operacionais. Em geral, essa categoria é orientada pela expansão do datacenter ou pelos ciclos de atualização. Um exemplo de uma expansão de datacenter seria um novo cluster de alto desempenho hospedar uma solução de Big Data ou um data warehouse, e geralmente cabe em uma categoria de CapEx. Os ciclos de atualização básicos são mais comuns. Algumas empresas têm ciclos de atualização de hardware rígidos, o que significa que ativos são desativados e substituídos em um ciclo regular (normalmente a cada 3, 5 ou 8 anos). Esses ciclos geralmente coincidem com os ciclos de arrendamento do ativo ou do ciclo de vida previsto do equipamento. Quando um ciclo de atualização é concluído, o departamento de TI desembolsa CapEx para adquirir novos equipamentos.
+As CapEx (despesas de capita) são um pouco diferentes das despesas operacionais. Em geral, essa categoria é orientada pela expansão do datacenter ou pelos ciclos de atualização. Um exemplo de uma expansão de datacenter seria um novo cluster de alto desempenho hospedar uma solução de Big Data ou um data warehouse, e geralmente cabe em uma categoria de CapEx. Os ciclos de atualização básicos são mais comuns. Algumas empresas têm hardware rígida ciclos de atualização, os ativos de significado são desativados e substituídos em um ciclo regular (normalmente, cada três, cinco ou oito anos). Esses ciclos geralmente coincidem com os ciclos de arrendamento do ativo ou do ciclo de vida previsto do equipamento. Quando um ciclo de atualização é concluído, o departamento de TI desembolsa CapEx para adquirir novos equipamentos.
 
 Se um ciclo de atualização é aprovado e está no orçamento, a Transformação de Nuvem pode ajudar a eliminar esse custo. Se um ciclo de atualização é planejado, mas ainda não aprovado, a Transformação de Nuvem pode criar uma provisão de custo de CapEx. Ambos os cenários seriam adicionados ao delta de custo.
 

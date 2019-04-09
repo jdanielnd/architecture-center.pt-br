@@ -1,16 +1,19 @@
 ---
-title: 'CAF: Governança de nuvem'
-description: Introdução ao conteúdo de governança de nuvem
+title: 'CAF: Governança no CAF Microsoft Azure'
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.custom: governance
+ms.date: 02/11/2019
+description: Governança no CAF Microsoft Azure
 author: BrianBlanchard
-ms.date: 2/11/2019
-ms.openlocfilehash: 8a9701677eec913788ca72f86444a3600e170d07
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: ce407de0daa590e767382346692c80e0a113bb3c
+ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55897364"
+ms.lasthandoff: 04/08/2019
+ms.locfileid: "59068830"
 ---
-# <a name="cloud-governance-in-the-microsoft-caf-for-azure"></a>Governança de nuvem no CAF para o Azure
+# <a name="governance-in-the-microsoft-caf-for-azure"></a>Governança no CAF Microsoft Azure
 
 A nuvem cria novos paradigmas sobre as tecnologias que dão suporte ao negócio. Esses novos paradigmas também causam turnos na maneira como essas tecnologias são adotadas, gerenciadas e controladas. Quando datacenters inteiros podem ser destruídos e recriados com uma linha de código executado a partir de um processo autônomo, é preciso repensar as abordagens tradicionais. Isso é igualmente verdadeiro quando se trata de governança.
 
@@ -23,23 +26,23 @@ As orientações nesta seção de CAF foram projetadas para duas finalidades:
 
 Este conteúdo destina-se a equipe de Governança de Nuvem. Também é relevante para os arquitetos de nuvem que precisam desenvolver uma base sólida de governança de nuvem.
 
-## <a name="audience"></a>Público-alvo
+## <a name="audience"></a>Público
 
 O conteúdo no CAF afeta os negócios, tecnologia e cultura das empresas. Esta seção de CAF irá interagir intensamente com as equipes de Segurança de TI,Governança de TI, finanças, líderes de linha de negócios, rede, identidade e adoção de nuvem. Há várias co-dependências nessas personas que exigem uma abordagem facilitadora pelos arquitetos de nuvem usando essa diretriz. A facilitação com essas equipes pode ser um esforço único, mas em alguns casos, isso resultará em interações recorrentes com outras personas.
 
 O arquiteto de nuvem serve como o líder de ideias e facilitador para reunir esses públicos. O conteúdo nesta coleção de guias foi projetado para ajudar o arquiteto de nuvem a facilitar a conversa certa, com o público correto, para orientar decisões necessárias. A transformação de negócios que é capacitada pela nuvem depende da função do arquiteto de nuvem para ajudar a guiar as decisões em toda a empresa e IT.
 
-**Especialização de arquiteto de nuvem nesta seção:** Cada seção de CAF representa outra especialização ou variante da função do Arquiteto de Nuvem. Esta seção de CAF destina-se a arquitetos de nuvem com paixão por redução ou eliminação de riscos técnicos. Muitos provedores de nuvem se referem a esses especialistas como responsáveis da nuvem. Preferimos guardiões de nuvem ou, coletivamente, a equipe de Governança de nuvem. Em cada jornada do cliente acionável, os artigos mostram como a composição e a função da equipe de governança de nuvem podem ser alteradas ao longo do tempo.
+**Especialização de arquiteto de nuvem nesta seção:** Cada seção de CAF representa outra especialização ou variante da função do Arquiteto de Nuvem. Esta seção do CAF destina-se de arquitetos da nuvem com uma paixão por redução ou reduzindo os riscos de técnicos. Muitos provedores de nuvem se referem a esses especialistas como responsáveis da nuvem. Preferimos guardiões de nuvem ou, coletivamente, a equipe de Governança de nuvem. Em cada jornada do cliente acionável, os artigos mostram como a composição e a função da equipe de governança de nuvem podem ser alteradas ao longo do tempo.
 
 ## <a name="using-this-guide"></a>Usando este guia
 
 Para leitores que desejam seguir este guia do início ao fim, esse conteúdo ajudará a desenvolver uma estratégia de governança de nuvem robusta em paralelo à implementação de nuvem. A diretriz orienta o leitor na teoria e implementação de uma estratégia.
 
-Para um curso intensivo na teoria e acesso rápido a implementação do Azure, comece com a [Visão geral de Percursos de Governança Acionáveis](./journeys/overview.md). Por meio deste guia, o leitor pode começar pequeno e evoluir suas necessidades de governança em paralelo aos seus esforços de adoção de nuvem.
+Para um curso intensivo na teoria e acesso rápido a implementação do Azure, comece com o [visão geral dos percursos de governança acionáveis](./journeys/overview.md). Por meio deste guia, o leitor pode começar pequeno e evoluir suas necessidades de governança em paralelo aos seus esforços de adoção de nuvem.
 
 ## <a name="next-steps"></a>Próximas etapas
 
-Revisão dos percursos de governança acionáveis.
+Examine os percursos de governança acionáveis.
 
 > [!div class="nextstepaction"]
 > [Percursos de governança acionáveis](./journeys/overview.md)

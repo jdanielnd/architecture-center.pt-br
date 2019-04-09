@@ -1,38 +1,44 @@
 ---
+title: Microsoft Cloud Adoption Framework for Azure
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.custom: governance
+ms.date: 02/11/2019
 layout: LandingPage
 ms.topic: landing-page
 author: BrianBlanchard
-ms.date: 2/11/2019
-ms.openlocfilehash: b67b58348d6a7dffdb63b0cc776a9eea02c2fb36
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: cb5f5a61ad71d60e0e5805fd7e8d6bd78f893293
+ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55897449"
+ms.lasthandoff: 04/08/2019
+ms.locfileid: "59068796"
 ---
 # <a name="microsoft-cloud-adoption-framework-for-azure"></a>Microsoft Cloud Adoption Framework for Azure
 
-A nuvem apresenta uma mudança fundamental na maneira como as empresas adquirem e utilizam os recursos de tecnologia. No passado, as empresas assumiam propriedade e responsabilidade de todos os níveis de tecnologia da infraestrutura para o software. Agora, a nuvem oferece o potencial para transformar a maneira como as empresas usam a tecnologia, provisionando e consumindo recursos conforme necessário. Enquanto a nuvem oferece flexibilidade praticamente ilimitada em termos de opções de design, as empresas buscam uma metodologia consistente e comprovada para a adoção de tecnologias de nuvem. O Cloud Adoption Framework (CAF) fornece a estrutura desejada para orientar as decisões em toda a adoção.
+Fundamentalmente, a nuvem altera como as empresas adquirem e usam recursos de tecnologia. Tradicionalmente, as empresas assumida propriedade e responsabilidade de todos os aspectos da tecnologia de infraestrutura de software. A nuvem permite que as empresas Provisionando e consumindo recursos somente quando necessário. Enquanto a nuvem oferece uma enorme flexibilidade em relação às opções de design, as empresas precisam uma metodologia consistente e comprovada para adotar tecnologias de nuvem. A estrutura de adoção do Microsoft Cloud para Azure (CAF) atende a essa necessidade, ajudando a guia decisões em toda a adoção da nuvem.
 
-No entanto, a adoção da nuvem é um meio, não é o objetivo final. A adoção de nuvem realmente eficaz começa bem antes de um fornecedor de plataformas de nuvem ser selecionado. A adoção da nuvem começa quando tomadores de decisões de IT e negócios percebem que a nuvem pode acelerar um objetivo de transformação de negócios específicos. O Cloud Adoption Framework (CAF) alinha estratégias de negócios, cultura e alteração técnica para capacitar os resultados de negócios desejados. A estrutura de adoção de nuvem fornece orientações técnicas relacionadas ao Microsoft Azure. Respeitar que os clientes ainda podem estar no processo de escolha de um fornecedor de nuvem, essa estrutura fornece diretrizes independente da nuvem para facilitar as decisões de nível superiores, quando possível.
+No entanto, a adoção da nuvem é um meio para um fim. A adoção da nuvem bem-sucedido começa bem antes de um fornecedor de plataformas de nuvem é selecionado. Ele começa quando o business e tomadores de decisões perceber que a nuvem pode acelerar um objetivo de transformação de negócios específicas. Auxílios CAF em alinhando as estratégias de negócios, cultura e alteração técnica para obter os resultados de negócios desejado.
+
+CAF fornece orientação técnica para o Microsoft Azure. Reconhecendo que os clientes ainda podem estar em processo de escolher um fornecedor de nuvem, essa estrutura fornece orientação de nuvem independente para decisões de nível superior sempre que possível.
 
 ## <a name="product-truths"></a>Verdades do Produto
 
-O CAF atualmente é oferecido como uma visualização pública. O framework entrará em disponibilidade geral (GA), quando os objetivos de aspiração acima forem realizados. Na versão de visualização atual do CAF, o principal foco é na [governança de nuvem](./governance/journeys/overview.md). O CAF será expandido com frequência, conforme a equipe aproxima a versão GA.
+O CAF atualmente é oferecido como uma visualização pública. O framework entrará em GA (disponibilidade geral) quando as metas de aspiração acima forem atendidas. Nesta versão de visualização do CAF, é a principal área de foco [governança de nuvem](./governance/journeys/overview.md). CAF será expandido com frequência enquanto se movimentam mais próximo à versão de GA.
 
-## <a name="audience"></a>Público-alvo
+## <a name="audience"></a>Público
 
-O conteúdo no CAF afeta os negócios, tecnologia e cultura das empresas. As funções afetadas incluem os líderes comerciais, os tomadores de decisão comercial, tomadores de decisão de TI, finanças, administradores da empresa, operações de TI, segurança de TI e conformidade, governança de TI, proprietários de desenvolvimento de carga de trabalho e proprietários de operações de carga de trabalho. Cada uma dessas funções e personas usa jargão diferente. Cada uma delas têm diferentes objetivos e indicadores chave de desempenho. É impossível para um único conjunto de conteúdo interagir diretamente com cada um dessas públicos-alvo.
+O conteúdo em CAF afeta os negócios, tecnologia e cultura das empresas. As funções afetadas incluem os líderes comerciais, os tomadores de decisão comercial, tomadores de decisão de TI, finanças, administradores da empresa, operações de TI, segurança de TI e conformidade, governança de TI, proprietários de desenvolvimento de carga de trabalho e proprietários de operações de carga de trabalho. Cada função usa o jargão diferente. Cada uma delas têm diferentes objetivos e indicadores chave de desempenho. Um único conjunto de conteúdo não é possível abordar cada esses públicos com eficiência.
 
-Insira o Arquiteto de Nuvem: O arquiteto de nuvem serve como o líder de ideias e facilitador para reunir esses públicos. O conteúdo nesta coleção de guias foi projetado para ajudar o arquiteto de nuvem a facilitar a conversa certa, com o público correto, para orientar decisões necessárias. A transformação de negócios que é capacitada pela nuvem depende da função do arquiteto de nuvem para ajudar a guiar as decisões em toda a empresa e IT.
+Insira o **arquiteto de nuvem**. O arquiteto de nuvem serve como o líder de ideias e facilitador para reunir esses públicos. Esta coleção de guias foi projetada para ajudar o arquiteto de nuvem a facilitar as conversas certas com o público certo para orientar decisões necessárias. Transformação do negócio capacitada pela nuvem depende da função do arquiteto de nuvem para ajudar a guia decisões em toda a empresa e IT.
 
-Especializações do arquiteto de nuvem: Cada seção do CAF representa outra especialização ou variante da função do arquiteto de nuvem. Essas seções também criam oportunidades para compartilhar a carga do arquiteto de nuvem entre uma equipe de arquitetos da nuvem. Exemplo de uma especialização: Esta seção do CAF destina-se a arquitetos de nuvem com paixão por atenuação de riscos técnicos. Muitos provedores de nuvem se referem a esses especialistas como responsáveis da nuvem, nós preferimos Guardiões da Nuvem ou, coletivamente, equipe de Governança de Nuvem.
+Cada seção do CAF representa outra especialização ou variante da função do arquiteto de nuvem. Essas seções também criam oportunidades para compartilhar as responsabilidades de arquitetura de nuvem com uma equipe de arquitetos da nuvem. Por exemplo, a seção de governança de CAF foi projetada para arquitetos de nuvem com uma paixão por minimização de riscos técnicos. Alguns provedores de nuvem se referem a esses especialistas como nuvem responsáveis; Preferimos que o termo **guardião nuvem**, ou coletivamente, a equipe de governança de nuvem.
 
 ## <a name="how-to-use-the-microsoft-cloud-adoption-framework-for-azure"></a>Como usar o Cloud Adoption Framework para o Azure
 
-Se sua empresa não está familiarizada com o Azure, comece com a [visão geral](./getting-started/overview.md) na seção de *introdução*. Este documento inclui orientações prescritivas para a transformação digital da sua empresa percorrer cada etapa do processo.
+Se sua empresa for nova no Azure, comece lendo [guia de Introdução com a estrutura de adoção da nuvem](./getting-started/overview.md). Esta visão geral fornece uma orientação prescritiva para a transformação digital da sua empresa, você acompanhará a cada etapa do processo.
 
-Se sua empresa tem experiência no Azure e busca mais orientações detalhadas e práticas recomendadas para áreas específicas, há seções para [governança](./governance/overview.md) e [Guias de decisão](./decision-guides/overview.md). Seções adicionais serão disponibilizadas, como as abordagens de versão de GA.
+Se sua empresa tem experiência com o Azure e está buscando obter diretrizes mais detalhadas e práticas recomendadas para áreas específicas, examine os [visão geral de governança](./governance/overview.md) e o [guias de decisão de arquitetura](./decision-guides/overview.md). Mais seções serão adicionadas como as abordagens de versão de GA.
 
 > [!div class="nextstepaction"]
 > [Introdução](./getting-started/overview.md)
