@@ -50,7 +50,7 @@ Essa arquitetura é formada pelos componentes a seguir.
 
 [O armazenamento de BLOBs do Azure] [ blob] é usado para armazenar os dados de entrada, os modelos de aprendizado de máquina previamente treinado e os resultados de previsão. Ele oferece armazenamento muito econômico para o desempenho que exige essa carga de trabalho.
 
-[As instâncias de contêiner do Azure] [ aci] fornecem computação sem servidor sob demanda. Nesse caso, uma instância de contêiner é implantada em um agendamento para disparar os trabalhos em lotes que geram as previsões. Os trabalhos em lotes são disparados de um script de R usando o [doAzureParallel] [ doAzureParallel] pacote. A instância de contêiner será desligado automaticamente depois que os trabalhos tiverem terminado.
+[As instâncias de contêiner do Azure] [ aci] fornecem computação sem servidor sob demanda. Nesse caso, uma instância de contêiner é implantada em um agendamento para disparar os trabalhos em lotes que geram as previsões. Os trabalhos em lotes são disparados de um script de R usando o [doAzureParallel][doAzureParallel] pacote. A instância de contêiner será desligado automaticamente depois que os trabalhos tiverem terminado.
 
 [Aplicativos lógicos do Azure] [ logic-apps] disparar o fluxo de trabalho inteiro ao implantar as instâncias de contêiner em um agendamento. Um conector de instâncias de contêiner do Azure em aplicativos lógicos permite que uma instância a ser implantado em um intervalo de eventos de gatilho.
 
@@ -86,13 +86,13 @@ Monitorar e encerrar trabalhos em lotes do **trabalhos** painel da conta do lote
 
 O pacote doAzureParallel automaticamente coleta logs de todos os stdout/stderr para todos os trabalhos enviados no lote do Azure. Eles podem ser encontrados na conta de armazenamento criada na instalação. Para exibi-los, use uma ferramenta de navegação de armazenamento, como [Azure Storage Explorer] [ storage-explorer] ou portal do Azure.
 
-Para depurar rapidamente os trabalhos em lote durante o desenvolvimento, imprimir os logs em sua sessão R local usando o [getJobFiles] [ getJobFiles] função de doAzureParallel.
+Para depurar rapidamente os trabalhos em lote durante o desenvolvimento, imprimir os logs em sua sessão R local usando o [getJobFiles][getJobFiles] função de doAzureParallel.
 
 ## <a name="cost-considerations"></a>Considerações de custo
 
 Os recursos de computação usados nesta arquitetura de referência são os componentes de custo mais alto. Para este cenário, um cluster de tamanho fixo é criado sempre que o trabalho é disparado e, em seguida, desligado após a conclusão do trabalho. O custo é incorrido apenas enquanto os nós de cluster estão iniciando, executando ou desligar. Essa abordagem é adequada para um cenário em que os recursos de computação necessários para gerar as previsões permanecem relativamente constantes de um trabalho para o trabalho.
 
-Em cenários em que a quantidade de computação necessária para concluir o trabalho não é conhecida de antemão, pode ser mais adequado ao usar o dimensionamento automático. Com essa abordagem, o tamanho do cluster é dimensionado para cima ou para baixo, dependendo do tamanho do trabalho. O lote do Azure dá suporte a uma variedade de fórmula de dimensionamento automático que você pode definir ao definir o cluster usando o [doAzureParallel] [ doAzureParallel] API.
+Em cenários em que a quantidade de computação necessária para concluir o trabalho não é conhecida de antemão, pode ser mais adequado ao usar o dimensionamento automático. Com essa abordagem, o tamanho do cluster é dimensionado para cima ou para baixo, dependendo do tamanho do trabalho. O lote do Azure dá suporte a uma variedade de fórmula de dimensionamento automático que você pode definir ao definir o cluster usando o [doAzureParallel][doAzureParallel] API.
 
 Para alguns cenários, o tempo entre trabalhos pode ser muito curto para desligar e iniciar o cluster. Nesses casos, manter o cluster em execução entre trabalhos, se apropriado.
 
@@ -100,7 +100,7 @@ DoAzureParallel e lote do Azure suportam o uso de VMs de baixa prioridade. Essas
 
 ## <a name="deployment"></a>Implantação
 
-Para implantar essa arquitetura de referência, siga as etapas descritas a [GitHub] [ github] repositório.
+Para implantar essa arquitetura de referência, siga as etapas descritas a [GitHub][github] repositório.
 
 
 [0]: ./_images/batch-scoring-r-models.png
