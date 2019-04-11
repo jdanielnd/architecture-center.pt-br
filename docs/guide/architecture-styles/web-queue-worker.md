@@ -3,17 +3,17 @@ title: Estilo de arquitetura de trabalho de fila da Web
 titleSuffix: Azure Application Architecture Guide
 description: Descreve os benefícios, os desafios e as melhores práticas para arquiteturas de trabalho de fila da Web no Azure.
 author: MikeWasson
-ms.date: 08/30/2018
+ms.date: 04/10/2019
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seojan19
-ms.openlocfilehash: b471d270af09df7ffd58dfdd49e7d03d05bfe582
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 974b8b8595d6d9333552c41dfe1f3f2af848d264
+ms.sourcegitcommit: bb75a25bd589a761c79e39f2ccdec4acc7d71d60
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58244587"
+ms.lasthandoff: 04/11/2019
+ms.locfileid: "59480075"
 ---
 # <a name="web-queue-worker-architecture-style"></a>Estilo de arquitetura de trabalho de fila da Web
 
@@ -71,15 +71,15 @@ Esta seção descreve uma arquitetura recomendada de trabalho de fila da Web que
 
 ![Diagrama físico do estilo de arquitetura de trabalho de fila da Web](./images/web-queue-worker-physical.png)
 
-O front-end é implementado como um aplicativo da Web do Serviço de Aplicativo do Azure, e o trabalho é implementado como um Trabalho Web. O aplicativo Web e o trabalho Web são ambas associados a um plano do Serviço de Aplicativo que fornece as instâncias de VM.
+- O front-end é implementado como um aplicativo web do serviço de aplicativo do Azure e o trabalho é implementado como um aplicativo de funções do Azure. O aplicativo web e o aplicativo de funções são associadas com um plano do serviço de aplicativo que fornece as instâncias de VM.
 
-Você pode usar filas do Barramento de Serviço do Microsoft Azure ou do Armazenamento do Microsoft Azure para a fila de mensagens. (O diagrama mostra uma fila de Armazenamento do Microsoft Azure.)
+- Você pode usar filas do Barramento de Serviço do Microsoft Azure ou do Armazenamento do Microsoft Azure para a fila de mensagens. (O diagrama mostra uma fila de Armazenamento do Microsoft Azure.)
 
-O Cache Redis do Azure armazena o estado de sessão e outros dados que precisam de acesso de baixa latência.
+- O Cache Redis do Azure armazena o estado de sessão e outros dados que precisam de acesso de baixa latência.
 
-A CDN do Azure é usada para armazenar em cache o conteúdo estático, como imagens, CSS ou HTML.
+- A CDN do Azure é usada para armazenar em cache o conteúdo estático, como imagens, CSS ou HTML.
 
-Para o armazenamento, escolha as tecnologias de armazenamento que melhor atendem às necessidades do aplicativo. Você pode usar várias tecnologias de armazenamento (persistência poliglota). Para ilustrar essa ideia, o diagrama mostra o Banco de Dados SQL do Azure e o Azure Cosmos DB.
+- Para o armazenamento, escolha as tecnologias de armazenamento que melhor atendem às necessidades do aplicativo. Você pode usar várias tecnologias de armazenamento (persistência poliglota). Para ilustrar essa ideia, o diagrama mostra o Banco de Dados SQL do Azure e o Azure Cosmos DB.
 
 Para obter mais detalhes, confira [Arquitetura de referência do aplicativo do Serviço de Aplicativo Web][scalable-web-app].
 
@@ -89,7 +89,7 @@ Para obter mais detalhes, confira [Arquitetura de referência do aplicativo do S
 
 - Use o recurso interno de dimensionar automaticamente do Serviço de Aplicativo para escalar horizontalmente o número de instâncias de VM. Se a carga no aplicativo segue padrões previsíveis, use o dimensionamento automático baseado em agendamento. Se a carga for imprevisível, use regras de dimensionamento automático baseado em métricas.
 
-- Considere colocar o aplicativo Web e o trabalho Web em planos separados de Serviço de Aplicativo. Dessa forma, eles ficam hospedados em instâncias separadas de VM e podem ser dimensionados de forma independente.
+- Considere colocar o aplicativo web e o aplicativo de funções em planos de serviço de aplicativo separados. Dessa forma, eles podem ser dimensionados de forma independente.
 
 - Use planos de Serviço de Aplicativo separados para produção e teste. Caso contrário, se você usar o mesmo plano para produção e teste, isso significa que seus testes estão em execução em suas VMs de produção.
 

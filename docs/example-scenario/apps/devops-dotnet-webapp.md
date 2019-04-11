@@ -9,12 +9,12 @@ ms.service: architecture-center
 ms.subservice: example-scenario
 ms.custom: fasttrack, seodec18
 social_image_url: /azure/architecture/example-scenario/apps/media/architecture-devops-dotnet-webapp.svg
-ms.openlocfilehash: 0d6ac13fb357657a2ec5e6284abadb46d6926907
-ms.sourcegitcommit: 3b15d65e7c35a19506e562c444343f8467b6a073
-ms.translationtype: HT
+ms.openlocfilehash: f999b2ffdf234161f668887d5b2327ecf50f0e55
+ms.sourcegitcommit: bb75a25bd589a761c79e39f2ccdec4acc7d71d60
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/25/2019
-ms.locfileid: "54908487"
+ms.lasthandoff: 04/11/2019
+ms.locfileid: "59480126"
 ---
 # <a name="design-a-cicd-pipeline-using-azure-devops"></a>Criar um pipeline de CI/CD usando o Azure DevOps
 
@@ -93,11 +93,11 @@ Essa [árvore de decisão para serviços de computação do Azure](/azure/archit
 
 ### <a name="walk-through"></a>Passo a passo
 
-O [projeto de Azure DevOps](/azure/devops-project/azure-devops-project-github) implantará um Plano do Serviço de Aplicativo, um Serviço de Aplicativo e um recurso do Application Insights para você, além de configurar o projeto de Azure DevOps.
+[Projetos de DevOps do Azure](/azure/devops-project/azure-devops-project-github) será implantar um plano de serviço de aplicativo, serviço de aplicativo e um recurso do Application Insights para você, bem como configurar um pipeline de Pipelines do Azure para você.
 
-Depois que a implantação do projeto de Azure DevOps e do build for concluída, analise as alterações de código associadas, os itens de trabalho e os resultados de teste. Você observará que nenhum resultado de teste é exibido, pois o código não contém nenhum teste a ser executado.
+Depois que você configurou um pipeline com projetos de DevOps do Azure e a compilação for concluída, examine associado alterações de código, itens de trabalho e os resultados de teste. Você observará que nenhum resultado de teste é exibido, pois o código não contém nenhum teste a ser executado.
 
-O projeto cria um pipeline de lançamento e uma gatilho de implantação contínua, implantando nosso aplicativo no ambiente de desenvolvimento. Como parte de um processo de implantação contínua, você poderá ver versões que abrangem vários ambientes. Uma versão pode abranger infraestrutura (usando técnicas como infraestrutura como código) e também implantar os pacotes de aplicativos necessários, juntamente com quaisquer tarefas de pós-configuração.
+O pipeline cria uma definição de versão e um gatilho de implantação contínua, implantar nosso aplicativo para o ambiente de desenvolvimento. Como parte de um processo de implantação contínua, você poderá ver versões que abrangem vários ambientes. Uma versão pode abranger infraestrutura (usando técnicas como infraestrutura como código) e também implantar os pacotes de aplicativos necessários, juntamente com quaisquer tarefas de pós-configuração.
 
 ## <a name="pricing"></a>Preços
 
@@ -115,7 +115,7 @@ Examine os seguintes recursos para saber mais sobre CI/CD e o Azure DevOps:
 - [DevOps na Microsoft ‒ como trabalhamos com o Azure DevOps][devops-microsoft]
 - [Tutoriais passo a passo: DevOps com Azure DevOps][devops-with-vsts]
 - [Lista de verificação de DevOps][devops-checklist]
-- [Criar um pipeline de CI/CD para .NET com o Projeto de DevOps do Azure][devops-project-create]
+- [Criar um pipeline de CI/CD para .NET com projetos de DevOps do Azure][devops-project-create]
 
 <!-- links -->
 

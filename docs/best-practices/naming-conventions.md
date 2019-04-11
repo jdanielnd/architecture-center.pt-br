@@ -8,12 +8,12 @@ ms.topic: best-practice
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 87869d1b38d2b4a71cd5b604436e04deab993131
-ms.sourcegitcommit: 548374a0133f3caed3934fda6a380c76e6eaecea
+ms.openlocfilehash: ed1811495e81965fa514ab66dcfa49d00d2a59f2
+ms.sourcegitcommit: bb75a25bd589a761c79e39f2ccdec4acc7d71d60
 ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/25/2019
-ms.locfileid: "58420015"
+ms.lasthandoff: 04/11/2019
+ms.locfileid: "59480092"
 ---
 # <a name="naming-conventions-for-azure-resources"></a>Convenções de nomenclatura para recursos do Azure
 
@@ -85,6 +85,7 @@ Em geral, evite usar caracteres especiais (`-` ou `_`) como o primeiro ou últim
 |Conjunto de disponibilidade |Grupo de recursos |1-80 |Não diferencia maiúsculas de minúsculas |Alfanumérico, sublinhado e hífen |`<service-short-name>-<context>-as` |`profx-sql-as` |
 |Marca |Entidade associada |512 (nome), 256 (valor) |Não diferencia maiúsculas de minúsculas |Caracteres alfanuméricos, especiais, exceto `<`, `>`, `%`, `&`, `\`, `?`, `/`. Confira as limitações [aqui](/azure/azure-resource-manager/resource-group-using-tags). |`"key" : "value"` |`"department" : "Central IT"` |
 |Aplicativo Web |Global |1-60 |Não diferencia maiúsculas de minúsculas |Alfanumérico e hífen |`<app_name>-<source-slot-name>` |`contoso-staging` |
+|Gerenciamento de API |Global |1-50 |Não diferencia maiúsculas de minúsculas |Alfanumérico e hífen |`<apim-service-name>` |`contoso` |
 
 ### <a name="compute"></a>Computação
 
@@ -191,8 +192,8 @@ Para obter mais informações sobre como configurar esse recurso, confira [Confi
 
 Para obter mais informações sobre como nomear blobs, contêineres e tabelas, confira a lista a seguir:
 
-- [Nomeando e referenciando contêineres, blobs e metadados](https://msdn.microsoft.com/library/dd135715.aspx)
-- [Nomeação de filas e de metadados](https://msdn.microsoft.com/library/dd179349.aspx)
+- [Nomeando e referenciando contêineres, Blobs e metadados](https://msdn.microsoft.com/library/dd135715.aspx)
+- [Nomeando filas e metadados](https://msdn.microsoft.com/library/dd179349.aspx)
 - [Tabelas de nomenclatura](https://msdn.microsoft.com/library/azure/dd179338.aspx)
 
 Um nome de blob pode conter qualquer combinação de caracteres, mas os caracteres reservados de URL devem ser escapados corretamente. Evite nomes de blob que terminem com um ponto (.), com uma barra (/) ou com uma sequência ou uma combinação dos dois. Por convenção, a barra é o separador do diretório *virtual* . Não use uma barra invertida (\\) em um nome de blob. As APIs de cliente podem permitir o uso dela, mas não conseguem aplicar o hash corretamente, e as assinaturas não corresponderão.
