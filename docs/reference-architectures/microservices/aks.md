@@ -7,20 +7,18 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: microservices
-ms.openlocfilehash: 535c53faa810f74299e715a204e427c8919ce360
-ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
+ms.openlocfilehash: 3e93a036bdb7cdf9f4e49ae81887063624372a6b
+ms.sourcegitcommit: d58e6b2b891c9c99e951c59f15fce71addcb96b1
 ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/08/2019
-ms.locfileid: "59069017"
+ms.lasthandoff: 04/12/2019
+ms.locfileid: "59533117"
 ---
 # <a name="microservices-architecture-on-azure-kubernetes-service-aks"></a>Arquitetura de microsserviços no AKS (Serviço de Kubernetes do Azure)
 
 Essa arquitetura de referência mostra um aplicativo de microsserviços implantado no AKS (Serviço de Kubernetes do Azure). Ele descreve uma configuração básica do AKS que pode ser o ponto de partida para a maioria das implantações. Este artigo pressupõe conhecimentos básicos de Kubernetes. O artigo se concentra principalmente na infraestrutura e nas considerações de DevOps na execução de uma arquitetura de microsserviços no AKS. Para obter orientação sobre como criar microsserviços, consulte [criação de microsserviços no Azure](../../microservices/index.md).
 
-![Logotipo do GitHub](../../_images/github.png) uma implementação dessa arquitetura de referência está disponível no [GitHub](https://github.com/mspnp/microservices-reference-implementation).
-
-
+![Logotipo do GitHub](../../_images/github.png) uma implementação dessa arquitetura de referência está disponível no [GitHub][ri].
 
 ![Arquitetura de referência do AKS](./_images/aks.png)
 
@@ -48,7 +46,7 @@ A arquitetura consiste nos componentes a seguir.
 
 **Azure Monitor**. O Azure Monitor coleta e armazena métricas e logs, inclusive a métrica de plataforma para os serviços do Azure na telemetria do aplicativo e da solução. Use esses dados para monitorar o aplicativo, configurar alertas e painéis e executar a análise da causa raiz de falhas. O Azure Monitor integra-se ao AKS para coletar métricas de controladores, nós e contêineres, bem como logs do contêiner e logs do nó mestre.
 
-## <a name="design-considerations"></a>Considerações de design
+## <a name="design-considerations"></a>Considerações sobre o design
 
 Essa arquitetura de referência se concentra em arquiteturas de microsserviços, embora muitas das práticas recomendadas serão aplicáveis a outras cargas de trabalho em execução no AKS.
 
@@ -202,7 +200,7 @@ Como as credenciais de administrador de cluster têm muito poder, use o RBAC do 
 
 - A "Função de administrador de cluster do Serviço de Kubernetes do Azure" tem permissão para baixar as credenciais de administrador de cluster. Somente os administradores de cluster devem receber essa função.
 
-- A "Função de usuário de cluster do Serviço de Kubernetes do Azure" tem permissão para baixar as credenciais de usuário de cluster. Os usuários não administradores não podem receber essa função. Essa função não fornece nenhuma permissão específica em recursos do Kubernetes dentro do cluster &mdash; ela apenas permite que um usuário se conecte ao servidor de API. 
+- A "Função de usuário de cluster do Serviço de Kubernetes do Azure" tem permissão para baixar as credenciais de usuário de cluster. Os usuários não administradores não podem receber essa função. Essa função não fornece nenhuma permissão específica em recursos do Kubernetes dentro do cluster &mdash; ela apenas permite que um usuário se conecte ao servidor de API.
 
 Quando você definir as políticas de RBAC (Kubernetes e Azure), pense sobre as funções em sua organização:
 
@@ -259,109 +257,18 @@ Automatize a aplicação de patch em imagens usando Tarefas do ACR, um recurso d
 Aqui estão algumas metas de um processo de CI/CD robusto para uma arquitetura de microsserviços:
 
 - Cada equipe pode criar e implantar os serviços que ela possui independentemente, sem afetar ou interromper outras equipes.
-
 - Antes de uma nova versão de um serviço ser implantada na produção, ela é implantada em ambientes de desenvolvimento/teste/garantia de qualidade para validação. Há restrições de qualidade impostas em cada estágio.
-
 - Uma nova versão de um serviço pode ser implantada lado a lado com a versão anterior.
-
 - Há políticas de controle de acesso suficientes em vigor.
+- Para cargas de trabalho em contêineres, você pode confiar as imagens de contêiner que são implantadas em produção.
 
-- Você pode confiar nas imagens de contêiner que estão implantadas na produção.
+Para saber mais sobre os desafios, consulte [CI/CD para arquiteturas de microsserviços](../../microservices/ci-cd.md).
 
-### <a name="isolation-of-environments"></a>Isolamento de ambientes
+Para obter recomendações específicas e as práticas recomendadas, consulte [CI/CD para microsserviços no Kubernetes](../../microservices/ci-cd-kubernetes.md).
 
-Você terá vários ambientes com serviços implantados, incluindo ambientes de desenvolvimento, smoke test, testes de integração, testes de carga e, finalmente, produção. Esses ambientes precisam de algum nível de isolamento. No Kubernetes, você pode escolher entre o isolamento físico e o isolamento lógico. Isolamento físico significa implantar em clusters separados. O isolamento lógico faz uso de namespaces e as políticas, conforme descrito anteriormente.
+## <a name="deploy-the-solution"></a>Implantar a solução
 
-Nossa recomendação é criar um cluster de produção dedicado juntamente com um cluster separado para seus ambientes de desenvolvimento/teste. Use o isolamento lógico para separar ambientes dentro do cluster de desenvolvimento/teste. Os serviços implantados no cluster de desenvolvimento/teste nunca devem ter acesso a armazenamentos de dados que contêm dados de negócios. 
+Para implantar a implementação de referência para essa arquitetura, siga as etapas a [repositório GitHub][ri-deploy].
 
-### <a name="helm"></a>Helm
-
-Considere usar o Helm para gerenciar, criar e implantar serviços. Alguns dos recursos do Helm que ajudam com CI/CD incluem:
-
-- Organizar todos os objetos de Kubernetes de um microsserviço específico em um único gráfico do Helm.
-- Implantar o gráfico como um comando do Helm único em vez de uma série de comandos kubectl.
-- Acompanhar atualizações e revisões, usando controle de versão semântico, além da capacidade de reverter para uma versão anterior.
-- Usar modelos para evitar a duplicação de informações, como rótulos e seletores, em vários arquivos.
-- Gerenciar dependências entre gráficos.
-- Publicar gráficos em um repositório do Helm, como um Registro de Contêiner do Azure, e integrá-los ao pipeline de build.
-
-Para obter mais informações sobre como usar o Registro de Contêiner como um repositório do Helm, confira [Usar o Registro de Contêiner do Azure como um repositório do Helm para os gráficos do aplicativo](/azure/container-registry/container-registry-helm-repos).
-
-### <a name="cicd-workflow"></a>Fluxo de trabalho de CI/CD
-
-Antes de criar um fluxo de trabalho de CI/CD, você precisa saber como a base de código será estruturada e gerenciada.
-
-- As equipes funcionam em repositórios separados ou em um repositório único?
-- Qual é sua estratégia de ramificação?
-- Quem pode efetuar push do código para a produção? Existe uma função de gerente de versão?
-
-A abordagem de repositório único tem tido mais aceitação, mas há vantagens e desvantagens em ambas.
-
-| &nbsp; | Repositório único | Vários repositórios |
-|--------|----------|----------------|
-| **Vantagens** | Compartilhamento de código<br/>Maior facilidade em padronizar o código e as ferramentas<br/>Maior facilidade em refatorar o código<br/>Detectabilidade – modo de exibição único do código<br/> | Propriedade clara por equipe<br/>Possivelmente menos conflitos de mesclagem<br/>Ajuda a impor o desacoplamento de microsserviços |
-| **Desafios** | As alterações no código compartilhado podem afetar vários microsserviços<br/>Maior potencial de conflitos de mesclagem<br/>As ferramentas devem ser dimensionadas para uma base de código grande<br/>Controle de acesso<br/>Processo de implantação mais complexo | Mais difícil de compartilhar o código<br/>Mais difícil de impor padrões de codificação<br/>Gerenciamento de dependências<br/>Base de código difusa, baixa detectabilidade<br/>Falta de infraestrutura compartilhada
-
-Nesta seção, apresentamos um possível fluxo de trabalho de CI/CD com base nas seguintes suposições:
-
-- O repositório de código é único, com pastas organizadas por microsserviço.
-- A estratégia de ramificação da equipe se baseia no [desenvolvimento com base em troncos](https://trunkbaseddevelopment.com/).
-- A equipe usa o [Azure Pipelines](/azure/devops/pipelines) para executar o processo de CI/CD.
-- A equipe usa [namespaces](/azure/container-registry/container-registry-best-practices#repository-namespaces) no Registro de Contêiner do Azure para isolar as imagens que foram aprovadas para a produção das imagens que ainda estão sendo testadas.
-
-Neste exemplo, um desenvolvedor está trabalhando em um microsserviço chamado Serviço de Entrega. (O nome vem da implementação de referência descrita [aqui](../../microservices/design/index.md#scenario).) Ao desenvolver um novo recurso, o desenvolvedor coloca código em um branch de recursos.
-
-![Fluxo de trabalho de CI/CD](./_images/aks-cicd-1.png)
-
-O push de confirmações efetuado para esse branch dispara uma compilação de CI para o microsserviço. Por convenção, os branches de recursos recebem o nome de `feature/*`. O [arquivo de definição de compilação](/azure/devops/pipelines/yaml-schema) inclui um gatilho que filtra por nome do branch e por caminho de origem. Usando essa abordagem, cada equipe pode ter seu próprio pipeline de build.
-
-```yaml
-trigger:
-  batch: true
-  branches:
-    include:
-    - master
-    - feature/*
-
-    exclude:
-    - feature/experimental/*
-
-  paths:
-     include:
-     - /src/shipping/delivery/
-```
-
-Agora, no fluxo de trabalho, a compilação de CI executa uma verificação mínima no código:
-
-1. Compilar o código
-1. Executar testes de unidade
-
-A ideia aqui é manter os tempos de compilação curtos para que o desenvolvedor possa receber comentários rapidamente. Quando o recurso está pronto para ser mesclado com o mestre, o desenvolvedor abre uma solicitação de pull. Isso dispara outra compilação de CI que executa verificações adicionais:
-
-1. Compilar o código
-1. Executar testes de unidade
-1. Criar a imagem de contêiner do tempo de execução
-1. Executar exames de vulnerabilidade na imagem
-
-![Fluxo de trabalho de CI/CD](./_images/aks-cicd-2.png)
-
-> [!NOTE]
-> No Azure Repos, você pode definir [políticas](/azure/devops/repos/git/branch-policies) para proteger branches. Por exemplo, a política poderia exigir uma compilação de CI bem-sucedida e a aprovação de uma pessoa pertinente para fazer a mesclagem com o mestre.
-
-Em algum momento, a equipe estará pronta para implantar uma nova versão do Serviço de Entrega. Para isso, o gerente de versão cria um branch do mestre com este padrão de nomenclatura: `release/<microservice name>/<semver>`. Por exemplo, `release/delivery/v1.0.2`.
-Isso dispara uma compilação de CI completa que executa todas as etapas anteriores, além de:
-
-1. Efetuar push da imagem do Docker para o Registro de Contêiner do Azure. A imagem é marcada com o número de versão obtido do nome do branch.
-2. Executar `helm package` para empacotar o gráfico do Helm
-3. Efetuar push do pacote do Helm para o Registro de Contêiner executando `az acr helm push`.
-
-Supondo que essa compilação seja bem-sucedida, ela disparará um processo de implantação usando um [pipeline de lançamento](/azure/devops/pipelines/release/what-is-release-management) do Azure Pipelines. Este pipeline
-
-1. Executa `helm upgrade` para implantar o gráfico do Helm em um ambiente de QA.
-1. Um aprovador confirma a aprovação antes que o pacote seja movido para a produção. Confira [Controle de implantação de versão usando aprovações](/azure/devops/pipelines/release/approvals/approvals).
-1. Marca novamente a imagem do Docker com o namespace de produção no Registro de Contêiner do Azure. Por exemplo, se a marca atual for `myrepo.azurecr.io/delivery:v1.0.2`, a marca de produção será `myrepo.azurecr.io/prod/delivery:v1.0.2`.
-1. Executa `helm upgrade` para implantar o gráfico do Helm no ambiente de produção.
-
-![Fluxo de trabalho de CI/CD](./_images/aks-cicd-3.png)
-
-É importante lembrar que mesmo em um repositório único, o escopo dessas tarefas pode ser definido para microsserviços individuais, para que as equipes possam fazer a implantação rapidamente. Há algumas etapas manuais no processo: Aprovar solicitações de pull, criar branches de versão e aprovar implantações no cluster de produção. Essas etapas são manuais de acordo com a política &mdash; elas poderão ser totalmente automatizadas se a organização preferir.
+[ri]: https://github.com/mspnp/microservices-reference-implementation
+[ri-deploy]: https://github.com/mspnp/microservices-reference-implementation/blob/master/deployment.md
