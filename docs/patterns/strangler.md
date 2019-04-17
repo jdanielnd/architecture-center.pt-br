@@ -22,7 +22,7 @@ Migre incrementalmente um sistema herdado substituindo gradualmente partes espec
 
 ## <a name="context-and-problem"></a>Contexto e problema
 
-Conforme o sistema envelhece, as ferramentas de desenvolvimento, a tecnologia de hospedagem e até mesmo as arquiteturas do sistema em que elas criadas podem se tornar cada vez mais obsoletas. Conforme são adicionados novos recursos e funcionalidades, a complexidade desses aplicativos pode aumentar consideravelmente, tornando mais difícil de manter ou adicionar novos recursos.
+Conforme o sistema envelhece, as ferramentas de desenvolvimento, a tecnologia de hospedagem e até mesmo as arquiteturas do sistema em que elas foram criadas podem se tornar cada vez mais obsoletas. Conforme são adicionados novos recursos e funcionalidades, a complexidade desses aplicativos pode aumentar consideravelmente, tornando mais difícil de manter ou adicionar novos recursos.
 
 Substituir completamente um sistema complexo pode ser uma tarefa muito grande. Geralmente, você precisará de uma migração gradual para um novo sistema, mantendo o sistema antigo para manipular recursos que ainda não tenham sido migrados. No entanto, executar duas versões diferentes de um aplicativo significa que os clientes precisam saber o local em que determinados recursos estão localizados. Sempre que um recurso ou serviço for migrado, os clientes precisarão ser atualizados para apontar para o novo local.
 
