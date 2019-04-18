@@ -7,16 +7,16 @@ ms.date: 12/07/2018
 ms.topic: design-pattern
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
-ms.openlocfilehash: 9b931337f7f0e5dc58f83701271c7d3491af5bfd
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: f3d15d65aeab41977e6d30b8141baaa956da29d3
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58248741"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640763"
 ---
 # <a name="publisher-subscriber-pattern"></a>Padrão Publisher-Subscriber
 
-Permite a um aplicativo anunciar eventos para vários consumidores de seu interesse assincronamente, sem acoplar os remetentes aos destinatários.
+Permita que um aplicativo anunciar eventos para vários consumidores interessados de forma assíncrona, sem acoplamento os remetentes aos destinatários.
 
 **Também chamado de**: Mensagens pub/sub
 
@@ -130,4 +130,4 @@ Os padrões e diretrizes a seguir também podem ser relevantes ao implementar es
 
 - [Padrão de observador](https://en.wikipedia.org/wiki/Observer_pattern). O padrão Publish-Subscribe se baseia no padrão de observador, separando os assuntos de observadores por meio de mensagens assíncronas.
 
-- [Padrão de agente de mensagem](https://en.wikipedia.org/wiki/Message_broker). Muitos subsistemas de mensagens que dão suporte ao modelo publish-subscribe são implementados por meio de um agente de mensagem.
+- [Padrão de agente de mensagem](https://en.wikipedia.org/wiki/Message_broker). Muitos subsistemas de mensagens que dão suporte ao publicar-assinar o modelo são implementadas por meio de um agente de mensagem.

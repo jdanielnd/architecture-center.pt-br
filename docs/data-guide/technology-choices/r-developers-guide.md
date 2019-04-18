@@ -9,12 +9,12 @@ ms.devlang: R
 ms.topic: article
 ms.date: 03/19/2019
 ms.author: jepeach
-ms.openlocfilehash: a14c8ce76f78baa7274f22b939eb28cb025ef87e
-ms.sourcegitcommit: 1a3cc91530d56731029ea091db1f15d41ac056af
+ms.openlocfilehash: 7b263d0f49b3b41c9a25b5842de908d5e507780b
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/03/2019
-ms.locfileid: "58887922"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640474"
 ---
 # <a name="r-developers-guide-to-azure"></a>Guia do desenvolvedor de R para Azure
 
@@ -46,7 +46,7 @@ A [DSVM (Máquina Virtual de Ciência de Dados)](https://docs.microsoft.com/azur
 
 * [Microsoft R Open](https://mran.microsoft.com/open/)
 * [Microsoft Machine Learning Server](https://docs.microsoft.com/machine-learning-server/what-is-machine-learning-server)
-* [Área de trabalho do RStudio](https://www.rstudio.com/products/rstudio/#Desktop)
+* [RStudio Desktop](https://www.rstudio.com/products/rstudio/#Desktop)
 * [RStudio Server](https://www.rstudio.com/products/rstudio/#Server)
 
 A DSVM pode ser provisionada com Windows ou Linux como o sistema operacional.  Você pode usar a DSVM de duas maneiras diferentes: como uma estação de trabalho interativa ou como uma plataforma de computação para um cluster personalizado.
@@ -129,14 +129,13 @@ Esse recurso oferece um mecanismo inserido de análise preditiva e ciência de d
 
 Embora os Serviços do Machine Learning façam parte do SQL Server local desde 2016, é relativamente novo ao Banco de Dados SQL do Azure.  Ele está atualmente em [versão prévia limitada](https://docs.microsoft.com/sql/advanced-analytics/what-s-new-in-sql-server-machine-learning-services?view=sql-server-2017#azure-sql-database-roadmap), mas continuará a evoluir.
 
-
 ### <a name="next-steps"></a>Próximas etapas
 
-* [Seu código R em execução no Azure com mrsdeploy](https://blog.revolutionanalytics.com/2017/03/running-your-r-code-azure.html)
-* [Machine Learning Server na nuvem](https://docs.microsoft.com/machine-learning-server/install/machine-learning-server-in-the-cloud)
-* [Recursos adicionais do Machine Learning Server e Microsoft R](https://docs.microsoft.com/machine-learning-server/resources-more)
+* [Como executar seu código R no Azure com mrsdeploy](https://blog.revolutionanalytics.com/2017/03/running-your-r-code-azure.html)
+* [Machine Learning Server na Nuvem](https://docs.microsoft.com/machine-learning-server/install/machine-learning-server-in-the-cloud)
+* [Recursos Adicionais do Machine Learning Server e do Microsoft R](https://docs.microsoft.com/machine-learning-server/resources-more)
 * [R no Azure](https://github.com/yueguoguo/r-on-azure) – uma visão geral de pacotes, ferramentas e estudos de caso do uso do R com o Azure
 
 ---
 
-<sub>O logotipo de R é &copy; 2016 The R Foundation e é usado sob os termos do [licença Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/).</sub>
+<sub>O logotipo do R é &copy; 2016 The R Foundation, e é usado sob os termos da [licença Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/).</sub>

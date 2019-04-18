@@ -8,12 +8,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18, networking
-ms.openlocfilehash: 2595352075c708e015a0f0c536be31ceb5614fcd
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 046ca8c9c67c2d8a77efc87c2106c79670bd153f
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58245677"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640066"
 ---
 # <a name="implement-a-dmz-between-azure-and-the-internet"></a>Implementar uma rede de perímetro entre o Azure e a Internet
 
@@ -95,13 +95,13 @@ Uma implantação para uma arquitetura de referência que implementa essas recom
 
 1. Navegue para a pasta `/dmz/secure-vnet-dmz` do repositório GitHub de arquiteturas de referência.
 
-2. Execute o comando a seguir:
+1. Execute o comando a seguir:
 
     ```bash
     azbb -s <subscription_id> -g <resource_group_name> -l <region> -p onprem.json --deploy
     ```
 
-4. Execute o comando a seguir:
+1. Execute o comando a seguir:
 
     ```bash
     azbb -s <subscription_id> -g <resource_group_name> -l <region> -p secure-vnet-dmz.json --deploy

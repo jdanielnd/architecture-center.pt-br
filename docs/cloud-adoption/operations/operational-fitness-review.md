@@ -6,12 +6,12 @@ ms.date: 09/20/2018
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: afecf380b1a75d006f6f2bc0cb0e5058cd3feffc
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 7d7f6bd46fb60a190a7fb27432d5ff4b74b0c597
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58241637"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640695"
 ---
 # <a name="establishing-an-operational-fitness-review"></a>Estabelecer uma análise de adequação operacional
 
@@ -31,11 +31,11 @@ Como você aprendeu no [Guia de Introdução](../../cloud-adoption/getting-start
 
 Durante esse processo, o foco geralmente está nos _recursos_ do serviço. Ou seja, há um conjunto de requisitos _funcionais_ desejados para a realização do serviço. Por exemplo, um serviço de entrega de mercadorias exige recursos para determinar os locais de origem e de destino da mercadoria que rastreiam a mercadoria durante a entrega, as notificações do cliente, entre outros.
 
-Por outro lado, os requisitos _não funcionais_ estão relacionados às propriedades, como a [disponibilidade](../../checklist/availability.md), [resiliência](../../resiliency/index.md) e [escalabilidade](../../checklist/scalability.md) do serviço. Essas propriedades diferem dos requisitos funcionais porque elas não afetam diretamente a função final de nenhum recurso específico no serviço. No entanto, esses requisitos não funcionais estão relacionados ao _desempenho_ e à _continuidade_ do serviço.
+Em contraste, o _inoperante_ requisitos se relacionam às propriedades, como o serviço [confiabilidade](../../reliability/index.md) e [escalabilidade](../../checklist/scalability.md). Essas propriedades diferem dos requisitos funcionais porque elas não afetam diretamente a função final de nenhum recurso específico no serviço. No entanto, esses requisitos não funcionais estão relacionados ao _desempenho_ e à _continuidade_ do serviço.
 
 Alguns requisitos não funcionais podem ser especificados nos termos de um contrato de nível de serviço (SLA). Por exemplo, em relação à continuidade do serviço, um requisito de disponibilidade para o serviço pode ser expresso em forma de uma porcentagem, como **disponível 99,99% do tempo**. Outros requisitos não funcionais podem ser mais difíceis de definir e podem mudar conforme as necessidades de produção evoluem. Por exemplo, um serviço voltado para o consumidor pode começar a enfrentar requisitos imprevistos de taxa de transferência após uma onda de popularidade.
 
-![OBSERVAÇÃO] Definir os requisitos para garantir a resiliência, incluindo explicações de RPO, RTO, SLA e conceitos relacionados, são explorados mais detalhadamente em [Projetar aplicativos resilientes para o Azure](../../resiliency/index.md#define-your-availability-requirements).
+! [OBSERVAÇÃO] Definindo os requisitos para garantir a resiliência, incluindo explicações de RPO, RTO, SLA e conceitos relacionados, são explorados mais detalhadamente no [desenvolvendo requisitos para aplicativos resilientes do Azure](../../reliability/requirements.md).
 
 ## <a name="operational-fitness-review-process"></a>Processo de análise de adequação operacional
 
@@ -53,7 +53,7 @@ As etapas nesta fase destinam-se a capturar os requisitos necessários para cond
 
 - **Mapear operações para serviços**. Mapeie essas operações de negócios para os serviços que dão suporte a elas. No exemplo do carrinho de compras acima, vários serviços podem estar envolvidos: um serviço de gerenciamento de estoque de inventário, um serviço do carrinho de compras, entre outros. No exemplo do pagamento com cartão de crédito acima, um serviço de pagamento local pode interagir com um serviço de processamento de pagamento de terceiros.
 
-- **Analisar dependências de serviços**. A maioria das operações de negócios exige um trabalho coordenado entre vários serviços de suporte. É importante entender as dependências entre os serviços e o fluxo de transações críticas para a missão por meio desses serviços. Você também deve considerar as dependências entre os serviços locais e os serviços do Azure. No exemplo do carrinho de compras, o serviço de gerenciamento de estoque de inventário pode ser hospedado no local e inserir dados recebidos pelos funcionários de um armazém físico, mas pode armazenar dados em um serviço do Azure como o [armazenamento do Azure](/azure/storage/common/storage-introduction) ou um banco de dados como o [Azure Cosmos DB](/azure/cosmos-db/introduction).
+- **Analisar dependências de serviços**. A maioria das operações de negócios exige um trabalho coordenado entre vários serviços de suporte. É importante compreender as dependências entre os serviços e o fluxo de transações de missão crítica por meio desses serviços. Você também deve considerar as dependências entre os serviços locais e os serviços do Azure. No exemplo do carrinho de compras, o serviço de gerenciamento de estoque de inventário pode ser hospedado no local e inserir dados recebidos pelos funcionários de um armazém físico, mas pode armazenar dados em um serviço do Azure como o [armazenamento do Azure](/azure/storage/common/storage-introduction) ou um banco de dados como o [Azure Cosmos DB](/azure/cosmos-db/introduction).
 
 O resultado dessas atividades é um conjunto de **métricas de scorecard** para operações de serviço. As métricas são categorizadas em termos de critérios não funcionais como disponibilidade, escalabilidade e recuperação de desastre. As métricas de scorecard expressam os critérios que espera-se que o serviço atenda operacionalmente. Essas métricas podem ser expressas em qualquer nível de granularidade apropriado para a operação de serviço.
 
@@ -95,7 +95,7 @@ Os detalhes do processo e a reunião devem ser adaptados para atender às suas n
 
 2. O responsável pela engenharia e o proprietário de serviços mapeiam o **estado atual** das operações de negócios para os serviços locais e na nuvem. O mapeamento é formado por uma lista dos componentes em cada serviço, organizada como uma árvore de dependência. Depois que a lista e a árvore de dependência são geradas, são determinados os **caminhos críticos** na árvore.
 
-3. O responsável pela engenharia e o proprietário de serviços analisam o estado atual do log operacional e o monitoramento dos serviços listados na etapa anterior. Um registro em log e um monitoramento robustos são essenciais para identificar os componentes de serviço que contribuem para o não cumprimento de requisitos não funcionais. Se não houver um registro em log e monitoramento adequados em vigor, um plano deve ser criado e implementado para colocá-los em vigor.
+3. O responsável pela engenharia e o proprietário de serviços analisam o estado atual do log operacional e o monitoramento dos serviços listados na etapa anterior. Registro em log e monitoramento robustos são críticos para identificar os componentes de serviço que contribuem para falhar em atender os requisitos não funcionais. Se não houver um registro em log e monitoramento adequados em vigor, um plano deve ser criado e implementado para colocá-los em vigor.
 
 4. As métricas de scorecard são criadas para novas operações de negócios. O scorecard é formado pela lista de componentes constituintes para cada serviço identificado na etapa 2, alinhados com os requisitos não funcionais e uma métrica que representa o quão bem o componente atende ao requisito.
 
@@ -109,7 +109,7 @@ Os detalhes do processo e a reunião devem ser adaptados para atender às suas n
     Esta seção do guia de Arquitetura de aplicativo do Azure descreve os cinco pilares de qualidade do software: Escalabilidade, disponibilidade, resiliência, gerenciamento e segurança.
 - [Dez princípios de design para aplicativos do Azure](../../guide/design-principles/index.md).
     Esta seção do guia de Arquitetura de Aplicativo do Azure aborda um conjunto de princípios de design para tornar seu aplicativo mais escalonável, resiliente e gerenciável.
-- [Projetar aplicativos resilientes para o Azure](../../resiliency/index.md).
+- [Desenvolvendo aplicativos do Azure confiáveis](../../reliability/index.md).
     Este guia começa com uma definição do termo resiliência e conceitos relacionados. Em seguida, descreve um processo para a obtenção de resiliência, usando uma abordagem estruturada sobre o tempo de vida de um aplicativo, desde o design e a implementação até a implantação e as operações.
 - [Padrões de design na nuvem](../../patterns/index.md).
     Esses padrões de design são úteis para equipes de engenharia ao criar aplicativos sobre os pilares de qualidade do software.

@@ -9,12 +9,12 @@ ms.service: architecture-center
 ms.subservice: example-scenario
 ms.custom: csa-team
 social_image_url: /azure/architecture/example-scenario/apps/media/architecture-decentralized-trust.png
-ms.openlocfilehash: a3c497f91b3861bf02f05981ee92e578a22a14ca
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 3bc75e59a4d391c74a0e606f9670c88509a3375b
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58246277"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640430"
 ---
 # <a name="decentralized-trust-between-banks-on-azure"></a>Relação de confiança descentralizada entre bancos no Azure
 
@@ -72,8 +72,6 @@ Para outros cenários estendidos ou diferentes, podem surgir preocupações como
 
 O [Azure Monitor][monitor] é usado para monitorar continuamente se há problemas na rede de blockchain e garantir a disponibilidade. Um link para um painel de monitoramento personalizado com base no Azure Monitor será enviado a você após a implantação bem-sucedida do modelo de solução de blockchain usado nesse cenário. O painel mostra nós que estão relatando pulsações nos últimos 30 minutos, bem como outras estatísticas úteis.
 
-Para ver outros tópicos sobre disponibilidade, consulte a [lista de verificação de disponibilidade][availability] no Azure Architecture Center.
-
 ### <a name="scalability"></a>Escalabilidade
 
 Uma preocupação popular referente ao blockchain é o número de transações que ele pode incluir em um período de tempo predefinido. Esse cenário usa uma Prova de Autoridade em que tal escalabilidade pode ser gerenciada melhor do que a Prova de Trabalho. Em redes com base em Prova de Autoridade, os participantes de consenso são conhecidos e gerenciados, tornando-as mais adequadas para o blockchain privado para um consórcio de organizações que conhecem umas às outras. Os parâmetros como tempo médio de bloco, transações por minuto e consumo de recursos de computação podem ser facilmente monitorados por meio do painel personalizado. Os recursos podem ser ajustados adequadamente com base nos requisitos de dimensionamento.
@@ -90,7 +88,7 @@ Para obter orientação geral sobre como criar soluções seguras, confira a [Do
 
 O próprio blockchain Ethereum PoA pode fornecer alguma resiliência, pois os nós de validação podem ser implantados em regiões diferentes. O Azure tem opções para implantações em mais de 54 regiões em todo o mundo. Um blockchain como o desse cenário fornece possibilidades novas e exclusivas de cooperação para aumentar a resiliência. A resiliência da rede não é fornecida apenas para por um único participante centralizado, mas por todos os membros do consórcio. Um blockchain com base em Prova de Autoridade permite que a resiliência de rede seja ainda mais planejada e deliberada.
 
-Para obter diretrizes gerais sobre como criar soluções resilientes, confira [Projetando aplicativos resilientes para o Azure][resiliency].
+Para obter diretrizes gerais sobre como criar soluções resilientes, consulte [desenvolvendo aplicativos do Azure confiáveis](../../reliability/index.md).
 
 ## <a name="pricing"></a>Preços
 
@@ -120,8 +118,6 @@ Para saber mais sobre como usar o modelo de solução de Prova de Autoridade de 
 [deploy]: https://portal.azure.com/?pub_source=email&pub_status=success#create/microsoft-azure-blockchain.azure-blockchain-ethereumethereum-poa-consortium
 [source]: https://github.com/vitoc/creditscoreblockchain
 [monitor]: /azure/monitoring-and-diagnostics/monitoring-overview-azure-monitor
-[availability]: /azure/architecture/checklist/availability
 [scalability]: /azure/architecture/checklist/scalability
-[resiliency]: ../../resiliency/index.md
 [security]: /azure/security/
 [vault]: https://azure.microsoft.com/services/key-vault/

@@ -7,12 +7,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat
-ms.openlocfilehash: 5219d08fce5cf09b075b6d7adfb73970e007ded4
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 34c21f4b5356dc0acbd5c2c85124300a6ed13c99
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58248671"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640491"
 ---
 # <a name="web-application-monitoring-on-azure"></a>Monitoramento de aplicativo Web no Azure
 
@@ -78,7 +78,7 @@ Esse cenário se concentra nas soluções de PaaS para o monitoramento, em grand
 
 O Application Insights tem [limites][app-insights-limits] para o número de solicitações que podem ser processadas por segundo. Se exceder o limite de solicitação, você poderá enfrentar a limitação de mensagens. Para evitar limitação, implemente [filtragem][message-filtering] ou [amostragem][message-sampling] para reduzir a taxa de dados
 
-No entanto, considerações de alta disponibilidade para o aplicativo que você executa são responsabilidade do desenvolvedor. Para saber mais sobre a escala, por exemplo, confira a seção [Considerações sobre escalabilidade](#scalability-considerations) na arquitetura de referência do aplicativo Web básico. Depois que um aplicativo for implantado, você poderá configurar testes para [monitorar sua disponibilidade][monitor its availability] usando o Application Insights.
+No entanto, considerações de alta disponibilidade para o aplicativo que você executa são responsabilidade do desenvolvedor. Para saber mais sobre a escala, por exemplo, confira a seção [Considerações sobre escalabilidade](./basic-web-app.md#scalability-considerations) na arquitetura de referência do aplicativo Web básico. Depois que um aplicativo for implantado, você poderá configurar testes para [monitorar sua disponibilidade][monitor its availability] usando o Application Insights.
 
 ### <a name="security"></a>Segurança
 

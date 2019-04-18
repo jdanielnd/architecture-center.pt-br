@@ -9,10 +9,10 @@ ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seojan19
 ms.openlocfilehash: 3fd3badd66edbe561bea88576bb80d9fc3e0bb79
-ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/08/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59068915"
 ---
 # <a name="criteria-for-choosing-a-data-store"></a>Critérios para escolher um armazenamento de dados
@@ -103,7 +103,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td><strong>Tipo de Dados</strong></td>
+<tr><td><strong>Tipo de dados</strong></td>
     <td>
         <ul>
             <li>Os dados são altamente normalizados.</li>
@@ -146,7 +146,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
             <li>Os documentos individuais são recuperados e gravados como um único bloco.</li>
     </td>
 </tr>
-<tr><td><strong>Tipo de Dados</strong></td>
+<tr><td><strong>Tipo de dados</strong></td>
     <td>
         <ul>
             <li>Os dados podem ser gerenciados de forma desordenada.</li>
@@ -161,7 +161,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
 <tr><td><strong>Exemplos</strong></td>
     <td>
         <ul>
-            <li>Catálogo de Produtos</li>
+            <li>Catálogo de produtos</li>
             <li>Contas de usuário</li>
             <li>Lista de materiais</li>
             <li>Personalização</li>
@@ -189,7 +189,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td><strong>Tipo de Dados</strong></td>
+<tr><td><strong>Tipo de dados</strong></td>
     <td>
         <ul>
             <li>O tamanho dos dados tende a ser grande.</li>
@@ -224,7 +224,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td><strong>Tipo de Dados</strong></td>
+<tr><td><strong>Tipo de dados</strong></td>
     <td>
         <ul>
             <li>Os dados são compostos por nós e relações.</li>
@@ -240,7 +240,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
             <li>Quadros da organização</li>
             <li>Gráficos sociais</li>
             <li>Detecção de fraude</li>
-            <li>Análises</li>
+            <li>Análise</li>
             <li>Mecanismos de recomendação</li>
         </ul>
     </td>
@@ -261,7 +261,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td><strong>Tipo de Dados</strong></td>
+<tr><td><strong>Tipo de dados</strong></td>
     <td>
         <ul>
             <li>Os dados são armazenados em tabelas compostas por uma coluna de chave e uma ou mais famílias de colunas.</li>
@@ -303,7 +303,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td><strong>Tipo de Dados</strong></td>
+<tr><td><strong>Tipo de dados</strong></td>
     <td>
         <ul>
             <li>Dados semi-estruturados ou não estruturados</li>
@@ -318,7 +318,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
             <li>Catálogos de produtos</li>
             <li>Pesquisa de site</li>
             <li>Registro em log</li>
-            <li>Análises</li>
+            <li>Análise</li>
             <li>Sites de compra</li>
         </ul>
     </td>
@@ -336,7 +336,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td><strong>Tipo de Dados</strong></td>
+<tr><td><strong>Tipo de dados</strong></td>
     <td>
         <ul>
             <li>Dados históricos de várias fontes.</li>
@@ -368,7 +368,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td><strong>Tipo de Dados</strong></td>
+<tr><td><strong>Tipo de dados</strong></td>
     <td>
         <ul>
             <li>Um carimbo de data/hora que é usado a chave primária e o mecanismo de classificação.</li>
@@ -387,7 +387,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
 </tr>
 </table>
 
-## <a name="object-storage"></a>Armazenamento de objeto
+## <a name="object-storage"></a>Armazenamento de objetos
 
 <table>
 <tr><td><strong>Carga de trabalho</strong></td>
@@ -400,7 +400,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td><strong>Tipo de Dados</strong></td>
+<tr><td><strong>Tipo de dados</strong></td>
     <td>
         <ul>
             <li>O tamanho dos dados é grande.</li>
@@ -433,7 +433,7 @@ As seções a seguir comparam vários modelos de armazenamento de dados com rela
         </ul>
     </td>
 </tr>
-<tr><td><strong>Tipo de Dados</strong></td>
+<tr><td><strong>Tipo de dados</strong></td>
     <td>
         <ul>
             <li>Arquivos em um conjunto hierárquico de pastas.</li>

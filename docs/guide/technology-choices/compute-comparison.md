@@ -8,12 +8,12 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seojan19
-ms.openlocfilehash: 2b6b9b941bf7a3c0136b71ecb65bfe4b4a59e07b
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: c4ce7a5da196e0fcf8f85376439e53683432883e
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58245597"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640457"
 ---
 # <a name="criteria-for-choosing-an-azure-compute-service"></a>Critérios para escolher um serviço de computação do Azure
 
@@ -30,8 +30,8 @@ O termo *computação* refere-se ao modelo de hospedagem para os recursos de com
 | Número mínimo de nós | 1 <a href="#note2"><sup>2</sup></a>  | 1 | 5 <a href="#note3"><sup>3</sup></a> | Sem servidor <a href="#note1"><sup>1</sup></a> | 3 <a href="#note3"><sup>3</sup></a> | Sem nós dedicados | 1 <a href="#note4"><sup>4</sup></a> |
 | Gerenciamento de estado | Com Estado ou Sem Estado | Sem estado | Com estado ou sem estado | Sem estado | Com Estado ou Sem Estado | Sem estado | Sem estado |
 | Hospedagem na Web | Independente | Interno | Independente | Não aplicável | Independente | Independente | Não  |
-| Pode ser implantado para VNet dedicada? | Com suporte | Com suporte<a href="#note5"><sup>5</sup></a> | Com suporte | Com suporte <a href="#note5"><sup>5</sup></a> | [Com suporte](/azure/aks/networking-overview) | Sem suporte | Com suporte |
-| Conectividade híbrida | Com suporte | Com suporte <a href="#note6"><sup>6</sup></a>  | Com suporte | Com suporte <a href="#node7"><sup>7</sup></a> | Com suporte | Sem suporte | Com suporte |
+| Pode ser implantado para VNet dedicada? | Suportado | Com suporte<a href="#note5"><sup>5</sup></a> | Suportado | Com suporte <a href="#note5"><sup>5</sup></a> | [Com suporte](/azure/aks/networking-overview) | Sem suporte | Suportado |
+| Conectividade híbrida | Suportado | Com suporte <a href="#note6"><sup>6</sup></a>  | Suportado | Com suporte <a href="#note7"><sup>7</sup></a> | Suportado | Sem suporte | Suportado |
 
 Observações
 
@@ -79,7 +79,7 @@ Observações
 
 | Critérios | Máquinas Virtuais | Serviço de Aplicativo | Service Fabric | Funções do Azure | Serviço de Kubernetes do Azure | Instâncias de Contêiner | Lote do Azure |
 |----------|-----------------|-------------|----------------|-----------------|-------------------------|----------------|-------------|
-| SSL | Configurado na VM | Com suporte | Com suporte  | Com suporte | [Controlador de entrada](/azure/aks/ingress) | Usar contêiner [sidecar](../../patterns/sidecar.md) | Com suporte |
+| SSL | Configurado na VM | Suportado | Suportado  | Suportado | [Controlador de entrada](/azure/aks/ingress) | Usar contêiner [sidecar](../../patterns/sidecar.md) | Suportado |
 | Custo | [Windows][cost-windows-vm], [Linux][cost-linux-vm] | [Preços do Serviço de Aplicativo][cost-app-service] | [Preços do Service Fabric][cost-service-fabric] | [Preços do Azure Functions][cost-functions] | [Preços do AKS][cost-acs] | [Preço das Instâncias de Contêiner](https://azure.microsoft.com/pricing/details/container-instances/) | [Preço do Lote do Azure][cost-batch]
 | Estilos de arquitetura adequados | [N camadas][n-tier], [Big compute] [ big-compute] (HPC) | [Trabalhado de Fila da Web][w-q-w], [N Camadas][n-tier] | [Microsserviços][microservices], [arquitetura orientada a eventos][event-driven] | [Microsserviços][microservices], [arquitetura orientada a eventos][event-driven] | [Microsserviços][microservices], [arquitetura orientada a eventos][event-driven] | [Microsserviços][microservices], automação de tarefas, trabalhos em lotes  | [Big compute][big-compute] (HPC) |
 

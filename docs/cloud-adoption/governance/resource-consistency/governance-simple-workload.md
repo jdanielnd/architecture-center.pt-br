@@ -7,12 +7,12 @@ ms.custom: governance
 description: Orientação para configurar os controles de governança do Azure para habilitar um usuário e implantar uma carga de trabalho simples
 author: petertaylor9999
 ms.date: 02/11/2019
-ms.openlocfilehash: 0b6f16ee30ce3af8a533b6e153fbe318252c23e7
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 6bf2f15f706140955df29f7f372068c80ce1ad21
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58246427"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640576"
 ---
 # <a name="governance-design-for-a-simple-workload"></a>Design de governança para uma carga de trabalho simples
 
@@ -79,7 +79,7 @@ Observe que neste exemplo, o **proprietário da conta** atribuiu a [função de 
 A função de **proprietário** interna concede todas as permissões ao **proprietário da carga de trabalho** no escopo da assinatura.
 
 > [!IMPORTANT]
-> O **proprietário de conta** do Azure é responsável pelo compromisso financeiro associado à assinatura, mas o **proprietário da carga de trabalho** tem as mesmas permissões. O **proprietário da conta** deve confiar no **proprietário da carga de trabalho** para implantar recursos que estão dentro do orçamento da assinatura.
+> O Azure **proprietário da conta** é responsável pelo compromisso financeiro associado à assinatura, mas o **proprietário da carga de trabalho** tem as mesmas permissões. O **proprietário da conta** deve confiar no **proprietário da carga de trabalho** para implantar recursos que estão dentro do orçamento da assinatura.
 
 O próximo nível do escopo de gerenciamento é o nível do **grupo de recursos**. Um grupo de recursos é um contêiner lógico para recursos. Operações aplicadas no nível do grupo de recursos se aplicam a todos os recursos em um grupo. Além disso, é importante observar que as permissões para cada usuário são herdadas do próximo nível para cima, a menos que elas sejam alteradas explicitamente nesse escopo.
 

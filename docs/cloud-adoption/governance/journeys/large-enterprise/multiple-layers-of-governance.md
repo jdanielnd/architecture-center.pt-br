@@ -1,18 +1,18 @@
 ---
-title: 'CAF: Empresas de grande porte – várias camadas de governança em empresas de grande porte'
+title: 'CAF: Grandes empresas – várias camadas de governança em grandes empresas'
 titleSuffix: Microsoft Cloud Adoption Framework for Azure
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
 ms.custom: governance
 ms.date: 02/11/2019
-description: Empresas de grande porte – várias camadas de governança em empresas de grande porte
+description: Grandes empresas – várias camadas de governança em grandes empresas
 author: BrianBlanchard
-ms.openlocfilehash: 42f4159ca0701c6a798f239359509a3e3b246c38
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: 1a90f8007077df0ecefa8ec5d8c0dd6bfca9ccc7
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900335"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59641205"
 ---
 # <a name="multiple-layers-of-governance-in-large-enterprises"></a>Várias camadas de governança em empresas de grande porte
 
@@ -30,7 +30,7 @@ Este artigo explora algumas maneiras de navegar por esse tipo de complexidade.
 
 Grandes empresas estabelecidas geralmente têm equipes ou funcionários que se concentram nas disciplinas mencionadas nessa jornada. Nessa jornada demonstra uma abordagem para tornar a governança em um esporte de equipe.
 
-Em muitas empresas de grande porte, as disciplinas de governança de nuvem podem ser impedimentos à adoção. Desenvolver competências de nuvem na identidade, segurança, operações, implantações e configuração em toda a empresa leva tempo. Implementar holisticamente a política de governança de TI e segurança de TI pode diminuir a inovação por meses ou até mesmo anos. Equilibrar a necessidade de negócios para inovar e a necessidade de governança para proteger os recursos existentes é delicada.
+Em muitos grandes empresas, disciplinas cinco de governança de nuvem pode ser impedimentos à adoção. Desenvolver competências de nuvem na identidade, segurança, operações, implantações e configuração em toda a empresa leva tempo. Implementar holisticamente a política de governança de TI e segurança de TI pode diminuir a inovação por meses ou até mesmo anos. Equilibrar a necessidade de negócios para inovar e a necessidade de governança para proteger os recursos existentes é delicada.
 
 Os recursos inerentes da nuvem podem remover bloqueadores de inovação, mas aumentar os riscos. Nessa jornada de governança, mostramos como a empresa de exemplo criou as grades de proteção para atenuar o risco. Em vez de lidar com cada uma das disciplinas necessárias para proteger o ambiente, a equipe de governança de nuvem leva uma abordagem baseada em riscos para determinar o que pode ser implantado, enquanto as outras equipes criam as maturidades necessárias para a nuvem. Mais importante, à medida que cada equipe atinge a maturidade de nuvem, a governança aplica suas soluções de forma global. Como cada equipe amadurece e o adiciona à solução geral, a equipe de governança de nuvem pode abrir os portões de estágio, permitindo que a inovação e adoção prosperem.
 
@@ -38,7 +38,7 @@ Esse modelo ilustra o crescimento de uma parceria entre a equipe de governança 
 
 ## <a name="requirements-to-supporting-such-a-team-sport"></a>Requisitos para dar suporte a uma equipe de esporte
 
-É o primeiro requisito de um modelo de governança de várias camadas para entender a hierarquia de governança. Responder às perguntas a seguir ajudará a compreender a hierarquia de controle geral:
+É o primeiro requisito de um modelo de governança de várias camadas para entender a hierarquia de governança. Responder às perguntas a seguir ajudarão você a compreender a hierarquia de controle geral:
 
 - Como a contabilização de nuvem (cobrança dos serviços de nuvem) é alocada entre as unidades de negócios?
 - Como as responsabilidades de governança são alocadas na TI corporativa e em cada unidade de negócios?

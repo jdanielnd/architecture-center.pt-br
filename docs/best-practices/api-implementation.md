@@ -8,12 +8,12 @@ ms.topic: best-practice
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 9b6bef0fd803db5b488e93d246642d4e3681a94c
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: dcbfa528a4fdd640b08b42904ceadb7a802b806e
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55897755"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640916"
 ---
 # <a name="api-implementation"></a>Implementação da API
 
@@ -582,7 +582,7 @@ ServicePoint sp = ServicePointManager.FindServicePoint(uri);
 sp.Expect100Continue = false;
 ```
 
-Você também pode definir a propriedade `Expect100Continue` estática da classe `ServicePointManager` para especificar o valor padrão dessa propriedade para todos os objetos [ServicePoint]](/dotnet/api/system.net.servicepoint) criados posteriormente.
+Você também pode definir estático `Expect100Continue` propriedade do `ServicePointManager` classe para especificar o valor padrão dessa propriedade para todos os criados posteriormente [ServicePoint](/dotnet/api/system.net.servicepoint) objetos.
 
 ### <a name="support-pagination-for-requests-that-may-return-large-numbers-of-objects"></a>Ofereça suporte a paginação para solicitações que podem retornar um grande número de objetos
 
@@ -708,7 +708,7 @@ Cuidado com códigos de status de resposta inesperados do intervalo 5xx. Normalm
 
 - Teste as cadeias de consulta. Se uma operação aceita parâmetros opcionais (por exemplo, solicitações de paginação), teste as diferentes combinações e ordens dos parâmetros.
 
-- Verifique se as operações assíncronas são concluídas com êxito. Se a API da Web oferece suporte a streaming para solicitações que retornam objetos binários grandes (como vídeo ou áudio), certifique-se de que as solicitações de cliente não são bloqueadas enquanto os dados são transmitidos. Se a API da Web implementa sondagem para operações de modificação de dados de execução longa, verifique se as operações relatam seu status corretamente conforme elas prosseguem.
+- Verifique se as operações assíncronas são concluídas com êxito. Se a API da Web oferece suporte a streaming para solicitações que retornam objetos binários grandes (como vídeo ou áudio), certifique-se de que as solicitações de cliente não são bloqueadas enquanto os dados são transmitidos. Se a API da web implementa sondagem para operações de modificação de dados de longa execução, verifique se as operações relatam seu status corretamente conforme elas prosseguem.
 
 Você também deve criar e executar testes de desempenho para verificar que a API da Web funciona satisfatoriamente durante emergências. Você pode criar um projeto de teste de carga e desempenho da Web usando o Visual Studio Ultimate. Para obter mais informações, confira [Executar testes de desempenho em um aplicativo antes do lançamento](https://msdn.microsoft.com/library/dn250793.aspx).
 

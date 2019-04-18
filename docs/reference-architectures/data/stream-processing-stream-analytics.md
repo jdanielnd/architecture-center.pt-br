@@ -8,12 +8,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18
-ms.openlocfilehash: af56a010e90fb176b13c1110ad4000dcababe009
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: e891c0fe490f57e0723b1ec133e33e70d2e23554
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58243867"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640406"
 ---
 # <a name="create-a-stream-processing-pipeline-with-azure-stream-analytics"></a>Criar um pipeline de processamento de fluxo com o Azure Stream Analytics
 
@@ -234,4 +234,3 @@ Talvez seja melhor examinar os seguintes [cenários de exemplo do Azure](/azure/
 <!-- links -->
 
 [github]: https://github.com/mspnp/azure-stream-analytics-data-pipeline
-

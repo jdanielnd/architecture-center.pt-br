@@ -9,12 +9,12 @@ description: Visão geral de conteúdo de governança em CAF
 author: BrianBlanchard
 layout: LandingPage
 ms.topic: landing-page
-ms.openlocfilehash: 1721e2ff7b4e7879637a7c09a40a5571b73c9ace
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: ddd7f5e4b7e79ebe2ddf87be7421b6c4691aced1
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900347"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639862"
 ---
 # <a name="the-five-disciplines-of-cloud-governance"></a>As cinco disciplinas da governança de nuvem
 
@@ -26,7 +26,7 @@ ms.locfileid: "55900347"
         <div class="cardPadding" style="padding-bottom:10px;">
             <div class="card" style="padding-bottom:10px;">
                 <div class="cardText" style="padding-left:0px;">
-Qualquer alteração em processos de negócios ou plataformas de tecnologia apresenta. Equipes de governança de nuvem, cujos membros muitas vezes são conhecidos como responsáveis da nuvem, ficam encarregadas de atenuar esses riscos com interrupção mínima para os esforços de adoção ou inovação.<br/><br/>O modelo de governança do CAF orienta essas decisões (independentemente da plataforma de nuvem escolhida) focando no <a href="#corporate-policy">desenvolvimento de política corporativa</a> e nas <a href="#disciplines-of-cloud-governance">Disciplinas de Governança de Nuvem</a>. <a href="#actionable-journeys">Guias de design acionáveis</a> demonstram esse modelo usando os serviços do Azure. Este artigo serve como uma página de aterrissagem para as cinco disciplinas do modelo de governança CAF.
+Qualquer alteração em processos de negócios ou plataformas de tecnologia apresenta. Equipes de governança de nuvem, cujos membros muitas vezes são conhecidos como responsáveis da nuvem, ficam encarregadas de atenuar esses riscos com interrupção mínima para os esforços de adoção ou inovação.<br/><br/>O modelo de governança CAF orienta essas decisões (independentemente da plataforma de nuvem escolhido), concentrando-se no desenvolvimento de políticas corporativas e <a href="#disciplines-of-cloud-governance">disciplinas de governança de nuvem</a>. <a href="./journeys/overview.md">Percursos acionáveis</a> demonstrar esse modelo usando os serviços do Azure. Este artigo serve como uma página de aterrissagem para as cinco disciplinas do modelo de governança CAF.
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@ Qualquer alteração em processos de negócios ou plataformas de tecnologia apre
                     <div class="cardText" style="padding-left:0px;">
 <img src="../_images/operational-transformation-govern-highres.png" alt="Diagram of the CAF governance model: Corporate policy and governance disciplines">
 <br>
-<i>Figura 1. Visual de política corporativa e as Cinco disciplinas de Governança de nuvem</i>
+<i>Figura 1. Diagrama de política corporativa e disciplinas cinco de governança de nuvem</i>
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@ Qualquer alteração em processos de negócios ou plataformas de tecnologia apre
 
 ## <a name="disciplines-of-cloud-governance"></a>Cinco disciplinas da governança de nuvem
 
-Em cada provedor de nuvem, há disciplinas de governança de nuvem comuns que podem servir como um guia para ajudar a informar as políticas e alinhar cadeias de ferramentas. Esses disciplinas orientam as decisões sobre o nível adequado de automação e a imposição de política corporativa entre provedores na nuvem.
+Em cada provedor de nuvem, há disciplinas de governança comum que podem servir como um guia para ajudar a informar as políticas e alinhar cadeias de ferramentas. Esses disciplinas orientam as decisões sobre o nível adequado de automação e a imposição de política corporativa entre provedores na nuvem.
 
 <!-- markdownlint-disable MD033 -->
 

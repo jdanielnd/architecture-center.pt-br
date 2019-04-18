@@ -6,12 +6,12 @@ ms.date: 04/11/2018
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
-ms.openlocfilehash: 66f1431f45a0c9accf3a8227fa8cbb5966568372
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: a1fc28737b194fe69e2ae094bd996d97363eb29c
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58248007"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59641103"
 ---
 # <a name="migrate-an-azure-cloud-services-application-to-azure-service-fabric"></a>Migrar um aplicativo dos Serviços de Nuvem do Azure para o Azure Service Fabric 
 
@@ -26,7 +26,6 @@ Antes de ler este artigo, será útil entender os conceitos básicos de Service 
 - [Visão geral do Azure Service Fabric][sf-overview]
 - [Por que usar uma abordagem de microsserviço para construir aplicativos?][sf-why-microservices]
 
-
 ## <a name="about-the-surveys-application"></a>Sobre o aplicativo Surveys
 
 Em 2012, o grupo de padrões e práticas criou um aplicativo chamado Surveys, para um catálogo chamado [Desenvolvimento de aplicativos multilocatários para a nuvem][tailspin-book]. O catálogo descreve uma empresa fictícia chamada Tailspin que projeta e implementa o aplicativo Surveys.
@@ -35,8 +34,8 @@ O Surveys é um aplicativo multilocatário que permite que os clientes criem pes
 
 Agora a Tailspin deseja mover o aplicativo de Surveys para uma arquitetura de microsserviços, usando o Service Fabric em execução no Azure. Como o aplicativo já estava implantado como aplicativo de Serviços de Nuvem, a Tailspin adota uma abordagem de várias fases:
 
-1.  Portar os serviços de nuvem para o Service Fabric, enquanto minimiza as alterações do aplicativo.
-2.  Otimizar o aplicativo de Service Fabric movendo para uma arquitetura de microsserviços.
+1. Portar os serviços de nuvem para o Service Fabric, enquanto minimiza as alterações do aplicativo.
+2. Otimizar o aplicativo de Service Fabric movendo para uma arquitetura de microsserviços.
 
 Este artigo descreve a primeira fase. Um artigo posterior descreverá a segunda fase. Em um projeto do mundo real, é provável que os dois estágios sobreponham-se. Ao portar para o Service Fabric, você também precisaria começar a refazer a arquitetura do aplicativo em microsserviços. Mais tarde, você pode refinar a arquitetura ainda mais, talvez dividindo os serviços de alta granularidade em serviços menores.  
 
@@ -87,7 +86,6 @@ A tabela a seguir resume algumas das diferenças importantes entre os Serviços 
 | Dimensionamento automático | [Serviço interno][cloud-service-autoscale] | Conjuntos de Dimensionamento de VM para dimensionamento automático |
 | Depurando | Emulador local | Cluster local |
 
-
 \*Os serviços com estado usam [coleções confiáveis][sf-reliable-collections] para armazenar o estado entre réplicas, para que todas as leituras sejam locais aos nós no cluster. As gravações são replicadas em nós para confiabilidade. Os serviços sem estado podem ter estado externo, usando um banco de dados ou outro armazenamento externo.
 
 ** Funções de trabalho também podem hospedar automaticamente a ASP.NET Web API usando o OWIN.
@@ -123,7 +121,6 @@ Conforme mencionado, o objetivo dessa fase foi migrar para o Service Fabric com 
 ![](./images/tailspin02.png)
 
 Intencionalmente, essa arquitetura é muito semelhante ao aplicativo original. No entanto, o diagrama oculta algumas diferenças importantes. No restante deste artigo, vamos explorar essas diferenças. 
-
 
 ## <a name="converting-the-cloud-service-roles-to-services"></a>Converter as funções de serviço de nuvem para serviços
 
@@ -216,7 +213,6 @@ Para dar suporte a configurações diferentes para vários ambientes, use a segu
 2. No manifesto do aplicativo, defina uma substituição para a configuração.
 3. Coloque configurações específicas do ambiente em arquivos de parâmetro do aplicativo.
 
-
 ## <a name="deploying-the-application"></a>Implantação do aplicativo
 
 Enquanto os Serviços de Nuvem do Azure são um serviço gerenciado, o Service Fabric é um tempo de execução. Você pode criar clusters do Service Fabric em muitos ambientes, incluindo no Azure e no local. Neste artigo, vamos nos concentrar na implantação no Azure. 
@@ -265,8 +261,8 @@ O diagrama a seguir mostra um cluster que separa os serviços de front-end e de 
 
 Para implementar essa abordagem:
 
-1.  Quando você criar o cluster, defina dois ou mais tipos de nó. 
-2.  Para cada serviço, use [restrições de posicionamento][sf-placement-constraints] para atribuir o serviço a um tipo de nó.
+1. Quando você criar o cluster, defina dois ou mais tipos de nó. 
+2. Para cada serviço, use [restrições de posicionamento][sf-placement-constraints] para atribuir o serviço a um tipo de nó.
 
 Quando você implanta no Azure, cada tipo de nó é implantado em um conjunto separado de dimensionamento de VM. O cluster do Service Fabric abrange todos os tipos de nó. Para obter mais informações, consulte [A relação entre os tipos de nó do Service Fabric e os conjuntos de escala da máquina virtual][sf-node-types].
 
@@ -282,7 +278,6 @@ Você pode expandir o aplicativo adicionando VMs ao cluster. Os conjuntos de dim
 
 Enquanto o cluster está em execução, você deve coletar logs de todos os nós em um local central. Para saber mais, veja [Coletar logs usando o Diagnóstico do Azure][sf-logs].   
 
-
 ## <a name="conclusion"></a>Conclusão
 
 O processo de portar o aplicativo Surveys para o Service Fabric foi bastante simples. Para resumir, fizemos o seguinte:
@@ -293,7 +288,7 @@ O processo de portar o aplicativo Surveys para o Service Fabric foi bastante sim
 
 Além disso, a implantação foi alterada de Serviços de Nuvem para cluster do Service Fabric em execução em um conjunto de dimensionamento de VM.
 
-## <a name="next-steps"></a>Próximas etapas
+## <a name="next-steps"></a>Próximos passos
 
 Agora que o aplicativo Surveys foi movido com êxito, a Tailspin quer aproveitar os recursos do Service Fabric, como implantação de serviço independente e controle de versão. Saiba como a Tailspin decompôs esses serviços a uma arquitetura mais granular para aproveitar esses recursos do Service Fabric em [Refatorar um Aplicativo Azure Service Fabric migrado a partir dos Serviços de Nuvem do Azure][refactor-surveys]
 

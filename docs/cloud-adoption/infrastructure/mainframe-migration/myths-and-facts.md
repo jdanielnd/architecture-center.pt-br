@@ -3,12 +3,12 @@ title: 'Migração de mainframe: Mitos e fatos'
 description: Migre aplicativos de ambientes de mainframe no Azure, uma infraestrutura escalonável, altamente disponível e comprovada para sistemas que atualmente executam em mainframes.
 author: njray
 ms.date: 12/27/2018
-ms.openlocfilehash: bcad01ec044d2d802b055e328a9496aae7b33311
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: e56f5b1b7e502ac727b28e583105bdee1c9cecd8
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58241537"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640321"
 ---
 # <a name="mainframe-myths-and-facts"></a>Mitos e fatos a respeito de mainframe
 
@@ -32,7 +32,7 @@ Os novos sistemas baseados na Intel de núcleo denso têm tanta capacidade de co
 
 ## <a name="myth-the-cloud-cannot-accommodate-mission-critical-applications-for-large-companies-such-as-financial-institutions"></a>Mito: A nuvem não pode acomodar aplicativos de missão crítica para grandes empresas, como instituições financeiras
 
-Embora possa haver algumas instâncias isoladas onde não bastarão soluções de nuvem, isso é normalmente porque os algoritmos de aplicativo não podem ser distribuídos. Alguns desses exemplos são as exceções, não a regra.
+Embora possa haver algumas instâncias isoladas onde não bastarão soluções de nuvem, é normalmente porque os algoritmos de aplicativo não podem ser distribuídos. Alguns desses exemplos são as exceções, não a regra.
 
 ## <a name="summary"></a>Resumo
 

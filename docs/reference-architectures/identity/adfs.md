@@ -8,12 +8,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18, identity
-ms.openlocfilehash: 22a2a2042c85e70d0d5a523c9ecf72395a9e774c
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 873b6a86da14e00d0a537f910d10922444cc1ded
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58244387"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640729"
 ---
 # <a name="extend-active-directory-federation-services-ad-fs-to-azure"></a>Estender o Serviços de Federação do Active Directory (AD FS) para o Azure
 
@@ -126,7 +126,7 @@ Publique os aplicativos Web da organização e disponibilize-os a parceiros exte
 
 O AD FS dá suporte para aumento e transformação de token. O Azure Active Directory não oferece esse recurso. Com o AD FS, ao configurar as relações de confiança, você pode:
 
-- Configurar transformações de declaração para regras de autorização. Por exemplo, você pode mapear a segurança do grupo de uma representação usada por uma organização que não seja parceira da Microsoft para algo que o Active Directory DS possa autorizar em sua organização.
+- Configurar transformações de declaração para regras de autorização. Por exemplo, você pode mapear a segurança do grupo de uma representação usada por uma organização de parceiro não são da Microsoft para algo que o Active Directory DS possa autorizar em sua organização.
 - Transforme declarações de um formato para outro. Por exemplo, você poderá mapear de SAML 2.0 para SAML 1.1 se seu aplicativo somente der suporte para declarações SAML 1.1.
 
 ### <a name="ad-fs-monitoring"></a>Monitoramento do AD FS

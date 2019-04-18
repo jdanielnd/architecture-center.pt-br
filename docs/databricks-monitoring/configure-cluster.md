@@ -3,18 +3,18 @@ title: Configurar o Azure Databricks para enviar métricas para o Azure Monitor
 description: Uma biblioteca de scala para habilitar o monitoramento de métricas e registro em log dados no Azure Log Analytics
 author: petertaylor9999
 ms.date: 03/26/2019
-ms.openlocfilehash: af6b6433f87964ac60c179ecf498e54129344126
-ms.sourcegitcommit: 9854bd27fb5cf92041bbfb743d43045cd3552a69
+ms.openlocfilehash: f2fc1fd19da661b74ddf032dd1d5153ce575345c
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/27/2019
-ms.locfileid: "58503365"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639879"
 ---
 <!-- markdownlint-disable MD040 -->
 
 # <a name="configure-azure-databricks-to-send-metrics-to-azure-monitor"></a>Configurar o Azure Databricks para enviar métricas para o Azure Monitor
 
-Este artigo mostra como configurar um cluster do Databricks do Azure para enviar métricas para um [espaço de trabalho do Log Analytics](/azure/azure-monitor/platform/manage-access). Ele usa o [biblioteca de monitoramento do Azure Databricks](https://github.com/mspnp/spark-monitoring), que está disponível no GitHub. Compreensão do Java, Scala e Maven são recomendadas como prerequisistes.
+Este artigo mostra como configurar um cluster do Databricks do Azure para enviar métricas para um [espaço de trabalho do Log Analytics](/azure/azure-monitor/platform/manage-access). Ele usa o [biblioteca de monitoramento do Azure Databricks](https://github.com/mspnp/spark-monitoring), que está disponível no GitHub. Compreensão do Java, Scala e Maven são recomendadas como pré-requisitos.
 
 ## <a name="about-the-azure-databricks-monitoring-library"></a>Sobre o Azure Databricks biblioteca de monitoramento
 
@@ -43,7 +43,7 @@ O **POM. XML** arquivo é o principal arquivo de build do Maven para o projeto i
 Para começar, implante os seguintes recursos do Azure:
 
 - Um espaço de trabalho do Databricks do Azure. Confira [Início Rápido: Executar um trabalho do Spark no Azure Databricks usando o portal do Azure](/azure/azure-databricks/quickstart-create-databricks-workspace-portal).
-- Um workspace do Log Analytics. Ver [criar um espaço de trabalho do Log Analytics no portal do Azure](/azure/azure-monitor/learn/quick-create-workspace).
+- Um espaço de trabalho do Log Analytics. Ver [criar um espaço de trabalho do Log Analytics no portal do Azure](/azure/azure-monitor/learn/quick-create-workspace).
 
 Em seguida, instale o [CLI do Azure Databricks](https://docs.databricks.com/user-guide/dev-tools/databricks-cli.html#install-the-cli). Um token de acesso pessoal do Azure Databricks é necessário para usar a CLI. Para obter instruções, consulte [gerar um token](https://docs.azuredatabricks.net/api/latest/authentication.html#token-management).
 
@@ -63,17 +63,17 @@ Para compilar a biblioteca de monitoramento do Azure Databricks, execute as segu
 
 1. Importar o arquivo de modelo de objeto do projeto Maven, _POM. XML_, localizado na **/src** pasta em seu projeto. Isso vai importar três projetos:
 
-    - trabalhos do Spark
-    - ouvintes do Spark
-    - Spark de ouvintes de loganalytics
+    - spark-jobs
+    - spark-listeners
+    - spark-listeners-loganalytics
 
 1. Execute o Maven **pacote** fase de compilação no seu IDE para compilar os arquivos JAR para cada um desses projetos Java:
 
     |Project| Arquivo JAR|
     |-------|---------|
-    |trabalhos do Spark|Spark-trabalhos-1.0-snapshot. jar|
-    |ouvintes do Spark|Spark-ouvintes-1.0-snapshot. jar|
-    |Spark de ouvintes de loganalytics|Spark-ouvintes-loganalytics-1.0-snapshot. jar|
+    |spark-jobs|spark-jobs-1.0-SNAPSHOT.jar|
+    |spark-listeners|spark-listeners-1.0-SNAPSHOT.jar|
+    |spark-listeners-loganalytics|spark-listeners-loganalytics-1.0-SNAPSHOT.jar|
 
 1. Usar a CLI do Databricks do Azure para criar um diretório chamado **dbfs: / databricks/monitoramento-preparo**:  
 
@@ -144,7 +144,7 @@ Além disso, a biblioteca de fluxos de eventos no nível do Apache Spark e Spark
 
 Para obter mais informações sobre como exibir logs, consulte [exibindo e analisando dados de log no Azure Monitor](/azure/azure-monitor/log-query/portals).
 
-## <a name="next-steps"></a>Próximas etapas
+## <a name="next-steps"></a>Próximos passos
 
 Este artigo descreveu como configurar o cluster para enviar métricas para o Azure Monitor. O próximo artigo mostra como usar a biblioteca de monitoramento do Azure Databricks para enviar logs e métricas de aplicativo.
 

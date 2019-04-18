@@ -1,16 +1,16 @@
 ---
-title: Enviar logs de aplicativo do Azure Databricks para o Azure Monitor
+title: Enviar logs do aplicativo do Azure Databricks para o Azure Monitor
 description: Como enviar logs personalizados e métricas do Azure Databricks para o Azure Monitor
 author: petertaylor9999
 ms.date: 03/26/2019
-ms.openlocfilehash: 49c631687fb3e3bbd807ffbbb49d9c5f6526bfb4
-ms.sourcegitcommit: 9854bd27fb5cf92041bbfb743d43045cd3552a69
+ms.openlocfilehash: ea67122d7871663e8aaf42b7af0043492f63b6b1
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/27/2019
-ms.locfileid: "58503364"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639172"
 ---
-# <a name="send-azure-databricks-application-logs-to-azure-monitor"></a>Enviar logs de aplicativo do Azure Databricks para o Azure Monitor
+# <a name="send-azure-databricks-application-logs-to-azure-monitor"></a>Enviar logs do aplicativo do Azure Databricks para o Azure Monitor
 
 Este artigo mostra como enviar métricas e logs de aplicativo do Azure Databricks para um [espaço de trabalho do Log Analytics](/azure/azure-monitor/platform/manage-access). Ele usa o [biblioteca de monitoramento do Azure Databricks](https://github.com/mspnp/spark-monitoring), que está disponível no GitHub.
 
@@ -92,7 +92,7 @@ Para enviar os logs de aplicativo do Azure Databricks ao Azure Log Analytics usa
     }
     ```
 
-1. Adicione mensagens de log do Apache Spark no nível apropriado em seu código conforme necessário. Por exemplo, use o `logDebug` método para enviar um meesage de log de depuração. Para obter mais informações, consulte [registro em log] [ spark-logging] na documentação do Spark.
+1. Adicione mensagens de log do Apache Spark no nível apropriado em seu código conforme necessário. Por exemplo, use o `logDebug` método para enviar uma mensagem de log de depuração. Para obter mais informações, consulte [registro em log] [ spark-logging] na documentação do Spark.
 
     ```Scala
     logTrace("Trace message")
@@ -137,7 +137,7 @@ SparkMetric_CL | where name_s contains "rowcounter" | limit 50
 Implante o painel de controle que acompanha esta biblioteca de código para solucionar problemas de desempenho em suas cargas de trabalho do Databricks do Azure de produção de monitoramento de desempenho.
 
 > [!div class="nextstepaction"]
-> [Use painéis para visualizar as métricas do Azure Databricks](./dashboards.md)
+> [Usar painéis para visualizar métricas do Azure Databricks](./dashboards.md)
 
 <!-- links -->
 

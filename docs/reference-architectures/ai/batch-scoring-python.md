@@ -7,12 +7,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat-ai, AI
-ms.openlocfilehash: b7607984bcf2c4bd046421aeb6e9d52dd8e7c18e
-ms.sourcegitcommit: 1a3cc91530d56731029ea091db1f15d41ac056af
+ms.openlocfilehash: 9341b9e4c17025e9623902a6202076c352b237b9
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/03/2019
-ms.locfileid: "58887736"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640534"
 ---
 # <a name="batch-scoring-of-python-machine-learning-models-on-azure"></a>Lote de pontuação de modelos de aprendizado de máquina do Python no Azure
 
@@ -25,11 +25,12 @@ Há uma implantação de referência para essa arquitetura de referência dispon
 **Cenário**: A solução monitora a operação de um grande número de dispositivos em uma configuração de IoT, em que cada dispositivo envia leituras do sensor continuamente. Assume-se que cada dispositivo é associado com modelos de detecção de anomalias pré-treinados que precisam ser usados para prever se uma série de medidas, agregadas em um intervalo de tempo predefinido, correspondem a uma anomalia ou não. Em cenários do mundo real, isso seria um fluxo de leituras de sensor que precisariam ser filtrados e agregados antes de serem usados em treinamento ou pontuação em tempo real. Para manter a simplicidade, essa solução usa o mesmo arquivo de dados na execução de trabalhos de pontuação.
 
 Essa arquitetura de referência foi projetada para cargas de trabalho que são disparadas de forma agendada. O processamento envolve as seguintes etapas:
-1.  Envie leituras do sensor para ingestão para os Hubs de Eventos do Azure.
-2.  Execute o processamento do fluxo e armazene os dados brutos.
-3.  Envie os dados para um cluster de Machine Learning que esteja pronto para começar a fazer o trabalho. Cada nó no cluster executa um trabalho de pontuação para um sensor específico. 
-4.  Execute o pipeline de pontuação, que executa os trabalhos de pontuação em paralelo usando scripts Python de Machine Learning. O pipeline é criado, publicado e agendado para ser executado em um intervalo de tempo predefinido.
-5.  Gere previsões e armazene-as no armazenamento de Blobs para consumo posterior.
+
+1. Envie leituras do sensor para ingestão para os Hubs de Eventos do Azure.
+2. Execute o processamento do fluxo e armazene os dados brutos.
+3. Envie os dados para um cluster de Machine Learning que esteja pronto para começar a fazer o trabalho. Cada nó no cluster executa um trabalho de pontuação para um sensor específico. 
+4. Execute o pipeline de pontuação, que executa os trabalhos de pontuação em paralelo usando scripts Python de Machine Learning. O pipeline é criado, publicado e agendado para ser executado em um intervalo de tempo predefinido.
+5. Gere previsões e armazene-as no armazenamento de Blobs para consumo posterior.
 
 ## <a name="architecture"></a>Arquitetura
 
@@ -66,7 +67,7 @@ Por questões de conveniência neste cenário, uma tarefa de pontuação é envi
 ## <a name="management-considerations"></a>Considerações de gerenciamento
 
 - **Monitorar trabalhos**. É importante monitorar o progresso de trabalhos em execução, mas pode ser um desafio monitorá-los em um cluster de nós ativos. Para inspecionar o estado de nós no cluster, use o [Portal do Azure][portal] para gerenciar o [workspace do machine learning][ml-workspace]. Se um nó estiver inativo ou se um trabalho falhar, os logs de erro serão salvos no armazenamento de blobs e também poderão ser acessados na seção Pipelines. Para um monitoramento mais avançado, conecte os logs ao [Application Insights][app-insights], ou execute processos separados para sondar o estado do cluster e de seus trabalhos.
--   **Registro em log**. Os logs do Serviço Machine Learning registram todos os stdout/stderr da conta do Armazenamento do Azure associada. Para navegar facilmente nos arquivos de log, use uma ferramenta de navegação de armazenamento, como o [Gerenciador de Armazenamento do Azure][explorer].
+- **Registro em log**. Os logs do Serviço Machine Learning registram todos os stdout/stderr da conta do Armazenamento do Azure associada. Para navegar facilmente nos arquivos de log, use uma ferramenta de navegação de armazenamento, como o [Gerenciador de Armazenamento do Azure][explorer].
 
 ## <a name="cost-considerations"></a>Considerações de custo
 
@@ -75,7 +76,6 @@ Os componentes mais caros usados nesta arquitetura de referência são os recurs
 Para trabalho que não exige processamento imediato, configure a fórmula de dimensionamento automático a fim de definir o estado padrão (mínimo) como um cluster sem nós. Com essa configuração, o cluster começa com zero nós e só pode ser escalado verticalmente quando detecta os trabalhos na fila. Se o processo de pontuação do lote acontecer apenas algumas vezes por dia, essa configuração permitirá uma economia considerável.
 
 Talvez o dimensionamento automático não seja apropriado para trabalhos em lote que aconteçam muito próximos uns dos outros. O tempo de ativação e desativação de um cluster também incorre em um custo, portanto, se uma carga de trabalho do lote começar apenas alguns minutos após o término do trabalho anterior, talvez seja mais econômico manter o cluster em execução entre os trabalhos. Isso depende da frequência de agendamento dos processos de pontuação, com alta frequência (a cada hora, por exemplo) ou com baixa frequência (uma vez por mês, por exemplo).
-
 
 ## <a name="deployment"></a>Implantação
 

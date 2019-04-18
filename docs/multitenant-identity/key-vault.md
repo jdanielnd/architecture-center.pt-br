@@ -8,12 +8,12 @@ ms.service: architecture-center
 ms.subservice: reference-architecture
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: client-assertion
-ms.openlocfilehash: 6aa8d33da0b2fd41fdc037bac28bca9f7ff09907
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 170a88863fef4b97e137d7fb047a9168d6463e01
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58249411"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639947"
 ---
 # <a name="use-azure-key-vault-to-protect-application-secrets"></a>Usar o Azure Key Vault para proteger os segredos do aplicativo
 
@@ -103,6 +103,7 @@ Agora atribua esse usuário como o proprietário da assinatura.
     ```powershell
     .\Setup-KeyVault.ps1 -Subject <<subject>>
     ```
+
     Para o parâmetro `Subject` , digite qualquer nome, como "surveysapp". O script gera um certificado autoassinado e o armazena no repositório de certificados "Usuário Atual/Pessoal". A saída do script é um fragmento JSON. Copie esse valor.
 
 2. No [portal do Azure][azure-portal], alterne para o diretório no qual o aplicativo Surveys é registrado selecionando a sua conta no canto superior direito do portal.
@@ -174,6 +175,7 @@ Agora atribua esse usuário como o proprietário da assinatura.
     ```powershell
     .\Setup-KeyVault.ps1 -KeyVaultName <<key vault name> -KeyName Redis--Configuration -KeyValue "<<Redis DNS name>>.redis.cache.windows.net,password=<<Redis access key>>,ssl=true"
     ```
+
     onde
 
    * nome do cofre da chave = o nome que você deu ao cofre da chave na etapa anterior.
@@ -214,6 +216,7 @@ Agora atribua esse usuário como o proprietário da assinatura.
     //    config["AzureAd:ClientId"],
     //    config["AzureAd:ClientSecret"]);
     ```
+
 3. No Tailspin.Surveys.Web/Startup.cs, localize o código que registra o `ICredentialService`. Remova a marca de comentário da linha que usa `CertificateCredentialService` e comente a linha que usa `ClientCredentialService`:
 
     ```csharp

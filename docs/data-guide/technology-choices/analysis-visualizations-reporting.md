@@ -7,12 +7,12 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: data-analytics
-ms.openlocfilehash: 72b889e2fe0d862ab1ff280cea76c2880b0fadc4
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: bfdfeefe36dd44478f407008e2f9f3749f7a70d6
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58245947"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639743"
 ---
 # <a name="choosing-a-data-analytics-technology-in-azure"></a>Escolhendo uma tecnologia de análise de dados no Azure
 

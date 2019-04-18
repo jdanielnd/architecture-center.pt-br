@@ -1,17 +1,17 @@
 ---
 title: Implantar condicionalmente um recurso em um modelo do Azure Resource Manager
-description: Descreve como estender a funcionalidade de modelos do Azure Resource Manager para implantar condicionalmente um recurso dependendo do valor de um parâmetro.
+description: Descreve como estender a funcionalidade dos modelos do Azure Resource Manager para implantar condicionalmente um recurso, dependendo do valor de um parâmetro.
 author: petertay
 ms.date: 10/30/2018
 ms.topic: article
 ms.service: architecture-center
 ms.subservice: reference-architecture
-ms.openlocfilehash: f3d22c6437cdabcd93a781ecf7c99db5a570d7cf
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 437490b2998cfbcde4df13570831e34a776e7afe
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58243797"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640202"
 ---
 # <a name="conditionally-deploy-a-resource-in-an-azure-resource-manager-template"></a>Implantar condicionalmente um recurso em um modelo do Azure Resource Manager
 

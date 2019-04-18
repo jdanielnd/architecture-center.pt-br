@@ -8,10 +8,10 @@ ms.date: 02/11/2019
 description: Grandes empresas – práticas recomendadas explicada
 author: BrianBlanchard
 ms.openlocfilehash: 2d52797f1c3541fab1c97d97d0438210d2e66f79
-ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/08/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59068983"
 ---
 # <a name="large-enterprise-best-practice-explained"></a>Empresas de grande porte: Melhor prática explicada
@@ -102,12 +102,12 @@ Se qualquer um dos padrões escolhidos nessa jornada de governança não se alin
 
 - [Padrões de criptografia](../../../decision-guides/encryption/overview.md)
 - [Padrões de identidade](../../../decision-guides/identity/overview.md)
-- [Registro em log e padrões de emissão de relatórios](../../../decision-guides/log-and-report/overview.md)
+- [Padrões de registro em log e relatórios](../../../decision-guides/log-and-report/overview.md)
 - [Padrões de imposição de política](../../../decision-guides/policy-enforcement/overview.md)
 - [Padrões de consistência de recursos](../../../decision-guides/resource-consistency/overview.md)
 - [Padrões de marcação de recursos](../../../decision-guides/resource-tagging/overview.md)
-- [Padrões de rede definida pelo software](../../../decision-guides/software-defined-network/overview.md)
-- [Padrões de Design de assinatura](../../../decision-guides/subscriptions/overview.md)
+- [Padrões de rede definida por software](../../../decision-guides/software-defined-network/overview.md)
+- [Padrões de design de assinatura](../../../decision-guides/subscriptions/overview.md)
 
 ## <a name="next-steps"></a>Próximas etapas
 

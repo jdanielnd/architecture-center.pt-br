@@ -8,12 +8,12 @@ ms.topic: checklist
 ms.service: architecture-center
 ms.subservice: cloud-design-principles
 ms.custom: checklist
-ms.openlocfilehash: 1a000c811cce57cc9b1fcda84d0eb7e2a1312aca
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: b08884d2a39550b56b4c1b52a418f6607eda00fe
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58243377"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640712"
 ---
 # <a name="devops-checklist"></a>Lista de verificação de DevOps
 
@@ -119,7 +119,7 @@ Após o lançamento inicial, você deve executar testes de capacidade e de desem
 
 Contêineres também criam uma camada de abstração entre o aplicativo e o sistema operacional subjacente, o que proporciona consistência entre ambientes. Essa abstração também pode isolar um contêiner de outros processos ou aplicativos em execução em um host.
 
-**Implemente resiliência e autorrecuperação.** A resiliência é a capacidade de um aplicativo se recuperar de falhas. Estratégias para garantir resiliência incluem fazer novas tentativas em caso de falhas transitórias e fazer failover para uma instância secundária ou até mesmo outra região. Para obter mais informações, consulte [Desenvolvimento de aplicativos resilientes para o Azure][resiliency]. Instrumente seus aplicativos para que os problemas sejam reportados imediatamente e você possa gerenciar interrupções ou outras falhas de sistema.
+**Implemente resiliência e autorrecuperação.** A resiliência é a capacidade de um aplicativo se recuperar de falhas. Estratégias para garantir resiliência incluem fazer novas tentativas em caso de falhas transitórias e fazer failover para uma instância secundária ou até mesmo outra região. Para obter mais informações, consulte [desenvolvendo aplicativos do Azure confiáveis](../reliability/index.md) . Instrumente seus aplicativos para que os problemas sejam reportados imediatamente e você possa gerenciar interrupções ou outras falhas de sistema.
 
 **Tenha um manual de operações.** Um manual de operações ou *runbook* documenta os procedimentos e as informações de gerenciamento necessárias para a equipe de operações manter um sistema. Documente também quaisquer cenários de operações e planos de mitigação que possam surgir durante uma falha ou outra interrupção do seu serviço. Crie essa documentação durante o processo de desenvolvimento e mantenha-a atualizada daí em diante. Este é um documento dinâmico e deve ser revisado, testado e aprimorado regularmente.
 
@@ -158,7 +158,6 @@ Para obter mais informações sobre DevOps, consulte [Quais as novidades no DevO
 [feature-toggles]: https://www.martinfowler.com/articles/feature-toggles.html
 [oms]: https://www.microsoft.com/cloud-platform/operations-management-suite
 [rbac]: /azure/active-directory/role-based-access-control-what-is
-[resiliency]: ../resiliency/index.md
 [resource-manager]: /azure/azure-resource-manager/
 [trunk-based]: https://trunkbaseddevelopment.com/
 [what-is-devops]: https://www.visualstudio.com/learn/what-is-devops/

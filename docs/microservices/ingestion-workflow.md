@@ -7,18 +7,21 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: microservices
-ms.openlocfilehash: aa5c2b4357ed53da9bebf4795fcbefb89afe0c78
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
+ms.openlocfilehash: a36d2b4c7bfd2b26d5e1de44ddd8005fbce4bdd2
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54482552"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640848"
 ---
 # <a name="designing-microservices-ingestion-and-workflow"></a>Como criar microsserviços: Ingestão de dados e fluxo de trabalho
 
 Os microsserviços normalmente têm um fluxo de trabalho que abrange vários serviços para uma única transação. O fluxo de trabalho deve ser confiável; ele não pode perder transações nem deixá-las em um estado parcialmente concluído. Além disso, o controle da taxa de ingestão de solicitações de entrada é algo crítico. Com muitos serviços pequenos comunicando-se entre si, um grande volume de solicitações de entrada pode sobrecarregar a comunicação entre os serviços.
 
 ![Diagrama do fluxo de trabalho de ingestão](./images/ingestion-workflow.png)
+
+> [!NOTE]
+> Este artigo se baseia em uma implementação de referência de microsserviços chamada a [aplicativo de entrega por Drone](./design/index.md).
 
 ## <a name="the-drone-delivery-workflow"></a>O fluxo de trabalho da entrega por drone
 
@@ -83,7 +86,7 @@ Em uma partição, o Host do Processador de Eventos espera que `ProcessEventsAsy
 > [!NOTE]
 > O Host do Processador não *espera* no sentido de bloquear um thread. O método `ProcessEventsAsync` é assíncrono, portanto o Host do Processador poderá executar outras tarefas enquanto o método estiver sendo concluído. No entanto, ele não entregará outro lote de mensagens para essa partição até o método ser retornado.
 
-No aplicativo de entrega por drone, um lote de mensagens pode ser processado em paralelo. No entanto, esperar a conclusão de um lote inteiro ainda poderá causar um gargalo. A velocidade de processamento depende da mensagem mais lenta no lote. Qualquer variação de tempos de resposta pode criar uma espera longa, em que algumas respostas lentas retardam todo o sistema. Nossos testes de desempenho mostraram que não alcançamos nossa meta de produtividade usando essa abordagem. Isso *não* significa que você deva evitar usar o Host do Processador de Eventos. No entanto, para obter alta produtividade, evite tarefas de longa execução no método `ProcesssEventsAsync`. Processe cada lote rapidamente.
+No aplicativo de entrega por drone, um lote de mensagens pode ser processado em paralelo. No entanto, esperar a conclusão de um lote inteiro ainda poderá causar um gargalo. A velocidade de processamento depende da mensagem mais lenta no lote. Qualquer variação de tempos de resposta pode criar uma espera longa, em que algumas respostas lentas retardam todo o sistema. Nossos testes de desempenho mostraram que não alcançamos nossa meta de produtividade usando essa abordagem. Isso *não* significa que você deva evitar usar o Host do Processador de Eventos. No entanto, para obter alta produtividade, evite tarefas de longa execução no método `ProcessEventsAsync`. Processe cada lote rapidamente.
 
 ### <a name="iothub-react"></a>IoTHub React
 
@@ -176,7 +179,7 @@ Se a lógica das transações de compensação for complexa, considere a criaç�
 
 ![Diagrama mostrando o microsserviço de Supervisor](./images/supervisor.png)
 
-## <a name="idempotent-vs-non-idempotent-operations"></a>Operações idempotentes e não idempotentes
+## <a name="idempotent-versus-non-idempotent-operations"></a>Idempotente versus operações não idempotentes
 
 Para evitar a perda das solicitações, o serviço de Agendador deve assegurar que todas as mensagens sejam processadas pelo menos uma vez. Os Hubs de Eventos poderão assegurar a entrega pelo menos uma vez se o cliente realizar o ponto de verificação corretamente.
 
@@ -239,9 +242,6 @@ public async Task<IActionResult> Put([FromBody]Delivery delivery, string id)
 ```
 
 Espera-se que a maioria das solicitações criará uma nova entidade, portanto o método chamará de maneira otimista `CreateAsync` no objeto de repositório e, em seguida, tratará as exceções de recurso duplicado atualizando o recurso.
-
-> [!div class="nextstepaction"]
-> [Gateways de API](./gateway.md)
 
 <!-- links -->
 

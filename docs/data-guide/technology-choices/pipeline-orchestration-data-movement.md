@@ -6,12 +6,12 @@ ms.date: 02/12/2018
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
-ms.openlocfilehash: 76a101b76497ae2b2aacff973175bb0fe4703d9e
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 31f052cc22f039540c89759c55028c368be1d238
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58245867"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640780"
 ---
 # <a name="choosing-a-data-pipeline-orchestration-technology-in-azure"></a>Escolhendo uma tecnologia de orquestração do pipeline de dados no Azure
 
@@ -75,4 +75,3 @@ As tabelas a seguir resumem as principais diferenças em funcionalidades.
 | Escalar verticalmente | Sim | Não | Não  |
 | Expansão | Sim | Não  | Sim (com a adição de nós de trabalho ao cluster) |
 | Otimizado para Big Data | Sim | Não  | Sim |
-

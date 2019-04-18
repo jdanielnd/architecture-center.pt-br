@@ -8,12 +8,12 @@ ms.topic: best-practice
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: d99c63b9cb5f2ed7ffcd869b5b8ac7910b9dabe3
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
+ms.openlocfilehash: 170a38f6b8a6c107670561e63f236e43af948d7d
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54487127"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59641035"
 ---
 # <a name="retry-guidance-for-specific-services"></a>Repetir as diretrizes para serviços específicos
 
@@ -169,7 +169,7 @@ O Cache Redis do Azure é um serviço de cache de baixa latência e acesso a dad
 
 A diretriz nesta seção se baseia em como usar o cliente StackExchange.Redis para acessar o cache. Uma lista de outros clientes adequados pode ser encontrada no [site do Redis](https://redis.io/clients), e eles podem ter mecanismos de repetição diferentes.
 
-Observe que o cliente StackExchange.Redis usa multiplexação por meio de uma única conexão. O uso recomendado é criar uma instância do cliente na inicialização do aplicativo e usar essa instância para todas as operações no cache. Por esse motivo, a conexão com o cache é feita apenas uma vez, e toda a orientação desta seção está relacionada à política de repetição para esta conexão inicial, e não para cada operação que acessa o cache.
+Observe que o cliente StackExchange.Redis usa multiplexação por meio de uma única conexão. O uso recomendado é criar uma instância do cliente na inicialização do aplicativo e usar essa instância para todas as operações no cache. Por esse motivo, a conexão para o cache é feita apenas uma vez, e todas as orientações nesta seção está relacionada à política de repetição para esta conexão inicial &mdash; e não para cada operação que acessa o cache.
 
 ### <a name="retry-mechanism"></a>Mecanismo de repetição
 
@@ -955,7 +955,7 @@ Considere as seguintes diretrizes ao acessar serviços de armazenamento do Azure
 
 - Use as políticas de repetição internas do namespace Microsoft.WindowsAzure.Storage.RetryPolicies onde elas forem apropriadas para suas necessidades. Na maioria dos casos, essas políticas serão suficientes.
 
-- Use a política **ExponentialRetry** em operações em lote, tarefas em segundo plano ou cenários não interativos. Nesses cenários, geralmente você pode permitir mais tempo para que o serviço se recupere — com uma chance consequentemente aumentada da operação ser bem-sucedida.
+- Use a política **ExponentialRetry** em operações em lote, tarefas em segundo plano ou cenários não interativos. Nesses cenários, geralmente você pode permitir mais tempo para que o serviço se recupere &mdash; com uma chance consequentemente aumentada da operação ser bem-sucedida.
 
 - Considere especificar a propriedade **MaximumExecutionTime** do parâmetro **RequestOptions** para limitar o tempo de execução total, mas leve em consideração o tipo e o tamanho da operação ao escolher um valor de tempo limite.
 
@@ -1123,7 +1123,7 @@ Veja a seguir os tipos comuns de intervalo de estratégias de repetição:
 
 ### <a name="transient-fault-handling-with-polly"></a>Falha transitória manipulada com a Polly
 
-[Polly][polly] é uma biblioteca para manipular programaticamente novas tentativas e estratégias de [disjuntor](../patterns/circuit-breaker.md). O projeto Polly é um membro da [Fundação .NET][dotnet-foundation]. Para serviços em que o cliente não oferece suporte a novas tentativas, a Polly é uma alternativa válida e evita a necessidade de escrever código de repetição personalizado, que pode ser difícil de implementar corretamente. A Polly também fornece uma maneira de rastrear erros, para que você possa fazer novas tentativas.
+[Polly] [ polly] é uma biblioteca para manipular programaticamente novas tentativas e [disjuntor](../patterns/circuit-breaker.md) estratégias. O projeto Polly é um membro da [Fundação .NET][dotnet-foundation]. Para serviços em que o cliente não oferece suporte a novas tentativas, a Polly é uma alternativa válida e evita a necessidade de escrever código de repetição personalizado, que pode ser difícil de implementar corretamente. A Polly também fornece uma maneira de rastrear erros, para que você possa fazer novas tentativas.
 
 ### <a name="more-information"></a>Mais informações
 

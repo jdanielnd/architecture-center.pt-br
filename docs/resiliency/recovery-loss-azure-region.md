@@ -7,16 +7,14 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-design-principles
 ms.custom: resiliency
-ms.openlocfilehash: 7f207bbc0bb0128126f9b828dc100d43553cb100
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: b58e8fa1cc4955f90e7171e17aaa70ac0cfb7b71
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58242707"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640559"
 ---
-[!INCLUDE [header](../_includes/header.md)]
-
-# <a name="azure-resiliency-technical-guidance-recovery-from-a-region-wide-service-disruption"></a>Orientações técnicas de resiliência do Azure: recuperação de uma interrupção de serviço em toda a região
+# <a name="recover-from-a-region-wide-service-disruption"></a>Recuperar de uma interrupção do serviço de toda a região
 
 O Azure é dividido fisicamente e logicamente em unidades chamadas de regiões. Uma região consiste em um ou mais datacenters nas proximidades.
 
@@ -121,7 +119,7 @@ Ao tentar executar seu serviço de nuvem em várias regiões do Azure, você dev
 
 ### <a name="service-bus"></a>Barramento de Serviço
 
-O Barramento de Serviço do Azure usa um namespace exclusivo que não abrange regiões do Azure. Portanto, o primeiro requisito é configurar os namespaces do barramento de serviço necessários na região alternativa. No entanto, também há considerações sobre a durabilidade das mensagens na fila. Há várias estratégias para replicar mensagens entre regiões do Azure. Para obter detalhes sobre essas estratégias de replicação e outras estratégias de recuperação de desastre, confira [Práticas recomendadas para isolar aplicativos contra interrupções e desastres do Barramento de Serviço](/azure/service-bus-messaging/service-bus-outages-disasters/). Para obter outras considerações sobre disponibilidade, confira [Barramento de Serviço (Disponibilidade)](recovery-local-failures.md#other-azure-platform-services).
+O Barramento de Serviço do Azure usa um namespace exclusivo que não abrange regiões do Azure. Portanto, o primeiro requisito é configurar os namespaces do barramento de serviço necessários na região alternativa. No entanto, também há considerações sobre a durabilidade das mensagens na fila. Há várias estratégias para replicar mensagens entre regiões do Azure. Para obter detalhes sobre essas estratégias de replicação e outras estratégias de recuperação de desastre, confira [Práticas recomendadas para isolar aplicativos contra interrupções e desastres do Barramento de Serviço](/azure/service-bus-messaging/service-bus-outages-disasters/).
 
 ### <a name="app-service"></a>Serviço de Aplicativo
 
@@ -129,7 +127,7 @@ Para migrar um aplicativo do Serviço de Aplicativo do Azure, como Aplicativos W
 
 ### <a name="hdinsight"></a>HDInsight
 
-Os dados associados ao HDInsight são armazenados por padrão no armazenamento de Blobs do Azure. O HDInsight requer que um cluster Hadoop processando trabalhos de MapReduce esteja colocalizado na mesma região da conta de armazenamento que contém os dados sendo analisados. Desde que você use o recurso de replicação geográfica disponível para o Armazenamento do Azure, você poderá acessar os dados na região secundária onde os dados foram replicados se, por algum motivo, a região primária não estiver mais disponível. Você pode criar um novo cluster Hadoop na região em que os dados foram replicados e continuar processando-os. Para obter outras considerações sobre disponibilidade, confira [HDInsight (Disponibilidade)](recovery-local-failures.md#other-azure-platform-services).
+Os dados associados ao HDInsight são armazenados por padrão no armazenamento de Blobs do Azure. O HDInsight requer que um cluster Hadoop processando trabalhos de MapReduce esteja colocalizado na mesma região da conta de armazenamento que contém os dados sendo analisados. Desde que você use o recurso de replicação geográfica disponível para o Armazenamento do Azure, você poderá acessar os dados na região secundária onde os dados foram replicados se, por algum motivo, a região primária não estiver mais disponível. Você pode criar um novo cluster Hadoop na região em que os dados foram replicados e continuar processando-os.
 
 ### <a name="sql-reporting"></a>Relatórios SQL
 

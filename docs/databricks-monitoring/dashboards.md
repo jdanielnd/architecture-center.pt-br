@@ -1,16 +1,16 @@
 ---
-title: Use painéis para visualizar as métricas do Azure Databricks
+title: Usar painéis para visualizar métricas do Azure Databricks
 description: Como implantar um painel do Grafana para monitorar o desempenho no Azure Databricks
 author: petertaylor9999
 ms.date: 03/26/2019
-ms.openlocfilehash: 36fcd93f6ca757e8e750d0fcbbdf0311c08560b0
-ms.sourcegitcommit: 1a3cc91530d56731029ea091db1f15d41ac056af
+ms.openlocfilehash: a84203a9188848e6363a80ac455332e8f6a73cda
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/03/2019
-ms.locfileid: "58887821"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640304"
 ---
-# <a name="use-dashboards-to-visualize-azure-databricks-metrics"></a>Use painéis para visualizar as métricas do Azure Databricks
+# <a name="use-dashboards-to-visualize-azure-databricks-metrics"></a>Usar painéis para visualizar métricas do Azure Databricks
 
 Este artigo mostra como configurar um painel do Grafana para monitorar trabalhos do Azure Databricks para problemas de desempenho.
 
@@ -20,7 +20,7 @@ Essa biblioteca ativa o log de métricas de serviço do Azure Databricks, bem co
 
 ![Captura de tela do painel](./_images/dashboard-screenshot.png)
 
-## <a name="prequisites"></a>Pré-requisitos
+## <a name="prerequisites"></a>Pré-requisitos
 
 Clone o [repositório Github](https://github.com/mspnp/spark-monitoring) e [siga as instruções de implantação](./configure-cluster.md) para criar e configurar o registro em log do Azure Monitor para a biblioteca do Azure Databricks enviar logs ao seu espaço de trabalho do Log Analytics do Azure.
 
@@ -31,7 +31,7 @@ Para implantar o espaço de trabalho do Log Analytics do Azure, siga estas etapa
 1. Navegue até o `/perftools/deployment/loganalytics` directory.
 1. Implantar o **logAnalyticsDeploy.json** modelo do Resource Manager. Para obter mais informações sobre como implantar modelos do Resource Manager, consulte [implantar recursos com modelos do Resource Manager e a CLI do Azure][rm-cli]. O modelo tem os seguintes parâmetros:
 
-    * **local**: A região em que o espaço de trabalho do Log Analytics e os painéis são implantados.
+    * **location**: A região em que o espaço de trabalho do Log Analytics e os painéis são implantados.
     * **serviceTier**: Tipo de preço do espaço de trabalho do trocador. Ver [aqui] [ sku] para obter uma lista de valores válidos.
     * **dataRetention** (opcional): O número de dias de dados de log é mantido no espaço de trabalho do Log Analytics. O valor padrão é de 30 dias. Se o tipo de preço é `Free`, a retenção de dados deve ser 7 dias.
     * **WorkspaceName** (opcional): Um nome para o espaço de trabalho. Se não for especificado, o modelo gera um nome.
@@ -40,7 +40,7 @@ Para implantar o espaço de trabalho do Log Analytics do Azure, siga estas etapa
     az group deployment create --resource-group <resource-group-name> --template-file logAnalyticsDeploy.json --parameters location='East US' serviceTier='Standalone'
     ```
 
-Este modelo cria o espaço de trabalho e também cria um conjunto de consultas predefinidas que são usadas pelo painel.
+Este modelo cria o espaço de trabalho e também cria um conjunto de consultas predefinidas que são usados pelo painel.
 
 ## <a name="deploy-grafana-in-a-virtual-machine"></a>Implantar o Grafana em uma máquina virtual
 
@@ -81,7 +81,7 @@ Em seguida, altere a senha de administrador do Grafana seguindo estas etapas:
 
 1. No portal do Azure, selecione a VM e clique em **visão geral**.
 1. Copie o endereço IP público.
-1. Abra um navegador da web e navegue até a seguinte URL: `http://<IP addresss>:3000`.
+1. Abra um navegador da web e navegue até a seguinte URL: `http://<IP address>:3000`.
 1. O log do Grafana na tela, insira **admin** para o nome de usuário e use a senha do Grafana das etapas anteriores.
 1. Depois de conectado, selecione **configuração** (o ícone de engrenagem).
 1. Selecione **administrador do servidor**.
@@ -177,7 +177,7 @@ Essa visualização é uma exibição de alto nível de itens de trabalho indexa
 
 ### <a name="streaming-throughputlatency"></a>Streaming de taxa de transferência/latência
 
-Este visualzation está relacionado às métricas associadas a uma consulta de streaming estruturada. Os grafos mostra o número de linhas de entrada por segundo e o número de linhas processadas por segundo. As métricas de streaming também são representadas por aplicativo. Essas métricas são enviadas quando o evento OnQueryProgress é gerado conforme a consulta de streaming estruturada é processada e a visualização representa streaming latência como a quantidade de tempo, em milissegundos, necessário para executar um lote de consultas.
+Esta visualização está relacionada às métricas associadas a uma consulta de streaming estruturada. Os grafos mostra o número de linhas de entrada por segundo e o número de linhas processadas por segundo. As métricas de streaming também são representadas por aplicativo. Essas métricas são enviadas quando o evento OnQueryProgress é gerado conforme a consulta de streaming estruturada é processada e a visualização representa streaming latência como a quantidade de tempo, em milissegundos, necessário para executar um lote de consultas.
 
 ### <a name="resource-consumption-per-executor"></a>Consumo de recursos por executor
 

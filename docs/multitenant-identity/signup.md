@@ -9,12 +9,12 @@ ms.subservice: reference-architecture
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: claims
 pnp.series.next: app-roles
-ms.openlocfilehash: a1ec441b731ba7f2166f9115452b052ec944444f
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: eb4e65b20ec3339b633b65d2adad768e98d1bdbb
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58245037"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640593"
 ---
 # <a name="tenant-sign-up-and-onboarding"></a>Inscrição e integração de locatário
 
@@ -63,7 +63,7 @@ Quando um usuário anônimo visita o aplicativo Surveys, o usuário vê dois bot
 
 Esses botões invocam ações na classe `AccountController`.
 
-A ação `SignIn` retorna um **ChallegeResult**, que faz com que o middleware OpenID Connect redirecione para o ponto de extremidade de autenticação. Essa é a maneira padrão de disparar a autenticação no ASP.NET Core.
+O `SignIn` ação retorna um **ChallengeResult**, que faz com que o middleware OpenID Connect redirecionar para o ponto de extremidade de autenticação. Essa é a maneira padrão de disparar a autenticação no ASP.NET Core.
 
 ```csharp
 [AllowAnonymous]
@@ -259,7 +259,7 @@ private async Task<Tenant> SignUpTenantAsync(BaseControlContext context, TenantM
 Veja um resumo de todo o fluxo de inscrição no aplicativo Surveys:
 
 1. O usuário clica no botão **Inscrever-se** .
-2. A ação `AccountController.SignUp` retorna um resultado de desafio.  O estado da autenticação inclui o valor "inscrição".
+2. O `AccountController.SignUp` ação retorna um resultado de desafio.  O estado da autenticação inclui o valor "inscrição".
 3. No evento `RedirectToAuthenticationEndpoint`, adicione o prompt `admin_consent`.
 4. O middleware OpenID Connect redireciona para o Azure AD e o usuário é autenticado.
 5. No evento `AuthenticationValidated` , procure o estado "inscrição".

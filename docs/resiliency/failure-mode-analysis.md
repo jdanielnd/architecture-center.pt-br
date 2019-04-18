@@ -1,28 +1,26 @@
 ---
 title: Análise do modo de falha
-description: Diretrizes para executar a análise do modo de falha para soluções de nuvem baseadas no Azure.
+description: Diretrizes para executar uma análise do modo de falha para soluções de nuvem baseadas no Azure.
 author: MikeWasson
 ms.date: 05/07/2018
 ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-design-principles
 ms.custom: resiliency
-ms.openlocfilehash: 6d0f58161c5b9d5922c21f24b1b1a50bab836bb1
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 0d89570ca42aa087a9c18148b5a4019b6f348e6b
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58248063"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640957"
 ---
-# <a name="failure-mode-analysis"></a>Análise do modo de falha
-
-[!INCLUDE [header](../_includes/header.md)]
+# <a name="failure-mode-analysis-for-azure-applications"></a>Análise do modo de falha para aplicativos do Azure
 
 A FMA (análise do modo de falha) é um processo de criação de resiliência em um sistema por meio da identificação de possíveis pontos de falha no sistema. A FMA deve ser parte das fases de arquitetura e de design para que você possa inserir a recuperação de falha no sistema desde o início.
 
 Veja abaixo o processo geral para realizar uma FMA:
 
-1. Identifique todos os componentes no sistema. Inclua dependências externas, por exemplo, provedores de identidade, serviços de terceiros e assim por diante.
+1. Identifique todos os componentes no sistema. Inclua dependências externas, como provedores de identidade, serviços de terceiros e assim por diante.
 2. Para cada componente, identifique possíveis falhas que possam ocorrer. Um único componente pode ter mais de um modo de falha. Por exemplo, considere a possibilidade de falhas de leitura e de gravação separadamente, pois o impacto e as possíveis mitigações serão diferentes.
 3. Classifique cada modo de falha de acordo com seu risco geral. Considere estes fatores:
 
@@ -426,7 +424,7 @@ Para obter mais informações, veja [Visão geral das filas de mensagens mortas 
 
 **Recuperação**. Para cada camada de aplicativo, coloque várias instâncias de VM no mesmo conjunto de disponibilidade e coloque um balanceador de carga na frente das VMs. Se houver falha na investigação de integridade, o balanceador de carga interromperá o envio de novas conexões para a instância não íntegra.
 
-**Diagnóstico**. - Use a [análise de log][lb-monitor] do balanceador de carga.
+**Diagnóstico**. - Use a [análise de logs][lb-monitor] do balanceador de carga.
 
 - Configure o sistema de monitoramento para monitorar todos os pontos de extremidade de monitoramento de integridade.
 

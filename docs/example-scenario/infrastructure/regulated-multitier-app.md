@@ -9,12 +9,12 @@ ms.service: architecture-center
 ms.subservice: example-scenario
 ms.custom: seodec18, Windows
 social_image_url: /azure/architecture/example-scenario/infrastructure/media/architecture-regulated-multitier-app.png
-ms.openlocfilehash: 440d208b423703fe791dcbe2cad0609fef0e6508
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 2e3bb28abf870a1ce358dd67efeb3f422b983651
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58246217"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639930"
 ---
 # <a name="building-secure-web-applications-with-windows-virtual-machines-on-azure"></a>Como compilar aplicativos Web seguros com máquinas virtuais do Windows no Azure
 
@@ -67,8 +67,6 @@ Nesse cenário, as instâncias de VM são implantadas em várias [Zonas de Dispo
 
 A camada de banco de dados pode ser configurada para usar grupos de disponibilidade Always On. Com essa configuração do SQL Server, um banco de dados primário em um cluster é configurado com até oito bancos de dados secundários. Se ocorrer um problema com o banco de dados primário, o cluster faz o failover para um banco de dados secundários, permitindo que o aplicativo continue disponível. Para saber mais informações, confira [Visão geral dos grupos de disponibilidade Always On para SQL Server][sqlalwayson-docs].
 
-Para conferir mais orientação sobre disponibilidade, confira a [lista de verificação de disponibilidade][availability] no Centro de Arquitetura do Azure.
-
 ### <a name="scalability"></a>Escalabilidade
 
 Esse cenário usa conjuntos de dimensionamento de máquina virtual para os componentes front-end e back-end. Com conjuntos de dimensionamento, o número de instâncias VM que executam a camada de aplicativo front-end pode dimensionar automaticamente em resposta à demanda do cliente ou com base em um agendamento definido. Para saber mais, veja [Visão geral sobre dimensionamento automático com conjuntos de dimensionamento de máquinas virtuais][vmssautoscale-docs].
@@ -85,7 +83,7 @@ Para exibir as diretrizes sobre como implantar a [infraestrutura compatível com
 
 Em combinação com o uso de Zonas de Disponibilidade e conjuntos de dimensionamento de máquina virtual, esse cenário usa o Gateway de Aplicativo do Azure e o balanceador de carga. Esses dois componentes de rede distribuem o tráfego para as instâncias de VM conectadas e incluem as investigações de integridade que garantem que o tráfego é distribuído apenas para VMs íntegras. Duas instâncias de Gateway de Aplicativo são configuradas em uma configuração ativo-passivo, e um balanceador de carga com redundância de zona é usado. Essa configuração torna os recursos de rede e aplicativo resilientes a problemas que, de outra forma, interromperiam o tráfego e impactariam o acesso do usuário final.
 
-Para obter diretrizes gerais sobre como criar cenários resilientes, confira [Projetando aplicativos resilientes para o Azure][resiliency].
+Para obter diretrizes gerais sobre como criar soluções resilientes, consulte [desenvolvendo aplicativos do Azure confiáveis](../../reliability/index.md).
 
 ## <a name="deploy-the-scenario"></a>Implantar o cenário
 
@@ -133,12 +131,10 @@ Para conferir guias de implementação mais detalhados, examine a [arquitetura d
 [appgateway-docs]: /azure/application-gateway/overview
 [architecture]: ./media/architecture-regulated-multitier-app.png
 [autoscaling]: /azure/architecture/best-practices/auto-scaling
-[availability]: ../../checklist/availability.md
 [cloudwitness-docs]: /windows-server/failover-clustering/deploy-cloud-witness
 [loadbalancer-docs]: /azure/load-balancer/load-balancer-overview
 [nsg-docs]: /azure/virtual-network/security-overview
 [ntiersql-ra]: /azure/architecture/reference-architectures/n-tier/n-tier-sql-server
-[resiliency]: /azure/architecture/resiliency/
 [security]: /azure/security/
 [scalability]: /azure/architecture/checklist/scalability
 [scaleset-docs]: /azure/virtual-machine-scale-sets/overview

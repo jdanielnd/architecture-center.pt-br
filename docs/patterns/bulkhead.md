@@ -9,12 +9,12 @@ ms.topic: design-pattern
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 4ad221ae5e9bd51c6d304ba33b884f71c5081b16
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 2b881a6565693642b54d2cabe877853e15282b05
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58244487"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639998"
 ---
 # <a name="bulkhead-pattern"></a>Padrão de bulkhead
 
@@ -98,7 +98,7 @@ spec:
 
 ## <a name="related-guidance"></a>Diretrizes relacionadas
 
-- [Projeto de aplicativos resilientes do Azure](../resiliency/index.md)
+- [Desenvolvendo aplicativos do Azure confiáveis](../reliability/index.md)
 - [Padrão de interruptor de circuito](./circuit-breaker.md)
 - [Padrão de repetição](./retry.md)
 - [Padrão de limitação](./throttling.md)

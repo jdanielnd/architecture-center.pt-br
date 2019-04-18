@@ -8,12 +8,12 @@ ms.topic: best-practice
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: ed1811495e81965fa514ab66dcfa49d00d2a59f2
-ms.sourcegitcommit: bb75a25bd589a761c79e39f2ccdec4acc7d71d60
+ms.openlocfilehash: e67da8043beed01c99f36da689dfd0553e012535
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/11/2019
-ms.locfileid: "59480092"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640389"
 ---
 # <a name="naming-conventions-for-azure-resources"></a>Convenções de nomenclatura para recursos do Azure
 
@@ -135,7 +135,7 @@ Em geral, evite usar caracteres especiais (`-` ou `_`) como o primeiro ou últim
 
 | Entidade | Escopo | Comprimento | Capitalização | Caracteres válidos | Padrão sugerido | Exemplo |
 | --- | --- | --- | --- | --- | --- | --- |
-|Namespace do Barramento de Serviço | Global |6-50 |Não diferencia maiúsculas de minúsculas | Alfanumérico, hífen, deve começar com leter; ver [aqui](/rest/api/servicebus/create-namespace) para obter detalhes. |`<service short name>-bus` |`app1-bus` |
+|Namespace do Barramento de Serviço | Global |6-50 |Não diferencia maiúsculas de minúsculas | Alfanumérico, hífen, deve começar com uma letra; ver [aqui](/rest/api/servicebus/create-namespace) para obter detalhes. |`<service short name>-bus` |`app1-bus` |
 
 ## <a name="organize-resources-with-tags"></a>Organizar recursos com marcas
 
@@ -192,8 +192,8 @@ Para obter mais informações sobre como configurar esse recurso, confira [Confi
 
 Para obter mais informações sobre como nomear blobs, contêineres e tabelas, confira a lista a seguir:
 
-- [Nomeando e referenciando contêineres, Blobs e metadados](https://msdn.microsoft.com/library/dd135715.aspx)
-- [Nomeando filas e metadados](https://msdn.microsoft.com/library/dd179349.aspx)
+- [Nomeando e referenciando contêineres, blobs e metadados](https://msdn.microsoft.com/library/dd135715.aspx)
+- [Nomeação de filas e de metadados](https://msdn.microsoft.com/library/dd179349.aspx)
 - [Tabelas de nomenclatura](https://msdn.microsoft.com/library/azure/dd179338.aspx)
 
 Um nome de blob pode conter qualquer combinação de caracteres, mas os caracteres reservados de URL devem ser escapados corretamente. Evite nomes de blob que terminem com um ponto (.), com uma barra (/) ou com uma sequência ou uma combinação dos dois. Por convenção, a barra é o separador do diretório *virtual* . Não use uma barra invertida (\\) em um nome de blob. As APIs de cliente podem permitir o uso dela, mas não conseguem aplicar o hash corretamente, e as assinaturas não corresponderão.
@@ -202,4 +202,3 @@ Não é possível modificar o nome de uma conta de armazenamento ou um contêine
 
 > [!TIP]
 > Recomendamos o estabelecimento de uma convenção de nomenclatura para todos os tipos e contas de armazenamento antes de embarcar no desenvolvimento de um novo serviço ou aplicativo.
-

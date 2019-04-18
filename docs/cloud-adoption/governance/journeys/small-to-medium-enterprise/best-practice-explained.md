@@ -1,18 +1,18 @@
 ---
-title: 'CAF: Empresas de pequeno a médio porte - detalhes técnicos adicionais sobre o MVP de governança'
+title: 'CAF: Empresa de pequeno a médio porte – práticas recomendadas explicada'
 titleSuffix: Microsoft Cloud Adoption Framework for Azure
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
 ms.custom: governance
 ms.date: 02/11/2019
-description: Explicação - Empresas de pequeno a médio porte - Detalhes técnicos adicionais sobre o MVP de governança
+description: Empresa de pequeno a médio porte – práticas recomendadas explicada
 author: BrianBlanchard
-ms.openlocfilehash: e726213459c8bee63e3cc77ab54868fe7196b3ac
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: b9b385be345098bf1b9e0e1cdce7fd3cceeb5523
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900253"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639567"
 ---
 # <a name="small-to-medium-enterprise-best-practice-explained"></a>Empresas de pequeno a médio porte: Melhor prática explicada
 
@@ -22,7 +22,7 @@ Neste artigo, discutiremos as estratégias de alto nível que são necessárias 
 
 ## <a name="governance-mvp-cloud-adoption-foundation"></a>MVP de governança (fundamentos para adoção da nuvem)
 
-A adoção rápida da governança e a política corporativa é uma realidade graças a alguns princípios simples e ferramentas de governança baseadas em nuvem. Essas são as primeiras das três Disciplinas de governança de nuvem a serem abordadas em qualquer processo de governança. Nos aprofundaremos em cada uma delas neste artigo.
+A adoção rápida da governança e a política corporativa é uma realidade graças a alguns princípios simples e ferramentas de governança baseadas em nuvem. Essas são as primeiras três disciplinas abordar em qualquer processo de governança. Nos aprofundaremos em cada uma delas neste artigo.
 
 Para estabelecer o ponto de partida, este artigo discutirá as estratégias de alto nível por trás da Linha de Base de Identidade, Linha de Base de Segurança e Aceleração de Implantação que são necessárias para criar um MVP de governança e que servirão como a base para a adoção como um todo.
 
@@ -38,7 +38,7 @@ Essa implementação também pode ser descrita usando uma lista de verificação
 
 1. Solicite decisões relacionadas às dependências básicas: Identidade, Rede e Criptografia.
 2. Determine o padrão a ser usado durante a imposição da política corporativa.
-3. Determine os padrões de governança apropriados para as disciplinas Consistência de Recursos, Marcação de Recursos e Registro em Log e Relatórios.
+3. Determine os padrões de governança apropriado para o recurso de consistência, marcação de recursos e disciplinas de registro em log e relatórios.
 4. Implemente as ferramentas de governança alinhadas ao padrão de imposição de política escolhido para aplicar as decisões dependentes e as decisões de governança.
 
 [!INCLUDE [implementation-process](../../../../../includes/cloud-adoption/governance/implementation-process.md)]

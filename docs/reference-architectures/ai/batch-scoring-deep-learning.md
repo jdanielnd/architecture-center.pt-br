@@ -8,12 +8,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat-ai
-ms.openlocfilehash: a1c0701185c85f8e7bcbc183b32c4834529fc524
-ms.sourcegitcommit: 1a3cc91530d56731029ea091db1f15d41ac056af
+ms.openlocfilehash: 3459f7895b7b57833da5853a77b2641dc7c85a9e
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/03/2019
-ms.locfileid: "58887855"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639709"
 ---
 # <a name="batch-scoring-of-deep-learning-models-on-azure"></a>Lote de pontuação de modelos de aprendizado aprofundado no Azure
 
@@ -120,7 +120,7 @@ Para ter uma ideia do estado geral do cluster, vá até a folha de Machine Learn
 
 ### <a name="logging-with-azure-machine-learning"></a>Registrar em log com o Azure Machine Learning
 
-O Azure Machine Learning registrará automaticamente todos os stdout/stderr na conta de armazenamento de blob associada. Salvo indicação em contrário, seu Workspace do Azure Machine Learning provisionará automaticamente uma conta de armazenamento e despejará os logs nela. Também é possível usar uma ferramenta de navegação de armazenamento, como o Gerenciador de Armazenamento, que fornecerá uma experiência muito mais fácil para navegação em arquivos de log.
+O Azure Machine Learning registrará automaticamente todos os stdout/stderr para a conta de armazenamento de blob associado. Salvo indicação em contrário, seu Workspace do Azure Machine Learning provisionará automaticamente uma conta de armazenamento e despejará os logs nela. Também é possível usar uma ferramenta de navegação de armazenamento, como o Gerenciador de Armazenamento, que fornecerá uma experiência muito mais fácil para navegação em arquivos de log.
 
 ## <a name="cost-considerations"></a>Considerações de custo
 

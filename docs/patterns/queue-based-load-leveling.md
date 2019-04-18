@@ -9,12 +9,12 @@ ms.topic: design-pattern
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: c736afced1b0478e8eb1a2694acc4d6a6f0c62fc
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 267d630d97a998c76a75a70191a77f9b74e801ef
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58248721"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59641052"
 ---
 # <a name="queue-based-load-leveling-pattern"></a>Padrão de nivelamento de carga baseado em fila
 
@@ -67,8 +67,6 @@ Um aplicativo Web grava dados em um repositório de dados externo. Se um grande 
 Para resolver isso, é possível usar uma fila para nivelar a carga entre as instâncias do aplicativo e o repositório de dados. Um aplicativo do Azure Functions lê as mensagens da fila e executa as solicitações de leitura/gravação para o armazenamento de dados. A lógica do aplicativo no aplicativo de funções pode controlar a taxa em que ele transmite solicitações ao repositório de dados para impedir que o serviço de armazenamento seja sobrecarregado. (Caso contrário, o aplicativo de funções apenas reintroduzirá o mesmo problema no back-end.)
 
 ![Figura 3 - Como usar uma fila e um aplicativo de funções para nivelar a carga](./_images/queue-based-load-leveling-function.png)
-
-
 
 ## <a name="related-patterns-and-guidance"></a>Diretrizes e padrões relacionados
 

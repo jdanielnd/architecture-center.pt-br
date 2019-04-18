@@ -1,29 +1,29 @@
 ---
-title: Estender o AD DS (Active Directory Domain Services) para o Azure
+title: Estender o seu domínio do Active Directory local ao Azure
 titleSuffix: Azure Reference Architectures
-description: Estender o seu domínio do Active Directory local para o Azure.
+description: Implante os serviços de domínio do Active Directory (AD DS) em uma rede virtual do Azure.
 author: telmosampaio
 ms.date: 05/02/2018
 ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18, identity
-ms.openlocfilehash: 67f23ae3676d0fb95ef484fa6dcb7a8bb92e0fa2
-ms.sourcegitcommit: 548374a0133f3caed3934fda6a380c76e6eaecea
+ms.openlocfilehash: c617a0ceba900fc9cd78eff21aadf5c94f6b143b
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/25/2019
-ms.locfileid: "58419998"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640338"
 ---
-# <a name="extend-active-directory-domain-services-ad-ds-to-azure"></a>Estender o AD DS (Active Directory Domain Services) para o Azure
+# <a name="extend-your-on-premises-active-directory-domain-to-azure"></a>Estender o seu domínio do Active Directory local ao Azure
 
-Essa arquitetura de referência mostra como estender seu ambiente do Active Directory para o Azure a fim de fornecer serviços de autenticação distribuídos usando o AD DS (Active Directory Domain Services). [**Implantar esta solução**](#deploy-the-solution).
+Essa arquitetura mostra como estender um domínio do Active Directory local ao Azure para fornecer serviços de autenticação distribuídos. [**Implantar esta solução**](#deploy-the-solution).
 
 ![Arquitetura de rede híbrida segura com o Active Directory](./images/adds-extend-domain.png)
 
 *Baixe um [Arquivo Visio][visio-download] dessa arquitetura.*
 
-O AD DS é usado para autenticar o usuário, computador, aplicativo ou outras identidades incluídas em um domínio de segurança. Ele poderá ser hospedado localmente, mas se o aplicativo estiver hospedado parcialmente localmente e parcialmente no Azure, será mais eficiente replicar essa funcionalidade no Azure. Isso pode reduzir a latência causada pelo envio de autenticação e solicitações de autorização local da nuvem de volta para o AD DS em execução local.
+Se seu aplicativo estiver hospedado parcialmente localmente e parcialmente no Azure, talvez seja mais eficiente replicar os serviços de domínio Active Directory (AD DS) no Azure. Isso pode reduzir a latência causada pelo envio de solicitações de autenticação da nuvem para o AD DS em execução no local.
 
 Essa arquitetura é geralmente usada quando a rede local e a rede virtual do Azure estão conectadas por uma conexão VPN ou de ExpressRoute. Essa arquitetura também dá suporte à replicação bidirecional, o que significa que alterações podem ser feitas localmente ou na nuvem, e ambas as fontes serão mantidas consistentes. Usos típicos dessa arquitetura incluem aplicativos híbridos em que a funcionalidade é distribuída entre o local e o Azure, e os aplicativos e serviços que realizam autenticação usando o Active Directory.
 
@@ -170,7 +170,7 @@ Após a conclusão da implantação, você pode testar a conexão do ambiente si
 
    ![Captura de tela da caixa de diálogo Adicionar Servidores](./images/add-servers-dialog.png)
 
-## <a name="next-steps"></a>Próximas etapas
+## <a name="next-steps"></a>Próximos passos
 
 - Conheça as práticas recomendadas para [criar uma floresta de recursos do AD DS][adds-resource-forest] no Azure.
 - Conheça as práticas recomendadas para [criar uma infraestrutura do Serviços de Federação do Active Directory (AD FS)][adfs] no Azure.

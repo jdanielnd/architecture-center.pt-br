@@ -7,12 +7,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat-ai
-ms.openlocfilehash: 0f5de0eca6fbd35cca1a0e8443f363df09ffc6aa
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: caee864285a03affa43739317d1c4c6fd2131450
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58248691"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640627"
 ---
 # <a name="enterprise-grade-conversational-bot"></a>Bot conversacional de nível empresarial
 
@@ -85,7 +85,7 @@ Antes de abordarmos as especificidades da arquitetura, vamos começar com o flux
 
 ### <a name="system-data-flow"></a>Fluxo de dados do sistema
 
-**ETL**. O bot se baseia em informações e conhecimento extraídos dos dados brutos por um processo de ETL no back-end. Esses dados podem ser estruturados (banco de dados SQL), semiestruturados (sistema de CRM, perguntas frequentes) ou não estruturados (documentos do Word, PDFs, blogs). Um subsistema de ETL extrai os dados em um cronograma fixo. O conteúdo é transformado, aprimorado e carregado em um armazenamento de dados intermediários, como o Cosmos DB ou o Armazenamento de Blobs do Azure.
+**ETL**. O bot se baseia em informações e conhecimento extraídos dos dados brutos por um processo de ETL no back-end. Esses dados podem ser estruturados (banco de dados SQL), semiestruturados (sistema de CRM, perguntas frequentes) ou não estruturados (documentos do Word, PDFs, logs web). Um subsistema de ETL extrai os dados em um cronograma fixo. O conteúdo é transformado, aprimorado e carregado em um armazenamento de dados intermediários, como o Cosmos DB ou o Armazenamento de Blobs do Azure.
 
 Os dados no repositório intermediário são indexados no Azure Search para recuperação de documentos, carregados no QnA Maker para criar pares de pergunta e resposta ou carregados em um aplicativo Web personalizado para processamento de texto não estruturado. Os dados também são usados para treinar o modelo LUIS na extração de entidade e de intenção.
 
@@ -141,7 +141,7 @@ Outra opção é integrar seu próprio serviço de IA personalizado. Essa aborda
 
 ## <a name="quality-assurance-and-enhancement"></a>Aprimoramento e garantia de qualidade
 
-**Registro em log**. Registre as conversas de usuário com o bot em log, incluindo as métricas de desempenho subjacentes e eventuais erros. Esses logs serão de grande valia para depurar problemas, entender as interações do usuário e aprimorar o sistema. Diferentes armazenamentos de dados servem para diferentes tipos de logs. Por exemplo, pense em usar o Application Insights para blobs, o Cosmos DB para conversas e o Armazenamento do Azure para grandes cargas. Confira [Gravar diretamente no Armazenamento do Azure][transcript-storage].
+**Registro em log**. Registre as conversas de usuário com o bot em log, incluindo as métricas de desempenho subjacentes e eventuais erros. Esses logs serão de grande valia para depurar problemas, entender as interações do usuário e aprimorar o sistema. Diferentes armazenamentos de dados servem para diferentes tipos de logs. Por exemplo, pense em usar o Application Insights para logs web, o Cosmos DB para conversas e o Armazenamento do Azure para grandes cargas. Confira [Gravar diretamente no Armazenamento do Azure][transcript-storage].
 
 **Comentários**. Também é importante entender o grau de satisfação dos usuários com suas interações de bot. Se você tiver um registro de comentários do usuário, poderá usar esses dados para concentrar seus esforços em aprimorar determinadas interações e readaptar os modelos de IA para melhorar o desempenho. Use os comentários para readaptar os modelos, como o LUIS, em seu sistema.
 
@@ -224,4 +224,3 @@ Você pode implantar a lógica do bot diretamente de seu IDE ou de uma linha de 
 [appinsights-logger]: https://github.com/Microsoft/botbuilder-utils-js/tree/master/packages/botbuilder-transcript-app-insights
 [feedback-util]: https://github.com/Microsoft/botbuilder-utils-js/tree/master/packages/botbuilder-feedback
 [testing util]: https://github.com/Microsoft/botbuilder-utils-js/tree/master/packages/botbuilder-http-test-recorder
-

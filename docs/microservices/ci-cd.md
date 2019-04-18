@@ -7,12 +7,12 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: microservices
-ms.openlocfilehash: f7f3f3d48087db51c40f134e3e4cf11ec58501bb
-ms.sourcegitcommit: d58e6b2b891c9c99e951c59f15fce71addcb96b1
+ms.openlocfilehash: c52ff3d0a330f564e5f7e9b0b07f0ba84c328c8b
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/12/2019
-ms.locfileid: "59533083"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639765"
 ---
 # <a name="cicd-for-microservices-architectures"></a>CI/CD para arquiteturas de microsserviços
 
@@ -64,7 +64,7 @@ Para obter uma versão de alta velocidade, o pipeline de lançamento deve ser au
 
 - **Gerenciamento de versão**. Cada equipe deve ser capaz de implantar uma atualização para a produção. Isso não significa que cada membro da equipe tem permissões para fazer isso. Mas ter uma função de Gerenciador de Versão centralizada pode reduzir a velocidade das implantações.
 
-    **Migitation**: Quanto mais o processo de CI/CD for automatizado e confiável, menos deverá haver necessidade de uma autoridade central. Dito isso, você pode ter diferentes políticas para liberar atualizações dos principais recursos e correções de bugs secundários. Ser descentralizado não significa zero governança.
+    **Atenuação**: Quanto mais o processo de CI/CD for automatizado e confiável, menos deverá haver necessidade de uma autoridade central. Dito isso, você pode ter diferentes políticas para liberar atualizações dos principais recursos e correções de bugs secundários. Ser descentralizado não significa zero governança.
 
 - **Atualizações de serviço**. Quando você atualizar um serviço para uma nova versão, ele não deverá interromper outros serviços que dependem dele.
 
@@ -74,7 +74,7 @@ Para obter uma versão de alta velocidade, o pipeline de lançamento deve ser au
 
 Antes de criar um fluxo de trabalho de CI/CD, você precisa saber como a base de código será estruturada e gerenciada.
 
-- As equipes funcionam em repositórios separados ou em um repositório único?
+- As equipes funcionam em repositórios separados ou em um monorepo (único repositório)?
 - Qual é sua estratégia de ramificação?
 - Quem pode efetuar push do código para a produção? Existe uma função de gerente de versão?
 

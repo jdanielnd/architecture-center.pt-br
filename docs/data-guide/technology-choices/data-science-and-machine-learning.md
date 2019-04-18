@@ -6,12 +6,12 @@ ms.date: 03/06/2019
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
-ms.openlocfilehash: 1020e938a04c6a82e6cc831e6620ec17c9a10cc7
-ms.sourcegitcommit: 9854bd27fb5cf92041bbfb743d43045cd3552a69
+ms.openlocfilehash: e4c81add1a97254f427d67584ff7e2a4799f84a9
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/27/2019
-ms.locfileid: "58503223"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640899"
 ---
 # <a name="what-are-the-machine-learning-products-at-microsoft"></a>Quais são os produtos de aprendizado de máquina na Microsoft?
 
@@ -63,7 +63,7 @@ As seguintes plataformas de desenvolvimento e as ferramentas estão disponíveis
 
 Use o serviço Azure Machine Learning para treinar, implantar e gerenciar modelos de aprendizado de máquina usando o Python e a CLI em escala de nuvem.
 
-Experimente a [versão gratuita ou paga do Serviço do Azure Machine Learning](http://aka.ms/AMLFree).
+Experimente a [versão gratuita ou paga do Serviço do Azure Machine Learning](https://aka.ms/AMLFree).
 
 |||
 |-|-|
@@ -190,5 +190,5 @@ Use o Windows ML quando quiser usar modelos de aprendizado de máquina treinados
 
 ## <a name="next-steps"></a>Próximas etapas
 
-- Para saber mais sobre todos os produtos de desenvolvimento de IA (Inteligência Artificial) disponíveis na Microsoft, veja [Plataforma de IA da Microsoft](https://www.microsoft.com/ai)
+- Para saber mais sobre todos os produtos de desenvolvimento de inteligência Artificial (AI) disponíveis na Microsoft, consulte [plataforma da Microsoft de AI](https://www.microsoft.com/ai)
 - Para obter treinamento sobre como desenvolver soluções de IA, veja a [Microsoft AI School](https://aischool.microsoft.com/learning-paths)

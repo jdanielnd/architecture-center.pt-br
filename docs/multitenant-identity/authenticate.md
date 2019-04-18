@@ -9,12 +9,12 @@ ms.subservice: reference-architecture
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: tailspin
 pnp.series.next: claims
-ms.openlocfilehash: b4a833a18b44e40f544449a222fb082d71e4268d
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
+ms.openlocfilehash: a35342c0e40290332a349577260de316b5e7d503
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54481636"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640423"
 ---
 # <a name="authenticate-using-azure-ad-and-openid-connect"></a>Autentique usando o Azure AD e o OpenID Connect
 
@@ -40,7 +40,7 @@ Para registrar o aplicativo, siga as etapas em [Integrar aplicativos ao Azure Ac
 
 Consulte [Executar o aplicativo Surveys](./run-the-app.md) para as etapas específicas para o aplicativo Surveys. Observe o seguinte:
 
-- Para um aplicativo multilocatário, você deve configurar a opção multilocatário explicitamente. Isso habilita outras organizações a acessar o aplicativo.
+- Para um aplicativo multilocatário, você deve configurar a opção multilocatário explicitamente. Isso permite que outras organizações acessem o aplicativo.
 
 - A URL de resposta é a URL em que o Azure AD enviará respostas do OAuth 2.0. Ao usar o ASP.NET Core, isso deve corresponder ao caminho que você configura no middleware de autenticação (confira a próxima seção).
 
@@ -157,7 +157,7 @@ Durante o processo de autenticação, o middleware OpenID Connect gera uma séri
 
 Para fornecer retornos de chamada para esses eventos, defina a opção **Eventos** no middleware. Há duas maneiras diferentes de declarar os manipuladores de eventos: embutido com lambdas ou em uma classe que deriva de **OpenIdConnectEvents**. A segunda abordagem é recomendada se os seus retornos de chamada do evento tiverem uma quantidade consideração de lógica, para que eles não baguncem sua classe de inicialização. Nossa implementação de referência usa essa abordagem.
 
-### <a name="openid-connect-endpoints"></a>Pontos de extremidade do OpenId Connect
+### <a name="openid-connect-endpoints"></a>Pontos de extremidade do OpenID Connect
 
 O Azure AD oferece suporte ao [OpenID Connect Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html), no qual o IDP (provedor de identidade) retorna um documento de metadados JSON de um [ponto de extremidade conhecido](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig). O documento de metadados contém informações como as seguintes:
 
@@ -167,7 +167,7 @@ O Azure AD oferece suporte ao [OpenID Connect Discovery](https://openid.net/spec
 
 Por padrão, o middleware OIDC sabe como buscar esses metadados. Defina a opção **Authority** no middleware, e o middleware construirá a URL dos metadados. (Você pode substituir a URL dos metadados, definindo a opção **MetadataAddress** .)
 
-### <a name="openid-connect-flows"></a>Fluxos do OpenId Connect
+### <a name="openid-connect-flows"></a>Fluxos do OpenID Connect
 
 Por padrão, o middleware OIDC usa um fluxo híbrido com o modo de resposta de postagem de formulário.
 

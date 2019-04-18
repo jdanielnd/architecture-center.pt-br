@@ -3,12 +3,12 @@ title: 'CAF: Criar consistência de nuvem híbrida'
 description: Definir a abordagem para criar a consistência de nuvem híbrida
 author: BrianBlanchard
 ms.date: 12/27/2018
-ms.openlocfilehash: 726ea56f52d68f6c9b0d1478d19a91c2b7f12fdd
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: d5cfc8565a97c0342b5dc200512308d4c795422a
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900411"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639911"
 ---
 # <a name="create-hybrid-cloud-consistency"></a>Criar consistência de nuvem híbrida
 
@@ -18,7 +18,7 @@ Os modelos de implantação híbrida durante a migração podem reduzir o risco 
 
 ## <a name="integrate-hybrid-cloud-consistency"></a>Integrar a consistência da nuvem híbrida
 
-O uso de uma solução de nuvem híbrida permite que as organizações dimensionem os recursos de computação. Isso também elimina a necessidade de fazer grandes investimentos de capital para lidar com picos de demanda de curto prazo. Quando alterações aos seus negócios levam à necessidade de liberar recursos locais para mais dados confidenciais ou aplicativos, o desprovisionamento de recursos de nuvem fica mais fácil, rápido e com menos custos. Você paga apenas pelos recursos que sua organização usa temporariamente em vez de precisar comprar e fazer a manutenção de recursos adicionais. Isso reduz a quantidade de equipamentos que podem permanecer inativos durante longos períodos de tempo. A computação em nuvem híbrida é uma plataforma que reúne “o melhor de cada cenário”, proporcionando todos os benefícios da computação em nuvem: flexibilidade, escalabilidade e eficiências de custo; todos com o menor risco possível de exposição de dados.
+O uso de uma solução de nuvem híbrida permite que as organizações dimensionem os recursos de computação. Isso também elimina a necessidade de fazer grandes investimentos de capital para lidar com picos de demanda de curto prazo. Quando alterações aos seus negócios levam à necessidade de liberar recursos locais para mais dados confidenciais ou aplicativos, o desprovisionamento de recursos de nuvem fica mais fácil, rápido e com menos custos. Você paga apenas pelos recursos que sua organização usa temporariamente em vez de precisar comprar e fazer a manutenção de recursos adicionais. Isso reduz a quantidade de equipamentos que podem permanecer inativos durante longos períodos de tempo. Nuvem híbrida é uma plataforma de "melhor de todos os mundos possíveis", fornecendo todos os benefícios da flexibilidade, escalabilidade e eficiências de custo; de computação em nuvem de computação tudo isso com o mais baixo possível risco de exposição de dados.
 
 ![Criação da consistência de nuvem híbrida entre identidades, gerenciamentos, segurança, dados, desenvolvimentos e DevOps](../../_images/hybrid-consistency.png)
 *Figura 1. Criação da consistência de nuvem híbrida entre identidades, gerenciamentos, segurança, dados, desenvolvimentos e DevOps*
@@ -32,7 +32,7 @@ Uma verdadeira solução de nuvem híbrida deve fornecer quatro componentes, com
   
 Os exemplos desses componentes de uma perspectiva do Azure incluem:
 
-- o Azure AD (Azure Active Directory), que funciona com o Azure AD local para fornecer uma identidade comum a todos os usuários. O SSO entre o local e por meio da nuvem facilita o acesso seguro dos usuários aos aplicativos e ativos de que precisam. Os administradores podem gerenciar a segurança e os controles de governança para que os usuários possam acessar o que precisam com flexibilidade para ajustar essas permissões sem afetar a experiência do usuário.
+- o Azure AD (Azure Active Directory), que funciona com o Azure AD local para fornecer uma identidade comum a todos os usuários. O SSO entre o local e por meio da nuvem facilita o acesso seguro dos usuários aos aplicativos e ativos de que precisam. Os administradores podem gerenciar a segurança e controles de governança para que os usuários possam acessar o que eles precisam, com flexibilidade para ajustar essas permissões sem afetar a experiência do usuário.
 - O Azure oferece serviços integrados de gerenciamento e segurança para as infraestruturas de nuvem e local que incluem um conjunto integrado de ferramentas para monitorar, configurar e proteger nuvens híbridas. Essa abordagem de ponta a ponta do gerenciamento aborda especificamente os desafios do mundo real que as organizações enfrentam ao levar uma solução de nuvem híbrida em consideração.
 - Uma nuvem híbrida do Azure fornece ferramentas comuns que garantem acesso seguro a todos os dados, de modo perfeito e eficiente. Os serviços de dados do Azure se unem ao Microsoft SQL Server para criar uma plataforma de dados consistente. Um modelo de nuvem híbrida consistente permite que os usuários trabalhem com dados operacionais e analíticos, fornecendo os mesmos serviços locais e na nuvem para data warehouse, análise de dados e visualização de dados.
 - Os serviços de nuvem do Microsoft Azure, combinados com o Microsoft Azure Stack local, fornecem desenvolvimento e DevOps unificados. A consistência entre a nuvem e o local significa que sua equipe de DevOps pode criar aplicativos que sejam executados em qualquer um desses ambientes e podem fazer facilmente a implantação ao local correto. Você também pode reutilizar os modelos em toda a solução híbrida, o que pode simplificar ainda mais os processos do DevOps.
@@ -56,7 +56,7 @@ O Azure Stack é oferecido com duas opções de implantação:
 
 ## <a name="azure-stack-one-cloud-ecosystem"></a>Ecossistema de nuvem única do Azure Stack
 
-Você pode acelerar as iniciativas do Azure Stack por meio do ecossistema completo do Azure:
+Você pode acelerar iniciativas de pilha do Azure usando o ecossistema do Azure completo:
 
 - O Azure garante que a maioria dos aplicativos e serviços certificados do Azure funcionará no Azure Stack. Vários ISVs &mdash; incluindo Bitnami, Docker, Kemp Technologies, Pivotal Cloud Foundry, Red Hat Enterprise Linux e SUSE Linux &mdash; estão estendendo suas soluções ao Azure Stack.
 - Você pode optar por ter o Azure Stack entregue e operado como um serviço totalmente gerenciado. Vários parceiros &mdash; incluindo Tieto, Yourhosting, Revera, Pulsant e NTT &mdash; contarão com as ofertas de serviço gerenciadas no Azure e Azure Stack em breve. Esses parceiros têm fornecido serviços gerenciados do Azure por meio do programa de Provedor de soluções de nuvem (Provedores de nuvem) e agora estão ampliando suas ofertas para incluir soluções híbridas.

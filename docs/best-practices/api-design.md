@@ -8,12 +8,12 @@ ms.topic: best-practice
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: b15b97de2042a0e213192dd586ffdcc4c51b1f11
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: 06090b0862a7c737d9ee93512f851d3fcf2e2d9f
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55897976"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640865"
 ---
 # <a name="api-design"></a>Design de API
 
@@ -97,7 +97,7 @@ O envio de uma solicitação HTTP GET para o URI da coleção recupera uma lista
 
 Adote uma convenção de nomenclatura consistente nos URIs. Em geral, é bom usar substantivos plurais para URIs que fazem referência a coleções. É uma boa prática organizar URIs de coleções e itens em uma hierarquia. Por exemplo, `/customers` é o caminho para a coleção de clientes, e `/customers/5` é o caminho para o cliente com a ID igual a 5. Essa abordagem ajuda a manter a API da Web intuitiva. Além disso, muitas estruturas de API da Web podem rotear solicitações baseadas em caminhos de URI com parâmetros, de modo que é possível definir uma rota para o caminho `/customers/{id}`.
 
-Também considere as relações entre diferentes tipos de recursos e como você pode expor essas associações. Por exemplo, `/customers/5/orders` pode representar todos os pedidos do cliente 5. Também é possível ir na outra direção e representar a associação de um pedido de volta a um cliente com um URI como `/orders/99/customer`. No entanto, estender esse modelo demasiadamente pode torná-lo difícil de ser implementado. Uma solução melhor é fornecer links navegáveis para recursos associados no corpo da mensagem de resposta HTTP. Esse mecanismo é descrito posteriormente e com mais detalhes na seção [Usando a abordagem de HATEOAS para habilitar a navegação para recursos relacionados](#using-the-hateoas-approach-to-enable-navigation-to-related-resources).
+Também considere as relações entre diferentes tipos de recursos e como você pode expor essas associações. Por exemplo, `/customers/5/orders` pode representar todos os pedidos do cliente 5. Também é possível ir na outra direção e representar a associação de um pedido de volta a um cliente com um URI como `/orders/99/customer`. No entanto, estender esse modelo demasiadamente pode torná-lo difícil de ser implementado. Uma solução melhor é fornecer links navegáveis para recursos associados no corpo da mensagem de resposta HTTP. Esse mecanismo é descrito mais detalhadamente na seção [uso de HATEOAS para habilitar a navegação para recursos relacionados](#use-hateoas-to-enable-navigation-to-related-resources).
 
 Em sistemas mais complexos, pode ser tentador fornecer URIs que permitam que um cliente navegue entre vários níveis de relações, como `/customers/1/orders/99/products`. No entanto, esse nível de complexidade pode ser difícil de manter e é inflexível no caso de as relações entre os recursos mudarem no futuro. Em vez disso, tente manter os URIs relativamente simples. Uma vez que um aplicativo tem uma referência a um recurso, deve ser possível usar essa referência para localizar itens relacionados a esse recurso. A consulta anterior pode ser substituída com o URI `/customers/1/orders` para localizar todos os pedidos do cliente 1 e depois `/orders/99/products` para localizar os produtos nesse pedido.
 
@@ -442,7 +442,7 @@ Em vez de fornecer vários URIs, você pode especificar a versão do recurso usa
 Essa abordagem tem a vantagem de semântica que o mesmo recurso é sempre recuperado do mesmo URI, mas para isso, é necessário que o código que processa a solicitação analise a cadeia de consulta e envie de volta a resposta HTTP apropriada. Essa abordagem também tem as mesmas complicações para implementar HATEOAS como o mecanismo de controle de versão do URI.
 
 > [!NOTE]
-> Alguns navegadores e proxies da Web mais antigos não armazenarão respostas em cache para solicitações que incluam, no URI, uma cadeia de consulta. Isso pode ter um impacto negativo no desempenho de aplicativos Web que usam uma API da Web e que são executados de um navegador da Web desse tipo.
+> Alguns navegadores e proxies da Web mais antigos não armazenarão respostas em cache para solicitações que incluam, no URI, uma cadeia de consulta. Isso pode prejudicar o desempenho para aplicativos web que usam uma API da web e que são executados de dentro de um navegador da web.
 
 ### <a name="header-versioning"></a>Controle de versão de cabeçalho
 

@@ -1,18 +1,18 @@
 ---
-title: 'CAF: Empresas de pequeno a médio porte - evolução da Linha de Base de Segurança'
+title: 'CAF: Enterprise de pequeno a médio porte – evolução de linha de base de segurança'
 titleSuffix: Microsoft Cloud Adoption Framework for Azure
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
 ms.custom: governance
 ms.date: 02/11/2019
-description: Explicação - Empresas de pequeno a médio porte - Evolução da Linha de Base de Segurança
+description: Empresa de pequeno a médio porte explicação – evolução de linha de base de segurança
 author: BrianBlanchard
-ms.openlocfilehash: 5714b886ef63cc2392905250d97ea905839f6011
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: bb26fa2f0d21bda6b1af1213bca817136b0c963f
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900234"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640236"
 ---
 # <a name="caf-small-to-medium-enterprise-security-baseline-evolution"></a>CAF: Empresas de pequeno a médio porte: Evolução da linha de base de segurança
 
@@ -24,9 +24,9 @@ A liderança de negócios e de TI estão satisfeitas com os resultados dos teste
 
 ### <a name="evolution-of-the-cloud-governance-team"></a>Evolução da equipe de Governança de Nuvem
 
-Dado o impacto da narrativa sobre alterações e sobre suporte fornecidas até agora, a equipe de Governança de Nuvem agora é vista de forma diferente. Os dois administradores de sistema que iniciaram a equipe agora são vistos como arquitetos de nuvem experientes. Conforme esse narrativa evolui, a percepção sobre eles mudará de Custodiantes da Nuvem para uma função de Guardiões da Nuvem.
+Dado o efeito da alteração narrativa e suporte fornecidas até agora, a equipe de governança de nuvem é agora exibida diferente. Os dois administradores de sistema que iniciaram a equipe agora são vistos como arquitetos de nuvem experientes. Conforme esse narrativa evolui, a percepção sobre eles mudará de Custodiantes da Nuvem para uma função de Guardiões da Nuvem.
 
-Embora a diferença seja sutil, é uma distinção importante ao criar uma cultura de TI focada em governança. Um Custodiante da Nuvem organiza a bagunça feita pelos arquitetos de nuvem inovadores. As duas funções possuem um atrito natural e objetivos opostos. Por outro lado, um Guardião da Nuvem ajuda a proteger a nuvem para que outros arquitetos de nuvem possam trabalhar mais rapidamente, com menos complicações. Além disso, um Guardião da Nuvem está envolvido na criação de modelos que aceleram a implantação e a adoção, tornando-os um acelerador de inovação, e também um defensor das cinco disciplinas da nuvem.
+Embora a diferença seja sutil, é uma distinção importante ao criar uma cultura de TI focada em governança. Um Custodiante da Nuvem organiza a bagunça feita pelos arquitetos de nuvem inovadores. As duas funções possuem um atrito natural e objetivos opostos. Por outro lado, um Guardião da Nuvem ajuda a proteger a nuvem para que outros arquitetos de nuvem possam trabalhar mais rapidamente, com menos complicações. Além disso, um guardião de nuvem estiver envolvido na criação de modelos que aceleram a implantação e a adoção, tornando-os um acelerador de inovação, bem como um defender de disciplinas cinco de governança de nuvem.
 
 ### <a name="evolution-of-the-current-state"></a>Evolução do estado atual
 
@@ -53,7 +53,7 @@ As alterações ao estado atual e futuro expõem novos riscos que exigem novas i
 
 Esse risco de negócios pode ser dividido em alguns riscos técnicos:
 
-- Os aplicativos de missão crítica ou dados protegidos podem ser implantados acidentalmente.
+- Aplicativos de missão crítica ou dados protegidos podem ser implantados acidentalmente.
 - Dados protegidos podem ser expostos durante o armazenamento devido a más decisões de criptografia.
 - Os usuários não autorizados podem acessar dados protegidos.
 - Uma invasão externa pode resultar no acesso aos dados protegidos.

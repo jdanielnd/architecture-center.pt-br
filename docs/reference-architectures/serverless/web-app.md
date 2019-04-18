@@ -8,12 +8,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18, serverless
-ms.openlocfilehash: 60af3df5bbb75d97d6ba797874c8b37319b2fad5
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
+ms.openlocfilehash: edf569b82a0a632e6ca048fee12c1dc61c039cd9
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54487382"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640797"
 ---
 # <a name="serverless-web-application-on-azure"></a>Aplicativo Web sem servidor no Azure
 
@@ -39,9 +39,6 @@ As funções são executadas quando um gatilho externo ocorre, como uma solicita
 Essa arquitetura consiste nos seguintes componentes:
 
 **Armazenamento de Blobs**. O conteúdo Web estático, como arquivos HTML, CSS e JavaScript, é armazenado no Armazenamento de Blobs do Azure e fornecido aos clientes usando a [hospedagem de site estático][static-hosting]. Toda a interação dinâmica ocorre através das chamadas do código JavaScript para as APIs de back-end. Não há código do lado do servidor para renderizar a página da Web. A hospedagem do site estático oferece suporte à indexação de documentos e páginas de erro 404 personalizadas.
-
-> [!NOTE]
-> A hospedagem do site estático está em [versão prévia][static-hosting-preview] no momento.
 
 **CDN**. Use a CDN ([Rede de Distribuição de Conteúdo do Azure][cdn]) para armazenar em cache o conteúdo para latência mais baixa e distribuição mais rápida do conteúdo, além de fornecer um ponto de extremidade HTTPS.
 
@@ -137,7 +134,7 @@ A implantação exibida aqui reside em uma única região do Azure. Para uma abo
 
 ### <a name="authentication"></a>Autenticação
 
-A API `GetStatus` na implementação de referência usa o Azure AD para autenticar solicitações. O AD do Azure oferece suporte ao protocolo Open ID Connect, que é um protocolo de autenticação criado sobre o protocolo OAuth 2.
+A API `GetStatus` na implementação de referência usa o Azure AD para autenticar solicitações. AD do Azure suporta o protocolo OpenID Connect, que é um protocolo de autenticação criado sobre o protocolo OAuth 2.
 
 Nessa arquitetura, o aplicativo cliente é um aplicativo de página única (SPA) executado no navegador. Esse tipo de aplicativo cliente não consegue ocultar o segredo de um cliente ou um código de autorização, por isso o fluxo de concessão implícita é apropriado. (Confira [Qual fluxo de OAuth 2.0 devo usar?] [oauth-flow]). Veja o fluxo geral:
 
@@ -329,7 +326,7 @@ Para implantar essa arquitetura de referência, confira o [Leiame do GitHub][rea
 [functions-zip-deploy]: /azure/azure-functions/deployment-zip-push
 [graph]: https://developer.microsoft.com/graph/docs/concepts/overview
 [key-vault-web-app]: /azure/key-vault/tutorial-web-application-keyvault
-[microservices-domain-analysis]: ../../microservices/domain-analysis.md
+[microservices-domain-analysis]: ../../microservices/model/domain-analysis.md
 [monitor]: /azure/azure-monitor/overview
 [oauth-flow]: https://auth0.com/docs/api-auth/which-oauth-flow-to-use
 [partition-key]: /azure/cosmos-db/partition-data

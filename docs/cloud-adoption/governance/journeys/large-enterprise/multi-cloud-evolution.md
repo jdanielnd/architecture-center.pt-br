@@ -1,20 +1,20 @@
 ---
-title: 'CAF: Empresa de grande porte – Evolução de Multinuvem'
+title: 'CAF: Grandes empresas – evolução de várias nuvens'
 titleSuffix: Microsoft Cloud Adoption Framework for Azure
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
 ms.custom: governance
 ms.date: 02/11/2019
-description: Empresa de grande porte – Evolução de Multinuvem
+description: Grandes empresas – evolução de várias nuvens
 author: BrianBlanchard
-ms.openlocfilehash: 5ef29aa523c04ff93b2d4f983482f94654a4a039
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: 62a2fdd6e340c96494354f4f0cf2f78ab572c251
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900322"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59641137"
 ---
-# <a name="large-enterprise-multi-cloud-evolution"></a>Empresa de grande porte: Evolução de multinuvem
+# <a name="large-enterprise-multi-cloud-evolution"></a>Empresas de grande porte: Evolução de várias nuvens
 
 ## <a name="evolution-of-the-narrative"></a>Evolução da narrativa
 
@@ -58,7 +58,7 @@ As seguintes alterações da política ajudarão a mitigar os novos riscos e ori
 
 ## <a name="evolution-of-the-best-practices"></a>Evolução das melhores práticas
 
-Esta seção do artigo evoluirá o design de MVP de governança para incluir novas políticas do Azure e uma implementação do Gerenciamento de Custos do Azure. Em conjunto, essas duas alterações de design atenderão às novas declarações da política corporativa.
+Esta seção do artigo evoluirá o design MVP de governança para incluir novas políticas do Azure e uma implementação do Gerenciamento de Custos do Azure. Em conjunto, essas duas alterações de design atenderão às novas declarações da política corporativa.
 
 1. Conecte as redes - Executado pela Segurança de Rede e TI, com suporte pela governança
     1. Adicionar uma conexão do provedor de linha dedicada/MPLS à nova nuvem irá integrar as redes. Adicionar tabelas de roteamento e configurações de firewall controlará o acesso e o tráfego entre os ambientes.
@@ -80,9 +80,9 @@ Esta seção do artigo evoluirá o design de MVP de governança para incluir nov
 
 Na medida em que a adoção de multinuvem cresce, a evolução do design acima continua se consolidando.
 
-## <a name="next-steps"></a>Próximas etapas
+## <a name="next-steps"></a>Próximos passos
 
-Em muitas empresas de grande porte, as disciplinas de governança de nuvem podem ser impedimentos à adoção. O próximo artigo descreve algumas considerações finais sobre como tornar a governança uma ação coletiva para ajudar a garantir o sucesso de longo prazo na nuvem.
+Em muitos grandes empresas, disciplinas cinco de governança de nuvem pode ser impedimentos à adoção. O próximo artigo tem algumas ideias adicionais em tornar governança esporte uma equipe para ajudar a garantir o sucesso a longo prazo na nuvem.
 
 > [!div class="nextstepaction"]
 > [Múltiplas camadas de governança](./multiple-layers-of-governance.md)

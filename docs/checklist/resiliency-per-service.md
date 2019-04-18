@@ -8,16 +8,16 @@ ms.topic: checklist
 ms.service: architecture-center
 ms.subservice: cloud-design-principles
 ms.custom: resiliency, checklist
-ms.openlocfilehash: fbb7501a663c8b5e326b2b601685419c8e5a0806
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
+ms.openlocfilehash: db42bd259bf71ef2ffa3e9efc5e4cd6ba2078e6b
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54486906"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639692"
 ---
 # <a name="resiliency-checklist-for-specific-azure-services"></a>Lista de verificação de resiliência para serviços específicos do Azure
 
-Resiliência é a capacidade de um sistema de se recuperar de falhas e continuar funcionando, além de ser um dos [pilares da qualidade de software](../guide/pillars.md). Cada tecnologia tem seus próprios modos de falha específicos, o que você deve considerar ao projetar e implementar seu aplicativo. Use esta lista de verificação para revisar as considerações de resiliência para serviços específicos do Azure. Revise também a [lista de verificação de resiliência geral](./resiliency.md).
+Resiliência é a capacidade de um sistema para se recuperar de falhas e continuar a funcionar. Cada tecnologia tem seus próprios modos de falha específicos, o que você deve considerar ao projetar e implementar seu aplicativo. Use esta lista de verificação para revisar as considerações de resiliência para serviços específicos do Azure. Para obter mais informações sobre como projetar aplicativos resilientes, consulte [projetar aplicativos do Azure confiáveis](../reliability/index.md).
 
 ## <a name="app-service"></a>Serviço de Aplicativo
 
@@ -143,7 +143,7 @@ Caso esteja usando o Cache Redis como um cache de dados temporário e não como 
 
 **Coloque cada camada de aplicativo em um conjunto de disponibilidade separado.** Em um aplicativo de N camadas, não coloque as VMs de camadas diferentes no mesmo conjunto de disponibilidade. VMs em um conjunto de disponibilidade são colocadas em FDs (domínios de falha) e UDs (domínios de atualização). No entanto, para obter o benefício de redundância de FDs e UDs, todas as VMs no conjunto de disponibilidade devem ser capazes de lidar com as mesmas solicitações de cliente.
 
-**Replique VMs usando o Azure Site Recovery.** Quando você replicar VMs do Azure usando a [Recuperação de Site][site-recovery], todos os discos de VM serão replicados continuamente para a região de destino assincronamente. Os pontos de replicação são criados a cada poucos minutos. Isso fornece um RPO (Objetivo de Ponto de Recuperação) na ordem de minutos. Realize a recuperação de desastre quantas vezes quiser sem afetar o aplicativo de produção ou a replicação contínua. Para saber mais, confira [Realizar uma análise detalhada da recuperação de desastre para o Azure][site-recovery-test].
+**Replique VMs usando o Azure Site Recovery.** Quando você replicar VMs do Azure usando a [Recuperação de Site][site-recovery], todos os discos de VM serão replicados continuamente para a região de destino assincronamente. Os pontos de replicação são criados a cada poucos minutos. Isso fornece um RPO (Objetivo de Ponto de Recuperação) na ordem de minutos. Você pode realizar a recuperação de desastre quantas vezes quiser, sem afetar o aplicativo de produção ou a replicação contínua. Para saber mais, confira [Realizar uma análise detalhada da recuperação de desastre para o Azure][site-recovery-test].
 
 **Escolha o tamanho de VM correto com base nos requisitos de desempenho.** Ao mover uma carga de trabalho existente para o Azure, comece com o tamanho da VM que mais se aproxima de seus servidores locais. Em seguida, meça o desempenho da carga de trabalho real com relação à CPU, memória e IOPS e ajuste o tamanho, se necessário. Isso ajuda a garantir que o aplicativo se comporte como esperado em um ambiente de nuvem. Além disso, se você precisar de várias NICs, esteja ciente do limite de NIC para cada tamanho.
 

@@ -1,18 +1,18 @@
 ---
-title: 'CAF: Empresa de pequeno a médio porte - política corporativa inicial por trás da estratégia de governança'
+title: 'CAF: Empresa de pequeno a médio porte - diretiva corporativa inicial por trás da estratégia de governança'
 titleSuffix: Microsoft Cloud Adoption Framework for Azure
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
 ms.custom: governance
-ms.date: 2/11/2019
-description: Empresa de pequeno a médio porte - política corporativa inicial por trás da estratégia de governança
+ms.date: 02/11/2019
+description: Empresa de pequeno a médio porte - diretiva corporativa inicial por trás da estratégia de governança
 author: BrianBlanchard
-ms.openlocfilehash: 4f49d0aae2c6ab5a5c8feba669cbbb904af2773b
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: 2133145c9933ad450ea3cc55ecd68b8a667df783
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900212"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640015"
 ---
 # <a name="small-to-medium-enterprise-initial-corporate-policy-behind-the-governance-strategy"></a>Empresas de pequeno a médio porte: Política corporativa inicial por trás da estratégia de governança
 
@@ -37,7 +37,7 @@ A tolerância a riscos atual é alta e o apetite de investir em governança de n
 
 [!INCLUDE [policy-statements](../../../../../includes/cloud-adoption/governance/policy-statements.md)]
 
-## <a name="next-steps"></a>Próximas etapas
+## <a name="next-steps"></a>Próximos passos
 
 Essa política corporativa prepara a equipe de governança de nuvem para implementar a governança MVP, que será a base para a adoção. A próxima etapa é implementar esse MVP.
 

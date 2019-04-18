@@ -6,12 +6,12 @@ ms.date: 02/12/2018
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
-ms.openlocfilehash: 281a2e9995d1d04aa9688e811e0d4ff8088fe30b
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: fdad7e9241ddd9c11c18e31a1fd2da5a163d05ac
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58249701"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640508"
 ---
 # <a name="natural-language-processing"></a>Processamento de idioma natural
 
@@ -24,7 +24,7 @@ O NLP (processamento de idioma natural) é usado para tarefas, como análise de 
 O NLP pode ser usado para classificar documentos, como a rotulagem de documentos como confidenciais ou spam. O resultado do NLP pode ser usado para processamento ou pesquisa posteriores. Outro uso do NLP é resumir o texto identificando as entidades presentes no documento. Essas entidades também podem ser usadas para marcar documentos com palavras-chave, o que permite a pesquisa e recuperação com base no conteúdo. As entidades podem ser combinadas em tópicos, com resumos que descrevem os tópicos importantes presentes em cada documento. Os tópicos detectados podem ser usados para categorizar os documentos para navegação ou enumerar documentos relacionados, considerando um tópico selecionado. Outro uso do NLP é pontuar um texto em relação ao sentimento, a fim de avaliar o caráter positivo ou negativo de um documento. Essas abordagens usam muitas técnicas do processamento de idioma natural, como:
 
 - **Gerador de token**. Divisão do texto em palavras ou frases.
-- **Lematização**. Normalização de palavras, de modo que diferentes formas sejam mapeadas para a palavra canônica com o mesmo significado. Por exemplo, "correndo" e "correu" mapeados para "correr".
+- **Lematização**. Normalização de palavras para que diferentes formas sejam mapeadas para a palavra canônica com o mesmo significado. Por exemplo, "correndo" e "correu" mapeados para "correr".
 - **Extração de entidade**. Identificação de sujeitos no texto.
 - **Detecção de parte do discurso**. Identificação do texto como um verbo, substantivo, particípio, sintagma verbal e assim por diante.
 - **Detecção de limites de sentenças**. Detecção de frases completas em parágrafos de texto.

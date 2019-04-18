@@ -8,12 +8,12 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seojan19, microservices
-ms.openlocfilehash: cc72f61003f4146fd65e501feebda0c0d1d27993
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 87a9dd31b6d935dd11a5a2a2950b6de11f337741
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58245087"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639964"
 ---
 # <a name="microservices-architecture-style"></a>Estilo de arquitetura de microsserviços
 
@@ -71,7 +71,7 @@ Considere esse estilo de arquitetura para:
 
 - **Equipes pequenas e focadas**. As equipes podem se concentrar em um serviço. O escopo menor de cada serviço torna a base de código mais fácil de entender e é mais fácil para novos membros da equipe fazerem a expansão.
 
-- **Isolamento de falha**. Se um serviço falhar, ele não derrubará o aplicativo inteiro. No entanto, isso não significa que você obtém resiliência gratuitamente. Você ainda precisa seguir as melhores práticas de resiliência e padrões de design. Consulte [Desenvolvimento de aplicativos resilientes para o Azure][resiliency-overview].
+- **Isolamento de falha**. Se um serviço falhar, ele não derrubará o aplicativo inteiro. No entanto, isso não significa que você obtém resiliência gratuitamente. Você ainda precisa seguir as melhores práticas de resiliência e padrões de design. Ver [desenvolvendo aplicativos do Azure confiáveis][resiliency-overview].
 
 - **Pilhas de tecnologia mistas**. As equipes podem escolher a tecnologia mais adequada para seu serviço.
 
@@ -113,7 +113,7 @@ Considere esse estilo de arquitetura para:
 
 - Os serviços devem ter um acoplamento flexível e alta coesão funcional. Funções que provavelmente mudarão juntas devem ser empacotadas e implantadas juntas. Se residirem em serviços separados, esses serviços acabarão sendo fortemente acoplados, porque uma alteração em um serviço exigirá atualizar outro. Uma comunicação excessivamente prolixa entre dois serviços pode ser um sintoma de acoplamento forte e coesão baixa.
 
-- Isole falhas. Use estratégias de resiliência para impedir que falhas em um serviço distribuam-se em cascata. Consulte [Padrões de resiliência][resiliency-patterns] e [Design de aplicativos resilientes][resiliency-overview].
+- Isole falhas. Use estratégias de resiliência para impedir que falhas em um serviço distribuam-se em cascata. Ver [padrões de resiliência] [ resiliency-patterns] e [Projetando aplicativos confiáveis][resiliency-overview].
 
 ## <a name="next-steps"></a>Próximas etapas
 
@@ -121,5 +121,5 @@ Para obter orientações detalhadas sobre como criar uma arquitetura de microsse
 
 <!-- links -->
 
-[resiliency-overview]: ../../resiliency/index.md
+[resiliency-overview]: ../../reliability/index.md
 [resiliency-patterns]: ../../patterns/category/resiliency.md

@@ -9,12 +9,12 @@ ms.service: architecture-center
 ms.subservice: example-scenario
 ms.custom: fasttrack, Linux
 social_image_url: /azure/architecture/example-scenario/infrastructure/media/azure-citrix-sample-diagram.png
-ms.openlocfilehash: 77093cba0e5646146ec9de68655754d9ac1e5461
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: e59e785df80efc9de134d27664ba1581a61dd1d1
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58248481"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640270"
 ---
 # <a name="linux-virtual-desktops-with-citrix"></a>Áreas de trabalho virtuais do Linux com o Citrix
 
@@ -71,7 +71,7 @@ Nesse cenário, são usados os seguintes SKUs:
 - O [Banco de Dados SQL do Azure](/azure/sql-database/sql-database-technical-overview) é um banco de dados como serviço relacional (DBaaS) baseado na versão estável mais recente do Mecanismo de Banco de Dados do Microsoft SQL Server. Ele será usado para hospedar os bancos de dados da Citrix.
 - O [ExpressRoute](/azure/expressroute/expressroute-introduction) permite que você estenda suas redes locais até a nuvem da Microsoft por meio de conexão privada facilitada por um provedor de conectividade.
 - [Os Serviços de Domínio do Active Directory é usado para autenticação de usuários e serviços de diretório
-- Os [Conjuntos de disponibilidade do Azure](/azure/virtual-machines/windows/tutorial-availability-sets) garantem que as VMs implantadas no Azure sejam distribuídas entre vários nós de hardware isolados em um cluster. Isso garante que, se ocorrer uma falha de hardware ou de software no Azure, apenas um subconjunto de suas VMs será afetado e a solução geral permanecerá disponível e operacional.
+- [Conjuntos de disponibilidade do Azure](/azure/virtual-machines/windows/tutorial-availability-sets) garantirá que as VMs implantadas no Azure sejam distribuídas entre vários nós de hardware isolados em um cluster. Isso garante que, se ocorrer uma falha de hardware ou de software no Azure, apenas um subconjunto de suas VMs será afetado e a solução geral permanecerá disponível e operacional.
 - O [Citrix ADC (NetScaler)](https://www.citrix.com/products/citrix-adc) é um controlador de entrega de aplicativo que executa análise de tráfego específico do aplicativo para distribuir, otimizar e proteger de maneira inteligente o tráfego de rede da Camada 4-Camada 7 (L4-L7) para aplicativos da Web.
 - O [Citrix Storefront](https://www.citrix.com/products/citrix-virtual-apps-and-desktops/citrix-storefront.html) é uma loja de aplicativos corporativos que melhora a segurança e simplifica as implantações, oferecendo uma experiência de usuário quase nativa, moderna e incomparável no Citrix Receiver em qualquer plataforma. O StoreFront facilita o gerenciamento de ambientes multissites e de várias versões das áreas de trabalho e dos aplicativos virtuais do Citrix.
 - O [Servidor de licença do Citrix](https://www.citrix.com/buy/licensing/overview.html) gerenciará as licenças para produtos Citrix.

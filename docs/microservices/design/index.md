@@ -8,10 +8,10 @@ ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: microservices
 ms.openlocfilehash: 17e275e5b5f45233f7467192402cb28fce35c57b
-ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/08/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59068898"
 ---
 # <a name="designing-a-microservices-architecture"></a>Projetar uma arquitetura de microsserviços
@@ -23,7 +23,7 @@ Nesse conjunto de artigos, exploraremos como compilar e executar uma arquitetura
 - [Comunicação entre serviços](./interservice-communication.md)
 - [Design de API](./api-design.md)
 - [Gateways de API](./gateway.md)
-- [Considerações de dados](./data-considerations.md)
+- [Considerações sobre dados](./data-considerations.md)
 - [Padrões de design](./patterns.md)
 
 ## <a name="prerequisites"></a>Pré-requisitos

@@ -6,12 +6,12 @@ ms.date: 02/12/2018
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
-ms.openlocfilehash: 1551736d8ef3d2b82eb0a2fdb626330798ec1c65
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: aa578464947e51964fee9859395149b44b47fa00
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58246187"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639981"
 ---
 # <a name="extract-transform-and-load-etl"></a>ETL (extrair, transformar e carregar)
 
@@ -49,7 +49,7 @@ Na prática, o armazenamento de dados de destino é um [data warehouse](./data-w
 
 O armazenamento de dados somente gerencia o esquema dos dados e aplica o esquema na leitura. Por exemplo, um cluster Hadoop que usa o Hive descreverá uma tabela do Hive em que a fonte de dados é efetivamente um caminho para um conjunto de arquivos no HDFS. No SQL Data Warehouse, o PolyBase pode obter o mesmo resultado &mdash; criando uma tabela com os dados armazenados externamente ao próprio banco de dados. Quando os dados de origem são carregados, os dados presentes nas tabelas externas podem ser processados usando as funcionalidades do armazenamento de dados. Em cenários de Big Data, isso significa que o armazenamento de dados tem a capacidade de MPP (processamento paralelo maciço), que divide os dados em partes menores e distribui o processamento das partes entre vários computadores em paralelo.
 
-Normalmente, a fase final do pipeline ELT é transformar os dados de origem em um formato final que é mais eficiente para os tipos de consultas que precisam de suporte. Por exemplo, os dados podem ser particionados. Além disso, o ELT pode usar formatos de armazenamento otimizados como o Parquet, que armazena dados orientados por linha em uma forma de coluna e fornece indexação otimizada.
+Normalmente, a fase final do pipeline ELT é transformar os dados de origem em um formato final que é mais eficiente para os tipos de consultas que precisam de suporte. Por exemplo, os dados podem ser particionados. Além disso, o ELT pode usar os formatos de armazenamento otimizados como o Parquet, que armazena dados orientado por linha em uma forma de coluna e fornece indexação otimizada.
 
 Serviço do Azure relevante:
 
@@ -66,7 +66,7 @@ Outras ferramentas:
 
 No contexto de pipelines de dados, o fluxo de controle garante o processamento ordenado de um conjunto de tarefas. Para impor a ordem de processamento correta dessas tarefas, restrições de precedência são usadas. Considere essas restrições como conectores em um diagrama de fluxo de trabalho, conforme mostrado na imagem abaixo. Cada tarefa tem um resultado, como êxito, falha ou conclusão. Qualquer tarefa posterior não inicia o processamento até que seu predecessor tenha concluído com um desses resultados.
 
-Os fluxos de controle executam fluxos de dados como uma tarefa. Em uma tarefa de fluxo de dados, os dados são extraídos de uma fonte, transformados ou carregados em um armazenamento de dados. A saída de uma tarefa de fluxo de dados pode ser a entrada para a próxima tarefa de fluxo de dados e os fluxos de dados podem ser executados em paralelo. Ao contrário de fluxos de controle, não é possível adicionar restrições entre tarefas em um fluxo de dados. No entanto, é possível adicionar um visualizador de dados para observar os dados conforme eles são processados por cada tarefa.
+Os fluxos de controle executam fluxos de dados como uma tarefa. Em uma tarefa de fluxo de dados, os dados são extraídos de uma fonte, transformados ou carregados em um armazenamento de dados. A saída de tarefa de fluxo de dados pode ser a entrada para a próxima tarefa de fluxo de dados e fluxos de dados podem ser executados em paralelo. Ao contrário de fluxos de controle, não é possível adicionar restrições entre tarefas em um fluxo de dados. No entanto, é possível adicionar um visualizador de dados para observar os dados conforme eles são processados por cada tarefa.
 
 ![Fluxo de Dados executado como uma tarefa em um Fluxo de Controle](../images/control-flow-data-flow.png)
 
@@ -87,7 +87,7 @@ Outras ferramentas:
 - [Data warehouses](./data-warehousing.md)
 - [Orquestração de pipeline](../technology-choices/pipeline-orchestration-data-movement.md)
 
-## <a name="next-steps"></a>Próximas etapas
+## <a name="next-steps"></a>Próximos passos
 
 As seguintes arquiteturas de referência mostram os pipelines ELT de ponta a ponta no Azure:
 

@@ -9,12 +9,12 @@ ms.service: architecture-center
 ms.subservice: example-scenario
 ms.custom: fasttrack
 social_image_url: /azure/architecture/example-scenario/apps/media/architecture-ecommerce-scenario.png
-ms.openlocfilehash: 989dec6afccbb836b61eb32e39904f43ffff65ac
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: b10ffaafb6479fef89e6691a686c018ac6ce5632
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58244007"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640746"
 ---
 # <a name="an-e-commerce-front-end-on-azure"></a>Um front-end de comércio eletrônico no Azure
 
@@ -103,7 +103,7 @@ Outras opções para a camada de dados incluem:
 - Considere a possibilidade de aproveitar o [padrão de disjuntor][ circuit-breaker] para fornecer um tratamento de erros normal caso uma parte do aplicativo não esteja disponível.
 - Analise os [padrões de design comuns para resiliência][design-patterns-resiliency] e considere a implementação deles quando apropriado.
 - Você pode encontrar várias [práticas recomendadas para o Serviço de Aplicativo][resiliency-app-service] no Centro de Arquitetura do Azure.
-- Considere o uso [replicação geográfica][sql-geo-replication] ativa para a camada de dados e armazenamento com [redundância geográfica][storage-geo-redudancy] para imagens e filas.
+- Considere o uso [replicação geográfica][sql-geo-replication] ativa para a camada de dados e armazenamento com [redundância geográfica][storage-geo-redundancy] para imagens e filas.
 - Para uma discussão mais detalhada sobre [resiliência][resiliency], consulte o artigo relevante no Centro de Arquitetura do Azure.
 
 ## <a name="deploy-the-scenario"></a>Implantar o cenário
@@ -162,4 +162,4 @@ Fornecemos três perfis de custo de exemplo com base na quantidade de tráfego q
 [secure-development]: https://www.microsoft.com/SDL/process/design.aspx
 [service-bus]: /azure/service-bus-messaging/
 [sql-geo-replication]: /azure/sql-database/sql-database-geo-replication-overview
-[storage-geo-redudancy]: /azure/storage/common/storage-redundancy-grs
+[storage-geo-redundancy]: /azure/storage/common/storage-redundancy-grs

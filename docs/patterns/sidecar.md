@@ -9,12 +9,12 @@ ms.topic: design-pattern
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 2b0e46a06f7fe47f281f726f73128db1d7dd1067
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 20a63cdd935f28cc47686238d34d654da2798985
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58243557"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639590"
 ---
 # <a name="sidecar-pattern"></a>Padrão sidecar
 
@@ -46,7 +46,7 @@ Vantagens de usar um padrão de sidecar:
 
 - Por causa de sua proximidade do aplicativo principal, não há latência significativa ao se comunicar entre eles.
 
-- Mesmo para aplicativos que não fornecem um mecanismo de extensibilidade, você pode usar um sidecar para estender a funcionalidade anexando-o como o próprio processo no mesmo host ou subcontêiner como o aplicativo principal.
+- Mesmo para aplicativos que não fornecem um mecanismo de extensibilidade, você pode usar um sidecar para estender a funcionalidade anexando-o como seu próprio processo no mesmo host ou subcontêiner como o aplicativo principal.
 
 O padrão de sidecar geralmente é usado com contêineres e conhecido como um contêiner de sidecar ou sidekick.
 

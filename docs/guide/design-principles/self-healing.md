@@ -8,12 +8,12 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seojan19
-ms.openlocfilehash: 5e5af0be41fa892e490d556ef4286d5367144fd9
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 84bc6e5c8d78517e3dc1dc0ee8d250346a33ce43
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58249501"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59641188"
 ---
 # <a name="design-for-self-healing"></a>Design de autorrecuperação
 
@@ -59,7 +59,7 @@ Além disso, não considere apenas grandes eventos, como interrupções regionai
 
 **Adotar a engenharia caos**. A engenharia do caos estende a noção de injeção de falha injetando aleatoriamente falhas ou condições anormais em instâncias de produção.
 
-Para uma abordagem estruturada para tornar seus aplicativos aptos a realizar autorrecuperação, consulte [Desenvolvimento de aplicativos resilientes para o Azure][resiliency-overview].
+Para uma abordagem estruturada para tornar seus aplicativos autorrecuperação, consulte [projetar aplicativos confiáveis do Azure][resiliency-overview].
 
 <!-- links -->
 
@@ -67,7 +67,7 @@ Para uma abordagem estruturada para tornar seus aplicativos aptos a realizar aut
 [compensating-transactions]: ../../patterns/compensating-transaction.md
 [leader-election]: ../../patterns/leader-election.md
 [load-level]: ../../patterns/queue-based-load-leveling.md
-[resiliency-overview]: ../../resiliency/index.md
+[resiliency-overview]: ../../reliability/index.md
 [retry]: ../../patterns/retry.md
 [throttle]: ../../patterns/throttling.md
 [transient-fault-handling]: ../../best-practices/transient-faults.md

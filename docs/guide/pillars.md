@@ -8,12 +8,12 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seojan19
-ms.openlocfilehash: 76870f58fc957f6d82f6dc176d1c538c795a7d20
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: d6eed98c6e224956942c45b52621ec02832be015
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58243057"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639746"
 ---
 # <a name="pillars-of-software-quality"></a>Pilares da qualidade de software
 
@@ -76,8 +76,6 @@ No Azure, o SLA (Contrato de Nível de Serviço) descreve os compromissos da Mic
 
 Os aplicativos frequentemente dependem de vários serviços. Em geral, a probabilidade de qualquer serviço sofrer tempo de inatividade é independente. Por exemplo, suponha que seu aplicativo dependa de dois serviços, cada um com um SLA de 99,9%. O SLA de composição para ambos os serviços é de 99,9% &times; 99,9% &asymp; 99,8% ou um pouco menos que cada serviço por si só.
 
-Use a [Lista de verificação de disponibilidade][availability-checklist] para examinar o seu design de um ponto de vista de disponibilidade.
-
 ### <a name="availability-guidance"></a>Diretriz de disponibilidade
 
 - [Padrões de design para disponibilidade][availability-patterns]
@@ -104,11 +102,9 @@ Dito isso, você ainda precisa criar resiliência em seu aplicativo. Estratégia
 
 Ao criar um aplicativo para ser resiliente, você deve entender seus requisitos de disponibilidade. Quanto tempo de inatividade é aceitável? Trata-se parcialmente de uma questão de custo. Quanto o tempo de inatividade em potencial custará para sua empresa? Quanto você deve investir para tornar o aplicativo altamente disponível?
 
-Use a [Lista de verificação de resiliência][resiliency-checklist] para examinar o design de um ponto de vista de resiliência.
-
 ### <a name="resiliency-guidance"></a>Diretrizes de resiliência
 
-- [Projetando aplicativos resilientes para Azure][resiliency]
+- [Desenvolvendo aplicativos do Azure confiáveis][resiliency]
 - [Padrões de design para resiliência][resiliency-patterns]
 - Melhores práticas: [Tratamento de falhas transitórias][transient-fault-handling], [Diretriz de nova tentativa para serviços específicos][retry-service-specific]
 
@@ -173,7 +169,7 @@ Use o Key Vault para proteger segredos e chaves de criptografia. Ao usar o Key V
 
 [dr-guidance]: ../resiliency/disaster-recovery-azure-applications.md
 [identity-ref-arch]: ../reference-architectures/identity/index.md
-[resiliency]: ../resiliency/index.md
+[resiliency]: ../reliability/index.md
 
 [ad-subscriptions]: /azure/active-directory/active-directory-how-subscriptions-associated-directory
 [data-warehouse-encryption]: /azure/data-lake-store/data-lake-store-security-overview#data-protection
@@ -205,7 +201,5 @@ Use o Key Vault para proteger segredos e chaves de criptografia. Ao usar o Key V
 [transient-fault-handling]: ../best-practices/transient-faults.md
 
 <!-- checklist -->
-[availability-checklist]: ../checklist/availability.md
 [devops-checklist]: ../checklist/dev-ops.md
-[resiliency-checklist]: ../checklist/resiliency.md
 [scalability-checklist]: ../checklist/scalability.md

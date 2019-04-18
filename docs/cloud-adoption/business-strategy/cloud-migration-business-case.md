@@ -8,12 +8,12 @@ description: Considerações ao criar uma justificativa comercial para a migraç
 author: BrianBlanchard
 ms.date: 12/10/2018
 ms.topic: guide
-ms.openlocfilehash: 21c2b877a0f329711027f020fd0047479e8c7bfb
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: a2fdb225fb978eaade39850560ca1adbbb3476e7
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55898299"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640644"
 ---
 # <a name="build-a-business-justification-for-cloud-migration"></a>Criar uma justificativa de negócios para a migração de nuvem
 
@@ -30,8 +30,8 @@ As migrações para a nuvem podem gerar retorno sobre o investimento (ROI) antec
 **Mito: os custos com servidores fundamentam os casos comerciais a favor da migração para a nuvem.** Às vezes, isso é verdade. Para algumas empresas, é importante reduzir as despesas de capital contínuas relacionadas aos servidores. No entanto, isso depende de vários fatores. As empresas com um ciclo de atualização de hardware de cinco a oito anos provavelmente não verão retornos rápidos sobre sua migração para a nuvem. As empresas com ciclos de atualização padronizados ou impostos podem zerar o custo rapidamente. Em ambos os casos, outras despesas podem ser gatilhos financeiros que justificam a migração. A seguir estão alguns exemplos de custos que normalmente são ignorados quando a análise é feita somente visualizando os servidores ou as VMs:
 
 - Os custos de software com virtualização, servidores e middleware podem ser altos. Os provedores de nuvem eliminam alguns desses custos. Dois exemplos de um provedor de nuvem que reduz custos com virtualização são os programas [Benefícios Híbridos do Azure](https://azure.microsoft.com/pricing/hybrid-benefit/#services) e [Reservas](https://azure.microsoft.com/reservations/).
-- Prejuízo nos negócios devido a interrupções podem rapidamente ultrapassar os custos de hardware ou software. Se o datacenter atual está instável, trabalhe com a empresa para quantificar o impacto das interrupções em termos de custos de oportunidade ou de custos comerciais reais.
-- Os custos ambientais também podem ter um grande impacto. Para a família americana média, suas casas são o maior investimento e o custo mais alto no seu orçamento. Geralmente, o mesmo acontece com data centers. Imóveis, instalações e custos com serviços essenciais representam uma parte importante dos custos locais. Quando datacenters são desativados, essas instalações podem ser adaptadas pela empresa, ou a empresa poderia potencialmente se livrar dos custos inteiramente.
+- Prejuízo nos negócios devido a interrupções podem rapidamente ultrapassar os custos de hardware ou software. Se o datacenter atual está instável, trabalhe com os negócios a quantificar o efeito de interrupções em termos de custos de oportunidade ou negócios reais.
+- Os custos ambientais também podem ser significativos. Para a família americana média, suas casas são o maior investimento e o custo mais alto no seu orçamento. Geralmente, o mesmo é verdadeiro para data centers. Imóveis, instalações e custos com serviços essenciais representam uma parte importante dos custos locais. Quando datacenters são desativados, essas instalações podem ser adaptadas a empresa ou potencialmente a empresa poderia ser liberada dos custos inteiramente.
 
 **Mito: Despesas operacionais (OpEx) são melhores do que despesas de capital (CapEx).** Conforme explicado no artigo sobre [resultados fiscais](business-outcomes/fiscal-outcomes.md), OpEx pode ser uma coisa boa. No entanto, há diversos setores que veem o OpEx como algo negativo. A seguir estão alguns exemplos que poderiam exigir maior integração com os departamentos de contabilidade e comercial em relação à conversa sobre OpEx:
 
@@ -70,17 +70,17 @@ Destrinchar esta fórmula cria uma exibição das fórmulas, específica da migr
 
 ## <a name="migration-specific-initial-investment"></a>Investimento inicial específico da migração
 
-- Provedores de nuvem como o Azure oferecem calculadoras para estimar os investimentos em nuvem. Um exemplo desse tipo de calculadora é a [Calculadora de preços do Azure](https://azure.microsoft.com/en-in/pricing/).
+- Provedores de nuvem como o Azure oferecem calculadoras para estimar os investimentos em nuvem. Um exemplo desse tipo de calculadora é a [Calculadora de preços do Azure](https://azure.microsoft.com/pricing).
 - Alguns provedores de nuvem também dão suporte a calculadoras de delta do custo. Um exemplo de uma calculadora de delta de custo é a [Calculadora do Custo Total de Propriedade (TCO) do Azure](https://azure.com/tco).
 - Para estruturas de custo mais refinadas, considere um exercício de [Planejamento de Propriedade Digital](../digital-estate/overview.md).
 - Estime o custo da migração.
-- Estime o custo das oportunidades de treinamento esperadas, se houver. O [Microsoft Learn](https://docs.microsoft.com/learn/) poderá ajudar a reduzir esses custos.
+- Estime o custo das oportunidades de treinamento esperadas, se houver. O [Microsoft Learn](/learn) poderá ajudar a reduzir esses custos.
 - Em algumas empresas, o tempo investido pelos membros da equipe existente pode precisar ser incluído nos custos iniciais. Consulte o departamento financeiro para obter diretrizes.
 - Discuta custos adicionais ou indiretos com o departamento financeiro para validação.
 
 ## <a name="migration-specific-revenue-deltas"></a>Deltas de receita específicos da migração
 
-Esse aspecto muitas vezes é ignorado durante a criação de uma justificativa comercial para a migração. Em algumas áreas, a nuvem pode cortar custos. No entanto, o objetivo final de qualquer transformação é produzir resultados melhores ao longo do tempo. Considere o impacto mais à frente para entender o aumento da receita a longo prazo. Quais novas tecnologias estarão disponíveis para os negócios após a migração que não podem ser aproveitadas atualmente? Quais projetos ou objetivos de negócios estão vetados pela dependência de tecnologias herdadas? Quais programas estão em espera, esperando altos custos de tecnologia em despesas de capital?
+Esse aspecto muitas vezes é ignorado durante a criação de uma justificativa comercial para a migração. Em algumas áreas, a nuvem pode cortar custos. No entanto, o objetivo final de qualquer transformação é produzir resultados melhores ao longo do tempo. Considere o impacto mais à frente para entender o aumento da receita a longo prazo. Quais novas tecnologias estará disponíveis para os negócios após a migração não pode ser usados hoje em dia? Quais projetos ou objetivos de negócios estão vetados pela dependência de tecnologias herdadas? Quais programas estão em espera, esperando altos custos de tecnologia em despesas de capital?
 
 Após considerar as oportunidades viabilizadas pela nuvem, trabalhe com a empresa para calcular o aumento de receita que poderia ser atingido com essas oportunidades.
 
@@ -88,26 +88,26 @@ Após considerar as oportunidades viabilizadas pela nuvem, trabalhe com a empres
 
 Calcule todas as alterações nos custos que resultarão da migração proposta. Confira [Modelos financeiros](financial-models.md) para obter detalhes sobre os diferentes tipos de deltas de custo. Os provedores de nuvem geralmente fornecem ferramentas para calcular delta de custo. Um exemplo de uma calculadora de delta de custo é a [Calculadora do Custo Total de Propriedade (TCO) do Azure](https://azure.com/tco).
 
-Outros exemplos de custos que podem ser reduzidos em uma migração para a nuvem:
+Outros exemplos de custos que podem ser reduzidos em uma migração na nuvem:
 
-- Encerramento ou redução de data center (custos ambientais)
+- Encerramento do Datacenter ou redução (custos ambientais)
 - Redução no consumo de energia (custos ambientais)
 - Encerramento de rack (recuperação de ativos físicos)
-- Impedimento de uma atualização de hardware (provisão)
-- Impedimento de uma renovação de software (redução de custos operacionais ou provisão)
-- Consolidação de fornecedores (redução de custos operacionais e possível redução de custos intangíveis)
+- Prevenção de atualização de hardware (redução de custo)
+- Impedimento de renovação de software (redução de custo ou de redução de custos operacionais)
+- Consolidação de fornecedor (redução de custos operacionais e redução de custos com software potencial)
 
 ## <a name="when-roi-results-are-surprising"></a>Quando os resultados do ROI são surpreendentes
 
-Se o ROI da migração para a nuvem não estiver de acordo com as expectativas, talvez seja bom rever os mitos comuns indicados no início deste artigo.
+Se o ROI da migração na nuvem não corresponder às expectativas, ele pode ser valioso para rever os mitos comuns listados no início deste artigo.
 
 No entanto, é importante entender que um resultado de economia de custo nem sempre é possível. Há aplicativos que custam mais para funcionar na nuvem do que localmente. Esses aplicativos podem afetar significativamente os resultados em uma análise.
 
 Quando o ROI estiver abaixo de 20%, considere um exercício de [Planejamento de Propriedade Digital](../digital-estate/overview.md), com bastante atenção à [racionalização](../digital-estate/rationalize.md). Durante a análise quantitativa, execute uma revisão de cada aplicativo para encontrar cargas de trabalho que distorcem os resultados. Pode ser aconselhável remover essas cargas de trabalho do plano. Se houver dados de uso disponíveis, considere reduzir o tamanho das VMs para corresponder ao uso.
 
-Se o ROI ainda estiver desalinhado, procure a ajuda de seu representante de vendas da Microsoft ou [entre em contato com um parceiro experiente](https://azure.microsoft.com/en-us/migration/partners/).
+Se o ROI ainda estiver desalinhado, procure a ajuda de seu representante de vendas da Microsoft ou [entre em contato com um parceiro experiente](https://azure.microsoft.com/migration/support).
 
-## <a name="next-steps"></a>Próximas etapas
+## <a name="next-steps"></a>Próximos passos
 
 > [!div class="nextstepaction"]
 > [Criar um modelo financeiro para a transformação de nuvem](./financial-models.md)
