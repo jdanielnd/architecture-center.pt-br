@@ -3,18 +3,18 @@ title: Acelerar a modelagem baseada em imagem digital no Azure
 titleSuffix: Azure Example Scenarios
 description: Acelere a modelagem baseada em imagem digital no Azure usando o Avere e o Agisoft PhotoScan
 author: adamboeglin
-ms.date: 1/11/2019
+ms.date: 01/11/2019
 ms.topic: example-scenario
 ms.service: architecture-center
 ms.subservice: example-scenario
 ms.custom: cat-team, Linux, HPC
 social_image_url: /azure/architecture/example-scenario/infrastructure/media/architecture-image-modeling.png
-ms.openlocfilehash: 87b43347fb5f4baec0081a67c8b003dccd2fdf0d
-ms.sourcegitcommit: 14226018a058e199523106199be9c07f6a3f8592
-ms.translationtype: HT
+ms.openlocfilehash: 981d9f01ef12f75d9b292196f754f3a0affa791a
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 01/31/2019
-ms.locfileid: "55483004"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640372"
 ---
 # <a name="accelerate-digital-image-based-modeling-on-azure"></a>Acelerar a modelagem baseada em imagem digital no Azure
 
@@ -50,7 +50,7 @@ Esta arquitetura também inclui os controladores de domínio do Active Directory
 - O [Avere vFXT](/azure/avere-vfxt/avere-vfxt-overview) é um arquivo de solução de cache de arquivos que usa armazenamento de objeto e NAS (Network Attached Storage) para otimizar o armazenamento de grandes conjuntos de dados.  Ele inclui:
   - Controlador do Avere. Essa VM executa o script que instala o cluster do Avere vFXT e executa Ubuntu 18.04 LTS. A VM pode ser usada posteriormente para adicionar ou remover nós de cluster e também para acabar com o cluster.
   - Cluster do vFXT. Pelo menos três VMs são usadas, uma para cada um dos nós do Avere vFXT com base no sistema operacional Avere 5.0.2.1. Essas VMs formam o cluster do vFXT, que é anexado ao Armazenamento de Blobs do Azure.
-- Os [controladores de domínio do Microsoft Active Directory](/windows/desktop/ad/active-directory-domain-services) dão ao host acesso aos recursos do domínio e fornecem resolução de nomes DNS. O Avere vFXT adiciona vários registros; por exemplo, cada registro em um cluster do vFXT aponta para o endereço IP de cada nó do Avere vFXT. Nessa configuração, todas as VMs usam o padrão round robin para acessar exportações do vFXT.
+- Os [controladores de domínio do Microsoft Active Directory](/windows/desktop/ad/active-directory-domain-services) dão ao host acesso aos recursos do domínio e fornecem resolução de nomes DNS. Avere vFXT adiciona um número de registros &mdash; por exemplo, cada registro em um cluster vFXT aponta para o endereço IP de cada nó de vFXT Avere. Nessa configuração, todas as VMs usam o padrão round robin para acessar exportações do vFXT.
 - [Outras VMs](/azure/virtual-machines/) servem como jump boxes usadas pelo administrador para acessar os nós de processamento e do agendador. A jumpbox do Windows é obrigatória para permitir que o administrador acesse o nó de cabeçalho por meio do protocolo de área de trabalho remota. A segunda jumpbox é opcional e executa o Linux para administrar nós de trabalho.
 - Os [NSGs](/azure/virtual-network/manage-network-security-group) (Grupos de Segurança de Rede) limitam o acesso ao PIP (endereço IP público) e permitem as portas 3389 e 22 para acesso às VMs conectadas à sub-rede da Jumpbox.
 - O [Emparelhamento VNET](/azure/virtual-network/virtual-network-peering-overview) conecta uma rede virtual do PhotoScan a uma rede virtual do Avere.
@@ -71,7 +71,7 @@ Esse cenário foi projetado especificamente para fornecer armazenamento de alto 
 As considerações sobre a implantação dependem dos aplicativos e serviços usados, mas algumas observações se aplicam:
 
 - Ao criar aplicativos de alto desempenho, use o Armazenamento Premium do Azure e [otimize a camada de aplicativo](/azure/virtual-machines/windows/premium-storage-performance). Otimize o armazenamento para acesso frequente usando a [camada de acesso frequente](/azure/storage/blobs/storage-blob-storage-tiers) do Blob do Azure.
-- Use uma [opção de replicação](/azure/storage/common/storage-redundancy) de armazenamento que atenda às necessidades de desempenho e disponibilidade. Neste exemplo, o Avere vFXT está configurado para alta disponibilidade por padrão, com LRS (armazenamento com redundância local). Para balanceamento de carga, todas as VMs nessa instalação usam o padrão round robin para acessar as exportações do vFXT.
+- Usar um armazenamento [opção de replicação](/azure/storage/common/storage-redundancy) que atenda às suas necessidades de desempenho e disponibilidade. Neste exemplo, o Avere vFXT está configurado para alta disponibilidade por padrão, com LRS (armazenamento com redundância local). Para balanceamento de carga, todas as VMs nessa instalação usam o padrão round robin para acessar as exportações do vFXT.
 - Se o armazenamento de back-end for consumido por clientes do Windows e do Linux, use servidores Samba para dar suporte a nós do Windows. Uma [versão](https://github.com/paulomarquesc/beegfs-template) deste cenário de exemplo com base em BeeGFS usa Samba para dar suporte ao nó agendador da carga de trabalho de HPC (PhotoScan) em execução no Windows. Um balanceador de carga é implantado para atuar como uma substituição inteligente do round robin de DNS.
 - Execute aplicativos de HPC usando o tipo de VM mais adequado para sua carga de trabalho do [Windows](/azure/virtual-machines/windows/sizes-hpc) ou do [Linux](/azure/virtual-machines/linux/sizes?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
 - Para isolar a carga de trabalho de HPC dos recursos de armazenamento, implante cada uma em sua própria rede virtual e, em seguida, use o [emparelhamento](/azure/virtual-network/virtual-network-peering-overview) VNET para conectá-las. O emparelhamento cria uma conexão de baixa latência e alta largura de banda entre recursos em redes virtuais diferentes e roteia o tráfego pela infraestrutura de backbone da Microsoft somente por meio de endereços IP privados.
@@ -91,7 +91,7 @@ Considere as seguintes opções para melhorar ainda mais a segurança no cenári
 
 ## <a name="pricing"></a>Preços
 
-O custo de executar este cenário pode variar bastante, dependendo de vários fatores.  O número e o tamanho das VMs, a quantidade de armazenamento necessária e a quantidade de tempo exigida para concluir um trabalho determinarão seu custo.
+O custo de executar esse cenário pode variar muito, dependendo de vários fatores.  O número e o tamanho das VMs, a quantidade de armazenamento necessária e a quantidade de tempo exigida para concluir um trabalho determinarão seu custo.
 
 O perfil de custo de exemplo a seguir na [Calculadora de preços do Azure](https://azure.com/e/42362ddfd2e245a28a8e78bc609c80f3) baseia-se em uma configuração típica para Avere vFXT e PhotoScan:
 

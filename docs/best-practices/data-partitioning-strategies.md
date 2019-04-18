@@ -8,12 +8,12 @@ ms.topic: best-practice
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 4f973a6173e882d6ae839833bd3c5bf86f8d7fb6
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: bb810f549c78d16eabd4a96cd811cdc120cc8b6f
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55898129"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640933"
 ---
 # <a name="data-partitioning-strategies"></a>Estratégias de particionamento de dados
 
@@ -53,11 +53,11 @@ Pools elásticos tornam possível a adição ou remoção de fragmentos conforme
 
 Se um aplicativo precisar dividir um fragmento em dois fragmentos separados ou combinar os fragmentos, use a [ferramenta de mesclagem/divisão](/azure/sql-database/sql-database-elastic-scale-overview-split-and-merge). Essa ferramenta é executada como um serviço Web do Azure e migra os dados entre os fragmentos com segurança.
 
-O esquema de particionamento pode afetar significativamente o desempenho do sistema. Ele também pode afetar a taxa na qual os fragmentos devem ser adicionados ou removidos, ou esses dados devem ser reparticionados entre os fragmentos. Considere os seguintes pontos:
+O esquema de particionamento pode afetar significativamente o desempenho do seu sistema. Ele também pode afetar a taxa na qual os fragmentos devem ser adicionados ou removidos, ou esses dados devem ser reparticionados entre os fragmentos. Considere os seguintes pontos:
 
 - Agrupe os dados que são usados juntos no mesmo fragmento e evite operações que acessem os dados a partir de vários fragmentos. Um fragmento é um banco de dados SQL em si mesmo, e as junções entre bancos de dados devem ser executadas no lado do cliente.
 
-    Embora o Banco de Dados SQL não dê suporte a junções entre bancos de dados, você pode usar as ferramentas do Banco de Dados Elástico para realizar [consultas com vários segmentos](/azure/sql-database/sql-database-elastic-scale-multishard-querying). Uma consulta de vários fragmentos envia consultas individuais para cada banco de dados e mescla os resultados.
+    Embora o banco de dados SQL não oferece suporte a junções entre bancos de dados, você pode usar as ferramentas de banco de dados Elástico para realizar [consultas de vários fragmentos](/azure/sql-database/sql-database-elastic-scale-multishard-querying). Uma consulta de vários fragmentos envia consultas individuais para cada banco de dados e mescla os resultados.
 
 - Não crie um sistema que tenha dependências entre fragmentos. Restrições de integridade referencial, gatilhos e procedimentos armazenados em um banco de dados não podem fazer referência a objetos em outro.
 
@@ -135,7 +135,7 @@ As filas de armazenamento do Azure permitem implementar mensagens assíncronas e
 
 Cada fila de armazenamento tem um nome exclusivo dentro da conta de armazenamento na qual ela está contida. O Azure particiona filas com base no nome. Todas as mensagens para a mesma fila são armazenadas na mesma partição, que é controlada por um único servidor. Diferentes filas podem ser gerenciadas por diferentes servidores para ajudar a balancear a carga. A alocação de filas para servidores é transparente para aplicativos e usuários.
 
-Em um aplicativo de grande escala, não use a mesma fila de armazenamento para todas as instâncias do aplicativo, pois essa abordagem pode fazer com que o servidor que está hospedando a fila se torne um ponto de acesso. Em vez disso, use filas diferentes para diferentes áreas funcionais do aplicativo. As filas de armazenamento do Azure não dão suporte a transações; portanto, direcionar mensagens para diferentes filas deve ter pouco impacto na consistência das mensagens.
+Em um aplicativo de grande escala, não use a mesma fila de armazenamento para todas as instâncias do aplicativo, pois essa abordagem pode fazer com que o servidor que está hospedando a fila se torne um ponto de acesso. Em vez disso, use filas diferentes para diferentes áreas funcionais do aplicativo. As filas do armazenamento do Azure não damos suporte a transações, portanto, direcionar mensagens para diferentes filas deve ter pouco efeito na consistência das mensagens.
 
 Uma fila de armazenamento do Azure pode manipular até 2.000 mensagens por segundo. Se precisar processar mensagens a uma taxa maior que essa, considere criar várias filas. Por exemplo, em um aplicativo global, crie filas de armazenamento separadas em contas de armazenamento separadas para manipular instâncias do aplicativo que estão sendo executadas em cada região.
 
