@@ -8,10 +8,10 @@ layout: LandingPage
 ms.topic: landing-page
 author: BrianBlanchard
 ms.openlocfilehash: cb5f5a61ad71d60e0e5805fd7e8d6bd78f893293
-ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/08/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59068796"
 ---
 # <a name="microsoft-cloud-adoption-framework-for-azure"></a>Microsoft Cloud Adoption Framework for Azure
@@ -26,7 +26,7 @@ CAF fornece orientação técnica para o Microsoft Azure. Reconhecendo que os cl
 
 O CAF atualmente é oferecido como uma visualização pública. O framework entrará em GA (disponibilidade geral) quando as metas de aspiração acima forem atendidas. Nesta versão de visualização do CAF, é a principal área de foco [governança de nuvem](./governance/journeys/overview.md). CAF será expandido com frequência enquanto se movimentam mais próximo à versão de GA.
 
-## <a name="audience"></a>Público
+## <a name="audience"></a>Público-alvo
 
 O conteúdo em CAF afeta os negócios, tecnologia e cultura das empresas. As funções afetadas incluem os líderes comerciais, os tomadores de decisão comercial, tomadores de decisão de TI, finanças, administradores da empresa, operações de TI, segurança de TI e conformidade, governança de TI, proprietários de desenvolvimento de carga de trabalho e proprietários de operações de carga de trabalho. Cada função usa o jargão diferente. Cada uma delas têm diferentes objetivos e indicadores chave de desempenho. Um único conjunto de conteúdo não é possível abordar cada esses públicos com eficiência.
 

@@ -6,18 +6,19 @@ layout: LandingPage
 ms.topic: landing-page
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: 57f28808d3c49c74bc010133c670a186206a4466
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.openlocfilehash: f49640f4a994bf1cdca8029260fc95a5da323ff2
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58344522"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640610"
 ---
 # <a name="azure-virtual-datacenter-and-the-enterprise-control-plane"></a>Datacenter Virtual do Azure e o Plano de controle empresarial
 
 O Datacenter Virtual do Azure é uma abordagem para aproveitar ao máximo os recursos da plataforma de nuvem do Azure, respeitando simultaneamente suas políticas de segurança e de rede existentes. Ao implantar cargas de trabalho da empresa na nuvem, as organizações de TI e as unidades de negócios devem equilibrar a governança com a agilidade do desenvolvedor. O Datacenter Virtual do Azure fornece modelos para alcançar esse equilíbrio com ênfase na governança.
- 
+
 ## <a name="resources"></a>Recursos
+
 <table>
 <tr>
     <td style="width: 64px; vertical-align: middle;"><a href="https://aka.ms/VDC/Concepts"><img src="../_images/virtual-datacenter.svg" alt="Virtual Datacenter eBook" /></a></td>
@@ -58,6 +59,5 @@ A implantação de cargas de trabalho para a nuvem gera a necessidade de desenvo
 Estes quatro componentes possibilitam o Datacenter Virtual do Azure: identidade, criptografia, rede definida pelo software e conformidade (incluindo logs e relatórios).
 
 No modelo do Datacenter Virtual do Azure, é possível aplicar políticas de isolamento, tornar a nuvem mais parecida com os datacenters físicos que você conhece e alcançar os níveis de segurança e confiança de que você precisa. Quatro componentes que qualquer equipe de TI empresarial pensariam em tornar possíveis: rede definida pelo software, criptografia, gerenciamento de identidade e padrões de conformidade e certificações subjacentes à plataforma do Azure. Os quatro são fundamentais para transformar um datacenter virtual em uma extensão confiável de seu investimento de infraestrutura existente.
-
 
 Continue lendo o livro eletrônico <a href="https://aka.ms/VDC/eBook">Datacenter Virtual do Azure: conceitos</a>.
