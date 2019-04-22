@@ -9,12 +9,12 @@ ms.topic: design-pattern
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: c8fe971e031825632c2bb157bfd23e15f56520a3
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.openlocfilehash: f0cc64c555be092f9efb51e1f769c3668ce281af
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58343468"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59641001"
 ---
 # <a name="cloud-design-patterns"></a>Padrões de design na nuvem
 
@@ -58,7 +58,7 @@ Cada padrão descreve o problema ao qual o padrão se destina, as consideraçõe
     <td style="width: 64px; vertical-align: middle;"><a href="./category/management-monitoring.md"><img src="_images/category/management-monitoring.svg" alt="Management and Monitoring" /></a></td>
     <td>
         <h3><a href="./category/management-monitoring.md">Gerenciamento e Monitoramento</a></h3>
-        <p>Os aplicativos de nuvem executados em um data center remoto em que você não tem controle total da infraestrutura ou, em alguns casos, o sistema operacional. Isso pode tornar o gerenciamento e o monitoramento mais difíceis do que uma implantação local. Os aplicativos devem expor informações de tempo de execução que operadores e administradores podem usar para gerenciar e monitorar o sistema, bem como suporte para alteração requisitos de negócios e personalização sem a necessidade do aplicativo a ser interrompido ou reimplantado.</p>
+        <p>Os aplicativos em nuvem são executados em um data center remoto em que você não tem controle total da infraestrutura ou, em alguns casos, do sistema operacional. Isso pode tornar o gerenciamento e o monitoramento mais difíceis do que uma implantação local. Os aplicativos devem expor informações de tempo de execução que operadores e administradores podem usar para gerenciar e monitorar o sistema, bem como suporte para alteração requisitos de negócios e personalização sem a necessidade do aplicativo a ser interrompido ou reimplantado.</p>
     </td>
 </tr>
 <tr>

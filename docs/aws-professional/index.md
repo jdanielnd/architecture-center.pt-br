@@ -9,12 +9,12 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 89434c0ce72b9f061e4b092354b1dcbaf683b7c6
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.openlocfilehash: 6e44953cccf39cc40be775f4043bcf8b1b890dae
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58346307"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59641154"
 ---
 # <a name="azure-for-aws-professionals"></a>Azure para profissionais do AWS
 
@@ -157,7 +157,7 @@ O backup do [armazenamento com redundância geográfica](/azure/storage/common/s
 
 - [Alta disponibilidade para os aplicativos do Azure](../resiliency/high-availability-azure-applications.md)
 
-- [Recuperação de desastre para aplicativos do Azure](../resiliency/disaster-recovery-azure-applications.md)
+- [Recuperação de desastre e falha para aplicativos do Azure](../reliability/disaster-recovery.md)
 
 - [Manutenção planejada para máquinas virtuais Linux no Azure](/azure/virtual-machines/linux/maintenance-and-updates)
 

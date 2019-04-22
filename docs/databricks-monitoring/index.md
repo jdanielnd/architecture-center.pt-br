@@ -3,12 +3,12 @@ title: Monitorando o Azure Databricks com o Azure Monitor
 description: Uma biblioteca do Scala para habilitar o monitoramento do Azure Databricks no Azure Log Analytics
 author: petertaylor9999
 ms.date: 03/26/2019
-ms.openlocfilehash: 4544d3abc3264ec459a80ac1a61a912e6d30d6b2
-ms.sourcegitcommit: 1a3cc91530d56731029ea091db1f15d41ac056af
+ms.openlocfilehash: 93798ccf74735a880eab2999008b1495e6a63e10
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: HT
 ms.contentlocale: pt-BR
-ms.lasthandoff: 04/03/2019
-ms.locfileid: "58887685"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640525"
 ---
 # <a name="monitoring-azure-databricks"></a>Monitorando o Azure Databricks
 
@@ -19,7 +19,7 @@ O monitoramento é uma parte crítica de qualquer solução de nível de produç
 Os artigos a seguir mostram como enviar dados de monitoramento do Azure Databricks para o [Azure Monitor](/azure/azure-monitor/overview), a plataforma de dados de monitoramento do Azure. Você deve seguir estes artigos na ordem.
 
 1. [Configurar o Azure Databricks para enviar métricas para o Azure Monitor](./configure-cluster.md)
-1. [Enviar logs do aplicativo do Azure Databricks para o Azure Monitor](./application-logs.md)
+1. [Enviar logs de aplicativo do Azure Databricks para o Azure Monitor](./application-logs.md)
 1. [Usar painéis para visualizar métricas do Azure Databricks](./dashboards.md)
 
 A biblioteca de código que acompanha esses artigos estende a funcionalidade de monitoramento principal do Azure Databricks para enviar métricas, eventos e informações de log do Spark para o Azure Monitor.
