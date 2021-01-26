@@ -505,9 +505,9 @@ Essa abordagem é possivelmente o mais puro dos mecanismos de controle de versã
 >
 > Os mecanismos de controle de versão do cabeçalho e do tipo de mídia, normalmente, exigem lógica adicional para examinar os valores no cabeçalho personalizado ou no cabeçalho Accept. Em um ambiente de grande escala, muitos clientes usando versões diferentes de uma API da Web podem resultar em uma quantidade significativa de dados duplicados em um cache do lado do servidor. Esse problema pode se tornar importante se um aplicativo cliente se comunica com um servidor Web através de um proxy que implementa caching, e que encaminha uma solicitação ao servidor Web somente se ele não mantém atualmente uma cópia dos dados solicitados em seu cache.
 
-## <a name="open-api-initiative"></a>Abrir Iniciativa de API
+## <a name="open-api-initiative"></a>Iniciativa OpenAPI
 
-A [Open API Initiative](https://www.openapis.org/) foi criada por um consórcio do setor para padronizar descrições de API REST entre fornecedores. Como parte dessa iniciativa, a especificação de Swagger 2.0 foi renomeada como OAS (OpenAPI Specification) e colocada sob a iniciativa de API aberta.
+A [OpenAPI Initiative](https://www.openapis.org/) foi criada por um consórcio do setor para padronizar descrições de API REST entre fornecedores. Como parte dessa iniciativa, a especificação de Swagger 2.0 foi renomeada como OAS (OpenAPI Specification) e colocada sob a iniciativa de API aberta.
 
 Talvez você queira adotar a OpenAPI para suas APIs Web. Considere o seguinte:
 
